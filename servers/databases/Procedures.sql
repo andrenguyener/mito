@@ -1,7 +1,14 @@
 SELECT * FROM [USER]
-SELECT * FROM FRIEND
 SELECT * FROM FRIEND_TYPE
+SELECT * FROM FRIEND
+SELECT * FROM [NOTIFICATION]
+SELECT * FROM NOTIFICATION_TYPE
 
+INSERT INTO NOTIFICATION_TYPE (NotificationType, LinkToView, [Message])
+		VALUES ('Friend Request', 'www.sample.com', 'has sent a friend request')
+
+--CREATE PROC insertNotification
+--@
 ALTER PROC insertFriend
 	@Username1 nvarchar(50),
 	@Username2 nvarchar(50),
@@ -36,21 +43,32 @@ ALTER PROC insertFriend
 		END
 	BEGIN TRAN
 		INSERT INTO FRIEND (User1Id, User2Id, FriendTypeId) VALUES (@User1Id, @User2Id, @FriendTypeId)
+		DECLARE @FriendId INT = (SELECT SCOPE_IDENTITY())
 		IF @@ERROR <> 0
 			ROLLBACK TRAN
 		ELSE
 			COMMIT TRAN
+			IF @FriendType = 'Pending'
+				DECLARE @NotificationTypeId INT = (SELECT NotificationTypeId FROM NOTIFICATION_TYPE WHERE NotificationType = @FriendType)
+				IF @NotificationTypeId IS NULL
+					BEGIN
+						PRINT 'Pending is not a type of notification'
+						RAISERROR('@NotificationTypeId is null',11,1)
+						RETURN
+					END
+				INSERT INTO NOTIFICATION (FriendId, NotificationTypeId, SendFrom, NotificationDate)
+						VALUES(@FriendId, @NotificationTypeId, 0, GETDATE())
 
---EXEC insertFriend @Username1 = 'sneak', @Username2 = 'guopher8', @FriendType = 'Acquaintance'
+EXEC insertFriend @Username1 = 'andre', @Username2 = 'guopher8', @FriendType = 'Pending'
 
---DECLARE @pwd varbinary(max) = CAST('wahid2' AS VARBINARY(MAX))
---EXEC insertUser @UserFname = 'Sopheak', 
---				@UserLname = 'Neak', 
---				@UserEmail = 'sneak@uw.edu',
---				@PasswordHash = @pwd,
---				@PhotoUrl = NULL,
---				@UserDOB = '11-08-1995',
---				@Username = 'sneak'
+DECLARE @pwd varbinary(max) = CAST('wat' AS VARBINARY(MAX))
+EXEC insertUser @UserFname = 'Andre', 
+				@UserLname = 'Nguyen', 
+				@UserEmail = 'andre@uw.edu',
+				@PasswordHash = @pwd,
+				@PhotoUrl = NULL,
+				@UserDOB = '03-08-1997',
+				@Username = 'andre'
 
 ALTER PROC insertUser
 @UserFname nvarchar(50),
