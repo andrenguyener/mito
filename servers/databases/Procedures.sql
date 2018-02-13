@@ -1,8 +1,53 @@
-SELECT * FROM [USER]
-SELECT * FROM FRIEND_TYPE
-SELECT * FROM FRIEND
-SELECT * FROM [NOTIFICATION]
-SELECT * FROM NOTIFICATION_TYPE
+-- Be aware of order of @Username1 and @Username2 passed in
+ALTER PROC updateAcceptFriendRequest
+@Username1 nvarchar(50),
+@Username2 nvarchar(50)
+AS
+	DECLARE @User1Id INT = (SELECT UserId FROM [USER] WHERE Username = @Username1)
+	DECLARE @User2Id INT = (SELECT UserId FROM [USER] WHERE Username = @Username2)
+	DECLARE @FriendId INT = (SELECT FriendId FROM FRIEND WHERE User1Id = @User1Id AND User2Id = @User2Id)
+	DECLARE @FriendTypeId INT = (SELECT FriendTypeId FROM FRIEND_TYPE WHERE FriendType = 'Pending')
+	DECLARE @NotificationTypeId INT = (SELECT NotificationTypeId FROM NOTIFICATION_TYPE WHERE NotificationType = 'Pending')
+	-- Check both users already exist in the [USER] database
+	IF @User1Id IS NULL OR @User2Id IS NULL
+		BEGIN
+			PRINT 'User1 or User2 does not exist'
+			RAISERROR('@Username1 or @Username2 is null', 11, 1)
+			RETURN
+		END
+	-- Ensure the friendship exists in the FRIEND table, should be a pending status
+	IF @FriendId IS NULL
+		BEGIN
+			PRINT 'User1 never sent User2 a friend request'
+			RAISERROR('@Username1 and @Username2 are not in FRIEND table',11,1)
+			RETURN
+		END
+	-- Ensure Pending is a FRIEND_TYPE and NOTIFICATION_TYPE
+	IF @FriendTypeId IS NULL OR @NotificationTypeId IS NULL
+		BEGIN
+			PRINT 'User1 does not have a pending friend request status with User2'
+			RAISERROR('@Username1 and @Username2 do not have a pending friend request',11,1)
+			RETURN
+		END
+	DECLARE @AcceptedFriendRequestId INT = (SELECT NotificationTypeId FROM [NOTIFICATION_TYPE] WHERE NotificationType = 'Accepted')
+	BEGIN TRAN T1
+		-- Insert a new notification that @Username2 accepted @Username1's friend request
+		INSERT INTO NOTIFICATION (FriendId, NotificationTypeId, SendFrom, NotificationDate)
+			VALUES(@FriendId, @AcceptedFriendRequestId, 0, GETDATE())
+		IF @@ERROR <> 0
+			ROLLBACK TRAN T1
+		ELSE
+			COMMIT TRAN T1
+			DECLARE @AcquaintanceId INT = (SELECT FriendTypeId FROM [FRIEND_TYPE] WHERE FriendType = 'Acquaintance')
+			-- Change the existing friendship from "Pending" to "Acquaintance"
+			BEGIN TRAN T2
+				UPDATE FRIEND
+				SET FriendTypeId = @AcquaintanceId
+				WHERE User1Id = @User1Id AND User2Id = @User2Id
+				IF @@ERROR<> 0
+					ROLLBACK TRAN T2
+				ELSE
+					COMMIT TRAN T2
 
 /*
 	Insert data into FRIEND table to record friend connection
@@ -59,7 +104,7 @@ ALTER PROC insertFriend
 			ROLLBACK TRAN
 		ELSE
 			COMMIT TRAN
-			-- If @FriendType is a friend request that has not been accepted
+			-- Make sure pending is a type in the NOTIFICATION_TYPE table
 			IF @FriendType = 'Pending'
 				DECLARE @NotificationTypeId INT = (SELECT NotificationTypeId FROM NOTIFICATION_TYPE WHERE NotificationType = @FriendType)
 				IF @NotificationTypeId IS NULL
@@ -72,18 +117,6 @@ ALTER PROC insertFriend
 				INSERT INTO NOTIFICATION (FriendId, NotificationTypeId, SendFrom, NotificationDate)
 						VALUES(@FriendId, @NotificationTypeId, 0, GETDATE())
 
--- EXEC insert new friendship into [FRIEND] table
-EXEC insertFriend @Username1 = 'andre', @Username2 = 'guopher8', @FriendType = 'Pending'
-
--- EXEC insert new user into [USER] table
-DECLARE @pwd varbinary(max) = CAST('wat' AS VARBINARY(MAX))
-EXEC insertUser @UserFname = 'Andre', 
-				@UserLname = 'Nguyen', 
-				@UserEmail = 'andre@uw.edu',
-				@PasswordHash = @pwd,
-				@PhotoUrl = NULL,
-				@UserDOB = '03-08-1997',
-				@Username = 'andre'
 /*
 	Insert a new user into the [USER] database
 */
