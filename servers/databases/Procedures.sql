@@ -178,3 +178,11 @@ END
 ALTER TABLE USERNAME
 ADD CONSTRAINT
 CHECK (dbo.checkUniquename() = 0)
+
+-- an output parameter SPROC for retrieving an UserId
+-- @param Username 
+CREATE PROC GetUserId
+@Username NVARCHAR(50),
+@User_Id INT OUT
+AS
+	SET @User_Id = (SELECT UserId FROM [USER] WHERE Username = @Username)
