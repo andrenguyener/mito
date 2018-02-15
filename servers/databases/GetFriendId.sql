@@ -1,6 +1,6 @@
 /*
 @params: username1,username, an initialized value to hold the FriendId
-GetFriendId query the FRIEND table with 2 usernames to find whether they are friend
+GetFriendId queries the FRIEND table with 2 usernames to find whether they are friend
 or not (order is not important). If the 2 usernames are friend, then it will return the FriendId of the pair
 If the 2 usernames are NOT friend, it will return NULL
 */
