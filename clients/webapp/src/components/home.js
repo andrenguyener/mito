@@ -1,3 +1,8 @@
+/*
+Home component is used for testing redux state dispatching and retrieve with React component.
+This may be used for reference and test. 
+*/
+
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
