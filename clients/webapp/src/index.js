@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Root from './App';
-import { createStore } from 'redux';
-import profile from './reducers/userProfile';
+import App from './App';
+import { createStore, applyMiddleware } from 'redux';
+import username from './reducers/userReducer';
 
-let store = createStore(profile);
+let middleware = applyMiddleware();
+
+let store = createStore(username,middleware);
 
 ReactDOM.render(
-        <Root store={store} />,
+        <App store={store} />,
     document.getElementById('root'));
 
 

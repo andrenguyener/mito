@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import Home from './components/home';
 import PropTypes from 'prop-types';
 
-const Root = ({ store }) => (
+const App = ({ store }) => (
   <Provider store={store}>
     <Router>
       <Switch>
@@ -19,8 +19,8 @@ const Root = ({ store }) => (
   </Provider>
 )
 
-Root.propTypes = {
+App.propTypes = {
   store: PropTypes.object.isRequired
 }
 
-export default Root;
+export default App;
