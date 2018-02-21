@@ -119,6 +119,7 @@ ALTER PROC insertFriend
 
 /*
 	Insert a new user into the [USER] database
+	and return the newly made user id as an output parameter
 */
 ALTER PROC insertUser
 @UserFname nvarchar(50),
@@ -127,7 +128,8 @@ ALTER PROC insertUser
 @PasswordHash varbinary(max),
 @PhotoUrl nvarchar(max),
 @UserDOB date,
-@Username nvarchar(50)
+@Username nvarchar(50),
+@RetNewUserId INT OUT
 AS
 	-- Check username does not already exist
 	IF EXISTS (SELECT * FROM [USER] WHERE Username = @Username)
@@ -159,6 +161,9 @@ AS
 	BEGIN TRAN
 		INSERT INTO [USER] (UserFname, UserLname, UserEmail, PasswordHash, PhotoUrl, UserDOB, Username)
 		VALUES (@UserFname, @UserLname, @UserEmail, @PasswordHash, @PhotoUrl, @UserDOB, @Username)
+		SET @RetNewUserId = (SELECT SCOPE_IDENTITY())
+		--DECLARE @NewUserId INT = (SELECT SCOPE_IDENTITY())
+		--EXEC GetUserById @NewUserId
 		IF @@ERROR <> 0
 			ROLLBACK TRAN
 		ELSE
