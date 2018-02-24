@@ -1,3 +1,10 @@
+/*
+A stored procedure to insert notification into the table
+@param FriendId: a valid friendid 
+@NotificationTypeId: the notification type for a specific action (ex: update friend, accept friend, etc)
+@SendFrom: always 0 // might need to modify
+@NotifcationDate: the date of when the notification is inserted
+*/
 CREATE PROC InsertNotification
 @FriendId INT,
 @NotificationTypeId INT,
