@@ -1,0 +1,272 @@
+'use strict';
+
+const express = require('express');
+const  axios = require('axios');
+var parser = require('xml2json');
+const Address = require('./../models/amazon/amazon');
+const sendToMQ = require('./message-queue');
+
+const   sha256hash   = require('./amazonhash');
+const publicKeyAmazon = "AKIAJSRYKM2YU35LEDSQ";
+const secretKeyAmazon = "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";
+var chrsz = 8;
+// invokeRequest("harry+potter", "All", "");
+function invokeRequest(keyword, searchIndex, responseGroup) {
+
+    // if (getAccessKeyId() == "AWS Access Key ID") {
+    //     alert("Please provide an AWS Access Key ID");
+    //     return;
+    // }
+
+    // if (getSecretAccessKey() == "AWS Secret Access Key") {
+    //     alert("Please provide an AWS Secret Access Key");
+    //     return;
+    // }
+    // keyword = keyword.replace(/ /g,"+");
+
+
+    var unsignedUrl = `http://webservices.amazon.com/onca/xml?Service=AWSECommerceService&Operation=ItemSearch&SubscriptionId=AKIAJSRYKM2YU35LEDSQ&AssociateTag=mitoteam-20&SearchIndex=${searchIndex}&Keywords=${keyword}&ResponseGroup=Images,ItemAttributes,Offers,Reviews`
+    // var unsignedUrl = document.getElementById("UnsignedURL").value;
+    if (unsignedUrl == "") {
+        alert("Please provide a URL");
+        return;
+    }
+
+    var lines = unsignedUrl.split("\n");
+    unsignedUrl = "";
+    for (var i in lines) { unsignedUrl += lines[i]; }
+
+    // find host and query portions
+    var urlregex = new RegExp("^http:\\/\\/(.*)\\/onca\\/xml\\?(.*)$");
+    var matches = urlregex.exec(unsignedUrl);
+
+    if (matches == null) {
+        alert("Could not find PA-API end-point in the URL. Please ensure the URL looks like the example provided.");
+        return;
+    }
+
+    var host = matches[1].toLowerCase();
+    var query = matches[2];
+
+    // split the query into its constituent parts
+    var pairs = query.split("&");
+
+    // remove signature if already there
+    // remove access key id if already present 
+    //  and replace with the one user provided above
+    // add timestamp if not already present
+    pairs = cleanupRequest(pairs);
+
+    // show it
+    // document.getElementById("NameValuePairs").value = pairs.join("\n");
+
+    // encode the name and value in each pair
+    pairs = encodeNameValuePairs(pairs);
+
+    // sort them and put them back together to get the canonical query string
+    pairs.sort();
+    // document.getElementById("OrderedPairs").value = pairs.join("\n");
+
+    var canonicalQuery = pairs.join("&");
+    var stringToSign = "GET\n" + host + "\n/onca/xml\n" + canonicalQuery;
+
+    // calculate the signature
+
+    var secret = secretKeyAmazon;
+    var signature = sign(secret, stringToSign);
+
+    // assemble the signed url
+    var signedUrl = "http://" + host + "/onca/xml?" + canonicalQuery + "&Signature=" + signature;
+    // console.log(signedUrl);
+    return signedUrl;
+    // update the UI
+    // var stringToSignArea = document.getElementById("StringToSign");
+    // stringToSignArea.value = stringToSign;
+
+    // var signedURLArea = document.getElementById("SignedURL");
+    // signedURLArea.value = signedUrl;
+}
+
+function encodeNameValuePairs(pairs) {
+    for (var i = 0; i < pairs.length; i++) {
+        var name = "";
+        var value = "";
+
+        var pair = pairs[i];
+        var index = pair.indexOf("=");
+
+        // take care of special cases like "&foo&", "&foo=&" and "&=foo&" 
+        if (index == -1) {
+            name = pair;
+        } else if (index == 0) {
+            value = pair;
+        } else {
+            name = pair.substring(0, index);
+            if (index < pair.length - 1) {
+                value = pair.substring(index + 1);
+            }
+        }
+
+        // decode and encode to make sure we undo any incorrect encoding
+        name = encodeURIComponent(decodeURIComponent(name));
+
+        value = value.replace(/\+/g, "%20");
+        value = encodeURIComponent(decodeURIComponent(value));
+
+        pairs[i] = name + "=" + value;
+    }
+
+    return pairs;
+}
+
+function cleanupRequest(pairs) {
+    var haveTimestamp = false;
+    var haveAwsId = false;
+    var accessKeyId = publicKeyAmazon;
+
+    var nPairs = pairs.length;
+    var i = 0;
+    while (i < nPairs) {
+        var p = pairs[i];
+        if (p.search(/^Timestamp=/) != -1) {
+            haveTimestamp = true;
+        } else if (p.search(/^(AWSAccessKeyId|SubscriptionId)=/) != -1) {
+            pairs.splice(i, 1, "AWSAccessKeyId=" + accessKeyId);
+            haveAwsId = true;
+        } else if (p.search(/^Signature=/) != -1) {
+            pairs.splice(i, 1);
+            i--;
+            nPairs--;
+        }
+        i++;
+    }
+
+    if (!haveTimestamp) {
+        pairs.push("Timestamp=" + getNowTimeStamp());
+    }
+
+    if (!haveAwsId) {
+        pairs.push("AWSAccessKeyId=" + accessKeyId);
+    }
+    return pairs;
+}
+
+function sign(secret, message) {
+    var messageBytes = sha256hash.str2binb(message);
+    var secretBytes = sha256hash.str2binb(secret);
+
+    if (secretBytes.length > 16) {
+        secretBytes = sha256hash.core_sha256(secretBytes, secret.length * chrsz);
+    }
+
+    var ipad = Array(16), opad = Array(16);
+    for (var i = 0; i < 16; i++) {
+        ipad[i] = secretBytes[i] ^ 0x36363636;
+        opad[i] = secretBytes[i] ^ 0x5C5C5C5C;
+    }
+
+    var imsg = ipad.concat(messageBytes);
+    var ihash = sha256hash.core_sha256(imsg, 512 + message.length * chrsz);
+    var omsg = opad.concat(ihash);
+    var ohash = sha256hash.core_sha256(omsg, 512 + 256);
+
+    var b64hash = sha256hash.binb2b64(ohash);
+    var urlhash = encodeURIComponent(b64hash);
+
+    return urlhash;
+}
+
+// Date.prototype.toISODate =
+//     new Function("with (this)\n    return " +
+//         "getFullYear()+'-'+addZero(getMonth()+1)+'-'" +
+//         "+addZero(getDate())+'T'+addZero(getHours())+':'" +
+//         "+addZero(getMinutes())+':'+addZero(getSeconds())+'.000Z'");
+
+function addZero(n) {
+    return (n < 0 || n > 9 ? "" : "0") + n;
+}
+
+function getNowTimeStamp() {
+    var time = new Date();
+    var gmtTime = new Date(time.getTime() + (time.getTimezoneOffset() * 60000));
+    return gmtTime.toISOString();
+}
+
+// function getAccessKeyId() {
+//     return document.getElementById('AWSAccessKeyId').value;
+// }
+
+// function getSecretAccessKey() {
+//     return document.getElementById('AWSSecretAccessKey').value;
+// }
+
+const AmazonHashHandler = () => {
+
+
+    // A signal indicating that the promise should break here.
+    class BreakSignal { }
+    const breakSignal = new BreakSignal();
+
+    const router = express.Router();
+
+    router.post('/v1/amazonsearch', (req, res) => {
+        // console.log(req.body.data);
+        let urlString = req.body.data;
+        // console.log("hello " + req.params.resulturl);
+        // let urlString = req.params.resulturl;
+        // console.log(urlString);
+        // debugger
+        axios.get(urlString)
+        .then(function (response) {
+            // console.log(typeof response);
+            // 
+            let json = parser.toJson(response.data, {object:true});
+            let returnJson = json.ItemSearchResponse.Items;
+            res.send(returnJson)
+            debugger
+            console.log(json);
+            debugger
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    });
+
+    router.get('/v1/amazonhash/:keyword/:searchindex/:responsegroup', (req, res) => {
+        console.log("hi")
+        // searchIndex (category), keywords (user query), responseGroup (respond filter)
+        let keyword = req.params.keyword;
+        let searchindex = req.params.searchindex;
+        let responsegroup = req.params.responsegroup;
+        let urlString = invokeRequest(keyword, searchindex, responsegroup);
+        res.send(urlString);
+        // var request = new Request(urlString, {
+        //     method: 'GET',
+        // });
+        // fetch(request)
+        // .then((response) => {
+        //     response.json().then((data)=> {
+        //         console.log(data)
+        //     })
+        // })
+        // .catch(function (err) {
+        //     console.log(err);
+        // });
+        // var test = new Promise((resolve, reject) => {
+        //     var request = new XMLHttpRequest();
+        //     request.open("Get", urlString);
+        //     request.onload = () => resolve(res.send(request.responseText));
+        //     request.onerror = () => reject(res.send(request.statusText));
+        //     request.send();
+        // });
+        
+
+    });
+
+
+
+
+    return router;
+};
+
+module.exports = AmazonHashHandler;
