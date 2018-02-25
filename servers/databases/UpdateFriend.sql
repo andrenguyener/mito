@@ -1,7 +1,8 @@
 ALTER PROC updateFriend
 @Username1 NVARCHAR(50),
 @Username2 NVARCHAR(50),
-@FriendTypeToUpdate NVARCHAR(25)
+@FriendTypeToUpdate NVARCHAR(25),
+@FriendTypeRequestResponse NVARCHAR(25)
 AS
 	DECLARE @User1Id INT
 	DECLARE @User2Id INT
@@ -10,7 +11,7 @@ AS
 	EXEC GetUserId @Username1, @User_ID = @User1Id OUT
 	EXEC GetUserId @Username2, @User_ID = @User2Id OUT
 	--Get FriendId for both username, if they're not friend, it will return NULL
-	EXEC GetFriendId @User1Id, @User2Id, @MatchedFriendId = @FriendId OUT
+	EXEC GetFriendId @Username1, @Username2, @MatchedFriendId = @FriendId OUT
 
 	-- Check both users already exist in the [USER] database
 	IF @User1Id IS NULL OR @User2Id IS NULL
@@ -33,7 +34,7 @@ AS
 	
 	--Get a new FriendTypeId that the friend will update to  
 	DECLARE @NewFriendTypeId INT
-	EXEC GetFriendTypeId @FriendTypeToUpdate, @FriendType_Id = @NewFriendTypeId
+	EXEC GetFriendTypeId @FriendTypeToUpdate, @FriendType_Id = @NewFriendTypeId OUT
 	DECLARE @Delete BIT = 0
 	--If the new friend type to update is 'Unfriend', prompt deleted
 	IF @FriendTypeToUpdate = 'Unfriend'
@@ -51,9 +52,30 @@ AS
 	*/
 
 	DECLARE @NotificationTypeId INT 
-	EXEC GetNotificationType @FriendTypeToUpdate, @NotificationType_ID = @NotificationTypeId
+	EXEC GetNotificationType @FriendTypeRequestResponse, @NotificationType_ID = @NotificationTypeId OUT
 	
 	DECLARE @TodaysDate DATETIME = GETDATE()
+	--determine if the sender is a User1 or User2 in FriendTable
+	DECLARE @SendFromUser BIT
+	EXEC User1orUser2 @FriendId, @User1Id, @User1 = @SendFromUser OUT
+
+	BEGIN TRAN insertNotification
+		--Update the friend type based on the FriendId
+			BEGIN TRAN updateFriend
+			EXEC UpdateFriendType @FriendId, @NewFriendTypeId, @Delete 
+			IF @@ERROR <> 0
+				ROLLBACK TRAN updateFriend
+			ELSE
+				COMMIT TRAN updateFriend
+		
+		-- Insert a new notification that @Username2 accepted @Username1's friend request
+		EXEC InsertNotification @FriendId, @NotificationTypeId, @SendFromUser, @TodaysDate
+		IF @@ERROR <> 0 
+			ROLLBACK TRAN insertNotification
+		ELSE
+			COMMIT TRAN insertNotification
+	
+	/*
 	BEGIN TRAN updateFriend
 		--Update the friend type based on the FriendId
 		EXEC UpdateFriendType @FriendId, @NewFriendTypeId, @Delete 
@@ -68,3 +90,4 @@ AS
 				ROLLBACK TRAN insertNotification
 			ELSE
 				COMMIT TRAN insertNotification
+			*/
