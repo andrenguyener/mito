@@ -1,0 +1,587 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B244999D2040BDD2006FA81B /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B244999C2040BDD2006FA81B /* AppData.swift */; };
+		B244999F2040C340006FA81B /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = B244999E2040C340006FA81B /* fonts */; };
+		B29AEC62203FC9C100110EF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29AEC61203FC9C100110EF9 /* AppDelegate.swift */; };
+		B29AEC64203FC9C100110EF9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29AEC63203FC9C100110EF9 /* ViewController.swift */; };
+		B29AEC67203FC9C100110EF9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B29AEC65203FC9C100110EF9 /* Main.storyboard */; };
+		B29AEC69203FC9C100110EF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B29AEC68203FC9C100110EF9 /* Assets.xcassets */; };
+		B29AEC6C203FC9C100110EF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B29AEC6A203FC9C100110EF9 /* LaunchScreen.storyboard */; };
+		B29AEC77203FC9C200110EF9 /* Mito_1_0Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29AEC76203FC9C200110EF9 /* Mito_1_0Tests.swift */; };
+		B29AEC82203FC9C200110EF9 /* Mito_1_0UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29AEC81203FC9C200110EF9 /* Mito_1_0UITests.swift */; };
+		DAD995312042386E007A7687 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD995302042386E007A7687 /* ActivityViewController.swift */; };
+		DAD995332042389B007A7687 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD995322042389B007A7687 /* Person.swift */; };
+		DAD9953520423A4B007A7687 /* Andre.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD9953420423A4B007A7687 /* Andre.png */; };
+		DAD9953720423EE9007A7687 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD9953620423EE9007A7687 /* TableViewCell.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B29AEC73203FC9C200110EF9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B29AEC56203FC9C100110EF9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B29AEC5D203FC9C100110EF9;
+			remoteInfo = "Mito 1.0";
+		};
+		B29AEC7E203FC9C200110EF9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B29AEC56203FC9C100110EF9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B29AEC5D203FC9C100110EF9;
+			remoteInfo = "Mito 1.0";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B244999C2040BDD2006FA81B /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
+		B244999E2040C340006FA81B /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
+		B29AEC5E203FC9C100110EF9 /* Mito 1.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mito 1.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B29AEC61203FC9C100110EF9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B29AEC63203FC9C100110EF9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B29AEC66203FC9C100110EF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B29AEC68203FC9C100110EF9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B29AEC6B203FC9C100110EF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B29AEC6D203FC9C100110EF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B29AEC72203FC9C200110EF9 /* Mito 1.0Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mito 1.0Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B29AEC76203FC9C200110EF9 /* Mito_1_0Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mito_1_0Tests.swift; sourceTree = "<group>"; };
+		B29AEC78203FC9C200110EF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B29AEC7D203FC9C200110EF9 /* Mito 1.0UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mito 1.0UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B29AEC81203FC9C200110EF9 /* Mito_1_0UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mito_1_0UITests.swift; sourceTree = "<group>"; };
+		B29AEC83203FC9C200110EF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DAD995302042386E007A7687 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		DAD995322042389B007A7687 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		DAD9953420423A4B007A7687 /* Andre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Andre.png; sourceTree = "<group>"; };
+		DAD9953620423EE9007A7687 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B29AEC5B203FC9C100110EF9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B29AEC6F203FC9C200110EF9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B29AEC7A203FC9C200110EF9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B29AEC55203FC9C100110EF9 = {
+			isa = PBXGroup;
+			children = (
+				B29AEC60203FC9C100110EF9 /* Mito 1.0 */,
+				B29AEC75203FC9C200110EF9 /* Mito 1.0Tests */,
+				B29AEC80203FC9C200110EF9 /* Mito 1.0UITests */,
+				B29AEC5F203FC9C100110EF9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B29AEC5F203FC9C100110EF9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B29AEC5E203FC9C100110EF9 /* Mito 1.0.app */,
+				B29AEC72203FC9C200110EF9 /* Mito 1.0Tests.xctest */,
+				B29AEC7D203FC9C200110EF9 /* Mito 1.0UITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B29AEC60203FC9C100110EF9 /* Mito 1.0 */ = {
+			isa = PBXGroup;
+			children = (
+				B29AEC65203FC9C100110EF9 /* Main.storyboard */,
+				B29AEC61203FC9C100110EF9 /* AppDelegate.swift */,
+				B29AEC63203FC9C100110EF9 /* ViewController.swift */,
+				B244999C2040BDD2006FA81B /* AppData.swift */,
+				B29AEC68203FC9C100110EF9 /* Assets.xcassets */,
+				DAD9953420423A4B007A7687 /* Andre.png */,
+				B29AEC6A203FC9C100110EF9 /* LaunchScreen.storyboard */,
+				B29AEC6D203FC9C100110EF9 /* Info.plist */,
+				B244999E2040C340006FA81B /* fonts */,
+				DAD995302042386E007A7687 /* ActivityViewController.swift */,
+				DAD995322042389B007A7687 /* Person.swift */,
+				DAD9953620423EE9007A7687 /* TableViewCell.swift */,
+			);
+			path = "Mito 1.0";
+			sourceTree = "<group>";
+		};
+		B29AEC75203FC9C200110EF9 /* Mito 1.0Tests */ = {
+			isa = PBXGroup;
+			children = (
+				B29AEC76203FC9C200110EF9 /* Mito_1_0Tests.swift */,
+				B29AEC78203FC9C200110EF9 /* Info.plist */,
+			);
+			path = "Mito 1.0Tests";
+			sourceTree = "<group>";
+		};
+		B29AEC80203FC9C200110EF9 /* Mito 1.0UITests */ = {
+			isa = PBXGroup;
+			children = (
+				B29AEC81203FC9C200110EF9 /* Mito_1_0UITests.swift */,
+				B29AEC83203FC9C200110EF9 /* Info.plist */,
+			);
+			path = "Mito 1.0UITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B29AEC5D203FC9C100110EF9 /* Mito 1.0 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B29AEC86203FC9C200110EF9 /* Build configuration list for PBXNativeTarget "Mito 1.0" */;
+			buildPhases = (
+				B29AEC5A203FC9C100110EF9 /* Sources */,
+				B29AEC5B203FC9C100110EF9 /* Frameworks */,
+				B29AEC5C203FC9C100110EF9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Mito 1.0";
+			productName = "Mito 1.0";
+			productReference = B29AEC5E203FC9C100110EF9 /* Mito 1.0.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B29AEC71203FC9C200110EF9 /* Mito 1.0Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B29AEC89203FC9C200110EF9 /* Build configuration list for PBXNativeTarget "Mito 1.0Tests" */;
+			buildPhases = (
+				B29AEC6E203FC9C200110EF9 /* Sources */,
+				B29AEC6F203FC9C200110EF9 /* Frameworks */,
+				B29AEC70203FC9C200110EF9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B29AEC74203FC9C200110EF9 /* PBXTargetDependency */,
+			);
+			name = "Mito 1.0Tests";
+			productName = "Mito 1.0Tests";
+			productReference = B29AEC72203FC9C200110EF9 /* Mito 1.0Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B29AEC7C203FC9C200110EF9 /* Mito 1.0UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B29AEC8C203FC9C200110EF9 /* Build configuration list for PBXNativeTarget "Mito 1.0UITests" */;
+			buildPhases = (
+				B29AEC79203FC9C200110EF9 /* Sources */,
+				B29AEC7A203FC9C200110EF9 /* Frameworks */,
+				B29AEC7B203FC9C200110EF9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B29AEC7F203FC9C200110EF9 /* PBXTargetDependency */,
+			);
+			name = "Mito 1.0UITests";
+			productName = "Mito 1.0UITests";
+			productReference = B29AEC7D203FC9C200110EF9 /* Mito 1.0UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B29AEC56203FC9C100110EF9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = "Benny Souriyadeth";
+				TargetAttributes = {
+					B29AEC5D203FC9C100110EF9 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					B29AEC71203FC9C200110EF9 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = B29AEC5D203FC9C100110EF9;
+					};
+					B29AEC7C203FC9C200110EF9 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = B29AEC5D203FC9C100110EF9;
+					};
+				};
+			};
+			buildConfigurationList = B29AEC59203FC9C100110EF9 /* Build configuration list for PBXProject "Mito 1.0" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B29AEC55203FC9C100110EF9;
+			productRefGroup = B29AEC5F203FC9C100110EF9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B29AEC5D203FC9C100110EF9 /* Mito 1.0 */,
+				B29AEC71203FC9C200110EF9 /* Mito 1.0Tests */,
+				B29AEC7C203FC9C200110EF9 /* Mito 1.0UITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B29AEC5C203FC9C100110EF9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B29AEC6C203FC9C100110EF9 /* LaunchScreen.storyboard in Resources */,
+				B29AEC69203FC9C100110EF9 /* Assets.xcassets in Resources */,
+				B29AEC67203FC9C100110EF9 /* Main.storyboard in Resources */,
+				B244999F2040C340006FA81B /* fonts in Resources */,
+				DAD9953520423A4B007A7687 /* Andre.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B29AEC70203FC9C200110EF9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B29AEC7B203FC9C200110EF9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B29AEC5A203FC9C100110EF9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAD995332042389B007A7687 /* Person.swift in Sources */,
+				B29AEC64203FC9C100110EF9 /* ViewController.swift in Sources */,
+				B29AEC62203FC9C100110EF9 /* AppDelegate.swift in Sources */,
+				DAD9953720423EE9007A7687 /* TableViewCell.swift in Sources */,
+				B244999D2040BDD2006FA81B /* AppData.swift in Sources */,
+				DAD995312042386E007A7687 /* ActivityViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B29AEC6E203FC9C200110EF9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B29AEC77203FC9C200110EF9 /* Mito_1_0Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B29AEC79203FC9C200110EF9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B29AEC82203FC9C200110EF9 /* Mito_1_0UITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B29AEC74203FC9C200110EF9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B29AEC5D203FC9C100110EF9 /* Mito 1.0 */;
+			targetProxy = B29AEC73203FC9C200110EF9 /* PBXContainerItemProxy */;
+		};
+		B29AEC7F203FC9C200110EF9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B29AEC5D203FC9C100110EF9 /* Mito 1.0 */;
+			targetProxy = B29AEC7E203FC9C200110EF9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B29AEC65203FC9C100110EF9 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B29AEC66203FC9C100110EF9 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B29AEC6A203FC9C100110EF9 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B29AEC6B203FC9C100110EF9 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B29AEC84203FC9C200110EF9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B29AEC85203FC9C200110EF9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B29AEC87203FC9C200110EF9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6KH97C972X;
+				INFOPLIST_FILE = "Mito 1.0/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.uw.bennys.Mito-1-0";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B29AEC88203FC9C200110EF9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6KH97C972X;
+				INFOPLIST_FILE = "Mito 1.0/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.uw.bennys.Mito-1-0";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B29AEC8A203FC9C200110EF9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6KH97C972X;
+				INFOPLIST_FILE = "Mito 1.0Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.uw.bennys.Mito-1-0Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mito 1.0.app/Mito 1.0";
+			};
+			name = Debug;
+		};
+		B29AEC8B203FC9C200110EF9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6KH97C972X;
+				INFOPLIST_FILE = "Mito 1.0Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.uw.bennys.Mito-1-0Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mito 1.0.app/Mito 1.0";
+			};
+			name = Release;
+		};
+		B29AEC8D203FC9C200110EF9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6KH97C972X;
+				INFOPLIST_FILE = "Mito 1.0UITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.uw.bennys.Mito-1-0UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Mito 1.0";
+			};
+			name = Debug;
+		};
+		B29AEC8E203FC9C200110EF9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6KH97C972X;
+				INFOPLIST_FILE = "Mito 1.0UITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.uw.bennys.Mito-1-0UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Mito 1.0";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B29AEC59203FC9C100110EF9 /* Build configuration list for PBXProject "Mito 1.0" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B29AEC84203FC9C200110EF9 /* Debug */,
+				B29AEC85203FC9C200110EF9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B29AEC86203FC9C200110EF9 /* Build configuration list for PBXNativeTarget "Mito 1.0" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B29AEC87203FC9C200110EF9 /* Debug */,
+				B29AEC88203FC9C200110EF9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B29AEC89203FC9C200110EF9 /* Build configuration list for PBXNativeTarget "Mito 1.0Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B29AEC8A203FC9C200110EF9 /* Debug */,
+				B29AEC8B203FC9C200110EF9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B29AEC8C203FC9C200110EF9 /* Build configuration list for PBXNativeTarget "Mito 1.0UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B29AEC8D203FC9C200110EF9 /* Debug */,
+				B29AEC8E203FC9C200110EF9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B29AEC56203FC9C100110EF9 /* Project object */;
+}
