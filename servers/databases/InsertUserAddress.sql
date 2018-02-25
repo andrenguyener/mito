@@ -11,8 +11,7 @@ ALTER PROC InsertUserAddress
 @cityName NVARCHAR(75),
 @stateName NVARCHAR(30),
 @zipCode NVARCHAR(12),
-@aliasName NVARCHAR(50),
-@UserAddress_ID INT OUT
+@aliasName NVARCHAR(50)
 AS
 	--retrieve matching StreetAddressId based on the given streetaddress1 and streetaddress 2
 	DECLARE @streetAddressId INT
@@ -55,7 +54,7 @@ AS
 	BEGIN TRAN addUserAddress
 		INSERT INTO USER_ADDRESS(AddressId,UserId,IsDefault,Alias,IsDefaultCreatedDate,CreatedDate)
 		VALUES(@newAddressId,@userId,1,@aliasName,@todaysDate,@todaysDate)
-		SET @UserAddress_ID = (SELECT SCOPE_IDENTITY())
+		--SET @UserAddress_ID = (SELECT SCOPE_IDENTITY())
 		IF @@ERROR <> 0
 			ROLLBACK TRAN addUserAddress
 		ELSE
