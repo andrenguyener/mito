@@ -7,19 +7,20 @@ import (
 	"net/http"
 	"net/http/httputil"
 	"os"
+	"strings"
 	"sync"
 	"time"
 
 	"github.com/andrenguyener/mito/servers/gateway/models/users"
 	"github.com/andrenguyener/mito/servers/gateway/sessions"
 	"github.com/streadway/amqp"
-	mgo "gopkg.in/mgo.v2"
 
-	"github.com/go-redis/redis"
+	"context"
+	"database/sql"
+
 	"github.com/andrenguyener/mito/servers/gateway/handlers"
 	_ "github.com/denisenkom/go-mssqldb"
-	"database/sql"
-	"context"
+	"github.com/go-redis/redis"
 )
 
 // Gets the current user of the session
@@ -68,8 +69,8 @@ func main() {
 	addr := os.Getenv("ADDR")
 	sessionKey := os.Getenv("SESSIONKEY")
 	redisAddr := os.Getenv("REDISADDR")
-	dbAddr := os.Getenv("DBADDR")
-
+	// dbAddr := os.Getenv("DBADDR")
+	messagesaddr := "localhost:4004"
 	// messagesaddr := os.Getenv("MESSAGESSVCADDR")
 	// if len(messagesaddr) == 0 {
 	// 	messagesaddr := "localhost:4004"
@@ -98,17 +99,34 @@ func main() {
 	redisStore := sessions.NewRedisStore(redisClient, time.Hour)
 
 	// Connection to Mongo
-	if len(dbAddr) == 0 {
-		dbAddr = "localhost:27017"
-	}
-	sess, err := mgo.Dial(dbAddr)
+	// if len(dbAddr) == 0 {
+	// 	dbAddr = "localhost:27017"
+	// }
+	// sess, err := mgo.Dial(dbAddr)
+	// if err != nil {
+	// 	log.Fatalf("error dialing mongos: %v\n", err)
+	// }
+	// mongoStore := users.NewMongoStore(sess, "mongo", "users")
+
+	// Connection to SQL
+	// Create connection string
+	connString := fmt.Sprintf("server=%s;user id=%s;password=%s;database=projectmito",
+		server, user, password)
+
+	// Create connection pool
+	db, err := sql.Open("sqlserver", connString)
 	if err != nil {
-		log.Fatalf("error dialing mongosss: %v\n", err)
+		log.Fatal("Error creating connection pool: " + err.Error())
 	}
-	mongoStore := users.NewMongoStore(sess, "mongo", "users")
+	sqlStore := users.NewSqlStore(db, "projectmito", "USERS")
+	log.Printf("Connected!\n")
+
+	// Close the database connection pool after program executes
+	defer db.Close()
 
 	// Adds the Trie Store
-	trieStore := mongoStore.Index()
+	// trieStore := mongoStore.Index()
+	trieStore := sqlStore.Index()
 
 	// Connection to RabbitMQ
 	mqAddr := os.Getenv("MQADDR")
@@ -134,7 +152,7 @@ func main() {
 	ctx := &handlers.Context{
 		SessionKey:   sessionKey,
 		SessionStore: redisStore,
-		UserStore:    mongoStore,
+		UserStore:    sqlStore,
 		TrieStore:    trieStore,
 		Notifier:     notifier,
 	}
@@ -147,26 +165,8 @@ func main() {
 		log.Fatal("please set TLSKEY and TLSCERT")
 	}
 
-	// splitMessagesAddrs := strings.Split(messagesaddr, ",")
+	splitMessagesAddrs := strings.Split(messagesaddr, ",")
 	// splitSummaryAddrs := strings.Split(summaryaddr, ",")
-
-
-
-    // Create connection string
-	connString := fmt.Sprintf("server=%s;user id=%s;password=%s;database=projectmito",
-		server, user, password)
-
-    // Create connection pool
-	db, err = sql.Open("sqlserver", connString)
-	if err != nil {
-		log.Fatal("Error creating connection pool: " + err.Error())
-	}
-    log.Printf("Connected!\n")
-
-    // Close the database connection pool after program executes
-    defer db.Close()
-
-    SelectVersion()
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/v1/users", ctx.UsersHandler)
@@ -178,7 +178,7 @@ func main() {
 	corsHandler := handlers.NewCORSHandler(mux)
 	mux.Handle("/v1/ws", ctx.NewWebSocketsHandler(notifier))
 	fmt.Printf("server is listening at https://%s\n", addr)
-	
+
 	// mux.Handle("/v1/channels", NewServiceProxy(splitMessagesAddrs, ctx))
 	// mux.Handle("/v1/channels/", NewServiceProxy(splitMessagesAddrs, ctx))
 	// mux.Handle("/v1/messages/", NewServiceProxy(splitMessagesAddrs, ctx))
@@ -186,64 +186,149 @@ func main() {
 	// mux.Handle("/v1/payments", NewServiceProxy(splitMessagesAddrs, ctx))
 	// mux.Handle("/v1/payments/", NewServiceProxy(splitMessagesAddrs, ctx))
 	// mux.Handle("/v1/email", NewServiceProxy(splitMessagesAddrs, ctx))
+	mux.Handle("/v1/amazonhash/", NewServiceProxy(splitMessagesAddrs, ctx))
+	mux.Handle("/v1/amazonsearch", NewServiceProxy(splitMessagesAddrs, ctx))
 	log.Fatal(http.ListenAndServeTLS(addr, tlscert, tlskey, corsHandler))
 }
 
-// Gets and prints SQL Server version
-func SelectVersion(){
-    // Use background context
-    ctx := context.Background()
+type User struct {
+	UserId       int
+	UserFName    string
+	UserLName    string
+	UserEmail    string
+	PasswordHash string
+	PhotoUrl     sql.NullString
+	UserDOB      string
+	Username     string
+}
 
-    // Ping database to see if it's still alive.
-    // Important for handling network issues and long queries.
-    err := db.PingContext(ctx)
+// Gets and prints SQL Server version
+func SelectVersion() {
+	// Use background context
+	ctx := context.Background()
+
+	// Ping database to see if it's still alive.
+	// Important for handling network issues and long queries.
+	err := db.PingContext(ctx)
 	if err != nil {
 		log.Fatal("Error pinging database: " + err.Error())
 	}
 
-	var result string
-
-    // Run query and scan for result
-	err = db.QueryRowContext(ctx, "SELECT * FROM [projectmito].[dbo].[USER]").Scan(&result)
+	rows, err := db.Query("SELECT * FROM [projectmito].[dbo].[USER]")
 	if err != nil {
-        log.Fatal("Scan failed:", err.Error())
-    }
-	fmt.Printf("%s\n", result)
-	
-	// tsql := fmt.Sprintf("SELECT * FROM [USER]")
+		log.Fatal(err)
+	}
+	defer rows.Close()
+	cols, _ := rows.Columns()
+	fmt.Println(cols)
+	for rows.Next() {
+		var name User
 
-	// var result3 string
+		if err := rows.Scan(&name.UserId, &name.UserFName, &name.UserLName, &name.UserEmail, &name.PasswordHash, &name.PhotoUrl, &name.UserDOB, &name.Username); err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println(name)
+	}
+	if err := rows.Err(); err != nil {
+		log.Fatal(err)
+	}
+	//UserId UserFname UserLname UserEmail PasswordHash PhotoUrl UserDOB Username
+	// tsql := fmt.Sprintf("INSERT INTO [projectmito].[dbo].[USER] (UserFname, UserLname, UserEmail, PasswordHash, PhotoUrl, UserDOB, Username) VALUES (@UserFname, @UserLname, @UserEmail, @PasswordHash, @PhotoUrl, @UserDOB, @Username);")
+	tsql := fmt.Sprintf("EXEC insertUser @UserFname, @UserLname, @UserEmail, @PasswordHash, @PhotoUrl, @UserDOB, @Username;")
 
-    // // Execute non-query with named parameters
-    // result3, err = db.ExecContext(ctx, tsql)
+	// Execute non-query with named parameters
+	_, err = db.Exec(
+		tsql,
+		sql.Named("UserFname", "Tom2"),
+		sql.Named("UserLname", "Brady2"),
+		sql.Named("UserEmail", "Tom@uw.edu2"),
+		sql.Named("PasswordHash", []byte("wahid2")),
+		sql.Named("PhotoUrl", "Tom@pictureurl2"),
+		sql.Named("UserDOB", "1995-01-02T00:00:00Z"),
+		sql.Named("Username", "Tom2"))
 
-	// fmt.Printf(result3)
+	if err != nil {
+		log.Fatal("Error inserting new row: " + err.Error())
+	}
+	fmt.Println("QUERY AGAIN AFTER INSTERTING")
+	// Query again after inserting
+	rows, err = db.Query("SELECT * FROM [projectmito].[dbo].[USER]")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+	cols, _ = rows.Columns()
+	fmt.Println(cols)
+	for rows.Next() {
+		var name User
 
+		if err := rows.Scan(&name.UserId, &name.UserFName, &name.UserLName, &name.UserEmail, &name.PasswordHash, &name.PhotoUrl, &name.UserDOB, &name.Username); err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println(name)
+	}
+	if err := rows.Err(); err != nil {
+		log.Fatal(err)
+	}
 
-	// tsql := fmt.Sprintf("SELECT * FROM [projectmito].[dbo].[USER]")
+	tsql = fmt.Sprintf("DELETE FROM [projectmito].[dbo].[USER] WHERE UserFname=@UserFname;")
 
-    // // Execute query
-    // rows, err := db.QueryContext(ctx, tsql)
-    // if err != nil {
-    //     log.Fatal("Error reading rows: " + err.Error())
-    // }
+	// Execute non-query with named parameters
+	_, err = db.ExecContext(ctx, tsql, sql.Named("UserFname", "Tom"))
+	if err != nil {
+		fmt.Println("Error deleting row: " + err.Error())
+	}
+	fmt.Println("QUERY AGAIN AFTER DELETE")
+	// query again after deleting
+	rows, err = db.Query("SELECT * FROM [projectmito].[dbo].[USER]")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+	cols, _ = rows.Columns()
+	fmt.Println(cols)
+	for rows.Next() {
+		var name User
 
-    // defer rows.Close()
+		if err := rows.Scan(&name.UserId, &name.UserFName, &name.UserLName, &name.UserEmail, &name.PasswordHash, &name.PhotoUrl, &name.UserDOB, &name.Username); err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println(name)
+	}
+	if err := rows.Err(); err != nil {
+		log.Fatal(err)
+	}
 
-    // var count int = 0
+	tsql = fmt.Sprintf("UPDATE [projectmito].[dbo].[USER] SET UserFname = @newName WHERE UserFname= @Name")
 
-    // // Iterate through the result set.
-    // for rows.Next() {
-    //     var name, location string
-    //     var id int
+	// Execute non-query with named parameters
+	_, err = db.ExecContext(
+		ctx,
+		tsql,
+		sql.Named("newName", "Victoria"),
+		sql.Named("Name", "Victor"))
+	if err != nil {
+		log.Fatal("Error updating row: " + err.Error())
+	}
 
-    //     // Get values from row.
-    //     err := rows.Scan(&id, &name, &location)
-    //     if err != nil {
-    //         log.Fatal("Error reading rows: " + err.Error())
-    //     }
+	fmt.Println("QUERY AGAIN AFTER UPDATING")
+	// Query again after inserting
+	rows, err = db.Query("SELECT * FROM [projectmito].[dbo].[USER]")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+	cols, _ = rows.Columns()
+	fmt.Println(cols)
+	for rows.Next() {
+		var name User
 
-    //     fmt.Printf("ID: %d, Name: %s, Location: %s\n", id, name, location)
-    //     count++
-    // }
+		if err := rows.Scan(&name.UserId, &name.UserFName, &name.UserLName, &name.UserEmail, &name.PasswordHash, &name.PhotoUrl, &name.UserDOB, &name.Username); err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println(name)
+	}
+	if err := rows.Err(); err != nil {
+		log.Fatal(err)
+	}
 }

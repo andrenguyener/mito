@@ -1,7 +1,6 @@
 package indexes
 
 import (
-	"gopkg.in/mgo.v2/bson"
 	"sort"
 	"strings"
 	"sync"
@@ -22,7 +21,7 @@ func NewTrie() *Trie {
 
 // Insert inserts a new key/value pair entry into the trie,
 // where the key is the key and value is user ID.
-func (trie *Trie) Insert(key string, userID bson.ObjectId) {
+func (trie *Trie) Insert(key string, userID int) {
 	// Make all keys lowercase, so our search is case-insensitive.
 	key = strings.ToLower(key)
 	trie.mx.Lock()
@@ -35,13 +34,13 @@ func (trie *Trie) Insert(key string, userID bson.ObjectId) {
 // that start with the prefix string,
 // and then do a recursive depth-first search to
 // find the first n values in that branch.
-func (trie *Trie) Search(n int, prefix string) map[bson.ObjectId]bool {
+func (trie *Trie) Search(n int, prefix string) map[int]bool {
 
 	trie.mx.RLock()
 	defer trie.mx.RUnlock()
 
 	// results is a set that only contains unique userID.
-	results := make(map[bson.ObjectId]bool)
+	results := make(map[int]bool)
 
 	prefix = strings.ToLower(prefix)
 
@@ -73,7 +72,7 @@ func (trie *Trie) Search(n int, prefix string) map[bson.ObjectId]bool {
 
 // Remove removes a key/value pair entry from the trie,
 // where key is a word and value is user ID.
-func (trie *Trie) Remove(key string, value bson.ObjectId) {
+func (trie *Trie) Remove(key string, value int) {
 	key = strings.ToLower(key)
 	trie.mx.Lock()
 	trie.root.remove(key, value)
@@ -83,7 +82,7 @@ func (trie *Trie) Remove(key string, value bson.ObjectId) {
 // node represents a single node in the trie.
 type node struct {
 	char     rune
-	values   map[bson.ObjectId]bool
+	values   map[int]bool
 	children map[rune]*node
 	parent   *node
 }
@@ -92,13 +91,13 @@ type node struct {
 func newNode(char rune) *node {
 	return &node{
 		char:     char,
-		values:   make(map[bson.ObjectId]bool),
+		values:   make(map[int]bool),
 		children: make(map[rune]*node),
 		parent:   nil,
 	}
 }
 
-func (root *node) insert(key string, userID bson.ObjectId) {
+func (root *node) insert(key string, userID int) {
 	curNode := root
 	// Loop through each character in the key.
 	for _, char := range key {
@@ -128,7 +127,7 @@ func (root *node) insert(key string, userID bson.ObjectId) {
 
 // root here is not the root of the trie.
 // It represents a node whose char is the last character of the prefix.
-func (root *node) search(n int, results map[bson.ObjectId]bool, totalResults int) map[bson.ObjectId]bool {
+func (root *node) search(n int, results map[int]bool, totalResults int) map[int]bool {
 	// Store all user IDs of the current node
 	// if there are any.
 	if len(root.values) != 0 {
@@ -149,7 +148,7 @@ func (root *node) search(n int, results map[bson.ObjectId]bool, totalResults int
 
 	// Explore all child nodes.
 	if len(root.children) > 0 {
-		branchResults := make(map[bson.ObjectId]bool)
+		branchResults := make(map[int]bool)
 		sortedChars := []rune{}
 		for char := range root.children {
 			sortedChars = append(sortedChars, char)
@@ -183,7 +182,7 @@ func (root *node) search(n int, results map[bson.ObjectId]bool, totalResults int
 	return results
 }
 
-func (root *node) remove(key string, value bson.ObjectId) {
+func (root *node) remove(key string, value int) {
 	// Find the node whose value we want to remove for a given key.
 	curNode := root
 	for _, char := range key {

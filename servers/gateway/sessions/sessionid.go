@@ -83,7 +83,6 @@ func ValidateID(id string, signingKey string) (SessionID, error) {
 	h.Write(idPortion)
 	signature := h.Sum(nil)
 
-
 	if subtle.ConstantTimeCompare(signature, hmacPortion) != 1 {
 		return InvalidSessionID, ErrInvalidID
 
