@@ -17,6 +17,7 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.rowHeight = 106
         // Do any additional setup after loading the view.
     }
     
@@ -38,7 +39,7 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
         let personObj = appdata.people[indexPath.row]
         cell.img.image = UIImage(named: "\(personObj.avatar)")
         cell.name.text = "\(personObj.firstName) \(personObj.lastName)"
