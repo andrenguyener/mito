@@ -214,6 +214,7 @@
                                             <outlet property="img" destination="SnI-Ck-2Qr" id="cH3-QQ-yP0"/>
                                             <outlet property="time" destination="D3J-hb-G36" id="paE-e6-x1t"/>
                                             <outlet property="whatHappened" destination="7nF-J0-ZcK" id="MjX-uX-PPF"/>
+                                            <segue destination="mKW-hw-jiX" kind="show" id="Bm5-Ov-tyb"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -332,7 +333,39 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aal-tH-Eyd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2724" y="488.42364532019707"/>
+            <point key="canvasLocation" x="2724" y="488"/>
+        </scene>
+        <!--Product Details View Controller-->
+        <scene sceneID="u9n-hr-Fxu">
+            <objects>
+                <viewController id="mKW-hw-jiX" customClass="ProductDetailsViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Hy4-EJ-BfW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2VX-4k-3cu">
+                                <rect key="frame" x="16" y="113" width="343" height="220"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3JA-VS-G7W">
+                                <rect key="frame" x="22" y="44" width="34" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <segue destination="k7B-N4-R6E" kind="show" id="XW2-e7-C0I"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="9Tf-DT-4J7"/>
+                    </view>
+                    <connections>
+                        <outlet property="img" destination="2VX-4k-3cu" id="wcl-08-USR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="55a-NT-Bh9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2064.8000000000002" y="-140.39408866995075"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="gFb-Q6-MNY">
@@ -389,5 +422,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="WVX-Ho-R1q"/>
+        <segue reference="XW2-e7-C0I"/>
     </inferredMetricsTieBreakers>
 </document>

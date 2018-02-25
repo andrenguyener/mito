@@ -15,19 +15,19 @@ class AppData: NSObject {
 //    let Andre: Person =
     open var people: [Person] = [
         Person(firstName: "Andre", lastName: "Nguyen", handle: "@andrenguyen", friendshipType: "Trusted Friend", avatar: "Andre.png"),
+        Person(firstName: "Sopheak", lastName: "Neak", handle: "@sneak", friendshipType: "Trusted Friend", avatar: "Sopheak.png"),
         Person(firstName: "Andre", lastName: "Nguyen", handle: "@andrenguyen", friendshipType: "Trusted Friend", avatar: "Andre.png"),
+        Person(firstName: "Sopheak", lastName: "Neak", handle: "@sneak", friendshipType: "Trusted Friend", avatar: "Sopheak.png"),
         Person(firstName: "Andre", lastName: "Nguyen", handle: "@andrenguyen", friendshipType: "Trusted Friend", avatar: "Andre.png"),
-        Person(firstName: "Andre", lastName: "Nguyen", handle: "@andrenguyen", friendshipType: "Trusted Friend", avatar: "Andre.png"),
-        Person(firstName: "Andre", lastName: "Nguyen", handle: "@andrenguyen", friendshipType: "Trusted Friend", avatar: "Andre.png"),
-        Person(firstName: "Andre", lastName: "Nguyen", handle: "@andrenguyen", friendshipType: "Trusted Friend", avatar: "Andre.png")
+        Person(firstName: "Sopheak", lastName: "Neak", handle: "@sneak", friendshipType: "Trusted Friend", avatar: "Sopheak.png")
     ]
     
     open var feedItem: [FeedItem] = [
+        FeedItem(avatar: "Sopheak.png", descr: "Gucci Gang", time: "12h", whatHappened: "Andre Nguyen received a gift from Sopheak Neak"),
         FeedItem(avatar: "Andre.png", descr: "Gucci Gang", time: "12h", whatHappened: "Andre Nguyen received a gift from Sopheak Neak"),
+        FeedItem(avatar: "Sopheak.png", descr: "Gucci Gang", time: "12h", whatHappened: "Andre Nguyen received a gift from Sopheak Neak"),
         FeedItem(avatar: "Andre.png", descr: "Gucci Gang", time: "12h", whatHappened: "Andre Nguyen received a gift from Sopheak Neak"),
-        FeedItem(avatar: "Andre.png", descr: "Gucci Gang", time: "12h", whatHappened: "Andre Nguyen received a gift from Sopheak Neak"),
-        FeedItem(avatar: "Andre.png", descr: "Gucci Gang", time: "12h", whatHappened: "Andre Nguyen received a gift from Sopheak Neak"),
-        FeedItem(avatar: "Andre.png", descr: "Gucci Gang", time: "12h", whatHappened: "Andre Nguyen received a gift from Sopheak Neak"),
+        FeedItem(avatar: "Sopheak.png", descr: "Gucci Gang", time: "12h", whatHappened: "Andre Nguyen received a gift from Sopheak Neak"),
         FeedItem(avatar: "Andre.png", descr: "Gucci Gang", time: "12h", whatHappened: "Andre Nguyen received a gift from Sopheak Neak")
     ]
 }
