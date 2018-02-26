@@ -47,6 +47,10 @@
 /* Begin PBXFileReference section */
 		B244999C2040BDD2006FA81B /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 		B244999E2040C340006FA81B /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
+		B272DC212043915C00EE2121 /* Group 142.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Group 142.png"; sourceTree = "<group>"; };
+		B272DC222043915C00EE2121 /* Group 408.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Group 408.png"; sourceTree = "<group>"; };
+		B272DC232043915C00EE2121 /* Cart Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cart Icon.png"; sourceTree = "<group>"; };
+		B272DC242043915C00EE2121 /* Notification Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Notification Icon.png"; sourceTree = "<group>"; };
 		B29AEC5E203FC9C100110EF9 /* Mito 1.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mito 1.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B29AEC61203FC9C100110EF9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B29AEC63203FC9C100110EF9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +100,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B272DC202043915C00EE2121 /* Icon */ = {
+			isa = PBXGroup;
+			children = (
+				B272DC212043915C00EE2121 /* Group 142.png */,
+				B272DC222043915C00EE2121 /* Group 408.png */,
+				B272DC232043915C00EE2121 /* Cart Icon.png */,
+				B272DC242043915C00EE2121 /* Notification Icon.png */,
+			);
+			path = Icon;
+			sourceTree = "<group>";
+		};
 		B29AEC55203FC9C100110EF9 = {
 			isa = PBXGroup;
 			children = (
@@ -128,6 +143,7 @@
 				DAD9953420423A4B007A7687 /* Andre.png */,
 				B29AEC6A203FC9C100110EF9 /* LaunchScreen.storyboard */,
 				B29AEC6D203FC9C100110EF9 /* Info.plist */,
+				B272DC202043915C00EE2121 /* Icon */,
 				B244999E2040C340006FA81B /* fonts */,
 				DAD995302042386E007A7687 /* ActivityViewController.swift */,
 				DA27C217204353FF00CCFD60 /* HomeViewController.swift */,
