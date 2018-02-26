@@ -10,19 +10,38 @@ import UIKit
 
 class ActivityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var peopleTableView: UITableView!
+    @IBOutlet weak var productTableView: UITableView!
+
+    
+
+    @IBOutlet weak var productPeopleTab: UISegmentedControl!
+    
+
+    @IBAction func switchTab(_ sender: UISegmentedControl) {
+        print(productPeopleTab.selectedSegmentIndex)
+        
+        if productPeopleTab.selectedSegmentIndex == 0 {
+            UIView.transition(from: peopleTableView, to: productTableView, duration: 0, options: .showHideTransitionViews)
+        } else {
+            UIView.transition(from: productTableView, to: peopleTableView, duration: 0, options: .showHideTransitionViews)
+        }
+    }
+    
+    
     
     var appdata = AppData.shared
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.rowHeight = 106
-        // Do any additional setup after loading the view.
+        peopleTableView.delegate = self
+        peopleTableView.dataSource = self
+        peopleTableView.rowHeight = 106
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        tableView.reloadData()
+        peopleTableView.reloadData()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

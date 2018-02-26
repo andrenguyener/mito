@@ -25,6 +25,6 @@ class ProductDetailsViewController: UIViewController {
 
     @IBAction func back(_ sender: Any) {
        
-        performSegue(withIdentifier: "22", sender: self)
+        performSegue(withIdentifier: "prodDetailBack", sender: self)
     }
 }
