@@ -44,7 +44,7 @@ func (ss *SqlStore) GetByID(id int) (*User, error) {
 
 	defer rows.Close()
 	for rows.Next() {
-		if err := rows.Scan(&user.UserId, &user.UserFname, &user.UserLname, &user.UserEmail, &user.PasswordHash, &user.PhotoUrl, &user.UserDOB, &user.Username); err != nil {
+		if err := rows.Scan(&user.UserId, &user.UserFname, &user.UserLname, &user.UserEmail, &user.PhotoUrl, &user.UserDOB, &user.Username); err != nil {
 			log.Fatal(err)
 		}
 		fmt.Println(user)
@@ -57,24 +57,54 @@ func (ss *SqlStore) GetByID(id int) (*User, error) {
 
 //GetByEmail returns the User with the given email
 func (ss *SqlStore) GetByEmail(email string) (*User, error) {
-	// user := &User{}
+	user := &User{}
+	tsql := fmt.Sprintf("EXEC GetUserByUserEmail @Useremail;")
 
-	// if err != nil {
-	// 	return nil, ErrUserNotFound
-	// }
-	//return user, nil
-	return nil, ErrUserNotFound
+	rows, err := ss.database.Query(
+		tsql,
+		sql.Named("Useremail", email))
+	if err != nil {
+		return nil, ErrUserNotFound
+	}
+
+	defer rows.Close()
+	for rows.Next() {
+		if err := rows.Scan(&user.UserId, &user.UserFname, &user.UserLname, &user.UserEmail, &user.PhotoUrl, &user.UserDOB, &user.Username); err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println(user)
+	}
+	if err := rows.Err(); err != nil {
+		log.Fatal(err)
+	}
+
+	return user, nil
 }
 
 //GetByUserName returns the User with the given Username
 func (ss *SqlStore) GetByUserName(username string) (*User, error) {
-	// user := &User{}
-	// err := ms.collection.Find(bson.M{"username": username}).One(user)
-	// if err == mgo.ErrNotFound {
-	// 	return nil, ErrUserNotFound
-	// }
-	// return user, nil
-	return nil, ErrUserNotFound
+	user := &User{}
+	tsql := fmt.Sprintf("EXEC GetUserByUsername @Username;")
+
+	rows, err := ss.database.Query(
+		tsql,
+		sql.Named("Username", username))
+	if err != nil {
+		return nil, ErrUserNotFound
+	}
+
+	defer rows.Close()
+	for rows.Next() {
+		if err := rows.Scan(&user.UserId, &user.UserFname, &user.UserLname, &user.UserEmail, &user.PhotoUrl, &user.UserDOB, &user.Username); err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println(user)
+	}
+	if err := rows.Err(); err != nil {
+		log.Fatal(err)
+	}
+
+	return user, nil
 }
 
 //Insert converts the NewUser to a User, inserts
@@ -85,19 +115,6 @@ func (ss *SqlStore) Insert(newUser *NewUser) (*User, error) {
 		return nil, fmt.Errorf("Error converting new user to user %s", err)
 	}
 	var newUserId int64
-	// tsql := fmt.Sprintf("EXEC insertUser @UserFname, @UserLname, @UserEmail, @PasswordHash, @PhotoUrl, @UserDOB, @Username, @RetNewUserId = OUT;")
-
-	// _, err = ss.database.Query(
-	// 	tsql,
-	// 	sql.Named("UserFname", user.UserFname),
-	// 	sql.Named("UserLname", user.UserLname),
-	// 	sql.Named("UserEmail", user.UserEmail),
-	// 	sql.Named("PasswordHash", user.PasswordHash),
-	// 	sql.Named("PhotoUrl", user.PhotoUrl),
-	// 	sql.Named("UserDOB", user.UserDOB),
-	// 	sql.Named("Username", user.Username),
-	// 	sql.Named("VarName", sql.Out{Dest: &newUserId}))
-	// var outArg string
 	_, err = ss.database.Exec("insertUser",
 		sql.Named("UserFname", user.UserFname),
 		sql.Named("UserLname", user.UserLname),
@@ -112,17 +129,6 @@ func (ss *SqlStore) Insert(newUser *NewUser) (*User, error) {
 	}
 	user.UserId = int(newUserId)
 	fmt.Println(user)
-	// name := &User{}
-	// defer rows.Close()
-	// for rows.Next() {
-	// 	if err := rows.Scan(&name.UserId, &name.UserFname, &name.UserLname, &name.UserEmail, &name.PasswordHash, &name.PhotoUrl, &name.UserDOB, &name.Username); err != nil {
-	// 		log.Fatal(err)
-	// 	}
-	// 	fmt.Println(name)
-	// }
-	// if err := rows.Err(); err != nil {
-	// 	log.Fatal(err)
-	// }
 
 	return user, err
 }

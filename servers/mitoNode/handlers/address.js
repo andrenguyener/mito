@@ -3,7 +3,7 @@
 
 const express = require('express');
 
-const Address = require('./../models/address/address');
+const Address = require('./../models/address/address-class');
 const sendToMQ = require('./message-queue');
 
 const AddressHandler = (addressStore) => {
@@ -17,9 +17,11 @@ const AddressHandler = (addressStore) => {
 
     const router = express.Router();
 
-    router.get('/v1/address', (req, res) => {
-        console.log("hi")
+    router.get('/v1/address/:userId', (req, res) => {
+        console.log(req.params.userId);
     });
+
+    //Do get user address by UserId, returns row of data . Sopheak id is 7. Returning rows of address
 
     router.post('/v1/address', (req, res) => {
         let streetAddress1 = req.body.streetAddress1;
@@ -27,10 +29,14 @@ const AddressHandler = (addressStore) => {
         let cityName = req.body.cityName;
         let zipCode = req.body.zipCode;
         let stateName = req.body.stateName;
-        let userJSON = JSON.parse(req.get('X-User'));
-        let userId = userJSON.userId;
-        const address = new Address(userId, streetAddress1, streetAddress2, cityName, zipCode, stateName);
-
+        // let userJSON = JSON.parse(req.get('X-User'));
+        // let userId = userJSON.userId;
+        let userId = req.body.userId;
+        let aliasName = req.body.aliasName;
+        let address = new Address(userId, streetAddress1, streetAddress2, cityName, zipCode, stateName, aliasName);
+        console.log(address);
+        addressStore.insert(address);
+        res.json(address);
     });
     
     

@@ -1,7 +1,7 @@
 'use strict';
 
 class Address {
-    constructor(userId, streetAddress1, streetAddress2, cityName, zipCode, stateName) {
+    constructor(userId, streetAddress1, streetAddress2, cityName, zipCode, stateName, aliasName) {
 
         this.userId = userId
 
@@ -11,9 +11,11 @@ class Address {
 
         this.cityName = cityName
 
-        this.zipCode = int(zipCode)
+        this.zipCode = zipCode
 
         this.stateName = stateName
+
+        this.aliasName = aliasName
     }
 }
 
