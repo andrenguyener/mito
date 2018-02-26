@@ -15,18 +15,15 @@ var config = {
     options: { encrypt: true, database: 'projectmito'  }
 };
 
-// const PaymentStore = require("./paymentstore");
-// const PaymentHandler = require("./payment");
-
-// const ChannelStore = require("./models/channels/channel-store");
-// const MessageStore = require("./models/messages/message-store");
-// const Channel = require('./models/channels/channel');
-// const ChannelHandler = require('./handlers/channel');
-// const MessageHandler = require('./handlers/message');
 
 const AddressStore = require("./models/address/address-store");
 const Address = require('./models/address/address-class');
 const AddressHandler = require('./handlers/address');
+
+
+const FriendStore = require("./models/friend/friend-store");
+const Friend = require('./models/friend/friend-class');
+const FriendHandler = require('./handlers/friend');
 
 const AmazonHashHandler = require('./handlers/amazon');
 
@@ -38,8 +35,8 @@ const portNum = parseInt(port);
 
 // const mongodb = require("mongodb");
 // const mongoAddr = process.env.DBADDR || "mongos:27017";
-const mongoAddr = process.env.DBADDR || "localhost:27017"
-const mongoURL = `mongodb://${mongoAddr}/mongo`;
+// const mongoAddr = process.env.DBADDR || "localhost:27017"
+// const mongoURL = `mongodb://${mongoAddr}/mongo`;
 
 
 const amqp = require("amqplib");
@@ -50,30 +47,30 @@ const mqURL = `amqp://${mqAddr}`;
 var Request = require('tedious').Request;  
 var TYPES = require('tedious').TYPES;  
 
-function executeStatement(connection) {  
-    var request = new Request("SELECT * FROM [USER]", function(err) {  
-        if (err) {  
-            console.log(err);
-        }  
-    });  
-    var result = "";
-    request.on('row', function(columns) {  
-        columns.forEach(function(column) {  
-          if (column.value === null) {  
-            console.log('NULL');  
-          } else {  
-            result+= column.value + " ";  
-          }  
-        });  
-        console.log(result);  
-        result ="";  
-    });  
+// function executeStatement(connection) {  
+//     var request = new Request("SELECT * FROM [USER]", function(err) {  
+//         if (err) {  
+//             console.log(err);
+//         }  
+//     });  
+//     var result = "";
+//     request.on('row', function(columns) {  
+//         columns.forEach(function(column) {  
+//           if (column.value === null) {  
+//             console.log('NULL');  
+//           } else {  
+//             result+= column.value + " ";  
+//           }  
+//         });  
+//         console.log(result);  
+//         result ="";  
+//     });  
 
-    request.on('done', function(rowCount, more) {  
-        console.log(rowCount + ' rows returned');  
-    });  
-    connection.execSql(request);  
-}  
+//     request.on('done', function(rowCount, more) {  
+//         console.log(rowCount + ' rows returned');  
+//     });  
+//     connection.execSql(request);  
+// }  
 
 (async () => {
     try {
@@ -81,15 +78,15 @@ function executeStatement(connection) {
         // const db = await mongodb.MongoClient.connect(mongoURL);
 
         let sql = await new Connection(config);
-        // connection.on('connect', function(err) {  
-        // // If no error, then good to proceed. 
-        //     if (err) {
-        //         console.log(err)
-        //     } else {
-        //         console.log("Connected");
-        //         executeStatement(connection);
-        //     }
-        // });
+        sql.on('connect', function(err) {  
+        // If no error, then good to proceed. 
+            if (err) {
+                console.log(err)
+            } else {
+                console.log("Connected");
+                // executeStatement(connection);
+            }
+        });
        
 
         
@@ -132,7 +129,7 @@ function executeStatement(connection) {
         // let messageStore = new MessageStore(db, 'messages');
         // let payStore = new PaymentStore(db, "payments");
         let addressStore = new AddressStore(sql);
-
+        let friendStore = new FriendStore(sql);
         // const defaultChannel = new Channel('general', '');
         // const fetchedChannel = await channelStore.getByName(defaultChannel.name);
         // Add the default channel if not found.
@@ -145,6 +142,7 @@ function executeStatement(connection) {
         // app.use(MessageHandler(messageStore));
         // app.use(PaymentHandler(payStore));
         app.use(AddressHandler(addressStore));
+        app.use(FriendHandler(friendStore));
         app.use(AmazonHashHandler());
         app.listen(portNum, host, () => {
             console.log(`server is listening at http://${addr}`);

@@ -188,6 +188,8 @@ func main() {
 	// mux.Handle("/v1/email", NewServiceProxy(splitMessagesAddrs, ctx))
 	mux.Handle("/v1/address", NewServiceProxy(splitMessagesAddrs, ctx))
 	mux.Handle("/v1/address/", NewServiceProxy(splitMessagesAddrs, ctx))
+	mux.Handle("/v1/friend", NewServiceProxy(splitMessagesAddrs, ctx))
+	mux.Handle("/v1/friend/", NewServiceProxy(splitMessagesAddrs, ctx))
 	mux.Handle("/v1/amazonhash/", NewServiceProxy(splitMessagesAddrs, ctx))
 	mux.Handle("/v1/amazonsearch", NewServiceProxy(splitMessagesAddrs, ctx))
 	log.Fatal(http.ListenAndServeTLS(addr, tlscert, tlskey, corsHandler))
