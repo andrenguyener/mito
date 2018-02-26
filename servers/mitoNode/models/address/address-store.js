@@ -1,9 +1,9 @@
 'use strict';
 
-var Request = require('tedious').Request;  
-var TYPES = require('tedious').TYPES; 
+var Request = require('tedious').Request;
+var TYPES = require('tedious').TYPES;
 class AddressStore {
-    
+
     constructor(sql) {
         // this.collection = db.collection(colName);
         // this should be a table
@@ -11,10 +11,10 @@ class AddressStore {
     }
 
     request(procedure) {
-        return new Request(`${procedure}`), function(err) {
-            if (err) {  
+        return new Request(`${procedure}`), function (err) {
+            if (err) {
                 console.log(err);
-            }  
+            }
         }
     }
 
@@ -24,10 +24,10 @@ class AddressStore {
         // channel._id = new mongodb.ObjectID();
         // return this.collection.insertOne(channel).then(() => channel);
         let procedureName = "InsertUserAddress";
-        var request = new Request(`${procedureName}`, function(err) {
-            if (err) {  
+        var request = new Request(`${procedureName}`, function (err) {
+            if (err) {
                 console.log(err);
-            }  
+            }
         });
         var addressId;
         request.addParameter('userId', TYPES.VarChar, address.userId);
@@ -47,9 +47,10 @@ class AddressStore {
         this.sql.callProcedure(request)
     }
 
-    // get() retrieves an address from SqlServer for a given address ID.
+    // get() retrieves an address from SqlServer for a given ID.
     get(id) {
         // return this.collection.findOne({ _id: id });
+
     }
 
     // // getByName retrieves one channel from MongoDB for a given channel name.
@@ -58,18 +59,44 @@ class AddressStore {
     // }
 
     // getAll() retrieves all addresses from SqlServer with the user ID.
-    getAll() {
-        // return this.collection
-        //     .find({})
-        //     .limit(100)
-        //     .toArray();
-        let procedureName = "AddressProcedure";
-        var request = request(`${procedureName}`);
-        var addressId;
-        request.addParameter('userId', TYPES.VarChar, address.userId);
-        request.addOutputParameter('id', addressId);
+    getAll(id, res) {
+        let procedureName = "GetUserAddressById";
+        var request = new Request(`${procedureName}`, function (err, rowCount, rows) {
+            if (err) {
+                console.log(err);
+            }
+            // return rowCount
+        });
+        
+        request.addParameter('UserId', TYPES.VarChar, id);
+
+        let jsonArray = []
+        let rowKount = 0
+        request.on('row', function (columns) {
+            var rowObject = {};
+            columns.forEach(function (column) {
+                if (column.value === null) {
+                    console.log('NULL');
+                } else {
+                    rowObject[column.metadata.colName] = column.value;
+                }
+            });
+            jsonArray.push(rowObject)
+            rowKount++;
+        });
+
+        request.on('doneProc', function (rowCount, more) {
+            console.log(jsonArray);
+            res.json(jsonArray);
+            // return jsonArray
+     
+            
+        });
 
         this.sql.callProcedure(request)
+        
+
+       
     }
 
     // update() updates a address for a given address ID.

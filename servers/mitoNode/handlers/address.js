@@ -18,7 +18,11 @@ const AddressHandler = (addressStore) => {
     const router = express.Router();
 
     router.get('/v1/address/:userId', (req, res) => {
-        console.log(req.params.userId);
+
+        // let addressArray = []
+
+        addressStore.getAll(req.params.userId, res);
+          
     });
 
     //Do get user address by UserId, returns row of data . Sopheak id is 7. Returning rows of address
