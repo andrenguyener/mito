@@ -11,10 +11,10 @@ import UIKit
 class SettingsViewController: UIViewController {
 
 
+    //Login
     @IBAction func settingsToHome(_ sender: Any) {
         performSegue(withIdentifier: "settingsToMe", sender: self)
     }
-    
     @IBAction func signout(_ sender: Any) {
         performSegue(withIdentifier: "signOut", sender: self)
     }
