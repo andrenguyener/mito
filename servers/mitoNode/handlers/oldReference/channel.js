@@ -4,9 +4,9 @@
 const mongodb = require('mongodb');
 const express = require('express');
 
-const Channel = require('./../models/channels/channel');
-const Message = require('./../models/messages/message');
-const sendToMQ = require('./message-queue');
+const Channel = require('./../../models/channels/channel');
+const Message = require('./../../models/messages/message');
+const sendToMQ = require('./../message-queue');
 
 const ChannelHandler = (channelStore, messageStore) => {
     if (!channelStore || !messageStore) {

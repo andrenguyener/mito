@@ -25,7 +25,7 @@ var config = {
 // const MessageHandler = require('./handlers/message');
 
 const AddressStore = require("./models/address/address-store");
-const Address = require('./models/address/address');
+const Address = require('./models/address/address-class');
 const AddressHandler = require('./handlers/address');
 
 const AmazonHashHandler = require('./handlers/amazon');
@@ -131,7 +131,7 @@ function executeStatement(connection) {
         // let channelStore = new ChannelStore(db, 'channels');
         // let messageStore = new MessageStore(db, 'messages');
         // let payStore = new PaymentStore(db, "payments");
-        let addressStore = new AddressStore(sql, 'address');
+        let addressStore = new AddressStore(sql);
 
         // const defaultChannel = new Channel('general', '');
         // const fetchedChannel = await channelStore.getByName(defaultChannel.name);

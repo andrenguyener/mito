@@ -11,6 +11,10 @@ import (
 	"github.com/andrenguyener/mito/servers/gateway/sessions"
 )
 
+type UserId struct {
+	UserId int `json:"userId"`
+}
+
 // UsersHandler allows new users to sign up (POST) or return all the users (GET)
 func (ctx *Context) UsersHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
@@ -105,6 +109,37 @@ func (ctx *Context) UsersHandler(w http.ResponseWriter, r *http.Request) {
 			}
 
 		}
+
+	default:
+		http.Error(w, "invalid status method", http.StatusMethodNotAllowed)
+		return
+	}
+}
+
+// Gets the user by its ID
+func (ctx *Context) UsersIDHandler(w http.ResponseWriter, r *http.Request) {
+	switch r.Method {
+	case "POST":
+		if r.Body == nil {
+			http.Error(w, "Response Body is empty", http.StatusBadRequest)
+			return
+		}
+
+		// decode the request body into newUser struct
+		decoder := json.NewDecoder(r.Body)
+		userId := &UserId{}
+
+		err := decoder.Decode(userId)
+		if err != nil {
+			http.Error(w, "Error decoding JSON: "+err.Error(), http.StatusBadRequest)
+			return
+		}
+		fmt.Println(userId)
+		user, err := ctx.UserStore.GetByID(userId.UserId)
+		if err != nil {
+			http.Error(w, "fail error "+err.Error(), http.StatusBadRequest)
+		}
+		respond(w, user)
 	default:
 		http.Error(w, "invalid status method", http.StatusMethodNotAllowed)
 		return
