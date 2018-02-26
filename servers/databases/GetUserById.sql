@@ -12,7 +12,7 @@ As
 	SET NOCOUNT ON
 	IF EXISTS(SELECT UserId FROM [USER] WHERE UserId = @UserId)
 		BEGIN
-		SELECT * FROM [USER] WHERE UserId = @UserId
+		SELECT UserId, Username, UserFname, UserLname, UserEmail, PhotoUrl, UserDOB FROM [USER] WHERE UserId = @UserId
 		END
 	ELSE
 		BEGIN 
