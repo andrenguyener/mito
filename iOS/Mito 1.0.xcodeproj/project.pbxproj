@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B244999D2040BDD2006FA81B /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B244999C2040BDD2006FA81B /* AppData.swift */; };
 		B244999F2040C340006FA81B /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = B244999E2040C340006FA81B /* fonts */; };
+		B272DC2620439E2200EE2121 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = B272DC2520439E2200EE2121 /* Product.swift */; };
+		B272DC2E2043BBE400EE2121 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B272DC2D2043BBE400EE2121 /* AppData.swift */; };
 		B29AEC62203FC9C100110EF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29AEC61203FC9C100110EF9 /* AppDelegate.swift */; };
 		B29AEC64203FC9C100110EF9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29AEC63203FC9C100110EF9 /* ViewController.swift */; };
 		B29AEC67203FC9C100110EF9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B29AEC65203FC9C100110EF9 /* Main.storyboard */; };
@@ -45,12 +46,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		B244999C2040BDD2006FA81B /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 		B244999E2040C340006FA81B /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
-		B272DC212043915C00EE2121 /* Group 142.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Group 142.png"; sourceTree = "<group>"; };
-		B272DC222043915C00EE2121 /* Group 408.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Group 408.png"; sourceTree = "<group>"; };
-		B272DC232043915C00EE2121 /* Cart Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cart Icon.png"; sourceTree = "<group>"; };
-		B272DC242043915C00EE2121 /* Notification Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Notification Icon.png"; sourceTree = "<group>"; };
+		B272DC2520439E2200EE2121 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		B272DC282043BA8700EE2121 /* Home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Home.png; sourceTree = "<group>"; };
+		B272DC292043BA8700EE2121 /* Person.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Person.png; sourceTree = "<group>"; };
+		B272DC2A2043BA8700EE2121 /* Cart Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cart Icon.png"; sourceTree = "<group>"; };
+		B272DC2B2043BA8700EE2121 /* Notification Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Notification Icon.png"; sourceTree = "<group>"; };
+		B272DC2D2043BBE400EE2121 /* AppData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 		B29AEC5E203FC9C100110EF9 /* Mito 1.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mito 1.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B29AEC61203FC9C100110EF9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B29AEC63203FC9C100110EF9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -100,13 +102,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B272DC202043915C00EE2121 /* Icon */ = {
+		B272DC272043BA8700EE2121 /* Icon */ = {
 			isa = PBXGroup;
 			children = (
-				B272DC212043915C00EE2121 /* Group 142.png */,
-				B272DC222043915C00EE2121 /* Group 408.png */,
-				B272DC232043915C00EE2121 /* Cart Icon.png */,
-				B272DC242043915C00EE2121 /* Notification Icon.png */,
+				B272DC282043BA8700EE2121 /* Home.png */,
+				B272DC292043BA8700EE2121 /* Person.png */,
+				B272DC2A2043BA8700EE2121 /* Cart Icon.png */,
+				B272DC2B2043BA8700EE2121 /* Notification Icon.png */,
 			);
 			path = Icon;
 			sourceTree = "<group>";
@@ -134,24 +136,25 @@
 		B29AEC60203FC9C100110EF9 /* Mito 1.0 */ = {
 			isa = PBXGroup;
 			children = (
-				B29AEC65203FC9C100110EF9 /* Main.storyboard */,
-				B29AEC61203FC9C100110EF9 /* AppDelegate.swift */,
-				B29AEC63203FC9C100110EF9 /* ViewController.swift */,
-				B244999C2040BDD2006FA81B /* AppData.swift */,
 				B29AEC68203FC9C100110EF9 /* Assets.xcassets */,
-				DA27C21F2043736400CCFD60 /* Sopheak.png */,
-				DAD9953420423A4B007A7687 /* Andre.png */,
-				B29AEC6A203FC9C100110EF9 /* LaunchScreen.storyboard */,
-				B29AEC6D203FC9C100110EF9 /* Info.plist */,
-				B272DC202043915C00EE2121 /* Icon */,
+				B272DC272043BA8700EE2121 /* Icon */,
 				B244999E2040C340006FA81B /* fonts */,
 				DAD995302042386E007A7687 /* ActivityViewController.swift */,
+				B272DC2D2043BBE400EE2121 /* AppData.swift */,
+				B29AEC61203FC9C100110EF9 /* AppDelegate.swift */,
+				DA27C21B204356B400CCFD60 /* FeedItem.swift */,
+				DA27C2192043550A00CCFD60 /* HomeTableViewCell.swift */,
 				DA27C217204353FF00CCFD60 /* HomeViewController.swift */,
 				DAD995322042389B007A7687 /* Person.swift */,
-				DAD9953620423EE9007A7687 /* TableViewCell.swift */,
-				DA27C2192043550A00CCFD60 /* HomeTableViewCell.swift */,
-				DA27C21B204356B400CCFD60 /* FeedItem.swift */,
+				B272DC2520439E2200EE2121 /* Product.swift */,
 				DA27C21D204371CE00CCFD60 /* ProductDetailsViewController.swift */,
+				DAD9953620423EE9007A7687 /* TableViewCell.swift */,
+				B29AEC63203FC9C100110EF9 /* ViewController.swift */,
+				B29AEC65203FC9C100110EF9 /* Main.storyboard */,
+				B29AEC6A203FC9C100110EF9 /* LaunchScreen.storyboard */,
+				B29AEC6D203FC9C100110EF9 /* Info.plist */,
+				DAD9953420423A4B007A7687 /* Andre.png */,
+				DA27C21F2043736400CCFD60 /* Sopheak.png */,
 			);
 			path = "Mito 1.0";
 			sourceTree = "<group>";
@@ -315,8 +318,9 @@
 				B29AEC64203FC9C100110EF9 /* ViewController.swift in Sources */,
 				B29AEC62203FC9C100110EF9 /* AppDelegate.swift in Sources */,
 				DA27C21E204371CE00CCFD60 /* ProductDetailsViewController.swift in Sources */,
+				B272DC2E2043BBE400EE2121 /* AppData.swift in Sources */,
 				DAD9953720423EE9007A7687 /* TableViewCell.swift in Sources */,
-				B244999D2040BDD2006FA81B /* AppData.swift in Sources */,
+				B272DC2620439E2200EE2121 /* Product.swift in Sources */,
 				DA27C21C204356B400CCFD60 /* FeedItem.swift in Sources */,
 				DA27C218204353FF00CCFD60 /* HomeViewController.swift in Sources */,
 				DA27C21A2043550A00CCFD60 /* HomeTableViewCell.swift in Sources */,

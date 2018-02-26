@@ -10,17 +10,13 @@ import UIKit
 
 class ActivityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    
     @IBOutlet weak var peopleTableView: UITableView!
     @IBOutlet weak var productTableView: UITableView!
-
-    
-
     @IBOutlet weak var productPeopleTab: UISegmentedControl!
-    
 
     @IBAction func switchTab(_ sender: UISegmentedControl) {
         print(productPeopleTab.selectedSegmentIndex)
-        
         if productPeopleTab.selectedSegmentIndex == 0 {
             UIView.transition(from: peopleTableView, to: productTableView, duration: 0, options: .showHideTransitionViews)
         } else {
@@ -37,6 +33,9 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         peopleTableView.dataSource = self
         peopleTableView.rowHeight = 106
         
+        productTableView.delegate = self
+        productTableView.dataSource = self
+        productTableView.rowHeight = 106
         
     }
     
