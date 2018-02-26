@@ -19,10 +19,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--Open-->
         <scene sceneID="7dv-dz-wVg">
             <objects>
-                <viewController id="jVO-xl-sXb" sceneMemberID="viewController">
+                <viewController title="Open" id="jVO-xl-sXb" customClass="LoginViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Es7-sx-xiV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -42,6 +42,9 @@
                                 <state key="normal" title="LOG IN">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="login:" destination="jVO-xl-sXb" eventType="touchUpInside" id="9KX-2j-vVD"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gS8-lv-B80">
                                 <rect key="frame" x="172" y="686" width="70" height="30"/>
@@ -49,6 +52,9 @@
                                 <state key="normal" title="or Sign up">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="signup:" destination="jVO-xl-sXb" eventType="touchUpInside" id="U3U-S1-oB1"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="39o-Wv-VpO">
                                 <rect key="frame" x="120" y="295" width="173" height="30"/>
@@ -69,17 +75,18 @@
                         <viewLayoutGuide key="safeArea" id="sQG-NY-zjb"/>
                     </view>
                     <connections>
-                        <segue destination="vJa-9R-Sbw" kind="show" id="cTu-G9-fQe"/>
+                        <segue destination="vJa-9R-Sbw" kind="show" identifier="login" id="cTu-G9-fQe"/>
+                        <segue destination="WyY-un-hcv" kind="show" identifier="signup" id="Tk8-BD-Yxk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fPE-RK-iyf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="116" y="108"/>
         </scene>
-        <!--View Controller-->
+        <!--Welcome-->
         <scene sceneID="mEU-rU-f6g">
             <objects>
-                <viewController id="vJa-9R-Sbw" sceneMemberID="viewController">
+                <viewController title="Welcome" id="vJa-9R-Sbw" customClass="LoginViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gWj-Ww-utY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -271,7 +278,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="signOut:" destination="8y5-fW-uZG" eventType="touchUpInside" id="8gU-He-dou"/>
+                                    <action selector="signout:" destination="8y5-fW-uZG" eventType="touchUpInside" id="KNB-Xk-2VL"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -280,16 +287,17 @@
                     </view>
                     <connections>
                         <segue destination="5ev-RP-TnR" kind="show" identifier="settingsToMe" id="OxN-eG-nJb"/>
+                        <segue destination="jVO-xl-sXb" kind="show" identifier="signOut" id="zJm-g1-0h0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ooY-HR-NjK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2829" y="1926"/>
         </scene>
-        <!--View Controller-->
+        <!--Signup-->
         <scene sceneID="fIx-cB-byW">
             <objects>
-                <viewController id="WyY-un-hcv" sceneMemberID="viewController">
+                <viewController title="Signup" id="WyY-un-hcv" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fXp-uq-m6U">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -629,6 +637,6 @@
         <image name="Person.png" width="24" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ZPJ-OI-9Hk"/>
+        <segue reference="OxN-eG-nJb"/>
     </inferredMetricsTieBreakers>
 </document>
