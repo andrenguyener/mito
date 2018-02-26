@@ -15,9 +15,10 @@ class SettingsViewController: UIViewController {
         performSegue(withIdentifier: "settingsToMe", sender: self)
     }
     
-    @IBAction func signOut(_ sender: Any) {
+    @IBAction func signout(_ sender: Any) {
         performSegue(withIdentifier: "signOut", sender: self)
     }
+    
     
     
     override func viewDidLoad() {

@@ -19,7 +19,7 @@
 		B29AEC82203FC9C200110EF9 /* Mito_1_0UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29AEC81203FC9C200110EF9 /* Mito_1_0UITests.swift */; };
 		B2F849452043C33F00CBD83A /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F849442043C33F00CBD83A /* MeViewController.swift */; };
 		B2F849472043CAA900CBD83A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F849462043CAA900CBD83A /* SettingsViewController.swift */; };
-		B2F8494D2043CE0700CBD83A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F8494C2043CE0700CBD83A /* LoginViewController.swift */; };
+		B2F8494F2043D71000CBD83A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F8494E2043D71000CBD83A /* LoginViewController.swift */; };
 		DA27C218204353FF00CCFD60 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA27C217204353FF00CCFD60 /* HomeViewController.swift */; };
 		DA27C21A2043550A00CCFD60 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA27C2192043550A00CCFD60 /* HomeTableViewCell.swift */; };
 		DA27C21C204356B400CCFD60 /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA27C21B204356B400CCFD60 /* FeedItem.swift */; };
@@ -71,7 +71,7 @@
 		B29AEC83203FC9C200110EF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2F849442043C33F00CBD83A /* MeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		B2F849462043CAA900CBD83A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		B2F8494C2043CE0700CBD83A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		B2F8494E2043D71000CBD83A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DA27C217204353FF00CCFD60 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		DA27C2192043550A00CCFD60 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		DA27C21B204356B400CCFD60 /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
@@ -152,7 +152,6 @@
 				DA27C2192043550A00CCFD60 /* HomeTableViewCell.swift */,
 				DA27C217204353FF00CCFD60 /* HomeViewController.swift */,
 				B2F849442043C33F00CBD83A /* MeViewController.swift */,
-				B2F8494C2043CE0700CBD83A /* LoginViewController.swift */,
 				DAD995322042389B007A7687 /* Person.swift */,
 				B272DC2520439E2200EE2121 /* Product.swift */,
 				DA27C21D204371CE00CCFD60 /* ProductDetailsViewController.swift */,
@@ -160,6 +159,7 @@
 				DAD9953620423EE9007A7687 /* TableViewCell.swift */,
 				B29AEC63203FC9C100110EF9 /* ViewController.swift */,
 				B29AEC65203FC9C100110EF9 /* Main.storyboard */,
+				B2F8494E2043D71000CBD83A /* LoginViewController.swift */,
 				B29AEC6A203FC9C100110EF9 /* LaunchScreen.storyboard */,
 				B29AEC6D203FC9C100110EF9 /* Info.plist */,
 				DAD9953420423A4B007A7687 /* Andre.png */,
@@ -323,7 +323,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2F8494D2043CE0700CBD83A /* LoginViewController.swift in Sources */,
+				B2F8494F2043D71000CBD83A /* LoginViewController.swift in Sources */,
 				DAD995332042389B007A7687 /* Person.swift in Sources */,
 				B29AEC64203FC9C100110EF9 /* ViewController.swift in Sources */,
 				B29AEC62203FC9C100110EF9 /* AppDelegate.swift in Sources */,
@@ -503,7 +503,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6KH97C972X;
+				DEVELOPMENT_TEAM = TG372K25N5;
 				INFOPLIST_FILE = "Mito 1.0/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.uw.bennys.Mito-1-0";
@@ -518,7 +518,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6KH97C972X;
+				DEVELOPMENT_TEAM = TG372K25N5;
 				INFOPLIST_FILE = "Mito 1.0/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.uw.bennys.Mito-1-0";
