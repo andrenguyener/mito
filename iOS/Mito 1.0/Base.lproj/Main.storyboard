@@ -126,7 +126,7 @@
             <objects>
                 <viewController id="zTg-1Y-lm9" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3YQ-Zj-vYT">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Activity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y18-N1-XhR">
@@ -570,7 +570,7 @@
             <objects>
                 <viewController id="k7B-N4-R6E" customClass="HomeViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jDo-cr-7fi">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zry-fA-7Ss">
@@ -1199,7 +1199,7 @@
         <scene sceneID="gFb-Q6-MNY">
             <objects>
                 <tabBarController id="5ev-RP-TnR" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3Ob-EE-XVa">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="3Ob-EE-XVa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1227,7 +1227,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Jjr-wW-Hse"/>
-        <segue reference="Huf-aH-vL3"/>
+        <segue reference="cI7-Td-TzM"/>
         <segue reference="cTu-G9-fQe"/>
     </inferredMetricsTieBreakers>
 </document>
