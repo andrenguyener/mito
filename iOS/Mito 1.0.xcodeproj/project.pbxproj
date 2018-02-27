@@ -12,6 +12,16 @@
 		B247197020454733006CF6C2 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B247196F20454733006CF6C2 /* CartTableViewCell.swift */; };
 		B247197320454C4E006CF6C2 /* You’re so nice!.png in Resources */ = {isa = PBXBuildFile; fileRef = B247197120454C4D006CF6C2 /* You’re so nice!.png */; };
 		B247197420454C4E006CF6C2 /* GiftWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = B247197220454C4D006CF6C2 /* GiftWhite.png */; };
+		B247197F2046245E006CF6C2 /* Sign Out SG.png in Resources */ = {isa = PBXBuildFile; fileRef = B24719752046245C006CF6C2 /* Sign Out SG.png */; };
+		B24719802046245E006CF6C2 /* Get Help SG.png in Resources */ = {isa = PBXBuildFile; fileRef = B24719762046245C006CF6C2 /* Get Help SG.png */; };
+		B24719812046245E006CF6C2 /* Cart Icon SG .png in Resources */ = {isa = PBXBuildFile; fileRef = B24719772046245D006CF6C2 /* Cart Icon SG .png */; };
+		B24719822046245E006CF6C2 /* Card SG.png in Resources */ = {isa = PBXBuildFile; fileRef = B24719782046245D006CF6C2 /* Card SG.png */; };
+		B24719832046245E006CF6C2 /* Notification Icon SG.png in Resources */ = {isa = PBXBuildFile; fileRef = B24719792046245D006CF6C2 /* Notification Icon SG.png */; };
+		B24719842046245E006CF6C2 /* Blocked User SG.png in Resources */ = {isa = PBXBuildFile; fileRef = B247197A2046245D006CF6C2 /* Blocked User SG.png */; };
+		B24719852046245E006CF6C2 /* trash SG.png in Resources */ = {isa = PBXBuildFile; fileRef = B247197B2046245D006CF6C2 /* trash SG.png */; };
+		B24719862046245E006CF6C2 /* Lock SG.png in Resources */ = {isa = PBXBuildFile; fileRef = B247197C2046245E006CF6C2 /* Lock SG.png */; };
+		B24719872046245E006CF6C2 /* Settings SG.png in Resources */ = {isa = PBXBuildFile; fileRef = B247197D2046245E006CF6C2 /* Settings SG.png */; };
+		B24719882046245E006CF6C2 /* Profile SG.png in Resources */ = {isa = PBXBuildFile; fileRef = B247197E2046245E006CF6C2 /* Profile SG.png */; };
 		B272DC2620439E2200EE2121 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = B272DC2520439E2200EE2121 /* Product.swift */; };
 		B272DC2E2043BBE400EE2121 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B272DC2D2043BBE400EE2121 /* AppData.swift */; };
 		B29AEC62203FC9C100110EF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29AEC61203FC9C100110EF9 /* AppDelegate.swift */; };
@@ -59,6 +69,16 @@
 		B247196F20454733006CF6C2 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
 		B247197120454C4D006CF6C2 /* You’re so nice!.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "You’re so nice!.png"; sourceTree = "<group>"; };
 		B247197220454C4D006CF6C2 /* GiftWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GiftWhite.png; sourceTree = "<group>"; };
+		B24719752046245C006CF6C2 /* Sign Out SG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sign Out SG.png"; sourceTree = "<group>"; };
+		B24719762046245C006CF6C2 /* Get Help SG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Get Help SG.png"; sourceTree = "<group>"; };
+		B24719772046245D006CF6C2 /* Cart Icon SG .png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cart Icon SG .png"; sourceTree = "<group>"; };
+		B24719782046245D006CF6C2 /* Card SG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Card SG.png"; sourceTree = "<group>"; };
+		B24719792046245D006CF6C2 /* Notification Icon SG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Notification Icon SG.png"; sourceTree = "<group>"; };
+		B247197A2046245D006CF6C2 /* Blocked User SG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Blocked User SG.png"; sourceTree = "<group>"; };
+		B247197B2046245D006CF6C2 /* trash SG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trash SG.png"; sourceTree = "<group>"; };
+		B247197C2046245E006CF6C2 /* Lock SG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Lock SG.png"; sourceTree = "<group>"; };
+		B247197D2046245E006CF6C2 /* Settings SG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Settings SG.png"; sourceTree = "<group>"; };
+		B247197E2046245E006CF6C2 /* Profile SG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Profile SG.png"; sourceTree = "<group>"; };
 		B272DC2520439E2200EE2121 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		B272DC282043BA8700EE2121 /* Home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Home.png; sourceTree = "<group>"; };
 		B272DC292043BA8700EE2121 /* Person.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Person.png; sourceTree = "<group>"; };
@@ -127,6 +147,16 @@
 				B247197120454C4D006CF6C2 /* You’re so nice!.png */,
 				B272DC2A2043BA8700EE2121 /* Cart Icon.png */,
 				B272DC2B2043BA8700EE2121 /* Notification Icon.png */,
+				B247197A2046245D006CF6C2 /* Blocked User SG.png */,
+				B24719782046245D006CF6C2 /* Card SG.png */,
+				B24719772046245D006CF6C2 /* Cart Icon SG .png */,
+				B24719762046245C006CF6C2 /* Get Help SG.png */,
+				B247197C2046245E006CF6C2 /* Lock SG.png */,
+				B24719792046245D006CF6C2 /* Notification Icon SG.png */,
+				B247197E2046245E006CF6C2 /* Profile SG.png */,
+				B247197D2046245E006CF6C2 /* Settings SG.png */,
+				B24719752046245C006CF6C2 /* Sign Out SG.png */,
+				B247197B2046245D006CF6C2 /* trash SG.png */,
 			);
 			path = Icon;
 			sourceTree = "<group>";
@@ -309,14 +339,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				B29AEC6C203FC9C100110EF9 /* LaunchScreen.storyboard in Resources */,
+				B24719832046245E006CF6C2 /* Notification Icon SG.png in Resources */,
 				DA27C2202043736400CCFD60 /* Sopheak.png in Resources */,
 				B29AEC69203FC9C100110EF9 /* Assets.xcassets in Resources */,
+				B24719862046245E006CF6C2 /* Lock SG.png in Resources */,
+				B24719822046245E006CF6C2 /* Card SG.png in Resources */,
 				B247197420454C4E006CF6C2 /* GiftWhite.png in Resources */,
 				B29AEC67203FC9C100110EF9 /* Main.storyboard in Resources */,
+				B24719812046245E006CF6C2 /* Cart Icon SG .png in Resources */,
 				B244999F2040C340006FA81B /* fonts in Resources */,
 				B247197320454C4E006CF6C2 /* You’re so nice!.png in Resources */,
+				B24719872046245E006CF6C2 /* Settings SG.png in Resources */,
+				B24719802046245E006CF6C2 /* Get Help SG.png in Resources */,
+				B24719882046245E006CF6C2 /* Profile SG.png in Resources */,
+				B24719852046245E006CF6C2 /* trash SG.png in Resources */,
+				B247197F2046245E006CF6C2 /* Sign Out SG.png in Resources */,
 				DA4FC9EF2045E0D300999F28 /* profileInfo.json in Resources */,
 				DAD9953520423A4B007A7687 /* Andre.png in Resources */,
+				B24719842046245E006CF6C2 /* Blocked User SG.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
