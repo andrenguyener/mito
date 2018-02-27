@@ -18,13 +18,7 @@ class CartViewController: UIViewController {
     
     
     //User's Cart
-//    @IBOutlet weak var numberItemsInCart: UILabel!
-//    @IBOutlet weak var totalCartPrice: UILabel!
-//    @IBOutlet weak var itemImage: UIImageView!
-//    @IBOutlet weak var itemName: UILabel!
-//    @IBOutlet weak var seller: UILabel!
-//    @IBOutlet weak var price: UILabel!
-    
+
     @IBOutlet weak var cartTableView: UITableView!
     
     @IBAction func finishShopping(_ sender: Any) {
@@ -34,11 +28,21 @@ class CartViewController: UIViewController {
         performSegue(withIdentifier: "cartToHome", sender: self)
     }
     
-    // Checkout Page
+    //Checkout Page
     
-
     @IBAction func checkoutToCart(_ sender: Any) {
         performSegue(withIdentifier: "checkoutToCart", sender: self)
+    }
+    
+    @IBAction func finishCheckout(_ sender: Any) {
+        performSegue(withIdentifier: "checkoutFinish", sender: self)
+    }
+    
+    
+    //CheckOutComplete Page
+    
+    @IBAction func returnHome(_ sender: Any) {
+        performSegue(withIdentifier: "checkoutComplete", sender: self)
     }
     
 }
