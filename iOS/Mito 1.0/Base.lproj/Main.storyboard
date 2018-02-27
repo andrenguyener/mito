@@ -1109,10 +1109,10 @@
             </objects>
             <point key="canvasLocation" x="3582.608695652174" y="-779.34782608695662"/>
         </scene>
-        <!--checkOutComplete-->
+        <!--CheckOutComplete-->
         <scene sceneID="wfo-qB-gu0">
             <objects>
-                <viewController title="checkOutComplete" id="qdc-jL-mfw" customClass="CartViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="CheckOutComplete" id="qdc-jL-mfw" customClass="CartViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Gmz-6A-1TC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1132,6 +1132,21 @@
                                             <action selector="returnHome:" destination="qdc-jL-mfw" eventType="touchUpInside" id="xXv-z8-OUQ"/>
                                         </connections>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="GiftWhite.png" translatesAutoresizingMaskIntoConstraints="NO" id="PhN-RU-rAy">
+                                        <rect key="frame" x="87" y="72" width="241" height="232"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="You’re so nice!.png" translatesAutoresizingMaskIntoConstraints="NO" id="C6s-Wf-UQ7">
+                                        <rect key="frame" x="93" y="332" width="229" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="We will notify you when Andre accepts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8VG-bt-wq1">
+                                        <rect key="frame" x="60" y="488" width="295" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -1204,9 +1219,11 @@
     </scenes>
     <resources>
         <image name="Cart Icon.png" width="23" height="24"/>
+        <image name="GiftWhite.png" width="215" height="210"/>
         <image name="Home.png" width="24" height="23"/>
         <image name="Notification Icon" width="23" height="23"/>
         <image name="Person.png" width="24" height="26"/>
+        <image name="You’re so nice!.png" width="267" height="33"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Jjr-wW-Hse"/>

@@ -18,7 +18,6 @@ class CartViewController: UIViewController {
     
     
     //User's Cart
-
     @IBOutlet weak var cartTableView: UITableView!
     
     @IBAction func finishShopping(_ sender: Any) {
@@ -29,7 +28,6 @@ class CartViewController: UIViewController {
     }
     
     //Checkout Page
-    
     @IBAction func checkoutToCart(_ sender: Any) {
         performSegue(withIdentifier: "checkoutToCart", sender: self)
     }
@@ -38,9 +36,7 @@ class CartViewController: UIViewController {
         performSegue(withIdentifier: "checkoutFinish", sender: self)
     }
     
-    
     //CheckOutComplete Page
-    
     @IBAction func returnHome(_ sender: Any) {
         performSegue(withIdentifier: "checkoutComplete", sender: self)
     }
