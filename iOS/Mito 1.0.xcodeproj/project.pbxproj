@@ -29,6 +29,7 @@
 		DA27C21C204356B400CCFD60 /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA27C21B204356B400CCFD60 /* FeedItem.swift */; };
 		DA27C21E204371CE00CCFD60 /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA27C21D204371CE00CCFD60 /* ProductDetailsViewController.swift */; };
 		DA27C2202043736400CCFD60 /* Sopheak.png in Resources */ = {isa = PBXBuildFile; fileRef = DA27C21F2043736400CCFD60 /* Sopheak.png */; };
+		DA4FC9EF2045E0D300999F28 /* profileInfo.json in Resources */ = {isa = PBXBuildFile; fileRef = DA4FC9EE2045E0D300999F28 /* profileInfo.json */; };
 		DAD995312042386E007A7687 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD995302042386E007A7687 /* ActivityViewController.swift */; };
 		DAD995332042389B007A7687 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD995322042389B007A7687 /* Person.swift */; };
 		DAD9953520423A4B007A7687 /* Andre.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD9953420423A4B007A7687 /* Andre.png */; };
@@ -85,6 +86,7 @@
 		DA27C21B204356B400CCFD60 /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
 		DA27C21D204371CE00CCFD60 /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
 		DA27C21F2043736400CCFD60 /* Sopheak.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sopheak.png; sourceTree = "<group>"; };
+		DA4FC9EE2045E0D300999F28 /* profileInfo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = profileInfo.json; sourceTree = SOURCE_ROOT; };
 		DAD995302042386E007A7687 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		DAD995322042389B007A7687 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		DAD9953420423A4B007A7687 /* Andre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Andre.png; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				DA27C217204353FF00CCFD60 /* HomeViewController.swift */,
 				B2F8494E2043D71000CBD83A /* LoginViewController.swift */,
 				B2F849442043C33F00CBD83A /* MeViewController.swift */,
+				DA4FC9EE2045E0D300999F28 /* profileInfo.json */,
 				DAD995322042389B007A7687 /* Person.swift */,
 				B272DC2520439E2200EE2121 /* Product.swift */,
 				DA27C21D204371CE00CCFD60 /* ProductDetailsViewController.swift */,
@@ -312,6 +315,7 @@
 				B29AEC67203FC9C100110EF9 /* Main.storyboard in Resources */,
 				B244999F2040C340006FA81B /* fonts in Resources */,
 				B247197320454C4E006CF6C2 /* You’re so nice!.png in Resources */,
+				DA4FC9EF2045E0D300999F28 /* profileInfo.json in Resources */,
 				DAD9953520423A4B007A7687 /* Andre.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
