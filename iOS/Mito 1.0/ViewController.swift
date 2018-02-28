@@ -12,11 +12,8 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
 
-    @IBAction func Login(_ sender: Any) {
-        performSegue(withIdentifier: "-3", sender: self)
-    }
+    
 }
 

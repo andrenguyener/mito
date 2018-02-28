@@ -11,15 +11,21 @@ import Foundation
 class Person {
     var firstName: String = ""
     var lastName: String = ""
-    var handle: String = ""
-    var friendshipType: String = ""
+//    var handle: String = ""
+//    var friendshipType: String = ""
+    var email: String = ""
     var avatar: String = ""
     
-    init(firstName: String, lastName: String, handle: String, friendshipType: String, avatar: String) {
+    init(firstName: String, lastName: String, email: String, avatar: String) {
         self.firstName = firstName
         self.lastName = lastName
-        self.handle = handle
-        self.friendshipType = friendshipType
+//        self.handle = handle
+//        self.friendshipType = friendshipType
+        self.email = email
         self.avatar = avatar
+    }
+    
+    func description() -> String {
+        return "\(self.firstName) \(self.lastName) \(self.email) \(self.avatar)"
     }
 }

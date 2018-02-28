@@ -11,6 +11,7 @@ import UIKit
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+    
     var appdata = AppData.shared
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,4 +46,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
 
+    @IBAction func cart(_ sender: Any) {
+        performSegue(withIdentifier: "homeToCart", sender: self)
+    }
+    
+    
 }
