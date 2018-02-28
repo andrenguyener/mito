@@ -12,7 +12,7 @@ const AddressHandler = (addressStore) => {
     }
 
     // A signal indicating that the promise should break here.
-    class BreakSignal {}
+    class BreakSignal { }
     const breakSignal = new BreakSignal();
 
     const router = express.Router();
@@ -20,9 +20,12 @@ const AddressHandler = (addressStore) => {
     router.get('/v1/address/:userId', (req, res) => {
 
         // let addressArray = []
+        // fetch()
+        //     .then((address) => {
 
+        //     })
         addressStore.getAll(req.params.userId, res);
-          
+
     });
 
     //Do get user address by UserId, returns row of data . Sopheak id is 7. Returning rows of address
@@ -42,9 +45,9 @@ const AddressHandler = (addressStore) => {
         addressStore.insert(address);
         res.json(address);
     });
-    
-    
-  
+
+
+
 
     return router;
 };

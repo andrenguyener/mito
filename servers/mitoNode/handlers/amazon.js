@@ -2,7 +2,7 @@
 
 const express = require('express');
 const  axios = require('axios');
-var parser = require('xml2json');
+// var parser = require('xml2json');
 const Address = require('./../models/amazon/amazon');
 const sendToMQ = require('./message-queue');
 
@@ -210,26 +210,21 @@ const AmazonHashHandler = () => {
     const router = express.Router();
 
     router.post('/v1/amazonsearch', (req, res) => {
-        // console.log(req.body.data);
-        let urlString = req.body.data;
-        // console.log("hello " + req.params.resulturl);
-        // let urlString = req.params.resulturl;
-        // console.log(urlString);
-        // debugger
-        axios.get(urlString)
-        .then(function (response) {
-            // console.log(typeof response);
-            // 
-            let json = parser.toJson(response.data, {object:true});
-            let returnJson = json.ItemSearchResponse.Items;
-            res.send(returnJson)
-            debugger
-            console.log(json);
-            debugger
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+
+        // let urlString = req.body.data;
+
+        // axios.get(urlString)
+        // .then(function (response) {
+        //     let json = parser.toJson(response.data, {object:true});
+        //     let returnJson = json.ItemSearchResponse.Items;
+        //     res.send(returnJson)
+        //     debugger
+        //     console.log(json);
+        //     debugger
+        // })
+        // .catch(function (error) {
+        //     console.log(error);
+        // });
     });
 
     router.get('/v1/amazonhash/:keyword/:searchindex/:responsegroup', (req, res) => {

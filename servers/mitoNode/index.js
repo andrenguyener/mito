@@ -145,6 +145,7 @@ var TYPES = require('tedious').TYPES;
         app.use(FriendHandler(friendStore));
         app.use(AmazonHashHandler());
         app.listen(portNum, host, () => {
+            console.log("oyyo");
             console.log(`server is listening at http://${addr}`);
         });
     } catch (err) {
