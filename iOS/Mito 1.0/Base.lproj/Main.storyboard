@@ -910,7 +910,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="UkS-xn-J5S"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Search" image="Cart Icon.png" id="pJ4-uA-eMM">
+                    <tabBarItem key="tabBarItem" title="Search" image="search Grey" id="pJ4-uA-eMM">
                         <color key="badgeColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -1416,6 +1416,7 @@
         <image name="Notification Icon" width="23" height="23"/>
         <image name="Person.png" width="24" height="26"/>
         <image name="You’re so nice!.png" width="267" height="33"/>
+        <image name="search Grey" width="18" height="18"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="kS1-pK-LOk"/>
