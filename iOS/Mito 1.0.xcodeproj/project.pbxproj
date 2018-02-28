@@ -25,6 +25,8 @@
 		B247198C204626ED006CF6C2 /* search Grey.png in Resources */ = {isa = PBXBuildFile; fileRef = B2471989204626EC006CF6C2 /* search Grey.png */; };
 		B247198D204626ED006CF6C2 /* Cart Solid White Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B247198A204626ED006CF6C2 /* Cart Solid White Icon.png */; };
 		B247198E204626ED006CF6C2 /* Search.png in Resources */ = {isa = PBXBuildFile; fileRef = B247198B204626ED006CF6C2 /* Search.png */; };
+		B2471992204672B1006CF6C2 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2471991204672B1006CF6C2 /* NotificationTableViewCell.swift */; };
+		B2471994204672DE006CF6C2 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2471993204672DE006CF6C2 /* NotificationViewController.swift */; };
 		B272DC2620439E2200EE2121 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = B272DC2520439E2200EE2121 /* Product.swift */; };
 		B272DC2E2043BBE400EE2121 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B272DC2D2043BBE400EE2121 /* AppData.swift */; };
 		B29AEC62203FC9C100110EF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29AEC61203FC9C100110EF9 /* AppDelegate.swift */; };
@@ -85,6 +87,8 @@
 		B2471989204626EC006CF6C2 /* search Grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search Grey.png"; sourceTree = "<group>"; };
 		B247198A204626ED006CF6C2 /* Cart Solid White Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cart Solid White Icon.png"; sourceTree = "<group>"; };
 		B247198B204626ED006CF6C2 /* Search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Search.png; sourceTree = "<group>"; };
+		B2471991204672B1006CF6C2 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
+		B2471993204672DE006CF6C2 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		B272DC2520439E2200EE2121 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		B272DC282043BA8700EE2121 /* Home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Home.png; sourceTree = "<group>"; };
 		B272DC292043BA8700EE2121 /* Person.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Person.png; sourceTree = "<group>"; };
@@ -206,6 +210,8 @@
 				DA27C217204353FF00CCFD60 /* HomeViewController.swift */,
 				B2F8494E2043D71000CBD83A /* LoginViewController.swift */,
 				B2F849442043C33F00CBD83A /* MeViewController.swift */,
+				B2471991204672B1006CF6C2 /* NotificationTableViewCell.swift */,
+				B2471993204672DE006CF6C2 /* NotificationViewController.swift */,
 				DA4FC9EE2045E0D300999F28 /* profileInfo.json */,
 				DAD995322042389B007A7687 /* Person.swift */,
 				B272DC2520439E2200EE2121 /* Product.swift */,
@@ -400,12 +406,14 @@
 				DA27C21E204371CE00CCFD60 /* ProductDetailsViewController.swift in Sources */,
 				B272DC2E2043BBE400EE2121 /* AppData.swift in Sources */,
 				DAD9953720423EE9007A7687 /* TableViewCell.swift in Sources */,
+				B2471992204672B1006CF6C2 /* NotificationTableViewCell.swift in Sources */,
 				B247196E20453917006CF6C2 /* CartViewController.swift in Sources */,
 				B2F849452043C33F00CBD83A /* MeViewController.swift in Sources */,
 				B272DC2620439E2200EE2121 /* Product.swift in Sources */,
 				DA27C21C204356B400CCFD60 /* FeedItem.swift in Sources */,
 				DA27C218204353FF00CCFD60 /* HomeViewController.swift in Sources */,
 				B2F849472043CAA900CBD83A /* SettingsViewController.swift in Sources */,
+				B2471994204672DE006CF6C2 /* NotificationViewController.swift in Sources */,
 				DA27C21A2043550A00CCFD60 /* HomeTableViewCell.swift in Sources */,
 				DAD995312042386E007A7687 /* ActivityViewController.swift in Sources */,
 				B247197020454733006CF6C2 /* CartTableViewCell.swift in Sources */,
