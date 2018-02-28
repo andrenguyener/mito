@@ -1,9 +1,9 @@
 package handlers
 
 import (
-	"github.com/andrenguyener/mito/servers/gatewaymito/indexes"
-	"github.com/andrenguyener/mito/servers/gatewaymito/models/users"
-	"github.com/andrenguyener/mito/servers/gatewaymito/sessions"
+	"github.com/mito/servers/gatewaymito/indexes"
+	"github.com/mito/servers/gatewaymito/models/users"
+	"github.com/mito/servers/gatewaymito/sessions"
 )
 
 type Context struct {

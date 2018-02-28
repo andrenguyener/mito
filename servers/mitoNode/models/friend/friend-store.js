@@ -46,6 +46,13 @@ class FriendStore {
 
         request.on('doneProc', function (rowCount, more) {
             console.log(jsonArray);
+            // let returnArray = [];
+            // for (object in jsonArray) {
+            //     let returnObject = {};
+            //     returnObject.UserId = object.UserId;
+            //     returnObject.Username = object.Username;
+            //     returnArray.push(returnObject);
+            // }
             res.json(jsonArray);
         });
 

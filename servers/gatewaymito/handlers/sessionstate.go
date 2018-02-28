@@ -3,7 +3,7 @@ package handlers
 import (
 	"time"
 
-	"github.com/andrenguyener/mito/servers/gatewaymito/models/users"
+	"github.com/mito/servers/gatewaymito/models/users"
 )
 
 type SessionState struct {

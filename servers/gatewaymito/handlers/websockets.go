@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"sync"
 
-	"github.com/andrenguyener/mito/servers/gatewaymito/sessions"
 	"github.com/gorilla/websocket"
+	"github.com/mito/servers/gatewaymito/sessions"
 	"github.com/streadway/amqp"
 )
 

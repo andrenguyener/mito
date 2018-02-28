@@ -11,16 +11,15 @@ import (
 	"sync"
 	"time"
 
-	"github.com/andrenguyener/mito/servers/gatewaymito/models/users"
-	"github.com/andrenguyener/mito/servers/gatewaymito/sessions"
+	"github.com/mito/servers/gatewaymito/models/users"
+	"github.com/mito/servers/gatewaymito/sessions"
 	"github.com/streadway/amqp"
 
-	"context"
 	"database/sql"
 
-	"github.com/andrenguyener/mito/servers/gatewaymito/handlers"
 	_ "github.com/denisenkom/go-mssqldb"
 	"github.com/go-redis/redis"
+	"github.com/mito/servers/gatewaymito/handlers"
 )
 
 // Gets the current user of the session
@@ -178,146 +177,4 @@ func main() {
 	mux.Handle("/v1/amazonhash/", NewServiceProxy(splitMitoNodeAddrs, ctx))
 	mux.Handle("/v1/amazonsearch", NewServiceProxy(splitMitoNodeAddrs, ctx))
 	log.Fatal(http.ListenAndServeTLS(addr, tlscert, tlskey, corsHandler))
-}
-
-type User struct {
-	UserId       int
-	UserFName    string
-	UserLName    string
-	UserEmail    string
-	PasswordHash string
-	PhotoUrl     sql.NullString
-	UserDOB      string
-	Username     string
-}
-
-// Gets and prints SQL Server version
-func SelectVersion() {
-	// Use background context
-	ctx := context.Background()
-
-	// Ping database to see if it's still alive.
-	// Important for handling network issues and long queries.
-	err := db.PingContext(ctx)
-	if err != nil {
-		log.Fatal("Error pinging database: " + err.Error())
-	}
-
-	rows, err := db.Query("SELECT * FROM [projectmito].[dbo].[USER]")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer rows.Close()
-	cols, _ := rows.Columns()
-	fmt.Println(cols)
-	for rows.Next() {
-		var name User
-
-		if err := rows.Scan(&name.UserId, &name.UserFName, &name.UserLName, &name.UserEmail, &name.PasswordHash, &name.PhotoUrl, &name.UserDOB, &name.Username); err != nil {
-			log.Fatal(err)
-		}
-		fmt.Println(name)
-	}
-	if err := rows.Err(); err != nil {
-		log.Fatal(err)
-	}
-	//UserId UserFname UserLname UserEmail PasswordHash PhotoUrl UserDOB Username
-	// tsql := fmt.Sprintf("INSERT INTO [projectmito].[dbo].[USER] (UserFname, UserLname, UserEmail, PasswordHash, PhotoUrl, UserDOB, Username) VALUES (@UserFname, @UserLname, @UserEmail, @PasswordHash, @PhotoUrl, @UserDOB, @Username);")
-	tsql := fmt.Sprintf("EXEC insertUser @UserFname, @UserLname, @UserEmail, @PasswordHash, @PhotoUrl, @UserDOB, @Username;")
-
-	// Execute non-query with named parameters
-	_, err = db.Exec(
-		tsql,
-		sql.Named("UserFname", "Tom2"),
-		sql.Named("UserLname", "Brady2"),
-		sql.Named("UserEmail", "Tom@uw.edu2"),
-		sql.Named("PasswordHash", []byte("wahid2")),
-		sql.Named("PhotoUrl", "Tom@pictureurl2"),
-		sql.Named("UserDOB", "1995-01-02T00:00:00Z"),
-		sql.Named("Username", "Tom2"))
-
-	if err != nil {
-		log.Fatal("Error inserting new row: " + err.Error())
-	}
-	fmt.Println("QUERY AGAIN AFTER INSTERTING")
-	// Query again after inserting
-	rows, err = db.Query("SELECT * FROM [projectmito].[dbo].[USER]")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer rows.Close()
-	cols, _ = rows.Columns()
-	fmt.Println(cols)
-	for rows.Next() {
-		var name User
-
-		if err := rows.Scan(&name.UserId, &name.UserFName, &name.UserLName, &name.UserEmail, &name.PasswordHash, &name.PhotoUrl, &name.UserDOB, &name.Username); err != nil {
-			log.Fatal(err)
-		}
-		fmt.Println(name)
-	}
-	if err := rows.Err(); err != nil {
-		log.Fatal(err)
-	}
-
-	tsql = fmt.Sprintf("DELETE FROM [projectmito].[dbo].[USER] WHERE UserFname=@UserFname;")
-
-	// Execute non-query with named parameters
-	_, err = db.ExecContext(ctx, tsql, sql.Named("UserFname", "Tom"))
-	if err != nil {
-		fmt.Println("Error deleting row: " + err.Error())
-	}
-	fmt.Println("QUERY AGAIN AFTER DELETE")
-	// query again after deleting
-	rows, err = db.Query("SELECT * FROM [projectmito].[dbo].[USER]")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer rows.Close()
-	cols, _ = rows.Columns()
-	fmt.Println(cols)
-	for rows.Next() {
-		var name User
-
-		if err := rows.Scan(&name.UserId, &name.UserFName, &name.UserLName, &name.UserEmail, &name.PasswordHash, &name.PhotoUrl, &name.UserDOB, &name.Username); err != nil {
-			log.Fatal(err)
-		}
-		fmt.Println(name)
-	}
-	if err := rows.Err(); err != nil {
-		log.Fatal(err)
-	}
-
-	tsql = fmt.Sprintf("UPDATE [projectmito].[dbo].[USER] SET UserFname = @newName WHERE UserFname= @Name")
-
-	// Execute non-query with named parameters
-	_, err = db.ExecContext(
-		ctx,
-		tsql,
-		sql.Named("newName", "Victoria"),
-		sql.Named("Name", "Victor"))
-	if err != nil {
-		log.Fatal("Error updating row: " + err.Error())
-	}
-
-	fmt.Println("QUERY AGAIN AFTER UPDATING")
-	// Query again after inserting
-	rows, err = db.Query("SELECT * FROM [projectmito].[dbo].[USER]")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer rows.Close()
-	cols, _ = rows.Columns()
-	fmt.Println(cols)
-	for rows.Next() {
-		var name User
-
-		if err := rows.Scan(&name.UserId, &name.UserFName, &name.UserLName, &name.UserEmail, &name.PasswordHash, &name.PhotoUrl, &name.UserDOB, &name.Username); err != nil {
-			log.Fatal(err)
-		}
-		fmt.Println(name)
-	}
-	if err := rows.Err(); err != nil {
-		log.Fatal(err)
-	}
 }
