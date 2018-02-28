@@ -43,6 +43,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.whatHappened.text = "\(feedItemObj.whatHappened)"
         cell.time.text = "\(feedItemObj.time)"
         cell.descr.text = "\(feedItemObj.descr)"
+        cell.whatHappened.numberOfLines = 2
         return cell
     }
 
