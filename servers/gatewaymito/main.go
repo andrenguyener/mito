@@ -142,9 +142,15 @@ func main() {
 	}
 
 	tlskey := os.Getenv("TLSKEY")
-	// tlskey := "./../tls/privkey.pem"
+	if len(tlskey) == 0 {
+		tlskey = "./../tls/privkey.pem"
+	}
+
 	tlscert := os.Getenv("TLSCERT")
-	// tlscert := "./../tls/fullchain.pem"
+	if len(tlscert) == 0 {
+		tlscert = "./../tls/fullchain.pem"
+	}
+
 	if len(tlskey) == 0 || len(tlscert) == 0 {
 		log.Fatal("please set TLSKEY and TLSCERT")
 	}
