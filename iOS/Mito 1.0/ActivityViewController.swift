@@ -68,6 +68,7 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        appdata.friends.removeAll()
         peopleTableView.reloadData()
     }
     
