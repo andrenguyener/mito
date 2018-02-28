@@ -5,10 +5,11 @@ import (
 	"fmt"
 	"net/http"
 	"sort"
+	"strconv"
 	"time"
 
-	"github.com/andrenguyener/mito/servers/gatewaymito/models/users"
-	"github.com/andrenguyener/mito/servers/gatewaymito/sessions"
+	"github.com/mito/servers/gatewaymito/models/users"
+	"github.com/mito/servers/gatewaymito/sessions"
 )
 
 type UserId struct {
@@ -119,23 +120,31 @@ func (ctx *Context) UsersHandler(w http.ResponseWriter, r *http.Request) {
 // Gets the user by its ID
 func (ctx *Context) UsersIDHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
-	case "POST":
+	case "GET":
 		if r.Body == nil {
 			http.Error(w, "Response Body is empty", http.StatusBadRequest)
 			return
 		}
-
-		// decode the request body into newUser struct
-		decoder := json.NewDecoder(r.Body)
-		userId := &UserId{}
-
-		err := decoder.Decode(userId)
-		if err != nil {
-			http.Error(w, "Error decoding JSON: "+err.Error(), http.StatusBadRequest)
-			return
+		id := r.URL.Query().Get("id")
+		if len(id) == 0 {
+			http.Error(w, "please provide url", http.StatusBadRequest)
 		}
-		fmt.Println(userId)
-		user, err := ctx.UserStore.GetByID(userId.UserId)
+		idInt, err := strconv.Atoi(id)
+		if err != nil {
+			http.Error(w, "error converting string to int", http.StatusBadRequest)
+		}
+		// decode the request body into newUser struct
+		// decoder := json.NewDecoder(r.Body)
+		// userId := &UserId{}
+
+		// err := decoder.Decode(userId)
+		// if err != nil {
+		// 	http.Error(w, "Error decoding JSON: "+err.Error(), http.StatusBadRequest)
+		// 	return
+		// }
+		// fmt.Println(userId)
+
+		user, err := ctx.UserStore.GetByID(idInt)
 		if err != nil {
 			http.Error(w, "fail error "+err.Error(), http.StatusBadRequest)
 		}

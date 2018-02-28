@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/andrenguyener/mito/servers/gatewaymito/indexes"
+	"github.com/mito/servers/gatewaymito/indexes"
 )
 
 //SqlStore implements Store for SqlStore
