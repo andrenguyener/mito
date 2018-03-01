@@ -756,7 +756,6 @@
                                             <outlet property="img" destination="SnI-Ck-2Qr" id="cH3-QQ-yP0"/>
                                             <outlet property="time" destination="D3J-hb-G36" id="paE-e6-x1t"/>
                                             <outlet property="whatHappened" destination="7nF-J0-ZcK" id="MjX-uX-PPF"/>
-                                            <segue destination="mKW-hw-jiX" kind="show" id="Bm5-Ov-tyb"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -925,6 +924,7 @@
                                                     <outlet property="handle" destination="yfd-Vu-w5K" id="Usn-Uv-TqJ"/>
                                                     <outlet property="img" destination="vY4-we-02b" id="N9P-S4-JHH"/>
                                                     <outlet property="name" destination="8vc-zL-vIj" id="PhC-zf-i2c"/>
+                                                    <segue destination="mKW-hw-jiX" kind="show" id="1Cx-gC-rMc"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
