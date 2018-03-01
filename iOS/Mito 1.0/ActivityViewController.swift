@@ -38,6 +38,18 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         productTableView.dataSource = self
         productTableView.rowHeight = 106
         
+        loadPeopleData()
+
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        appdata.friends.removeAll()
+        loadPeopleData()
+        peopleTableView.reloadData()
+    }
+    
+    func loadPeopleData() {
         let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
             if error != nil {
                 print("ERROR")
@@ -64,12 +76,6 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }
         task.resume()
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        appdata.friends.removeAll()
-        peopleTableView.reloadData()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
