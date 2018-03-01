@@ -15,8 +15,7 @@ class NotificationViewController: UIViewController {
     @IBOutlet weak var notificationView: UIView!
     @IBOutlet weak var segment: UISegmentedControl!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    @IBAction func segmentControl(_ sender: Any) {
         print(segment.selectedSegmentIndex)
         if segment.selectedSegmentIndex == 0 {
             UIView.transition(from: packageInView, to: notificationView, duration: 0, options: .showHideTransitionViews)
@@ -25,9 +24,7 @@ class NotificationViewController: UIViewController {
         }
     }
     
-    
-
-    
-    
-    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 }
