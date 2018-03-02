@@ -27,7 +27,8 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     var appdata = AppData.shared
-    var url = URL(string: "https://api.projectmito.io/v1/friend/7")
+    var url = URL(string: "https://api.projectmito.io/v1/friend/34")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         peopleTableView.delegate = self
@@ -38,6 +39,18 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         productTableView.dataSource = self
         productTableView.rowHeight = 106
         
+        loadPeopleData()
+
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        appdata.friends.removeAll()
+        loadPeopleData()
+        peopleTableView.reloadData()
+    }
+    
+    func loadPeopleData() {
         let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
             if error != nil {
                 print("ERROR")
@@ -64,11 +77,6 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }
         task.resume()
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        peopleTableView.reloadData()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

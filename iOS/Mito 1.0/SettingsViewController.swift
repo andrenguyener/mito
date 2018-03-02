@@ -17,6 +17,12 @@ class SettingsViewController: UIViewController {
     }
     @IBAction func signout(_ sender: Any) {
         performSegue(withIdentifier: "signOut", sender: self)
+        UserDefaults.standard.removeObject(forKey: "UserInfo")
+        if UserDefaults.standard.object(forKey: "UserInfo") == nil {
+            print("Data is gone")
+        } else {
+            print("Data is still here")
+        }
     }
     
     
