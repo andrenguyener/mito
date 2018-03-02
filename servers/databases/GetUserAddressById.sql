@@ -18,7 +18,7 @@ AS
 	-- Check if the UserId has an address in USER_ADDRESS
 	IF EXISTS (SELECT * FROM USER_ADDRESS WHERE UserId = @UserId)
 
-	(SELECT U.UserId, U.UserFname, U.UserLname, U.UserEmail,U.Username,
+	(SELECT U.UserId, U.Username,
 		SA.StreetAddress, StreetAddress2, CityName, StateName, ZipCode, UA.IsDefault FROM [USER] U
 		JOIN USER_ADDRESS UA ON U.UserId = UA.UserId
 		JOIN [ADDRESS] A ON UA.AddressId = A.AddressId
