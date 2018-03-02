@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getUsername } from '../actions/userActions';
 import FlatButton from 'material-ui/FlatButton';
-
+import './../styles/home.css';
 /*
 mapStateToProps() allows for isolations of state (declaration of state can be found in corresponding reducer) 
 and pass those state as properties to the component.
@@ -34,12 +34,20 @@ class Home extends React.Component {
     }
     render() {
         return (
-            <div>
-                <header>
-                    <h1>{this.props.user.username}</h1>
-                </header>
+            // <div>
+            //     <header>
+            //         <h1>{this.props.user.username}</h1>
+            //     </header>
+            //     <main>
+                    
+            //         <FlatButton backgroundColor='green' label='Get User Information' onClick={this.handleSubmit.bind(this)} />
+            //     </main>
+            // </div>
+            <div id="bgimg">
                 <main>
-                    <FlatButton backgroundColor='green' label='Get User Information' onClick={this.handleSubmit.bind(this)} />
+                    <h1> Mito </h1>
+                    <hr/>
+                    <h1> Coming Soon </h1>
                 </main>
             </div>
         )

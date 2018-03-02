@@ -278,7 +278,7 @@ func (ctx *Context) SessionsMineHandler(w http.ResponseWriter, r *http.Request) 
 			http.Error(w, "Error deleting session: "+err.Error(), http.StatusUnauthorized)
 			return
 		}
-
+		w.Header().Add(headerContentType, "text/plain")
 		w.Write([]byte("signed out"))
 	} else {
 		http.Error(w, "invalid status method", http.StatusMethodNotAllowed)

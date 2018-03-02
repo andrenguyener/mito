@@ -20,11 +20,18 @@ const AddressHandler = (addressStore) => {
     router.get('/v1/address/:userId', (req, res) => {
 
         // let addressArray = []
-        // fetch()
-        //     .then((address) => {
-
-        //     })
-        addressStore.getAll(req.params.userId, res);
+        addressStore
+            .getAll(req.params.userId)
+            .then( address => {
+                console.log(address)
+                res.json(address)
+            })
+            .catch(err => {
+                if (err !== breakSignal) {
+                    console.log(err);
+                }
+                
+            });
 
     });
 
