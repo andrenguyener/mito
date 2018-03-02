@@ -27,7 +27,7 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     var appdata = AppData.shared
-    var url = URL(string: "https://api.projectmito.io/v1/friend/15")
+    var url = URL(string: "https://api.projectmito.io/v1/friend/34")
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -42,15 +42,15 @@ class MeViewController: UIViewController {
 //            } catch {
 //                // handle error
 //            }
-//        }
-        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
-            if error != nil {
-                print("ERROR")
-            } else {
-                if let content = data {
-                    do {
-                        let myJson = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
-                        DispatchQueue.main.async {
+////        }
+//        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
+//            if error != nil {
+//                print("ERROR")
+//            } else {
+//                if let content = data {
+//                    do {
+//                        let myJson = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
+//                        DispatchQueue.main.async {
                             let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
                             print(data)
                             self.userID.text = data["userId"] as? String
@@ -60,15 +60,15 @@ class MeViewController: UIViewController {
                             self.userLname.text = data["userLname"] as? String
                             self.userDOB.text = data["userDOB"] as? String
                             self.photoURL.text = data["photoURL"] as? String
-                        }
-                    } catch {
-                        print("Catch")
-                    }
-                } else {
-                    print("Error")
-                }
-            }
-        }
-        task.resume()
+//                        }
+//                    } catch {
+//                        print("Catch")
+//                    }
+//                } else {
+//                    print("Error")
+//                }
+//            }
+//        }
+//        task.resume()
     }
 }
