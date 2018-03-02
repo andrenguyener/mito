@@ -59,44 +59,46 @@ class AddressStore {
     // }
 
     // getAll() retrieves all addresses from SqlServer with the user ID.
-    getAll(id, res) {
-        let procedureName = "GetUserAddressById";
-        var request = new Request(`${procedureName}`, function (err, rowCount, rows) {
-            if (err) {
-                console.log(err);
-            }
-            // return rowCount
-        });
-        
-        request.addParameter('UserId', TYPES.VarChar, id);
-
-        let jsonArray = []
-        let rowKount = 0
-        request.on('row', function (columns) {
-            var rowObject = {};
-            columns.forEach(function (column) {
-                if (column.value === null) {
-                    console.log('NULL');
-                } else {
-                    rowObject[column.metadata.colName] = column.value;
+    getAll(id) {
+        return new Promise((resolve) => {
+            let procedureName = "GetUserAddressById";
+            var request = new Request(`${procedureName}`, function (err, rowCount, rows) {
+                if (err) {
+                    console.log(err);
                 }
             });
-            jsonArray.push(rowObject)
-            rowKount++;
+
+            request.addParameter('UserId', TYPES.VarChar, id);
+
+            let jsonArray = []
+            request.on('row', function (columns) {
+                var rowObject = {};
+                columns.forEach(function (column) {
+                    if (column.value === null) {
+                        console.log('NULL');
+                    } else {
+                        rowObject[column.metadata.colName] = column.value;
+                    }
+                });
+                jsonArray.push(rowObject)
+            });
+            request.on('doneProc', function (rowCount, more) {
+                console.log(jsonArray);
+                resolve(jsonArray);
+            });
+
+            this.sql.callProcedure(request)
+        })
+        .then((jsonArray) => {
+            return jsonArray
+        })
+        .catch((err) => {
+            console.log(err);
         });
 
-        request.on('doneProc', function (rowCount, more) {
-            console.log(jsonArray);
-            res.json(jsonArray);
-            // return jsonArray
-     
-            
-        });
 
-        this.sql.callProcedure(request)
-        
 
-       
+
     }
 
     // update() updates a address for a given address ID.
