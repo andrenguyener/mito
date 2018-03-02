@@ -14,26 +14,20 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var password: UITextField!
     // Opening Login Page
     @IBAction func login(_ sender: Any) {
-//        performSegue(withIdentifier: "login", sender: self )
         let u = username.text
         let p = password.text
-        var JSONObj: [String: Any] = [
+        let JSONObj: [String: Any] = [
             "userEmail": u,
             "password": p
             
         ]
+        var success = false
         let jsonData = try? JSONSerialization.data(withJSONObject: JSONObj)
         let url = URL(string: "https://api.projectmito.io/v1/sessions")!
         var request = URLRequest(url: url)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "POST"
         request.httpBody = jsonData
-        print("Print \(jsonData)")
-//        var stringf = jsonData as String
-//        var somedata = jsonData.data(using: String.Encoding.utf8)
-//        var backToString = String(data: somedata!, encoding: String.Encoding.utf8) as String!
-//        var data = jsonData.data(using: .utf8)
-//        let dictionary = try? JSONSerialization.jsonObject(with: jsonData!, options: .mutableLeaves)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {                                                 // check for fundamental networking error
                 print("error=\(error)")
@@ -46,10 +40,18 @@ class LoginViewController: UIViewController {
             }
             
             let responseString = String(data: data, encoding: .utf8)
-            print("responseString = \(responseString)")
+//            print("responseString = \(responseString)")
             var data2 = responseString?.data(using: .utf8)
             let dictionary = try? JSONSerialization.jsonObject(with: data2!, options: .mutableLeaves)
-            print(dictionary)
+//            print(dictionary)
+            DispatchQueue.main.async {
+                if (dictionary != nil) {
+                    self.performSegue(withIdentifier: "login", sender: self)
+                    UserDefaults.standard.set(dictionary, forKey: "UserInfo")
+                    print(UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary)
+                }
+            }
+            success = true
 
         }
         task.resume()
@@ -68,9 +70,30 @@ class LoginViewController: UIViewController {
         performSegue(withIdentifier: "createAccount", sender: self)
     }
     
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0{
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
     
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y != 0{
+                self.view.frame.origin.y += keyboardSize.height
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+//        if UserDefaults.standard.object(forKey: "UserInfo") == nil {
+//            print("There is no local data")
+//        } else {
+//            performSegue(withIdentifier: "login", sender: self)
+//        }
     }
 }
