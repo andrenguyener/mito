@@ -20,7 +20,7 @@ AS
 	INSERT @friendsIdList
 	EXEC GetUserFriendsIdList @UserId
 
-	IF EXISTS(SELECT * FROM FRIEND WHERE User1Id = @UserId OR User2Id = @UserId
+	IF EXISTS(SELECT * FROM FRIEND WHERE (User1Id = @UserId OR User2Id = @UserId)
 		AND FriendTypeId <> @NotFriendType )
 		BEGIN
 		SELECT UserId, Username, UserFname, UserLname,UserEmail, PhotoUrl FROM [USER] U

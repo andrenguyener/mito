@@ -3,7 +3,7 @@ ALTER PROC GetUserFriendsIdList
 AS
 	DECLARE @NotFriendType INT
 	EXEC GetFriendTypeId 'Pending', @FriendType_Id = @NotFriendType OUT
-	DECLARE @totalFriendCount INT = (SELECT COUNT(*) FROM FRIEND WHERE User1Id = @UserId OR User2Id = @UserId
+	DECLARE @totalFriendCount INT = (SELECT COUNT(*) FROM FRIEND WHERE (User1Id = @UserId OR User2Id = @UserId)
 		AND FriendTypeId <> @NotFriendType)
 	IF @totalFriendCount < 1
 		BEGIN
@@ -13,7 +13,7 @@ AS
 
 	DECLARE @friendId INT
 
-	SELECT * INTO #TempFriendTable FROM FRIEND WHERE User1Id = @UserId OR User2Id = @UserId
+	SELECT * INTO #TempFriendTable FROM FRIEND WHERE (User1Id = @UserId OR User2Id = @UserId)
 	AND FriendTypeId <> @NotFriendType
 	DECLARE @friendUserId INT
 	DECLARE @friendsIdList TABLE(FriendId INT)
