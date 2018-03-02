@@ -69,7 +69,7 @@ func (ss *SqlStore) GetByEmail(email string) (*User, error) {
 
 	defer rows.Close()
 	for rows.Next() {
-		if err := rows.Scan(&user.UserId, &user.UserFname, &user.UserLname, &user.UserEmail, &user.PhotoUrl, &user.UserDOB, &user.Username); err != nil {
+		if err := rows.Scan(&user.UserId, &user.UserFname, &user.UserLname, &user.UserEmail, &user.PasswordHash, &user.PhotoUrl, &user.UserDOB, &user.Username); err != nil {
 			log.Fatal(err)
 		}
 		fmt.Println(user)

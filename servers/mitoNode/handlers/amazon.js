@@ -11,7 +11,7 @@ const publicKeyAmazon = "AKIAJSRYKM2YU35LEDSQ";
 const secretKeyAmazon = "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";
 var chrsz = 8;
 // invokeRequest("harry+potter", "All", "");
-function invokeRequest(keyword, searchIndex, responseGroup) {
+function invokeRequest(keyword) {
 
     // if (getAccessKeyId() == "AWS Access Key ID") {
     //     alert("Please provide an AWS Access Key ID");
@@ -25,7 +25,7 @@ function invokeRequest(keyword, searchIndex, responseGroup) {
     // keyword = keyword.replace(/ /g,"+");
 
 
-    var unsignedUrl = `http://webservices.amazon.com/onca/xml?Service=AWSECommerceService&Operation=ItemSearch&SubscriptionId=AKIAJSRYKM2YU35LEDSQ&AssociateTag=mitoteam-20&SearchIndex=${searchIndex}&Keywords=${keyword}&ResponseGroup=Images,ItemAttributes,Offers,Reviews`
+    var unsignedUrl = `http://webservices.amazon.com/onca/xml?Service=AWSECommerceService&Operation=ItemSearch&SubscriptionId=AKIAJSRYKM2YU35LEDSQ&AssociateTag=mitoteam-20&SearchIndex=All&Keywords=${keyword}&ResponseGroup=Images,ItemAttributes,Offers,Reviews`
     // var unsignedUrl = document.getElementById("UnsignedURL").value;
     if (unsignedUrl == "") {
         alert("Please provide a URL");
@@ -227,13 +227,11 @@ const AmazonHashHandler = () => {
         // });
     });
 
-    router.get('/v1/amazonhash/:keyword/:searchindex/:responsegroup', (req, res) => {
-        console.log("hi")
+    router.get('/v1/amazonhash/:keyword', (req, res) => {
+
         // searchIndex (category), keywords (user query), responseGroup (respond filter)
         let keyword = req.params.keyword;
-        let searchindex = req.params.searchindex;
-        let responsegroup = req.params.responsegroup;
-        let urlString = invokeRequest(keyword, searchindex, responsegroup);
+        let urlString = invokeRequest(keyword);
         res.send(urlString);
         // var request = new Request(urlString, {
         //     method: 'GET',
