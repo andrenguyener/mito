@@ -96,6 +96,8 @@
                         <viewLayoutGuide key="safeArea" id="sQG-NY-zjb"/>
                     </view>
                     <connections>
+                        <outlet property="password" destination="i9J-yt-UsC" id="lFH-d3-WAZ"/>
+                        <outlet property="username" destination="39o-Wv-VpO" id="W8a-Pa-Bg2"/>
                         <segue destination="vJa-9R-Sbw" kind="show" identifier="login" id="cTu-G9-fQe"/>
                         <segue destination="WyY-un-hcv" kind="show" identifier="signup" id="Tk8-BD-Yxk"/>
                     </connections>
@@ -1576,7 +1578,6 @@
         <image name="search Grey" width="18" height="18"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="sAd-vQ-kz5"/>
         <segue reference="OxN-eG-nJb"/>
         <segue reference="cI7-Td-TzM"/>
         <segue reference="cTu-G9-fQe"/>
