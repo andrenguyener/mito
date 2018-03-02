@@ -47,7 +47,7 @@ class Home extends React.Component {
                 <main>
                     <h1> Mito </h1>
                     <hr/>
-                    <h1> Coming Soon </h1>
+                    <h2> Coming Soon </h2>
                 </main>
             </div>
         )
