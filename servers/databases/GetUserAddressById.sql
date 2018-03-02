@@ -18,7 +18,7 @@ AS
 	-- Check if the UserId has an address in USER_ADDRESS
 	IF EXISTS (SELECT * FROM USER_ADDRESS WHERE UserId = @UserId)
 
-	(SELECT U.UserId, U.Username,
+	(SELECT U.UserId, U.UserFname, U.UserLname, U.UserEmail,U.Username, UA.UserAddressId,
 		SA.StreetAddress, StreetAddress2, CityName, StateName, ZipCode, UA.IsDefault FROM [USER] U
 		JOIN USER_ADDRESS UA ON U.UserId = UA.UserId
 		JOIN [ADDRESS] A ON UA.AddressId = A.AddressId
@@ -26,7 +26,7 @@ AS
 		JOIN CITY C ON A.CityId = C.CityId
 		JOIN [STATE] S ON A.StateId = S.StateId
 		JOIN ZIPCODE Z ON A.ZipCodeId = Z.ZipCodeId
-		WHERE U.UserId = @UserId)
+		WHERE U.UserId = @UserId AND UA.IsDeleted <> 1)
 	ELSE 
 		BEGIN
 			PRINT'This user does not have the given address in their address book'

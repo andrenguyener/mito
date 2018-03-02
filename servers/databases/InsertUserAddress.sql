@@ -12,6 +12,7 @@ ALTER PROC InsertUserAddress
 @stateName NVARCHAR(30),
 @zipCode NVARCHAR(12),
 @aliasName NVARCHAR(50)
+--@UserAddress_ID INT OUT
 AS
 	--retrieve matching StreetAddressId based on the given streetaddress1 and streetaddress 2
 	DECLARE @streetAddressId INT

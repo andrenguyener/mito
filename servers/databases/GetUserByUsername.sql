@@ -3,7 +3,7 @@
 Find relevant user information based on the given Username
 */
 
-CREATE PROC GetUserByUsername 
+ALTER PROC GetUserByUsername 
 @Username NVARCHAR(50)
 As	
 	--DECLARE @err_msg NVARCHAR(255)
@@ -12,7 +12,7 @@ As
 	SET NOCOUNT ON
 	IF EXISTS(SELECT UserId FROM [USER] WHERE Username = @Username)
 		BEGIN
-		SELECT * FROM [USER] WHERE Username = @Username
+		SELECT UserId, UserFname, UserLname,UserEmail,PhotoUrl, UserDOB, Username FROM [USER] WHERE Username = @Username
 		END
 	ELSE
 		BEGIN 
