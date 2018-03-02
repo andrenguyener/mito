@@ -3,7 +3,7 @@
 Find relevant user information based on the given email address
 */
 
-CREATE PROC GetUserByUserEmail
+ALTER PROC GetUserByUserEmail
 @Useremail NVARCHAR(100)
 As	
 	--DECLARE @err_msg NVARCHAR(255)
