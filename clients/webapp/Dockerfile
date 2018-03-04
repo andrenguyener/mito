@@ -1,4 +1,4 @@
 FROM nginx
 ADD default.conf /etc/nginx/conf.d/default.conf
-COPY . /usr/share/nginx/html
+COPY build /usr/share/nginx/html
 EXPOSE 443 80

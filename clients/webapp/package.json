@@ -2,7 +2,6 @@
   "name": "webapp",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
   "dependencies": {
     "material-ui": "^0.20.0",
     "react": "^16.2.0",
@@ -12,8 +11,7 @@
     "react-scripts": "1.1.1",
     "redux": "^3.7.2",
     "npm-run-all": "^4.0.2",
-    "node-sass-chokidar": "0.0.3",
-    "gh-pages": "^1.1.0"
+    "node-sass-chokidar": "0.0.3"
   },
   "scripts": {
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
@@ -22,9 +20,7 @@
     "start": "npm-run-all -p watch-css start-js",
     "build": "npm run build-css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "eject": "react-scripts eject"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
   "main": "index.js",
