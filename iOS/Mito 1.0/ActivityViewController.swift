@@ -24,8 +24,6 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    
-    
     var appdata = AppData.shared
     var url = URL(string: "https://api.projectmito.io/v1/friend/34")
     
@@ -40,8 +38,6 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         productTableView.rowHeight = 106
         
         loadPeopleData()
-
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -99,7 +95,14 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
 //        cell.img.image = UIImage(named: "\(personObj.avatar)")
         cell.name.text = "\(personObj.firstName) \(personObj.lastName)"
         cell.handle.text = "\(personObj.email)"
-        cell.img.image = UIImage(named: "Sopheak.png")
+        let url = URL(string:"\(personObj.avatar)")
+        let defaultURL = URL(string: "https://www.sparklabs.com/forum/styles/comboot/theme/images/default_avatar.jpg")
+        if let data = try? Data(contentsOf: url!) {
+            cell.img.image = UIImage(data: data)!
+        } else if let data = try? Data(contentsOf: defaultURL!){
+            cell.img.image = UIImage(data: data)
+        }
+//        cell.img.image = UIImage(named: "Sopheak.png")
         cell.friendshipType.text = "\(personObj.avatar)"
 //        cell.friendshipType.text = "\(personObj.friendshipType)"
         return cell

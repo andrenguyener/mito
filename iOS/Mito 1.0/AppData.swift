@@ -11,15 +11,6 @@ import UIKit
 class AppData: NSObject {
     static let shared = AppData()
     
-//    open var people: [Person] = [
-//        Person(firstName: "Andre", lastName: "Nguyen", handle: "@andrenguyen", friendshipType: "Trusted Friend", avatar: "Andre.png"),
-//        Person(firstName: "Sopheak", lastName: "Neak", handle: "@sneak", friendshipType: "Friend", avatar: "Sopheak.png"),
-//        Person(firstName: "Andre", lastName: "Nguyen", handle: "@andrenguyen", friendshipType: "Trusted Friend", avatar: "Andre.png"),
-//        Person(firstName: "Sopheak", lastName: "Neak", handle: "@sneak", friendshipType: "Friend", avatar: "Sopheak.png"),
-//        Person(firstName: "Andre", lastName: "Nguyen", handle: "@andrenguyen", friendshipType: "Trusted Friend", avatar: "Andre.png"),
-//        Person(firstName: "Sopheak", lastName: "Neak", handle: "@sneak", friendshipType: "Friend", avatar: "Sopheak.png")
-//    ]
-    
     open var friends: [Person] = []
     
     open var feedItem: [FeedItem] = [
