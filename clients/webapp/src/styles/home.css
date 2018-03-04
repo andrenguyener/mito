@@ -4,6 +4,7 @@
   /* Full-screen */
   height: 100%;
   /* Center the background image */
+  background-position: center;
   /* Scale and zoom in the image */
   background-size: cover;
   /* Add position: relative to enable absolutely positioned elements inside the image (place text) */
@@ -18,7 +19,7 @@
 
 main {
   position: absolute;
-  top: 80%;
+  bottom: -40px;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center; }
@@ -27,7 +28,8 @@ h1 {
   margin-bottom: 5px; }
 
 h2 {
-  margin-top: 5px; }
+  margin-top: 5px;
+  margin-bottom: 0; }
 
 /* Style the <hr> element */
 hr {
