@@ -24,10 +24,9 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    
-    
     var appdata = AppData.shared
-    var url = URL(string: "https://api.projectmito.io/v1/friend/7")
+    var url = URL(string: "https://api.projectmito.io/v1/friend/34")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         peopleTableView.delegate = self
@@ -38,6 +37,16 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         productTableView.dataSource = self
         productTableView.rowHeight = 106
         
+        loadPeopleData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        appdata.friends.removeAll()
+        loadPeopleData()
+        peopleTableView.reloadData()
+    }
+    
+    func loadPeopleData() {
         let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
             if error != nil {
                 print("ERROR")
@@ -64,11 +73,6 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }
         task.resume()
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        peopleTableView.reloadData()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -91,7 +95,14 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
 //        cell.img.image = UIImage(named: "\(personObj.avatar)")
         cell.name.text = "\(personObj.firstName) \(personObj.lastName)"
         cell.handle.text = "\(personObj.email)"
-        cell.img.image = UIImage(named: "Sopheak.png")
+        let url = URL(string:"\(personObj.avatar)")
+        let defaultURL = URL(string: "https://www.sparklabs.com/forum/styles/comboot/theme/images/default_avatar.jpg")
+        if let data = try? Data(contentsOf: url!) {
+            cell.img.image = UIImage(data: data)!
+        } else if let data = try? Data(contentsOf: defaultURL!){
+            cell.img.image = UIImage(data: data)
+        }
+//        cell.img.image = UIImage(named: "Sopheak.png")
         cell.friendshipType.text = "\(personObj.avatar)"
 //        cell.friendshipType.text = "\(personObj.friendshipType)"
         return cell

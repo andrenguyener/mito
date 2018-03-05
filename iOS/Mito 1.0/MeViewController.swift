@@ -42,31 +42,33 @@ class MeViewController: UIViewController {
 //            } catch {
 //                // handle error
 //            }
+////        }
+//        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
+//            if error != nil {
+//                print("ERROR")
+//            } else {
+//                if let content = data {
+//                    do {
+//                        let myJson = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
+//                        DispatchQueue.main.async {
+                            let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+                            print(data)
+                            self.userID.text = data["userId"] as? String
+                            self.userEmail.text = data["userEmail"] as? String
+                            self.username.text = data["username"] as? String
+                            self.userFname.text = data["userFname"] as? String
+                            self.userLname.text = data["userLname"] as? String
+                            self.userDOB.text = data["userDOB"] as? String
+                            self.photoURL.text = data["photoURL"] as? String
+//                        }
+//                    } catch {
+//                        print("Catch")
+//                    }
+//                } else {
+//                    print("Error")
+//                }
+//            }
 //        }
-        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
-            if error != nil {
-                print("ERROR")
-            } else {
-                if let content = data {
-                    do {
-                        let myJson = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
-                        DispatchQueue.main.async {
-                            self.userID.text = myJson["userId"] as? String
-                            self.userEmail.text = myJson["userEmail"] as? String
-                            self.username.text = myJson["username"] as? String
-                            self.userFname.text = myJson["userFname"] as? String
-                            self.userLname.text = myJson["userLname"] as? String
-                            self.userDOB.text = myJson["userDOB"] as? String
-                            self.photoURL.text = myJson["photoURL"] as? String
-                        }
-                    } catch {
-                        print("Catch")
-                    }
-                } else {
-                    print("Error")
-                }
-            }
-        }
-        task.resume()
+//        task.resume()
     }
 }

@@ -17,7 +17,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.rowHeight = 110
+        tableView.rowHeight = 133
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,6 +43,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.whatHappened.text = "\(feedItemObj.whatHappened)"
         cell.time.text = "\(feedItemObj.time)"
         cell.descr.text = "\(feedItemObj.descr)"
+        cell.whatHappened.numberOfLines = 2
         return cell
     }
 
