@@ -10,6 +10,8 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    var log = false
+    
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
     // Opening Login Page
@@ -52,6 +54,7 @@ class LoginViewController: UIViewController {
                 }
             }
             success = true
+            self.log = true
 
         }
         task.resume()
@@ -97,8 +100,11 @@ class LoginViewController: UIViewController {
         self.view.addGestureRecognizer(tapGesture)
         NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        username.returnKeyType = .next
-        password.returnKeyType = .done
+        if log == true {
+            username.returnKeyType = .next
+            password.returnKeyType = .done
+            log = false
+        }
 //        if UserDefaults.standard.object(forKey: "UserInfo") == nil {
 //            print("There is no local data")
 //        } else {
