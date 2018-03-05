@@ -81,7 +81,6 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return appdata.friends.count
-//        return appdata.people.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -92,7 +91,6 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
         let personObj = appdata.friends[indexPath.row]
-//        cell.img.image = UIImage(named: "\(personObj.avatar)")
         cell.name.text = "\(personObj.firstName) \(personObj.lastName)"
         cell.handle.text = "\(personObj.email)"
         let url = URL(string:"\(personObj.avatar)")
@@ -102,9 +100,7 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         } else if let data = try? Data(contentsOf: defaultURL!){
             cell.img.image = UIImage(data: data)
         }
-//        cell.img.image = UIImage(named: "Sopheak.png")
         cell.friendshipType.text = "\(personObj.avatar)"
-//        cell.friendshipType.text = "\(personObj.friendshipType)"
         return cell
     }
 

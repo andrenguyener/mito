@@ -10,13 +10,10 @@ import UIKit
 
 class CartViewController: UIViewController {
 
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
-    
+
     //User's Cart
     @IBOutlet weak var cartTableView: UITableView!
     

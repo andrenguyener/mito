@@ -19,9 +19,8 @@ class LoginViewController: UIViewController {
         let u = username.text
         let p = password.text
         let JSONObj: [String: Any] = [
-            "userEmail": u,
-            "password": p
-            
+            "userEmail": u!,
+            "password": p!
         ]
         var success = false
         let jsonData = try? JSONSerialization.data(withJSONObject: JSONObj)
@@ -42,10 +41,8 @@ class LoginViewController: UIViewController {
             }
             
             let responseString = String(data: data, encoding: .utf8)
-//            print("responseString = \(responseString)")
-            var data2 = responseString?.data(using: .utf8)
+            let data2 = responseString?.data(using: .utf8)
             let dictionary = try? JSONSerialization.jsonObject(with: data2!, options: .mutableLeaves)
-//            print(dictionary)
             DispatchQueue.main.async {
                 if (dictionary != nil) {
                     self.performSegue(withIdentifier: "login", sender: self)
@@ -83,8 +80,8 @@ class LoginViewController: UIViewController {
     
     @objc func keyboardWillHide(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y != 0 {
-                self.view.frame.origin.y += 75 //keyboardSize.height
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height
             }
         }
     }

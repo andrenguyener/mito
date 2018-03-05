@@ -10,10 +10,6 @@ import UIKit
 
 class HomeTableViewCell: UITableViewCell {
 
-//    @IBOutlet weak var img: UIImageView!
-//    @IBOutlet weak var whatHappened: UILabel!
-//    @IBOutlet weak var time: UILabel!
-//    @IBOutlet weak var descr: UILabel!
     @IBOutlet weak var img: UIImageView!
     @IBOutlet weak var whatHappened: UILabel!
     @IBOutlet weak var time: UILabel!

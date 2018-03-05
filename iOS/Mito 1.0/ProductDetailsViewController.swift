@@ -22,7 +22,6 @@ class ProductDetailsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
     @IBAction func back(_ sender: Any) {
         performSegue(withIdentifier: "prodDetailBack", sender: self)
     }

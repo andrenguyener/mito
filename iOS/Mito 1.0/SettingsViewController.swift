@@ -10,7 +10,6 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
-
     //Login
     @IBAction func settingsToHome(_ sender: Any) {
         performSegue(withIdentifier: "settingsToMe", sender: self)
@@ -24,8 +23,6 @@ class SettingsViewController: UIViewController {
             print("Data is still here")
         }
     }
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
