@@ -89,16 +89,12 @@ class AddressStore {
 
             this.sql.callProcedure(request)
         })
-        .then((jsonArray) => {
-            return jsonArray
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-
-
-
-
+            .then((jsonArray) => {
+                return jsonArray
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }
 
     // update() updates a address for a given address ID.

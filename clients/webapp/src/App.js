@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { HashRouter as Router, Switch, Redirect, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Redirect, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import Home from './components/home';
 import PropTypes from 'prop-types';
