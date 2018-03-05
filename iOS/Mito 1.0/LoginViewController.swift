@@ -73,15 +73,15 @@ class LoginViewController: UIViewController {
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= 75 //keyboardSize.height
+                self.view.frame.origin.y -= 75
             }
         }
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= keyboardSize.height
+            if self.view.frame.origin.y == -75 {
+                self.view.frame.origin.y += 75
             }
         }
     }
