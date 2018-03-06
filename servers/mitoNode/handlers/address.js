@@ -17,8 +17,8 @@ const AddressHandler = (addressStore) => {
 
     const router = express.Router();
 
+    // Get all the addresses of the User
     router.get('/v1/address/:userId', (req, res) => {
-
         addressStore
             .getAll(req.params.userId)
             .then(address => {
@@ -30,11 +30,9 @@ const AddressHandler = (addressStore) => {
                     console.log(err);
                 }
             });
-
     });
 
-    //Do get user address by UserId, returns row of data . Sopheak id is 7. Returning rows of address
-
+    // Insert an address for the User
     router.post('/v1/address', (req, res) => {
         let streetAddress1 = req.body.streetAddress1;
         let streetAddress2 = req.body.streetAddress2;
@@ -51,6 +49,17 @@ const AddressHandler = (addressStore) => {
         res.json(address);
     });
 
+    // Delete an address from the User
+    router.delete('', (req, res) => {
+
+
+    });
+
+    // Update an address from the User
+    router.patch('', (req, res) => {
+
+
+    });
 
 
 

@@ -8,19 +8,17 @@ class FriendStore {
         this.sql = sql;
     }
 
-
-
-    insert(address) {
+    // Insert a friend into SqlServer
+    insert(friend) {
 
     }
 
-
+    // Get information about a friend from their UserId
     get(id) {
 
     }
 
-
-
+    // Get all friends of a UserId
     getAll(id) {
         return new Promise((resolve) => {
             let procedureName = "GetUserFriendsById";
@@ -62,13 +60,18 @@ class FriendStore {
 
     }
 
-    update(id, updates) {
-
+    // Update (downgrade/upgrade) friend status
+    updateFriendStatus(id, updates) {
 
     }
 
+    // Accept/Decline friend request
+    updateFriendRequest(userId, friendId) {
 
-    delete(id) {
+    }
+
+    // Delete a friend from the User  
+    delete(userId, deletedId) {
 
 
     }
