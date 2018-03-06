@@ -17,6 +17,12 @@ const FriendHandler = (friendStore) => {
 
     const router = express.Router();
 
+    // Get information about a friend
+    router.get('', (req, res) => {
+
+    });
+
+    // Get all the friends of a given UserId
     router.get('/v1/friend/:userId', (req, res) => {
         friendStore
             .getAll(req.params.userId)
@@ -31,12 +37,25 @@ const FriendHandler = (friendStore) => {
             });
     });
 
-
+    // Add a new friend
     router.post('', (req, res) => {
 
     });
 
+    // Update (upgrade/downgrade) friend status
+    router.patch('', (req, res) => {
 
+    });
+
+    // Update friend request (accept/decline)
+    router.patch('', (req, res) => {
+
+    });
+
+    // Delete a friend from the UserId
+    router.delete('', (req, res) => {
+
+    });
 
 
     return router;
