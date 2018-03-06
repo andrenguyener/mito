@@ -21,42 +21,45 @@ class FriendStore {
 
 
 
-    getAll(id, res) {
-        let procedureName = "GetUserFriendsById";
-        var request = new Request(`${procedureName}`, function (err, rowCount, rows) {
-            if (err) {
-                console.log(err);
-            }
-        });
-
-        request.addParameter('UserId', TYPES.Int, id);
-
-        let jsonArray = []
-        request.on('row', function (columns) {
-            var rowObject = {};
-            columns.forEach(function (column) {
-                if (column.value === null) {
-                    console.log('NULL');
-                } else {
-                    rowObject[column.metadata.colName] = column.value;
+    getAll(id) {
+        return new Promise((resolve) => {
+            let procedureName = "GetUserFriendsById";
+            var request = new Request(`${procedureName}`, function (err, rowCount, rows) {
+                if (err) {
+                    console.log(err);
                 }
             });
-            jsonArray.push(rowObject)
-        });
 
-        request.on('doneProc', function (rowCount, more) {
-            console.log(jsonArray);
-            // let returnArray = [];
-            // for (object in jsonArray) {
-            //     let returnObject = {};
-            //     returnObject.UserId = object.UserId;
-            //     returnObject.Username = object.Username;
-            //     returnArray.push(returnObject);
-            // }
-            res.json(jsonArray);
-        });
+            request.addParameter('UserId', TYPES.Int, id);
 
-        this.sql.callProcedure(request)
+            let jsonArray = []
+            request.on('row', function (columns) {
+                var rowObject = {};
+                columns.forEach(function (column) {
+                    if (column.value === null) {
+                        console.log('NULL');
+                    } else {
+                        rowObject[column.metadata.colName] = column.value;
+                    }
+                });
+                jsonArray.push(rowObject)
+            });
+
+            request.on('doneProc', function (rowCount, more) {
+                console.log(jsonArray);
+                resolve(jsonArray);
+            });
+
+            this.sql.callProcedure(request)
+        })
+            .then((jsonArray) => {
+                return jsonArray
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
+
     }
 
     update(id, updates) {

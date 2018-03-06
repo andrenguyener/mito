@@ -19,10 +19,9 @@ const AddressHandler = (addressStore) => {
 
     router.get('/v1/address/:userId', (req, res) => {
 
-        // let addressArray = []
         addressStore
             .getAll(req.params.userId)
-            .then( address => {
+            .then(address => {
                 console.log(address)
                 res.json(address)
             })
@@ -30,7 +29,6 @@ const AddressHandler = (addressStore) => {
                 if (err !== breakSignal) {
                     console.log(err);
                 }
-                
             });
 
     });
