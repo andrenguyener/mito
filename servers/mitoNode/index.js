@@ -6,13 +6,13 @@
 const express = require("express");
 const morgan = require("morgan");
 const app = express();
-var Connection = require('tedious').Connection; 
+var Connection = require('tedious').Connection;
 // config for your database
 var config = {
     userName: 'mitoteam',
     password: 'JABS2018!',
-    server: 'projectmito.database.windows.net', 
-    options: { encrypt: true, database: 'projectmito'  }
+    server: 'projectmito.database.windows.net',
+    options: { encrypt: true, database: 'projectmito' }
 };
 
 
@@ -20,10 +20,13 @@ const AddressStore = require("./models/address/address-store");
 const Address = require('./models/address/address-class');
 const AddressHandler = require('./handlers/address');
 
-
 const FriendStore = require("./models/friend/friend-store");
 const Friend = require('./models/friend/friend-class');
 const FriendHandler = require('./handlers/friend');
+
+const OrderStore = require('./models/order/order-store');
+const Order = require('./models/order/order-class');
+const OrderHandler = require('./handlers/order');
 
 const AmazonHashHandler = require('./handlers/amazon');
 
@@ -44,8 +47,8 @@ const qName = "testQ";
 // const mqAddr = process.env.MQADDR || "rabbit:5672";
 const mqAddr = process.env.MQADDR || "localhost:5672"
 const mqURL = `amqp://${mqAddr}`;
-var Request = require('tedious').Request;  
-var TYPES = require('tedious').TYPES;  
+var Request = require('tedious').Request;
+var TYPES = require('tedious').TYPES;
 
 // function executeStatement(connection) {  
 //     var request = new Request("SELECT * FROM [USER]", function(err) {  
@@ -78,8 +81,8 @@ var TYPES = require('tedious').TYPES;
         // const db = await mongodb.MongoClient.connect(mongoURL);
 
         let sql = await new Connection(config);
-        sql.on('connect', function(err) {  
-        // If no error, then good to proceed. 
+        sql.on('connect', function (err) {
+            // If no error, then good to proceed. 
             if (err) {
                 console.log(err)
             } else {
@@ -87,9 +90,9 @@ var TYPES = require('tedious').TYPES;
                 // executeStatement(connection);
             }
         });
-       
 
-        
+
+
         // Add global middlewares.
         app.use(morgan('dev'));
         // Parses posted JSON and makes
@@ -122,7 +125,7 @@ var TYPES = require('tedious').TYPES;
         app.set('qName', qName);
 
 
-    
+
 
         // Initialize Mongo stores.
         // let channelStore = new ChannelStore(db, 'channels');
