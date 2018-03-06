@@ -10,10 +10,10 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
-    var log = false
     
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
+    
     // Opening Login Page
     @IBAction func login(_ sender: Any) {
         let u = username.text
@@ -22,7 +22,7 @@ class LoginViewController: UIViewController {
             "userEmail": u!,
             "password": p!
         ]
-        var success = false
+        //var success = false
         let jsonData = try? JSONSerialization.data(withJSONObject: JSONObj)
         let url = URL(string: "https://api.projectmito.io/v1/sessions")!
         var request = URLRequest(url: url)
@@ -31,13 +31,13 @@ class LoginViewController: UIViewController {
         request.httpBody = jsonData
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {                                                 // check for fundamental networking error
-                print("error=\(error)")
+                print("error=\(String(describing: error))")
                 return
             }
             
             if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
                 print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(response)")
+                print("response = \(String(describing: response))")
             }
             
             let responseString = String(data: data, encoding: .utf8)
@@ -50,12 +50,11 @@ class LoginViewController: UIViewController {
                     print(UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary)
                 }
             }
-            success = true
-            self.log = true
-
+            //success = true
         }
         task.resume()
     }
+    
     @IBAction func signup(_ sender: Any) {
         performSegue(withIdentifier: "signup", sender: self)
     }
@@ -71,15 +70,18 @@ class LoginViewController: UIViewController {
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+        if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
             if self.view.frame.origin.y == 0 {
                 self.view.frame.origin.y -= 75
             }
         }
+        username.returnKeyType = .next
+        password.returnKeyType = .done
+
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+        if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
             if self.view.frame.origin.y == -75 {
                 self.view.frame.origin.y += 75
             }
@@ -97,11 +99,9 @@ class LoginViewController: UIViewController {
         self.view.addGestureRecognizer(tapGesture)
         NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        if log == true {
-            username.returnKeyType = .next
-            password.returnKeyType = .done
-            log = false
-        }
+  
+
+
 //        if UserDefaults.standard.object(forKey: "UserInfo") == nil {
 //            print("There is no local data")
 //        } else {
