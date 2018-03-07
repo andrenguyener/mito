@@ -1600,11 +1600,12 @@
                                     <action selector="back:" destination="mKW-hw-jiX" eventType="touchUpInside" id="Gib-Ub-96s"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2VX-4k-3cu">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2VX-4k-3cu">
                                 <rect key="frame" x="36" y="82" width="303" height="274"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Andre" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ToY-00-w3Q">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Andre" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ToY-00-w3Q">
                                 <rect key="frame" x="164.5" y="426" width="46" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1615,10 +1616,7 @@
                             <constraint firstItem="2VX-4k-3cu" firstAttribute="centerX" secondItem="Hy4-EJ-BfW" secondAttribute="centerX" id="0tQ-DI-8qc"/>
                             <constraint firstItem="3JA-VS-G7W" firstAttribute="top" secondItem="9Tf-DT-4J7" secondAttribute="top" constant="24" id="4iD-PJ-EOp"/>
                             <constraint firstItem="3JA-VS-G7W" firstAttribute="leading" secondItem="9Tf-DT-4J7" secondAttribute="leading" constant="22" id="H82-qK-YDx"/>
-                            <constraint firstItem="2VX-4k-3cu" firstAttribute="centerX" secondItem="ToY-00-w3Q" secondAttribute="centerX" id="IhG-wW-LFH"/>
                             <constraint firstItem="2VX-4k-3cu" firstAttribute="top" secondItem="3JA-VS-G7W" secondAttribute="bottom" constant="8" symbolic="YES" id="TAr-6r-tBG"/>
-                            <constraint firstItem="ToY-00-w3Q" firstAttribute="top" secondItem="2VX-4k-3cu" secondAttribute="bottom" constant="70" id="XdZ-Xl-6Eh"/>
-                            <constraint firstItem="9Tf-DT-4J7" firstAttribute="bottom" secondItem="ToY-00-w3Q" secondAttribute="bottom" constant="220" id="ZEt-kM-ZwA"/>
                             <constraint firstItem="2VX-4k-3cu" firstAttribute="leading" secondItem="9Tf-DT-4J7" secondAttribute="leading" constant="36" id="hre-eI-1FN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9Tf-DT-4J7"/>
@@ -1664,7 +1662,7 @@
         <image name="search Grey" width="18" height="18"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ZPJ-OI-9Hk"/>
+        <segue reference="kS1-pK-LOk"/>
         <segue reference="Huf-aH-vL3"/>
         <segue reference="Fma-AT-nbz"/>
     </inferredMetricsTieBreakers>
