@@ -82,6 +82,41 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         task.resume()
     }
     
+    // Product Tab View
+    
+    func loadProductData() {
+        let task = URLSession.shared.dataTask(with: prodUrl!) { (data, response, error) in
+            if error != nil {
+                print("ERROR")
+            } else {
+                if let content = data {
+                    do {
+                        let myJson = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
+                        let itemSearchResponse = myJson["ItemSearchResponse"] as! NSDictionary
+                        let items = itemSearchResponse["Items"] as! NSArray
+                        let secondObj = items[0] as! NSDictionary
+                        let item = secondObj["Item"] as! NSArray
+                        var idx = 0
+                        for itemObj in item {
+                            let item = itemObj as! NSDictionary
+                            let ASINArray = item["ASIN"] as! NSArray
+                            print("\(idx): \(ASINArray[0] as! String)")
+                            idx += 1
+                        }
+                        DispatchQueue.main.async {
+                            //self.peopleTableView.reloadData()
+                        }
+                    } catch {
+                        print("Catch")
+                    }
+                } else {
+                    print("Error")
+                }
+            }
+        }
+        task.resume()
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -110,41 +145,4 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         cell.friendshipType.text = "\(personObj.avatar)"
         return cell
     }
-
-    
-    // Product Tab View
-    
-    func loadProductData() {
-        let task = URLSession.shared.dataTask(with: prodUrl!) { (data, response, error) in
-            if error != nil {
-                print("ERROR")
-            } else {
-                if let content = data {
-                    do {
-                        let myJson = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
-                        let itemSearchResponse = myJson["ItemSearchResponse"] as! NSDictionary
-                        let items = itemSearchResponse["Items"] as! NSArray
-                        let secondObj = items[0] as! NSDictionary
-                        let item = secondObj["Item"] as! NSArray
-                        for itemObj in item {
-                            let item = itemObj as! NSDictionary
-                            print(item["ASIN"])
-                        }
-                        DispatchQueue.main.async {
-                            //self.peopleTableView.reloadData()
-                        }
-                    } catch {
-                        print("Catch")
-                    }
-                } else {
-                    print("Error")
-                }
-            }
-        }
-        task.resume()
-    }
-    
-    
-
-
 }
