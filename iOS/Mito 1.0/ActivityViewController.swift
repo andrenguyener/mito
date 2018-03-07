@@ -25,7 +25,8 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     var appdata = AppData.shared
-    var url = URL(string: "https://api.projectmito.io/v1/friend/34")
+    var peopleUrl = URL(string: "https://api.projectmito.io/v1/friend/34")
+    var prodUrl = URL(string: "https://api.projectmito.io/v1/amazonhashtest/bunny" )
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,10 +45,15 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         appdata.friends.removeAll()
         loadPeopleData()
         peopleTableView.reloadData()
+        loadProductData()
+        //productTableView.reloadData()
+        
     }
     
+    // Loading Friends (people tab)
+    // POST: inserting (attach object) / GET request: put key word in the URL
     func loadPeopleData() {
-        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
+        let task = URLSession.shared.dataTask(with: peopleUrl!) { (data, response, error) in
             if error != nil {
                 print("ERROR")
             } else {
@@ -104,9 +110,40 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         return cell
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    // Product Tab View
+    
+    func loadProductData() {
+        let task = URLSession.shared.dataTask(with: prodUrl!) { (data, response, error) in
+            if error != nil {
+                print("ERROR")
+            } else {
+                if let content = data {
+                    do {
+                        let myJson = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers)
+                        print("Hi i got the bunny")
+//                        for obj in myJson {
+//
+//                            let object = obj as! NSDictionary
+//                            let p: Person = Person(firstName: (object["UserFname"] as? String)!, lastName: (object["UserLname"] as? String)!, email: (object["UserEmail"] as? String!)!, avatar: (object["PhotoUrl"] as? String!)!)
+//                            print(p.description())
+//                            self.appdata.friends.append(p)
+                       // }
+                        DispatchQueue.main.async {
+                            //self.peopleTableView.reloadData()
+                        }
+                    } catch {
+                        print("Catch")
+                    }
+                } else {
+                    print("Error")
+                }
+            }
+        }
+        task.resume()
     }
+    
+    
+
 
 }

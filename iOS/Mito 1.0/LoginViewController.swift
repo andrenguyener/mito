@@ -89,8 +89,11 @@ class LoginViewController: UIViewController {
     }
     
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
-        username.resignFirstResponder()
-        password.resignFirstResponder()
+        var f = false
+        if f == true {
+            username.resignFirstResponder()
+            password.resignFirstResponder()
+        }
     }
     
     override func viewDidLoad() {
