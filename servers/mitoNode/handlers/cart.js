@@ -6,8 +6,8 @@ const express = require('express');
 const Order = require('./../models/order/order-class');
 const sendToMQ = require('./message-queue');
 
-const OrderHandler = (orderStore) => {
-    if (!orderStore) {
+const CartHandler = (cartStore) => {
+    if (!cartStore) {
         throw new Error('no address table found');
     }
 
@@ -17,25 +17,24 @@ const OrderHandler = (orderStore) => {
 
     const router = express.Router();
 
-    // TODO: Talk to Sopheak to decide how to handle pending/incoming packages
-
-    router.get('/v1/order/:orderId', (req, res) => {
-
-
-    });
-
+    // Get items in cart
     router.get('', (req, res) => {
 
 
     });
 
-    router.get('', (req, res) => {
-
-
-    });
-
-
+    // Add items to cart
     router.post('', (req, res) => {
+
+    });
+
+    // Deletes items from cart
+    router.delete('', (req, res) => {
+
+    });
+
+    // Update the quantity of an item
+    router.patch('', (req, res) => {
 
     });
 
@@ -45,4 +44,4 @@ const OrderHandler = (orderStore) => {
     return router;
 };
 
-module.exports = OrderHandler;
+module.exports = CartHandler;
