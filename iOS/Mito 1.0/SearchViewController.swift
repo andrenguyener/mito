@@ -39,6 +39,7 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         productTableView.rowHeight = 106
         
         loadPeopleData()
+        loadProductData()
     }
     
     override func viewDidAppear(_ animated: Bool) {

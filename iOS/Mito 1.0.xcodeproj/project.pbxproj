@@ -46,7 +46,7 @@
 		DA27C21E204371CE00CCFD60 /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA27C21D204371CE00CCFD60 /* ProductDetailsViewController.swift */; };
 		DA27C2202043736400CCFD60 /* Sopheak.png in Resources */ = {isa = PBXBuildFile; fileRef = DA27C21F2043736400CCFD60 /* Sopheak.png */; };
 		DA4FC9EF2045E0D300999F28 /* profileInfo.json in Resources */ = {isa = PBXBuildFile; fileRef = DA4FC9EE2045E0D300999F28 /* profileInfo.json */; };
-		DAD995312042386E007A7687 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD995302042386E007A7687 /* ActivityViewController.swift */; };
+		DAD995312042386E007A7687 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD995302042386E007A7687 /* SearchViewController.swift */; };
 		DAD995332042389B007A7687 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD995322042389B007A7687 /* Person.swift */; };
 		DAD9953520423A4B007A7687 /* Andre.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD9953420423A4B007A7687 /* Andre.png */; };
 		DAD9953720423EE9007A7687 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD9953620423EE9007A7687 /* TableViewCell.swift */; };
@@ -119,7 +119,7 @@
 		DA27C21D204371CE00CCFD60 /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
 		DA27C21F2043736400CCFD60 /* Sopheak.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sopheak.png; sourceTree = "<group>"; };
 		DA4FC9EE2045E0D300999F28 /* profileInfo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = profileInfo.json; sourceTree = SOURCE_ROOT; };
-		DAD995302042386E007A7687 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		DAD995302042386E007A7687 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		DAD995322042389B007A7687 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		DAD9953420423A4B007A7687 /* Andre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Andre.png; sourceTree = "<group>"; };
 		DAD9953620423EE9007A7687 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
@@ -202,7 +202,7 @@
 				B29AEC68203FC9C100110EF9 /* Assets.xcassets */,
 				B272DC272043BA8700EE2121 /* Icon */,
 				B244999E2040C340006FA81B /* fonts */,
-				DAD995302042386E007A7687 /* ActivityViewController.swift */,
+				DAD995302042386E007A7687 /* SearchViewController.swift */,
 				B272DC2D2043BBE400EE2121 /* AppData.swift */,
 				B29AEC61203FC9C100110EF9 /* AppDelegate.swift */,
 				B247196F20454733006CF6C2 /* CartTableViewCell.swift */,
@@ -419,7 +419,7 @@
 				B2F849472043CAA900CBD83A /* SettingsViewController.swift in Sources */,
 				B2471994204672DE006CF6C2 /* NotificationViewController.swift in Sources */,
 				DA27C21A2043550A00CCFD60 /* HomeTableViewCell.swift in Sources */,
-				DAD995312042386E007A7687 /* ActivityViewController.swift in Sources */,
+				DAD995312042386E007A7687 /* SearchViewController.swift in Sources */,
 				B247197020454733006CF6C2 /* CartTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
