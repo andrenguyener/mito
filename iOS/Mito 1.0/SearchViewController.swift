@@ -121,15 +121,15 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
             } else {
                 if let content = data {
                     do {
-                        let myJson = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers)
-                        print("Hi i got the bunny")
-//                        for obj in myJson {
-//
-//                            let object = obj as! NSDictionary
-//                            let p: Person = Person(firstName: (object["UserFname"] as? String)!, lastName: (object["UserLname"] as? String)!, email: (object["UserEmail"] as? String!)!, avatar: (object["PhotoUrl"] as? String!)!)
-//                            print(p.description())
-//                            self.appdata.friends.append(p)
-                       // }
+                        let myJson = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
+                        let itemSearchResponse = myJson["ItemSearchResponse"] as! NSDictionary
+                        let items = itemSearchResponse["Items"] as! NSArray
+                        let secondObj = items[0] as! NSDictionary
+                        let item = secondObj["Item"] as! NSArray
+                        for itemObj in item {
+                            let item = itemObj as! NSDictionary
+                            print(item["ASIN"])
+                        }
                         DispatchQueue.main.async {
                             //self.peopleTableView.reloadData()
                         }
