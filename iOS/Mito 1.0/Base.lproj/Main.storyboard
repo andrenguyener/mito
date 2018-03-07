@@ -980,7 +980,7 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="Cy8-QW-6iy">
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Cy8-QW-6iy">
                                         <rect key="frame" x="10" y="92" width="357" height="29"/>
                                         <color key="backgroundColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <segments>
@@ -1008,7 +1008,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="activityCell" rowHeight="106" id="t1w-Or-4ow" customClass="TableViewCell" customModule="Mito_1_0" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="productCell" rowHeight="106" id="t1w-Or-4ow" customClass="ProductTableViewCell" customModule="Mito_1_0" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="414" height="106"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="t1w-Or-4ow" id="oId-TU-Stj">
@@ -1057,8 +1057,10 @@
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
-                                                    <outlet property="img" destination="7gh-ts-yKf" id="WN3-kc-x6y"/>
-                                                    <outlet property="name" destination="3SZ-vu-Stt" id="oyn-a9-kdt"/>
+                                                    <outlet property="img" destination="7gh-ts-yKf" id="PNz-Ia-or6"/>
+                                                    <outlet property="price" destination="Jan-Gs-ZQ8" id="VAd-e1-3Lw"/>
+                                                    <outlet property="publisher" destination="92T-Lf-saQ" id="Ueb-fl-2hJ"/>
+                                                    <outlet property="title" destination="3SZ-vu-Stt" id="Ymm-gF-0Tj"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -1657,7 +1659,6 @@
         <image name="search Grey" width="18" height="18"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1Cx-gC-rMc"/>
         <segue reference="kS1-pK-LOk"/>
         <segue reference="Huf-aH-vL3"/>
         <segue reference="Fma-AT-nbz"/>

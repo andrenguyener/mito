@@ -13,6 +13,8 @@ class AppData: NSObject {
     
     open var friends: [Person] = []
     
+    open var products: [Product] = []
+    
     open var feedItem: [FeedItem] = [
         FeedItem(avatar: "Sopheak.png", descr: "Testing a multiline comment because we need to test it why not", time: "12h", whatHappened: "Andre Nguyen received a gift from Sopheak Neak"),
         FeedItem(avatar: "Andre2.png", descr: "Gang Gang", time: "6h", whatHappened: "Andre Nguyen received a gift from Sopheak Neak"),

@@ -14,18 +14,23 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var peopleTableView: UITableView!
     @IBOutlet weak var productTableView: UITableView!
     @IBOutlet weak var productPeopleTab: UISegmentedControl!
+    var pageNum = 1
 
     @IBAction func switchTab(_ sender: UISegmentedControl) {
         if productPeopleTab.selectedSegmentIndex == 0 {
             UIView.transition(from: peopleTableView, to: productTableView, duration: 0, options: .showHideTransitionViews)
+            print("\(productPeopleTab.selectedSegmentIndex)")
+            pageNum = 0
         } else {
             UIView.transition(from: productTableView, to: peopleTableView, duration: 0, options: .showHideTransitionViews)
+            print("\(productPeopleTab.selectedSegmentIndex)")
+            pageNum = 1
         }
     }
     
     var appdata = AppData.shared
     var peopleUrl = URL(string: "https://api.projectmito.io/v1/friend/34")
-    var prodUrl = URL(string: "https://api.projectmito.io/v1/amazonhashtest/bunny" )
+    var prodUrl = URL(string: "https://api.projectmito.io/v1/amazonhashtest/echo" )
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,12 +44,16 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         
         loadPeopleData()
         loadProductData()
+//        peopleTableView.reloadData()
+//        productTableView.reloadData()
+//        print(appdata.products.count)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         appdata.friends.removeAll()
-        loadPeopleData()
-        peopleTableView.reloadData()
+        appdata.products.removeAll()
+//        loadPeopleData()
+//        peopleTableView.reloadData()
 //        loadProductData()
 //        productTableView.reloadData()
         
@@ -61,10 +70,9 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
                     do {
                         let myJson = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSArray
                         for obj in myJson {
-                            print("hi")
                             let object = obj as! NSDictionary
                             let p: Person = Person(firstName: (object["UserFname"] as? String)!, lastName: (object["UserLname"] as? String)!, email: (object["UserEmail"] as? String!)!, avatar: (object["PhotoUrl"] as? String!)!)
-                            print(p.description())
+//                            print(p.description())
                             self.appdata.friends.append(p)
                         }
                         DispatchQueue.main.async {
@@ -95,15 +103,37 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
                         let items = itemSearchResponse["Items"] as! NSArray
                         let secondObj = items[0] as! NSDictionary
                         let item = secondObj["Item"] as! NSArray
-                        var idx = 0
                         for itemObj in item {
+                            // some things will throw errors depending on what they search...
                             let item = itemObj as! NSDictionary
-                            let ASINArray = item["ASIN"] as! NSArray
-                            print("\(idx): \(ASINArray[0] as! String)")
-                            idx += 1
+                            let ASINArr = item["ASIN"] as! NSArray
+                            let ASIN = ASINArr[0] as! String
+//                            print("\(idx): \(ASINArray[0] as! String)")
+                            let SmallImageArr = item["SmallImage"] as! NSArray
+                            let SmallImageObj = SmallImageArr[0] as! NSDictionary
+                            let URLArr = SmallImageObj["URL"] as! NSArray
+                            let imgURL = URLArr[0] as! String
+//                            print(imgURL)
+                            let ItemAttributesArr = item["ItemAttributes"] as! NSArray
+                            let ItemAttributeObj = ItemAttributesArr[0] as! NSDictionary
+                            let ListPriceArr = ItemAttributeObj["ListPrice"] as! NSArray
+                            let ListPriceObj = ListPriceArr[0] as! NSDictionary
+//                            print(ListPriceObj.description)
+                            let formattedPriceArr = ListPriceObj["FormattedPrice"] as! NSArray
+                            let formattedPrice = formattedPriceArr[0] as! String
+//                            print(formattedPrice)
+                            let TitleArr = ItemAttributeObj["Title"] as! NSArray
+                            let title = TitleArr[0] as! String
+//                            print(title)
+                            let PublisherArr = ItemAttributeObj["Publisher"] as! NSArray
+                            let publisher = PublisherArr[0] as! String
+//                            print(publisher)
+                            let product: Product = Product(image: imgURL, ASIN: ASIN, title: title, publisher: publisher, price: formattedPrice)
+                            self.appdata.products.append(product)
+
                         }
                         DispatchQueue.main.async {
-                            //self.peopleTableView.reloadData()
+                            self.productTableView.reloadData()
                         }
                     } catch {
                         print("Catch")
@@ -121,7 +151,11 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return appdata.friends.count
+        if productPeopleTab.selectedSegmentIndex == 1 {
+            return appdata.friends.count
+        } else {
+            return appdata.products.count
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -129,24 +163,34 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
 //        performSegue(withIdentifier: "segue", sender: self)
     }
     
+    // Trying to figure out why this tableView gets called more than the expected appdata.friends.count
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if productPeopleTab.selectedSegmentIndex == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
-            let personObj = appdata.friends[indexPath.row]
-            cell.name.text = "\(personObj.firstName) \(personObj.lastName)"
-            cell.handle.text = "\(personObj.email)"
-            let url = URL(string:"\(personObj.avatar)")
-            let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
+//        if pageNum == 1 {
+//            print(indexPath.row)
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
+//            let personObj = appdata.friends[indexPath.row]
+//            cell.name.text = "\(personObj.firstName) \(personObj.lastName)"
+//            cell.handle.text = "\(personObj.email)"
+//            let url = URL(string:"\(personObj.avatar)")
+//            let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
+//            if let data = try? Data(contentsOf: url!) {
+//                cell.img.image = UIImage(data: data)!
+//            } else if let data = try? Data(contentsOf: defaultURL!){
+//                cell.img.image = UIImage(data: data)
+//            }
+//            cell.friendshipType.text = "\(personObj.avatar)"
+//            return cell
+//        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "productCell", for: indexPath) as! ProductTableViewCell
+            let productObj = appdata.products[indexPath.row]
+            let url = URL(string: "\(productObj.image)")
             if let data = try? Data(contentsOf: url!) {
                 cell.img.image = UIImage(data: data)!
-            } else if let data = try? Data(contentsOf: defaultURL!){
-                cell.img.image = UIImage(data: data)
             }
-            cell.friendshipType.text = "\(personObj.avatar)"
+            cell.title.text = productObj.title
+            cell.publisher.text = productObj.publisher
+            cell.price.text = productObj.price
             return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
-            return cell
-        }
+//        }
     }
 }

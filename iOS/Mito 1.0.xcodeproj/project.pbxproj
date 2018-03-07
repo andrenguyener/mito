@@ -50,6 +50,7 @@
 		DAD995332042389B007A7687 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD995322042389B007A7687 /* Person.swift */; };
 		DAD9953520423A4B007A7687 /* Andre.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD9953420423A4B007A7687 /* Andre.png */; };
 		DAD9953720423EE9007A7687 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD9953620423EE9007A7687 /* TableViewCell.swift */; };
+		DAD9A1A0204FD1C800E3AA5F /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD9A19F204FD1C800E3AA5F /* ProductTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +124,7 @@
 		DAD995322042389B007A7687 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		DAD9953420423A4B007A7687 /* Andre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Andre.png; sourceTree = "<group>"; };
 		DAD9953620423EE9007A7687 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		DAD9A19F204FD1C800E3AA5F /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +219,7 @@
 				DAD995322042389B007A7687 /* Person.swift */,
 				B272DC2520439E2200EE2121 /* Product.swift */,
 				DA27C21D204371CE00CCFD60 /* ProductDetailsViewController.swift */,
+				DAD9A19F204FD1C800E3AA5F /* ProductTableViewCell.swift */,
 				DAD995302042386E007A7687 /* SearchViewController.swift */,
 				B2F849462043CAA900CBD83A /* SettingsViewController.swift */,
 				DAD9953620423EE9007A7687 /* TableViewCell.swift */,
@@ -406,6 +409,7 @@
 				B2F8494F2043D71000CBD83A /* LoginViewController.swift in Sources */,
 				DAD995332042389B007A7687 /* Person.swift in Sources */,
 				B29AEC64203FC9C100110EF9 /* ViewController.swift in Sources */,
+				DAD9A1A0204FD1C800E3AA5F /* ProductTableViewCell.swift in Sources */,
 				B29AEC62203FC9C100110EF9 /* AppDelegate.swift in Sources */,
 				DA27C21E204371CE00CCFD60 /* ProductDetailsViewController.swift in Sources */,
 				B272DC2E2043BBE400EE2121 /* AppData.swift in Sources */,
