@@ -171,8 +171,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MfP-sC-TgG" userLabel="Top Nav">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
                                 <subviews>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="m8Q-ax-wXZ">
-                                        <rect key="frame" x="123" y="37" width="169" height="29"/>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="m8Q-ax-wXZ">
+                                        <rect key="frame" x="10" y="37" width="394" height="29"/>
                                         <color key="backgroundColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <segments>
                                             <segment title="Notification"/>
@@ -186,9 +186,8 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="m8Q-ax-wXZ" firstAttribute="centerX" secondItem="MfP-sC-TgG" secondAttribute="centerX" id="Aqg-BW-Vdy"/>
-                                    <constraint firstAttribute="bottom" secondItem="m8Q-ax-wXZ" secondAttribute="bottom" constant="17" id="JDw-IU-Pjl"/>
-                                    <constraint firstItem="m8Q-ax-wXZ" firstAttribute="top" secondItem="MfP-sC-TgG" secondAttribute="top" constant="37" id="trl-rC-bmQ"/>
+                                    <constraint firstItem="m8Q-ax-wXZ" firstAttribute="top" secondItem="MfP-sC-TgG" secondAttribute="top" constant="37" id="Aot-DR-M98"/>
+                                    <constraint firstAttribute="bottom" secondItem="m8Q-ax-wXZ" secondAttribute="bottom" constant="17" id="zLq-HT-Sl8"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CWB-eH-sni" userLabel="Package In">
@@ -225,7 +224,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="r68-ot-V1i" firstAttribute="top" secondItem="MfP-sC-TgG" secondAttribute="bottom" constant="41" id="78c-JH-gpc"/>
+                            <constraint firstItem="m8Q-ax-wXZ" firstAttribute="leading" secondItem="Gep-aQ-tBS" secondAttribute="leading" constant="10" id="Dzm-3D-1MS"/>
                             <constraint firstItem="r68-ot-V1i" firstAttribute="leading" secondItem="Gep-aQ-tBS" secondAttribute="leading" id="cEU-Xb-jcI"/>
+                            <constraint firstItem="m8Q-ax-wXZ" firstAttribute="trailing" secondItem="Gep-aQ-tBS" secondAttribute="trailing" constant="-10" id="e0T-j6-3Fb"/>
                             <constraint firstItem="MfP-sC-TgG" firstAttribute="trailing" secondItem="Gep-aQ-tBS" secondAttribute="trailing" id="fA6-hq-qhl"/>
                             <constraint firstItem="MfP-sC-TgG" firstAttribute="leading" secondItem="Gep-aQ-tBS" secondAttribute="leading" id="iPL-at-3cO"/>
                             <constraint firstItem="MfP-sC-TgG" firstAttribute="top" secondItem="Gep-aQ-tBS" secondAttribute="top" constant="-20" id="jmw-4Z-2Y2"/>
@@ -826,8 +827,9 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="AO7-NZ-k9u">
                                 <rect key="frame" x="10" y="28" width="394" height="56"/>
                                 <subviews>
-                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="38V-QS-i3J">
+                                    <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="38V-QS-i3J">
                                         <rect key="frame" x="0.0" y="0.0" width="285" height="56"/>
+                                        <color key="barTintColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </searchBar>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mYM-uR-Wdp">
@@ -883,20 +885,21 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="sbe-Z7-f9y">
-                                        <rect key="frame" x="10" y="28" width="414" height="56"/>
+                                        <rect key="frame" x="10" y="28" width="394" height="56"/>
                                         <subviews>
-                                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="1tB-1o-Hvx">
+                                            <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="1tB-1o-Hvx">
                                                 <rect key="frame" x="0.0" y="0.0" width="317" height="56"/>
+                                                <color key="barTintColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </searchBar>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UjG-eE-Nc2">
-                                                <rect key="frame" x="332" y="0.0" width="82" height="56"/>
+                                                <rect key="frame" x="332" y="0.0" width="62" height="56"/>
                                                 <state key="normal" image="Cart Solid White Icon.png"/>
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="Cy8-QW-6iy">
-                                        <rect key="frame" x="138" y="92" width="139" height="29"/>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="Cy8-QW-6iy">
+                                        <rect key="frame" x="10" y="92" width="396" height="29"/>
                                         <color key="backgroundColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <segments>
                                             <segment title="Products"/>
@@ -914,7 +917,7 @@
                                     <constraint firstItem="Cy8-QW-6iy" firstAttribute="top" secondItem="sbe-Z7-f9y" secondAttribute="bottom" constant="8" symbolic="YES" id="f7r-QF-wIO"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U7j-JY-MnK" userLabel="PeopleView">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U7j-JY-MnK" userLabel="Product View">
                                 <rect key="frame" x="0.0" y="136" width="414" height="551"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -991,7 +994,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uPe-gp-1lw" userLabel="ProductView">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uPe-gp-1lw" userLabel="People View">
                                 <rect key="frame" x="0.0" y="136" width="414" height="551"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -1072,9 +1075,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="sbe-Z7-f9y" firstAttribute="trailing" secondItem="UkS-xn-J5S" secondAttribute="trailing" constant="10" id="8ds-YC-oXs"/>
+                            <constraint firstItem="sbe-Z7-f9y" firstAttribute="trailing" secondItem="UkS-xn-J5S" secondAttribute="trailing" constant="-10" id="8ds-YC-oXs"/>
+                            <constraint firstItem="Cy8-QW-6iy" firstAttribute="leading" secondItem="UkS-xn-J5S" secondAttribute="leading" constant="10" id="WLN-BA-LAX"/>
                             <constraint firstItem="sbe-Z7-f9y" firstAttribute="top" secondItem="UkS-xn-J5S" secondAttribute="top" constant="8" id="kCs-DV-ujj"/>
                             <constraint firstItem="sbe-Z7-f9y" firstAttribute="leading" secondItem="UkS-xn-J5S" secondAttribute="leading" constant="10" id="u8x-Gg-k3A"/>
+                            <constraint firstItem="Cy8-QW-6iy" firstAttribute="trailing" secondItem="UkS-xn-J5S" secondAttribute="trailing" constant="-8" id="zo8-08-qK6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UkS-xn-J5S"/>
                     </view>
@@ -1574,6 +1579,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="OxN-eG-nJb"/>
         <segue reference="cI7-Td-TzM"/>
-        <segue reference="cTu-G9-fQe"/>
+        <segue reference="Fma-AT-nbz"/>
     </inferredMetricsTieBreakers>
 </document>
