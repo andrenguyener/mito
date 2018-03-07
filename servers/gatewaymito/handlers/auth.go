@@ -224,7 +224,7 @@ func (ctx *Context) SessionsHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 		decoder := json.NewDecoder(r.Body)
-		newSession := &users.Credentials2{}
+		newSession := &users.Credentials{}
 
 		// Decodes the request body in user credentials struct
 		if err := decoder.Decode(newSession); err != nil {

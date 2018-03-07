@@ -27,8 +27,8 @@ const FriendHandler = (friendStore) => {
         friendStore
             .getAll(req.params.userId)
             .then(friend => {
-                console.log(friend)
-                res.json(friend)
+                console.log(friend);
+                res.json(friend);
             })
             .catch(err => {
                 if (err !== breakSignal) {
@@ -38,8 +38,19 @@ const FriendHandler = (friendStore) => {
     });
 
     // Add a new friend
-    router.post('', (req, res) => {
-
+    router.post('/v1/friend', (req, res) => {
+        let userId = req.body.userId;
+        let friendId = req.body.friendId;
+        friendStore
+            .insert(userId, friendId)
+            .then((message) => {
+                res.send(message);
+            })
+            .catch(err => {
+                if (err !== breakSignal) {
+                    console.log(err);
+                }
+            });
     });
 
     // Update (upgrade/downgrade) friend status

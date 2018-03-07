@@ -44,9 +44,17 @@ const AddressHandler = (addressStore) => {
         let userId = req.body.userId;
         let aliasName = req.body.aliasName;
         let address = new Address(userId, streetAddress1, streetAddress2, cityName, zipCode, stateName, aliasName);
-        console.log(address);
-        addressStore.insert(address);
-        res.json(address);
+
+        addressStore
+            .insert(address)
+            .then(address => {
+                res.json(address);
+            })
+            .catch(err => {
+                if (err !== breakSignal) {
+                    console.log(err);
+                }
+            })
     });
 
     // Delete an address from the User

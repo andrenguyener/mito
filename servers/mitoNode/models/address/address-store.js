@@ -10,34 +10,46 @@ class AddressStore {
     }
 
     request(procedure) {
-        return new Request(`${procedure}`), function (err) {
+        return new Request((`${procedure}`), function (err) {
             if (err) {
                 console.log(err);
             }
-        }
+        });
     }
 
 
     // insert() creates a new address in SqlServer.
     insert(address) {
-        let procedureName = "InsertUserAddress";
-        var request = this.request(procedureName);
-        var addressId;
-        request.addParameter('userId', TYPES.VarChar, address.userId);
-        request.addParameter('streetAddress1', TYPES.VarChar, address.streetAddress1);
-        request.addParameter('streetAddress2', TYPES.VarChar, address.streetAddress2);
-        request.addParameter('cityName', TYPES.VarChar, address.cityName);
-        request.addParameter('zipCode', TYPES.VarChar, address.zipCode);
-        request.addParameter('stateName', TYPES.VarChar, address.stateName);
-        request.addParameter('aliasName', TYPES.VarChar, "test");
-        // request.addOutputParameter('Address_Id', addressId);
+        return new Promise((resolve) => {
+            let procedureName = "InsertUserAddress";
+            var request = this.request(procedureName);
+            var addressId;
+            request.addParameter('userId', TYPES.VarChar, address.userId);
+            request.addParameter('streetAddress1', TYPES.VarChar, address.streetAddress1);
+            request.addParameter('streetAddress2', TYPES.VarChar, address.streetAddress2);
+            request.addParameter('cityName', TYPES.VarChar, address.cityName);
+            request.addParameter('zipCode', TYPES.VarChar, address.zipCode);
+            request.addParameter('stateName', TYPES.VarChar, address.stateName);
+            request.addParameter('aliasName', TYPES.VarChar, "test");
+            // request.addOutputParameter('Address_Id', addressId);
 
-        // request.on('returnValue', function (parameterName, value, metadata) { 
-        //     console.log(parameterName);
-        //     console.log(value);
-        //     console.log(metadata);
-        // });
-        this.sql.callProcedure(request)
+            // request.on('returnValue', function (parameterName, value, metadata) { 
+            //     console.log(parameterName);
+            //     console.log(value);
+            //     console.log(metadata);
+            // });
+            request.on('doneProc', function (rowCount, more) {
+                resolve(address);
+            });
+
+            this.sql.callProcedure(request)
+        })
+            .then((address) => {
+                return address;
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }
 
     // get() retrieves an address from SqlServer for a given ID.
@@ -50,11 +62,7 @@ class AddressStore {
     getAll(id) {
         return new Promise((resolve) => {
             let procedureName = "GetUserAddressById";
-            var request = new Request(`${procedureName}`, function (err, rowCount, rows) {
-                if (err) {
-                    console.log(err);
-                }
-            });
+            var request = this.request(procedureName);
 
             request.addParameter('UserId', TYPES.VarChar, id);
 

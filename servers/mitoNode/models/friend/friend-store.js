@@ -8,8 +8,34 @@ class FriendStore {
         this.sql = sql;
     }
 
+    request(procedure) {
+        return new Request((`${procedure}`), function (err) {
+            if (err) {
+                console.log(err);
+            }
+        });
+    }
+
     // Insert a friend into SqlServer
-    insert(friend) {
+    insert(userId, friendId) {
+        return new Promise((resolve) => {
+            let procedureName = "insertFriend";
+            var request = this.request(procedureName);
+            request.addParameter('user1Id', TYPES.Int, userId);
+            request.addParameter('user2Id', TYPES.Int, friendId);
+
+            request.on('doneProc', function (rowCount, more) {
+                resolve("Friend Request Sent");
+            });
+
+            this.sql.callProcedure(request)
+        })
+            .then((message) => {
+                return message;
+            })
+            .catch((err) => {
+                console.log(err);
+            });
 
     }
 

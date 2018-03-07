@@ -23,7 +23,7 @@ class PackageStore {
     }
 
     // Update Accept/Deny incoming package
-    update(package) {
+    update() {
 
     }
 
