@@ -101,7 +101,7 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         cell.name.text = "\(personObj.firstName) \(personObj.lastName)"
         cell.handle.text = "\(personObj.email)"
         let url = URL(string:"\(personObj.avatar)")
-        let defaultURL = URL(string: "https://www.sparklabs.com/forum/styles/comboot/theme/images/default_avatar.jpg")
+        let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
         if let data = try? Data(contentsOf: url!) {
             cell.img.image = UIImage(data: data)!
         } else if let data = try? Data(contentsOf: defaultURL!){
