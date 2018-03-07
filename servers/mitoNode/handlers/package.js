@@ -3,11 +3,11 @@
 
 const express = require('express');
 
-const Order = require('./../models/order/order-class');
+const Address = require('./../models/address/address-class');
 const sendToMQ = require('./message-queue');
 
-const OrderHandler = (orderStore) => {
-    if (!orderStore) {
+const PackageHandler = (packageStore) => {
+    if (!packageStore) {
         throw new Error('no address table found');
     }
 
@@ -17,32 +17,18 @@ const OrderHandler = (orderStore) => {
 
     const router = express.Router();
 
-    // TODO: Talk to Sopheak to decide how to handle pending/incoming packages
-
-    router.get('/v1/order/:orderId', (req, res) => {
-
-
-    });
-
+    // Get all incoming package
     router.get('', (req, res) => {
 
-
     });
 
-    router.get('', (req, res) => {
-
-
-    });
-
-
+    // Accept/Deny incoming package
     router.post('', (req, res) => {
 
     });
 
 
-
-
     return router;
 };
 
-module.exports = OrderHandler;
+module.exports = PackageHandler;

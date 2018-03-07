@@ -26,8 +26,17 @@ func NewSqlStore(database *sql.DB, dbname string, tablename string) *SqlStore {
 }
 
 type UpdateUser struct {
-	UserFname string
-	UserLname string
+	UserFname string `json:"userFname"`
+	UserLname string `json:"userLname"`
+	UserEmail string `json:"userEmail"`
+	Username  string `json:"username"`
+	UserDOB   string `json:"userDOB"`
+	PhotoURL  string `json:"photoURL"`
+}
+
+type UpdateUserPassword struct {
+	UserPassword     string `json:"password"`
+	UserPasswordConf string `json:"passwordConf"`
 }
 
 //GetByID returns the User with the given ID

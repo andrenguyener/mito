@@ -7,6 +7,7 @@ const express = require("express");
 const morgan = require("morgan");
 const app = express();
 var Connection = require('tedious').Connection;
+
 // config for your database
 var config = {
     userName: 'mitoteam',
@@ -28,19 +29,24 @@ const OrderStore = require('./models/order/order-store');
 const Order = require('./models/order/order-class');
 const OrderHandler = require('./handlers/order');
 
+const FeedStore = require('./models/feed/feed-store');
+const Feed = require('./models/feed/feed-class');
+const FeedHandler = require('./handlers/feed');
+
+const PackageStore = require('./models/package/package-store');
+const Package = require('./models/package/package-class');
+const PackageHandler = require('./handlers/package');
+
+const CartStore = require('./models/cart/cart-store');
+const Cart = require('./models/cart/cart-class');
+const CartHandler = require('./handlers/cart');
+
 const AmazonHashHandler = require('./handlers/amazon');
 
-// const addr = process.env.ADDR || ":80";
+
 const addr = process.env.ADDR || "localhost:4004";
 const [host, port] = addr.split(":");
 const portNum = parseInt(port);
-
-
-// const mongodb = require("mongodb");
-// const mongoAddr = process.env.DBADDR || "mongos:27017";
-// const mongoAddr = process.env.DBADDR || "localhost:27017"
-// const mongoURL = `mongodb://${mongoAddr}/mongo`;
-
 
 const amqp = require("amqplib");
 const qName = "testQ";
@@ -50,36 +56,10 @@ const mqURL = `amqp://${mqAddr}`;
 var Request = require('tedious').Request;
 var TYPES = require('tedious').TYPES;
 
-// function executeStatement(connection) {  
-//     var request = new Request("SELECT * FROM [USER]", function(err) {  
-//         if (err) {  
-//             console.log(err);
-//         }  
-//     });  
-//     var result = "";
-//     request.on('row', function(columns) {  
-//         columns.forEach(function(column) {  
-//           if (column.value === null) {  
-//             console.log('NULL');  
-//           } else {  
-//             result+= column.value + " ";  
-//           }  
-//         });  
-//         console.log(result);  
-//         result ="";  
-//     });  
-
-//     request.on('done', function(rowCount, more) {  
-//         console.log(rowCount + ' rows returned');  
-//     });  
-//     connection.execSql(request);  
-// }  
 
 (async () => {
     try {
-        // Guarantee our MongoDB is started before clients can make any connections.
-        // const db = await mongodb.MongoClient.connect(mongoURL);
-
+        // TODO make connection a Promise 
         let sql = await new Connection(config);
         sql.on('connect', function (err) {
             // If no error, then good to proceed. 
@@ -127,29 +107,24 @@ var TYPES = require('tedious').TYPES;
 
 
 
-        // Initialize Mongo stores.
-        // let channelStore = new ChannelStore(db, 'channels');
-        // let messageStore = new MessageStore(db, 'messages');
-        // let payStore = new PaymentStore(db, "payments");
+        // Initialize table stores.
         let addressStore = new AddressStore(sql);
         let friendStore = new FriendStore(sql);
-        // const defaultChannel = new Channel('general', '');
-        // const fetchedChannel = await channelStore.getByName(defaultChannel.name);
-        // Add the default channel if not found.
-        // if (!fetchedChannel) {
-        //     const channel = await channelStore.insert(defaultChannel);
-        // }
+        let orderStore = new OrderStore(sql);
+        let feedStore = new FeedStore(sql);
+        let packageStore = new PackageStore(sql);
+        let cartStore = new CartStore(sql);
 
         // API resource handlers.
-        // app.use(ChannelHandler(channelStore, messageStore));
-        // app.use(MessageHandler(messageStore));
-        // app.use(PaymentHandler(payStore));
         app.use(AddressHandler(addressStore));
         app.use(FriendHandler(friendStore));
+        app.use(OrderHandler(orderStore));
+        app.use(FeedHandler(feedStore));
+        app.use(PackageHandler(packageStore));
+        app.use(CartHandler(cartStore));
         app.use(AmazonHashHandler());
         app.listen(portNum, host, () => {
-            console.log("oyyo");
-            console.log(`server is listening at http://${addr}`);
+            console.log(`server is listening at http://w${addr}`);
         });
     } catch (err) {
         console.log(err);
