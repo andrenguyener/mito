@@ -16,7 +16,6 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var productPeopleTab: UISegmentedControl!
 
     @IBAction func switchTab(_ sender: UISegmentedControl) {
-        print(productPeopleTab.selectedSegmentIndex)
         if productPeopleTab.selectedSegmentIndex == 0 {
             UIView.transition(from: peopleTableView, to: productTableView, duration: 0, options: .showHideTransitionViews)
         } else {
@@ -46,8 +45,8 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         appdata.friends.removeAll()
         loadPeopleData()
         peopleTableView.reloadData()
-        loadProductData()
-        //productTableView.reloadData()
+//        loadProductData()
+//        productTableView.reloadData()
         
     }
     
@@ -131,18 +130,23 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
-        let personObj = appdata.friends[indexPath.row]
-        cell.name.text = "\(personObj.firstName) \(personObj.lastName)"
-        cell.handle.text = "\(personObj.email)"
-        let url = URL(string:"\(personObj.avatar)")
-        let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
-        if let data = try? Data(contentsOf: url!) {
-            cell.img.image = UIImage(data: data)!
-        } else if let data = try? Data(contentsOf: defaultURL!){
-            cell.img.image = UIImage(data: data)
+        if productPeopleTab.selectedSegmentIndex == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
+            let personObj = appdata.friends[indexPath.row]
+            cell.name.text = "\(personObj.firstName) \(personObj.lastName)"
+            cell.handle.text = "\(personObj.email)"
+            let url = URL(string:"\(personObj.avatar)")
+            let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
+            if let data = try? Data(contentsOf: url!) {
+                cell.img.image = UIImage(data: data)!
+            } else if let data = try? Data(contentsOf: defaultURL!){
+                cell.img.image = UIImage(data: data)
+            }
+            cell.friendshipType.text = "\(personObj.avatar)"
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
+            return cell
         }
-        cell.friendshipType.text = "\(personObj.avatar)"
-        return cell
     }
 }

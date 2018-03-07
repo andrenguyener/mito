@@ -9,5 +9,6 @@
 import Foundation
 
 class Product {
-    
+    var image: String = ""
+    var ASIN: String = ""
 }

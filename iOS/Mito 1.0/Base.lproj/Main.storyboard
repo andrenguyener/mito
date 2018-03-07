@@ -1021,52 +1021,28 @@
                                                                 <constraint firstAttribute="width" constant="88" id="FpX-8X-T1M"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FirstName LastName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3SZ-vu-Stt">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ASIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3SZ-vu-Stt">
                                                             <rect key="frame" x="124" y="12" width="224" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@handle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AlK-FY-Y7U">
-                                                            <rect key="frame" x="124" y="33" width="224" height="21"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="21" id="au8-g6-CXB"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FriendshipType" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhU-ji-IAR">
-                                                            <rect key="frame" x="124" y="65" width="224" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zay-yf-nVp">
+                                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zay-yf-nVp">
                                                             <rect key="frame" x="365" y="35" width="30" height="30"/>
                                                             <state key="normal" title="+"/>
                                                         </button>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="Zay-yf-nVp" firstAttribute="leading" secondItem="AlK-FY-Y7U" secondAttribute="trailing" constant="17" id="8i9-bM-TqU"/>
                                                         <constraint firstAttribute="bottomMargin" secondItem="7gh-ts-yKf" secondAttribute="bottom" constant="-3" id="Egb-VH-wHU"/>
                                                         <constraint firstItem="3SZ-vu-Stt" firstAttribute="leading" secondItem="7gh-ts-yKf" secondAttribute="trailing" constant="16" id="KZH-6F-OpW"/>
-                                                        <constraint firstItem="AlK-FY-Y7U" firstAttribute="top" secondItem="3SZ-vu-Stt" secondAttribute="bottom" id="Vmy-TG-ayF"/>
                                                         <constraint firstItem="Zay-yf-nVp" firstAttribute="top" secondItem="oId-TU-Stj" secondAttribute="topMargin" constant="24" id="crP-1a-Ptq"/>
                                                         <constraint firstAttribute="trailingMargin" secondItem="3SZ-vu-Stt" secondAttribute="trailing" constant="51" id="dNG-wI-eMz"/>
                                                         <constraint firstItem="3SZ-vu-Stt" firstAttribute="top" secondItem="oId-TU-Stj" secondAttribute="topMargin" constant="1" id="gKB-fU-uRE"/>
-                                                        <constraint firstItem="3SZ-vu-Stt" firstAttribute="trailing" secondItem="AlK-FY-Y7U" secondAttribute="trailing" id="mjo-hf-Um6"/>
-                                                        <constraint firstItem="AlK-FY-Y7U" firstAttribute="leading" secondItem="xhU-ji-IAR" secondAttribute="leading" id="nOo-FO-pwN"/>
                                                         <constraint firstItem="7gh-ts-yKf" firstAttribute="top" secondItem="oId-TU-Stj" secondAttribute="topMargin" constant="-1" id="prE-8P-9hm"/>
                                                         <constraint firstItem="7gh-ts-yKf" firstAttribute="leading" secondItem="oId-TU-Stj" secondAttribute="leadingMargin" constant="5" id="r9h-qu-DVx"/>
-                                                        <constraint firstItem="3SZ-vu-Stt" firstAttribute="leading" secondItem="AlK-FY-Y7U" secondAttribute="leading" id="rlh-nq-v5O"/>
-                                                        <constraint firstItem="AlK-FY-Y7U" firstAttribute="trailing" secondItem="xhU-ji-IAR" secondAttribute="trailing" id="xI2-Yh-NVf"/>
-                                                        <constraint firstItem="xhU-ji-IAR" firstAttribute="top" secondItem="AlK-FY-Y7U" secondAttribute="bottom" constant="11" id="zNH-Ii-j1x"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
-                                                    <outlet property="friendshipType" destination="xhU-ji-IAR" id="VxQ-9R-ece"/>
-                                                    <outlet property="handle" destination="AlK-FY-Y7U" id="UfF-Qx-iHm"/>
                                                     <outlet property="img" destination="7gh-ts-yKf" id="WN3-kc-x6y"/>
                                                     <outlet property="name" destination="3SZ-vu-Stt" id="oyn-a9-kdt"/>
                                                 </connections>
@@ -1662,6 +1638,7 @@
         <image name="search Grey" width="18" height="18"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="1Cx-gC-rMc"/>
         <segue reference="kS1-pK-LOk"/>
         <segue reference="Huf-aH-vL3"/>
         <segue reference="Fma-AT-nbz"/>
