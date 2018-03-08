@@ -30,7 +30,7 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     
     var appdata = AppData.shared
     var peopleUrl = URL(string: "https://api.projectmito.io/v1/friend/34")
-    var prodUrl = URL(string: "https://api.projectmito.io/v1/amazonhashtest/harden" )
+    var prodUrl = URL(string: "https://api.projectmito.io/v1/amazonhashtest/jsosndfkd" )
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,53 +99,64 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
                 if let content = data {
                     do {
                         let myJson = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
+                        print(myJson)
                         let itemSearchResponse = myJson["ItemSearchResponse"] as! NSDictionary
                         let ItemsArr = itemSearchResponse["Items"] as! NSArray
-                        let ItemObj = ItemsArr[0] as! NSDictionary
-                        let ItemArr = ItemObj["Item"] as! NSArray
-                        var imgURL = ""
-                        for itemObj in ItemArr {
-                            // some things will throw errors depending on what they search...
-                            let item = itemObj as! NSDictionary
-                            let ASINArr = item["ASIN"] as! NSArray
-                            let ASIN = ASINArr[0] as! String
-//                            print("\(idx): \(ASINArray[0] as! String)")
-                            let ImageSetsArr = item["ImageSets"] as! NSArray
-                            let ImageSetsObj = ImageSetsArr[0] as! NSDictionary
-                            let ImageSetArr = ImageSetsObj["ImageSet"] as! NSArray
-                            let ImageSetObj = ImageSetArr[0] as! NSDictionary
-                            let SmallImageObjArr = ImageSetObj["SmallImage"] as! NSArray
-                            let SmallImageObj = SmallImageObjArr[0] as! NSDictionary
-                            let URLArr = SmallImageObj["URL"] as! NSArray
-                            imgURL = URLArr[0] as! String
-//                            if item["ImageSet"] == nil {
-//                                let SmallImageArr = item["SmallImage"] as! NSArray
-//                                let SmallImageObj = SmallImageArr[0] as! NSDictionary
-//                                let URLArr = SmallImageObj["URL"] as! NSArray
-//                                imgURL = URLArr[0] as! String
-//                                // print(imgURL)
-//                            } else {
-//
-//                            }
-                           
-
-                            let ItemAttributesArr = item["ItemAttributes"] as! NSArray
-                            let ItemAttributeObj = ItemAttributesArr[0] as! NSDictionary
-                            let ListPriceArr = ItemAttributeObj["ListPrice"] as! NSArray
-                            let ListPriceObj = ListPriceArr[0] as! NSDictionary
-//                            print(ListPriceObj.description)
-                            let formattedPriceArr = ListPriceObj["FormattedPrice"] as! NSArray
-                            let formattedPrice = formattedPriceArr[0] as! String
-//                            print(formattedPrice)
-                            let TitleArr = ItemAttributeObj["Title"] as! NSArray
-                            let title = TitleArr[0] as! String
-                            print(title)
-                            let PublisherArr = ItemAttributeObj["Publisher"] as! NSArray
-                            let publisher = PublisherArr[0] as! String
-//                            print(publisher)
-                            let product: Product = Product(image: imgURL, ASIN: ASIN, title: title, publisher: publisher, price: formattedPrice)
-                            self.appdata.products.append(product)
-
+                        let ItemsObj = ItemsArr[0] as! NSDictionary
+                        if ItemsObj["Item"] == nil {
+                            print("Error")
+                        } else {
+                            let ItemArr = ItemsObj["Item"] as! NSArray
+                            for itemObj in ItemArr {
+                                // some things will throw errors depending on what they search...
+                                let item = itemObj as! NSDictionary
+                                let ASINArr = item["ASIN"] as! NSArray
+                                let ASIN = ASINArr[0] as! String
+    //                            print("\(idx): \(ASINArray[0] as! String)")
+                                var imgURL = ""
+                                if item["SmallImage"] != nil {
+                                    let SmallImageArr = item["SmallImage"] as! NSArray
+                                    let SmallImageObj = SmallImageArr[0] as! NSDictionary
+                                    let URLArr = SmallImageObj["URL"] as! NSArray
+                                    imgURL = URLArr[0] as! String
+                                } else {
+                                    let ImageSetsArr = item["ImageSets"] as! NSArray
+                                    let ImageSetsObj = ImageSetsArr[0] as! NSDictionary
+                                    let ImageSetArr = ImageSetsObj["ImageSet"] as! NSArray
+                                    let ImageSetObj = ImageSetArr[0] as! NSDictionary
+                                    let SmallImageObjArr = ImageSetObj["SmallImage"] as! NSArray
+                                    let SmallImageObj = SmallImageObjArr[0] as! NSDictionary
+                                    let URLArr = SmallImageObj["URL"] as! NSArray
+                                    imgURL = URLArr[0] as! String
+                                }
+                                var formattedPrice = ""
+                                let ItemAttributesArr = item["ItemAttributes"] as! NSArray
+                                let ItemAttributeObj = ItemAttributesArr[0] as! NSDictionary
+                                if ItemAttributeObj["ListPrice"] != nil {
+                                    let ListPriceArr = ItemAttributeObj["ListPrice"] as! NSArray
+                                    let ListPriceObj = ListPriceArr[0] as! NSDictionary
+                                    //                            print(ListPriceObj.description)
+                                    let formattedPriceArr = ListPriceObj["FormattedPrice"] as! NSArray
+                                    formattedPrice = formattedPriceArr[0] as! String
+                                    //                            print(formattedPrice)
+                                } else {
+                                    formattedPrice = "N/A"
+                                }
+                                let TitleArr = ItemAttributeObj["Title"] as! NSArray
+                                let title = TitleArr[0] as! String
+    //                            print(title)
+                                var publisher_brand = ""
+                                if ItemAttributeObj["Publisher"] == nil {
+                                    let BrandArr = ItemAttributeObj["Brand"] as! NSArray
+                                    publisher_brand = BrandArr[0] as! String
+                                } else {
+                                    let PublisherArr = ItemAttributeObj["Publisher"] as! NSArray
+                                    publisher_brand = PublisherArr[0] as! String
+                                }
+                                print(publisher_brand)
+                                let product: Product = Product(image: imgURL, ASIN: ASIN, title: title, publisher: publisher_brand, price: formattedPrice)
+                                self.appdata.products.append(product)
+                            }
                         }
                         DispatchQueue.main.async {
                             self.productTableView.reloadData()
