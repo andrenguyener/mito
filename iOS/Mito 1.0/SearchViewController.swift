@@ -30,7 +30,7 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     
     var appdata = AppData.shared
     var peopleUrl = URL(string: "https://api.projectmito.io/v1/friend/34")
-    var prodUrl = URL(string: "https://api.projectmito.io/v1/amazonhashtest/echo" )
+    var prodUrl = URL(string: "https://api.projectmito.io/v1/amazonhashtest/harden" )
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,20 +100,35 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
                     do {
                         let myJson = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
                         let itemSearchResponse = myJson["ItemSearchResponse"] as! NSDictionary
-                        let items = itemSearchResponse["Items"] as! NSArray
-                        let secondObj = items[0] as! NSDictionary
-                        let item = secondObj["Item"] as! NSArray
-                        for itemObj in item {
+                        let ItemsArr = itemSearchResponse["Items"] as! NSArray
+                        let ItemObj = ItemsArr[0] as! NSDictionary
+                        let ItemArr = ItemObj["Item"] as! NSArray
+                        var imgURL = ""
+                        for itemObj in ItemArr {
                             // some things will throw errors depending on what they search...
                             let item = itemObj as! NSDictionary
                             let ASINArr = item["ASIN"] as! NSArray
                             let ASIN = ASINArr[0] as! String
 //                            print("\(idx): \(ASINArray[0] as! String)")
-                            let SmallImageArr = item["SmallImage"] as! NSArray
-                            let SmallImageObj = SmallImageArr[0] as! NSDictionary
+                            let ImageSetsArr = item["ImageSets"] as! NSArray
+                            let ImageSetsObj = ImageSetsArr[0] as! NSDictionary
+                            let ImageSetArr = ImageSetsObj["ImageSet"] as! NSArray
+                            let ImageSetObj = ImageSetArr[0] as! NSDictionary
+                            let SmallImageObjArr = ImageSetObj["SmallImage"] as! NSArray
+                            let SmallImageObj = SmallImageObjArr[0] as! NSDictionary
                             let URLArr = SmallImageObj["URL"] as! NSArray
-                            let imgURL = URLArr[0] as! String
-//                            print(imgURL)
+                            imgURL = URLArr[0] as! String
+//                            if item["ImageSet"] == nil {
+//                                let SmallImageArr = item["SmallImage"] as! NSArray
+//                                let SmallImageObj = SmallImageArr[0] as! NSDictionary
+//                                let URLArr = SmallImageObj["URL"] as! NSArray
+//                                imgURL = URLArr[0] as! String
+//                                // print(imgURL)
+//                            } else {
+//
+//                            }
+                           
+
                             let ItemAttributesArr = item["ItemAttributes"] as! NSArray
                             let ItemAttributeObj = ItemAttributesArr[0] as! NSDictionary
                             let ListPriceArr = ItemAttributeObj["ListPrice"] as! NSArray
@@ -124,7 +139,7 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
 //                            print(formattedPrice)
                             let TitleArr = ItemAttributeObj["Title"] as! NSArray
                             let title = TitleArr[0] as! String
-//                            print(title)
+                            print(title)
                             let PublisherArr = ItemAttributeObj["Publisher"] as! NSArray
                             let publisher = PublisherArr[0] as! String
 //                            print(publisher)
