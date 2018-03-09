@@ -1148,6 +1148,7 @@
                         <outlet property="productPeopleTab" destination="Cy8-QW-6iy" id="SRP-yO-Gh9"/>
                         <outlet property="productTableView" destination="wxt-cx-BMB" id="xL8-OK-7hJ"/>
                         <outlet property="productView" destination="U7j-JY-MnK" id="kgh-sR-tSc"/>
+                        <outlet property="searchBar" destination="1tB-1o-Hvx" id="YWZ-9e-Rnf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aal-tH-Eyd" userLabel="First Responder" sceneMemberID="firstResponder"/>

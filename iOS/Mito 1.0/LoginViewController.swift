@@ -75,8 +75,8 @@ class LoginViewController: UIViewController {
                 self.view.frame.origin.y -= 75
             }
         }
-        username.returnKeyType = .next
-        password.returnKeyType = .done
+//        username.returnKeyType = .next
+//        password.returnKeyType = .done
 
     }
     
@@ -89,9 +89,8 @@ class LoginViewController: UIViewController {
     }
     
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
-//        username.resignFirstResponder()
-//        password.resignFirstResponder()
-        
+        username.resignFirstResponder()
+        password.resignFirstResponder()
     }
     
     override func viewDidLoad() {

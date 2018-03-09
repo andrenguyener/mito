@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ActivityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ActivityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
     
     @IBOutlet weak var peopleTableView: UITableView!
@@ -16,9 +16,12 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var productPeopleTab: UISegmentedControl!
     @IBOutlet weak var productView: UIView!
     @IBOutlet weak var peopleView: UIView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     var pageNum = 1
     var myIndex = 0
+    var searchText = ""
+    var searchActive: Bool = false
 
     @IBAction func switchTab(_ sender: UISegmentedControl) {
         if productPeopleTab.selectedSegmentIndex == 0 {
@@ -34,7 +37,8 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     
     var appdata = AppData.shared
     var peopleUrl = URL(string: "https://api.projectmito.io/v1/friend/7")
-    var prodUrl = URL(string: "https://api.projectmito.io/v1/amazonhashtest/laptop+stand" )
+    var prodUrl = URL(string: "https://api.projectmito.io/v1/amazonhashtest/" )
+    var prodOriginalUrl = URL(string: "https://api.projectmito.io/v1/amazonhashtest/" )
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +49,8 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         productTableView.delegate = self
         productTableView.dataSource = self
         productTableView.rowHeight = 106
+        searchBar.delegate = self
+        searchBar.returnKeyType = UIReturnKeyType.done
         
         loadPeopleData()
         loadProductData()
@@ -61,6 +67,29 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
 //        loadProductData()
 //        productTableView.reloadData()
         
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        print(searchBar.text)
+        print("final text: \(searchBar.text)")
+        searchText = ""
+        searchText = searchBar.text!
+        print("searchText: \(searchText)")
+        searchBar.resignFirstResponder()
+        
+        appdata.products.removeAll()
+        var urlString = prodOriginalUrl?.absoluteString
+        urlString = urlString! + searchText
+        prodUrl = URL(string: urlString!)
+        loadProductData()
+        productTableView.reloadData()
+    }
+    
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        searchActive = true
+        print("Start typing")
+        return true
     }
     
     // Loading Friends (people tab)
@@ -103,7 +132,7 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
                 if let content = data {
                     do {
                         let myJson = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
-                        print(myJson)
+//                        print(myJson)
                         let itemSearchResponse = myJson["ItemSearchResponse"] as! NSDictionary
                         let ItemsArr = itemSearchResponse["Items"] as! NSArray
                         let ItemsObj = ItemsArr[0] as! NSDictionary
@@ -124,7 +153,7 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
                                     let URLArr = SmallImageObj["URL"] as! NSArray
                                     imgURL = URLArr[0] as! String
                                 } else {
-                                    let ImageSetsArr = item["ImageSets"] as! NSArray
+                                    let ImageSetsArr = item["ImageSets"] as! NSArray // error
                                     let ImageSetsObj = ImageSetsArr[0] as! NSDictionary
                                     let ImageSetArr = ImageSetsObj["ImageSet"] as! NSArray
                                     let ImageSetObj = ImageSetArr[0] as! NSDictionary
