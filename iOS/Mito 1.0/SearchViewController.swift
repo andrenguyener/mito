@@ -14,16 +14,19 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var peopleTableView: UITableView!
     @IBOutlet weak var productTableView: UITableView!
     @IBOutlet weak var productPeopleTab: UISegmentedControl!
+    @IBOutlet weak var productView: UIView!
+    @IBOutlet weak var peopleView: UIView!
+    
     var pageNum = 1
     var myIndex = 0
 
     @IBAction func switchTab(_ sender: UISegmentedControl) {
         if productPeopleTab.selectedSegmentIndex == 0 {
-            UIView.transition(from: peopleTableView, to: productTableView, duration: 0, options: .showHideTransitionViews)
+            UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
             print("\(productPeopleTab.selectedSegmentIndex)")
             pageNum = 0
         } else {
-            UIView.transition(from: productTableView, to: peopleTableView, duration: 0, options: .showHideTransitionViews)
+            UIView.transition(from: productView, to: peopleView, duration: 0, options: .showHideTransitionViews)
             print("\(productPeopleTab.selectedSegmentIndex)")
             pageNum = 1
         }
@@ -31,14 +34,14 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     
     var appdata = AppData.shared
     var peopleUrl = URL(string: "https://api.projectmito.io/v1/friend/7")
-    var prodUrl = URL(string: "https://api.projectmito.io/v1/amazonhashtest/harden" )
+    var prodUrl = URL(string: "https://api.projectmito.io/v1/amazonhashtest/laptop+stand" )
     
     override func viewDidLoad() {
         super.viewDidLoad()
         peopleTableView.delegate = self
         peopleTableView.dataSource = self
         peopleTableView.rowHeight = 106
-        
+//        productView.isHidden = true
         productTableView.delegate = self
         productTableView.dataSource = self
         productTableView.rowHeight = 106
@@ -212,6 +215,7 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
 //            cell.friendshipType.text = "\(personObj.avatar)"
 //            return cell
 //        } else {
+        print(indexPath.row)
             let cell = tableView.dequeueReusableCell(withIdentifier: "productCell", for: indexPath) as! ProductTableViewCell
             let productObj = appdata.products[indexPath.row]
             let url = URL(string: "\(productObj.image)")

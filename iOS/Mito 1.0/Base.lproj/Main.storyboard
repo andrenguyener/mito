@@ -971,7 +971,7 @@
                                     <constraint firstItem="Cy8-QW-6iy" firstAttribute="top" secondItem="sbe-Z7-f9y" secondAttribute="bottom" constant="8" symbolic="YES" id="f7r-QF-wIO"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uPe-gp-1lw" userLabel="People View">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uPe-gp-1lw" userLabel="People View">
                                 <rect key="frame" x="0.0" y="136" width="414" height="551"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -1132,6 +1132,11 @@
                             <constraint firstItem="Cy8-QW-6iy" firstAttribute="trailing" secondItem="UkS-xn-J5S" secondAttribute="trailing" constant="-8" id="zo8-08-qK6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UkS-xn-J5S"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="uPe-gp-1lw"/>
+                            </mask>
+                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Search" image="search Grey" id="pJ4-uA-eMM">
                         <color key="badgeColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1139,8 +1144,10 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="peopleTableView" destination="WBt-vu-arn" id="zLF-1q-dYE"/>
+                        <outlet property="peopleView" destination="uPe-gp-1lw" id="Lit-9L-cQ6"/>
                         <outlet property="productPeopleTab" destination="Cy8-QW-6iy" id="SRP-yO-Gh9"/>
                         <outlet property="productTableView" destination="wxt-cx-BMB" id="xL8-OK-7hJ"/>
+                        <outlet property="productView" destination="U7j-JY-MnK" id="kgh-sR-tSc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aal-tH-Eyd" userLabel="First Responder" sceneMemberID="firstResponder"/>
