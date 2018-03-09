@@ -152,7 +152,7 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
                                     let SmallImageObj = SmallImageArr[0] as! NSDictionary
                                     let URLArr = SmallImageObj["URL"] as! NSArray
                                     imgURL = URLArr[0] as! String
-                                } else {
+                                } else if item["ImageSets"] != nil {
                                     let ImageSetsArr = item["ImageSets"] as! NSArray // error
                                     let ImageSetsObj = ImageSetsArr[0] as! NSDictionary
                                     let ImageSetArr = ImageSetsObj["ImageSet"] as! NSArray
@@ -161,34 +161,41 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
                                     let SmallImageObj = SmallImageObjArr[0] as! NSDictionary
                                     let URLArr = SmallImageObj["URL"] as! NSArray
                                     imgURL = URLArr[0] as! String
+                                } else {
+                                    imgURL = "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897"
                                 }
                                 var formattedPrice = ""
                                 let ItemAttributesArr = item["ItemAttributes"] as! NSArray
                                 let ItemAttributeObj = ItemAttributesArr[0] as! NSDictionary
-                                if ItemAttributeObj["ListPrice"] != nil {
-                                    let ListPriceArr = ItemAttributeObj["ListPrice"] as! NSArray
-                                    let ListPriceObj = ListPriceArr[0] as! NSDictionary
-                                    //                            print(ListPriceObj.description)
-                                    let formattedPriceArr = ListPriceObj["FormattedPrice"] as! NSArray
-                                    formattedPrice = formattedPriceArr[0] as! String
-                                    //                            print(formattedPrice)
-                                } else {
-                                    formattedPrice = "N/A"
+                                print(ItemAttributeObj.description)
+                                let binding = ItemAttributeObj["Binding"] as! NSArray
+                                let type = binding[0] as! String
+                                if type != "Amazon Video" {
+                                    if ItemAttributeObj["ListPrice"] != nil {
+                                        let ListPriceArr = ItemAttributeObj["ListPrice"] as! NSArray
+                                        let ListPriceObj = ListPriceArr[0] as! NSDictionary
+                                        //                            print(ListPriceObj.description)
+                                        let formattedPriceArr = ListPriceObj["FormattedPrice"] as! NSArray
+                                        formattedPrice = formattedPriceArr[0] as! String
+                                        //                            print(formattedPrice)
+                                    } else {
+                                        formattedPrice = "N/A"
+                                    }
+                                    let TitleArr = ItemAttributeObj["Title"] as! NSArray
+                                    let title = TitleArr[0] as! String
+                                    print(title)
+                                    var publisher_brand = ""
+                                    if ItemAttributeObj["Publisher"] == nil {
+                                        let BrandArr = ItemAttributeObj["Brand"] as! NSArray
+                                        publisher_brand = BrandArr[0] as! String
+                                    } else {
+                                        let PublisherArr = ItemAttributeObj["Publisher"] as! NSArray
+                                        publisher_brand = PublisherArr[0] as! String
+                                    }
+                                    //                                print(publisher_brand)
+                                    let product: Product = Product(image: imgURL, ASIN: ASIN, title: title, publisher: publisher_brand, price: formattedPrice)
+                                    self.appdata.products.append(product)
                                 }
-                                let TitleArr = ItemAttributeObj["Title"] as! NSArray
-                                let title = TitleArr[0] as! String
-    //                            print(title)
-                                var publisher_brand = ""
-                                if ItemAttributeObj["Publisher"] == nil {
-                                    let BrandArr = ItemAttributeObj["Brand"] as! NSArray
-                                    publisher_brand = BrandArr[0] as! String
-                                } else {
-                                    let PublisherArr = ItemAttributeObj["Publisher"] as! NSArray
-                                    publisher_brand = PublisherArr[0] as! String
-                                }
-                                print(publisher_brand)
-                                let product: Product = Product(image: imgURL, ASIN: ASIN, title: title, publisher: publisher_brand, price: formattedPrice)
-                                self.appdata.products.append(product)
                             }
                         }
                         DispatchQueue.main.async {
