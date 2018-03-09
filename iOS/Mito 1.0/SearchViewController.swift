@@ -15,6 +15,7 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var productTableView: UITableView!
     @IBOutlet weak var productPeopleTab: UISegmentedControl!
     var pageNum = 1
+    var myIndex = 0
 
     @IBAction func switchTab(_ sender: UISegmentedControl) {
         if productPeopleTab.selectedSegmentIndex == 0 {
@@ -29,8 +30,8 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     var appdata = AppData.shared
-    var peopleUrl = URL(string: "https://api.projectmito.io/v1/friend/34")
-    var prodUrl = URL(string: "https://api.projectmito.io/v1/amazonhashtest/jsosndfkd" )
+    var peopleUrl = URL(string: "https://api.projectmito.io/v1/friend/7")
+    var prodUrl = URL(string: "https://api.projectmito.io/v1/amazonhashtest/harden" )
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -185,7 +186,11 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        myIndex = indexPath.row
+        myIndex = indexPath.row
+        print(myIndex)
+        appdata.cart.append(appdata.products[myIndex])
+        print(appdata.cart[appdata.cart.count - 1].title)
+        print(appdata.cart.count)
 //        performSegue(withIdentifier: "segue", sender: self)
     }
     
