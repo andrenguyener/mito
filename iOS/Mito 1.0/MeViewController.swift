@@ -24,13 +24,15 @@ class MeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
-        self.userID.text = data["userId"] as? String
-        self.userEmail.text = data["userEmail"] as? String
-        self.username.text = data["username"] as? String
-        self.userFname.text = data["userFname"] as? String
-        self.userLname.text = data["userLname"] as? String
-        self.userDOB.text = data["userDOB"] as? String
-        self.photoURL.text = data["photoURL"] as? String
+        if UserDefaults.standard.object(forKey: "UserInfo") != nil {
+            let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+            self.userID.text = data["userId"] as? String
+            self.userEmail.text = data["userEmail"] as? String
+            self.username.text = data["username"] as? String
+            self.userFname.text = data["userFname"] as? String
+            self.userLname.text = data["userLname"] as? String
+            self.userDOB.text = data["userDOB"] as? String
+            self.photoURL.text = data["photoURL"] as? String
+        }
     }
 }

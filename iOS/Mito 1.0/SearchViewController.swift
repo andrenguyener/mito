@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class ActivityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
@@ -51,7 +52,6 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         productTableView.rowHeight = 106
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
-        
         loadPeopleData()
         loadProductData()
 //        peopleTableView.reloadData()

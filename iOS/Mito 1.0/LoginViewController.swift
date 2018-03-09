@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class LoginViewController: UIViewController {
 
@@ -57,6 +58,14 @@ class LoginViewController: UIViewController {
     
     @IBAction func signup(_ sender: Any) {
         performSegue(withIdentifier: "signup", sender: self)
+        let content = UNMutableNotificationContent()
+        content.title = "Notification"
+        content.subtitle = "Notification subtitle"
+        content.body = "Andre has sent you a friend request"
+        content.badge = 1
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let request = UNNotificationRequest(identifier: "timerDone", content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
 
     // Sign up page
@@ -101,9 +110,9 @@ class LoginViewController: UIViewController {
         self.view.addGestureRecognizer(tapGesture)
         NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-  
-
-
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in
+            
+        })
 //        if UserDefaults.standard.object(forKey: "UserInfo") == nil {
 //            print("There is no local data")
 //        } else {
