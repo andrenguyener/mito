@@ -86,6 +86,10 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         productTableView.reloadData()
     }
     
+    @IBAction func cartButtonClicked(_ sender: Any) {
+        performSegue(withIdentifier: "searchToCart", sender: self)
+    }
+    
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         searchActive = true
         print("Start typing")
@@ -243,7 +247,7 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         print(myIndex)
         appdata.cart.append(appdata.products[myIndex])
         print(appdata.cart[appdata.cart.count - 1].title)
-        print(appdata.cart.count)
+        print("Cart count: \(appdata.cart.count)")
 //        performSegue(withIdentifier: "segue", sender: self)
     }
     
