@@ -1511,38 +1511,39 @@
                                             <action selector="returnHome:" destination="qdc-jL-mfw" eventType="touchUpInside" id="xXv-z8-OUQ"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GiftWhite.png" translatesAutoresizingMaskIntoConstraints="NO" id="PhN-RU-rAy">
-                                        <rect key="frame" x="87" y="72" width="241" height="232"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="232" id="h1m-LF-jer"/>
-                                        </constraints>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="You’re so nice!.png" translatesAutoresizingMaskIntoConstraints="NO" id="C6s-Wf-UQ7">
-                                        <rect key="frame" x="93" y="332" width="229" height="32"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="32" id="uME-LJ-cnt"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We will notify you when Andre accepts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8VG-bt-wq1">
-                                        <rect key="frame" x="60" y="488" width="295" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="XyB-E9-nYh">
+                                        <rect key="frame" x="28" y="48" width="358" height="602"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GiftWhite.png" translatesAutoresizingMaskIntoConstraints="NO" id="PhN-RU-rAy">
+                                                <rect key="frame" x="71.666666666666686" y="0.0" width="215" height="232"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="232" id="h1m-LF-jer"/>
+                                                </constraints>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="You’re so nice!.png" translatesAutoresizingMaskIntoConstraints="NO" id="C6s-Wf-UQ7">
+                                                <rect key="frame" x="45.666666666666686" y="391" width="267" height="32"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="32" id="uME-LJ-cnt"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We will notify you when Andre accepts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8VG-bt-wq1">
+                                                <rect key="frame" x="32" y="581.66666666666663" width="294.33333333333331" height="20.333333333333371"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailingMargin" secondItem="XyB-E9-nYh" secondAttribute="trailing" constant="20" id="5tY-e9-zwE"/>
                                     <constraint firstItem="P2A-f0-scU" firstAttribute="leading" secondItem="4vK-kL-Od9" secondAttribute="leadingMargin" id="BF4-DN-RV7"/>
-                                    <constraint firstAttribute="bottom" secondItem="8VG-bt-wq1" secondAttribute="bottom" constant="227" id="FCU-PN-RjI"/>
-                                    <constraint firstItem="8VG-bt-wq1" firstAttribute="centerX" secondItem="P2A-f0-scU" secondAttribute="centerX" id="J13-zb-Ceg"/>
-                                    <constraint firstItem="C6s-Wf-UQ7" firstAttribute="centerX" secondItem="8VG-bt-wq1" secondAttribute="centerX" id="RLX-hf-lUy"/>
-                                    <constraint firstItem="PhN-RU-rAy" firstAttribute="leading" secondItem="4vK-kL-Od9" secondAttribute="leading" constant="87" id="RNl-DJ-SO5"/>
+                                    <constraint firstItem="XyB-E9-nYh" firstAttribute="leading" secondItem="4vK-kL-Od9" secondAttribute="leadingMargin" constant="20" id="JaS-oz-oAG"/>
+                                    <constraint firstItem="XyB-E9-nYh" firstAttribute="top" secondItem="4vK-kL-Od9" secondAttribute="topMargin" constant="20" id="RsK-cq-eWd"/>
                                     <constraint firstItem="P2A-f0-scU" firstAttribute="trailing" secondItem="4vK-kL-Od9" secondAttribute="trailingMargin" id="UsJ-FY-QqM"/>
                                     <constraint firstAttribute="bottom" secondItem="P2A-f0-scU" secondAttribute="bottom" constant="20" id="X8N-xM-OXY"/>
-                                    <constraint firstItem="PhN-RU-rAy" firstAttribute="centerX" secondItem="C6s-Wf-UQ7" secondAttribute="centerX" id="XdF-xL-WGJ"/>
-                                    <constraint firstItem="C6s-Wf-UQ7" firstAttribute="leading" secondItem="4vK-kL-Od9" secondAttribute="leading" constant="93" id="da0-lM-RW5"/>
-                                    <constraint firstItem="C6s-Wf-UQ7" firstAttribute="top" secondItem="PhN-RU-rAy" secondAttribute="bottom" constant="28" id="eH7-Nq-PTi"/>
-                                    <constraint firstItem="PhN-RU-rAy" firstAttribute="top" secondItem="4vK-kL-Od9" secondAttribute="top" constant="72" id="gf7-kk-FM7"/>
+                                    <constraint firstItem="P2A-f0-scU" firstAttribute="top" secondItem="XyB-E9-nYh" secondAttribute="bottom" constant="20" id="eDy-MJ-RUs"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1640,7 +1641,7 @@
         <image name="search Grey" width="18" height="18"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="kS1-pK-LOk"/>
+        <segue reference="Jjr-wW-Hse"/>
         <segue reference="cI7-Td-TzM"/>
         <segue reference="cTu-G9-fQe"/>
     </inferredMetricsTieBreakers>
