@@ -677,11 +677,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xIz-7p-sjT">
-<<<<<<< HEAD
+
                                 <rect key="frame" x="36" y="267.33333333333331" width="303" height="26.666666666666686"/>
-=======
-                                <rect key="frame" x="36" y="258" width="342" height="30"/>
->>>>>>> 065dd0bee6ce982d615a488db948973dc479976d
+
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="xIz-7p-sjT" secondAttribute="height" multiplier="57:5" id="QfZ-cD-6Zr"/>
                                 </constraints>
@@ -690,11 +688,9 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXe-YI-ihJ">
-<<<<<<< HEAD
+
                                 <rect key="frame" x="36" y="302" width="303" height="18.666666666666686"/>
-=======
-                                <rect key="frame" x="36" y="296" width="342" height="21"/>
->>>>>>> 065dd0bee6ce982d615a488db948973dc479976d
+
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="TXe-YI-ihJ" secondAttribute="height" multiplier="114:7" id="qMp-5x-KEj"/>
                                 </constraints>
@@ -703,11 +699,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="j7b-HR-Hwa">
-<<<<<<< HEAD
+
                                 <rect key="frame" x="36" y="328.66666666666669" width="303" height="26.333333333333314"/>
-=======
-                                <rect key="frame" x="36" y="325" width="342" height="30"/>
->>>>>>> 065dd0bee6ce982d615a488db948973dc479976d
+
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="j7b-HR-Hwa" secondAttribute="height" multiplier="57:5" id="A3m-kg-ztO"/>
                                 </constraints>
@@ -734,11 +728,9 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zipcode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Smx-Cl-CJn">
-<<<<<<< HEAD
+
                                 <rect key="frame" x="36" y="424.33333333333331" width="303" height="18.666666666666686"/>
-=======
-                                <rect key="frame" x="36" y="430" width="342" height="21"/>
->>>>>>> 065dd0bee6ce982d615a488db948973dc479976d
+
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Smx-Cl-CJn" secondAttribute="height" multiplier="114:7" id="HFr-Ig-8Tz"/>
                                 </constraints>
@@ -747,11 +739,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vPC-bh-u6c">
-<<<<<<< HEAD
+
                                 <rect key="frame" x="36" y="451" width="303" height="26.333333333333314"/>
-=======
-                                <rect key="frame" x="36" y="459" width="342" height="30"/>
->>>>>>> 065dd0bee6ce982d615a488db948973dc479976d
+
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="vPC-bh-u6c" secondAttribute="height" multiplier="57:5" id="Kb6-zu-bwE"/>
                                 </constraints>
@@ -1226,40 +1216,30 @@
                                 <rect key="frame" x="20" y="164" width="374" height="495"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-<<<<<<< HEAD
+
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cartCell" rowHeight="158" id="ExR-FD-V61" customClass="CartTableViewCell" customModule="Mito_1_0" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="343" height="158"/>
-=======
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cartCell" rowHeight="158" id="ExR-FD-V61" customClass="CartTableViewCell" customModule="Mito_1_0" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="374" height="158"/>
->>>>>>> 065dd0bee6ce982d615a488db948973dc479976d
+
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ExR-FD-V61" id="WOD-8o-eza">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="157.66666666666666"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WXz-Qa-jgh">
-<<<<<<< HEAD
+
                                                     <rect key="frame" x="15" y="34" width="100" height="85"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rsV-cY-dGJ">
                                                     <rect key="frame" x="135" y="46" width="83" height="21"/>
-=======
-                                                    <rect key="frame" x="15" y="34" width="139" height="85"/>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rsV-cY-dGJ">
-                                                    <rect key="frame" x="174" y="46" width="83" height="21"/>
->>>>>>> 065dd0bee6ce982d615a488db948973dc479976d
+
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seller" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJE-kI-NPy">
-<<<<<<< HEAD
+
                                                     <rect key="frame" x="135" y="75" width="73" height="21"/>
-=======
-                                                    <rect key="frame" x="174" y="75" width="34.333333333333343" height="21"/>
->>>>>>> 065dd0bee6ce982d615a488db948973dc479976d
+
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="2I6-Av-ULc"/>
                                                     </constraints>
