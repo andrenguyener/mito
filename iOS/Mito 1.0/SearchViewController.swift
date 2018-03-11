@@ -52,8 +52,8 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         productTableView.rowHeight = 106
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
-        loadPeopleData()
-        loadProductData()
+//        loadPeopleData()
+//        loadProductData()
 //        peopleTableView.reloadData()
 //        productTableView.reloadData()
 //        print(appdata.products.count)
@@ -62,10 +62,10 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidAppear(_ animated: Bool) {
         appdata.friends.removeAll()
         appdata.products.removeAll()
-//        loadPeopleData()
-//        peopleTableView.reloadData()
-//        loadProductData()
-//        productTableView.reloadData()
+        loadPeopleData()
+        loadProductData()
+        peopleTableView.reloadData()
+        productTableView.reloadData()
         
     }
     
