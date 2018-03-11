@@ -9,7 +9,7 @@
 import UIKit
 import UserNotifications
 
-class ActivityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
     
     @IBOutlet weak var peopleTableView: UITableView!
@@ -80,7 +80,7 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is ProductViewController {
+        if segue.identifier == "searchToProduct" {
             let talkView = segue.destination as? ProductViewController
             talkView?.searchText = searchText
         }

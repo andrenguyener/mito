@@ -952,7 +952,7 @@
         <!--Search-->
         <scene sceneID="Mzq-YK-eiC">
             <objects>
-                <viewController title="Search" id="gAK-KX-AAt" customClass="ActivityViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Search" id="gAK-KX-AAt" customClass="SearchViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LFo-r9-nDl"/>
                         <viewControllerLayoutGuide type="bottom" id="dNb-3h-JP2"/>
@@ -1008,14 +1008,14 @@
                                 <rect key="frame" x="0.0" y="191" width="414" height="506"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
-                                    <segue destination="nQF-H2-qeS" kind="embed" id="kuy-pM-UUn"/>
+                                    <segue destination="nQF-H2-qeS" kind="embed" identifier="searchToProduct" id="kuy-pM-UUn"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DHp-hZ-6In">
                                 <rect key="frame" x="0.0" y="200" width="414" height="487"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
-                                    <segue destination="KMH-Dg-FRZ" kind="embed" id="czg-X6-pf6"/>
+                                    <segue destination="KMH-Dg-FRZ" kind="embed" identifier="searchToPeople" id="czg-X6-pf6"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uPe-gp-1lw" userLabel="People View">
@@ -1714,7 +1714,7 @@
         <!--ProductView-->
         <scene sceneID="1dT-pp-zIa">
             <objects>
-                <viewController title="ProductView" id="nQF-H2-qeS" sceneMemberID="viewController">
+                <viewController title="ProductView" id="nQF-H2-qeS" customClass="ProductViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZqT-Jh-MBr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="506"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
