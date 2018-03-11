@@ -471,7 +471,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXd-TL-RFe">
-                                <rect key="frame" x="136.33333333333331" y="20" width="141.33333333333331" height="43"/>
+                                <rect key="frame" x="136.66666666666663" y="20" width="141.33333333333337" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="sGD-uo-CBn"/>
                                 </constraints>
@@ -982,7 +982,7 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Cy8-QW-6iy">
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="Cy8-QW-6iy">
                                         <rect key="frame" x="10" y="92" width="396" height="29"/>
                                         <color key="backgroundColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -1004,6 +1004,20 @@
                                     <constraint firstItem="Cy8-QW-6iy" firstAttribute="top" secondItem="sbe-Z7-f9y" secondAttribute="bottom" constant="8" symbolic="YES" id="f7r-QF-wIO"/>
                                 </constraints>
                             </view>
+                            <containerView opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="va9-Dd-nB3">
+                                <rect key="frame" x="0.0" y="191" width="414" height="506"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="nQF-H2-qeS" kind="embed" id="kuy-pM-UUn"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DHp-hZ-6In">
+                                <rect key="frame" x="0.0" y="200" width="414" height="487"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="KMH-Dg-FRZ" kind="embed" id="czg-X6-pf6"/>
+                                </connections>
+                            </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uPe-gp-1lw" userLabel="People View">
                                 <rect key="frame" x="0.0" y="147" width="375" height="580"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1081,7 +1095,7 @@
                                     </tableView>
                                 </subviews>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U7j-JY-MnK" userLabel="Product View">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U7j-JY-MnK" userLabel="Product View">
                                 <rect key="frame" x="0.0" y="147" width="414" height="582"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -1167,6 +1181,7 @@
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="uPe-gp-1lw"/>
+                                <exclude reference="U7j-JY-MnK"/>
                             </mask>
                         </variation>
                     </view>
@@ -1175,8 +1190,10 @@
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="peopleContainer" destination="DHp-hZ-6In" id="dzd-EI-hTf"/>
                         <outlet property="peopleTableView" destination="WBt-vu-arn" id="zLF-1q-dYE"/>
                         <outlet property="peopleView" destination="uPe-gp-1lw" id="Lit-9L-cQ6"/>
+                        <outlet property="productContainer" destination="va9-Dd-nB3" id="Jmx-sw-N10"/>
                         <outlet property="productPeopleTab" destination="Cy8-QW-6iy" id="SRP-yO-Gh9"/>
                         <outlet property="productTableView" destination="wxt-cx-BMB" id="xL8-OK-7hJ"/>
                         <outlet property="productView" destination="U7j-JY-MnK" id="kgh-sR-tSc"/>
@@ -1694,6 +1711,61 @@
             </objects>
             <point key="canvasLocation" x="461" y="867"/>
         </scene>
+        <!--ProductView-->
+        <scene sceneID="1dT-pp-zIa">
+            <objects>
+                <viewController title="ProductView" id="nQF-H2-qeS" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZqT-Jh-MBr">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="506"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Product" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="z6j-Ua-QHw">
+                                <rect key="frame" x="40" y="238" width="334" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KZf-qV-M6v">
+                                <rect key="frame" x="184" y="325" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="z6j-Ua-QHw" firstAttribute="leading" secondItem="ZqT-Jh-MBr" secondAttribute="leadingMargin" constant="20" id="9ta-rA-u19"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="z6j-Ua-QHw" secondAttribute="trailing" constant="20" id="jpo-ZT-wJK"/>
+                            <constraint firstItem="z6j-Ua-QHw" firstAttribute="centerY" secondItem="ZqT-Jh-MBr" secondAttribute="centerY" id="oGL-QM-F92"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uRK-5w-OVX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2826" y="476"/>
+        </scene>
+        <!--PeopleView-->
+        <scene sceneID="47r-YW-b07">
+            <objects>
+                <viewController title="PeopleView" id="KMH-Dg-FRZ" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lE7-Hf-zbL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="487"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="People" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IOz-gU-rkk">
+                                <rect key="frame" x="159" y="255" width="97" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fQf-B4-8jT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3480" y="472"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Cart Solid White Icon.png" width="22" height="23"/>
@@ -1706,7 +1778,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="4Df-8F-JjS"/>
-        <segue reference="Huf-aH-vL3"/>
+        <segue reference="IOv-WN-4XC"/>
         <segue reference="cTu-G9-fQe"/>
     </inferredMetricsTieBreakers>
 </document>

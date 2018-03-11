@@ -50,6 +50,7 @@
 		DA27C21C204356B400CCFD60 /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA27C21B204356B400CCFD60 /* FeedItem.swift */; };
 		DA27C21E204371CE00CCFD60 /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA27C21D204371CE00CCFD60 /* ProductDetailsViewController.swift */; };
 		DA27C2202043736400CCFD60 /* Sopheak.png in Resources */ = {isa = PBXBuildFile; fileRef = DA27C21F2043736400CCFD60 /* Sopheak.png */; };
+		DA49F1DB2055EF9E0018ABA4 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA49F1DA2055EF9E0018ABA4 /* ProductViewController.swift */; };
 		DA4FC9EF2045E0D300999F28 /* profileInfo.json in Resources */ = {isa = PBXBuildFile; fileRef = DA4FC9EE2045E0D300999F28 /* profileInfo.json */; };
 		DAD995312042386E007A7687 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD995302042386E007A7687 /* SearchViewController.swift */; };
 		DAD995332042389B007A7687 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD995322042389B007A7687 /* Person.swift */; };
@@ -129,6 +130,7 @@
 		DA27C21B204356B400CCFD60 /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
 		DA27C21D204371CE00CCFD60 /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
 		DA27C21F2043736400CCFD60 /* Sopheak.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sopheak.png; sourceTree = "<group>"; };
+		DA49F1DA2055EF9E0018ABA4 /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
 		DA4FC9EE2045E0D300999F28 /* profileInfo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = profileInfo.json; sourceTree = SOURCE_ROOT; };
 		DAD995302042386E007A7687 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		DAD995322042389B007A7687 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				B272DC2520439E2200EE2121 /* Product.swift */,
 				DA27C21D204371CE00CCFD60 /* ProductDetailsViewController.swift */,
 				DAD9A19F204FD1C800E3AA5F /* ProductTableViewCell.swift */,
+				DA49F1DA2055EF9E0018ABA4 /* ProductViewController.swift */,
 				DAD995302042386E007A7687 /* SearchViewController.swift */,
 				B2F849462043CAA900CBD83A /* SettingsViewController.swift */,
 				DAD9953620423EE9007A7687 /* TableViewCell.swift */,
@@ -444,6 +447,7 @@
 				B2471994204672DE006CF6C2 /* NotificationViewController.swift in Sources */,
 				DA27C21A2043550A00CCFD60 /* HomeTableViewCell.swift in Sources */,
 				DAD995312042386E007A7687 /* SearchViewController.swift in Sources */,
+				DA49F1DB2055EF9E0018ABA4 /* ProductViewController.swift in Sources */,
 				B247197020454733006CF6C2 /* CartTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
