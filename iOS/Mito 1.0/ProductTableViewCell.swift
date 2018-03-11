@@ -1,27 +1,28 @@
 //
-//  CartTableViewCell.swift
+//  ProductTableViewCell.swift
 //  Mito 1.0
 //
-//  Created by Benny on 2/26/18.
+//  Created by JJ Guo on 3/6/18.
 //  Copyright © 2018 Benny Souriyadeth. All rights reserved.
 //
 
 import UIKit
 
-class CartTableViewCell: UITableViewCell {
+class ProductTableViewCell: UITableViewCell {
 
-    
-    @IBOutlet weak var itemImage: UIImageView!
-    @IBOutlet weak var itemName: UILabel!
-    @IBOutlet weak var seller: UILabel!
+    @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var publisher: UILabel!
     @IBOutlet weak var price: UILabel!
-
+    @IBOutlet weak var img: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+
         // Configure the view for the selected state
     }
 

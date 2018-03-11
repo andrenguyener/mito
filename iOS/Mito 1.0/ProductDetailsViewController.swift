@@ -13,15 +13,15 @@ class ProductDetailsViewController: UIViewController {
     @IBOutlet weak var img: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        img.image = UIImage(named: "Andre.png")
+        img.image = UIImage(named: "Andre2.png")
         // Do any additional setup after loading the view.
     }
 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
 
     @IBAction func back(_ sender: Any) {
         performSegue(withIdentifier: "prodDetailBack", sender: self)

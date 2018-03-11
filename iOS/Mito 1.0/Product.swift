@@ -9,5 +9,17 @@
 import Foundation
 
 class Product {
-
+    var image: String = ""
+    var ASIN: String = ""
+    var title: String = ""
+    var publisher: String = ""
+    var price: String = ""
+    
+    init(image: String, ASIN: String, title: String, publisher: String, price: String) {
+        self.image = image
+        self.ASIN = ASIN
+        self.title = title
+        self.publisher = publisher
+        self.price = price
+    }
 }

@@ -10,7 +10,6 @@ import UIKit
 
 class NotificationViewController: UIViewController {
 
-
     @IBOutlet weak var packageInView: UIView!
     @IBOutlet weak var notificationView: UIView!
     @IBOutlet weak var segment: UISegmentedControl!

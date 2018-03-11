@@ -11,23 +11,18 @@ import UIKit
 class AppData: NSObject {
     static let shared = AppData()
     
-//    open var people: [Person] = [
-//        Person(firstName: "Andre", lastName: "Nguyen", handle: "@andrenguyen", friendshipType: "Trusted Friend", avatar: "Andre.png"),
-//        Person(firstName: "Sopheak", lastName: "Neak", handle: "@sneak", friendshipType: "Friend", avatar: "Sopheak.png"),
-//        Person(firstName: "Andre", lastName: "Nguyen", handle: "@andrenguyen", friendshipType: "Trusted Friend", avatar: "Andre.png"),
-//        Person(firstName: "Sopheak", lastName: "Neak", handle: "@sneak", friendshipType: "Friend", avatar: "Sopheak.png"),
-//        Person(firstName: "Andre", lastName: "Nguyen", handle: "@andrenguyen", friendshipType: "Trusted Friend", avatar: "Andre.png"),
-//        Person(firstName: "Sopheak", lastName: "Neak", handle: "@sneak", friendshipType: "Friend", avatar: "Sopheak.png")
-//    ]
-    
     open var friends: [Person] = []
+    
+    open var products: [Product] = []
+    
+    open var cart: [Product] = []
     
     open var feedItem: [FeedItem] = [
         FeedItem(avatar: "Sopheak.png", descr: "Testing a multiline comment because we need to test it why not", time: "12h", whatHappened: "Andre Nguyen received a gift from Sopheak Neak"),
-        FeedItem(avatar: "Andre.png", descr: "Gang Gang", time: "6h", whatHappened: "Andre Nguyen received a gift from Sopheak Neak"),
+        FeedItem(avatar: "Andre2.png", descr: "Gang Gang", time: "6h", whatHappened: "Andre Nguyen received a gift from Sopheak Neak"),
         FeedItem(avatar: "Sopheak.png", descr: "Gucci Gang", time: "12h", whatHappened: "Andre Nguyen received a gift from Sopheak Neak"),
-        FeedItem(avatar: "Andre.png", descr: "Gang Gang", time: "6h", whatHappened: "Andre Nguyen received a gift from Sopheak Neak"),
+        FeedItem(avatar: "Andre2.png", descr: "Gang Gang", time: "6h", whatHappened: "Andre Nguyen received a gift from Sopheak Neak"),
         FeedItem(avatar: "Sopheak.png", descr: "Gucci Gang", time: "12h", whatHappened: "Andre Nguyen received a gift from Sopheak Neak"),
-        FeedItem(avatar: "Andre.png", descr: "Gang Gang", time: "6h", whatHappened: "Andre Nguyen received a gift from Sopheak Neak")
+        FeedItem(avatar: "Andre2.png", descr: "Gang Gang", time: "6h", whatHappened: "Andre Nguyen received a gift from Sopheak Neak")
     ]
 }

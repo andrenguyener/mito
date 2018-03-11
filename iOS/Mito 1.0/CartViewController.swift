@@ -8,17 +8,20 @@
 
 import UIKit
 
-class CartViewController: UIViewController {
+class CartViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    
+    //User's Cart
+    @IBOutlet weak var cartTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if cartTableView != nil {
+            cartTableView.delegate = self
+            cartTableView.dataSource = self
+            cartTableView.rowHeight = 106
+        }
     }
-    
-    
-    //User's Cart
-    @IBOutlet weak var cartTableView: UITableView!
+    var appdata = AppData.shared
     
     @IBAction func finishShopping(_ sender: Any) {
         performSegue(withIdentifier: "toCheckout", sender: self)
@@ -39,6 +42,27 @@ class CartViewController: UIViewController {
     //CheckOutComplete Page
     @IBAction func returnHome(_ sender: Any) {
         performSegue(withIdentifier: "checkoutComplete", sender: self)
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return appdata.cart.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cartCell", for: indexPath) as! CartTableViewCell
+        let cartObj = appdata.cart[indexPath.row]
+        let url = URL(string: "\(cartObj.image)")
+        if let data = try? Data(contentsOf: url!) {
+            cell.itemImage.image = UIImage(data: data)!
+        }
+        cell.itemName.text = cartObj.title
+        cell.price.text = cartObj.price
+        cell.seller.text = cartObj.publisher
+        return cell
     }
     
 }

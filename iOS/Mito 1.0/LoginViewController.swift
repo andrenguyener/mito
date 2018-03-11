@@ -7,21 +7,23 @@
 //
 
 import UIKit
+import UserNotifications
 
 class LoginViewController: UIViewController {
 
+    
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
+    
     // Opening Login Page
     @IBAction func login(_ sender: Any) {
         let u = username.text
         let p = password.text
         let JSONObj: [String: Any] = [
-            "userEmail": u,
-            "password": p
-            
+            "userEmail": u!,
+            "password": p!
         ]
-        var success = false
+        //var success = false
         let jsonData = try? JSONSerialization.data(withJSONObject: JSONObj)
         let url = URL(string: "https://api.projectmito.io/v1/sessions")!
         var request = URLRequest(url: url)
@@ -30,20 +32,18 @@ class LoginViewController: UIViewController {
         request.httpBody = jsonData
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {                                                 // check for fundamental networking error
-                print("error=\(error)")
+                print("error=\(String(describing: error))")
                 return
             }
             
             if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
                 print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(response)")
+                print("response = \(String(describing: response))")
             }
             
             let responseString = String(data: data, encoding: .utf8)
-//            print("responseString = \(responseString)")
-            var data2 = responseString?.data(using: .utf8)
+            let data2 = responseString?.data(using: .utf8)
             let dictionary = try? JSONSerialization.jsonObject(with: data2!, options: .mutableLeaves)
-//            print(dictionary)
             DispatchQueue.main.async {
                 if (dictionary != nil) {
                     self.performSegue(withIdentifier: "login", sender: self)
@@ -51,13 +51,21 @@ class LoginViewController: UIViewController {
                     print(UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary)
                 }
             }
-            success = true
-
+            //success = true
         }
         task.resume()
     }
+    
     @IBAction func signup(_ sender: Any) {
         performSegue(withIdentifier: "signup", sender: self)
+        let content = UNMutableNotificationContent()
+        content.title = "Notification"
+        content.subtitle = "Notification subtitle"
+        content.body = "Andre has sent you a friend request"
+        content.badge = 1
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let request = UNNotificationRequest(identifier: "timerDone", content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
 
     // Sign up page
@@ -71,32 +79,40 @@ class LoginViewController: UIViewController {
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y == 0{
-                self.view.frame.origin.y -= keyboardSize.height
+        if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= 75
             }
         }
+//        username.returnKeyType = .next
+//        password.returnKeyType = .done
+
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y != 0{
-                self.view.frame.origin.y += keyboardSize.height
+        if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
+            if self.view.frame.origin.y == -75 {
+                self.view.frame.origin.y += 75
             }
         }
     }
     
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
-        username.resignFirstResponder()
-        password.resignFirstResponder()
+        if username != nil && password != nil {
+            username.resignFirstResponder()
+            password.resignFirstResponder()
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
         self.view.addGestureRecognizer(tapGesture)
-//        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in
+            
+        })
 //        if UserDefaults.standard.object(forKey: "UserInfo") == nil {
 //            print("There is no local data")
 //        } else {
