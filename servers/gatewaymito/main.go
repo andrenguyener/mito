@@ -180,7 +180,10 @@ func main() {
 	mux.Handle("/v1/address/", NewServiceProxy(splitMitoNodeAddrs, ctx))
 	mux.Handle("/v1/friend", NewServiceProxy(splitMitoNodeAddrs, ctx))
 	mux.Handle("/v1/friend/", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/amazonhash", NewServiceProxy(splitMitoNodeAddrs, ctx))
 	mux.Handle("/v1/amazonhash/", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/amazonhashtest/", NewServiceProxy(splitMitoNodeAddrs, ctx))
 	mux.Handle("/v1/amazonsearch", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/amazonsearch/", NewServiceProxy(splitMitoNodeAddrs, ctx))
 	log.Fatal(http.ListenAndServeTLS(addr, tlscert, tlskey, corsHandler))
 }

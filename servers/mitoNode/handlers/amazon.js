@@ -1,12 +1,13 @@
 'use strict';
 
 const express = require('express');
-const  axios = require('axios');
+const axios = require('axios');
 // var parser = require('xml2json');
+var parseString = require('xml2js').parseString;
 const Address = require('./../models/amazon/amazon');
 const sendToMQ = require('./message-queue');
 
-const   sha256hash   = require('./amazonhash');
+const sha256hash = require('./amazonhash');
 const publicKeyAmazon = "AKIAJSRYKM2YU35LEDSQ";
 const secretKeyAmazon = "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";
 var chrsz = 8;
@@ -211,49 +212,49 @@ const AmazonHashHandler = () => {
 
     router.post('/v1/amazonsearch', (req, res) => {
 
-        // let urlString = req.body.data;
+        let urlString = req.body.data;
 
-        // axios.get(urlString)
-        // .then(function (response) {
-        //     let json = parser.toJson(response.data, {object:true});
-        //     let returnJson = json.ItemSearchResponse.Items;
-        //     res.send(returnJson)
-        //     debugger
-        //     console.log(json);
-        //     debugger
-        // })
-        // .catch(function (error) {
-        //     console.log(error);
-        // });
+        axios.get(urlString)
+            .then(function (response) {
+                var xml = response.data
+                parseString(xml, function (err, result) {
+                    console.log(result);
+                    res.json(result);
+                });
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+
     });
 
     router.get('/v1/amazonhash/:keyword', (req, res) => {
 
-        // searchIndex (category), keywords (user query), responseGroup (respond filter)
         let keyword = req.params.keyword;
         let urlString = invokeRequest(keyword);
-        res.send(urlString);
-        // var request = new Request(urlString, {
-        //     method: 'GET',
-        // });
-        // fetch(request)
-        // .then((response) => {
-        //     response.json().then((data)=> {
-        //         console.log(data)
-        //     })
-        // })
-        // .catch(function (err) {
-        //     console.log(err);
-        // });
-        // var test = new Promise((resolve, reject) => {
-        //     var request = new XMLHttpRequest();
-        //     request.open("Get", urlString);
-        //     request.onload = () => resolve(res.send(request.responseText));
-        //     request.onerror = () => reject(res.send(request.statusText));
-        //     request.send();
-        // });
-        
+        res.json(urlString)
 
+    });
+
+    router.get('/v1/amazonhashtest/:keyword', (req, res) => {
+
+        let keyword = req.params.keyword;
+        let urlString = invokeRequest(keyword);
+
+        axios.get(urlString)
+            .then(function (response) {
+                var xml = response.data
+                parseString(xml, function (err, result) {
+                    console.log(result);
+                    res.json(result);
+                });
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     });
 
 

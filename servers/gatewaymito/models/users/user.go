@@ -27,7 +27,7 @@ type User struct {
 }
 
 //Credentials represents user sign-in credentials
-type Credentials2 struct {
+type Credentials struct {
 	Email    string `json:"userEmail"`
 	Password string `json:"password"`
 }
@@ -117,6 +117,7 @@ func (u *User) SetPassword(password string) error {
 //Authenticate compares the plaintext password against the stored hash
 //and returns an error if they don't match, or nil if they do
 func (u *User) Authenticate(password string) error {
+
 	err := bcrypt.CompareHashAndPassword(u.PasswordHash, []byte(password))
 	if err != nil {
 		return err

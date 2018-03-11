@@ -8,64 +8,96 @@ class FriendStore {
         this.sql = sql;
     }
 
-
-
-    insert(address) {
-
-    }
-
-
-    get(id) {
-
-    }
-
-
-
-    getAll(id, res) {
-        let procedureName = "GetUserFriendsById";
-        var request = new Request(`${procedureName}`, function (err, rowCount, rows) {
+    request(procedure) {
+        return new Request((`${procedure}`), function (err) {
             if (err) {
                 console.log(err);
             }
         });
+    }
 
-        request.addParameter('UserId', TYPES.Int, id);
+    // Insert a friend into SqlServer
+    insert(userId, friendId) {
+        return new Promise((resolve) => {
+            let procedureName = "insertFriend";
+            var request = this.request(procedureName);
+            request.addParameter('user1Id', TYPES.Int, userId);
+            request.addParameter('user2Id', TYPES.Int, friendId);
 
-        let jsonArray = []
-        request.on('row', function (columns) {
-            var rowObject = {};
-            columns.forEach(function (column) {
-                if (column.value === null) {
-                    console.log('NULL');
-                } else {
-                    rowObject[column.metadata.colName] = column.value;
+            request.on('doneProc', function (rowCount, more) {
+                resolve("Friend Request Sent");
+            });
+
+            this.sql.callProcedure(request)
+        })
+            .then((message) => {
+                return message;
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
+    }
+
+    // Get information about a friend from their UserId
+    get(id) {
+
+    }
+
+    // Get all friends of a UserId
+    getAll(id) {
+        return new Promise((resolve) => {
+            let procedureName = "GetUserFriendsById";
+            var request = new Request(`${procedureName}`, function (err, rowCount, rows) {
+                if (err) {
+                    console.log(err);
                 }
             });
-            jsonArray.push(rowObject)
-        });
 
-        request.on('doneProc', function (rowCount, more) {
-            console.log(jsonArray);
-            // let returnArray = [];
-            // for (object in jsonArray) {
-            //     let returnObject = {};
-            //     returnObject.UserId = object.UserId;
-            //     returnObject.Username = object.Username;
-            //     returnArray.push(returnObject);
-            // }
-            res.json(jsonArray);
-        });
+            request.addParameter('UserId', TYPES.Int, id);
 
-        this.sql.callProcedure(request)
+            let jsonArray = []
+            request.on('row', function (columns) {
+                var rowObject = {};
+                columns.forEach(function (column) {
+                    if (column.value === null) {
+                        console.log('NULL');
+                    } else {
+                        rowObject[column.metadata.colName] = column.value;
+                    }
+                });
+                jsonArray.push(rowObject)
+            });
+
+            request.on('doneProc', function (rowCount, more) {
+                console.log(jsonArray);
+                resolve(jsonArray);
+            });
+
+            this.sql.callProcedure(request)
+        })
+            .then((jsonArray) => {
+                return jsonArray
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
+
     }
 
-    update(id, updates) {
-
+    // Update (downgrade/upgrade) friend status
+    updateFriendStatus(id, updates) {
 
     }
 
+    // Accept/Decline friend request
+    updateFriendRequest(userId, friendId) {
 
-    delete(id) {
+    }
+
+    // Delete a friend from the User  
+    delete(userId, deletedId) {
 
 
     }
