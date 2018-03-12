@@ -125,7 +125,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         for obj in myJson {
                             let object = obj as! NSDictionary
                             let p: Person = Person(firstName: (object["UserFname"] as? String)!, lastName: (object["UserLname"] as? String)!, email: (object["UserEmail"] as? String!)!, avatar: (object["PhotoUrl"] as? String!)!)
-//                            print(p.description())
                             self.appdata.friends.append(p)
                         }
                         DispatchQueue.main.async {
