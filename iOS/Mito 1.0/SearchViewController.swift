@@ -42,6 +42,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         } else {
             //appdata.products.removeAll()
             //loadPeopleData()
+            
             UIView.transition(from: productView, to: peopleView, duration: 0, options: .showHideTransitionViews)
            
             
@@ -71,10 +72,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         print("userURL: \(userURL)")
         peopleUrl = URL(string: userURL)
         print(peopleUrl)
-        if (productTableView.hasUncommittedUpdates) {
-            print("tab is false")
-            productPeopleTab.isEnabled = true
-        }
+
 //        loadPeopleData()
 //        loadProductData()
 //        peopleTableView.reloadData()
@@ -115,17 +113,12 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         var urlString = prodOriginalUrl?.absoluteString
         urlString = urlString! + searchText
         prodUrl = URL(string: urlString!)
+        productPeopleTab.isEnabled = false
         loadProductData()
         print(productTableView.hasUncommittedUpdates)
-        if (!productTableView.hasUncommittedUpdates) {
-            print("tab is false")
-            productPeopleTab.isEnabled = false
-        }
+
         productTableView.reloadData()
-        if (productTableView.hasUncommittedUpdates) {
-            print("tab is true")
-            productPeopleTab.isEnabled = true
-        }
+
         
 
         
@@ -285,6 +278,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         }
                         DispatchQueue.main.async {
                             self.productTableView.reloadData()
+                            self.productPeopleTab.isEnabled = true
                         }
                     } catch {
                         print("Catch")
