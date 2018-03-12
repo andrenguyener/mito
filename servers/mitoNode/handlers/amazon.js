@@ -25,7 +25,7 @@ function invokeRequest(keyword) {
     // }
     // keyword = keyword.replace(/ /g,"+");
 
-
+    // var unsignedUrl2 = `http://webservices.amazon.com/onca/xml?Service=AWSECommerceService&Operation=ItemSearch&SubscriptionId=AKIAJSRYKM2YU35LEDSQ&AssociateTag=mitoteam-20&SearchIndex=All&Keywords=${keyword}&ItemPage=${itemPage}ResponseGroup=Images,ItemAttributes,Offers,Reviews`
     var unsignedUrl = `http://webservices.amazon.com/onca/xml?Service=AWSECommerceService&Operation=ItemSearch&SubscriptionId=AKIAJSRYKM2YU35LEDSQ&AssociateTag=mitoteam-20&SearchIndex=All&Keywords=${keyword}&ResponseGroup=Images,ItemAttributes,Offers,Reviews`
     // var unsignedUrl = document.getElementById("UnsignedURL").value;
     if (unsignedUrl == "") {
@@ -241,6 +241,7 @@ const AmazonHashHandler = () => {
     router.get('/v1/amazonhashtest/:keyword', (req, res) => {
 
         let keyword = req.params.keyword;
+        // let pageItem = req.params.pageItem
         let urlString = invokeRequest(keyword);
 
         axios.get(urlString)

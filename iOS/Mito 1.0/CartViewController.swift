@@ -13,14 +13,30 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     //User's Cart
     @IBOutlet weak var cartTableView: UITableView!
     @IBOutlet weak var cartNumber: UILabel!
-    
+    @IBOutlet weak var cartPrice: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        let formatter = NumberFormatter()
+        var priceSum: Decimal
+        priceSum = 0.00
+        formatter.numberStyle = .currency
+        formatter.locale = Locale(identifier: "en_US")
+        for element in appdata.cart {
+            let itemPrice = element.price
+            if let number = formatter.number(from: itemPrice) {
+                let amount = number.decimalValue
+                priceSum = amount + priceSum
+                print(amount)
+            }
+        }
+        
+
         if cartTableView != nil {
             cartTableView.delegate = self
             cartTableView.dataSource = self
             cartTableView.rowHeight = 106
             cartNumber.text = "Cart has \(appdata.cart.count) items"
+            cartPrice.text = "$\(priceSum)"
         }
         
     }
@@ -34,6 +50,11 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     //Checkout Page
+    
+    @IBOutlet weak var itemCountCheckout: UILabel!
+    @IBOutlet weak var shippingCheckout: UILabel!
+    @IBOutlet weak var itemTotalCheckout: UILabel!
+    @IBOutlet weak var taxCheckout: UILabel!
     @IBAction func checkoutToCart(_ sender: Any) {
         performSegue(withIdentifier: "checkoutToCart", sender: self)
     }

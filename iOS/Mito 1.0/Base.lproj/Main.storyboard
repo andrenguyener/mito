@@ -271,9 +271,8 @@
                                 <rect key="frame" x="87" y="58" width="240" height="233"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vrN-o3-owS">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vrN-o3-owS">
                                 <rect key="frame" x="20" y="686" width="374" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Add to Cart">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -320,6 +319,11 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="vrN-o3-owS" firstAttribute="leading" secondItem="oYD-z9-NlW" secondAttribute="leadingMargin" id="Flw-F6-UTc"/>
+                            <constraint firstItem="vrN-o3-owS" firstAttribute="trailing" secondItem="oYD-z9-NlW" secondAttribute="trailingMargin" id="NvO-Fl-paX"/>
+                            <constraint firstItem="26e-ON-u8b" firstAttribute="top" secondItem="vrN-o3-owS" secondAttribute="bottom" constant="20" id="njY-03-aty"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="prodDetail" destination="pTd-Il-3Ti" id="9xp-Mx-A3k"/>
@@ -1458,6 +1462,7 @@
                     </view>
                     <connections>
                         <outlet property="cartNumber" destination="svl-x9-EzE" id="yMR-4c-rk1"/>
+                        <outlet property="cartPrice" destination="f1n-JT-FAF" id="51x-aO-2tZ"/>
                         <outlet property="cartTableView" destination="3Yt-AX-8vw" id="cP9-Rn-K3g"/>
                         <segue destination="5ev-RP-TnR" kind="show" identifier="cartToHome" id="4Df-8F-JjS"/>
                         <segue destination="XCS-Ex-cdl" kind="show" identifier="toCheckout" id="2Se-oB-5nh"/>
@@ -1647,6 +1652,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="itemCountCheckout" destination="crF-tz-OmM" id="qYY-aa-st8"/>
+                        <outlet property="itemTotalCheckout" destination="0SZ-Mx-91r" id="Rhi-4k-df2"/>
+                        <outlet property="shippingCheckout" destination="3oX-Ar-Ngk" id="F49-k9-50p"/>
+                        <outlet property="taxCheckout" destination="YJ4-uI-3c3" id="c2q-7i-lgT"/>
                         <segue destination="UPq-qC-84m" kind="show" identifier="checkoutToCart" id="Huf-aH-vL3"/>
                         <segue destination="qdc-jL-mfw" kind="show" identifier="checkoutFinish" id="VTw-HY-3To"/>
                     </connections>
@@ -1885,7 +1894,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="4Df-8F-JjS"/>
-        <segue reference="IOv-WN-4XC"/>
+        <segue reference="Huf-aH-vL3"/>
         <segue reference="pVS-WP-gY2"/>
         <segue reference="Fma-AT-nbz"/>
     </inferredMetricsTieBreakers>
