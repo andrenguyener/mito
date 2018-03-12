@@ -471,7 +471,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXd-TL-RFe">
-                                <rect key="frame" x="136.33333333333331" y="20" width="141.33333333333331" height="43"/>
+                                <rect key="frame" x="136.66666666666663" y="20" width="141.33333333333337" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="sGD-uo-CBn"/>
                                 </constraints>
@@ -642,6 +642,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="passwordConfSU" destination="NFe-9a-357" id="1YR-V9-Q48"/>
+                        <outlet property="passwordSU" destination="2h6-SM-hUZ" id="Bmt-mY-hdK"/>
+                        <outlet property="userEmailSU" destination="z18-WE-ZVf" id="nQC-fK-X3y"/>
+                        <outlet property="userFnameSU" destination="E9y-kw-hnK" id="g1c-Uy-rcf"/>
+                        <outlet property="usernameSU" destination="kLZ-kE-kzA" id="BHM-pU-gUj"/>
                         <segue destination="Eua-Q9-CQ1" kind="show" identifier="signUpToAddress" id="UQ1-zU-VkT"/>
                     </connections>
                 </viewController>
@@ -816,6 +821,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="address1AA" destination="rJz-P9-Kg7" id="4or-d7-Wsf"/>
+                        <outlet property="address2AA" destination="xIz-7p-sjT" id="0rS-Ll-sqT"/>
+                        <outlet property="cityAA" destination="j7b-HR-Hwa" id="PoF-fL-f8H"/>
+                        <outlet property="stateAA" destination="TC3-w8-VvJ" id="823-Ix-NdF"/>
+                        <outlet property="zipcodeAA" destination="vPC-bh-u6c" id="5wI-sZ-emX"/>
                         <segue destination="vJa-9R-Sbw" kind="show" identifier="createAccount" id="Fma-AT-nbz"/>
                     </connections>
                 </viewController>
@@ -952,7 +962,7 @@
         <!--Search-->
         <scene sceneID="Mzq-YK-eiC">
             <objects>
-                <viewController title="Search" id="gAK-KX-AAt" customClass="ActivityViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Search" id="gAK-KX-AAt" customClass="SearchViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LFo-r9-nDl"/>
                         <viewControllerLayoutGuide type="bottom" id="dNb-3h-JP2"/>
@@ -1004,8 +1014,22 @@
                                     <constraint firstItem="Cy8-QW-6iy" firstAttribute="top" secondItem="sbe-Z7-f9y" secondAttribute="bottom" constant="8" symbolic="YES" id="f7r-QF-wIO"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uPe-gp-1lw" userLabel="People View">
-                                <rect key="frame" x="0.0" y="147" width="375" height="580"/>
+                            <containerView opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="va9-Dd-nB3">
+                                <rect key="frame" x="0.0" y="300" width="414" height="397"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="nQF-H2-qeS" kind="embed" identifier="searchToProduct" id="kuy-pM-UUn"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DHp-hZ-6In">
+                                <rect key="frame" x="0.0" y="300" width="414" height="387"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="KMH-Dg-FRZ" kind="embed" identifier="searchToPeople" id="czg-X6-pf6"/>
+                                </connections>
+                            </containerView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uPe-gp-1lw" userLabel="People View">
+                                <rect key="frame" x="0.0" y="147" width="414" height="540"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WBt-vu-arn">
@@ -1021,13 +1045,13 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FirstName LastName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8vc-zL-vIj">
-                                                            <rect key="frame" x="124" y="12" width="227" height="21"/>
+                                                            <rect key="frame" x="124" y="12" width="188" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@handle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yfd-Vu-w5K">
-                                                            <rect key="frame" x="124" y="33" width="227" height="21"/>
+                                                            <rect key="frame" x="124" y="33" width="188" height="21"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="21" id="HpR-pf-9KU"/>
                                                             </constraints>
@@ -1036,13 +1060,13 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FriendshipType" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="35i-gb-yIp">
-                                                            <rect key="frame" x="124" y="69" width="227" height="21"/>
+                                                            <rect key="frame" x="124" y="69" width="188" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R4u-Pz-G1D">
-                                                            <rect key="frame" x="357" y="35" width="30" height="30"/>
+                                                            <rect key="frame" x="318" y="35" width="30" height="30"/>
                                                             <state key="normal" title="+"/>
                                                         </button>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vY4-we-02b">
@@ -1082,7 +1106,7 @@
                                 </subviews>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U7j-JY-MnK" userLabel="Product View">
-                                <rect key="frame" x="0.0" y="147" width="414" height="582"/>
+                                <rect key="frame" x="0.0" y="147" width="414" height="540"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wxt-cx-BMB">
@@ -1166,7 +1190,8 @@
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="uPe-gp-1lw"/>
+                                <exclude reference="va9-Dd-nB3"/>
+                                <exclude reference="DHp-hZ-6In"/>
                             </mask>
                         </variation>
                     </view>
@@ -1175,8 +1200,10 @@
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="peopleContainer" destination="DHp-hZ-6In" id="dzd-EI-hTf"/>
                         <outlet property="peopleTableView" destination="WBt-vu-arn" id="zLF-1q-dYE"/>
                         <outlet property="peopleView" destination="uPe-gp-1lw" id="Lit-9L-cQ6"/>
+                        <outlet property="productContainer" destination="va9-Dd-nB3" id="Jmx-sw-N10"/>
                         <outlet property="productPeopleTab" destination="Cy8-QW-6iy" id="SRP-yO-Gh9"/>
                         <outlet property="productTableView" destination="wxt-cx-BMB" id="xL8-OK-7hJ"/>
                         <outlet property="productView" destination="U7j-JY-MnK" id="kgh-sR-tSc"/>
@@ -1694,6 +1721,75 @@
             </objects>
             <point key="canvasLocation" x="461" y="867"/>
         </scene>
+        <!--ProductView-->
+        <scene sceneID="1dT-pp-zIa">
+            <objects>
+                <viewController title="ProductView" id="nQF-H2-qeS" customClass="ProductViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jLE-Ld-6oE"/>
+                        <viewControllerLayoutGuide type="bottom" id="19S-7T-pGy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ZqT-Jh-MBr">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="397"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Product" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="z6j-Ua-QHw">
+                                <rect key="frame" x="40" y="183.66666666666666" width="334" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KZf-qV-M6v">
+                                <rect key="frame" x="184" y="325" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="checkSearchString:" destination="nQF-H2-qeS" eventType="touchUpInside" id="YCj-gf-mEZ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="z6j-Ua-QHw" firstAttribute="leading" secondItem="ZqT-Jh-MBr" secondAttribute="leadingMargin" constant="20" id="9ta-rA-u19"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="z6j-Ua-QHw" secondAttribute="trailing" constant="20" id="jpo-ZT-wJK"/>
+                            <constraint firstItem="z6j-Ua-QHw" firstAttribute="centerY" secondItem="ZqT-Jh-MBr" secondAttribute="centerY" id="oGL-QM-F92"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="searchTextField" destination="z6j-Ua-QHw" id="3S1-SU-fxf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uRK-5w-OVX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2826" y="476"/>
+        </scene>
+        <!--PeopleView-->
+        <scene sceneID="47r-YW-b07">
+            <objects>
+                <viewController title="PeopleView" id="KMH-Dg-FRZ" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="t1L-Uq-VWZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="QQd-FS-0Og"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lE7-Hf-zbL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="387"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="People" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IOz-gU-rkk">
+                                <rect key="frame" x="159" y="255" width="97" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fQf-B4-8jT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3480" y="472"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Cart Solid White Icon.png" width="22" height="23"/>
@@ -1706,7 +1802,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="4Df-8F-JjS"/>
-        <segue reference="Huf-aH-vL3"/>
-        <segue reference="cTu-G9-fQe"/>
+        <segue reference="IOv-WN-4XC"/>
+        <segue reference="Fma-AT-nbz"/>
     </inferredMetricsTieBreakers>
 </document>

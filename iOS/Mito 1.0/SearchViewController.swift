@@ -9,7 +9,7 @@
 import UIKit
 import UserNotifications
 
-class ActivityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
     
     @IBOutlet weak var peopleTableView: UITableView!
@@ -19,6 +19,9 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var peopleView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
     
+    @IBOutlet weak var productContainer: UIView!
+    @IBOutlet weak var peopleContainer: UIView!
+    
     var pageNum = 1
     var myIndex = 0
     var searchText = ""
@@ -26,18 +29,22 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
 
     @IBAction func switchTab(_ sender: UISegmentedControl) {
         if productPeopleTab.selectedSegmentIndex == 0 {
+            appdata.friends.removeAll()
+            let userURL = appdata.userID
+//            peopleURL = URL(string: )
             UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
-            print("\(productPeopleTab.selectedSegmentIndex)")
-            pageNum = 0
+            loadProductData()
+            productTableView.reloadData()
         } else {
+            appdata.products.removeAll()
             UIView.transition(from: productView, to: peopleView, duration: 0, options: .showHideTransitionViews)
-            print("\(productPeopleTab.selectedSegmentIndex)")
-            pageNum = 1
+            loadPeopleData()
+            peopleTableView.reloadData()
         }
     }
     
     var appdata = AppData.shared
-    var peopleUrl = URL(string: "https://api.projectmito.io/v1/friend/7")
+    var peopleUrl = URL(string: "https://api.projectmito.io/v1/friend/")
     var prodUrl = URL(string: "https://api.projectmito.io/v1/amazonhashtest/" )
     var prodOriginalUrl = URL(string: "https://api.projectmito.io/v1/amazonhashtest/" )
     
@@ -52,38 +59,47 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         productTableView.rowHeight = 106
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
+        print("userid: \(appdata.userID)")
+        let userURL = "https://api.projectmito.io/v1/friend/\(appdata.userID)"
+        print("userURL: \(userURL)")
+        peopleUrl = URL(string: userURL)
+        print(peopleUrl)
 //        loadPeopleData()
 //        loadProductData()
 //        peopleTableView.reloadData()
 //        productTableView.reloadData()
-//        print(appdata.products.count)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         appdata.friends.removeAll()
         appdata.products.removeAll()
-        loadPeopleData()
+//        loadPeopleData()
         loadProductData()
         peopleTableView.reloadData()
         productTableView.reloadData()
         
     }
     
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "searchToProduct" {
+//            let talkView = segue.destination as? ProductViewController
+//            talkView?.searchText = searchText
+//        }
+//    }
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
         print(searchBar.text)
         print("final text: \(searchBar.text)")
         searchText = ""
-        searchText = searchBar.text!
+        searchText = searchBar.text!.replacingOccurrences(of: " ", with: "+")
         print("searchText: \(searchText)")
         searchBar.resignFirstResponder()
-        
         appdata.products.removeAll()
         var urlString = prodOriginalUrl?.absoluteString
         urlString = urlString! + searchText
         prodUrl = URL(string: urlString!)
         loadProductData()
-        productTableView.reloadData()
+        //productTableView.reloadData()
     }
     
     @IBAction func cartButtonClicked(_ sender: Any) {
@@ -215,6 +231,8 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
                                 let product: Product = Product(image: imgURL, ASIN: ASIN, title: title, publisher: publisher_brand, price: formattedPrice)
                                 self.appdata.products.append(product)
                             }
+                            print("NumProducts: \(self.appdata.products.count)")
+                            print("NumPeople: \(self.appdata.friends.count)")
                         }
                         DispatchQueue.main.async {
                             self.productTableView.reloadData()
@@ -245,31 +263,15 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         myIndex = indexPath.row
         print(myIndex)
-        appdata.cart.append(appdata.products[myIndex])
-        print(appdata.cart[appdata.cart.count - 1].title)
-        print("Cart count: \(appdata.cart.count)")
+        if productPeopleTab.selectedSegmentIndex == 0 {
+            appdata.cart.append(appdata.products[myIndex])
+            print(appdata.cart[appdata.cart.count - 1].title)
+            print("Cart count: \(appdata.cart.count)")
+        }
 //        performSegue(withIdentifier: "segue", sender: self)
     }
-    
-    // Trying to figure out why this tableView gets called more than the expected appdata.friends.count
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        if pageNum == 1 {
-//            print(indexPath.row)
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
-//            let personObj = appdata.friends[indexPath.row]
-//            cell.name.text = "\(personObj.firstName) \(personObj.lastName)"
-//            cell.handle.text = "\(personObj.email)"
-//            let url = URL(string:"\(personObj.avatar)")
-//            let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
-//            if let data = try? Data(contentsOf: url!) {
-//                cell.img.image = UIImage(data: data)!
-//            } else if let data = try? Data(contentsOf: defaultURL!){
-//                cell.img.image = UIImage(data: data)
-//            }
-//            cell.friendshipType.text = "\(personObj.avatar)"
-//            return cell
-//        } else {
-//        print(indexPath.row)
+        if productPeopleTab.selectedSegmentIndex == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "productCell", for: indexPath) as! ProductTableViewCell
             let productObj = appdata.products[indexPath.row]
             let url = URL(string: "\(productObj.image)")
@@ -280,6 +282,20 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
             cell.publisher.text = productObj.publisher
             cell.price.text = productObj.price
             return cell
-//        }
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
+            let personObj = appdata.friends[indexPath.row]
+            cell.name.text = "\(personObj.firstName) \(personObj.lastName)"
+            cell.handle.text = "\(personObj.email)"
+            let url = URL(string:"\(personObj.avatar)")
+            let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
+            if let data = try? Data(contentsOf: url!) {
+                cell.img.image = UIImage(data: data)!
+            } else if let data = try? Data(contentsOf: defaultURL!){
+                cell.img.image = UIImage(data: data)
+            }
+            cell.friendshipType.text = "\(personObj.avatar)"
+            return cell
+        }
     }
 }
