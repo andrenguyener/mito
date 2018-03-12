@@ -15,10 +15,6 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var cartNumber: UILabel!
     @IBOutlet weak var cartPrice: UILabel!
     
-    // Checkout Scene
-    @IBOutlet weak var recipientImg: UIImageView!
-    @IBOutlet weak var recipientName: UILabel!
-    
     @IBAction func finishShopping(_ sender: Any) {
         performSegue(withIdentifier: "toCheckout", sender: self)
     }
@@ -32,6 +28,8 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var shippingCheckout: UILabel!
     @IBOutlet weak var itemTotalCheckout: UILabel!
     @IBOutlet weak var taxCheckout: UILabel!
+    @IBOutlet weak var imgRecipient: UIImageView!
+    @IBOutlet weak var recipientName: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,8 +52,19 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             cartTableView.rowHeight = 106
             cartNumber.text = "Cart has \(appdata.cart.count) items"
             cartPrice.text = "$\(priceSum)"
+        } else {
+            itemCountCheckout.text = String(appdata.cart.count)
+            shippingCheckout.text = "FREE"
+            let tax: Decimal = priceSum * 0.12
+            taxCheckout.text = String(describing: tax)
+            itemTotalCheckout.text = String(describing: priceSum + tax)
+            print(appdata.friends.count)
+            let imageURL = URL(string: appdata.friends[0].avatar)
+            if let data = try? Data(contentsOf: imageURL!) {
+                imgRecipient.image = UIImage(data: data)
+            }
+            recipientName.text = "Sopheaky Neaky"
         }
-        
     }
     var appdata = AppData.shared
     
