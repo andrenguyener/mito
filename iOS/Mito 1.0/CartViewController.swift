@@ -14,6 +14,25 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var cartTableView: UITableView!
     @IBOutlet weak var cartNumber: UILabel!
     @IBOutlet weak var cartPrice: UILabel!
+    
+    // Checkout Scene
+    @IBOutlet weak var recipientImg: UIImageView!
+    @IBOutlet weak var recipientName: UILabel!
+    
+    @IBAction func finishShopping(_ sender: Any) {
+        performSegue(withIdentifier: "toCheckout", sender: self)
+    }
+    @IBAction func backButton(_ sender: Any) {
+        performSegue(withIdentifier: "cartToHome", sender: self)
+    }
+    
+    //Checkout Page
+    
+    @IBOutlet weak var itemCountCheckout: UILabel!
+    @IBOutlet weak var shippingCheckout: UILabel!
+    @IBOutlet weak var itemTotalCheckout: UILabel!
+    @IBOutlet weak var taxCheckout: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let formatter = NumberFormatter()
@@ -30,7 +49,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
         
-
+        
         if cartTableView != nil {
             cartTableView.delegate = self
             cartTableView.dataSource = self
@@ -42,19 +61,6 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     var appdata = AppData.shared
     
-    @IBAction func finishShopping(_ sender: Any) {
-        performSegue(withIdentifier: "toCheckout", sender: self)
-    }
-    @IBAction func backButton(_ sender: Any) {
-        performSegue(withIdentifier: "cartToHome", sender: self)
-    }
-    
-    //Checkout Page
-    
-    @IBOutlet weak var itemCountCheckout: UILabel!
-    @IBOutlet weak var shippingCheckout: UILabel!
-    @IBOutlet weak var itemTotalCheckout: UILabel!
-    @IBOutlet weak var taxCheckout: UILabel!
     @IBAction func checkoutToCart(_ sender: Any) {
         performSegue(withIdentifier: "checkoutToCart", sender: self)
     }
