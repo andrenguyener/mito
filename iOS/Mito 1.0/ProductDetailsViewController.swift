@@ -10,10 +10,22 @@ import UIKit
 
 class ProductDetailsViewController: UIViewController {
 
-    @IBOutlet weak var img: UIImageView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        img.image = UIImage(named: "Andre2.png")
+        print("i added item to cart")
+        
+        let url = URL(string: "\(appdata.products[appdata.currentIndex].image)")
+        if let data = try? Data(contentsOf: url!) {
+            prodImage.image = UIImage(data: data)!
+        }
+        prodTitle.text = appdata.products[appdata.currentIndex].title
+        prodPub.text = appdata.products[appdata.currentIndex].publisher
+        prodPrice.text = appdata.products[appdata.currentIndex].price
+        
+        prodDetail.text = appdata.products[appdata.currentIndex].description
+        print(appdata.products[appdata.currentIndex].title)
+        //img.image = UIImage(named: "Andre2.png")
         // Do any additional setup after loading the view.
     }
 
@@ -23,7 +35,34 @@ class ProductDetailsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    
+    var appdata = AppData.shared
+    //PEOPLE DETAIL SEGUE
     @IBAction func back(_ sender: Any) {
         performSegue(withIdentifier: "prodDetailBack", sender: self)
     }
+    
+    // PRODUCT DETAIL SEGUE
+    @IBOutlet weak var prodImage: UIImageView!
+    @IBOutlet weak var prodTitle: UILabel!
+    @IBOutlet weak var prodPub: UILabel!
+    @IBOutlet weak var prodPrice: UILabel!
+    @IBOutlet weak var prodDetail: UILabel!
+    
+    @IBAction func addToCart(_ sender: Any) {
+        //Add alert here
+//        print("i added item to cart")
+        
+//        print(appdata.products[appdata.currentIndex])
+        appdata.cart.append(appdata.products[appdata.currentIndex])
+        print(appdata.cart[appdata.cart.count - 1].title)
+        print("Cart count: \(appdata.cart.count)")
+    }
+    
+
+    @IBAction func backToSearch(_ sender: Any) {
+        appdata.products.removeAll()
+        performSegue(withIdentifier: "backToSearchSegue", sender: self)
+    }
+    
 }
