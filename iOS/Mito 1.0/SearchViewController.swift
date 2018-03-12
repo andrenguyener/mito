@@ -22,7 +22,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var productContainer: UIView!
     @IBOutlet weak var peopleContainer: UIView!
     
-    
     var pageNum = 1
     var myIndex = 0
     var searchText = ""
@@ -30,20 +29,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     @IBAction func switchTab(_ sender: UISegmentedControl) {
         if productPeopleTab.selectedSegmentIndex == 0 {
-            productContainer.alpha = 1
-            peopleContainer.alpha = 0
+            UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
         } else {
-            productContainer.alpha = 0
-            peopleContainer.alpha = 1
+            UIView.transition(from: productView, to: peopleView, duration: 0, options: .showHideTransitionViews)
         }
-//            UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
-//            print("\(productPeopleTab.selectedSegmentIndex)")
-//            pageNum = 0
-//        } else {
-//            UIView.transition(from: productView, to: peopleView, duration: 0, options: .showHideTransitionViews)
-//            print("\(productPeopleTab.selectedSegmentIndex)")
-//            pageNum = 1
-//        }
     }
     
     var appdata = AppData.shared
@@ -53,55 +42,51 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        peopleTableView.delegate = self
-//        peopleTableView.dataSource = self
-//        peopleTableView.rowHeight = 106
+        peopleTableView.delegate = self
+        peopleTableView.dataSource = self
+        peopleTableView.rowHeight = 106
 //        productView.isHidden = true
-//        productTableView.delegate = self
-//        productTableView.dataSource = self
-//        productTableView.rowHeight = 106
-//        searchBar.delegate = self
-//        searchBar.returnKeyType = UIReturnKeyType.done
+        productTableView.delegate = self
+        productTableView.dataSource = self
+        productTableView.rowHeight = 106
+        searchBar.delegate = self
+        searchBar.returnKeyType = UIReturnKeyType.done
 //        loadPeopleData()
 //        loadProductData()
 //        peopleTableView.reloadData()
 //        productTableView.reloadData()
-//        print(appdata.products.count)
     }
     
     override func viewDidAppear(_ animated: Bool) {
-//        appdata.friends.removeAll()
-//        appdata.products.removeAll()
-//        loadPeopleData()
-//        loadProductData()
-//        peopleTableView.reloadData()
-//        productTableView.reloadData()
+        appdata.friends.removeAll()
+        appdata.products.removeAll()
+        loadPeopleData()
+        loadProductData()
+        peopleTableView.reloadData()
+        productTableView.reloadData()
         
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "searchToProduct" {
-            let talkView = segue.destination as? ProductViewController
-            talkView?.searchText = searchText
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "searchToProduct" {
+//            let talkView = segue.destination as? ProductViewController
+//            talkView?.searchText = searchText
+//        }
+//    }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
-        
         print(searchBar.text)
         print("final text: \(searchBar.text)")
         searchText = ""
         searchText = searchBar.text!
         print("searchText: \(searchText)")
         searchBar.resignFirstResponder()
-//
-//        appdata.products.removeAll()
-//        var urlString = prodOriginalUrl?.absoluteString
-//        urlString = urlString! + searchText
-//        prodUrl = URL(string: urlString!)
-//        loadProductData()
-//        productTableView.reloadData()
+        appdata.products.removeAll()
+        var urlString = prodOriginalUrl?.absoluteString
+        urlString = urlString! + searchText
+        prodUrl = URL(string: urlString!)
+        loadProductData()
+        //productTableView.reloadData()
     }
     
     @IBAction func cartButtonClicked(_ sender: Any) {
@@ -233,6 +218,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 let product: Product = Product(image: imgURL, ASIN: ASIN, title: title, publisher: publisher_brand, price: formattedPrice)
                                 self.appdata.products.append(product)
                             }
+                            print("NumProducts: \(self.appdata.products.count)")
+                            print("NumPeople: \(self.appdata.friends.count)")
                         }
                         DispatchQueue.main.async {
                             self.productTableView.reloadData()
@@ -268,8 +255,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         print("Cart count: \(appdata.cart.count)")
 //        performSegue(withIdentifier: "segue", sender: self)
     }
-    
-    // Trying to figure out why this tableView gets called more than the expected appdata.friends.count
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //        if pageNum == 1 {
 //            print(indexPath.row)

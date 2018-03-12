@@ -41,6 +41,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //CheckOutComplete Page
     @IBAction func returnHome(_ sender: Any) {
+        appdata.products.removeAll()
         performSegue(withIdentifier: "checkoutComplete", sender: self)
     }
     

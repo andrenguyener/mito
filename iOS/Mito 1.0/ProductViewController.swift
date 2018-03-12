@@ -10,6 +10,7 @@ import UIKit
 
 class ProductViewController: UIViewController {
     
+    @IBOutlet weak var searchTextField: UITextField!
     var searchText = ""
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +21,12 @@ class ProductViewController: UIViewController {
         let talkView = segue.destination as! SearchViewController
         talkView.searchText = searchText
     }
-
+    
+    
+    @IBAction func checkSearchString(_ sender: Any) {
+        searchTextField.text = searchText
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
