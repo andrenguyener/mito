@@ -29,9 +29,15 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     @IBAction func switchTab(_ sender: UISegmentedControl) {
         if productPeopleTab.selectedSegmentIndex == 0 {
+            appdata.friends.removeAll()
             UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
+            loadProductData()
+            productTableView.reloadData()
         } else {
+            appdata.products.removeAll()
             UIView.transition(from: productView, to: peopleView, duration: 0, options: .showHideTransitionViews)
+            loadPeopleData()
+            peopleTableView.reloadData()
         }
     }
     
@@ -58,12 +64,12 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        appdata.friends.removeAll()
-        appdata.products.removeAll()
-        loadPeopleData()
-        loadProductData()
-        peopleTableView.reloadData()
-        productTableView.reloadData()
+//        appdata.friends.removeAll()
+//        appdata.products.removeAll()
+//        loadPeopleData()
+//        loadProductData()
+//        peopleTableView.reloadData()
+//        productTableView.reloadData()
         
     }
     
@@ -78,7 +84,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         print(searchBar.text)
         print("final text: \(searchBar.text)")
         searchText = ""
-        searchText = searchBar.text!
+        searchText = searchBar.text!.replacingOccurrences(of: " ", with: "+")
         print("searchText: \(searchText)")
         searchBar.resignFirstResponder()
         appdata.products.removeAll()
@@ -256,23 +262,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //        performSegue(withIdentifier: "segue", sender: self)
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        if pageNum == 1 {
-//            print(indexPath.row)
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
-//            let personObj = appdata.friends[indexPath.row]
-//            cell.name.text = "\(personObj.firstName) \(personObj.lastName)"
-//            cell.handle.text = "\(personObj.email)"
-//            let url = URL(string:"\(personObj.avatar)")
-//            let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
-//            if let data = try? Data(contentsOf: url!) {
-//                cell.img.image = UIImage(data: data)!
-//            } else if let data = try? Data(contentsOf: defaultURL!){
-//                cell.img.image = UIImage(data: data)
-//            }
-//            cell.friendshipType.text = "\(personObj.avatar)"
-//            return cell
-//        } else {
-//        print(indexPath.row)
+        if productPeopleTab.selectedSegmentIndex == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "productCell", for: indexPath) as! ProductTableViewCell
             let productObj = appdata.products[indexPath.row]
             let url = URL(string: "\(productObj.image)")
@@ -283,6 +273,20 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             cell.publisher.text = productObj.publisher
             cell.price.text = productObj.price
             return cell
-//        }
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
+            let personObj = appdata.friends[indexPath.row]
+            cell.name.text = "\(personObj.firstName) \(personObj.lastName)"
+            cell.handle.text = "\(personObj.email)"
+            let url = URL(string:"\(personObj.avatar)")
+            let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
+            if let data = try? Data(contentsOf: url!) {
+                cell.img.image = UIImage(data: data)!
+            } else if let data = try? Data(contentsOf: defaultURL!){
+                cell.img.image = UIImage(data: data)
+            }
+            cell.friendshipType.text = "\(personObj.avatar)"
+            return cell
+        }
     }
 }
