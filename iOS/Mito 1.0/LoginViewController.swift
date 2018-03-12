@@ -14,6 +14,7 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
+    var appdata = AppData.shared
     
     // Opening Login Page
     @IBAction func login(_ sender: Any) {
@@ -140,6 +141,7 @@ class LoginViewController: UIViewController {
             userID = data["userId"] as? Int
             print("data = \(data)")
             print("userId = \(String(describing: data["userId"]))")
+            appdata.userID = userID!
         }
         let address1 = address1AA.text
         let address2 = address2AA.text

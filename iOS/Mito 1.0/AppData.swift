@@ -10,6 +10,7 @@ import UIKit
 
 class AppData: NSObject {
     static let shared = AppData()
+    open var userID: Int = 0
     
     open var friends: [Person] = []
     

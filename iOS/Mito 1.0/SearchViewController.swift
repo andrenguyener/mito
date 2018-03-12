@@ -30,6 +30,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBAction func switchTab(_ sender: UISegmentedControl) {
         if productPeopleTab.selectedSegmentIndex == 0 {
             appdata.friends.removeAll()
+            let userURL = appdata.userID
+//            peopleURL = URL(string: )
             UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
             loadProductData()
             productTableView.reloadData()
@@ -42,7 +44,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     var appdata = AppData.shared
-    var peopleUrl = URL(string: "https://api.projectmito.io/v1/friend/7")
+    var peopleUrl = URL(string: "https://api.projectmito.io/v1/friend/")
     var prodUrl = URL(string: "https://api.projectmito.io/v1/amazonhashtest/" )
     var prodOriginalUrl = URL(string: "https://api.projectmito.io/v1/amazonhashtest/" )
     
@@ -57,6 +59,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         productTableView.rowHeight = 106
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
+        let userURL = "https://api.projectmito.io/v1/friend/\(appdata.userID)"
+        peopleUrl = URL(string: userURL)
+        print(peopleUrl)
 //        loadPeopleData()
 //        loadProductData()
 //        peopleTableView.reloadData()
