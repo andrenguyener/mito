@@ -167,8 +167,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 let ASIN = ASINArr[0] as! String
     //                            print("\(idx): \(ASINArray[0] as! String)")
                                 var imgURL = ""
-                                if item["SmallImage"] != nil {
-                                    let SmallImageArr = item["SmallImage"] as! NSArray
+                                if item["LargeImage"] != nil {
+                                    let SmallImageArr = item["LargeImage"] as! NSArray
                                     let SmallImageObj = SmallImageArr[0] as! NSDictionary
                                     let URLArr = SmallImageObj["URL"] as! NSArray
                                     imgURL = URLArr[0] as! String
@@ -177,17 +177,27 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     let ImageSetsObj = ImageSetsArr[0] as! NSDictionary
                                     let ImageSetArr = ImageSetsObj["ImageSet"] as! NSArray
                                     let ImageSetObj = ImageSetArr[0] as! NSDictionary
-                                    let SmallImageObjArr = ImageSetObj["SmallImage"] as! NSArray
+                                    let SmallImageObjArr = ImageSetObj["LargeImage"] as! NSArray
                                     let SmallImageObj = SmallImageObjArr[0] as! NSDictionary
                                     let URLArr = SmallImageObj["URL"] as! NSArray
                                     imgURL = URLArr[0] as! String
                                 } else {
                                     imgURL = "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897"
                                 }
+
                                 var formattedPrice = ""
                                 let ItemAttributesArr = item["ItemAttributes"] as! NSArray
                                 let ItemAttributeObj = ItemAttributesArr[0] as! NSDictionary
 //                                print(ItemAttributeObj.description)
+                                
+                                var itemFeature = ""
+                                if ItemAttributeObj["Feature"] != nil {
+                                    let itemFeatureArray = ItemAttributeObj["Feature"] as! NSArray
+                                    itemFeature = itemFeatureArray[0] as! String
+                                } else {
+                                    itemFeature = "NA"
+                                }
+                                
                                 let TitleArr = ItemAttributeObj["Title"] as! NSArray
                                 let title = TitleArr[0] as! String
 //                                print(title)
@@ -228,7 +238,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //                                    let ProductGroupArr = ItemAttributeObj["ProductGroup"] as! NSArray
                                     publisher_brand = "Brand"
                                 }
-                                let product: Product = Product(image: imgURL, ASIN: ASIN, title: title, publisher: publisher_brand, price: formattedPrice)
+                                let product: Product = Product(image: imgURL, ASIN: ASIN, title: title, publisher: publisher_brand, price: formattedPrice, description: itemFeature)
                                 self.appdata.products.append(product)
                             }
                             print("NumProducts: \(self.appdata.products.count)")
@@ -264,12 +274,19 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         myIndex = indexPath.row
         print(myIndex)
         if productPeopleTab.selectedSegmentIndex == 0 {
-            appdata.cart.append(appdata.products[myIndex])
-            print(appdata.cart[appdata.cart.count - 1].title)
-            print("Cart count: \(appdata.cart.count)")
+
+            appdata.currentIndex = myIndex
+            
+            performSegue(withIdentifier: "productDetail", sender: self)
+//            appdata.cart.append(appdata.products[myIndex])
+//            print(appdata.cart[appdata.cart.count - 1].title)
+//            print("Cart count: \(appdata.cart.count)")
         }
 //        performSegue(withIdentifier: "segue", sender: self)
     }
+    
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if productPeopleTab.selectedSegmentIndex == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "productCell", for: indexPath) as! ProductTableViewCell
