@@ -69,14 +69,130 @@ class LoginViewController: UIViewController {
     }
 
     // Sign up page
+    
+    @IBOutlet weak var userFnameSU: UITextField!
+    @IBOutlet weak var usernameSU: UITextField!
+    @IBOutlet weak var passwordSU: UITextField!
+    @IBOutlet weak var passwordConfSU: UITextField!
+    @IBOutlet weak var userEmailSU: UITextField!
     @IBAction func signupButton(_ sender: Any) {
-        performSegue(withIdentifier: "signUpToAddress", sender: self)
+        let uFname = userFnameSU.text
+        let uname = usernameSU.text
+        let pass = passwordSU.text
+        let passConf = passwordConfSU.text
+        let uEmail = userEmailSU.text
+        
+        let JSONObj: [String: Any] = [
+            "userFname": uFname!,
+            "userLname": "Smith",
+            "username": uname!,
+            "userEmail": uEmail!,
+            "password": pass!,
+            "passwordConf": passConf!,
+            "userDOB": "01/01/2000"
+        ]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: JSONObj)
+        let url = URL(string: "https://api.projectmito.io/v1/users")!
+        var request = URLRequest(url: url)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "POST"
+        request.httpBody = jsonData
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                print("error=\(String(describing: error))")
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode > 300 {           // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(String(describing: response))")
+            }
+            
+            let responseString = String(data: data, encoding: .utf8)
+            let data2 = responseString?.data(using: .utf8)
+            let dictionary = try? JSONSerialization.jsonObject(with: data2!, options: .mutableLeaves)
+            DispatchQueue.main.async {
+                if (dictionary != nil) {
+                    self.performSegue(withIdentifier: "signUpToAddress", sender: self)
+                    UserDefaults.standard.set(dictionary, forKey: "UserInfo")
+                    //print(UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary)
+                }
+            }
+            //success = true
+        }
+        task.resume()
+        
+        
     }
     
     // Add Address page
+    
+    @IBOutlet weak var address1AA: UITextField!
+    @IBOutlet weak var address2AA: UITextField!
+    @IBOutlet weak var cityAA: UITextField!
+    @IBOutlet weak var stateAA: UITextField!
+    @IBOutlet weak var zipcodeAA: UITextField!
     @IBAction func createAccountButton(_ sender: Any) {
-        performSegue(withIdentifier: "createAccount", sender: self)
+        var userID: Int?
+        if UserDefaults.standard.object(forKey: "UserInfo") != nil {
+            let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+            userID = data["userId"] as? Int
+            print("data = \(data)")
+            print("userId = \(String(describing: data["userId"]))")
+        }
+        let address1 = address1AA.text
+        let address2 = address2AA.text
+        let city = cityAA.text
+        let state = stateAA.text
+        let zipcode = zipcodeAA.text
+        let alias = "Home Address"
+        
+        let JSONObj: [String: Any] = [
+            "userId": userID!,
+            "streetAddress1": address1!,
+            "streetAddress2": address2!,
+            "cityName": city!,
+            "zipCode": zipcode!,
+            "stateName": state!,
+            "aliasName": alias
+        ]
+        
+        
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: JSONObj)
+        let url = URL(string: "https://api.projectmito.io/v1/address")!
+        var request = URLRequest(url: url)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "POST"
+        request.httpBody = jsonData
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                print("error=\(String(describing: error))")
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode > 300 {           // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(String(describing: response))")
+            }
+            
+            let responseString = String(data: data, encoding: .utf8)
+            let data2 = responseString?.data(using: .utf8)
+            let dictionary = try? JSONSerialization.jsonObject(with: data2!, options: .mutableLeaves)
+            DispatchQueue.main.async {
+                if (dictionary != nil) {
+                    self.performSegue(withIdentifier: "createAccount", sender: self)
+                    print(dictionary)
+                    //                    UserDefaults.standard.set(dictionary, forKey: "AddressInfo")
+                    //                    print(UserDefaults.standard.object(forKey: "AddressInfo") as! NSDictionary)
+                }
+            }
+            //success = true
+        }
+        task.resume()
     }
+
     
     @objc func keyboardWillShow(notification: NSNotification) {
         if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {

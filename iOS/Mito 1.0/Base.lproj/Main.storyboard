@@ -642,6 +642,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="passwordConfSU" destination="NFe-9a-357" id="1YR-V9-Q48"/>
+                        <outlet property="passwordSU" destination="2h6-SM-hUZ" id="Bmt-mY-hdK"/>
+                        <outlet property="userEmailSU" destination="z18-WE-ZVf" id="nQC-fK-X3y"/>
+                        <outlet property="userFnameSU" destination="E9y-kw-hnK" id="g1c-Uy-rcf"/>
+                        <outlet property="usernameSU" destination="kLZ-kE-kzA" id="BHM-pU-gUj"/>
                         <segue destination="Eua-Q9-CQ1" kind="show" identifier="signUpToAddress" id="UQ1-zU-VkT"/>
                     </connections>
                 </viewController>
@@ -816,6 +821,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="address1AA" destination="rJz-P9-Kg7" id="4or-d7-Wsf"/>
+                        <outlet property="address2AA" destination="xIz-7p-sjT" id="0rS-Ll-sqT"/>
+                        <outlet property="cityAA" destination="j7b-HR-Hwa" id="PoF-fL-f8H"/>
+                        <outlet property="stateAA" destination="TC3-w8-VvJ" id="823-Ix-NdF"/>
+                        <outlet property="zipcodeAA" destination="vPC-bh-u6c" id="5wI-sZ-emX"/>
                         <segue destination="vJa-9R-Sbw" kind="show" identifier="createAccount" id="Fma-AT-nbz"/>
                     </connections>
                 </viewController>
@@ -1785,6 +1795,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="4Df-8F-JjS"/>
         <segue reference="IOv-WN-4XC"/>
-        <segue reference="cTu-G9-fQe"/>
+        <segue reference="Fma-AT-nbz"/>
     </inferredMetricsTieBreakers>
 </document>
