@@ -37,17 +37,27 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //            if (tabFlag == false) {
             
 //                self.tabFlag = true
+                DispatchQueue.main.async(execute: {
+                    self.productPeopleTab.isEnabled = false
+                })
                 productTableView.reloadData()
+                DispatchQueue.main.async(execute: {
+                    self.productPeopleTab.isEnabled = true
+                })
 //            }
         } else {
             //appdata.products.removeAll()
             //loadPeopleData()
             
             UIView.transition(from: productView, to: peopleView, duration: 0, options: .showHideTransitionViews)
-           
+            DispatchQueue.main.async(execute: {
+                self.productPeopleTab.isEnabled = false
+            })
             
             peopleTableView.reloadData()
-            
+            DispatchQueue.main.async(execute: {
+                self.productPeopleTab.isEnabled = true
+            })
         }
     }
     
