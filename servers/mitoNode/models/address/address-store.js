@@ -24,7 +24,7 @@ class AddressStore {
             let procedureName = "InsertUserAddress";
             var request = this.request(procedureName);
             var addressId;
-            request.addParameter('userId', TYPES.VarChar, address.userId);
+            request.addParameter('userId', TYPES.Int, address.userId);
             request.addParameter('streetAddress1', TYPES.VarChar, address.streetAddress1);
             request.addParameter('streetAddress2', TYPES.VarChar, address.streetAddress2);
             request.addParameter('cityName', TYPES.VarChar, address.cityName);
