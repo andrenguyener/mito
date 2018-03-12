@@ -16,6 +16,9 @@ class ViewController: UIViewController {
         img.image = UIImage(named: "Andre2.png")
     }
 
+    @IBAction func backButton(_ sender: Any) {
+        performSegue(withIdentifier: "prodDetailBack", sender: self)
+    }
     
 }
 

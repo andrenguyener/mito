@@ -12,6 +12,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     //User's Cart
     @IBOutlet weak var cartTableView: UITableView!
+    @IBOutlet weak var cartNumber: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +20,9 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             cartTableView.delegate = self
             cartTableView.dataSource = self
             cartTableView.rowHeight = 106
+            cartNumber.text = "Cart has \(appdata.cart.count) items"
         }
+        
     }
     var appdata = AppData.shared
     

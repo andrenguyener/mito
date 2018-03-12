@@ -38,9 +38,7 @@ class ProductDetailsViewController: UIViewController {
     
     var appdata = AppData.shared
     //PEOPLE DETAIL SEGUE
-    @IBAction func back(_ sender: Any) {
-        performSegue(withIdentifier: "prodDetailBack", sender: self)
-    }
+
     
     // PRODUCT DETAIL SEGUE
     @IBOutlet weak var prodImage: UIImageView!
