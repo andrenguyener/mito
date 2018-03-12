@@ -47,9 +47,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
                 priceSum = amount + priceSum
                 print(amount)
             }
-        }
-        
-        
+        }        
         if cartTableView != nil {
             cartTableView.delegate = self
             cartTableView.dataSource = self
