@@ -21,7 +21,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var productContainer: UIView!
     @IBOutlet weak var peopleContainer: UIView!
-    
+    var tabFlag = false
     var pageNum = 1
     var myIndex = 0
     var searchText = ""
@@ -29,17 +29,24 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     @IBAction func switchTab(_ sender: UISegmentedControl) {
         if productPeopleTab.selectedSegmentIndex == 0 {
-            appdata.friends.removeAll()
+            //appdata.friends.removeAll()
             let userURL = appdata.userID
 //            peopleURL = URL(string: )
+            //loadProductData()
             UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
-            loadProductData()
-            productTableView.reloadData()
+//            if (tabFlag == false) {
+            
+//                self.tabFlag = true
+                productTableView.reloadData()
+//            }
         } else {
-            appdata.products.removeAll()
+            //appdata.products.removeAll()
+            //loadPeopleData()
             UIView.transition(from: productView, to: peopleView, duration: 0, options: .showHideTransitionViews)
-            loadPeopleData()
+           
+            
             peopleTableView.reloadData()
+            
         }
     }
     
@@ -64,6 +71,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         print("userURL: \(userURL)")
         peopleUrl = URL(string: userURL)
         print(peopleUrl)
+        if (productTableView.hasUncommittedUpdates) {
+            print("tab is false")
+            productPeopleTab.isEnabled = true
+        }
 //        loadPeopleData()
 //        loadProductData()
 //        peopleTableView.reloadData()
@@ -71,7 +82,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        appdata.friends.removeAll()
+        //appdata.friends.removeAll()
         appdata.products.removeAll()
 //        loadPeopleData()
         loadProductData()
@@ -87,7 +98,13 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //        }
 //    }
     
+    // Clicked Enter
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if (productPeopleTab.selectedSegmentIndex == 1) {
+            UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
+        }
+        productPeopleTab.selectedSegmentIndex = 0
+
         print(searchBar.text)
         print("final text: \(searchBar.text)")
         searchText = ""
@@ -99,7 +116,19 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         urlString = urlString! + searchText
         prodUrl = URL(string: urlString!)
         loadProductData()
-        //productTableView.reloadData()
+        print(productTableView.hasUncommittedUpdates)
+        if (!productTableView.hasUncommittedUpdates) {
+            print("tab is false")
+            productPeopleTab.isEnabled = false
+        }
+        productTableView.reloadData()
+        if (productTableView.hasUncommittedUpdates) {
+            print("tab is true")
+            productPeopleTab.isEnabled = true
+        }
+        
+
+        
     }
     
     @IBAction func cartButtonClicked(_ sender: Any) {
@@ -107,6 +136,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        if (productPeopleTab.selectedSegmentIndex == 1) {
+            UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
+        }
+        productPeopleTab.selectedSegmentIndex = 0
         searchActive = true
         print("Start typing")
         return true
@@ -121,6 +154,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             } else {
                 if let content = data {
                     do {
+//                        self.productPeopleTab.isEnabled = false
                         let myJson = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSArray
                         for obj in myJson {
                             let object = obj as! NSDictionary
@@ -129,7 +163,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         }
                         DispatchQueue.main.async {
                             self.peopleTableView.reloadData()
+                            self.productPeopleTab.isEnabled = true
+                            
                         }
+                        
                     } catch {
                         print("Catch")
                     }
@@ -139,6 +176,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
         task.resume()
+      
+//        self.productPeopleTab.isEnabled = true
     }
     
     // Product Tab View
@@ -150,6 +189,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             } else {
                 if let content = data {
                     do {
+//                        self.productPeopleTab.isEnabled = false
                         let myJson = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
 //                        print(myJson)
                         let itemSearchResponse = myJson["ItemSearchResponse"] as! NSDictionary
@@ -255,6 +295,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
         task.resume()
+//        self.productPeopleTab.isEnabled = true
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
