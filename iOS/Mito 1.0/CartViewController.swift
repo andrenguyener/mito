@@ -52,14 +52,13 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             cartTableView.rowHeight = 106
             cartNumber.text = "Cart has \(appdata.cart.count) items"
             cartPrice.text = "$\(priceSum)"
-        } else {
+        } else if itemCountCheckout != nil {
             itemCountCheckout.text = String(appdata.cart.count)
             shippingCheckout.text = "FREE"
             let tax: Decimal = priceSum * 0.12
             taxCheckout.text = String(describing: tax)
             itemTotalCheckout.text = String(describing: priceSum + tax)
-            print(appdata.friends.count)
-            let imageURL = URL(string: appdata.friends[0].avatar)
+            let imageURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t1.0-9/11822351_10203532431350051_1470782087578284319_n.jpg?oh=5d29573c2435a8b6f293e8dfc75d5215&oe=5B003A10")
             if let data = try? Data(contentsOf: imageURL!) {
                 imgRecipient.image = UIImage(data: data)
             }
