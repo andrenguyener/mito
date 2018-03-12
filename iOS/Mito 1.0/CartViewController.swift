@@ -61,6 +61,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             let imageURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t1.0-9/11822351_10203532431350051_1470782087578284319_n.jpg?oh=5d29573c2435a8b6f293e8dfc75d5215&oe=5B003A10")
             if let data = try? Data(contentsOf: imageURL!) {
                 imgRecipient.image = UIImage(data: data)
+                imgRecipient.contentMode = .scaleAspectFit
             }
             recipientName.text = "Sopheaky Neaky"
         }
@@ -95,8 +96,13 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         let url = URL(string: "\(cartObj.image)")
         if let data = try? Data(contentsOf: url!) {
             cell.itemImage.image = UIImage(data: data)!
+            cell.itemImage.contentMode = .scaleAspectFit
         }
+        print("Title: \(cartObj.title)")
+//        print(cartObj.description)
+//        print(cartObj.publisher)
         cell.itemName.text = cartObj.title
+        print("CellText \(cell.itemName.text)")
         cell.price.text = cartObj.price
         cell.seller.text = cartObj.publisher
         return cell
