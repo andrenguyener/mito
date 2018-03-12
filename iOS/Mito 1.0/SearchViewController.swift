@@ -59,7 +59,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         productTableView.rowHeight = 106
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
+        print("userid: \(appdata.userID)")
         let userURL = "https://api.projectmito.io/v1/friend/\(appdata.userID)"
+        print("userURL: \(userURL)")
         peopleUrl = URL(string: userURL)
         print(peopleUrl)
 //        loadPeopleData()
@@ -69,12 +71,12 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     override func viewDidAppear(_ animated: Bool) {
-//        appdata.friends.removeAll()
-//        appdata.products.removeAll()
+        appdata.friends.removeAll()
+        appdata.products.removeAll()
 //        loadPeopleData()
-//        loadProductData()
-//        peopleTableView.reloadData()
-//        productTableView.reloadData()
+        loadProductData()
+        peopleTableView.reloadData()
+        productTableView.reloadData()
         
     }
     
@@ -261,9 +263,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         myIndex = indexPath.row
         print(myIndex)
-        appdata.cart.append(appdata.products[myIndex])
-        print(appdata.cart[appdata.cart.count - 1].title)
-        print("Cart count: \(appdata.cart.count)")
+        if productPeopleTab.selectedSegmentIndex == 0 {
+            appdata.cart.append(appdata.products[myIndex])
+            print(appdata.cart[appdata.cart.count - 1].title)
+            print("Cart count: \(appdata.cart.count)")
+        }
 //        performSegue(withIdentifier: "segue", sender: self)
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

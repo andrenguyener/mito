@@ -1725,6 +1725,10 @@
         <scene sceneID="1dT-pp-zIa">
             <objects>
                 <viewController title="ProductView" id="nQF-H2-qeS" customClass="ProductViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jLE-Ld-6oE"/>
+                        <viewControllerLayoutGuide type="bottom" id="19S-7T-pGy"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ZqT-Jh-MBr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="397"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1763,6 +1767,10 @@
         <scene sceneID="47r-YW-b07">
             <objects>
                 <viewController title="PeopleView" id="KMH-Dg-FRZ" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="t1L-Uq-VWZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="QQd-FS-0Og"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="lE7-Hf-zbL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="387"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

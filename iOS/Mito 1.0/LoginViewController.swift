@@ -50,6 +50,12 @@ class LoginViewController: UIViewController {
                     self.performSegue(withIdentifier: "login", sender: self)
                     UserDefaults.standard.set(dictionary, forKey: "UserInfo")
                     print(UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary)
+                    if UserDefaults.standard.object(forKey: "UserInfo") != nil {
+                        let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+                        //userID = data["userId"] as? Int
+                        self.appdata.userID = (data["userId"] as? Int)!
+                    }
+                    //appdata.userID =
                 }
             }
             //success = true
@@ -118,6 +124,11 @@ class LoginViewController: UIViewController {
                     self.performSegue(withIdentifier: "signUpToAddress", sender: self)
                     UserDefaults.standard.set(dictionary, forKey: "UserInfo")
                     //print(UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary)
+                    if UserDefaults.standard.object(forKey: "UserInfo") != nil {
+                        let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+                        //userID = data["userId"] as? Int
+                        self.appdata.userID = (data["userId"] as? Int)!
+                    }
                 }
             }
             //success = true
