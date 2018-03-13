@@ -8,6 +8,7 @@
 
 import UIKit
 import UserNotifications
+import Alamofire
 
 class LoginViewController: UIViewController {
 

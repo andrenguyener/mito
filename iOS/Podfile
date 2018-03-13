@@ -1,0 +1,7 @@
+platform :ios, '9.0'
+  use_frameworks!
+
+target 'Mito 1.0' do
+  pod 'Alamofire', '~> 4.7'
+
+end
