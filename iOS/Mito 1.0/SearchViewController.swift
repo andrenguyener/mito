@@ -29,7 +29,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     @IBAction func switchTab(_ sender: UISegmentedControl) {
         if productPeopleTab.selectedSegmentIndex == 0 {
-            //appdata.friends.removeAll()
+//            appdata.friends.removeAll()
             let userURL = appdata.userID
 //            peopleURL = URL(string: )
             //loadProductData()
@@ -46,7 +46,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //            }
         } else {
             //appdata.products.removeAll()
-            //loadPeopleData()
+//            loadPeopleData()
           
             UIView.transition(from: productView, to: peopleView, duration: 0, options: .showHideTransitionViews)
            
@@ -87,9 +87,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        //appdata.friends.removeAll()
+        appdata.friends.removeAll()
         appdata.products.removeAll()
-//        loadPeopleData()
+        loadPeopleData()
         loadProductData()
         peopleTableView.reloadData()
         productTableView.reloadData()
