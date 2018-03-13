@@ -51,13 +51,26 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             cartTableView.dataSource = self
             cartTableView.rowHeight = 106
             cartNumber.text = "Cart has \(appdata.cart.count) items"
-            cartPrice.text = "$\(priceSum)"
+            
+            // rounds 2 decimal places for priceSum
+            let tempSum = Double(truncating: priceSum as NSNumber)
+            let temp2Sum = Double(round(100 * tempSum)/100)
+            
+            cartPrice.text = "$\(temp2Sum)"
         } else if itemCountCheckout != nil {
             itemCountCheckout.text = String(appdata.cart.count)
             shippingCheckout.text = "FREE"
             let tax: Decimal = priceSum * 0.12
-            taxCheckout.text = "$\(String(describing: tax))"
-            itemTotalCheckout.text = "$\(String(describing: priceSum + tax))"
+            
+            // rounds double with 2 digits precision
+            let tempTax = Double(truncating: tax as NSNumber)
+            let temp2 = Double(round(100 * tempTax)/100)
+
+            let tempTotal = Double(truncating: (priceSum + tax) as NSNumber)
+            let temp2Total = Double(round(100 * tempTotal)/100)
+            
+            taxCheckout.text = "$\(String(describing: temp2))"
+            itemTotalCheckout.text = "$\(String(describing: temp2Total))"
             let imageURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t1.0-9/11822351_10203532431350051_1470782087578284319_n.jpg?oh=5d29573c2435a8b6f293e8dfc75d5215&oe=5B003A10")
             if let data = try? Data(contentsOf: imageURL!) {
                 imgRecipient.image = UIImage(data: data)
