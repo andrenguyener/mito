@@ -125,6 +125,24 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             print(productTableView.hasUncommittedUpdates)
             
             productTableView.reloadData()
+        } else {
+            print(searchBar.text)
+            print("final text: \(searchBar.text)")
+            searchText = "amazon"
+            searchBar.text = "Amazon"
+            searchText = searchBar.text!.replacingOccurrences(of: " ", with: "+")
+            print("searchText: \(searchText)")
+            searchBar.resignFirstResponder()
+            appdata.products.removeAll()
+            var urlString = prodOriginalUrl?.absoluteString
+            urlString = urlString! + "amazon"
+            prodUrl = URL(string: urlString!)
+            productPeopleTab.isEnabled = false
+            print(prodUrl?.absoluteString)
+            loadProductData()
+            print(productTableView.hasUncommittedUpdates)
+            
+            productTableView.reloadData()
         }
 
 
