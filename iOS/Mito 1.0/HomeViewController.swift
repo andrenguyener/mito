@@ -11,13 +11,18 @@ import UIKit
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
-    
+    var peopleUrl = URL(string: "https://api.projectmito.io/v1/friend/")
     var appdata = AppData.shared
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = 133
+        
+        let userURL = "https://api.projectmito.io/v1/friend/\(appdata.userID)"
+        print("userURL: \(userURL)")
+        peopleUrl = URL(string: userURL)
+        loadPeopleData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,6 +51,34 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.whatHappened.numberOfLines = 2
         return cell
     }
+    
+    // Loading Friends (people tab)
+    // POST: inserting (attach object) / GET request: put key word in the URL
+    func loadPeopleData() {
+        let task = URLSession.shared.dataTask(with: peopleUrl!) { (data, response, error) in
+            if error != nil {
+                print("ERROR")
+            } else {
+                if let content = data {
+                    do {
+                        let myJson = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSArray
+                        for obj in myJson {
+                            let object = obj as! NSDictionary
+                            let p: Person = Person(firstName: (object["UserFname"] as? String)!, lastName: (object["UserLname"] as? String)!, email: (object["UserEmail"] as? String!)!, avatar: (object["PhotoUrl"] as? String!)!)
+                            self.appdata.friends.append(p)
+                        }
+  
+                    } catch {
+                        print("Catch")
+                    }
+                } else {
+                    print("Error")
+                }
+            }
+        }
+        task.resume()
+    }
+    
 
     @IBAction func cart(_ sender: Any) {
         performSegue(withIdentifier: "homeToCart", sender: self)

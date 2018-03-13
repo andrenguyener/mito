@@ -12,16 +12,8 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     //User's Cart
     @IBOutlet weak var cartTableView: UITableView!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        if cartTableView != nil {
-            cartTableView.delegate = self
-            cartTableView.dataSource = self
-            cartTableView.rowHeight = 106
-        }
-    }
-    var appdata = AppData.shared
+    @IBOutlet weak var cartNumber: UILabel!
+    @IBOutlet weak var cartPrice: UILabel!
     
     @IBAction func finishShopping(_ sender: Any) {
         performSegue(withIdentifier: "toCheckout", sender: self)
@@ -31,6 +23,66 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     //Checkout Page
+    
+    @IBOutlet weak var itemCountCheckout: UILabel!
+    @IBOutlet weak var shippingCheckout: UILabel!
+    @IBOutlet weak var itemTotalCheckout: UILabel!
+    @IBOutlet weak var taxCheckout: UILabel!
+    @IBOutlet weak var imgRecipient: UIImageView!
+    @IBOutlet weak var recipientName: UILabel!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let formatter = NumberFormatter()
+        var priceSum: Decimal
+        priceSum = 0.00
+        formatter.numberStyle = .currency
+        formatter.locale = Locale(identifier: "en_US")
+        for element in appdata.cart {
+            let itemPrice = element.price
+            if let number = formatter.number(from: itemPrice) {
+                let amount = number.decimalValue
+                priceSum = amount + priceSum
+                print(amount)
+            }
+        }        
+        if cartTableView != nil {
+            cartTableView.delegate = self
+            cartTableView.dataSource = self
+            cartTableView.rowHeight = 106
+            cartNumber.text = "Cart has \(appdata.cart.count) items"
+            
+            // rounds 2 decimal places for priceSum
+            let tempSum = Double(truncating: priceSum as NSNumber)
+            let temp2Sum = Double(round(100 * tempSum)/100)
+            
+            cartPrice.text = "$\(temp2Sum)"
+        } else if itemCountCheckout != nil {
+            itemCountCheckout.text = String(appdata.cart.count)
+            shippingCheckout.text = "FREE"
+            let tax: Decimal = priceSum * 0.12
+            
+            // rounds double with 2 digits precision
+            let tempTax = Double(truncating: tax as NSNumber)
+            let temp2 = Double(round(100 * tempTax)/100)
+
+            let tempTotal = Double(truncating: (priceSum + tax) as NSNumber)
+            let temp2Total = Double(round(100 * tempTotal)/100)
+            
+            taxCheckout.text = "$\(String(describing: temp2))"
+            itemTotalCheckout.text = "$\(String(describing: temp2Total))"
+            let imageURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t1.0-9/11822351_10203532431350051_1470782087578284319_n.jpg?oh=5d29573c2435a8b6f293e8dfc75d5215&oe=5B003A10")
+            if let data = try? Data(contentsOf: imageURL!) {
+                imgRecipient.image = UIImage(data: data)
+                imgRecipient.contentMode = .scaleAspectFit
+            }
+            recipientName.text = "Sopheaky Neaky"
+        } else {
+            appdata.cart.removeAll()
+        }
+    }
+    var appdata = AppData.shared
+    
     @IBAction func checkoutToCart(_ sender: Any) {
         performSegue(withIdentifier: "checkoutToCart", sender: self)
     }
@@ -59,8 +111,13 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         let url = URL(string: "\(cartObj.image)")
         if let data = try? Data(contentsOf: url!) {
             cell.itemImage.image = UIImage(data: data)!
+            cell.itemImage.contentMode = .scaleAspectFit
         }
+        print("Title: \(cartObj.title)")
+//        print(cartObj.description)
+//        print(cartObj.publisher)
         cell.itemName.text = cartObj.title
+        print("CellText \(cell.itemName.text)")
         cell.price.text = cartObj.price
         cell.seller.text = cartObj.publisher
         return cell

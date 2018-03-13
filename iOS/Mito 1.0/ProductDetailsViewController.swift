@@ -10,10 +10,22 @@ import UIKit
 
 class ProductDetailsViewController: UIViewController {
 
-    @IBOutlet weak var img: UIImageView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        img.image = UIImage(named: "Andre2.png")
+        print("i added item to cart")
+        
+        let url = URL(string: "\(appdata.products[appdata.currentIndex].image)")
+        if let data = try? Data(contentsOf: url!) {
+            prodImage.image = UIImage(data: data)!
+        }
+        prodTitle.text = appdata.products[appdata.currentIndex].title
+        prodPub.text = appdata.products[appdata.currentIndex].publisher
+        prodPrice.text = appdata.products[appdata.currentIndex].price
+        
+        prodDetail.text = appdata.products[appdata.currentIndex].description
+        print(appdata.products[appdata.currentIndex].title)
+        //img.image = UIImage(named: "Andre2.png")
         // Do any additional setup after loading the view.
     }
 
@@ -23,7 +35,34 @@ class ProductDetailsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func back(_ sender: Any) {
-        performSegue(withIdentifier: "prodDetailBack", sender: self)
+    
+    var appdata = AppData.shared
+    //PEOPLE DETAIL SEGUE
+
+    
+    // PRODUCT DETAIL SEGUE
+    @IBOutlet weak var prodImage: UIImageView!
+    @IBOutlet weak var prodTitle: UILabel!
+    @IBOutlet weak var prodPub: UILabel!
+    @IBOutlet weak var prodPrice: UILabel!
+    @IBOutlet weak var prodDetail: UILabel!
+    
+    @IBAction func addToCart(_ sender: Any) {
+        //Add alert here
+//        print("i added item to cart")
+        
+//        print(appdata.products[appdata.currentIndex])
+        appdata.cart.append(appdata.products[appdata.currentIndex])
+        print(appdata.cart[appdata.cart.count - 1].title)
+        print("Cart count: \(appdata.cart.count)")
+        let alertController = UIAlertController(title: "Done", message: "Added to cart!", preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(defaultAction)
+        present(alertController, animated: true, completion: nil)
     }
+    @IBAction func backSearch(_ sender: Any) {
+        appdata.products.removeAll()
+        performSegue(withIdentifier: "backToTabController", sender: self)
+    }
+    
 }

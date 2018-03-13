@@ -14,12 +14,14 @@ class Product {
     var title: String = ""
     var publisher: String = ""
     var price: String = ""
+    var description: String = ""
     
-    init(image: String, ASIN: String, title: String, publisher: String, price: String) {
+    init(image: String, ASIN: String, title: String, publisher: String, price: String, description: String) {
         self.image = image
         self.ASIN = ASIN
         self.title = title
         self.publisher = publisher
         self.price = price
+        self.description = description
     }
 }

@@ -21,7 +21,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var productContainer: UIView!
     @IBOutlet weak var peopleContainer: UIView!
-    
+    var tabFlag = false
     var pageNum = 1
     var myIndex = 0
     var searchText = ""
@@ -29,17 +29,32 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     @IBAction func switchTab(_ sender: UISegmentedControl) {
         if productPeopleTab.selectedSegmentIndex == 0 {
-            appdata.friends.removeAll()
+//            appdata.friends.removeAll()
             let userURL = appdata.userID
 //            peopleURL = URL(string: )
+            //loadProductData()
+           
             UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
-            loadProductData()
-            productTableView.reloadData()
+//            if (tabFlag == false) {
+            
+//                self.tabFlag = true
+      
+            
+          
+                productTableView.reloadData()
+       
+//            }
         } else {
-            appdata.products.removeAll()
+            //appdata.products.removeAll()
+//            loadPeopleData()
+          
             UIView.transition(from: productView, to: peopleView, duration: 0, options: .showHideTransitionViews)
-            loadPeopleData()
+           
+            
+
+            
             peopleTableView.reloadData()
+
         }
     }
     
@@ -64,6 +79,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         print("userURL: \(userURL)")
         peopleUrl = URL(string: userURL)
         print(peopleUrl)
+
 //        loadPeopleData()
 //        loadProductData()
 //        peopleTableView.reloadData()
@@ -73,7 +89,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidAppear(_ animated: Bool) {
         appdata.friends.removeAll()
         appdata.products.removeAll()
-//        loadPeopleData()
+        loadPeopleData()
         loadProductData()
         peopleTableView.reloadData()
         productTableView.reloadData()
@@ -87,19 +103,52 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //        }
 //    }
     
+    // Clicked Enter
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print(searchBar.text)
-        print("final text: \(searchBar.text)")
-        searchText = ""
-        searchText = searchBar.text!.replacingOccurrences(of: " ", with: "+")
-        print("searchText: \(searchText)")
-        searchBar.resignFirstResponder()
-        appdata.products.removeAll()
-        var urlString = prodOriginalUrl?.absoluteString
-        urlString = urlString! + searchText
-        prodUrl = URL(string: urlString!)
-        loadProductData()
-        //productTableView.reloadData()
+        if (productPeopleTab.selectedSegmentIndex == 1) {
+            UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
+        }
+        productPeopleTab.selectedSegmentIndex = 0
+        if (searchBar.text!.count > 0) {
+            print(searchBar.text)
+            print("final text: \(searchBar.text)")
+            searchText = ""
+            searchText = searchBar.text!.replacingOccurrences(of: " ", with: "+")
+            print("searchText: \(searchText)")
+            searchBar.resignFirstResponder()
+            appdata.products.removeAll()
+            var urlString = prodOriginalUrl?.absoluteString
+            urlString = urlString! + searchText
+            prodUrl = URL(string: urlString!)
+            productPeopleTab.isEnabled = false
+            loadProductData()
+            print(productTableView.hasUncommittedUpdates)
+            
+            productTableView.reloadData()
+        } else {
+            print(searchBar.text)
+            print("final text: \(searchBar.text)")
+            searchText = "amazon"
+            searchBar.text = "Amazon"
+            searchText = searchBar.text!.replacingOccurrences(of: " ", with: "+")
+            print("searchText: \(searchText)")
+            searchBar.resignFirstResponder()
+            appdata.products.removeAll()
+            var urlString = prodOriginalUrl?.absoluteString
+            urlString = urlString! + "amazon"
+            prodUrl = URL(string: urlString!)
+            productPeopleTab.isEnabled = false
+            print(prodUrl?.absoluteString)
+            loadProductData()
+            print(productTableView.hasUncommittedUpdates)
+            
+            productTableView.reloadData()
+        }
+
+
+        
+
+        
     }
     
     @IBAction func cartButtonClicked(_ sender: Any) {
@@ -107,6 +156,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        if (productPeopleTab.selectedSegmentIndex == 1) {
+            UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
+        }
+        productPeopleTab.selectedSegmentIndex = 0
         searchActive = true
         print("Start typing")
         return true
@@ -121,16 +174,19 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             } else {
                 if let content = data {
                     do {
+//                        self.productPeopleTab.isEnabled = false
                         let myJson = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSArray
                         for obj in myJson {
                             let object = obj as! NSDictionary
                             let p: Person = Person(firstName: (object["UserFname"] as? String)!, lastName: (object["UserLname"] as? String)!, email: (object["UserEmail"] as? String!)!, avatar: (object["PhotoUrl"] as? String!)!)
-//                            print(p.description())
                             self.appdata.friends.append(p)
                         }
                         DispatchQueue.main.async {
                             self.peopleTableView.reloadData()
+                            self.productPeopleTab.isEnabled = true
+                            
                         }
+                        
                     } catch {
                         print("Catch")
                     }
@@ -140,6 +196,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
         task.resume()
+      
+//        self.productPeopleTab.isEnabled = true
     }
     
     // Product Tab View
@@ -151,6 +209,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             } else {
                 if let content = data {
                     do {
+//                        self.productPeopleTab.isEnabled = false
                         let myJson = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
 //                        print(myJson)
                         let itemSearchResponse = myJson["ItemSearchResponse"] as! NSDictionary
@@ -167,8 +226,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 let ASIN = ASINArr[0] as! String
     //                            print("\(idx): \(ASINArray[0] as! String)")
                                 var imgURL = ""
-                                if item["SmallImage"] != nil {
-                                    let SmallImageArr = item["SmallImage"] as! NSArray
+                                if item["LargeImage"] != nil {
+                                    let SmallImageArr = item["LargeImage"] as! NSArray
                                     let SmallImageObj = SmallImageArr[0] as! NSDictionary
                                     let URLArr = SmallImageObj["URL"] as! NSArray
                                     imgURL = URLArr[0] as! String
@@ -177,17 +236,27 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     let ImageSetsObj = ImageSetsArr[0] as! NSDictionary
                                     let ImageSetArr = ImageSetsObj["ImageSet"] as! NSArray
                                     let ImageSetObj = ImageSetArr[0] as! NSDictionary
-                                    let SmallImageObjArr = ImageSetObj["SmallImage"] as! NSArray
+                                    let SmallImageObjArr = ImageSetObj["LargeImage"] as! NSArray
                                     let SmallImageObj = SmallImageObjArr[0] as! NSDictionary
                                     let URLArr = SmallImageObj["URL"] as! NSArray
                                     imgURL = URLArr[0] as! String
                                 } else {
                                     imgURL = "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897"
                                 }
+
                                 var formattedPrice = ""
                                 let ItemAttributesArr = item["ItemAttributes"] as! NSArray
                                 let ItemAttributeObj = ItemAttributesArr[0] as! NSDictionary
 //                                print(ItemAttributeObj.description)
+                                
+                                var itemFeature = ""
+                                if ItemAttributeObj["Feature"] != nil {
+                                    let itemFeatureArray = ItemAttributeObj["Feature"] as! NSArray
+                                    itemFeature = itemFeatureArray[0] as! String
+                                } else {
+                                    itemFeature = "NA"
+                                }
+                                
                                 let TitleArr = ItemAttributeObj["Title"] as! NSArray
                                 let title = TitleArr[0] as! String
 //                                print(title)
@@ -228,7 +297,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //                                    let ProductGroupArr = ItemAttributeObj["ProductGroup"] as! NSArray
                                     publisher_brand = "Brand"
                                 }
-                                let product: Product = Product(image: imgURL, ASIN: ASIN, title: title, publisher: publisher_brand, price: formattedPrice)
+                                let product: Product = Product(image: imgURL, ASIN: ASIN, title: title, publisher: publisher_brand, price: formattedPrice, description: itemFeature)
                                 self.appdata.products.append(product)
                             }
                             print("NumProducts: \(self.appdata.products.count)")
@@ -236,6 +305,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         }
                         DispatchQueue.main.async {
                             self.productTableView.reloadData()
+                            self.productPeopleTab.isEnabled = true
                         }
                     } catch {
                         print("Catch")
@@ -246,6 +316,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
         task.resume()
+//        self.productPeopleTab.isEnabled = true
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -264,12 +335,19 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         myIndex = indexPath.row
         print(myIndex)
         if productPeopleTab.selectedSegmentIndex == 0 {
-            appdata.cart.append(appdata.products[myIndex])
-            print(appdata.cart[appdata.cart.count - 1].title)
-            print("Cart count: \(appdata.cart.count)")
+
+            appdata.currentIndex = myIndex
+            
+            performSegue(withIdentifier: "productDetail", sender: self)
+//            appdata.cart.append(appdata.products[myIndex])
+//            print(appdata.cart[appdata.cart.count - 1].title)
+//            print("Cart count: \(appdata.cart.count)")
         }
 //        performSegue(withIdentifier: "segue", sender: self)
     }
+    
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if productPeopleTab.selectedSegmentIndex == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "productCell", for: indexPath) as! ProductTableViewCell

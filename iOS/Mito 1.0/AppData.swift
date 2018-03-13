@@ -11,7 +11,7 @@ import UIKit
 class AppData: NSObject {
     static let shared = AppData()
     open var userID: Int = 0
-    
+    open var currentIndex: Int = -1
     open var friends: [Person] = []
     
     open var products: [Product] = []
