@@ -105,7 +105,7 @@
                         <outlet property="password" destination="i9J-yt-UsC" id="lFH-d3-WAZ"/>
                         <outlet property="username" destination="39o-Wv-VpO" id="W8a-Pa-Bg2"/>
                         <segue destination="vJa-9R-Sbw" kind="show" identifier="login" id="cTu-G9-fQe"/>
-                        <segue destination="WyY-un-hcv" kind="show" identifier="signup" id="Tk8-BD-Yxk"/>
+                        <segue destination="WyY-un-hcv" kind="show" identifier="signup" animates="NO" id="Tk8-BD-Yxk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fPE-RK-iyf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -752,7 +752,7 @@
                         <outlet property="userEmailSU" destination="z18-WE-ZVf" id="nQC-fK-X3y"/>
                         <outlet property="userFnameSU" destination="E9y-kw-hnK" id="g1c-Uy-rcf"/>
                         <outlet property="usernameSU" destination="kLZ-kE-kzA" id="BHM-pU-gUj"/>
-                        <segue destination="Eua-Q9-CQ1" kind="show" identifier="signUpToAddress" id="UQ1-zU-VkT"/>
+                        <segue destination="Eua-Q9-CQ1" kind="show" identifier="signUpToAddress" animates="NO" id="UQ1-zU-VkT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4GN-ve-kmk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1477,7 +1477,7 @@
                         <outlet property="cartPrice" destination="f1n-JT-FAF" id="51x-aO-2tZ"/>
                         <outlet property="cartTableView" destination="3Yt-AX-8vw" id="cP9-Rn-K3g"/>
                         <segue destination="5ev-RP-TnR" kind="show" identifier="cartToHome" id="4Df-8F-JjS"/>
-                        <segue destination="XCS-Ex-cdl" kind="show" identifier="toCheckout" id="2Se-oB-5nh"/>
+                        <segue destination="XCS-Ex-cdl" kind="show" identifier="toCheckout" animates="NO" id="2Se-oB-5nh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4qR-31-kjr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1674,8 +1674,8 @@
                         <outlet property="recipientName" destination="Ojb-Ib-qjv" id="1JT-q2-IcF"/>
                         <outlet property="shippingCheckout" destination="3oX-Ar-Ngk" id="F49-k9-50p"/>
                         <outlet property="taxCheckout" destination="YJ4-uI-3c3" id="c2q-7i-lgT"/>
-                        <segue destination="UPq-qC-84m" kind="show" identifier="checkoutToCart" id="Huf-aH-vL3"/>
-                        <segue destination="qdc-jL-mfw" kind="show" identifier="checkoutFinish" id="VTw-HY-3To"/>
+                        <segue destination="UPq-qC-84m" kind="show" identifier="checkoutToCart" animates="NO" id="Huf-aH-vL3"/>
+                        <segue destination="qdc-jL-mfw" kind="show" identifier="checkoutFinish" animates="NO" id="VTw-HY-3To"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ibG-SQ-XDJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1812,7 +1812,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="55a-NT-Bh9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2828.985507246377" y="-114.1304347826087"/>
+            <point key="canvasLocation" x="2880" y="-114"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="gFb-Q6-MNY">
@@ -1915,7 +1915,6 @@
         <image name="search Grey" width="18" height="18"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2Se-oB-5nh"/>
         <segue reference="4Df-8F-JjS"/>
         <segue reference="Huf-aH-vL3"/>
         <segue reference="cTu-G9-fQe"/>
