@@ -60,11 +60,9 @@ class ProductDetailsViewController: UIViewController {
         alertController.addAction(defaultAction)
         present(alertController, animated: true, completion: nil)
     }
-    
-
-    @IBAction func backToSearch(_ sender: Any) {
+    @IBAction func backSearch(_ sender: Any) {
         appdata.products.removeAll()
-        performSegue(withIdentifier: "backToSearchSegue", sender: self)
+        performSegue(withIdentifier: "backToTabController", sender: self)
     }
     
 }

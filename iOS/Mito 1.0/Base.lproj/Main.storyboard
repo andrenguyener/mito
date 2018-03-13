@@ -311,7 +311,7 @@
                                 <rect key="frame" x="30" y="30" width="34" height="30"/>
                                 <state key="normal" title="Back"/>
                                 <connections>
-                                    <action selector="backToSearch:" destination="iOa-rf-R6J" eventType="touchUpInside" id="Ycz-O9-Qe1"/>
+                                    <action selector="backSearch:" destination="iOa-rf-R6J" eventType="touchUpInside" id="orv-2M-x7O"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H3a-LP-2zx">
@@ -353,7 +353,7 @@
                         <outlet property="prodPrice" destination="AMD-hj-WHc" id="XGs-CK-e8b"/>
                         <outlet property="prodPub" destination="yoe-L6-xNv" id="fow-cP-Re0"/>
                         <outlet property="prodTitle" destination="H3a-LP-2zx" id="7bT-D4-IOA"/>
-                        <segue destination="gAK-KX-AAt" kind="show" identifier="backToSearchSegue" id="pVS-WP-gY2"/>
+                        <segue destination="5ev-RP-TnR" kind="show" identifier="backToTabController" id="TBj-ao-1ie"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M5p-h1-NZA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1937,9 +1937,9 @@
         <image name="search Grey" width="18" height="18"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4Df-8F-JjS"/>
+        <segue reference="Xta-FM-2bW"/>
+        <segue reference="TBj-ao-1ie"/>
         <segue reference="Huf-aH-vL3"/>
-        <segue reference="pVS-WP-gY2"/>
         <segue reference="Fma-AT-nbz"/>
     </inferredMetricsTieBreakers>
 </document>
