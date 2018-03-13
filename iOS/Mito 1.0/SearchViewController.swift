@@ -33,31 +33,28 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let userURL = appdata.userID
 //            peopleURL = URL(string: )
             //loadProductData()
+           
             UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
 //            if (tabFlag == false) {
             
 //                self.tabFlag = true
-                DispatchQueue.main.async(execute: {
-                    self.productPeopleTab.isEnabled = false
-                })
+      
+            
+          
                 productTableView.reloadData()
-                DispatchQueue.main.async(execute: {
-                    self.productPeopleTab.isEnabled = true
-                })
+       
 //            }
         } else {
             //appdata.products.removeAll()
             //loadPeopleData()
-            
+          
             UIView.transition(from: productView, to: peopleView, duration: 0, options: .showHideTransitionViews)
-            DispatchQueue.main.async(execute: {
-                self.productPeopleTab.isEnabled = false
-            })
+           
+            
+
             
             peopleTableView.reloadData()
-            DispatchQueue.main.async(execute: {
-                self.productPeopleTab.isEnabled = true
-            })
+
         }
     }
     
@@ -112,22 +109,24 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
         }
         productPeopleTab.selectedSegmentIndex = 0
+        if (searchBar.text!.count > 0) {
+            print(searchBar.text)
+            print("final text: \(searchBar.text)")
+            searchText = ""
+            searchText = searchBar.text!.replacingOccurrences(of: " ", with: "+")
+            print("searchText: \(searchText)")
+            searchBar.resignFirstResponder()
+            appdata.products.removeAll()
+            var urlString = prodOriginalUrl?.absoluteString
+            urlString = urlString! + searchText
+            prodUrl = URL(string: urlString!)
+            productPeopleTab.isEnabled = false
+            loadProductData()
+            print(productTableView.hasUncommittedUpdates)
+            
+            productTableView.reloadData()
+        }
 
-        print(searchBar.text)
-        print("final text: \(searchBar.text)")
-        searchText = ""
-        searchText = searchBar.text!.replacingOccurrences(of: " ", with: "+")
-        print("searchText: \(searchText)")
-        searchBar.resignFirstResponder()
-        appdata.products.removeAll()
-        var urlString = prodOriginalUrl?.absoluteString
-        urlString = urlString! + searchText
-        prodUrl = URL(string: urlString!)
-        productPeopleTab.isEnabled = false
-        loadProductData()
-        print(productTableView.hasUncommittedUpdates)
-
-        productTableView.reloadData()
 
         
 
