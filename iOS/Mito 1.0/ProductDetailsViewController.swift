@@ -55,6 +55,10 @@ class ProductDetailsViewController: UIViewController {
         appdata.cart.append(appdata.products[appdata.currentIndex])
         print(appdata.cart[appdata.cart.count - 1].title)
         print("Cart count: \(appdata.cart.count)")
+        let alertController = UIAlertController(title: "Done", message: "Added to cart!", preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(defaultAction)
+        present(alertController, animated: true, completion: nil)
     }
     
 
