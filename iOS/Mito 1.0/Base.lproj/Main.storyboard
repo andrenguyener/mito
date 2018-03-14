@@ -36,7 +36,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mito" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sXV-vw-dvc">
-                                <rect key="frame" x="16" y="30" width="343" height="157"/>
+                                <rect key="frame" x="16" y="71" width="343" height="157"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="157" id="Okq-Xm-YYR"/>
                                 </constraints>
@@ -98,7 +98,7 @@
                             <constraint firstItem="sXV-vw-dvc" firstAttribute="leading" secondItem="TQZ-rQ-MLe" secondAttribute="leading" id="cri-XP-Ikb"/>
                             <constraint firstItem="sXV-vw-dvc" firstAttribute="leading" secondItem="Es7-sx-xiV" secondAttribute="leadingMargin" id="emr-Gt-s92"/>
                             <constraint firstItem="gS8-lv-B80" firstAttribute="top" secondItem="TQZ-rQ-MLe" secondAttribute="bottom" constant="8" symbolic="YES" id="jUZ-A4-esl"/>
-                            <constraint firstItem="sXV-vw-dvc" firstAttribute="top" secondItem="qdR-a4-Tpe" secondAttribute="bottom" constant="10" id="yZ0-aq-SdH"/>
+                            <constraint firstItem="sXV-vw-dvc" firstAttribute="top" secondItem="qdR-a4-Tpe" secondAttribute="bottom" constant="51" id="yZ0-aq-SdH"/>
                         </constraints>
                     </view>
                     <connections>
