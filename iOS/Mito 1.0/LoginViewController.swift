@@ -11,6 +11,32 @@ import UserNotifications
 import Alamofire
 
 class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    // Error-Handling
+    // Name constraints?
+    // username should throw error if username is already taken, green checkmark if valid?
+    // http://uigarage.net/wp-content/uploads/2016/10/2016-09-10-12.00.44.png
+    // two passwords must be equal
+    // send email to verify real email, code to determine if email is valid
+    // State dropdown
+    // Verify real address before continuing?
+    
+    
+    @IBOutlet weak var username: UITextField!
+    @IBOutlet weak var password: UITextField!
+    @IBOutlet weak var monthPicker: UIPickerView!
+    @IBOutlet weak var btnMonth: UIButton!
+    
+    var appdata = AppData.shared
+    var months = ["January", "February", "March", "April", "May", "June", "July", "August",
+                    "September", "October", "November", "December"]
+    
+    @IBAction func monthPressed(_ sender: Any) {
+        if monthPicker.isHidden == true {
+            monthPicker.isHidden = false
+        }
+    }
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -26,21 +52,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         btnMonth.setTitle(months[row], for: .normal)
         monthPicker.isHidden = true
-    }
-    
-    @IBOutlet weak var username: UITextField!
-    @IBOutlet weak var password: UITextField!
-    @IBOutlet weak var monthPicker: UIPickerView!
-    @IBOutlet weak var btnMonth: UIButton!
-    
-    var appdata = AppData.shared
-    var months = ["January", "February", "March", "April", "May", "June", "July", "August",
-                    "September", "October", "November", "December"]
-    
-    @IBAction func monthPressed(_ sender: Any) {
-        if monthPicker.isHidden == true {
-            monthPicker.isHidden = false
-        }
     }
     
     
