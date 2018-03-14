@@ -53,6 +53,7 @@
 		DA27C2202043736400CCFD60 /* Sopheak.png in Resources */ = {isa = PBXBuildFile; fileRef = DA27C21F2043736400CCFD60 /* Sopheak.png */; };
 		DA49F1DB2055EF9E0018ABA4 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA49F1DA2055EF9E0018ABA4 /* ProductViewController.swift */; };
 		DA4FC9EF2045E0D300999F28 /* profileInfo.json in Resources */ = {isa = PBXBuildFile; fileRef = DA4FC9EE2045E0D300999F28 /* profileInfo.json */; };
+		DA5D683E2058A45F00E86BE8 /* ProductDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA5D683C2058A45F00E86BE8 /* ProductDetails.storyboard */; };
 		DAD995312042386E007A7687 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD995302042386E007A7687 /* SearchViewController.swift */; };
 		DAD995332042389B007A7687 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD995322042389B007A7687 /* Person.swift */; };
 		DAD9953520423A4B007A7687 /* Andre.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD9953420423A4B007A7687 /* Andre.png */; };
@@ -135,6 +136,7 @@
 		DA27C21F2043736400CCFD60 /* Sopheak.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sopheak.png; sourceTree = "<group>"; };
 		DA49F1DA2055EF9E0018ABA4 /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
 		DA4FC9EE2045E0D300999F28 /* profileInfo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = profileInfo.json; sourceTree = SOURCE_ROOT; };
+		DA5D683D2058A45F00E86BE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Mito 1.0/Base.lproj/ProductDetails.storyboard"; sourceTree = "<group>"; };
 		DAD995302042386E007A7687 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		DAD995322042389B007A7687 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		DAD9953420423A4B007A7687 /* Andre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Andre.png; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 				DAD9953620423EE9007A7687 /* TableViewCell.swift */,
 				B29AEC63203FC9C100110EF9 /* ViewController.swift */,
 				B29AEC65203FC9C100110EF9 /* Main.storyboard */,
+				DA5D683C2058A45F00E86BE8 /* ProductDetails.storyboard */,
 				B29AEC6A203FC9C100110EF9 /* LaunchScreen.storyboard */,
 				B29AEC6D203FC9C100110EF9 /* Info.plist */,
 				DAD9953420423A4B007A7687 /* Andre.png */,
@@ -408,6 +411,7 @@
 				B247198D204626ED006CF6C2 /* Cart Solid White Icon.png in Resources */,
 				B2548FFD2055EA97000123D0 /* benny.png in Resources */,
 				B24719832046245E006CF6C2 /* Notification Icon SG.png in Resources */,
+				DA5D683E2058A45F00E86BE8 /* ProductDetails.storyboard in Resources */,
 				DA27C2202043736400CCFD60 /* Sopheak.png in Resources */,
 				B29AEC69203FC9C100110EF9 /* Assets.xcassets in Resources */,
 				B24719862046245E006CF6C2 /* Lock SG.png in Resources */,
@@ -579,6 +583,14 @@
 				B29AEC6B203FC9C100110EF9 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		DA5D683C2058A45F00E86BE8 /* ProductDetails.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA5D683D2058A45F00E86BE8 /* Base */,
+			);
+			name = ProductDetails.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
