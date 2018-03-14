@@ -10,12 +10,39 @@ import UIKit
 import UserNotifications
 import Alamofire
 
-class LoginViewController: UIViewController {
-
+class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return months.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return months[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        btnMonth.setTitle(months[row], for: .normal)
+        monthPicker.isHidden = true
+    }
     
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
+    @IBOutlet weak var monthPicker: UIPickerView!
+    @IBOutlet weak var btnMonth: UIButton!
+    
     var appdata = AppData.shared
+    var months = ["January", "February", "March", "April", "May", "June", "July", "August",
+                    "September", "October", "November", "December"]
+    
+    @IBAction func monthPressed(_ sender: Any) {
+        if monthPicker.isHidden == true {
+            monthPicker.isHidden = false
+        }
+    }
+    
     
     // Opening Login Page
     @IBAction func login(_ sender: Any) {
@@ -235,6 +262,11 @@ class LoginViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        if monthPicker != nil {
+            monthPicker.isHidden = true
+            monthPicker.delegate = self
+            monthPicker.dataSource = self
+        }
         super.viewDidLoad()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
         self.view.addGestureRecognizer(tapGesture)

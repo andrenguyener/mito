@@ -170,7 +170,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="JSi-F7-D59">
-                                <rect key="frame" x="36" y="189.5" width="303" height="288.5"/>
+                                <rect key="frame" x="36" y="172.5" width="303" height="322.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ljh-3o-PE2">
                                         <rect key="frame" x="0.0" y="0.0" width="301" height="20.5"/>
@@ -178,56 +178,63 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="meo-OE-pr4">
+                                        <rect key="frame" x="0.0" y="24.5" width="44" height="30"/>
+                                        <state key="normal" title="Month"/>
+                                        <connections>
+                                            <action selector="monthPressed:" destination="WyY-un-hcv" eventType="touchUpInside" id="zJ7-oe-L29"/>
+                                        </connections>
+                                    </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E9y-kw-hnK">
-                                        <rect key="frame" x="0.0" y="24.5" width="301" height="30"/>
+                                        <rect key="frame" x="0.0" y="58.5" width="301" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gS3-iL-nDh">
-                                        <rect key="frame" x="0.0" y="58.5" width="301" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="92.5" width="301" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kLZ-kE-kzA">
-                                        <rect key="frame" x="0.0" y="83" width="301" height="30"/>
+                                        <rect key="frame" x="0.0" y="117" width="301" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8rI-gc-UMe">
-                                        <rect key="frame" x="0.0" y="117" width="301" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="151" width="301" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2h6-SM-hUZ">
-                                        <rect key="frame" x="0.0" y="141.5" width="301" height="30"/>
+                                        <rect key="frame" x="0.0" y="175.5" width="301" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Re-enter Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWz-qJ-w56">
-                                        <rect key="frame" x="0.0" y="175.5" width="301" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="209.5" width="301" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NFe-9a-357">
-                                        <rect key="frame" x="0.0" y="200" width="301" height="30"/>
+                                        <rect key="frame" x="0.0" y="234" width="301" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXf-Rv-ach">
-                                        <rect key="frame" x="0.0" y="234" width="301" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="268" width="301" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="z18-WE-ZVf">
-                                        <rect key="frame" x="0.0" y="258.5" width="301" height="30"/>
+                                        <rect key="frame" x="0.0" y="292.5" width="301" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -281,6 +288,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="guy-jO-d3B">
+                                <rect key="frame" x="0.0" y="252" width="375" height="162"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -297,6 +308,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnMonth" destination="meo-OE-pr4" id="dKd-yU-Y8d"/>
+                        <outlet property="monthPicker" destination="guy-jO-d3B" id="wwE-6e-kbV"/>
                         <outlet property="passwordConfSU" destination="NFe-9a-357" id="1YR-V9-Q48"/>
                         <outlet property="passwordSU" destination="2h6-SM-hUZ" id="Bmt-mY-hdK"/>
                         <outlet property="userEmailSU" destination="z18-WE-ZVf" id="nQC-fK-X3y"/>
