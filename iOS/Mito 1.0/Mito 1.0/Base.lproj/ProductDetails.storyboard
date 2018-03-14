@@ -47,11 +47,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pTd-Il-3Ti">
-                                <rect key="frame" x="16" y="438.5" width="343" height="149"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="149" id="xF9-9j-sAZ"/>
-                                </constraints>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AMD-hj-WHc">
+                                <rect key="frame" x="16" y="409" width="343" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -69,8 +66,11 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AMD-hj-WHc">
-                                <rect key="frame" x="16" y="409" width="343" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pTd-Il-3Ti">
+                                <rect key="frame" x="16" y="447" width="343" height="142"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="142" id="xF9-9j-sAZ"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -81,7 +81,7 @@
                             <constraint firstItem="pTd-Il-3Ti" firstAttribute="trailing" secondItem="AMD-hj-WHc" secondAttribute="trailing" id="2tG-Wy-V5o"/>
                             <constraint firstItem="GTz-CR-asI" firstAttribute="centerX" secondItem="oYD-z9-NlW" secondAttribute="centerX" id="5Q3-vZ-Mp3"/>
                             <constraint firstItem="GTz-CR-asI" firstAttribute="centerX" secondItem="AMD-hj-WHc" secondAttribute="centerX" id="5Z6-mj-StB"/>
-                            <constraint firstItem="pTd-Il-3Ti" firstAttribute="top" secondItem="AMD-hj-WHc" secondAttribute="bottom" constant="8.5" id="848-ty-19e"/>
+                            <constraint firstItem="pTd-Il-3Ti" firstAttribute="top" secondItem="AMD-hj-WHc" secondAttribute="bottom" constant="17" id="848-ty-19e"/>
                             <constraint firstItem="H3a-LP-2zx" firstAttribute="trailing" secondItem="oYD-z9-NlW" secondAttribute="trailingMargin" id="9rE-uV-1D3"/>
                             <constraint firstItem="H3a-LP-2zx" firstAttribute="leading" secondItem="oYD-z9-NlW" secondAttribute="leadingMargin" id="B8K-RJ-eu5"/>
                             <constraint firstItem="GTz-CR-asI" firstAttribute="centerX" secondItem="yoe-L6-xNv" secondAttribute="centerX" id="CH3-Sd-opv"/>
@@ -113,7 +113,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M5p-h1-NZA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2866.666666666667" y="1072.8260869565217"/>
+            <point key="canvasLocation" x="2866.4000000000001" y="1072.7136431784108"/>
         </scene>
         <!--UITabBarController-5ev-RP-TnR-->
         <scene sceneID="8xQ-C2-4gI">
