@@ -47,12 +47,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AMD-hj-WHc">
-                                <rect key="frame" x="16" y="395.5" width="343" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pTd-Il-3Ti">
                                 <rect key="frame" x="16" y="438.5" width="343" height="149"/>
                                 <constraints>
@@ -75,13 +69,19 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AMD-hj-WHc">
+                                <rect key="frame" x="16" y="409" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="pTd-Il-3Ti" firstAttribute="trailing" secondItem="AMD-hj-WHc" secondAttribute="trailing" id="2tG-Wy-V5o"/>
                             <constraint firstItem="GTz-CR-asI" firstAttribute="centerX" secondItem="oYD-z9-NlW" secondAttribute="centerX" id="5Q3-vZ-Mp3"/>
                             <constraint firstItem="GTz-CR-asI" firstAttribute="centerX" secondItem="AMD-hj-WHc" secondAttribute="centerX" id="5Z6-mj-StB"/>
-                            <constraint firstItem="pTd-Il-3Ti" firstAttribute="top" secondItem="AMD-hj-WHc" secondAttribute="bottom" constant="22" id="848-ty-19e"/>
+                            <constraint firstItem="pTd-Il-3Ti" firstAttribute="top" secondItem="AMD-hj-WHc" secondAttribute="bottom" constant="8.5" id="848-ty-19e"/>
                             <constraint firstItem="H3a-LP-2zx" firstAttribute="trailing" secondItem="oYD-z9-NlW" secondAttribute="trailingMargin" id="9rE-uV-1D3"/>
                             <constraint firstItem="H3a-LP-2zx" firstAttribute="leading" secondItem="oYD-z9-NlW" secondAttribute="leadingMargin" id="B8K-RJ-eu5"/>
                             <constraint firstItem="GTz-CR-asI" firstAttribute="centerX" secondItem="yoe-L6-xNv" secondAttribute="centerX" id="CH3-Sd-opv"/>
@@ -90,7 +90,7 @@
                             <constraint firstItem="GTz-CR-asI" firstAttribute="centerX" secondItem="H3a-LP-2zx" secondAttribute="centerX" id="Kwm-PV-Vni"/>
                             <constraint firstItem="kyB-32-OBo" firstAttribute="leading" secondItem="oYD-z9-NlW" secondAttribute="leadingMargin" constant="10" id="M5c-qJ-3lX"/>
                             <constraint firstItem="vrN-o3-owS" firstAttribute="trailing" secondItem="oYD-z9-NlW" secondAttribute="trailingMargin" id="NvO-Fl-paX"/>
-                            <constraint firstItem="AMD-hj-WHc" firstAttribute="top" secondItem="yoe-L6-xNv" secondAttribute="bottom" constant="8" symbolic="YES" id="TBo-3N-PlZ"/>
+                            <constraint firstItem="AMD-hj-WHc" firstAttribute="top" secondItem="yoe-L6-xNv" secondAttribute="bottom" constant="21.5" id="TBo-3N-PlZ"/>
                             <constraint firstItem="yoe-L6-xNv" firstAttribute="centerY" secondItem="oYD-z9-NlW" secondAttribute="centerY" constant="43.5" id="U22-06-rDa"/>
                             <constraint firstItem="yoe-L6-xNv" firstAttribute="leading" secondItem="H3a-LP-2zx" secondAttribute="leading" id="XSc-8E-GeN"/>
                             <constraint firstItem="H3a-LP-2zx" firstAttribute="top" secondItem="GTz-CR-asI" secondAttribute="bottom" constant="25" id="cPA-1y-817"/>
