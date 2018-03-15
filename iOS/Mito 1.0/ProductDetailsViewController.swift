@@ -63,6 +63,7 @@ class ProductDetailsViewController: UIViewController {
     @IBAction func backSearch(_ sender: Any) {
         appdata.products.removeAll()
         performSegue(withIdentifier: "backToTabController", sender: self)
+        tabBarController?.selectedIndex = 1
     }
     
 }
