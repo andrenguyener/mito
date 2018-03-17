@@ -9,6 +9,8 @@
 import UIKit
 import UserNotifications
 
+var myIndex = 0
+
 class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
     
@@ -23,38 +25,21 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var peopleContainer: UIView!
     var tabFlag = false
     var pageNum = 1
-    var myIndex = 0
     var searchText = ""
     var searchActive: Bool = false
 
     @IBAction func switchTab(_ sender: UISegmentedControl) {
         if productPeopleTab.selectedSegmentIndex == 0 {
-//            appdata.friends.removeAll()
+            appdata.friends.removeAll()
             let userURL = appdata.userID
-//            peopleURL = URL(string: )
-            //loadProductData()
-           
+            loadProductData()
             UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
-//            if (tabFlag == false) {
-            
-//                self.tabFlag = true
-      
-            
-          
-                productTableView.reloadData()
-       
-//            }
+            productTableView.reloadData()
         } else {
-            //appdata.products.removeAll()
-//            loadPeopleData()
-          
+            appdata.products.removeAll()
+            loadPeopleData()
             UIView.transition(from: productView, to: peopleView, duration: 0, options: .showHideTransitionViews)
-           
-            
-
-            
             peopleTableView.reloadData()
-
         }
     }
     
@@ -74,16 +59,15 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         productTableView.rowHeight = 106
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
-        print("userid: \(appdata.userID)")
+//        print("userid: \(appdata.userID)")
         let userURL = "https://api.projectmito.io/v1/friend/\(appdata.userID)"
         print("userURL: \(userURL)")
         peopleUrl = URL(string: userURL)
-        print(peopleUrl)
-
-//        loadPeopleData()
-//        loadProductData()
-//        peopleTableView.reloadData()
-//        productTableView.reloadData()
+//        print(peopleUrl)
+        loadPeopleData()
+        loadProductData()
+        peopleTableView.reloadData()
+        productTableView.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -110,45 +94,22 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         productPeopleTab.selectedSegmentIndex = 0
         if (searchBar.text!.count > 0) {
-            print(searchBar.text)
-            print("final text: \(searchBar.text)")
             searchText = ""
             searchText = searchBar.text!.replacingOccurrences(of: " ", with: "+")
-            print("searchText: \(searchText)")
-            searchBar.resignFirstResponder()
-            appdata.products.removeAll()
-            var urlString = prodOriginalUrl?.absoluteString
-            urlString = urlString! + searchText
-            prodUrl = URL(string: urlString!)
-            productPeopleTab.isEnabled = false
-            loadProductData()
-            print(productTableView.hasUncommittedUpdates)
-            
-            productTableView.reloadData()
         } else {
-            print(searchBar.text)
-            print("final text: \(searchBar.text)")
-            searchText = "amazon"
+            searchText = "Amazon"
             searchBar.text = "Amazon"
-            searchText = searchBar.text!.replacingOccurrences(of: " ", with: "+")
-            print("searchText: \(searchText)")
-            searchBar.resignFirstResponder()
-            appdata.products.removeAll()
-            var urlString = prodOriginalUrl?.absoluteString
-            urlString = urlString! + "amazon"
-            prodUrl = URL(string: urlString!)
-            productPeopleTab.isEnabled = false
-            print(prodUrl?.absoluteString)
-            loadProductData()
-            print(productTableView.hasUncommittedUpdates)
-            
-            productTableView.reloadData()
         }
-
-
-        
-
-        
+//        print("searchText: \(searchText)")
+        searchBar.resignFirstResponder()
+        appdata.products.removeAll()
+        var urlString = prodOriginalUrl?.absoluteString
+        urlString = urlString! + searchText
+        prodUrl = URL(string: urlString!)
+        productPeopleTab.isEnabled = false
+        loadProductData()
+//        print(productTableView.hasUncommittedUpdates)
+        productTableView.reloadData()
     }
     
     @IBAction func cartButtonClicked(_ sender: Any) {
@@ -184,9 +145,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         DispatchQueue.main.async {
                             self.peopleTableView.reloadData()
                             self.productPeopleTab.isEnabled = true
-                            
                         }
-                        
                     } catch {
                         print("Catch")
                     }
@@ -300,8 +259,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 let product: Product = Product(image: imgURL, ASIN: ASIN, title: title, publisher: publisher_brand, price: formattedPrice, description: itemFeature)
                                 self.appdata.products.append(product)
                             }
-                            print("NumProducts: \(self.appdata.products.count)")
-                            print("NumPeople: \(self.appdata.friends.count)")
+//                            print("NumProducts: \(self.appdata.products.count)")
+//                            print("NumPeople: \(self.appdata.friends.count)")
                         }
                         DispatchQueue.main.async {
                             self.productTableView.reloadData()
@@ -333,17 +292,16 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         myIndex = indexPath.row
-        print(myIndex)
+        print("didSelectRowAt Index: \(myIndex)")
         if productPeopleTab.selectedSegmentIndex == 0 {
-
             appdata.currentIndex = myIndex
-            
             performSegue(withIdentifier: "productDetail", sender: self)
 //            appdata.cart.append(appdata.products[myIndex])
 //            print(appdata.cart[appdata.cart.count - 1].title)
 //            print("Cart count: \(appdata.cart.count)")
+        } else {
+            performSegue(withIdentifier: "searchToMitoProfile", sender: self)
         }
-//        performSegue(withIdentifier: "segue", sender: self)
     }
     
     

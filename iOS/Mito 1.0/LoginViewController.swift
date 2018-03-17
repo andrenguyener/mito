@@ -88,7 +88,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                 if (dictionary != nil) {
                     self.performSegue(withIdentifier: "login", sender: self)
                     UserDefaults.standard.set(dictionary, forKey: "UserInfo")
-                    print(UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary)
+//                    print(UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary)
                     if UserDefaults.standard.object(forKey: "UserInfo") != nil {
                         let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
                         //userID = data["userId"] as? Int
