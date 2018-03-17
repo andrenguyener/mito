@@ -25,7 +25,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var peopleContainer: UIView!
     var pageNum = 1
     var strSearchQuery = ""
-    var searchActive: Bool = false
     var appdata = AppData.shared
     var urlPeopleCall = URL(string: "https://api.projectmito.io/v1/friend/")
     var urlAmazonProductCall = URL(string: "https://api.projectmito.io/v1/amazonhashtest/" )
@@ -182,7 +181,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 } else {
                                     strImageURL = "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897"
                                 }
-
                                 let objItemAttribute = self.fnAccessFirstDictionaryInArray(dictObj: item, arrName: "ItemAttributes")
                                 
                                 var itemFeature = ""
