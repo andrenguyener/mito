@@ -8,7 +8,9 @@
 
 import UIKit
 
-class ProductDetailsViewController: UIViewController {
+class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    var arrQuantity = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10+"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +47,32 @@ class ProductDetailsViewController: UIViewController {
     @IBOutlet weak var prodPub: UILabel!
     @IBOutlet weak var prodPrice: UILabel!
     @IBOutlet weak var prodDetail: UILabel!
+    @IBOutlet weak var lblQuantity: UILabel!
+    @IBOutlet weak var pickerviewQuantity: UIPickerView!
+    
+    @IBAction func btnQuantityPressed(_ sender: Any) {
+        if pickerviewQuantity.isHidden {
+            pickerviewQuantity.isHidden = false
+        }
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return arrQuantity.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return arrQuantity[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        lblQuantity.text = arrQuantity[row]
+        pickerviewQuantity.isHidden = true
+    }
+    
     
     @IBAction func addToCart(_ sender: Any) {
         //Add alert here
