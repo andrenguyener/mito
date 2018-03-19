@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jVO-xl-sXb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Eua-Q9-CQ1">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -170,7 +170,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="JSi-F7-D59">
-                                <rect key="frame" x="36" y="172.5" width="303" height="322.5"/>
+                                <rect key="frame" x="36" y="62.5" width="303" height="542.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ljh-3o-PE2">
                                         <rect key="frame" x="0.0" y="0.0" width="301" height="20.5"/>
@@ -236,9 +236,12 @@
                                         <rect key="frame" x="0.0" y="292.5" width="44" height="30"/>
                                         <state key="normal" title="Month"/>
                                         <connections>
-                                            <action selector="monthPressed:" destination="WyY-un-hcv" eventType="touchUpInside" id="zJ7-oe-L29"/>
+                                            <action selector="btnMonthPressed:" destination="WyY-un-hcv" eventType="touchUpInside" id="zJ7-oe-L29"/>
                                         </connections>
                                     </button>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="guy-jO-d3B">
+                                        <rect key="frame" x="0.0" y="326.5" width="303" height="216"/>
+                                    </pickerView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="2h6-SM-hUZ" firstAttribute="width" secondItem="Ljh-3o-PE2" secondAttribute="width" id="0md-l8-20g"/>
@@ -288,10 +291,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="guy-jO-d3B">
-                                <rect key="frame" x="0.0" y="252" width="375" height="162"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -344,7 +343,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="PGp-mo-oIW">
-                                <rect key="frame" x="52" y="160" width="271" height="347"/>
+                                <rect key="frame" x="52" y="61" width="271" height="545.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address Nickname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9TY-rv-b49">
                                         <rect key="frame" x="0.0" y="0.0" width="271" height="20.5"/>
@@ -394,8 +393,16 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ez-fv-Hkb">
+                                        <rect key="frame" x="0.0" y="234" width="41" height="33"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="State"/>
+                                        <connections>
+                                            <action selector="btnStatePressed:" destination="Eua-Q9-CQ1" eventType="touchUpInside" id="GOj-VZ-EUO"/>
+                                        </connections>
+                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="State:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eOA-aA-qaP">
-                                        <rect key="frame" x="0.0" y="234" width="271" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="268" width="271" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -406,14 +413,17 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eql-j2-IXw">
+                                        <rect key="frame" x="0.0" y="271" width="271" height="216"/>
+                                    </pickerView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zipcode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Smx-Cl-CJn">
-                                        <rect key="frame" x="0.0" y="292.5" width="271" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="491" width="271" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vPC-bh-u6c">
-                                        <rect key="frame" x="0.0" y="317" width="271" height="30"/>
+                                        <rect key="frame" x="0.0" y="515.5" width="271" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -444,6 +454,12 @@
                                     <constraint firstAttribute="trailing" secondItem="vPC-bh-u6c" secondAttribute="trailing" id="wFH-ZR-ux0"/>
                                     <constraint firstAttribute="trailing" secondItem="xO1-Vh-xSd" secondAttribute="trailing" id="yB2-ha-bzL"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="eOA-aA-qaP"/>
+                                        <exclude reference="TC3-w8-VvJ"/>
+                                    </mask>
+                                </variation>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ir-XT-LMA">
                                 <rect key="frame" x="20" y="615" width="335" height="32"/>
@@ -477,7 +493,9 @@
                     <connections>
                         <outlet property="address1AA" destination="rJz-P9-Kg7" id="4or-d7-Wsf"/>
                         <outlet property="address2AA" destination="xIz-7p-sjT" id="0rS-Ll-sqT"/>
+                        <outlet property="btnState" destination="0ez-fv-Hkb" id="B7b-6t-1PD"/>
                         <outlet property="cityAA" destination="j7b-HR-Hwa" id="PoF-fL-f8H"/>
+                        <outlet property="pickerviewStateAA" destination="eql-j2-IXw" id="fWg-EC-oUh"/>
                         <outlet property="stateAA" destination="TC3-w8-VvJ" id="823-Ix-NdF"/>
                         <outlet property="zipcodeAA" destination="vPC-bh-u6c" id="5wI-sZ-emX"/>
                         <segue destination="vJa-9R-Sbw" kind="show" identifier="createAccount" id="Fma-AT-nbz"/>
@@ -497,6 +515,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Fma-AT-nbz"/>
+        <segue reference="cTu-G9-fQe"/>
     </inferredMetricsTieBreakers>
 </document>

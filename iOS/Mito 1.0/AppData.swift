@@ -16,6 +16,10 @@ class AppData: NSObject {
     
     open var products: [Product] = []
     
+    open var arrMonths: [Month] = []
+    
+    open var arrStates: [State] = []
+    
     open var cart: [Product] = []
     
     open var feedItem: [FeedItem] = [

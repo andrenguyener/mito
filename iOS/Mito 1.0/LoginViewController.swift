@@ -26,15 +26,16 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var monthPicker: UIPickerView!
     @IBOutlet weak var btnMonth: UIButton!
+    var urlStates = URL(string: "https://api.myjson.com/bins/penjf") // JSON states
+    var urlMonths = URL(string: "https://api.myjson.com/bins/vwhqz") // JSON months
     
     var appdata = AppData.shared
-    var months = ["January", "February", "March", "April", "May", "June", "July", "August",
-                    "September", "October", "November", "December"]
     
-    @IBAction func monthPressed(_ sender: Any) {
+    @IBAction func btnMonthPressed(_ sender: Any) {
         if monthPicker.isHidden == true {
             monthPicker.isHidden = false
         }
+        appdata.arrMonths.sort(by: fnSortMonthsByNumber)
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -42,16 +43,33 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return months.count
+        if !monthPicker.isHidden {
+            return appdata.arrMonths.count
+        } else if (pickerviewStateAA != nil) && !pickerviewStateAA.isHidden {
+            return appdata.arrStates.count
+        } else {
+            return 1
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return months[row]
+        if !monthPicker.isHidden {
+            return appdata.arrMonths[row].strName
+        } else if pickerviewStateAA != nil && !pickerviewStateAA.isHidden {
+            return appdata.arrStates[row].value
+        } else {
+            return ""
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        btnMonth.setTitle(months[row], for: .normal)
-        monthPicker.isHidden = true
+        if !monthPicker.isHidden {
+            btnMonth.setTitle(appdata.arrMonths[row].strAbbrev, for: .normal)
+            monthPicker.isHidden = true
+        } else {
+            btnState.setTitle(appdata.arrStates[row].abbrev, for: .normal)
+            pickerviewStateAA.isHidden = true
+        }
     }
     
     
@@ -104,6 +122,10 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     @IBAction func signup(_ sender: Any) {
         performSegue(withIdentifier: "signup", sender: self)
+        self.fnLoadMonthData()
+        for obj in appdata.arrMonths {
+            print(obj.description())
+        }
         let content = UNMutableNotificationContent()
         content.title = "Notification"
         content.subtitle = "Notification subtitle"
@@ -137,13 +159,14 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             "passwordConf": passConf!,
             "userDOB": "01/01/2000"
         ]
-        
+        print(JSONObj.description)
         let jsonData = try? JSONSerialization.data(withJSONObject: JSONObj)
         let url = URL(string: "https://api.projectmito.io/v1/users")!
         var request = URLRequest(url: url)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "POST"
         request.httpBody = jsonData
+        print(request.url?.absoluteString)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {                                                 // check for fundamental networking error
                 print("error=\(String(describing: error))")
@@ -184,6 +207,9 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var cityAA: UITextField!
     @IBOutlet weak var stateAA: UITextField!
     @IBOutlet weak var zipcodeAA: UITextField!
+    @IBOutlet weak var pickerviewStateAA: UIPickerView!
+    @IBOutlet weak var btnState: UIButton!
+    
     @IBAction func createAccountButton(_ sender: Any) {
         var userID: Int?
         if UserDefaults.standard.object(forKey: "UserInfo") != nil {
@@ -209,8 +235,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             "stateName": state!,
             "aliasName": alias
         ]
-        
-        
         
         let jsonData = try? JSONSerialization.data(withJSONObject: JSONObj)
         let url = URL(string: "https://api.projectmito.io/v1/address")!
@@ -244,7 +268,12 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         }
         task.resume()
     }
-
+    
+    @IBAction func btnStatePressed(_ sender: Any) {
+        if pickerviewStateAA.isHidden {
+            pickerviewStateAA.isHidden = false
+        }
+    }
     
     @objc func keyboardWillShow(notification: NSNotification) {
         if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
@@ -272,12 +301,68 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         }
     }
     
+    func fnLoadStateData() {
+        let task = URLSession.shared.dataTask(with: urlStates!) { (data, response, error) in
+            if error != nil {
+                print("ERROR")
+            } else {
+                if let content = data {
+                    do {
+                        let objStateData = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
+                        for obj in objStateData {
+                            let stateObj = State(abbrev: obj.key as! String, value: obj.value as! String)
+                            self.appdata.arrStates.append(stateObj)
+                        }
+                    } catch {
+                        print("Catch")
+                    }
+                } else {
+                    print("Error")
+                }
+            }
+        }
+        task.resume()
+    }
+    
+    func fnLoadMonthData() {
+        let task = URLSession.shared.dataTask(with: urlMonths!) { (data, response, error) in
+            if error != nil {
+                print("ERROR")
+            } else {
+                if let content = data {
+                    do {
+                        let objMonthData = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
+                        for obj in objMonthData {
+                            let objMonthValues = obj.value as! NSDictionary
+                            let objMonth = Month(strName: objMonthValues["name"] as! String, strAbbrev: objMonthValues["short"] as! String, intNum: objMonthValues["number"] as! Int, intNumDays: objMonthValues["days"] as! Int)
+                            self.appdata.arrMonths.append(objMonth)
+                        }
+                    } catch {
+                        print("Catch")
+                    }
+                } else {
+                    print("Error")
+                }
+            }
+        }
+        task.resume()
+    }
+    
+    func fnSortMonthsByNumber(this: Month, that: Month) -> Bool {
+        return this.intNum < that.intNum
+    }
+    
     override func viewDidLoad() {
         if monthPicker != nil {
             monthPicker.isHidden = true
             monthPicker.delegate = self
             monthPicker.dataSource = self
+        } else if pickerviewStateAA != nil {
+            pickerviewStateAA.isHidden = true
+            pickerviewStateAA.delegate = self
+            pickerviewStateAA.dataSource = self
         }
+        self.fnLoadStateData()
         super.viewDidLoad()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
         self.view.addGestureRecognizer(tapGesture)
