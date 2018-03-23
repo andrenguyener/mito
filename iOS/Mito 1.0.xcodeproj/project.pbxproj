@@ -56,6 +56,7 @@
 		DA49F1DB2055EF9E0018ABA4 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA49F1DA2055EF9E0018ABA4 /* ProductViewController.swift */; };
 		DA4FC9EF2045E0D300999F28 /* profileInfo.json in Resources */ = {isa = PBXBuildFile; fileRef = DA4FC9EE2045E0D300999F28 /* profileInfo.json */; };
 		DA5D683E2058A45F00E86BE8 /* ProductDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA5D683C2058A45F00E86BE8 /* ProductDetails.storyboard */; };
+		DA6CB7F22064E9B700962814 /* Back.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6CB7F12064E9B700962814 /* Back.png */; };
 		DACCDE29206057C500CD59D9 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACCDE28206057C500CD59D9 /* State.swift */; };
 		DACCDE2B2060617000CD59D9 /* Month.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACCDE2A2060617000CD59D9 /* Month.swift */; };
 		DAD995312042386E007A7687 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD995302042386E007A7687 /* SearchViewController.swift */; };
@@ -143,6 +144,7 @@
 		DA49F1DA2055EF9E0018ABA4 /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
 		DA4FC9EE2045E0D300999F28 /* profileInfo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = profileInfo.json; sourceTree = SOURCE_ROOT; };
 		DA5D683D2058A45F00E86BE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Mito 1.0/Base.lproj/ProductDetails.storyboard"; sourceTree = "<group>"; };
+		DA6CB7F12064E9B700962814 /* Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Back.png; sourceTree = "<group>"; };
 		DACCDE28206057C500CD59D9 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		DACCDE2A2060617000CD59D9 /* Month.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Month.swift; sourceTree = "<group>"; };
 		DAD995302042386E007A7687 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 				B29AEC6A203FC9C100110EF9 /* LaunchScreen.storyboard */,
 				B29AEC6D203FC9C100110EF9 /* Info.plist */,
 				DAD9953420423A4B007A7687 /* Andre.png */,
+				DA6CB7F12064E9B700962814 /* Back.png */,
 				B2624CF1204F714D006B7DE6 /* Andre2.png */,
 				DA27C21F2043736400CCFD60 /* Sopheak.png */,
 				B2548FFA2055EA96000123D0 /* ammara.png */,
@@ -421,6 +424,7 @@
 			files = (
 				B29AEC6C203FC9C100110EF9 /* LaunchScreen.storyboard in Resources */,
 				B247198D204626ED006CF6C2 /* Cart Solid White Icon.png in Resources */,
+				DA6CB7F22064E9B700962814 /* Back.png in Resources */,
 				B2548FFD2055EA97000123D0 /* benny.png in Resources */,
 				B24719832046245E006CF6C2 /* Notification Icon SG.png in Resources */,
 				DA5D683E2058A45F00E86BE8 /* ProductDetails.storyboard in Resources */,

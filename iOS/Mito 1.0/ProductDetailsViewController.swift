@@ -51,10 +51,15 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     @IBOutlet weak var prodDetail: UILabel!
     @IBOutlet weak var lblQuantity: UILabel!
     @IBOutlet weak var pickerviewQuantity: UIPickerView!
+    @IBOutlet weak var btnQuantity: UIButton!
+    @IBOutlet weak var btnAddToCart: UIButton!
     
     @IBAction func btnQuantityPressed(_ sender: Any) {
         if pickerviewQuantity.isHidden {
             pickerviewQuantity.isHidden = false
+            btnQuantity.isHidden = true
+            lblQuantity.isHidden = true
+            btnAddToCart.isHidden = true
         }
     }
     
@@ -73,10 +78,13 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         lblQuantity.text = arrQuantity[row]
         pickerviewQuantity.isHidden = true
+        btnQuantity.isHidden = false
+        lblQuantity.isHidden = false
+        btnAddToCart.isHidden = false
     }
     
     
-    @IBAction func addToCart(_ sender: Any) {
+    @IBAction func btnAddToCartPressed(_ sender: Any) {
         let objCurrentProduct = appdata.products[appdata.currentIndex]
         if (appdata.cart.count > 0) {
             for objLineItem in appdata.cart {
