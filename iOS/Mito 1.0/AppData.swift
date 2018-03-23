@@ -20,7 +20,7 @@ class AppData: NSObject {
     
     open var arrStates: [State] = []
     
-    open var cart: [Product] = []
+    open var cart: [LineItem] = []
     
     open var feedItem: [FeedItem] = [
         FeedItem(avatar: "Sopheak.png", descr: "Ayyyy its finally time for us to ERD!!", time: "12m", whatHappened: "Sopheak Neak sent a gift to Andre Nguyen"),

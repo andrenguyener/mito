@@ -39,7 +39,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         formatter.numberStyle = .currency
         formatter.locale = Locale(identifier: "en_US")
         for element in appdata.cart {
-            let itemPrice = element.price
+            let itemPrice = element.objProduct.price // change later
             if let number = formatter.number(from: itemPrice) {
                 let amount = number.decimalValue
                 priceSum = amount + priceSum
@@ -108,18 +108,16 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cartCell", for: indexPath) as! CartTableViewCell
         let cartObj = appdata.cart[indexPath.row]
-        let url = URL(string: "\(cartObj.image)")
+        let url = URL(string: "\(cartObj.objProduct.image)")
         if let data = try? Data(contentsOf: url!) {
             cell.itemImage.image = UIImage(data: data)!
             cell.itemImage.contentMode = .scaleAspectFit
         }
-        print("Title: \(cartObj.title)")
-//        print(cartObj.description)
-//        print(cartObj.publisher)
-        cell.itemName.text = cartObj.title
-        print("CellText \(cell.itemName.text)")
-        cell.price.text = cartObj.price
-        cell.seller.text = cartObj.publisher
+        print("Title: \(cartObj.objProduct.title)")
+        cell.itemName.text = cartObj.objProduct.title
+        cell.price.text = cartObj.objProduct.price
+        cell.seller.text = cartObj.objProduct.publisher
+        cell.quantity.setTitle((String)(cartObj.intQty), for: .normal)
         return cell
     }
     
