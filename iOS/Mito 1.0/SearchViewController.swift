@@ -20,6 +20,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var productView: UIView!
     @IBOutlet weak var peopleView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var spinnerProductSearch: UIActivityIndicatorView!
     
     @IBOutlet weak var productContainer: UIView!
     @IBOutlet weak var peopleContainer: UIView!
@@ -45,13 +46,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "backToTabController" {
-            let tabBarController = segue.destination as! UITabBarController
-            tabBarController.selectedIndex = 1
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         peopleTableView.delegate = self
@@ -70,6 +64,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         fnLoadProductData()
         peopleTableView.reloadData()
         productTableView.reloadData()
+        spinnerProductSearch.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -95,6 +90,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     // Pressed Enter
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        spinnerProductSearch.isHidden = false
+        spinnerProductSearch.startAnimating()
         if (productPeopleTab.selectedSegmentIndex == 1) {
             UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
             productPeopleTab.selectedSegmentIndex = 0
@@ -231,6 +228,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         DispatchQueue.main.async {
                             self.productTableView.reloadData()
                             self.productPeopleTab.isEnabled = true
+                            self.spinnerProductSearch.stopAnimating()
                         }
                     } catch {
                         print("Catch")

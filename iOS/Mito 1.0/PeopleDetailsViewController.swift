@@ -34,11 +34,11 @@ class PeopleDetailsViewController: UIViewController {
     }
 
     @IBAction func backButton(_ sender: Any) {
-        performSegue(withIdentifier: "backToTabController", sender: self)
+        performSegue(withIdentifier: "segPeopleDetailsToSearchView", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "backToTabController" {
+        if segue.identifier == "segPeopleDetailsToSearchView" {
             let tabBarController = segue.destination as! UITabBarController
             tabBarController.selectedIndex = 1
         }
