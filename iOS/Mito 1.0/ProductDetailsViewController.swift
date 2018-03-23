@@ -15,7 +15,9 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     override func viewDidLoad() {
         super.viewDidLoad()
         print("i added item to cart")
-        
+        pickerviewQuantity.isHidden = true
+        pickerviewQuantity.delegate = self
+        pickerviewQuantity.dataSource = self
         let url = URL(string: "\(appdata.products[appdata.currentIndex].image)")
         if let data = try? Data(contentsOf: url!) {
             prodImage.image = UIImage(data: data)!
@@ -75,18 +77,20 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     
     @IBAction func addToCart(_ sender: Any) {
-        //Add alert here
-//        print("i added item to cart")
-        
-//        print(appdata.products[appdata.currentIndex])
-        appdata.cart.append(appdata.products[appdata.currentIndex])
-        print(appdata.cart[appdata.cart.count - 1].title)
-        print("Cart count: \(appdata.cart.count)")
+        let intProdQty: Int = (Int)(lblQuantity.text!)!
+        for _ in 0..<intProdQty {
+            appdata.cart.append(appdata.products[appdata.currentIndex])
+        }
+        self.fnAlertAddedToCart()
+    }
+    
+    func fnAlertAddedToCart() {
         let alertController = UIAlertController(title: "Done", message: "Added to cart!", preferredStyle: .alert)
         let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertController.addAction(defaultAction)
         present(alertController, animated: true, completion: nil)
     }
+    
     @IBAction func backSearch(_ sender: Any) {
         appdata.products.removeAll()
         performSegue(withIdentifier: "backToTabController", sender: self)
