@@ -43,13 +43,13 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             let itemPrice = element.objProduct.price // change later
             if let number = formatter.number(from: itemPrice) {
                 let amount = number.decimalValue
-                let totalAmt = amount * (Decimal)(element.intQty)
+                let totalAmt = amount * (Decimal)(element.intQuantity)
                 priceSum += totalAmt
             }
         }
         var intNumItems = 0
         for objCartItem in appdata.cart {
-            intNumItems += objCartItem.intQty
+            intNumItems += objCartItem.intQuantity
         }
         if cartTableView != nil {
             cartTableView.delegate = self
@@ -119,21 +119,21 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cartObj = appdata.cart[indexPath.row]
         let url = URL(string: "\(cartObj.objProduct.image)")
         if let data = try? Data(contentsOf: url!) {
-            cell.itemImage.image = UIImage(data: data)!
-            cell.itemImage.contentMode = .scaleAspectFit
+            cell.imgItemImage.image = UIImage(data: data)!
+            cell.imgItemImage.contentMode = .scaleAspectFit
         }
         print("Title: \(cartObj.objProduct.title)")
-        cell.itemName.text = cartObj.objProduct.title
+        cell.lblItemName.text = cartObj.objProduct.title
         let strPrice = cartObj.objProduct.price
         formatter.numberStyle = .currency
         if let number = formatter.number(from: strPrice) {
             let dblPrice = number.decimalValue
-            let intQty = (Double)(cartObj.intQty)
-            cell.price.text = (String)(describing: dblPrice * (Decimal)(intQty))
+            let intQty = (Double)(cartObj.intQuantity)
+            cell.lblPrice.text = (String)(describing: dblPrice * (Decimal)(intQty))
         }
 //        let dblPrice = (Double)(cartObj.objProduct.price)!
-        cell.seller.text = cartObj.objProduct.publisher
-        cell.quantity.setTitle((String)(cartObj.intQty), for: .normal)
+        cell.lblSellerName.text = cartObj.objProduct.publisher
+        cell.btnQuantity.setTitle((String)(cartObj.intQuantity), for: .normal)
         return cell
     }
     

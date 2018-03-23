@@ -89,7 +89,7 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
         if (appdata.cart.count > 0) {
             for objLineItem in appdata.cart {
                 if objLineItem.objProduct.ASIN == objCurrentProduct.ASIN {
-                    objLineItem.intQty += (Int)(lblQuantity.text!)!
+                    objLineItem.intQuantity += (Int)(lblQuantity.text!)!
                 } else {
                     appdata.cart.append(LineItem(objProduct: objCurrentProduct, intQty: (Int)(lblQuantity.text!)!))
                 }

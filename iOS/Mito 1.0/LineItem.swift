@@ -10,14 +10,14 @@ import Foundation
 
 class LineItem {
     var objProduct: Product
-    var intQty: Int
+    var intQuantity: Int
     
     init(objProduct: Product, intQty: Int) {
         self.objProduct = objProduct
-        self.intQty = intQty
+        self.intQuantity = intQty
     }
     
     func description() -> String {
-        return "\(objProduct.title): \(intQty)"
+        return "\(objProduct.title): \(intQuantity)"
     }
 }
