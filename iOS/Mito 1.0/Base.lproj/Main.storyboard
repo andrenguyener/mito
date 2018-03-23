@@ -1285,7 +1285,7 @@
                         <outlet property="img" destination="2VX-4k-3cu" id="Xdx-l5-yIt"/>
                         <outlet property="lblEmail" destination="fZd-x7-rdQ" id="TFf-5A-aga"/>
                         <outlet property="lblName" destination="k1g-f7-mfA" id="Q0T-y5-OaF"/>
-                        <segue destination="5ev-RP-TnR" kind="show" identifier="prodDetailBack" id="kS1-pK-LOk"/>
+                        <segue destination="5ev-RP-TnR" kind="show" identifier="backToTabController" id="kS1-pK-LOk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="55a-NT-Bh9" userLabel="First Responder" sceneMemberID="firstResponder"/>

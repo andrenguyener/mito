@@ -101,8 +101,14 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     @IBAction func backSearch(_ sender: Any) {
         appdata.products.removeAll()
-        performSegue(withIdentifier: "backToTabController", sender: self)
-        tabBarController?.selectedIndex = 1
+        self.performSegue(withIdentifier: "backToTabController", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "backToTabController" {
+            let tabBarController = segue.destination as! UITabBarController
+            tabBarController.selectedIndex = 1
+        }
     }
     
 }

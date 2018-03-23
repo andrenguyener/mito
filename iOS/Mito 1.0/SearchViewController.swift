@@ -45,6 +45,13 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "backToTabController" {
+            let tabBarController = segue.destination as! UITabBarController
+            tabBarController.selectedIndex = 1
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         peopleTableView.delegate = self
