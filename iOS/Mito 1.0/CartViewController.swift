@@ -31,9 +31,10 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var imgRecipient: UIImageView!
     @IBOutlet weak var recipientName: UILabel!
     
+    let formatter = NumberFormatter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let formatter = NumberFormatter()
         var priceSum: Decimal
         priceSum = 0.00
         formatter.numberStyle = .currency
@@ -42,15 +43,23 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             let itemPrice = element.objProduct.price // change later
             if let number = formatter.number(from: itemPrice) {
                 let amount = number.decimalValue
-                priceSum = amount + priceSum
-                print(amount)
+                let totalAmt = amount * (Decimal)(element.intQty)
+                priceSum += totalAmt
             }
-        }        
+        }
+        var intNumItems = 0
+        for objCartItem in appdata.cart {
+            intNumItems += objCartItem.intQty
+        }
         if cartTableView != nil {
             cartTableView.delegate = self
             cartTableView.dataSource = self
             cartTableView.rowHeight = 106
-            cartNumber.text = "Cart has \(appdata.cart.count) items"
+            var strItems = "items"
+            if intNumItems == 1 {
+                strItems = "item"
+            }
+            cartNumber.text = "Cart has \(intNumItems) \(strItems)"
             
             // rounds 2 decimal places for priceSum
             let tempSum = Double(truncating: priceSum as NSNumber)
@@ -58,7 +67,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             cartPrice.text = "$\(temp2Sum)"
         } else if itemCountCheckout != nil {
-            itemCountCheckout.text = String(appdata.cart.count)
+            itemCountCheckout.text = String(intNumItems)
             shippingCheckout.text = "FREE"
             let tax: Decimal = priceSum * 0.12
             
@@ -115,7 +124,14 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         print("Title: \(cartObj.objProduct.title)")
         cell.itemName.text = cartObj.objProduct.title
-        cell.price.text = cartObj.objProduct.price
+        let strPrice = cartObj.objProduct.price
+        formatter.numberStyle = .currency
+        if let number = formatter.number(from: strPrice) {
+            let dblPrice = number.decimalValue
+            let intQty = (Double)(cartObj.intQty)
+            cell.price.text = (String)(describing: dblPrice * (Decimal)(intQty))
+        }
+//        let dblPrice = (Double)(cartObj.objProduct.price)!
         cell.seller.text = cartObj.objProduct.publisher
         cell.quantity.setTitle((String)(cartObj.intQty), for: .normal)
         return cell
