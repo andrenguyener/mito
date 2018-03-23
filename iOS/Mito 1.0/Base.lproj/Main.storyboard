@@ -816,6 +816,9 @@
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WXz-Qa-jgh">
                                                             <rect key="frame" x="0.0" y="0.0" width="93.5" height="107.5"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="WXz-Qa-jgh" secondAttribute="height" multiplier="93:107" id="woA-6V-TV7"/>
+                                                            </constraints>
                                                         </imageView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="fDj-D7-W7Y">
                                                             <rect key="frame" x="107.5" y="0.0" width="207.5" height="107.5"/>

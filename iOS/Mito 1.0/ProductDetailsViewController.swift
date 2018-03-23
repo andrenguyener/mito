@@ -77,19 +77,18 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     
     @IBAction func addToCart(_ sender: Any) {
-//        let intProdQty: Int = (Int)(lblQuantity.text!)!
         let objCurrentProduct = appdata.products[appdata.currentIndex]
-        for objLineItem in appdata.cart {
-            if objLineItem.objProduct.ASIN == objCurrentProduct.ASIN {
-                objLineItem.intQty += 1
-            } else {
-                appdata.cart.append(LineItem(objProduct: objCurrentProduct, intQty: 1))
+        if (appdata.cart.count > 0) {
+            for objLineItem in appdata.cart {
+                if objLineItem.objProduct.ASIN == objCurrentProduct.ASIN {
+                    objLineItem.intQty += (Int)(lblQuantity.text!)!
+                } else {
+                    appdata.cart.append(LineItem(objProduct: objCurrentProduct, intQty: (Int)(lblQuantity.text!)!))
+                }
             }
+        } else {
+            appdata.cart.append(LineItem(objProduct: objCurrentProduct, intQty: (Int)(lblQuantity.text!)!))
         }
-        print(appdata.cart.count)
-//        for _ in 0..<intProdQty {
-//            appdata.cart.append(appdata.products[appdata.currentIndex])
-//        }
         self.fnAlertAddedToCart()
     }
     
