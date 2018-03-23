@@ -49,7 +49,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="login:" destination="jVO-xl-sXb" eventType="touchUpInside" id="9KX-2j-vVD"/>
+                                    <action selector="btnLoginPressed:" destination="jVO-xl-sXb" eventType="touchUpInside" id="9KX-2j-vVD"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gS8-lv-B80">
@@ -58,7 +58,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="signup:" destination="jVO-xl-sXb" eventType="touchUpInside" id="U3U-S1-oB1"/>
+                                    <action selector="btnSignUpPressed:" destination="jVO-xl-sXb" eventType="touchUpInside" id="U3U-S1-oB1"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="jms-jt-aDl" userLabel="UsernamePassword">
@@ -278,11 +278,11 @@
                                 <rect key="frame" x="20" y="611" width="335" height="36"/>
                                 <color key="backgroundColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="SIGN UP">
+                                <state key="normal" title="NEXT">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="signupButton:" destination="WyY-un-hcv" eventType="touchUpInside" id="VuW-rw-uqF"/>
+                                    <action selector="btnNextPressed:" destination="WyY-un-hcv" eventType="touchUpInside" id="VuW-rw-uqF"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OKN-tn-pu2">
@@ -472,7 +472,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="createAccountButton:" destination="Eua-Q9-CQ1" eventType="touchUpInside" id="btj-TY-yEB"/>
+                                    <action selector="btnCreateAccountPressed:" destination="Eua-Q9-CQ1" eventType="touchUpInside" id="btj-TY-yEB"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -493,7 +493,7 @@
                     <connections>
                         <outlet property="address1AA" destination="rJz-P9-Kg7" id="4or-d7-Wsf"/>
                         <outlet property="address2AA" destination="xIz-7p-sjT" id="0rS-Ll-sqT"/>
-                        <outlet property="btnState" destination="0ez-fv-Hkb" id="B7b-6t-1PD"/>
+                        <outlet property="btnChooseState" destination="0ez-fv-Hkb" id="B7b-6t-1PD"/>
                         <outlet property="cityAA" destination="j7b-HR-Hwa" id="PoF-fL-f8H"/>
                         <outlet property="pickerviewStateAA" destination="eql-j2-IXw" id="fWg-EC-oUh"/>
                         <outlet property="stateAA" destination="TC3-w8-VvJ" id="823-Ix-NdF"/>

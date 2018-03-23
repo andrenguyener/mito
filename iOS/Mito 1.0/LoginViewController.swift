@@ -26,8 +26,8 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var monthPicker: UIPickerView!
     @IBOutlet weak var btnMonth: UIButton!
-    var urlStates = URL(string: "https://api.myjson.com/bins/penjf") // JSON states
-    var urlMonths = URL(string: "https://api.myjson.com/bins/vwhqz") // JSON months
+    var urlStates = URL(string: "https://api.myjson.com/bins/penjf") // JSON file containing US states
+    var urlMonths = URL(string: "https://api.myjson.com/bins/vwhqz") // JSON file containing months
     
     var appdata = AppData.shared
     
@@ -67,13 +67,13 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             btnMonth.setTitle(appdata.arrMonths[row].strAbbrev, for: .normal)
             monthPicker.isHidden = true
         } else {
-            btnState.setTitle(appdata.arrStates[row].abbrev, for: .normal)
+            btnChooseState.setTitle(appdata.arrStates[row].abbrev, for: .normal)
             pickerviewStateAA.isHidden = true
         }
     }
     
     // Opening Login Page
-    @IBAction func login(_ sender: Any) {
+    @IBAction func btnLoginPressed(_ sender: Any) {
         let u = username.text
         let p = password.text
         let JSONObj: [String: Any] = [
@@ -88,16 +88,19 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         request.httpMethod = "POST"
         request.httpBody = jsonData
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+            // Check fundamental networking error
+            guard let data = data, error == nil else {
                 print("error=\(String(describing: error))")
                 return
             }
             
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+            // Check HTTP error
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
                 print("statusCode should be 200, but is \(httpStatus.statusCode)")
                 print("response = \(String(describing: response))")
             }
             
+            // Success
             let responseString = String(data: data, encoding: .utf8)
             let data2 = responseString?.data(using: .utf8)
             let dictionary = try? JSONSerialization.jsonObject(with: data2!, options: .mutableLeaves)
@@ -105,13 +108,11 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                 if (dictionary != nil) {
                     self.performSegue(withIdentifier: "login", sender: self)
                     UserDefaults.standard.set(dictionary, forKey: "UserInfo")
-//                    print(UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary)
                     if UserDefaults.standard.object(forKey: "UserInfo") != nil {
                         let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
                         //userID = data["userId"] as? Int
                         self.appdata.userID = (data["userId"] as? Int)!
                     }
-                    //appdata.userID =
                 }
             }
             //success = true
@@ -119,20 +120,10 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         task.resume()
     }
     
-    @IBAction func signup(_ sender: Any) {
-        performSegue(withIdentifier: "signup", sender: self)
+    @IBAction func btnSignUpPressed(_ sender: Any) {
+        self.performSegue(withIdentifier: "signup", sender: self)
         self.fnLoadMonthData()
-        for obj in appdata.arrMonths {
-            print(obj.description())
-        }
-        let content = UNMutableNotificationContent()
-        content.title = "Notification"
-        content.subtitle = "Notification subtitle"
-        content.body = "Andre has sent you a friend request"
-        content.badge = 1
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-        let request = UNNotificationRequest(identifier: "timerDone", content: content, trigger: trigger)
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        self.fnLoadStateData()
     }
 
     // Sign up page
@@ -142,13 +133,15 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var passwordSU: UITextField!
     @IBOutlet weak var passwordConfSU: UITextField!
     @IBOutlet weak var userEmailSU: UITextField!
-    @IBAction func signupButton(_ sender: Any) {
+    
+    @IBAction func btnNextPressed(_ sender: Any) {
         let uFname = userFnameSU.text
         let uname = usernameSU.text
         let pass = passwordSU.text
         let passConf = passwordConfSU.text
         let uEmail = userEmailSU.text
         
+        // Should have last name field so we don't default to Smith
         let JSONObj: [String: Any] = [
             "userFname": uFname!,
             "userLname": "Smith",
@@ -165,7 +158,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "POST"
         request.httpBody = jsonData
-        print(request.url?.absoluteString)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {                                                 // check for fundamental networking error
                 print("error=\(String(describing: error))")
@@ -207,9 +199,9 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var stateAA: UITextField!
     @IBOutlet weak var zipcodeAA: UITextField!
     @IBOutlet weak var pickerviewStateAA: UIPickerView!
-    @IBOutlet weak var btnState: UIButton!
+    @IBOutlet weak var btnChooseState: UIButton!
     
-    @IBAction func createAccountButton(_ sender: Any) {
+    @IBAction func btnCreateAccountPressed(_ sender: Any) {
         var userID: Int?
         if UserDefaults.standard.object(forKey: "UserInfo") != nil {
             let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
@@ -258,7 +250,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             DispatchQueue.main.async {
                 if (dictionary != nil) {
                     self.performSegue(withIdentifier: "createAccount", sender: self)
-                    print(dictionary)
                     //                    UserDefaults.standard.set(dictionary, forKey: "AddressInfo")
                     //                    print(UserDefaults.standard.object(forKey: "AddressInfo") as! NSDictionary)
                 }
@@ -361,19 +352,29 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             pickerviewStateAA.delegate = self
             pickerviewStateAA.dataSource = self
         }
-        self.fnLoadStateData()
         super.viewDidLoad()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
         self.view.addGestureRecognizer(tapGesture)
-        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in
-            
-        })
 //        if UserDefaults.standard.object(forKey: "UserInfo") == nil {
 //            print("There is no local data")
 //        } else {
 //            performSegue(withIdentifier: "login", sender: self)
 //        }
     }
+    
+//    func NotificationStuff() {
+//        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+//        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in
+//
+//        })
+//        let content = UNMutableNotificationContent()
+//        content.title = "Notification"
+//        content.subtitle = "Notification subtitle"
+//        content.body = "Andre has sent you a friend request"
+//        content.badge = 1
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+//        let request = UNNotificationRequest(identifier: "timerDone", content: content, trigger: trigger)
+//        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+//    }
 }
