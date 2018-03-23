@@ -43,7 +43,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if !monthPicker.isHidden {
+        if monthPicker != nil && !monthPicker.isHidden {
             return appdata.arrMonths.count
         } else if (pickerviewStateAA != nil) && !pickerviewStateAA.isHidden {
             return appdata.arrStates.count
@@ -53,7 +53,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if !monthPicker.isHidden {
+        if monthPicker != nil && !monthPicker.isHidden {
             return appdata.arrMonths[row].strName
         } else if pickerviewStateAA != nil && !pickerviewStateAA.isHidden {
             return appdata.arrStates[row].value
@@ -63,7 +63,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if !monthPicker.isHidden {
+        if monthPicker != nil && !monthPicker.isHidden {
             btnMonth.setTitle(appdata.arrMonths[row].strAbbrev, for: .normal)
             monthPicker.isHidden = true
         } else {
@@ -71,7 +71,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             pickerviewStateAA.isHidden = true
         }
     }
-    
     
     // Opening Login Page
     @IBAction func login(_ sender: Any) {
