@@ -23,8 +23,8 @@ class PeopleDetailsViewController: UIViewController {
     
     func loadPersonData() {
         print("PeopleDetailsViewController Index: \(myIndex)")
-        print(appdata.friends[myIndex].description())
-        let friend = appdata.friends[myIndex]
+        print(appdata.arrFriends[myIndex].description())
+        let friend = appdata.arrFriends[myIndex]
         lblName.text = "\(friend.firstName) \(friend.lastName)"
         lblEmail.text = "\(friend.email)"
         let url = URL(string:"\(friend.avatar)")

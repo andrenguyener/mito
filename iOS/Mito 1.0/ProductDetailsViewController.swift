@@ -18,16 +18,16 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
         pickerviewQuantity.isHidden = true
         pickerviewQuantity.delegate = self
         pickerviewQuantity.dataSource = self
-        let url = URL(string: "\(appdata.products[appdata.currentIndex].image)")
+        let url = URL(string: "\(appdata.arrProductSearchResults[appdata.intCurrIndex].image)")
         if let data = try? Data(contentsOf: url!) {
             prodImage.image = UIImage(data: data)!
         }
-        prodTitle.text = appdata.products[appdata.currentIndex].title
-        prodPub.text = appdata.products[appdata.currentIndex].publisher
-        prodPrice.text = appdata.products[appdata.currentIndex].price
+        prodTitle.text = appdata.arrProductSearchResults[appdata.intCurrIndex].title
+        prodPub.text = appdata.arrProductSearchResults[appdata.intCurrIndex].publisher
+        prodPrice.text = appdata.arrProductSearchResults[appdata.intCurrIndex].price
         
-        prodDetail.text = appdata.products[appdata.currentIndex].description
-        print(appdata.products[appdata.currentIndex].title)
+        prodDetail.text = appdata.arrProductSearchResults[appdata.intCurrIndex].description
+        print(appdata.arrProductSearchResults[appdata.intCurrIndex].title)
         //img.image = UIImage(named: "Andre2.png")
         // Do any additional setup after loading the view.
     }
@@ -85,17 +85,17 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     
     @IBAction func btnAddToCartPressed(_ sender: Any) {
-        let objCurrentProduct = appdata.products[appdata.currentIndex]
-        if (appdata.cart.count > 0) {
-            for objLineItem in appdata.cart {
+        let objCurrentProduct = appdata.arrProductSearchResults[appdata.intCurrIndex]
+        if (appdata.arrCartLineItems.count > 0) {
+            for objLineItem in appdata.arrCartLineItems {
                 if objLineItem.objProduct.ASIN == objCurrentProduct.ASIN {
                     objLineItem.intQuantity += (Int)(lblQuantity.text!)!
                 } else {
-                    appdata.cart.append(LineItem(objProduct: objCurrentProduct, intQty: (Int)(lblQuantity.text!)!))
+                    appdata.arrCartLineItems.append(LineItem(objProduct: objCurrentProduct, intQty: (Int)(lblQuantity.text!)!))
                 }
             }
         } else {
-            appdata.cart.append(LineItem(objProduct: objCurrentProduct, intQty: (Int)(lblQuantity.text!)!))
+            appdata.arrCartLineItems.append(LineItem(objProduct: objCurrentProduct, intQty: (Int)(lblQuantity.text!)!))
         }
         self.fnAlertAddedToCart()
     }
@@ -108,7 +108,7 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     @IBAction func backSearch(_ sender: Any) {
-        appdata.products.removeAll()
+        appdata.arrProductSearchResults.removeAll()
         self.performSegue(withIdentifier: "backToTabController", sender: self)
     }
     

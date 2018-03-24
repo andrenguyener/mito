@@ -39,7 +39,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
 //            productTableView.reloadData()
         } else {
-            appdata.friends.removeAll()
+            appdata.arrFriends.removeAll()
             fnLoadPeopleData()
             UIView.transition(from: productView, to: peopleView, duration: 0, options: .showHideTransitionViews)
             peopleTableView.reloadData()
@@ -59,7 +59,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
 
-        urlPeopleCall = URL(string: "https://api.projectmito.io/v1/friend/\(appdata.userID)")
+        urlPeopleCall = URL(string: "https://api.projectmito.io/v1/friend/\(appdata.intCurrentUserID)")
         fnLoadPeopleData()
         fnLoadProductData()
         peopleTableView.reloadData()
@@ -104,7 +104,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             searchBar.text = "Amazon"
         }
         searchBar.resignFirstResponder()
-        appdata.products.removeAll()
+        appdata.arrProductSearchResults.removeAll()
         let urlString = (urlAmazonOriginal?.absoluteString)! + strSearchQuery
         urlAmazonProductCall = URL(string: urlString)
         productPeopleTab.isEnabled = false
@@ -125,7 +125,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         for obj in objPeopleData {
                             let object = obj as! NSDictionary
                             let p: Person = Person(firstName: (object["UserFname"] as? String)!, lastName: (object["UserLname"] as? String)!, email: (object["UserEmail"] as? String!)!, avatar: (object["PhotoUrl"] as? String!)!)
-                            self.appdata.friends.append(p)
+                            self.appdata.arrFriends.append(p)
                         }
                         DispatchQueue.main.async {
                             self.peopleTableView.reloadData()
@@ -222,7 +222,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     publisher_brand = "Brand"
                                 }
                                 let product: Product = Product(image: strImageURL, ASIN: strASIN, title: title, publisher: publisher_brand, price: formattedPrice, description: itemFeature)
-                                self.appdata.products.append(product)
+                                self.appdata.arrProductSearchResults.append(product)
                             }
                         }
                         DispatchQueue.main.async {
@@ -247,9 +247,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if productPeopleTab.selectedSegmentIndex == 1 {
-            return appdata.friends.count
+            return appdata.arrFriends.count
         } else {
-            return appdata.products.count
+            return appdata.arrProductSearchResults.count
         }
     }
     
@@ -257,7 +257,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         myIndex = indexPath.row
         print("didSelectRowAt Index: \(myIndex)")
         if productPeopleTab.selectedSegmentIndex == 0 {
-            appdata.currentIndex = myIndex
+            appdata.intCurrIndex = myIndex
             performSegue(withIdentifier: "productDetail", sender: self)
 //            appdata.cart.append(appdata.products[myIndex])
 //            print(appdata.cart[appdata.cart.count - 1].title)
@@ -270,7 +270,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if productPeopleTab.selectedSegmentIndex == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "productCell", for: indexPath) as! ProductTableViewCell
-            let objProduct = appdata.products[indexPath.row]
+            let objProduct = appdata.arrProductSearchResults[indexPath.row]
             let urlProductImage = URL(string: "\(objProduct.image)")
             if let data = try? Data(contentsOf: urlProductImage!) {
                 cell.img.image = UIImage(data: data)!
@@ -281,7 +281,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
-            let objPerson = appdata.friends[indexPath.row]
+            let objPerson = appdata.arrFriends[indexPath.row]
             let urlPeopleImage = URL(string:"\(objPerson.avatar)")
             let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
             if let data = try? Data(contentsOf: urlPeopleImage!) {

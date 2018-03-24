@@ -111,7 +111,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                     if UserDefaults.standard.object(forKey: "UserInfo") != nil {
                         let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
                         //userID = data["userId"] as? Int
-                        self.appdata.userID = (data["userId"] as? Int)!
+                        self.appdata.intCurrentUserID = (data["userId"] as? Int)!
                     }
                 }
             }
@@ -180,7 +180,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                     if UserDefaults.standard.object(forKey: "UserInfo") != nil {
                         let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
                         //userID = data["userId"] as? Int
-                        self.appdata.userID = (data["userId"] as? Int)!
+                        self.appdata.intCurrentUserID = (data["userId"] as? Int)!
                     }
                 }
             }
@@ -208,7 +208,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             userID = data["userId"] as? Int
             print("data = \(data)")
             print("userId = \(String(describing: data["userId"]))")
-            appdata.userID = userID!
+            appdata.intCurrentUserID = userID!
         }
         let address1 = address1AA.text
         let address2 = address2AA.text

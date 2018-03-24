@@ -39,7 +39,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         priceSum = 0.00
         formatter.numberStyle = .currency
         formatter.locale = Locale(identifier: "en_US")
-        for element in appdata.cart {
+        for element in appdata.arrCartLineItems {
             let itemPrice = element.objProduct.price // change later
             if let number = formatter.number(from: itemPrice) {
                 let amount = number.decimalValue
@@ -48,7 +48,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
         var intNumItems = 0
-        for objCartItem in appdata.cart {
+        for objCartItem in appdata.arrCartLineItems {
             intNumItems += objCartItem.intQuantity
         }
         if cartTableView != nil {
@@ -87,7 +87,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
             recipientName.text = "Sopheaky Neaky"
         } else {
-            appdata.cart.removeAll()
+            appdata.arrCartLineItems.removeAll()
         }
     }
     var appdata = AppData.shared
@@ -102,8 +102,15 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //CheckOutComplete Page
     @IBAction func returnHome(_ sender: Any) {
-        appdata.products.removeAll()
+        appdata.arrProductSearchResults.removeAll()
         performSegue(withIdentifier: "checkoutComplete", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "cartToHome" {
+            let tabBarController = segue.destination as! UITabBarController
+            tabBarController.selectedIndex = 1
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -111,18 +118,17 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return appdata.cart.count
+        return appdata.arrCartLineItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cartCell", for: indexPath) as! CartTableViewCell
-        let cartObj = appdata.cart[indexPath.row]
+        let cartObj = appdata.arrCartLineItems[indexPath.row]
         let url = URL(string: "\(cartObj.objProduct.image)")
         if let data = try? Data(contentsOf: url!) {
             cell.imgItemImage.image = UIImage(data: data)!
             cell.imgItemImage.contentMode = .scaleAspectFit
         }
-        print("Title: \(cartObj.objProduct.title)")
         cell.lblItemName.text = cartObj.objProduct.title
         let strPrice = cartObj.objProduct.price
         formatter.numberStyle = .currency
@@ -131,7 +137,6 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             let intQty = (Double)(cartObj.intQuantity)
             cell.lblPrice.text = (String)(describing: dblPrice * (Decimal)(intQty))
         }
-//        let dblPrice = (Double)(cartObj.objProduct.price)!
         cell.lblSellerName.text = cartObj.objProduct.publisher
         cell.btnQuantity.setTitle((String)(cartObj.intQuantity), for: .normal)
         return cell
