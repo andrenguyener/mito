@@ -42,7 +42,7 @@ type UpdateUserPassword struct {
 //GetByID returns the User with the given ID
 func (ss *SqlStore) GetByID(id int) (*User, error) {
 	user := &User{}
-	tsql := fmt.Sprintf("EXEC GetUserByID @UserId;")
+	tsql := fmt.Sprintf("EXEC uspGetUserById @UserId;")
 
 	rows, err := ss.database.Query(
 		tsql,
@@ -67,7 +67,7 @@ func (ss *SqlStore) GetByID(id int) (*User, error) {
 //GetByEmail returns the User with the given email
 func (ss *SqlStore) GetByEmail(email string) (*User, error) {
 	user := &User{}
-	tsql := fmt.Sprintf("EXEC GetUserByUserEmail @Useremail;")
+	tsql := fmt.Sprintf("EXEC uspGetUserByUserEmail @Useremail;")
 
 	rows, err := ss.database.Query(
 		tsql,
@@ -93,7 +93,7 @@ func (ss *SqlStore) GetByEmail(email string) (*User, error) {
 //GetByUserName returns the User with the given Username
 func (ss *SqlStore) GetByUserName(username string) (*User, error) {
 	user := &User{}
-	tsql := fmt.Sprintf("EXEC GetUserByUsername @Username;")
+	tsql := fmt.Sprintf("EXEC uspGetUserByUsername @Username;")
 
 	rows, err := ss.database.Query(
 		tsql,
@@ -124,7 +124,7 @@ func (ss *SqlStore) Insert(newUser *NewUser) (*User, error) {
 		return nil, fmt.Errorf("Error converting new user to user %s", err)
 	}
 	var newUserId int64
-	_, err = ss.database.Exec("insertUser",
+	_, err = ss.database.Exec("uspInsertUser",
 		sql.Named("UserFname", user.UserFname),
 		sql.Named("UserLname", user.UserLname),
 		sql.Named("UserEmail", user.UserEmail),

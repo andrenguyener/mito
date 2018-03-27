@@ -19,7 +19,7 @@ class FriendStore {
     // Insert a friend into SqlServer
     insert(userId, friendId) {
         return new Promise((resolve) => {
-            let procedureName = "insertFriend";
+            let procedureName = "uspRequestFriend";
             var request = this.request(procedureName);
             request.addParameter('user1Id', TYPES.Int, userId);
             request.addParameter('user2Id', TYPES.Int, friendId);
@@ -47,7 +47,7 @@ class FriendStore {
     // Get all friends of a UserId
     getAll(id) {
         return new Promise((resolve) => {
-            let procedureName = "GetUserFriendsById";
+            let procedureName = "uspGetUserFriendsById";
             var request = new Request(`${procedureName}`, function (err, rowCount, rows) {
                 if (err) {
                     console.log(err);
