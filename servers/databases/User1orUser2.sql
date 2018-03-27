@@ -1,4 +1,4 @@
-ALTER PROC User1orUser2
+ALTER PROC uspUser1orUser2
 @UserFriendId INT,
 @UserId INT,
 @User1 BIT OUT
@@ -13,3 +13,5 @@ AS
 		SET @User1 = 1
 		END
 GO
+
+EXEC sp_rename 'User1orUser2', 'uspUser1orUser2'

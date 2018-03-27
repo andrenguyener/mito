@@ -3,7 +3,7 @@
 Find relevant user information based on the given Username
 */
 
-ALTER PROC GetUserByUsername 
+ALTER PROC uspGetUserByUsername 
 @Username NVARCHAR(50)
 As	
 	--DECLARE @err_msg NVARCHAR(255)
@@ -20,3 +20,5 @@ As
 		RAISERROR('UserId is not found.', 11,1)
 		RETURN
 		END
+
+EXEC sp_rename 'GetUserByUsername', 'uspGetUserByUsername'

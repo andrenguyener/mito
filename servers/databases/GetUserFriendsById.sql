@@ -3,11 +3,11 @@
 Return all information on the user's friends
 */
 
-ALTER PROC GetUserFriendsById
+ALTER PROC uspGetUserFriendsById
 @UserId INT
 AS
 	DECLARE @NotFriendType INT
-	EXEC GetFriendTypeId'Pending', @FriendType_Id = @NotFriendType OUT
+	EXEC uspGetFriendTypeId'Pending', @FriendType_Id = @NotFriendType OUT
 
 	IF @NotFriendType IS NULL
 	BEGIN 
@@ -18,7 +18,7 @@ AS
 
 	DECLARE @friendsIdList TABLE(FriendId INT)
 	INSERT @friendsIdList
-	EXEC GetUserFriendsIdList @UserId
+	EXEC uspGetUserFriendsIdList @UserId
 
 	IF EXISTS(SELECT * FROM FRIEND WHERE (User1Id = @UserId OR User2Id = @UserId)
 		AND FriendTypeId <> @NotFriendType )
@@ -31,3 +31,5 @@ AS
 		BEGIN 
 		PRINT'This user does not have any friend.'
 		END
+
+EXEC sp_rename 'GetUserFriendsById', 'uspGetUserFriendsById'

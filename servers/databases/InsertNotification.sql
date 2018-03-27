@@ -5,7 +5,7 @@ A stored procedure to insert notification into the table
 @SendFrom: always 0 // might need to modify
 @NotifcationDate: the date of when the notification is inserted
 */
-CREATE PROC InsertNotification
+CREATE PROC uspInsertNotification
 @FriendId INT,
 @NotificationTypeId INT,
 @SendFrom BIT,
@@ -23,3 +23,5 @@ AS
 		ROLLBACK TRAN
 	ELSE
 		COMMIT TRAN
+
+EXEC sp_rename 'InsertNotification', 'uspInsertNotification'

@@ -3,7 +3,7 @@
 Find relevant user information based on the given email address
 */
 
-ALTER PROC GetUserByUserEmail
+ALTER PROC uspGetUserByUserEmail
 @Useremail NVARCHAR(100)
 As	
 	--DECLARE @err_msg NVARCHAR(255)
@@ -20,3 +20,5 @@ As
 		RAISERROR('Useremail is not found.', 11,1)
 		RETURN
 		END
+
+EXEC sp_rename 'GetUserByUserEmail', 'uspGetUserByUserEmail'

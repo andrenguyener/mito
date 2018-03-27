@@ -5,7 +5,7 @@ Output param SPROCs for getting relevant Address data
 -- @params: street address 1 and 2
 -- If found, return the StreetAddressId
 -- If not found, insert the new street address into the table and return the newly made StreetAddressId
-ALTER PROC GetStreetAddressId
+ALTER PROC uspGetStreetAddressId
 @streetAddress1 NVARCHAR(100),
 @streetAddress2 NVARCHAR(100),
 @StreetAddress_Id INT OUT
@@ -21,10 +21,12 @@ AS
 		END
 GO
 
+EXEC sp_rename 'GetStreetAddressId', 'uspGetStreetAddressId'
+
 -- @params: zipcode
 -- If found, return the matched ZipCodeId
 -- If not found, insert the zipcode into the table and return the newly made ZipCodeId
-ALTER PROC GetZipCodeId
+ALTER PROC uspGetZipCodeId
 @Zipcode NVARCHAR(12),
 @ZipCode_Id INT OUT
 AS
@@ -37,11 +39,11 @@ AS
 		SET @ZipCode_Id = (SELECT SCOPE_IDENTITY())
 		END
 GO
-
+EXEC sp_rename 'GetZipCodeId', 'uspGetZipCodeId'
 -- @params: city
 -- If found, return the matched cityId
 -- If not found, insert the city into the table and return the newly made CityId
-CREATE PROC GetCityId
+CREATE PROC uspGetCityId
 @city NVARCHAR(75),
 @City_Id INT OUT
 AS
@@ -54,11 +56,12 @@ AS
 		SET @City_Id = (SELECT SCOPE_IDENTITY())
 		END
 GO
+EXEC sp_rename 'GetCityId', 'uspGetCityId'
 
 -- @params: state name (Abbr.)
 -- If found, return the matched StateId
 -- If not found, insert the state into the table and return the newly made StateId
-CREATE PROC GetStateId
+CREATE PROC uspGetStateId
 @state NVARCHAR(30),
 @State_Id INT OUT
 AS
@@ -71,3 +74,4 @@ AS
 		SET @State_Id = (SELECT SCOPE_IDENTITY())
 		END
 GO
+EXEC sp_rename 'GetStateId', 'uspGetStateId'

@@ -1,4 +1,4 @@
-ALTER PROC InsertAddress
+ALTER PROC uspInsertAddress
 @streetAddress1 NVARCHAR(100),
 @streetAddress2 NVARCHAR(100),
 @cityName NVARCHAR(75),
@@ -8,19 +8,19 @@ ALTER PROC InsertAddress
 AS
 	--retrieve matching StreetAddressId based on the given streetaddress1 and streetaddress 2
 	DECLARE @streetAddressId INT
-	EXEC GetStreetAddressId @streetAddress1, @streetAddress2, @StreetAddress_Id = @streetAddressId OUT
+	EXEC uspGetStreetAddressId @streetAddress1, @streetAddress2, @StreetAddress_Id = @streetAddressId OUT
 
 	-- retrieve matching CityId based on the given city name
 	DECLARE @cityId INT
-	EXEC GetCityId @cityName, @City_Id = @cityId OUT
+	EXEC uspGetCityId @cityName, @City_Id = @cityId OUT
 
 	-- retrieve matching ZipCodeId based on the given zip code
 	DECLARE @zipCodeId INT
-	EXEC GetZipCodeId @zipCode, @ZipCode_Id = @zipCodeId OUT
+	EXEC uspGetZipCodeId @zipCode, @ZipCode_Id = @zipCodeId OUT
 
 	-- retrieve matching StateId based on the given state name
 	DECLARE @stateId INT
-	EXEC GetStateId @stateName, @State_Id = @stateId OUT
+	EXEC uspGetStateId @stateName, @State_Id = @stateId OUT
 	IF @streetAddressId IS NULL OR @cityId IS NULL
 	OR @zipCodeId IS NULL OR @stateId IS NULL
 		BEGIN
@@ -46,3 +46,5 @@ AS
 		ELSE
 			COMMIT TRAN addAddress
 		END
+
+EXEC sp_rename 'InsertAddress', 'uspInsertAddress'
