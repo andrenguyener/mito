@@ -1,4 +1,4 @@
-CREATE PROC UpdateFriendType
+CREATE PROC uspUpdateFriendType
 @FriendId INT,
 @FriendTypeId INT,
 @Delete BIT
@@ -12,3 +12,5 @@ AS
 		ELSE
 			COMMIT TRAN
 GO
+
+EXEC sp_rename 'UpdateFriendType', 'uspUpdateFriendType'

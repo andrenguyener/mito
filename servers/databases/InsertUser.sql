@@ -2,7 +2,7 @@
 	Insert a new user into the [USER] database
 	and return the newly made user id as an output parameter
 */
-ALTER PROC insertUser
+ALTER PROC uspInsertUser
 @UserFname nvarchar(50),
 @UserLname nvarchar(50),
 @UserEmail nvarchar(100),
@@ -13,9 +13,9 @@ ALTER PROC insertUser
 @RetNewUserId INT OUT
 AS	
 	DECLARE @UserId INT
-	EXEC GetUserId @Username, @User_Id = @UserId OUT
+	EXEC uspGetUserId @Username, @User_Id = @UserId OUT
 	DECLARE @UserIdByEmail INT
-	EXEC GetUserIdByEmail @UserEmail, @UserIdByEmail OUT
+	EXEC uspGetUserIdByEmail @UserEmail, @UserIdByEmail OUT
 	
 	-- Check username does not already exist
 	IF @UserId IS NOT NULL

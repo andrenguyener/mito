@@ -1,6 +1,6 @@
 -- @param: UserAddressId that users want to delete
 -- "Delete" the address from user address book based on the given UserAddressId
-CREATE PROC DeleteUserAddress
+CREATE PROC uspDeleteUserAddress
 @UserAddressId INT
 AS
 	IF @UserAddressId IS NULL
@@ -19,3 +19,5 @@ AS
 		ELSE
 			COMMIT TRAN
 GO
+
+EXEC sp_rename 'DeleteUserAddress', 'uspDeleteUserAddress'

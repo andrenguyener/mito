@@ -5,7 +5,7 @@ User profile information if the UserId has an
 existing address in their address book
 */
 
-ALTER PROC GetUserAddressById
+ALTER PROC uspGetUserAddressById
 @UserId INT
 AS
 	-- Check if the UserId exist in USER
@@ -35,8 +35,10 @@ AS
 		END
 GO
 
+EXEC sp_rename 'GetUserAddressById', 'uspGetUserAddressById'
+
 -- example success (uncomment the line below): 7 is a valid userId
---EXEC GetUserAddressById 7
+EXEC uspGetUserAddressById 7
 
 -- example error (uncomment the line below): 3 is a valid user but doesn't have any address
 --EXEC GetUserAddressById 3
