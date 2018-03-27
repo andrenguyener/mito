@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B244999F2040C340006FA81B /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = B244999E2040C340006FA81B /* fonts */; };
+		B244B3992069BF7E00B01BBA /* Title.png in Resources */ = {isa = PBXBuildFile; fileRef = B244B3982069BF7D00B01BBA /* Title.png */; };
 		B247196E20453917006CF6C2 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B247196D20453917006CF6C2 /* CartViewController.swift */; };
 		B247197020454733006CF6C2 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B247196F20454733006CF6C2 /* CartTableViewCell.swift */; };
 		B247197320454C4E006CF6C2 /* You’re so nice!.png in Resources */ = {isa = PBXBuildFile; fileRef = B247197120454C4D006CF6C2 /* You’re so nice!.png */; };
@@ -87,6 +88,7 @@
 		00B658EBC5F86F98DCB37842 /* Pods_Mito_1_0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mito_1_0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		84DCA3E27CF3BAF309A28CA2 /* Pods-Mito 1.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mito 1.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-Mito 1.0/Pods-Mito 1.0.release.xcconfig"; sourceTree = "<group>"; };
 		B244999E2040C340006FA81B /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
+		B244B3982069BF7D00B01BBA /* Title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Title.png; sourceTree = "<group>"; };
 		B247196D20453917006CF6C2 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		B247196F20454733006CF6C2 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
 		B247197120454C4D006CF6C2 /* You’re so nice!.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "You’re so nice!.png"; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 				B2548FF82055EA96000123D0 /* benny.png */,
 				B2548FF92055EA96000123D0 /* jj.png */,
 				B2548FF72055EA96000123D0 /* sarah.png */,
+				B244B3982069BF7D00B01BBA /* Title.png */,
 			);
 			path = "Mito 1.0";
 			sourceTree = "<group>";
@@ -452,6 +455,7 @@
 				B247198E204626ED006CF6C2 /* Search.png in Resources */,
 				DAD9953520423A4B007A7687 /* Andre.png in Resources */,
 				B24719842046245E006CF6C2 /* Blocked User SG.png in Resources */,
+				B244B3992069BF7E00B01BBA /* Title.png in Resources */,
 				B25490002055EA97000123D0 /* avina.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
