@@ -74,50 +74,81 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     // Opening Login Page
     @IBAction func btnLoginPressed(_ sender: Any) {
-        let u = username.text
-        let p = password.text
-        let JSONObj: [String: Any] = [
-            "userEmail": u!,
-            "password": p!
+        
+        let parameters: Parameters = [
+            "userEmail": username.text!,
+            "password": password.text!
         ]
-        //var success = false
-        let jsonData = try? JSONSerialization.data(withJSONObject: JSONObj)
-        let url = URL(string: "https://api.projectmito.io/v1/sessions")!
-        var request = URLRequest(url: url)
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpMethod = "POST"
-        request.httpBody = jsonData
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            // Check fundamental networking error
-            guard let data = data, error == nil else {
-                print("error=\(String(describing: error))")
-                return
-            }
-            
-            // Check HTTP error
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(String(describing: response))")
-            }
-            
-            // Success
-            let responseString = String(data: data, encoding: .utf8)
-            let data2 = responseString?.data(using: .utf8)
-            let dictionary = try? JSONSerialization.jsonObject(with: data2!, options: .mutableLeaves)
-            DispatchQueue.main.async {
-                if (dictionary != nil) {
-                    self.performSegue(withIdentifier: "login", sender: self)
-                    UserDefaults.standard.set(dictionary, forKey: "UserInfo")
-                    if UserDefaults.standard.object(forKey: "UserInfo") != nil {
-                        let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
-                        //userID = data["userId"] as? Int
-                        self.appdata.intCurrentUserID = (data["userId"] as? Int)!
+        
+        Alamofire.request("https://api.projectmito.io/v1/sessions", method: .post, parameters: parameters, encoding: JSONEncoding.default).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                
+                //                print("Response: \(String(describing: response.response))") // http url response
+                let authHeader = response.response?.allHeaderFields["Authorization"] ?? ""
+                if let dictionary = response.result.value {
+                    print("JSON: \(dictionary)") // serialized json response
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "login", sender: self)
+                        UserDefaults.standard.set(dictionary, forKey: "UserInfo")
+                        UserDefaults.standard.set(authHeader, forKey: "Authorization")
+                        if UserDefaults.standard.object(forKey: "UserInfo") != nil {
+                            let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+                            //userID = data["userId"] as? Int
+                            self.appdata.intCurrentUserID = (data["userId"] as? Int)!
+                        }
                     }
                 }
+                
+            case .failure(let error):
+                print(error)
             }
-            //success = true
         }
-        task.resume()
+        
+        //        let u = username.text
+        //        let p = password.text
+        //        let JSONObj: [String: Any] = [
+        //            "userEmail": u!,
+        //            "password": p!
+        //        ]
+        //        //var success = false
+        //        let jsonData = try? JSONSerialization.data(withJSONObject: JSONObj)
+        //        let url = URL(string: "https://api.projectmito.io/v1/sessions")!
+        //        var request = URLRequest(url: url)
+        //        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        //        request.httpMethod = "POST"
+        //        request.httpBody = jsonData
+        //        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        //            // Check fundamental networking error
+        //            guard let data = data, error == nil else {
+        //                print("error=\(String(describing: error))")
+        //                return
+        //            }
+        //
+        //            // Check HTTP error
+        //            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
+        //                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+        //                print("response = \(String(describing: response))")
+        //            }
+        //
+        //            // Success
+        //            let responseString = String(data: data, encoding: .utf8)
+        //            let data2 = responseString?.data(using: .utf8)
+        //            let dictionary = try? JSONSerialization.jsonObject(with: data2!, options: .mutableLeaves)
+        //            DispatchQueue.main.async {
+        //                if (dictionary != nil) {
+        //                    self.performSegue(withIdentifier: "login", sender: self)
+        //                    UserDefaults.standard.set(dictionary, forKey: "UserInfo")
+        //                    if UserDefaults.standard.object(forKey: "UserInfo") != nil {
+        //                        let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+        //                        //userID = data["userId"] as? Int
+        //                        self.appdata.intCurrentUserID = (data["userId"] as? Int)!
+        //                    }
+        //                }
+        //            }
+        //            //success = true
+        //        }
+        //        task.resume()
     }
     
     @IBAction func btnSignUpPressed(_ sender: Any) {
@@ -125,7 +156,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         self.fnLoadMonthData()
         self.fnLoadStateData()
     }
-
+    
     // Sign up page
     
     @IBOutlet weak var userFnameSU: UITextField!
@@ -142,7 +173,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         let uEmail = userEmailSU.text
         
         // Should have last name field so we don't default to Smith
-        let JSONObj: [String: Any] = [
+        let parameters: Parameters = [
             "userFname": uFname!,
             "userLname": "Smith",
             "username": uname!,
@@ -151,45 +182,74 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             "passwordConf": passConf!,
             "userDOB": "01/01/2000"
         ]
-        print(JSONObj.description)
-        let jsonData = try? JSONSerialization.data(withJSONObject: JSONObj)
-        let url = URL(string: "https://api.projectmito.io/v1/users")!
-        var request = URLRequest(url: url)
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpMethod = "POST"
-        request.httpBody = jsonData
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {                                                 // check for fundamental networking error
-                print("error=\(String(describing: error))")
-                return
-            }
-            
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode > 300 {           // check for http errors
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(String(describing: response))")
-            }
-            
-            let responseString = String(data: data, encoding: .utf8)
-            let data2 = responseString?.data(using: .utf8)
-            let dictionary = try? JSONSerialization.jsonObject(with: data2!, options: .mutableLeaves)
-            DispatchQueue.main.async {
-                if (dictionary != nil) {
+        Alamofire.request("https://api.projectmito.io/v1/users", method: .post, parameters: parameters, encoding: JSONEncoding.default).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                
+                //                print("Response: \(String(describing: response.response))") // http url response
+                let authHeader = response.response?.allHeaderFields["Authorization"] ?? ""
+                if let dictionary = response.result.value {
+                    print("JSON: \(dictionary)") // serialized json response
                     self.performSegue(withIdentifier: "signUpToAddress", sender: self)
-                    UserDefaults.standard.set(dictionary, forKey: "UserInfo")
-                    //print(UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary)
-                    if UserDefaults.standard.object(forKey: "UserInfo") != nil {
-                        let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
-                        //userID = data["userId"] as? Int
-                        self.appdata.intCurrentUserID = (data["userId"] as? Int)!
+                    DispatchQueue.main.async {
+                        
+                        UserDefaults.standard.set(dictionary, forKey: "UserInfo")
+                        UserDefaults.standard.set(authHeader, forKey: "Authorization")
+                        //print(UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary)
+                        if UserDefaults.standard.object(forKey: "UserInfo") != nil {
+                            let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+                            //userID = data["userId"] as? Int
+                            self.appdata.intCurrentUserID = (data["userId"] as? Int)!
+                        }
+                        
                     }
                 }
+            
+                
+            case .failure(let error):
+                print(error)
             }
-            //success = true
         }
-        task.resume()
-        
-        
     }
+    
+    //        let jsonData = try? JSONSerialization.data(withJSONObject: JSONObj)
+    //        let url = URL(string: "https://api.projectmito.io/v1/users")!
+    //        var request = URLRequest(url: url)
+    //        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    //        request.httpMethod = "POST"
+    //        request.httpBody = jsonData
+    //        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+    //            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+    //                print("error=\(String(describing: error))")
+    //                return
+    //            }
+    //
+    //            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode > 300 {           // check for http errors
+    //                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+    //                print("response = \(String(describing: response))")
+    //            }
+    //
+    //            let responseString = String(data: data, encoding: .utf8)
+    //            let data2 = responseString?.data(using: .utf8)
+    //            let dictionary = try? JSONSerialization.jsonObject(with: data2!, options: .mutableLeaves)
+    //            DispatchQueue.main.async {
+    //                if (dictionary != nil) {
+    //                    self.performSegue(withIdentifier: "signUpToAddress", sender: self)
+    //                    UserDefaults.standard.set(dictionary, forKey: "UserInfo")
+    //                    //print(UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary)
+    //                    if UserDefaults.standard.object(forKey: "UserInfo") != nil {
+    //                        let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+    //                        //userID = data["userId"] as? Int
+    //                        self.appdata.intCurrentUserID = (data["userId"] as? Int)!
+    //                    }
+    //                }
+    //            }
+    //            //success = true
+    //        }
+    //        task.resume()
+    
+    
+    
     
     // Add Address page
     
@@ -217,7 +277,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         let zipcode = zipcodeAA.text
         let alias = "Home Address"
         
-        let JSONObj: [String: Any] = [
+        let parameters: Parameters = [
             "userId": userID!,
             "streetAddress1": address1!,
             "streetAddress2": address2!,
@@ -227,37 +287,63 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             "aliasName": alias
         ]
         
-        let jsonData = try? JSONSerialization.data(withJSONObject: JSONObj)
-        let url = URL(string: "https://api.projectmito.io/v1/address")!
-        var request = URLRequest(url: url)
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpMethod = "POST"
-        request.httpBody = jsonData
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {                                                 // check for fundamental networking error
-                print("error=\(String(describing: error))")
-                return
-            }
-            
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode > 300 {           // check for http errors
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(String(describing: response))")
-            }
-            
-            let responseString = String(data: data, encoding: .utf8)
-            let data2 = responseString?.data(using: .utf8)
-            let dictionary = try? JSONSerialization.jsonObject(with: data2!, options: .mutableLeaves)
-            DispatchQueue.main.async {
-                if (dictionary != nil) {
-                    self.performSegue(withIdentifier: "createAccount", sender: self)
-                    //                    UserDefaults.standard.set(dictionary, forKey: "AddressInfo")
-                    //                    print(UserDefaults.standard.object(forKey: "AddressInfo") as! NSDictionary)
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        
+        Alamofire.request("https://api.projectmito.io/v1/address", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                
+                if let dictionary = response.result.value {
+                    print("JSON: \(dictionary)") // serialized json response
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "createAccount", sender: self)
+                        //                    UserDefaults.standard.set(dictionary, forKey: "AddressInfo")
+                        //                    print(UserDefaults.standard.object(forKey: "AddressInfo") as! NSDictionary)
+                    }
                 }
+                
+                
+            case .failure(let error):
+                print(error)
             }
-            //success = true
         }
-        task.resume()
+        
     }
+        
+        
+//        let jsonData = try? JSONSerialization.data(withJSONObject: JSONObj)
+//        let url = URL(string: "https://api.projectmito.io/v1/address")!
+//        var request = URLRequest(url: url)
+//        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//        request.httpMethod = "POST"
+//        request.httpBody = jsonData
+//        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+//            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+//                print("error=\(String(describing: error))")
+//                return
+//            }
+//
+//            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode > 300 {           // check for http errors
+//                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+//                print("response = \(String(describing: response))")
+//            }
+//
+//            let responseString = String(data: data, encoding: .utf8)
+//            let data2 = responseString?.data(using: .utf8)
+//            let dictionary = try? JSONSerialization.jsonObject(with: data2!, options: .mutableLeaves)
+//            DispatchQueue.main.async {
+//                if (dictionary != nil) {
+//                    self.performSegue(withIdentifier: "createAccount", sender: self)
+//                    //                    UserDefaults.standard.set(dictionary, forKey: "AddressInfo")
+//                    //                    print(UserDefaults.standard.object(forKey: "AddressInfo") as! NSDictionary)
+//                }
+//            }
+//            //success = true
+//        }
+//        task.resume()
+//    }
     
     @IBAction func btnStatePressed(_ sender: Any) {
         if pickerviewStateAA.isHidden {
@@ -271,9 +357,9 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                 self.view.frame.origin.y -= 75
             }
         }
-//        username.returnKeyType = .next
-//        password.returnKeyType = .done
-
+        //        username.returnKeyType = .next
+        //        password.returnKeyType = .done
+        
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
@@ -355,26 +441,26 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         super.viewDidLoad()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
         self.view.addGestureRecognizer(tapGesture)
-//        if UserDefaults.standard.object(forKey: "UserInfo") == nil {
-//            print("There is no local data")
-//        } else {
-//            performSegue(withIdentifier: "login", sender: self)
-//        }
+        //        if UserDefaults.standard.object(forKey: "UserInfo") == nil {
+        //            print("There is no local data")
+        //        } else {
+        //            performSegue(withIdentifier: "login", sender: self)
+        //        }
     }
     
-//    func NotificationStuff() {
-//        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-//        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in
-//
-//        })
-//        let content = UNMutableNotificationContent()
-//        content.title = "Notification"
-//        content.subtitle = "Notification subtitle"
-//        content.body = "Andre has sent you a friend request"
-//        content.badge = 1
-//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-//        let request = UNNotificationRequest(identifier: "timerDone", content: content, trigger: trigger)
-//        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-//    }
+    //    func NotificationStuff() {
+    //        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+    //        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    //        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in
+    //
+    //        })
+    //        let content = UNMutableNotificationContent()
+    //        content.title = "Notification"
+    //        content.subtitle = "Notification subtitle"
+    //        content.body = "Andre has sent you a friend request"
+    //        content.badge = 1
+    //        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+    //        let request = UNNotificationRequest(identifier: "timerDone", content: content, trigger: trigger)
+    //        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+    //    }
 }
