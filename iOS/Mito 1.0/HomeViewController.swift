@@ -19,7 +19,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.delegate = self
         tableView.rowHeight = 133
         
-        let userURL = "https://api.projectmito.io/v1/friend/\(appdata.userID)"
+        let userURL = "https://api.projectmito.io/v1/friend/\(appdata.intCurrentUserID)"
         print("userURL: \(userURL)")
         peopleUrl = URL(string: userURL)
         loadPeopleData()
@@ -38,12 +38,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return appdata.feedItem.count
+        return appdata.arrFeedItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "homeCell", for: indexPath) as! HomeTableViewCell
-        let feedItemObj = appdata.feedItem[indexPath.row]
+        let feedItemObj = appdata.arrFeedItems[indexPath.row]
         cell.img.image = UIImage(named: "\(feedItemObj.avatar)")
         cell.whatHappened.text = "\(feedItemObj.whatHappened)"
         cell.time.text = "\(feedItemObj.time)"
@@ -65,7 +65,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                         for obj in myJson {
                             let object = obj as! NSDictionary
                             let p: Person = Person(firstName: (object["UserFname"] as? String)!, lastName: (object["UserLname"] as? String)!, email: (object["UserEmail"] as? String!)!, avatar: (object["PhotoUrl"] as? String!)!)
-                            self.appdata.friends.append(p)
+                            self.appdata.arrFriends.append(p)
                         }
   
                     } catch {

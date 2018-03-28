@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B244999F2040C340006FA81B /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = B244999E2040C340006FA81B /* fonts */; };
+		B244B3992069BF7E00B01BBA /* Title.png in Resources */ = {isa = PBXBuildFile; fileRef = B244B3982069BF7D00B01BBA /* Title.png */; };
 		B247196E20453917006CF6C2 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B247196D20453917006CF6C2 /* CartViewController.swift */; };
 		B247197020454733006CF6C2 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B247196F20454733006CF6C2 /* CartTableViewCell.swift */; };
 		B247197320454C4E006CF6C2 /* You’re so nice!.png in Resources */ = {isa = PBXBuildFile; fileRef = B247197120454C4D006CF6C2 /* You’re so nice!.png */; };
@@ -32,11 +33,12 @@
 		B2548FFE2055EA97000123D0 /* jj.png in Resources */ = {isa = PBXBuildFile; fileRef = B2548FF92055EA96000123D0 /* jj.png */; };
 		B2548FFF2055EA97000123D0 /* ammara.png in Resources */ = {isa = PBXBuildFile; fileRef = B2548FFA2055EA96000123D0 /* ammara.png */; };
 		B25490002055EA97000123D0 /* avina.png in Resources */ = {isa = PBXBuildFile; fileRef = B2548FFB2055EA96000123D0 /* avina.png */; };
+		B25490092058AE92000123D0 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B25490082058AE92000123D0 /* Login.storyboard */; };
 		B2624CF2204F714D006B7DE6 /* Andre2.png in Resources */ = {isa = PBXBuildFile; fileRef = B2624CF1204F714D006B7DE6 /* Andre2.png */; };
 		B272DC2620439E2200EE2121 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = B272DC2520439E2200EE2121 /* Product.swift */; };
 		B272DC2E2043BBE400EE2121 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B272DC2D2043BBE400EE2121 /* AppData.swift */; };
 		B29AEC62203FC9C100110EF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29AEC61203FC9C100110EF9 /* AppDelegate.swift */; };
-		B29AEC64203FC9C100110EF9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29AEC63203FC9C100110EF9 /* ViewController.swift */; };
+		B29AEC64203FC9C100110EF9 /* PeopleDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29AEC63203FC9C100110EF9 /* PeopleDetailsViewController.swift */; };
 		B29AEC67203FC9C100110EF9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B29AEC65203FC9C100110EF9 /* Main.storyboard */; };
 		B29AEC69203FC9C100110EF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B29AEC68203FC9C100110EF9 /* Assets.xcassets */; };
 		B29AEC6C203FC9C100110EF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B29AEC6A203FC9C100110EF9 /* LaunchScreen.storyboard */; };
@@ -45,13 +47,19 @@
 		B2F849452043C33F00CBD83A /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F849442043C33F00CBD83A /* MeViewController.swift */; };
 		B2F849472043CAA900CBD83A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F849462043CAA900CBD83A /* SettingsViewController.swift */; };
 		B2F8494F2043D71000CBD83A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F8494E2043D71000CBD83A /* LoginViewController.swift */; };
+		BF623C7A17D127F65C5BFF46 /* Pods_Mito_1_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B658EBC5F86F98DCB37842 /* Pods_Mito_1_0.framework */; };
 		DA27C218204353FF00CCFD60 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA27C217204353FF00CCFD60 /* HomeViewController.swift */; };
 		DA27C21A2043550A00CCFD60 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA27C2192043550A00CCFD60 /* HomeTableViewCell.swift */; };
 		DA27C21C204356B400CCFD60 /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA27C21B204356B400CCFD60 /* FeedItem.swift */; };
 		DA27C21E204371CE00CCFD60 /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA27C21D204371CE00CCFD60 /* ProductDetailsViewController.swift */; };
 		DA27C2202043736400CCFD60 /* Sopheak.png in Resources */ = {isa = PBXBuildFile; fileRef = DA27C21F2043736400CCFD60 /* Sopheak.png */; };
+		DA42CC0A2064909900900C7D /* LineItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42CC092064909900900C7D /* LineItem.swift */; };
 		DA49F1DB2055EF9E0018ABA4 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA49F1DA2055EF9E0018ABA4 /* ProductViewController.swift */; };
 		DA4FC9EF2045E0D300999F28 /* profileInfo.json in Resources */ = {isa = PBXBuildFile; fileRef = DA4FC9EE2045E0D300999F28 /* profileInfo.json */; };
+		DA5D683E2058A45F00E86BE8 /* ProductDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA5D683C2058A45F00E86BE8 /* ProductDetails.storyboard */; };
+		DA6CB7F22064E9B700962814 /* Back.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6CB7F12064E9B700962814 /* Back.png */; };
+		DACCDE29206057C500CD59D9 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACCDE28206057C500CD59D9 /* State.swift */; };
+		DACCDE2B2060617000CD59D9 /* Month.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACCDE2A2060617000CD59D9 /* Month.swift */; };
 		DAD995312042386E007A7687 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD995302042386E007A7687 /* SearchViewController.swift */; };
 		DAD995332042389B007A7687 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD995322042389B007A7687 /* Person.swift */; };
 		DAD9953520423A4B007A7687 /* Andre.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD9953420423A4B007A7687 /* Andre.png */; };
@@ -77,7 +85,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00B658EBC5F86F98DCB37842 /* Pods_Mito_1_0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mito_1_0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		84DCA3E27CF3BAF309A28CA2 /* Pods-Mito 1.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mito 1.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-Mito 1.0/Pods-Mito 1.0.release.xcconfig"; sourceTree = "<group>"; };
 		B244999E2040C340006FA81B /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
+		B244B3982069BF7D00B01BBA /* Title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Title.png; sourceTree = "<group>"; };
 		B247196D20453917006CF6C2 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		B247196F20454733006CF6C2 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
 		B247197120454C4D006CF6C2 /* You’re so nice!.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "You’re so nice!.png"; sourceTree = "<group>"; };
@@ -102,6 +113,7 @@
 		B2548FF92055EA96000123D0 /* jj.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jj.png; sourceTree = "<group>"; };
 		B2548FFA2055EA96000123D0 /* ammara.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ammara.png; sourceTree = "<group>"; };
 		B2548FFB2055EA96000123D0 /* avina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avina.png; sourceTree = "<group>"; };
+		B25490082058AE92000123D0 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		B2624CF1204F714D006B7DE6 /* Andre2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Andre2.png; sourceTree = "<group>"; };
 		B272DC2520439E2200EE2121 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		B272DC282043BA8700EE2121 /* Home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Home.png; sourceTree = "<group>"; };
@@ -111,7 +123,7 @@
 		B272DC2D2043BBE400EE2121 /* AppData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 		B29AEC5E203FC9C100110EF9 /* Mito 1.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mito 1.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B29AEC61203FC9C100110EF9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B29AEC63203FC9C100110EF9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B29AEC63203FC9C100110EF9 /* PeopleDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleDetailsViewController.swift; sourceTree = "<group>"; };
 		B29AEC66203FC9C100110EF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B29AEC68203FC9C100110EF9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B29AEC6B203FC9C100110EF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -130,13 +142,19 @@
 		DA27C21B204356B400CCFD60 /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
 		DA27C21D204371CE00CCFD60 /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
 		DA27C21F2043736400CCFD60 /* Sopheak.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sopheak.png; sourceTree = "<group>"; };
+		DA42CC092064909900900C7D /* LineItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineItem.swift; sourceTree = "<group>"; };
 		DA49F1DA2055EF9E0018ABA4 /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
 		DA4FC9EE2045E0D300999F28 /* profileInfo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = profileInfo.json; sourceTree = SOURCE_ROOT; };
+		DA5D683D2058A45F00E86BE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Mito 1.0/Base.lproj/ProductDetails.storyboard"; sourceTree = "<group>"; };
+		DA6CB7F12064E9B700962814 /* Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Back.png; sourceTree = "<group>"; };
+		DACCDE28206057C500CD59D9 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		DACCDE2A2060617000CD59D9 /* Month.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Month.swift; sourceTree = "<group>"; };
 		DAD995302042386E007A7687 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		DAD995322042389B007A7687 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		DAD9953420423A4B007A7687 /* Andre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Andre.png; sourceTree = "<group>"; };
 		DAD9953620423EE9007A7687 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		DAD9A19F204FD1C800E3AA5F /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
+		E6908C73F6FF5F893922619E /* Pods-Mito 1.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mito 1.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Mito 1.0/Pods-Mito 1.0.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +162,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF623C7A17D127F65C5BFF46 /* Pods_Mito_1_0.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +183,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		81210DCF17B936C88D4BFFD9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				00B658EBC5F86F98DCB37842 /* Pods_Mito_1_0.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B272DC272043BA8700EE2121 /* Icon */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +224,8 @@
 				B29AEC75203FC9C200110EF9 /* Mito 1.0Tests */,
 				B29AEC80203FC9C200110EF9 /* Mito 1.0UITests */,
 				B29AEC5F203FC9C100110EF9 /* Products */,
+				C2BBC53CCCF26C319C3EE2F1 /* Pods */,
+				81210DCF17B936C88D4BFFD9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -223,24 +252,30 @@
 				DA27C21B204356B400CCFD60 /* FeedItem.swift */,
 				DA27C2192043550A00CCFD60 /* HomeTableViewCell.swift */,
 				DA27C217204353FF00CCFD60 /* HomeViewController.swift */,
+				DA42CC092064909900900C7D /* LineItem.swift */,
+				B25490082058AE92000123D0 /* Login.storyboard */,
 				B2F8494E2043D71000CBD83A /* LoginViewController.swift */,
+				B29AEC65203FC9C100110EF9 /* Main.storyboard */,
 				B2F849442043C33F00CBD83A /* MeViewController.swift */,
+				DACCDE2A2060617000CD59D9 /* Month.swift */,
 				B2471991204672B1006CF6C2 /* NotificationTableViewCell.swift */,
 				B2471993204672DE006CF6C2 /* NotificationViewController.swift */,
 				DA4FC9EE2045E0D300999F28 /* profileInfo.json */,
 				DAD995322042389B007A7687 /* Person.swift */,
+				B29AEC63203FC9C100110EF9 /* PeopleDetailsViewController.swift */,
 				B272DC2520439E2200EE2121 /* Product.swift */,
 				DA27C21D204371CE00CCFD60 /* ProductDetailsViewController.swift */,
+				DA5D683C2058A45F00E86BE8 /* ProductDetails.storyboard */,
 				DAD9A19F204FD1C800E3AA5F /* ProductTableViewCell.swift */,
 				DA49F1DA2055EF9E0018ABA4 /* ProductViewController.swift */,
 				DAD995302042386E007A7687 /* SearchViewController.swift */,
 				B2F849462043CAA900CBD83A /* SettingsViewController.swift */,
+				DACCDE28206057C500CD59D9 /* State.swift */,
 				DAD9953620423EE9007A7687 /* TableViewCell.swift */,
-				B29AEC63203FC9C100110EF9 /* ViewController.swift */,
-				B29AEC65203FC9C100110EF9 /* Main.storyboard */,
 				B29AEC6A203FC9C100110EF9 /* LaunchScreen.storyboard */,
 				B29AEC6D203FC9C100110EF9 /* Info.plist */,
 				DAD9953420423A4B007A7687 /* Andre.png */,
+				DA6CB7F12064E9B700962814 /* Back.png */,
 				B2624CF1204F714D006B7DE6 /* Andre2.png */,
 				DA27C21F2043736400CCFD60 /* Sopheak.png */,
 				B2548FFA2055EA96000123D0 /* ammara.png */,
@@ -248,6 +283,7 @@
 				B2548FF82055EA96000123D0 /* benny.png */,
 				B2548FF92055EA96000123D0 /* jj.png */,
 				B2548FF72055EA96000123D0 /* sarah.png */,
+				B244B3982069BF7D00B01BBA /* Title.png */,
 			);
 			path = "Mito 1.0";
 			sourceTree = "<group>";
@@ -270,6 +306,15 @@
 			path = "Mito 1.0UITests";
 			sourceTree = "<group>";
 		};
+		C2BBC53CCCF26C319C3EE2F1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E6908C73F6FF5F893922619E /* Pods-Mito 1.0.debug.xcconfig */,
+				84DCA3E27CF3BAF309A28CA2 /* Pods-Mito 1.0.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -277,9 +322,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B29AEC86203FC9C200110EF9 /* Build configuration list for PBXNativeTarget "Mito 1.0" */;
 			buildPhases = (
+				5222DA150B2EBA970FDD0FFF /* [CP] Check Pods Manifest.lock */,
 				B29AEC5A203FC9C100110EF9 /* Sources */,
 				B29AEC5B203FC9C100110EF9 /* Frameworks */,
 				B29AEC5C203FC9C100110EF9 /* Resources */,
+				40CA1F31B46646A0518D4BDA /* [CP] Embed Pods Frameworks */,
+				6212C51B0550D4CA14D1A782 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -379,11 +427,14 @@
 			files = (
 				B29AEC6C203FC9C100110EF9 /* LaunchScreen.storyboard in Resources */,
 				B247198D204626ED006CF6C2 /* Cart Solid White Icon.png in Resources */,
+				DA6CB7F22064E9B700962814 /* Back.png in Resources */,
 				B2548FFD2055EA97000123D0 /* benny.png in Resources */,
 				B24719832046245E006CF6C2 /* Notification Icon SG.png in Resources */,
+				DA5D683E2058A45F00E86BE8 /* ProductDetails.storyboard in Resources */,
 				DA27C2202043736400CCFD60 /* Sopheak.png in Resources */,
 				B29AEC69203FC9C100110EF9 /* Assets.xcassets in Resources */,
 				B24719862046245E006CF6C2 /* Lock SG.png in Resources */,
+				B25490092058AE92000123D0 /* Login.storyboard in Resources */,
 				B24719822046245E006CF6C2 /* Card SG.png in Resources */,
 				B247197420454C4E006CF6C2 /* GiftWhite.png in Resources */,
 				B29AEC67203FC9C100110EF9 /* Main.storyboard in Resources */,
@@ -404,6 +455,7 @@
 				B247198E204626ED006CF6C2 /* Search.png in Resources */,
 				DAD9953520423A4B007A7687 /* Andre.png in Resources */,
 				B24719842046245E006CF6C2 /* Blocked User SG.png in Resources */,
+				B244B3992069BF7E00B01BBA /* Title.png in Resources */,
 				B25490002055EA97000123D0 /* avina.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -424,6 +476,60 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		40CA1F31B46646A0518D4BDA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Mito 1.0/Pods-Mito 1.0-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Mito 1.0/Pods-Mito 1.0-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5222DA150B2EBA970FDD0FFF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Mito 1.0-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6212C51B0550D4CA14D1A782 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Mito 1.0/Pods-Mito 1.0-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B29AEC5A203FC9C100110EF9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -431,9 +537,10 @@
 			files = (
 				B2F8494F2043D71000CBD83A /* LoginViewController.swift in Sources */,
 				DAD995332042389B007A7687 /* Person.swift in Sources */,
-				B29AEC64203FC9C100110EF9 /* ViewController.swift in Sources */,
+				B29AEC64203FC9C100110EF9 /* PeopleDetailsViewController.swift in Sources */,
 				DAD9A1A0204FD1C800E3AA5F /* ProductTableViewCell.swift in Sources */,
 				B29AEC62203FC9C100110EF9 /* AppDelegate.swift in Sources */,
+				DACCDE29206057C500CD59D9 /* State.swift in Sources */,
 				DA27C21E204371CE00CCFD60 /* ProductDetailsViewController.swift in Sources */,
 				B272DC2E2043BBE400EE2121 /* AppData.swift in Sources */,
 				DAD9953720423EE9007A7687 /* TableViewCell.swift in Sources */,
@@ -442,8 +549,10 @@
 				B2F849452043C33F00CBD83A /* MeViewController.swift in Sources */,
 				B272DC2620439E2200EE2121 /* Product.swift in Sources */,
 				DA27C21C204356B400CCFD60 /* FeedItem.swift in Sources */,
+				DACCDE2B2060617000CD59D9 /* Month.swift in Sources */,
 				DA27C218204353FF00CCFD60 /* HomeViewController.swift in Sources */,
 				B2F849472043CAA900CBD83A /* SettingsViewController.swift in Sources */,
+				DA42CC0A2064909900900C7D /* LineItem.swift in Sources */,
 				B2471994204672DE006CF6C2 /* NotificationViewController.swift in Sources */,
 				DA27C21A2043550A00CCFD60 /* HomeTableViewCell.swift in Sources */,
 				DAD995312042386E007A7687 /* SearchViewController.swift in Sources */,
@@ -498,6 +607,14 @@
 				B29AEC6B203FC9C100110EF9 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		DA5D683C2058A45F00E86BE8 /* ProductDetails.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA5D683D2058A45F00E86BE8 /* Base */,
+			);
+			name = ProductDetails.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -612,14 +729,15 @@
 		};
 		B29AEC87203FC9C200110EF9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E6908C73F6FF5F893922619E /* Pods-Mito 1.0.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6KH97C972X;
+				DEVELOPMENT_TEAM = TG372K25N5;
 				INFOPLIST_FILE = "Mito 1.0/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.washington.bennys.mito;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.washington.jjguo.mito;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -628,14 +746,15 @@
 		};
 		B29AEC88203FC9C200110EF9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 84DCA3E27CF3BAF309A28CA2 /* Pods-Mito 1.0.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6KH97C972X;
+				DEVELOPMENT_TEAM = TG372K25N5;
 				INFOPLIST_FILE = "Mito 1.0/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.washington.bennys.mito;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.washington.jjguo.mito;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

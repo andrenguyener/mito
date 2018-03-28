@@ -31,26 +31,35 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var imgRecipient: UIImageView!
     @IBOutlet weak var recipientName: UILabel!
     
+    let formatter = NumberFormatter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let formatter = NumberFormatter()
         var priceSum: Decimal
         priceSum = 0.00
         formatter.numberStyle = .currency
         formatter.locale = Locale(identifier: "en_US")
-        for element in appdata.cart {
-            let itemPrice = element.price
+        for element in appdata.arrCartLineItems {
+            let itemPrice = element.objProduct.price // change later
             if let number = formatter.number(from: itemPrice) {
                 let amount = number.decimalValue
-                priceSum = amount + priceSum
-                print(amount)
+                let totalAmt = amount * (Decimal)(element.intQuantity)
+                priceSum += totalAmt
             }
-        }        
+        }
+        var intNumItems = 0
+        for objCartItem in appdata.arrCartLineItems {
+            intNumItems += objCartItem.intQuantity
+        }
         if cartTableView != nil {
             cartTableView.delegate = self
             cartTableView.dataSource = self
             cartTableView.rowHeight = 106
-            cartNumber.text = "Cart has \(appdata.cart.count) items"
+            var strItems = "items"
+            if intNumItems == 1 {
+                strItems = "item"
+            }
+            cartNumber.text = "Cart has \(intNumItems) \(strItems)"
             
             // rounds 2 decimal places for priceSum
             let tempSum = Double(truncating: priceSum as NSNumber)
@@ -58,7 +67,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             cartPrice.text = "$\(temp2Sum)"
         } else if itemCountCheckout != nil {
-            itemCountCheckout.text = String(appdata.cart.count)
+            itemCountCheckout.text = String(intNumItems)
             shippingCheckout.text = "FREE"
             let tax: Decimal = priceSum * 0.12
             
@@ -78,7 +87,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
             recipientName.text = "Sopheaky Neaky"
         } else {
-            appdata.cart.removeAll()
+            appdata.arrCartLineItems.removeAll()
         }
     }
     var appdata = AppData.shared
@@ -93,8 +102,15 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //CheckOutComplete Page
     @IBAction func returnHome(_ sender: Any) {
-        appdata.products.removeAll()
+        appdata.arrProductSearchResults.removeAll()
         performSegue(withIdentifier: "checkoutComplete", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "cartToHome" {
+            let tabBarController = segue.destination as! UITabBarController
+            tabBarController.selectedIndex = 1
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -102,24 +118,27 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return appdata.cart.count
+        return appdata.arrCartLineItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cartCell", for: indexPath) as! CartTableViewCell
-        let cartObj = appdata.cart[indexPath.row]
-        let url = URL(string: "\(cartObj.image)")
+        let cartObj = appdata.arrCartLineItems[indexPath.row]
+        let url = URL(string: "\(cartObj.objProduct.image)")
         if let data = try? Data(contentsOf: url!) {
-            cell.itemImage.image = UIImage(data: data)!
-            cell.itemImage.contentMode = .scaleAspectFit
+            cell.imgItemImage.image = UIImage(data: data)!
+            cell.imgItemImage.contentMode = .scaleAspectFit
         }
-        print("Title: \(cartObj.title)")
-//        print(cartObj.description)
-//        print(cartObj.publisher)
-        cell.itemName.text = cartObj.title
-        print("CellText \(cell.itemName.text)")
-        cell.price.text = cartObj.price
-        cell.seller.text = cartObj.publisher
+        cell.lblItemName.text = cartObj.objProduct.title
+        let strPrice = cartObj.objProduct.price
+        formatter.numberStyle = .currency
+        if let number = formatter.number(from: strPrice) {
+            let dblPrice = number.decimalValue
+            let intQty = (Double)(cartObj.intQuantity)
+            cell.lblPrice.text = (String)(describing: dblPrice * (Decimal)(intQty))
+        }
+        cell.lblSellerName.text = cartObj.objProduct.publisher
+        cell.btnQuantity.setTitle((String)(cartObj.intQuantity), for: .normal)
         return cell
     }
     
