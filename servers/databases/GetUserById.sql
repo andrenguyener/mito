@@ -13,6 +13,7 @@ As
 	IF EXISTS(SELECT UserId FROM [USER] WHERE UserId = @UserId)
 		BEGIN
 		SELECT UserId, UserFname, UserLname,UserEmail,PhotoUrl, UserDOB, Username FROM [USER] WHERE UserId = @UserId
+		FOR JSON AUTO
 		END
 	ELSE
 		BEGIN 
