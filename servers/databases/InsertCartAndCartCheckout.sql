@@ -153,11 +153,8 @@ BEGIN CATCH
     END
 END CATCH
 
-@UserId INT,
-@UserAddressId INT,
-@RecipientId INT,
-@Message NVARCHAR(1000),
-@GiftOption BIT
+ALTER TABLE [ORDER]
+ALTER COLUMN OrderDate DATETIME
 
 -- example cart processing
 SELECT * FROM CART
