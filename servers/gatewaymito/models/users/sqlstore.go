@@ -2,6 +2,7 @@ package users
 
 import (
 	"database/sql"
+	"encoding/json"
 	"fmt"
 	"log"
 
@@ -67,6 +68,7 @@ func (ss *SqlStore) GetByID(id int) (*User, error) {
 //GetByEmail returns the User with the given email
 func (ss *SqlStore) GetByEmail(email string) (*User, error) {
 	user := &User{}
+	var userString string
 	tsql := fmt.Sprintf("EXEC uspGetUserByUserEmail @Useremail;")
 
 	rows, err := ss.database.Query(
@@ -75,10 +77,12 @@ func (ss *SqlStore) GetByEmail(email string) (*User, error) {
 	if err != nil {
 		return nil, ErrUserNotFound
 	}
-
 	defer rows.Close()
 	for rows.Next() {
-		if err := rows.Scan(&user.UserId, &user.UserFname, &user.UserLname, &user.UserEmail, &user.PasswordHash, &user.PhotoUrl, &user.UserDOB, &user.Username); err != nil {
+		if err := rows.Scan(&userString); err != nil {
+			log.Fatal(err)
+		}
+		if err := json.Unmarshal([]byte(userString), user); err != nil {
 			log.Fatal(err)
 		}
 		fmt.Println(user)
@@ -204,5 +208,27 @@ func (ss *SqlStore) GetAll() ([]*User, error) {
 	// if err != nil {
 	// 	return nil, err
 	// }
+
+	tsql := fmt.Sprintf("EXEC uspGetAllUsers")
+
+	rows, err := ss.database.Query(
+		tsql)
+	if err != nil {
+		return nil, ErrUserNotFound
+	}
+
+	defer rows.Close()
+	for rows.Next() {
+		user := &User{}
+		if err := rows.Scan(&user.UserId, &user.UserFname, &user.UserLname, &user.UserEmail, &user.PhotoUrl, &user.UserDOB, &user.Username); err != nil {
+			log.Fatal(err)
+		}
+		users = append(users, user)
+		fmt.Println(user)
+	}
+	if err := rows.Err(); err != nil {
+		log.Fatal(err)
+	}
+
 	return users, nil
 }

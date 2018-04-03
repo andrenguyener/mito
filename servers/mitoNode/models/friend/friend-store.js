@@ -16,7 +16,7 @@ class FriendStore {
         });
     }
 
-    // Insert a friend into SqlServer
+    // Request a friend into SqlServer
     insert(userId, friendId) {
         return new Promise((resolve) => {
             let procedureName = "uspRequestFriend";

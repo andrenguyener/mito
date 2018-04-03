@@ -213,6 +213,82 @@ func (ctx *Context) UsersMeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// UsersValidateHandler allows users to check if the inputted credentials are valid
+func (ctx *Context) UsersValidateHandler(w http.ResponseWriter, r *http.Request) {
+	switch r.Method {
+	case "POST":
+		if r.Body == nil {
+			http.Error(w, "Response Body is empty", http.StatusBadRequest)
+			return
+		}
+
+		// decode the request body into newUser struct
+		decoder := json.NewDecoder(r.Body)
+		newUser := &users.NewUser{}
+
+		err := decoder.Decode(newUser)
+		fmt.Println(newUser)
+		if err != nil {
+			http.Error(w, "Error decoding JSON: "+err.Error(), http.StatusBadRequest)
+			return
+		}
+
+		// validate the new user
+		err = newUser.Validate()
+		if err != nil {
+			http.Error(w, "Error validating new user: "+err.Error(), http.StatusBadRequest)
+			return
+		}
+
+		// checks to see if there isn't already a user in the User Store with the same email
+		user, err := ctx.UserStore.GetByEmail(newUser.UserEmail)
+		if err != users.ErrUserNotFound && user != nil {
+			http.Error(w, "Error email already exists: "+newUser.UserEmail, http.StatusBadRequest)
+			return
+		}
+
+		// checks to see if there isn't already a user in the User Store with the same username
+		user, err = ctx.UserStore.GetByUserName(newUser.Username)
+		if err != users.ErrUserNotFound && user != nil {
+			http.Error(w, "Error username already exists: "+newUser.Username, http.StatusBadRequest)
+			return
+		}
+
+		w.WriteHeader(http.StatusCreated)
+		respond(w, user)
+	default:
+		http.Error(w, "method must be POST", http.StatusMethodNotAllowed)
+		return
+	}
+}
+
+// UsersAllHandler allows users to retrieve all the users
+func (ctx *Context) UsersAllHandler(w http.ResponseWriter, r *http.Request) {
+
+	// get the session state
+	sessionState := &SessionState{}
+
+	// get the state of the browser that is accessing their page
+	_, err := sessions.GetState(r, ctx.SessionKey, ctx.SessionStore, sessionState)
+	if err != nil {
+		http.Error(w, "Error cannot get session state: "+err.Error(), http.StatusUnauthorized)
+		return
+	}
+
+	switch r.Method {
+	case "GET":
+		users, err := ctx.UserStore.GetAll()
+		if err != nil {
+			http.Error(w, "Error cannot retrieve users "+err.Error(), http.StatusInternalServerError)
+		}
+
+		respond(w, users)
+	default:
+		http.Error(w, "method must be GET or PATCH", http.StatusMethodNotAllowed)
+		return
+	}
+}
+
 // SessionsHandler allows existing users to sign in
 func (ctx *Context) SessionsHandler(w http.ResponseWriter, r *http.Request) {
 	// The request must be POST
