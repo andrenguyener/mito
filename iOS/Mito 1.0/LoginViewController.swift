@@ -72,9 +72,28 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         }
     }
     
+    func fnLoadAllUsers() {
+        Alamofire.request("https://api.projectmito.io/v1/users/all", method: .get, encoding: JSONEncoding.default).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                let authHeader = response.response?.allHeaderFields["Authorization"] ?? ""
+                if let dictionary = response.result.value {
+                    print("All Users?: \(dictionary)")
+                    DispatchQueue.main.async {
+                        UserDefaults.standard.set(authHeader, forKey: "Authorization")
+                    }
+                }
+                
+            case .failure(let error):
+                print("Get all users error")
+                print(error)
+            }
+        }
+    }
+    
     // Opening Login Page
     @IBAction func btnLoginPressed(_ sender: Any) {
-        
+        fnLoadAllUsers()
         let parameters: Parameters = [
             "userEmail": username.text!,
             "password": password.text!
