@@ -16,12 +16,14 @@ class NotificationViewController: UIViewController {
     
     @IBAction func segmentControl(_ sender: Any) {
         print(segment.selectedSegmentIndex)
-        if segment.selectedSegmentIndex == 0 {
-            UIView.transition(from: packageInView, to: notificationView, duration: 0, options: .showHideTransitionViews)
-        } else {
-            UIView.transition(from: notificationView, to: packageInView, duration: 0, options: .showHideTransitionViews)
-        }
+//        if segment.selectedSegmentIndex == 0 {
+//            UIView.transition(from: packageInView, to: notificationView, duration: 0, options: .showHideTransitionViews)
+//        } else {
+//            UIView.transition(from: notificationView, to: packageInView, duration: 0, options: .showHideTransitionViews)
+//        }
     }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
