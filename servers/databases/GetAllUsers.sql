@@ -11,7 +11,7 @@ As
 	IF EXISTS(SELECT UserId, UserFname, UserLname,UserEmail,PhotoUrl, UserDOB, Username FROM [USER])
 		BEGIN
 		SELECT UserId, UserFname, UserLname,UserEmail,PhotoUrl, UserDOB, Username FROM [USER]
-		FOR JSON AUTO
+		FOR JSON AUTO, WITHOUT_ARRAY_WRAPPER
 		END
 	ELSE
 		BEGIN 

@@ -27,7 +27,7 @@ AS
 		JOIN [STATE] S ON A.StateId = S.StateId
 		JOIN ZIPCODE Z ON A.ZipCodeId = Z.ZipCodeId
 		WHERE U.UserId = @UserId AND UA.IsDeleted <> 1)
-		FOR JSON AUTO
+		FOR JSON AUTO, WITHOUT_ARRAY_WRAPPER
 	ELSE 
 		BEGIN
 			PRINT'This user does not have the given address in their address book'

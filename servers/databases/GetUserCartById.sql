@@ -12,7 +12,7 @@ AS
 		ON C.AmazonItemId = MostRecentSelection.AmazonItemId
 		AND C.CartDateTime = MostRecentSelection.MostRecentDate
 		WHERE UserId = @UserId
-		FOR JSON AUTO
+		FOR JSON AUTO, WITHOUT_ARRAY_WRAPPER
 	END
 GO
 
