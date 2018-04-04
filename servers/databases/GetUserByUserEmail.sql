@@ -13,7 +13,7 @@ As
 	IF EXISTS(SELECT UserId FROM [USER] WHERE UserEmail = @Useremail)
 		BEGIN
 		SELECT * FROM [USER] WHERE UserEmail = @Useremail
-		FOR JSON AUTO, WITHOUT_ARRAY_WRAPPER
+		--FOR JSON AUTO, WITHOUT_ARRAY_WRAPPER
 		END
 	ELSE
 		BEGIN 
@@ -23,3 +23,5 @@ As
 		END
 
 EXEC sp_rename 'GetUserByUserEmail', 'uspGetUserByUserEmail'
+
+EXEC dbo.uspGetUserByUserEmail 'tombrady@uw.edu'
