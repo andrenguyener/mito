@@ -13,6 +13,7 @@ As
 	IF EXISTS(SELECT UserId FROM [USER] WHERE UserEmail = @Useremail)
 		BEGIN
 		SELECT * FROM [USER] WHERE UserEmail = @Useremail
+		FOR JSON AUTO
 		END
 	ELSE
 		BEGIN 
