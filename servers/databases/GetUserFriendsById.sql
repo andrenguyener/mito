@@ -26,7 +26,7 @@ AS
 		SELECT UserId, Username, UserFname, UserLname,UserEmail, PhotoUrl FROM [USER] U
 		JOIN (SELECT * FROM @friendsIdList) UserFriendList
 		ON U.UserId = UserFriendList.FriendId
-		FOR JSON AUTO
+		FOR JSON AUTO, WITHOUT_ARRAY_WRAPPER
 		END
 	ELSE
 		BEGIN 
