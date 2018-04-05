@@ -115,7 +115,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // Loading Friends (people tab)
     // POST: inserting (attach object) / GET request: put key word in the URL
     func fnLoadPeopleData() {
-        let task = URLSession.shared.dataTask(with: urlPeopleCall!) { (data, response, error) in
+        let urlGetFriends = URL(string: (urlPeopleCall?.absoluteString)! + "/1")
+        let task = URLSession.shared.dataTask(with: urlGetFriends!) { (data, response, error) in
             if error != nil {
                 print("ERROR")
             } else {
@@ -130,9 +131,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         DispatchQueue.main.async {
                             self.peopleTableView.reloadData()
                             self.productPeopleTab.isEnabled = true
+                            print("Finished loading people")
                         }
                     } catch {
-                        print("Catch")
+                        print("Loading People (Catch)")
                     }
                 } else {
                     print("Error")
@@ -254,15 +256,16 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        myIndex = indexPath.row
-        print("didSelectRowAt Index: \(myIndex)")
         if productPeopleTab.selectedSegmentIndex == 0 {
+            myIndex = indexPath.row
             appdata.intCurrIndex = myIndex
             performSegue(withIdentifier: "productDetail", sender: self)
 //            appdata.cart.append(appdata.products[myIndex])
 //            print(appdata.cart[appdata.cart.count - 1].title)
 //            print("Cart count: \(appdata.cart.count)")
         } else {
+            myIndex = indexPath.row
+            print("didSelectRowAt Index: \(myIndex)")
             performSegue(withIdentifier: "searchToMitoProfile", sender: self)
         }
     }
