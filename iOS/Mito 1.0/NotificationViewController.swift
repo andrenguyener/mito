@@ -14,6 +14,8 @@ class NotificationViewController: UIViewController {
     @IBOutlet weak var notificationView: UIView!
     @IBOutlet weak var segment: UISegmentedControl!
     
+    var urlPeopleCall = URL(string: "https://api.projectmito.io/v1/friend/")
+    
     @IBAction func segmentControl(_ sender: Any) {
         print(segment.selectedSegmentIndex)
 //        if segment.selectedSegmentIndex == 0 {
@@ -21,10 +23,9 @@ class NotificationViewController: UIViewController {
 //        } else {
 //            UIView.transition(from: notificationView, to: packageInView, duration: 0, options: .showHideTransitionViews)
 //        }
+        // Show pending friend types
     }
-    
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }

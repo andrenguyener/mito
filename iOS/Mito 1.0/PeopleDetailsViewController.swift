@@ -22,8 +22,6 @@ class PeopleDetailsViewController: UIViewController {
     }
     
     func loadPersonData() {
-        print("PeopleDetailsViewController Index: \(myIndex)")
-        print(appdata.arrFriends[myIndex].description())
         let friend = appdata.arrFriends[myIndex]
         lblName.text = "\(friend.firstName) \(friend.lastName)"
         lblEmail.text = "\(friend.email)"
@@ -33,6 +31,13 @@ class PeopleDetailsViewController: UIViewController {
         }
     }
 
+    @IBAction func fnAddFriend(_ sender: Any) {
+        let user2ID = appdata.arrFriends[myIndex].intUserID
+        print(user2ID)
+        print(appdata.intCurrentUserID)
+        // send friend request here code
+    }
+    
     @IBAction func backButton(_ sender: Any) {
         performSegue(withIdentifier: "segPeopleDetailsToSearchView", sender: self)
     }

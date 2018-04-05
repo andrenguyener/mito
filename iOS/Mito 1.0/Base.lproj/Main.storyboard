@@ -1329,6 +1329,9 @@
                                                 <state key="normal" title="Add Friend">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="fnAddFriend:" destination="mKW-hw-jiX" eventType="touchUpInside" id="k3E-cU-XZA"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rwi-hr-9PZ">
                                                 <rect key="frame" x="142" y="0.0" width="62" height="29"/>
@@ -1485,7 +1488,6 @@
         <image name="search Grey" width="18" height="18"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="39f-jC-Icg"/>
         <segue reference="kS1-pK-LOk"/>
         <segue reference="IOv-WN-4XC"/>
     </inferredMetricsTieBreakers>

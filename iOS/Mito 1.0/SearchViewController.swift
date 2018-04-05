@@ -125,7 +125,12 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         let objPeopleData = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSArray
                         for obj in objPeopleData {
                             let object = obj as! NSDictionary
-                            let p: Person = Person(firstName: (object["UserFname"] as? String)!, lastName: (object["UserLname"] as? String)!, email: (object["UserEmail"] as? String!)!, avatar: (object["PhotoUrl"] as? String!)!)
+                            print(object)
+                            let p: Person = Person(firstName: (object["UserFname"] as? String)!,
+                                                   lastName: (object["UserLname"] as? String)!,
+                                                   email: (object["UserEmail"] as? String?)!!,
+                                                   avatar: (object["PhotoUrl"] as? String?)!!,
+                                                   intUserID: (object["UserId"] as? Int)!)
                             self.appdata.arrFriends.append(p)
                         }
                         DispatchQueue.main.async {

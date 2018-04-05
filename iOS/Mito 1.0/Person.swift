@@ -11,18 +11,20 @@ import Foundation
 class Person {
     var firstName: String = ""
     var lastName: String = ""
-//    var handle: String = ""
-//    var friendshipType: String = ""
     var email: String = ""
     var avatar: String = ""
+    var intUserID: Int = 0
+    //    var handle: String = ""
+    //    var friendshipType: String = ""
     
-    init(firstName: String, lastName: String, email: String, avatar: String) {
+    init(firstName: String, lastName: String, email: String, avatar: String, intUserID: Int) {
         self.firstName = firstName
         self.lastName = lastName
-//        self.handle = handle
-//        self.friendshipType = friendshipType
         self.email = email
         self.avatar = avatar
+        self.intUserID = intUserID
+        //        self.handle = handle
+        //        self.friendshipType = friendshipType
     }
     
     func description() -> String {
