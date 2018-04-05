@@ -28,6 +28,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var strSearchQuery = ""
     var appdata = AppData.shared
     var urlPeopleCall = URL(string: "https://api.projectmito.io/v1/friend/")
+    var urlAllUserCall = URL(string: "https://api.projectmito.io/v1/users/all")
     var urlAmazonProductCall = URL(string: "https://api.projectmito.io/v1/amazonhashtest/" )
     let urlAmazonOriginal = URL(string: "https://api.projectmito.io/v1/amazonhashtest/" )
 
@@ -60,7 +61,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         searchBar.returnKeyType = UIReturnKeyType.done
 
         urlPeopleCall = URL(string: "https://api.projectmito.io/v1/friend/\(appdata.intCurrentUserID)")
-        fnLoadPeopleData()
+//        fnLoadFriendData()
+        fnLoadAllUserData()
         fnLoadProductData()
         peopleTableView.reloadData()
         productTableView.reloadData()
@@ -114,9 +116,44 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     // Loading Friends (people tab)
     // POST: inserting (attach object) / GET request: put key word in the URL
-    func fnLoadPeopleData() {
+    func fnLoadFriendData() {
         let urlGetFriends = URL(string: (urlPeopleCall?.absoluteString)! + "/1")
         let task = URLSession.shared.dataTask(with: urlGetFriends!) { (data, response, error) in
+            if error != nil {
+                print("ERROR")
+            } else {
+                if let content = data {
+                    do {
+                        let objPeopleData = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSArray
+                        for obj in objPeopleData {
+                            let object = obj as! NSDictionary
+                            print(object)
+                            let p: Person = Person(firstName: (object["UserFname"] as? String)!,
+                                                   lastName: (object["UserLname"] as? String)!,
+                                                   email: (object["UserEmail"] as? String?)!!,
+                                                   avatar: (object["PhotoUrl"] as? String?)!!,
+                                                   intUserID: (object["UserId"] as? Int)!,
+                                                   strUsername: (object["Username"] as? String)!)
+                            self.appdata.arrFriends.append(p)
+                        }
+                        DispatchQueue.main.async {
+                            self.peopleTableView.reloadData()
+                            self.productPeopleTab.isEnabled = true
+                            print("Finished loading people")
+                        }
+                    } catch {
+                        print("Loading People (Catch)")
+                    }
+                } else {
+                    print("Error")
+                }
+            }
+        }
+        task.resume()
+    }
+    
+    func fnLoadAllUserData() {
+        let task = URLSession.shared.dataTask(with: urlAllUserCall!) { (data, response, error) in
             if error != nil {
                 print("ERROR")
             } else {
