@@ -32,9 +32,9 @@ class PeopleDetailsViewController: UIViewController {
     }
 
     @IBAction func fnAddFriend(_ sender: Any) {
-        let user2ID = appdata.arrFriends[myIndex].intUserID
-        print(user2ID)
+        print(appdata.arrFriends[myIndex].description())
         print(appdata.intCurrentUserID)
+        
         // send friend request here code
     }
     

@@ -130,7 +130,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                                    lastName: (object["UserLname"] as? String)!,
                                                    email: (object["UserEmail"] as? String?)!!,
                                                    avatar: (object["PhotoUrl"] as? String?)!!,
-                                                   intUserID: (object["UserId"] as? Int)!)
+                                                   intUserID: (object["UserId"] as? Int)!,
+                                                   strUsername: (object["Username"] as? String)!)
                             self.appdata.arrFriends.append(p)
                         }
                         DispatchQueue.main.async {

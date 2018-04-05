@@ -14,20 +14,20 @@ class Person {
     var email: String = ""
     var avatar: String = ""
     var intUserID: Int = 0
-    //    var handle: String = ""
+    var strUsername: String = ""
     //    var friendshipType: String = ""
     
-    init(firstName: String, lastName: String, email: String, avatar: String, intUserID: Int) {
+    init(firstName: String, lastName: String, email: String, avatar: String, intUserID: Int, strUsername: String) {
         self.firstName = firstName
         self.lastName = lastName
         self.email = email
         self.avatar = avatar
         self.intUserID = intUserID
-        //        self.handle = handle
+        self.strUsername = strUsername
         //        self.friendshipType = friendshipType
     }
     
     func description() -> String {
-        return "\(self.firstName) \(self.lastName) \(self.email) \(self.avatar)"
+        return "\(self.intUserID) \(self.strUsername )\(self.firstName) \(self.lastName) \(self.email) \(self.avatar) "
     }
 }

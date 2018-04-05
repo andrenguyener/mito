@@ -75,7 +75,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="119" id="bJu-JZ-QHb">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellNotification" rowHeight="119" id="bJu-JZ-QHb" customClass="NotificationTableViewCell" customModule="Mito_1_0" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="375" height="119"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bJu-JZ-QHb" id="69R-5r-aFv">
@@ -120,6 +120,11 @@
                                                         </button>
                                                     </subviews>
                                                 </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="imgPerson" destination="ekH-sZ-74u" id="a5l-ce-thF"/>
+                                                    <outlet property="strFirstNameLastName" destination="40X-rH-w4U" id="e1K-0C-329"/>
+                                                    <outlet property="strUsername" destination="dTB-aY-jrI" id="bG4-Y0-coF"/>
+                                                </connections>
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
@@ -153,6 +158,7 @@
                         <outlet property="notificationView" destination="r68-ot-V1i" id="d3m-AE-e30"/>
                         <outlet property="packageInView" destination="CWB-eH-sni" id="XQ1-ev-el0"/>
                         <outlet property="segment" destination="m8Q-ax-wXZ" id="sPb-Eb-ywl"/>
+                        <outlet property="tblviewNotification" destination="d63-uF-5nI" id="KQS-cD-HCb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gdz-Oq-dMf" userLabel="First Responder" sceneMemberID="firstResponder"/>

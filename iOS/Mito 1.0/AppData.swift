@@ -13,6 +13,7 @@ class AppData: NSObject {
     open var intCurrentUserID: Int = 0
     open var intCurrIndex: Int = -1
     open var arrFriends: [Person] = []
+    open var arrPendingFriends: [Person] = []
     
     open var arrProductSearchResults: [Product] = []
     
