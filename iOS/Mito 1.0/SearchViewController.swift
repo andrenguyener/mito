@@ -39,8 +39,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
 //            productTableView.reloadData()
         } else {
-            appdata.arrFriends.removeAll()
-            fnLoadPeopleData()
+//            appdata.arrFriends.removeAll()
+//            fnLoadPeopleData()
             UIView.transition(from: productView, to: peopleView, duration: 0, options: .showHideTransitionViews)
             peopleTableView.reloadData()
         }
