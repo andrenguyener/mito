@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class PeopleDetailsViewController: UIViewController {
 
@@ -34,8 +35,41 @@ class PeopleDetailsViewController: UIViewController {
     @IBAction func fnAddFriend(_ sender: Any) {
         print(appdata.arrFriends[myIndex].description())
         print(appdata.intCurrentUserID)
+        let intUser1Id = appdata.intCurrentUserID
+        let intUser2Id = appdata.arrFriends[myIndex].intUserID
         
-        // send friend request here code
+        let parameters: Parameters = [
+            "userId": intUser1Id,
+            "friendId": intUser2Id
+        ]
+        
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        
+        Alamofire.request("https://api.projectmito.io/v1/friend", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                
+                if let dictionary = response.result.value {
+                    print("JSON: \(dictionary)") // serialized json response
+                    DispatchQueue.main.async {
+                        self.fnAlertRequestSent()
+                    }
+                }
+                
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func fnAlertRequestSent() {
+        let alertController = UIAlertController(title: "Done", message: "Friend Request Sent", preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(defaultAction)
+        present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func backButton(_ sender: Any) {
