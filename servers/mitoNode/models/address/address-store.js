@@ -21,7 +21,7 @@ class AddressStore {
     // insert() creates a new address in SqlServer.
     insert(address) {
         return new Promise((resolve) => {
-            let procedureName = "uspInsertUserAddress";
+            let procedureName = "uspcInsertUserAddress";
             var request = this.request(procedureName);
             var addressId;
             request.addParameter('userId', TYPES.Int, address.userId);
@@ -61,7 +61,7 @@ class AddressStore {
     // getAll() retrieves all addresses from SqlServer with the user ID.
     getAll(id) {
         return new Promise((resolve) => {
-            let procedureName = "uspGetUserAddressById";
+            let procedureName = "uspcGetUserAddressById";
             var request = this.request(procedureName);
 
             request.addParameter('UserId', TYPES.VarChar, id);

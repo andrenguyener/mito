@@ -16,13 +16,13 @@ class FriendStore {
         });
     }
 
-    // Insert a friend into SqlServer
+    // Request a friend into SqlServer
     insert(userId, friendId) {
         return new Promise((resolve) => {
-            let procedureName = "uspRequestFriend";
+            let procedureName = "uspcRequestFriend";
             var request = this.request(procedureName);
-            request.addParameter('user1Id', TYPES.Int, userId);
-            request.addParameter('user2Id', TYPES.Int, friendId);
+            request.addParameter('User1Id', TYPES.Int, userId);
+            request.addParameter('User2Id', TYPES.Int, friendId);
 
             request.on('doneProc', function (rowCount, more) {
                 resolve("Friend Request Sent");
@@ -45,9 +45,9 @@ class FriendStore {
     }
 
     // Get all friends of a UserId
-    getAll(id) {
+    getAll(id, friendType) {
         return new Promise((resolve) => {
-            let procedureName = "uspGetUserFriendsById";
+            let procedureName = "uspcGetUserFriendsById";
             var request = new Request(`${procedureName}`, function (err, rowCount, rows) {
                 if (err) {
                     console.log(err);
@@ -55,7 +55,7 @@ class FriendStore {
             });
 
             request.addParameter('UserId', TYPES.Int, id);
-
+            request.addParameter('isFriend', TYPES.Int, friendType)
             let jsonArray = []
             request.on('row', function (columns) {
                 var rowObject = {};
@@ -93,7 +93,24 @@ class FriendStore {
 
     // Accept/Decline friend request
     updateFriendRequest(userId, friendId) {
+        return new Promise((resolve) => {
+            let procedureName = "uspcUpdateFriend";
+            var request = this.request(procedureName);
+            request.addParameter('user1Id', TYPES.Int, userId);
+            request.addParameter('user2Id', TYPES.Int, friendId);
 
+            request.on('doneProc', function (rowCount, more) {
+                resolve("Friend Request Sent");
+            });
+
+            this.sql.callProcedure(request)
+        })
+            .then((message) => {
+                return message;
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }
 
     // Delete a friend from the User  

@@ -23,9 +23,10 @@ const FriendHandler = (friendStore) => {
     });
 
     // Get all the friends of a given UserId
-    router.get('/v1/friend/:userId', (req, res) => {
+    router.get('/v1/friend/:userId/:friendType', (req, res) => {
+
         friendStore
-            .getAll(req.params.userId)
+            .getAll(req.params.userId, req.params.friendType)
             .then(friend => {
                 console.log(friend);
                 res.json(friend);
@@ -52,6 +53,14 @@ const FriendHandler = (friendStore) => {
                 }
             });
     });
+
+    // Get all pending requests of given User
+    router.post('v1/friend/pendingrequest', (req, res) => {
+        // Userid
+        // bit 0 or 1 // 0 = all non friends (pending) 1 = all friends except pending
+        let userId = req.body.userId;
+        let bit = req
+    })
 
     // Update (upgrade/downgrade) friend status
     router.patch('', (req, res) => {
