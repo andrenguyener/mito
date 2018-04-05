@@ -43,7 +43,8 @@ type UpdateUserPassword struct {
 //GetByID returns the User with the given ID
 func (ss *SqlStore) GetByID(id int) (*User, error) {
 	user := &User{}
-	tsql := fmt.Sprintf("EXEC uspGetUserById @UserId;")
+	var userString string
+	tsql := fmt.Sprintf("EXEC uspcGetUserById @UserId;")
 
 	rows, err := ss.database.Query(
 		tsql,
@@ -57,6 +58,9 @@ func (ss *SqlStore) GetByID(id int) (*User, error) {
 		if err := rows.Scan(&user.UserId, &user.UserFname, &user.UserLname, &user.UserEmail, &user.PhotoUrl, &user.UserDOB, &user.Username); err != nil {
 			log.Fatal(err)
 		}
+		if err := json.Unmarshal([]byte(userString), user); err != nil {
+			log.Fatal(err)
+		}
 		fmt.Println(user)
 	}
 	if err := rows.Err(); err != nil {
@@ -67,9 +71,35 @@ func (ss *SqlStore) GetByID(id int) (*User, error) {
 
 //GetByEmail returns the User with the given email
 func (ss *SqlStore) GetByEmail(email string) (*User, error) {
+	// user := &User{}
+	// var userString string
+	// tsql := fmt.Sprintf("EXEC uspGetUserByUserEmail @Useremail;")
+
+	// rows, err := ss.database.Query(
+	// 	tsql,
+	// 	sql.Named("Useremail", email))
+	// if err != nil {
+	// 	return nil, ErrUserNotFound
+	// }
+	// defer rows.Close()
+	// for rows.Next() {
+	// 	if err := rows.Scan(&userString); err != nil {
+	// 		log.Fatal(err)
+	// 	}
+	// 	fmt.Printf("something something")
+	// 	if err := json.Unmarshal([]byte(userString), user); err != nil {
+	// 		log.Fatal(err)
+	// 	}
+	// 	fmt.Println(user)
+	// 	// fmt.Println(user.PasswordHash)
+	// }
+	// if err := rows.Err(); err != nil {
+	// 	log.Fatal(err)
+	// }
+
+	// return user, nil
 	user := &User{}
-	var userString string
-	tsql := fmt.Sprintf("EXEC uspGetUserByUserEmail @Useremail;")
+	tsql := fmt.Sprintf("EXEC uspcGetUserByUserEmail @Useremail;")
 
 	rows, err := ss.database.Query(
 		tsql,
@@ -77,12 +107,10 @@ func (ss *SqlStore) GetByEmail(email string) (*User, error) {
 	if err != nil {
 		return nil, ErrUserNotFound
 	}
+
 	defer rows.Close()
 	for rows.Next() {
-		if err := rows.Scan(&userString); err != nil {
-			log.Fatal(err)
-		}
-		if err := json.Unmarshal([]byte(userString), user); err != nil {
+		if err := rows.Scan(&user.UserId, &user.UserFname, &user.UserLname, &user.UserEmail, &user.PasswordHash, &user.PhotoUrl, &user.UserDOB, &user.Username); err != nil {
 			log.Fatal(err)
 		}
 		fmt.Println(user)
@@ -97,7 +125,8 @@ func (ss *SqlStore) GetByEmail(email string) (*User, error) {
 //GetByUserName returns the User with the given Username
 func (ss *SqlStore) GetByUserName(username string) (*User, error) {
 	user := &User{}
-	tsql := fmt.Sprintf("EXEC uspGetUserByUsername @Username;")
+	var userString string
+	tsql := fmt.Sprintf("EXEC uspcGetUserByUsername @Username;")
 
 	rows, err := ss.database.Query(
 		tsql,
@@ -109,6 +138,9 @@ func (ss *SqlStore) GetByUserName(username string) (*User, error) {
 	defer rows.Close()
 	for rows.Next() {
 		if err := rows.Scan(&user.UserId, &user.UserFname, &user.UserLname, &user.UserEmail, &user.PhotoUrl, &user.UserDOB, &user.Username); err != nil {
+			log.Fatal(err)
+		}
+		if err := json.Unmarshal([]byte(userString), user); err != nil {
 			log.Fatal(err)
 		}
 		fmt.Println(user)
@@ -128,7 +160,7 @@ func (ss *SqlStore) Insert(newUser *NewUser) (*User, error) {
 		return nil, fmt.Errorf("Error converting new user to user %s", err)
 	}
 	var newUserId int64
-	_, err = ss.database.Exec("uspInsertUser",
+	result, err := ss.database.Exec("uspcInsertUser",
 		sql.Named("UserFname", user.UserFname),
 		sql.Named("UserLname", user.UserLname),
 		sql.Named("UserEmail", user.UserEmail),
@@ -140,6 +172,7 @@ func (ss *SqlStore) Insert(newUser *NewUser) (*User, error) {
 	if err != nil {
 		return nil, fmt.Errorf("Error inserting user %s", err)
 	}
+	fmt.Println(result)
 	user.UserId = int(newUserId)
 	fmt.Println(user)
 
@@ -209,7 +242,7 @@ func (ss *SqlStore) GetAll() ([]*User, error) {
 	// 	return nil, err
 	// }
 
-	tsql := fmt.Sprintf("EXEC uspGetAllUsers")
+	tsql := fmt.Sprintf("EXEC uspcGetAllUsers")
 
 	rows, err := ss.database.Query(
 		tsql)
