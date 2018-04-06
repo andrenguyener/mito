@@ -161,3 +161,6 @@ SELECT * FROM CART
 SELECT * FROM ORDER_PRODUCT
 SELECT * FROM [ORDER]
 EXEC dbo.uspProcessCheckout 7, 7, 8, 'Testing checkout cart', 0
+
+
+--Update 
