@@ -98,10 +98,10 @@ class FriendStore {
             var request = this.request(procedureName);
             request.addParameter('user1Id', TYPES.Int, userId);
             request.addParameter('user2Id', TYPES.Int, friendId);
-            request.addParameter('user1Id', TYPES.NVarChar, friendType);
-            request.addParameter('user2Id', TYPES.NVarChar, notificationType);
+            request.addParameter('friendTypeToUpdate', TYPES.NVarChar, friendType);
+            request.addParameter('friendTypeRequestResponse', TYPES.NVarChar, notificationType);
             request.on('doneProc', function (rowCount, more) {
-                resolve("Friend Request Sent");
+                resolve("Action Completed");
             });
 
             this.sql.callProcedure(request)

@@ -24,8 +24,42 @@ const CartHandler = (cartStore) => {
     });
 
     // Add items to cart
-    router.post('', (req, res) => {
+    router.post('v1/cart', (req, res) => {
+        const userJSON = req.get('X-User');
+        const user = JSON.parse(userJSON);
+        let amazonASIN = req.body.amazonASIN;
+        let amazonPrice = req.body.amazonPrice;
+        let quantity = req.body.quantity;
+        cartStore
+            .insert(user.userId, amazonASIN, amazonPrice, quantity)
+            .then((cart) => {
+                res.send(cart);
+            })
+            .catch(err => {
+                if (err !== breakSignal) {
+                    console.log(err);
+                }
+            });
+    });
 
+    // Process checkout of cart
+    router.post('v1/cart/process', (req, res) => {
+        const userJSON = req.get('X-User');
+        const user = JSON.parse(userJSON);
+        let userAddressId = req.body.userAddressId;
+        let recipientId = req.body.recipientId;
+        let message = req.body.message;
+        let giftOption = req.body.giftOption;
+        cartStore
+            .insert(user.userId, userAddressId, recipientId, message, giftOption)
+            .then((cart) => {
+                res.send(cart);
+            })
+            .catch(err => {
+                if (err !== breakSignal) {
+                    console.log(err);
+                }
+            });
     });
 
     // Deletes items from cart
