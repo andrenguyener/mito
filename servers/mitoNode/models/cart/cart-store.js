@@ -15,10 +15,43 @@ class CartStore {
             }
         });
     }
+    // Get items in cart based on a given userId
+    get(id) {
+        return new Promise((resolve) => {
+            let procedureName = "uspcGetUserCartItemList";
+            var request = new Request(`${procedureName}`, function (err, rowCount, rows) {
+                if (err) {
+                    console.log(err);
+                }
+            });
 
-    // Get items in cart
-    get() {
+            request.addParameter('UserId', TYPES.Int, id);
+            let jsonArray = []
+            request.on('row', function (columns) {
+                var rowObject = {};
+                columns.forEach(function (column) {
+                    if (column.value === null) {
+                        console.log('NULL');
+                    } else {
+                        rowObject[column.metadata.colName] = column.value;
+                    }
+                });
+                jsonArray.push(rowObject)
+            });
 
+            request.on('doneProc', function (rowCount, more) {
+                console.log(jsonArray);
+                resolve(jsonArray);
+            });
+
+            this.sql.callProcedure(request)
+        })
+            .then((jsonArray) => {
+                return jsonArray
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }
 
     // Add items to cart
