@@ -15,37 +15,43 @@ class CartStore {
             }
         });
     }
-
     // Get items in cart based on a given userId
-    get(userId) {
-        return new Request((resolve) => {
+    get(id) {
+        return new Promise((resolve) => {
             let procedureName = "uspcGetUserCartItemList";
-            var request = this.request(procedureName)
-            request.addParameter('UserId', TYPES.Int, userId);
+            var request = new Request(`${procedureName}`, function (err, rowCount, rows) {
+                if (err) {
+                    console.log(err);
+                }
+            });
+
+            request.addParameter('UserId', TYPES.Int, id);
             let jsonArray = []
-            request.on("row", function (columns) {
+            request.on('row', function (columns) {
                 var rowObject = {};
                 columns.forEach(function (column) {
                     if (column.value === null) {
-                        console.log('NULL')
+                        console.log('NULL');
                     } else {
-                        rowObject[column.metadata.colName] = column.value
+                        rowObject[column.metadata.colName] = column.value;
                     }
-                })
-                jsonArray.push(rowObject);
-            })
-            request.on("doneProc", function (rowCount, more) {
+                });
+                jsonArray.push(rowObject)
+            });
+
+            request.on('doneProc', function (rowCount, more) {
+                console.log(jsonArray);
                 resolve(jsonArray);
-            })
+            });
+
             this.sql.callProcedure(request)
         })
             .then((jsonArray) => {
-                return jsonArray;
+                return jsonArray
             })
-            .catch((error) => {
-                console.log(error)
+            .catch((err) => {
+                console.log(err);
             });
-
     }
 
     // Add items to cart

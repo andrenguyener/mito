@@ -82,8 +82,6 @@ class FriendStore {
             .catch((err) => {
                 console.log(err);
             });
-
-
     }
 
     // Update (downgrade/upgrade) friend status

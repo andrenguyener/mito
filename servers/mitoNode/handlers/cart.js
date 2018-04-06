@@ -21,18 +21,19 @@ const CartHandler = (cartStore) => {
     router.get('/v1/cart/retrieve', (req, res) => {
         const userJSON = req.get('X-User');
         const user = JSON.parse(userJSON);
-        let userId = user.userId;
+        var userId = user.userId;
+        console.log(userId);
         cartStore
-        .get(userId)
-        .then(cart => {
-            console.log(cart)
-            res.json(cart)
-        })
-        .catch(error => {
-            if (error != breakSignal) {
-                console.log(error)
-            }
-        })
+            .get(userId)
+            .then(cart => {
+                console.log(cart)
+                res.json(cart)
+            })
+            .catch(error => {
+                if (error != breakSignal) {
+                    console.log(error)
+                }
+            })
 
     });
 
