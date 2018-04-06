@@ -46,6 +46,12 @@
 		B2619146206C5E5E004597F0 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2619137206C5E5A004597F0 /* Roboto-Thin.ttf */; };
 		B2619147206C5E5E004597F0 /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2619134206C5E5A004597F0 /* Roboto-ThinItalic.ttf */; };
 		B2624CF2204F714D006B7DE6 /* Andre2.png in Resources */ = {isa = PBXBuildFile; fileRef = B2624CF1204F714D006B7DE6 /* Andre2.png */; };
+		B272D9052077646A00E53276 /* mitodesignblacksvg.svg in Resources */ = {isa = PBXBuildFile; fileRef = B272D8FF2077646A00E53276 /* mitodesignblacksvg.svg */; };
+		B272D9062077646A00E53276 /* mitowhitesvg.svg in Resources */ = {isa = PBXBuildFile; fileRef = B272D9002077646A00E53276 /* mitowhitesvg.svg */; };
+		B272D9072077646A00E53276 /* mitowhiteonlysvg.svg in Resources */ = {isa = PBXBuildFile; fileRef = B272D9012077646A00E53276 /* mitowhiteonlysvg.svg */; };
+		B272D9082077646A00E53276 /* mitodesignwhite.png in Resources */ = {isa = PBXBuildFile; fileRef = B272D9022077646A00E53276 /* mitodesignwhite.png */; };
+		B272D9092077646A00E53276 /* mitowhiteonly.png in Resources */ = {isa = PBXBuildFile; fileRef = B272D9032077646A00E53276 /* mitowhiteonly.png */; };
+		B272D90A2077646A00E53276 /* mitodesignblack.png in Resources */ = {isa = PBXBuildFile; fileRef = B272D9042077646A00E53276 /* mitodesignblack.png */; };
 		B272DC2620439E2200EE2121 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = B272DC2520439E2200EE2121 /* Product.swift */; };
 		B272DC2E2043BBE400EE2121 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B272DC2D2043BBE400EE2121 /* AppData.swift */; };
 		B29AEC62203FC9C100110EF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29AEC61203FC9C100110EF9 /* AppDelegate.swift */; };
@@ -137,6 +143,12 @@
 		B261913A206C5E5A004597F0 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		B261913B206C5E5B004597F0 /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
 		B2624CF1204F714D006B7DE6 /* Andre2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Andre2.png; sourceTree = "<group>"; };
+		B272D8FF2077646A00E53276 /* mitodesignblacksvg.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mitodesignblacksvg.svg; sourceTree = "<group>"; };
+		B272D9002077646A00E53276 /* mitowhitesvg.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mitowhitesvg.svg; sourceTree = "<group>"; };
+		B272D9012077646A00E53276 /* mitowhiteonlysvg.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mitowhiteonlysvg.svg; sourceTree = "<group>"; };
+		B272D9022077646A00E53276 /* mitodesignwhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mitodesignwhite.png; sourceTree = "<group>"; };
+		B272D9032077646A00E53276 /* mitowhiteonly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mitowhiteonly.png; sourceTree = "<group>"; };
+		B272D9042077646A00E53276 /* mitodesignblack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mitodesignblack.png; sourceTree = "<group>"; };
 		B272DC2520439E2200EE2121 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		B272DC282043BA8700EE2121 /* Home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Home.png; sourceTree = "<group>"; };
 		B272DC292043BA8700EE2121 /* Person.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Person.png; sourceTree = "<group>"; };
@@ -232,6 +244,19 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		B272D8FE2077646A00E53276 /* Mito Text Design */ = {
+			isa = PBXGroup;
+			children = (
+				B272D9002077646A00E53276 /* mitowhitesvg.svg */,
+				B272D8FF2077646A00E53276 /* mitodesignblacksvg.svg */,
+				B272D9012077646A00E53276 /* mitowhiteonlysvg.svg */,
+				B272D9022077646A00E53276 /* mitodesignwhite.png */,
+				B272D9032077646A00E53276 /* mitowhiteonly.png */,
+				B272D9042077646A00E53276 /* mitodesignblack.png */,
+			);
+			path = "Mito Text Design";
+			sourceTree = "<group>";
+		};
 		B272DC272043BA8700EE2121 /* Icon */ = {
 			isa = PBXGroup;
 			children = (
@@ -286,6 +311,7 @@
 				B261912F206C5E4F004597F0 /* Fonts */,
 				B29AEC68203FC9C100110EF9 /* Assets.xcassets */,
 				B272DC272043BA8700EE2121 /* Icon */,
+				B272D8FE2077646A00E53276 /* Mito Text Design */,
 				B272DC2D2043BBE400EE2121 /* AppData.swift */,
 				B29AEC61203FC9C100110EF9 /* AppDelegate.swift */,
 				B247196F20454733006CF6C2 /* CartTableViewCell.swift */,
@@ -467,6 +493,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B29AEC6C203FC9C100110EF9 /* LaunchScreen.storyboard in Resources */,
+				B272D9062077646A00E53276 /* mitowhitesvg.svg in Resources */,
 				B2619140206C5E5E004597F0 /* Roboto-Italic.ttf in Resources */,
 				B247198D204626ED006CF6C2 /* Cart Solid White Icon.png in Resources */,
 				DA6CB7F22064E9B700962814 /* Back.png in Resources */,
@@ -481,16 +508,19 @@
 				B24719822046245E006CF6C2 /* Card SG.png in Resources */,
 				B261913C206C5E5E004597F0 /* Roboto-Black.ttf in Resources */,
 				B2619146206C5E5E004597F0 /* Roboto-Thin.ttf in Resources */,
+				B272D9092077646A00E53276 /* mitowhiteonly.png in Resources */,
 				B247197420454C4E006CF6C2 /* GiftWhite.png in Resources */,
 				B29AEC67203FC9C100110EF9 /* Main.storyboard in Resources */,
 				B2548FFF2055EA97000123D0 /* ammara.png in Resources */,
 				B2619145206C5E5E004597F0 /* Roboto-Regular.ttf in Resources */,
+				B272D9072077646A00E53276 /* mitowhiteonlysvg.svg in Resources */,
 				B24719812046245E006CF6C2 /* Cart Icon SG .png in Resources */,
 				B2548FFC2055EA97000123D0 /* sarah.png in Resources */,
 				B2548FFE2055EA97000123D0 /* jj.png in Resources */,
 				B247197320454C4E006CF6C2 /* You’re so nice!.png in Resources */,
 				B247198C204626ED006CF6C2 /* search Grey.png in Resources */,
 				B24719872046245E006CF6C2 /* Settings SG.png in Resources */,
+				B272D90A2077646A00E53276 /* mitodesignblack.png in Resources */,
 				B2619147206C5E5E004597F0 /* Roboto-ThinItalic.ttf in Resources */,
 				B24719802046245E006CF6C2 /* Get Help SG.png in Resources */,
 				B24719882046245E006CF6C2 /* Profile SG.png in Resources */,
@@ -498,10 +528,12 @@
 				B2619143206C5E5E004597F0 /* Roboto-Medium.ttf in Resources */,
 				B2624CF2204F714D006B7DE6 /* Andre2.png in Resources */,
 				B24719852046245E006CF6C2 /* trash SG.png in Resources */,
+				B272D9082077646A00E53276 /* mitodesignwhite.png in Resources */,
 				B247197F2046245E006CF6C2 /* Sign Out SG.png in Resources */,
 				DA4FC9EF2045E0D300999F28 /* profileInfo.json in Resources */,
 				B247198E204626ED006CF6C2 /* Search.png in Resources */,
 				B261913D206C5E5E004597F0 /* Roboto-BlackItalic.ttf in Resources */,
+				B272D9052077646A00E53276 /* mitodesignblacksvg.svg in Resources */,
 				DAD9953520423A4B007A7687 /* Andre.png in Resources */,
 				B24719842046245E006CF6C2 /* Blocked User SG.png in Resources */,
 				B2619142206C5E5E004597F0 /* Roboto-LightItalic.ttf in Resources */,
@@ -785,11 +817,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TG372K25N5;
+				DEVELOPMENT_TEAM = 6KH97C972X;
 				INFOPLIST_FILE = "Mito 1.0/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.washington.jjguo.mito;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.washington.bennys.mito;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -802,11 +834,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TG372K25N5;
+				DEVELOPMENT_TEAM = 6KH97C972X;
 				INFOPLIST_FILE = "Mito 1.0/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.washington.jjguo.mito;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.washington.bennys.mito;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
