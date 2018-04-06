@@ -4,8 +4,8 @@ Return raw address of the given UserId along with
 User profile information if the UserId has an
 existing address in their address book
 */
-
-ALTER PROC uspGetUserAddressById
+EXEC sp_rename 'uspGetUserAddressById', 'uspcGetUserAddressById'
+ALTER PROC uspcGetUserAddressById
 @UserId INT
 AS
 	-- Check if the UserId exist in USER
@@ -27,7 +27,7 @@ AS
 		JOIN [STATE] S ON A.StateId = S.StateId
 		JOIN ZIPCODE Z ON A.ZipCodeId = Z.ZipCodeId
 		WHERE U.UserId = @UserId AND UA.IsDeleted <> 1)
-		FOR JSON AUTO, WITHOUT_ARRAY_WRAPPER
+		--FOR JSON AUTO, WITHOUT_ARRAY_WRAPPER
 	ELSE 
 		BEGIN
 			PRINT'This user does not have the given address in their address book'
