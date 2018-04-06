@@ -13,3 +13,5 @@ BEGIN
 	ON C.AmazonItemId = MostRecentSelection.AmazonItemId
 	AND C.CartDateTime = MostRecentSelection.MostRecentDate
 END
+
+EXEC sp_rename 'uspGetUserCartItemList', 'uspcGetUserCartItemList'
