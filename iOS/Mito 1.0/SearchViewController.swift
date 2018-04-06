@@ -171,88 +171,169 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     // Product Tab View
     func fnLoadProductData() {
-        let task = URLSession.shared.dataTask(with: urlAmazonProductCall!) { (data, response, error) in
-            if error != nil {
-                print("ERROR")
-            } else {
-                if let content = data {
-                    do {
-                        let myJson = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
-                        let itemSearchResponse = myJson["ItemSearchResponse"] as! NSDictionary
-                        let objItems = self.fnAccessFirstDictionaryInArray(dictObj: itemSearchResponse, arrName: "Items")
-                        if objItems["Item"] == nil {
-                            print("Error")
-                        } else {
-                            let arrItem = objItems["Item"] as! NSArray
-                            for itemObj in arrItem {
-                                let item = itemObj as! NSDictionary
-                                let strASIN = self.fnAccesStringinObj(dictObj: item, strAttribute: "ASIN")
-                                var strImageURL = ""
-                                if item["LargeImage"] != nil {
-                                    let objLargeImage = self.fnAccessFirstDictionaryInArray(dictObj: item, arrName: "LargeImage")
-                                    strImageURL = self.fnAccesStringinObj(dictObj: objLargeImage, strAttribute: "URL")
-                                } else if item["ImageSets"] != nil {
-                                    let objImageSets = self.fnAccessFirstDictionaryInArray(dictObj: item, arrName: "ImageSets")
-                                    let objImageSet = self.fnAccessFirstDictionaryInArray(dictObj: objImageSets, arrName: "ImageSet")
-                                    let objLargeImage = self.fnAccessFirstDictionaryInArray(dictObj: objImageSet, arrName: "LargeImage")
-                                    strImageURL = self.fnAccesStringinObj(dictObj: objLargeImage, strAttribute: "URL")
-                                } else {
-                                    strImageURL = "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897"
-                                }
-                                let objItemAttribute = self.fnAccessFirstDictionaryInArray(dictObj: item, arrName: "ItemAttributes")
-                                
-                                var itemFeature = ""
-                                if objItemAttribute["Feature"] != nil {
-                                    itemFeature = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Feature")
-                                } else {
-                                    itemFeature = "NA"
-                                }
-                                
-                                let title = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Title")
-                                
-                                var formattedPrice = ""
-                                if objItemAttribute["ListPrice"] != nil {
-                                    let objListPrice = self.fnAccessFirstDictionaryInArray(dictObj: objItemAttribute, arrName: "ListPrice")
-                                    formattedPrice = self.fnAccesStringinObj(dictObj: objListPrice, strAttribute: "FormattedPrice")
-                                } else {
-                                    formattedPrice = "N/A"
-                                }
-                                var type = ""
-                                if objItemAttribute["Binding"] != nil {
-                                    type = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Binding")
-                                } else {
-                                    type = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "ProductGroup")
-                                }
-                                var publisher_brand = ""
-                                if type != "Amazon Video" {
-                                    if objItemAttribute["Brand"] != nil {
-                                        publisher_brand = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Brand")
-                                    } else if objItemAttribute["Publisher"] != nil {
-                                        publisher_brand = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Publisher")
-                                    } else {
-                                        publisher_brand = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Binding")
-                                    }
-                                } else {
-                                    publisher_brand = "Brand"
-                                }
-                                let product: Product = Product(image: strImageURL, ASIN: strASIN, title: title, publisher: publisher_brand, price: formattedPrice, description: itemFeature)
-                                self.appdata.arrProductSearchResults.append(product)
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlAmazonProductCall!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    let myJson = dictionary as! NSDictionary
+                    let itemSearchResponse = myJson["ItemSearchResponse"] as! NSDictionary
+                    let objItems = self.fnAccessFirstDictionaryInArray(dictObj: itemSearchResponse, arrName: "Items")
+                    if objItems["Item"] == nil {
+                        print("Error")
+                    } else {
+                        let arrItem = objItems["Item"] as! NSArray
+                        for itemObj in arrItem {
+                            let item = itemObj as! NSDictionary
+                            let strASIN = self.fnAccesStringinObj(dictObj: item, strAttribute: "ASIN")
+                            var strImageURL = ""
+                            if item["LargeImage"] != nil {
+                                let objLargeImage = self.fnAccessFirstDictionaryInArray(dictObj: item, arrName: "LargeImage")
+                                strImageURL = self.fnAccesStringinObj(dictObj: objLargeImage, strAttribute: "URL")
+                            } else if item["ImageSets"] != nil {
+                                let objImageSets = self.fnAccessFirstDictionaryInArray(dictObj: item, arrName: "ImageSets")
+                                let objImageSet = self.fnAccessFirstDictionaryInArray(dictObj: objImageSets, arrName: "ImageSet")
+                                let objLargeImage = self.fnAccessFirstDictionaryInArray(dictObj: objImageSet, arrName: "LargeImage")
+                                strImageURL = self.fnAccesStringinObj(dictObj: objLargeImage, strAttribute: "URL")
+                            } else {
+                                strImageURL = "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897"
                             }
+                            let objItemAttribute = self.fnAccessFirstDictionaryInArray(dictObj: item, arrName: "ItemAttributes")
+                            
+                            var itemFeature = ""
+                            if objItemAttribute["Feature"] != nil {
+                                itemFeature = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Feature")
+                            } else {
+                                itemFeature = "NA"
+                            }
+                            
+                            let title = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Title")
+                            
+                            var formattedPrice = ""
+                            if objItemAttribute["ListPrice"] != nil {
+                                let objListPrice = self.fnAccessFirstDictionaryInArray(dictObj: objItemAttribute, arrName: "ListPrice")
+                                formattedPrice = self.fnAccesStringinObj(dictObj: objListPrice, strAttribute: "FormattedPrice")
+                            } else {
+                                formattedPrice = "N/A"
+                            }
+                            var type = ""
+                            if objItemAttribute["Binding"] != nil {
+                                type = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Binding")
+                            } else {
+                                type = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "ProductGroup")
+                            }
+                            var publisher_brand = ""
+                            if type != "Amazon Video" {
+                                if objItemAttribute["Brand"] != nil {
+                                    publisher_brand = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Brand")
+                                } else if objItemAttribute["Publisher"] != nil {
+                                    publisher_brand = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Publisher")
+                                } else {
+                                    publisher_brand = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Binding")
+                                }
+                            } else {
+                                publisher_brand = "Brand"
+                            }
+                            let product: Product = Product(image: strImageURL, ASIN: strASIN, title: title, publisher: publisher_brand, price: formattedPrice, description: itemFeature)
+                            self.appdata.arrProductSearchResults.append(product)
                         }
-                        DispatchQueue.main.async {
-                            self.productTableView.reloadData()
-                            self.productPeopleTab.isEnabled = true
-                            self.spinnerProductSearch.stopAnimating()
-                        }
-                    } catch {
-                        print("Catch")
                     }
-                } else {
-                    print("Error")
+                    DispatchQueue.main.async {
+                        self.productTableView.reloadData()
+                        self.productPeopleTab.isEnabled = true
+                        self.spinnerProductSearch.stopAnimating()
+                    }
                 }
+                
+            case .failure(let error):
+                print("Get Amazon Product error")
+                print(error)
             }
         }
-        task.resume()
+//        let task = URLSession.shared.dataTask(with: urlAmazonProductCall!) { (data, response, error) in
+//            if error != nil {
+//                print("ERROR")
+//            } else {
+//                if let content = data {
+//                    do {
+//                        let myJson = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
+//                        let itemSearchResponse = myJson["ItemSearchResponse"] as! NSDictionary
+//                        let objItems = self.fnAccessFirstDictionaryInArray(dictObj: itemSearchResponse, arrName: "Items")
+//                        if objItems["Item"] == nil {
+//                            print("Error")
+//                        } else {
+//                            let arrItem = objItems["Item"] as! NSArray
+//                            for itemObj in arrItem {
+//                                let item = itemObj as! NSDictionary
+//                                let strASIN = self.fnAccesStringinObj(dictObj: item, strAttribute: "ASIN")
+//                                var strImageURL = ""
+//                                if item["LargeImage"] != nil {
+//                                    let objLargeImage = self.fnAccessFirstDictionaryInArray(dictObj: item, arrName: "LargeImage")
+//                                    strImageURL = self.fnAccesStringinObj(dictObj: objLargeImage, strAttribute: "URL")
+//                                } else if item["ImageSets"] != nil {
+//                                    let objImageSets = self.fnAccessFirstDictionaryInArray(dictObj: item, arrName: "ImageSets")
+//                                    let objImageSet = self.fnAccessFirstDictionaryInArray(dictObj: objImageSets, arrName: "ImageSet")
+//                                    let objLargeImage = self.fnAccessFirstDictionaryInArray(dictObj: objImageSet, arrName: "LargeImage")
+//                                    strImageURL = self.fnAccesStringinObj(dictObj: objLargeImage, strAttribute: "URL")
+//                                } else {
+//                                    strImageURL = "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897"
+//                                }
+//                                let objItemAttribute = self.fnAccessFirstDictionaryInArray(dictObj: item, arrName: "ItemAttributes")
+//
+//                                var itemFeature = ""
+//                                if objItemAttribute["Feature"] != nil {
+//                                    itemFeature = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Feature")
+//                                } else {
+//                                    itemFeature = "NA"
+//                                }
+//
+//                                let title = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Title")
+//
+//                                var formattedPrice = ""
+//                                if objItemAttribute["ListPrice"] != nil {
+//                                    let objListPrice = self.fnAccessFirstDictionaryInArray(dictObj: objItemAttribute, arrName: "ListPrice")
+//                                    formattedPrice = self.fnAccesStringinObj(dictObj: objListPrice, strAttribute: "FormattedPrice")
+//                                } else {
+//                                    formattedPrice = "N/A"
+//                                }
+//                                var type = ""
+//                                if objItemAttribute["Binding"] != nil {
+//                                    type = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Binding")
+//                                } else {
+//                                    type = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "ProductGroup")
+//                                }
+//                                var publisher_brand = ""
+//                                if type != "Amazon Video" {
+//                                    if objItemAttribute["Brand"] != nil {
+//                                        publisher_brand = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Brand")
+//                                    } else if objItemAttribute["Publisher"] != nil {
+//                                        publisher_brand = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Publisher")
+//                                    } else {
+//                                        publisher_brand = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Binding")
+//                                    }
+//                                } else {
+//                                    publisher_brand = "Brand"
+//                                }
+//                                let product: Product = Product(image: strImageURL, ASIN: strASIN, title: title, publisher: publisher_brand, price: formattedPrice, description: itemFeature)
+//                                self.appdata.arrProductSearchResults.append(product)
+//                            }
+//                        }
+//                        DispatchQueue.main.async {
+//                            self.productTableView.reloadData()
+//                            self.productPeopleTab.isEnabled = true
+//                            self.spinnerProductSearch.stopAnimating()
+//                        }
+//                    } catch {
+//                        print("Catch")
+//                    }
+//                } else {
+//                    print("Error")
+//                }
+//            }
+//        }
+//        task.resume()
     }
 //
 //    func numberOfSections(in tableView: UITableView) -> Int {
