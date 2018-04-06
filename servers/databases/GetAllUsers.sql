@@ -2,7 +2,7 @@
 Get all users basic information
 */
 
-ALTER PROC uspGetAllUsers 
+ALTER PROC uspcGetAllUsers 
 As	
 	--DECLARE @err_msg NVARCHAR(255)
 	-- SET NOCOUNT ON added to prevent extra result sets from  
@@ -11,7 +11,7 @@ As
 	IF EXISTS(SELECT UserId, UserFname, UserLname,UserEmail,PhotoUrl, UserDOB, Username FROM [USER])
 		BEGIN
 		SELECT UserId, UserFname, UserLname,UserEmail,PhotoUrl, UserDOB, Username FROM [USER]
-		FOR JSON AUTO, WITHOUT_ARRAY_WRAPPER
+		--FOR JSON AUTO, WITHOUT_ARRAY_WRAPPER
 		END
 	ELSE
 		BEGIN 
@@ -20,6 +20,6 @@ As
 		RETURN
 		END
 
-EXEC sp_rename 'GetAllUsers', 'uspGetAllUsers'
+EXEC sp_rename 'uspGetAllUsers', 'uspcGetAllUsers'
 
 EXEC dbo.uspGetAllUsers

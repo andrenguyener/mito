@@ -3,7 +3,7 @@
 Find relevant user information based on the given email address
 */
 
-ALTER PROC uspGetUserByUserEmail
+ALTER PROC uspcGetUserByUserEmail
 @Useremail NVARCHAR(100)
 As	
 	--DECLARE @err_msg NVARCHAR(255)
@@ -22,6 +22,6 @@ As
 		RETURN
 		END
 
-EXEC sp_rename 'GetUserByUserEmail', 'uspGetUserByUserEmail'
+EXEC sp_rename 'uspGetUserByUserEmail', 'uspcGetUserByUserEmail'
 
 EXEC dbo.uspGetUserByUserEmail 'tombrady@uw.edu'

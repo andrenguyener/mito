@@ -3,11 +3,18 @@
 Return all information on the user's friends
 */
 
-ALTER PROC uspGetUserFriendsById
-@UserId INT
+ALTER PROC uspcGetUserFriendsById
+@UserId INT,
+@IsFriend BIT
 AS
+	DECLARE @FriendTypeString NVARCHAR(50) = 'Friend'
+	IF @IsFriend = 0 
+	BEGIN
+		SET @FriendTypeString = 'Pending'
+	END
+
 	DECLARE @NotFriendType INT
-	EXEC uspGetFriendTypeId'Pending', @FriendType_Id = @NotFriendType OUT
+	EXEC uspGetFriendTypeId @FriendTypeString, @FriendType_Id = @NotFriendType OUT
 
 	IF @NotFriendType IS NULL
 	BEGIN 
@@ -18,19 +25,20 @@ AS
 
 	DECLARE @friendsIdList TABLE(FriendId INT)
 	INSERT @friendsIdList
-	EXEC uspGetUserFriendsIdList @UserId
+	EXEC uspGetUserFriendsIdList @UserId, @IsFriend
 
 	IF EXISTS(SELECT * FROM FRIEND WHERE (User1Id = @UserId OR User2Id = @UserId)
-		AND FriendTypeId <> @NotFriendType )
+		AND FriendTypeId = @NotFriendType )
 		BEGIN
 		SELECT UserId, Username, UserFname, UserLname,UserEmail, PhotoUrl FROM [USER] U
 		JOIN (SELECT * FROM @friendsIdList) UserFriendList
 		ON U.UserId = UserFriendList.FriendId
-		FOR JSON AUTO, WITHOUT_ARRAY_WRAPPER
+		--FOR JSON AUTO, WITHOUT_ARRAY_WRAPPER
 		END
 	ELSE
 		BEGIN 
 		PRINT'This user does not have any friend.'
 		END
 
-EXEC sp_rename 'GetUserFriendsById', 'uspGetUserFriendsById'
+EXEC sp_rename 'uspGetUserFriendsById', 'uspcGetUserFriendsById'
+

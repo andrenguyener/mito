@@ -3,7 +3,7 @@
 Find relevant user information based on the given Username
 */
 
-ALTER PROC uspGetUserByUsername 
+ALTER PROC uspcGetUserByUsername 
 @Username NVARCHAR(50)
 As	
 	--DECLARE @err_msg NVARCHAR(255)
@@ -13,7 +13,7 @@ As
 	IF EXISTS(SELECT UserId FROM [USER] WHERE Username = @Username)
 		BEGIN
 		SELECT UserId, UserFname, UserLname,UserEmail,PhotoUrl, UserDOB, Username FROM [USER] WHERE Username = @Username
-		FOR JSON AUTO, WITHOUT_ARRAY_WRAPPER
+		--FOR JSON AUTO, WITHOUT_ARRAY_WRAPPER
 		END
 	ELSE
 		BEGIN 
@@ -22,4 +22,4 @@ As
 		RETURN
 		END
 
-EXEC sp_rename 'GetUserByUsername', 'uspGetUserByUsername'
+EXEC sp_rename 'uspGetUserByUsername', 'uspcGetUserByUsername'

@@ -2,7 +2,7 @@
 	Insert a new user into the [USER] database
 	and return the newly made user id as an output parameter
 */
-ALTER PROC uspInsertUser
+ALTER PROC uspcInsertUser
 @UserFname nvarchar(50),
 @UserLname nvarchar(50),
 @UserEmail nvarchar(100),
@@ -55,3 +55,5 @@ AS
 			ROLLBACK TRAN
 		ELSE
 			COMMIT TRAN
+
+EXEC sp_rename 'uspInsertUser', 'uspcInsertUser'
