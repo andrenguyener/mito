@@ -23,35 +23,36 @@ class PeopleDetailsViewController: UIViewController {
     }
     
     func loadPersonData() {
-        let friend = appdata.arrFriends[myIndex]
+        let friend = appdata.arrPendingFriends[myIndex]
         lblName.text = "\(friend.firstName) \(friend.lastName)"
         lblEmail.text = "\(friend.email)"
         let url = URL(string:"\(friend.avatar)")
         if let data = try? Data(contentsOf: url!) {
             img.image = UIImage(data: data)!
         }
+        print("\(lblName.text)'s ID: \(friend.intUserID)")
     }
 
     @IBAction func fnAddFriend(_ sender: Any) {
-        print(appdata.arrFriends[myIndex].description())
+        print(appdata.arrPendingFriends[myIndex].description())
         print(appdata.intCurrentUserID)
-        let intUser1Id = appdata.intCurrentUserID
-        let intUser2Id = appdata.arrFriends[myIndex].intUserID
+        let intUser2Id = appdata.arrPendingFriends[myIndex].intUserID
         
         let parameters: Parameters = [
-            "userId": intUser1Id,
             "friendId": intUser2Id
         ]
         
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
+        print(UserDefaults.standard.object(forKey: "Authorization"))
         
         Alamofire.request("https://api.projectmito.io/v1/friend", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
             switch response.result {
             case .success:
                 
                 if let dictionary = response.result.value {
+                    print("Request: \(response.request)")
                     print("JSON: \(dictionary)") // serialized json response
                     DispatchQueue.main.async {
                         self.fnAlertRequestSent()
@@ -60,6 +61,7 @@ class PeopleDetailsViewController: UIViewController {
                 
                 
             case .failure(let error):
+                print("Request: \(response.request)")
                 print(error)
             }
         }

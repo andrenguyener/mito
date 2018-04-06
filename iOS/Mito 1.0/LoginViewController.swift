@@ -80,7 +80,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             switch response.result {
             case .success:
                 if let dictionary = response.result.value {
-//                    print("All Users?: \(dictionary)")
                     let objUsers = dictionary as! NSArray
                     for objUser in objUsers {
                         let objPerson2 = objUser as! NSDictionary

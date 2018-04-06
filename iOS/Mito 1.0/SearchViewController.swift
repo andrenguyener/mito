@@ -45,6 +45,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //            fnLoadPeopleData()
             UIView.transition(from: productView, to: peopleView, duration: 0, options: .showHideTransitionViews)
             peopleTableView.reloadData()
+            print(appdata.arrPendingFriends.count)
         }
     }
     
@@ -119,16 +120,14 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // POST: inserting (attach object) / GET request: put key word in the URL
     func fnLoadFriendData() {
         let urlGetFriends = URL(string: (urlPeopleCall?.absoluteString)! + "1")
-        print("Correct url: \(urlGetFriends?.absoluteString)")
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
-        print(UserDefaults.standard.object(forKey: "UserInfo"))
-        print("Authorization again \(UserDefaults.standard.object(forKey: "Authorization") as! String)")
+        print("fnLoadFriendData: \(UserDefaults.standard.object(forKey: "Authorization"))")
         Alamofire.request(urlGetFriends!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success:
-                let authHeader = response.response?.allHeaderFields["Authorization"] ?? ""
+//                let authHeader = response.response?.allHeaderFields["Authorization"] ?? ""
                 if let dictionary = response.result.value {
                     let dict2 = dictionary as! NSArray
                     for obj in dict2 {
@@ -141,9 +140,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                                intUserID: (object["UserId"] as? Int)!,
                                                strUsername: (object["Username"] as? String)!)
                         self.appdata.arrFriends.append(p)
-                        DispatchQueue.main.async {
-                            UserDefaults.standard.set(authHeader, forKey: "Authorization")
-                        }
+//                        DispatchQueue.main.async {
+//                            UserDefaults.standard.set(authHeader, forKey: "Authorization")
+//                        }
                     }
                 }
                 
@@ -291,7 +290,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if productPeopleTab.selectedSegmentIndex == 1 {
-            return appdata.arrFriends.count
+            return appdata.arrPendingFriends.count
         } else {
             return appdata.arrProductSearchResults.count
         }
@@ -326,7 +325,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
-            let objPerson = appdata.arrFriends[indexPath.row]
+            let objPerson = appdata.arrPendingFriends[indexPath.row]
             let urlPeopleImage = URL(string:"\(objPerson.avatar)")
             let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
             if let data = try? Data(contentsOf: urlPeopleImage!) {
