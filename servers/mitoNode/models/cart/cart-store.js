@@ -23,9 +23,9 @@ class CartStore {
             var request = this.request(procedureName)
             request.addParameter('UserId', TYPES.Int, userId);
             let jsonArray = []
-            request.on("row", columns => {
+            request.on("row", function (columns) {
                 var rowObject = {};
-                columns.forEach(column => {
+                columns.forEach(function (column) {
                     if (column.value === null) {
                         console.log('NULL')
                     } else {
@@ -34,17 +34,17 @@ class CartStore {
                 })
                 jsonArray.push(rowObject);
             })
-            request.on("doneProc", (rowCount, more) => {
-                resolve("successfully retrieved the user cart")
+            request.on("doneProc", function (rowCount, more) {
+                resolve(jsonArray);
             })
             this.sql.callProcedure(request)
         })
-            .then(jsonArray => {
+            .then((jsonArray) => {
                 return jsonArray;
             })
-            .catch(error => {
+            .catch((error) => {
                 console.log(error)
-            })
+            });
 
     }
 
