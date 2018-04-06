@@ -26,8 +26,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         peopleUrl = URL(string: userURL)
 //        loadPeopleData()
         print("Authorization: \(UserDefaults.standard.object(forKey: "Authorization"))")
-        self.fnLoadFriendData()
-        self.fnLoadAllUsers()
+//        self.fnLoadFriendData()
+//        self.fnLoadAllUsers()
         print("All Users count: \(appdata.arrAllUsers.count)")
     }
 

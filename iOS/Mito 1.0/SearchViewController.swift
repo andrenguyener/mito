@@ -25,6 +25,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var productContainer: UIView!
     @IBOutlet weak var peopleContainer: UIView!
+    var refresher: UIRefreshControl!
+    
     var pageNum = 1
     var strSearchQuery = ""
     var appdata = AppData.shared
@@ -60,22 +62,25 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
 
-//        urlPeopleCall = URL(string: "https://api.projectmito.io/v1/friend/\(appdata.intCurrentUserID)")
         print("First FriendsCount \(appdata.arrFriends.count)")
         fnLoadProductData()
         peopleTableView.reloadData()
         productTableView.reloadData()
         spinnerProductSearch.isHidden = true
+        
+        refresher = UIRefreshControl()
+        refresher.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refresher.addTarget(self, action: #selector(SearchViewController.fnLoadFriendsAndAllUsers), for: UIControlEvents.valueChanged)
+        peopleTableView.addSubview(refresher)
     }
     
-    func fnLoadFriendsAndAllUsers() {
+    @objc func fnLoadFriendsAndAllUsers() {
         self.fnLoadFriendData()
-        for obj in appdata.arrFriends {
-            print("\(obj.firstName) \(obj.lastName)")
-        }
         self.fnLoadAllUsers()
         self.arrFriendsAndAllMitoUsers.append(appdata.arrFriends)
         self.arrFriendsAndAllMitoUsers.append(appdata.arrAllUsers)
+        self.peopleTableView.reloadData()
+        refresher.endRefreshing()
     }
     
     // Loading Friends (people tab)
@@ -100,11 +105,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                                intUserID: (object["UserId"] as? Int)!,
                                                strUsername: (object["Username"] as? String)!)
                         self.appdata.arrFriends.append(p)
-//                        print(p.description())
                     }
-                    DispatchQueue.main.async {
-                        self.peopleTableView.reloadData()
-                    }
+//                    DispatchQueue.main.async {
+//                        self.peopleTableView.reloadData()
+//                    }
                 }
                 
             case .failure(let error):
@@ -128,7 +132,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         let objPerson = Person(firstName: objPerson2["userFname"] as! String, lastName: objPerson2["userLname"] as! String, email: objPerson2["userEmail"] as! String, avatar: objPerson2["photoURL"] as! String, intUserID: objPerson2["userId"] as! Int, strUsername: objPerson2["username"] as! String)
                         self.appdata.arrAllUsers.append(objPerson)
                     }
-                    
+                    DispatchQueue.main.async {
+                        self.peopleTableView.reloadData()
+                    }
                 }
                 
             case .failure(let error):
@@ -271,7 +277,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if productPeopleTab.selectedSegmentIndex == 1 {
             return self.arrSections[section]
         } else {
-            return ""
+            return nil
         }
     }
     
@@ -295,7 +301,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             performSegue(withIdentifier: "productDetail", sender: self)
         } else {
             myIndex = indexPath.row
-            print("didSelectRowAt Index: \(myIndex)")
             performSegue(withIdentifier: "searchToMitoProfile", sender: self)
         }
     }
