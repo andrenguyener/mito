@@ -4,7 +4,9 @@
 	@Username1 sent a friend request to @Username2
 	@FriendType will always be "Pending"
 */
-ALTER PROC uspRequestFriend
+EXEC sp_rename 'uspRequestFriend', 'uspcRequestFriend'
+
+ALTER PROC uspcRequestFriend
 @User1Id INT,
 @User2Id INT
 AS

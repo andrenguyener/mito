@@ -1,10 +1,21 @@
+--return all user id based on the param friendtype
+-- if 0, return all non friends, else return all friends  
+-- 0 means non-friend
+-- 1 means friend
 ALTER PROC uspGetUserFriendsIdList
-@UserId INT
+@UserId INT,
+@IsFriend BIT
 AS
+	DECLARE @FriendTypeString NVARCHAR(50) = 'Friend'
+	IF @IsFriend = 0 
+		BEGIN
+			SET @FriendTypeString = 'Pending'
+		END
+
 	DECLARE @NotFriendType INT
-	EXEC uspGetFriendTypeId 'Pending', @FriendType_Id = @NotFriendType OUT
+	EXEC uspGetFriendTypeId @FriendTypeString, @FriendType_Id = @NotFriendType OUT
 	DECLARE @totalFriendCount INT = (SELECT COUNT(*) FROM FRIEND WHERE (User1Id = @UserId OR User2Id = @UserId)
-		AND FriendTypeId <> @NotFriendType)
+		AND FriendTypeId = @NotFriendType)
 	IF @totalFriendCount < 1
 		BEGIN
 		PRINT 'This user has no friend'
@@ -14,7 +25,7 @@ AS
 	DECLARE @friendId INT
 
 	SELECT * INTO #TempFriendTable FROM FRIEND WHERE (User1Id = @UserId OR User2Id = @UserId)
-	AND FriendTypeId <> @NotFriendType
+	AND FriendTypeId = @NotFriendType
 	DECLARE @friendUserId INT
 	DECLARE @friendsIdList TABLE(FriendId INT)
 

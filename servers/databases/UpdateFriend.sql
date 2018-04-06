@@ -3,7 +3,7 @@ params: user1 and user2 id, FriendType that wish to update to and notification r
 for the friend update request 
 */
 
-ALTER PROC uspUpdateFriend
+ALTER PROC uspcUpdateFriend
 @User1Id INT,
 @User2Id INT,
 @FriendTypeToUpdate NVARCHAR(25),
@@ -77,4 +77,4 @@ AS
 			COMMIT TRAN insertNotification
 GO
 
-EXEC sp_rename 'updateFriend', 'uspUpdateFriend'
+EXEC sp_rename 'uspUpdateFriend', 'uspcUpdateFriend'

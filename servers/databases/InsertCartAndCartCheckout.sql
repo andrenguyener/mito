@@ -19,7 +19,9 @@ ADD GrandTotal NUMERIC(12,2) NOT NULL
 
 -- params: Amazon product ASIN, Item price for the product, UserId, and Quantity
 -- Insert into the cart based on the params above
-CREATE PROC uspInsertIntoCart
+EXEC sp_rename 'uspInsertIntoCart', 'uspcInsertIntoCart'
+
+ALTER PROC uspcInsertIntoCart
 @AmazonASIN INT,
 @AmazonPrice NUMERIC(12,2),
 @UserId INT,
@@ -30,6 +32,13 @@ IF @AmazonASIN IS NULL
 	BEGIN
 		PRINT'Amazon Product ASIN is not provided'
 		RAISERROR('@AmazonASIN cannot be NULL',11,1)
+		RETURN
+	END
+
+IF @Qty < 1
+	BEGIN
+		PRINT'Quantity must be at least 1'
+		RAISERROR('@Qty cannot be less than 1', 11,1)
 		RETURN
 	END
 
@@ -46,7 +55,8 @@ GO
 -- params: UserId, The billing address of the user, UserId of the recipient
 -- checkout the items in users cart to process an order for the given receipient
 -- default confirmation for the order will be "pending"
-CREATE PROC uspProcessCheckout
+EXEC sp_rename 'uspProcessCheckout', 'uspcProcessCheckout'
+ALTER PROC uspcProcessCheckout
 @UserId INT,
 @UserAddressId INT,
 @RecipientId INT,
@@ -63,15 +73,9 @@ AmazonItemPrice NUMERIC(12,2) NOT NULL,
 SumPrice NUMERIC(12,2))
 
 -- populate the temp table @CART with values from user's CART
-INSERT INTO @CART(AmazonASIN, Qty, AmazonItemPrice, SumPrice)
 -- only select MOST RECENT (DATETIME) of distinct products in the cart
-SELECT C.AmazonItemId, Quantity, AmazonItemPrice, AmazonItemPrice * Quantity AS SumPrice
-FROM CART C
-JOIN 
-(SELECT AmazonItemId, MAX(CartDateTime) AS MostRecentDate
-FROM CART GROUP BY AmazonItemId) AS MostRecentSelection
-ON C.AmazonItemId = MostRecentSelection.AmazonItemId
-AND C.CartDateTime = MostRecentSelection.MostRecentDate
+INSERT INTO @CART
+EXEC dbo.uspGetUserCartItemList @UserId
 
 DECLARE @Count INT = (SELECT COUNT(*) FROM @CART)
 DECLARE @SumCartPrice NUMERIC(12,2) = (SELECT SUM(SumPrice) FROM @CART)
@@ -92,11 +96,15 @@ SET XACT_ABORT ON
 
 BEGIN TRY
 BEGIN TRANSACTION G1
-INSERT INTO [ORDER](SenderId, BillingAddressId, RecipientId,
-OrderMessage, OrderDate, GiftOption, OrderUserConfirmation, GrandTotal)
-VALUES (@UserId, @UserAddressId, @RecipientId, @Message, 
-@TodaysDate, @GiftOption, @PendingStatusId, @SumCartPrice)
-SET @OrderID = (SELECT Scope_Identity())
+EXEC dbo.uspCreatePurchaseOrder @UserId, @UserAddressId, @RecipientId, @Message, 
+@TodaysDate, @GiftOption, @PendingStatusId, @SumCartPrice, @Order_Id = @OrderID OUT
+
+IF @OrderID IS NULL
+	BEGIN
+		PRINT'There is a problem creating a purchase order'
+		RAISERROR('@OrderID cannot be NULL',11,1)
+		RETURN
+	END
 
 WHILE @Count > 0 --begin loop to process all rows from #CART; @Count is number of rows to be processed
     BEGIN
@@ -153,11 +161,10 @@ BEGIN CATCH
     END
 END CATCH
 
-ALTER TABLE [ORDER]
-ALTER COLUMN OrderDate DATETIME
-
 -- example cart processing
 SELECT * FROM CART
 SELECT * FROM ORDER_PRODUCT
 SELECT * FROM [ORDER]
-EXEC dbo.uspProcessCheckout 7, 7, 8, 'Testing checkout cart', 0
+EXEC dbo.uspcInsertIntoCart '1245','12.00',7,5
+EXEC dbo.uspcInsertIntoCart '10394','12.00',7,5
+EXEC dbo.uspcProcessCheckout 7, 7, 8, 'Testing checkout cart', 0
