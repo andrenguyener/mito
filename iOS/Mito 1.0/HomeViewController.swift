@@ -85,7 +85,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                         //                        }
                     }
                 }
-                
+
             case .failure(let error):
                 print("Get all users error")
                 print(error)
@@ -93,32 +93,32 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    // Loading Friends (people tab)
-    // POST: inserting (attach object) / GET request: put key word in the URL
-    func loadPeopleData() {
-        let task = URLSession.shared.dataTask(with: peopleUrl!) { (data, response, error) in
-            if error != nil {
-                print("ERROR")
-            } else {
-                if let content = data {
-                    do {
-                        let myJson = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSArray
-                        for obj in myJson {
-                            let object = obj as! NSDictionary
-                            let p: Person = Person(firstName: (object["UserFname"] as? String)!, lastName: (object["UserLname"] as? String)!, email: (object["UserEmail"] as? String?)!!, avatar: (object["PhotoUrl"] as? String?)!!, intUserID: (object["UserID"] as? Int?)!!, strUsername: (object["Username"] as? String)!)
-                            self.appdata.arrFriends.append(p)
-                        }
-  
-                    } catch {
-                        print("Catch")
-                    }
-                } else {
-                    print("Error")
-                }
-            }
-        }
-        task.resume()
-    }
+//    // Loading Friends (people tab)
+//    // POST: inserting (attach object) / GET request: put key word in the URL
+//    func loadPeopleData() {
+//        let task = URLSession.shared.dataTask(with: peopleUrl!) { (data, response, error) in
+//            if error != nil {
+//                print("ERROR")
+//            } else {
+//                if let content = data {
+//                    do {
+//                        let myJson = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSArray
+//                        for obj in myJson {
+//                            let object = obj as! NSDictionary
+//                            let p: Person = Person(firstName: (object["UserFname"] as? String)!, lastName: (object["UserLname"] as? String)!, email: (object["UserEmail"] as? String?)!!, avatar: (object["PhotoUrl"] as? String?)!!, intUserID: (object["UserID"] as? Int?)!!, strUsername: (object["Username"] as? String)!)
+//                            self.appdata.arrFriends.append(p)
+//                        }
+//
+//                    } catch {
+//                        print("Catch")
+//                    }
+//                } else {
+//                    print("Error")
+//                }
+//            }
+//        }
+//        task.resume()
+//    }
     
 
     @IBAction func cart(_ sender: Any) {

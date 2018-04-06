@@ -44,11 +44,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
 //            productTableView.reloadData()
         } else {
-//            appdata.arrFriends.removeAll()
-//            fnLoadPeopleData()
+            print("People Tab FriendsCount \(appdata.arrFriends.count)")
+            fnLoadFriendData()
+            print("Friends Count: \(appdata.arrFriends.count)")
             UIView.transition(from: productView, to: peopleView, duration: 0, options: .showHideTransitionViews)
             peopleTableView.reloadData()
-            print("All Users Count: \(appdata.arrAllUsers.count)")
         }
     }
     
@@ -67,13 +67,12 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
 //        urlPeopleCall = URL(string: "https://api.projectmito.io/v1/friend/\(appdata.intCurrentUserID)")
 //        fnLoadFriendData()
-        print("FriendsCount \(appdata.arrFriends.count)")
+        print("First FriendsCount \(appdata.arrFriends.count)")
         fnLoadProductData()
         peopleTableView.reloadData()
         productTableView.reloadData()
         spinnerProductSearch.isHidden = true
         self.arrFriendsAndAllMitoUsers.append(appdata.arrFriends)
-        print("All Users Count: \(appdata.arrAllUsers.count)")
         self.arrFriendsAndAllMitoUsers.append(appdata.arrAllUsers)
     }
     
@@ -84,6 +83,41 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //        loadProductData()
 //        peopleTableView.reloadData()
 //        productTableView.reloadData()
+    }
+    
+    // Loading Friends (people tab)
+    // POST: inserting (attach object) / GET request: put key word in the URL
+    func fnLoadFriendData() {
+        let urlGetFriends = URL(string: (urlPeopleCall?.absoluteString)! + "1")
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlGetFriends!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    let dict2 = dictionary as! NSArray
+                    for obj in dict2 {
+                        let object = obj as! NSDictionary
+                        //                        print(object)
+                        let p: Person = Person(firstName: (object["UserFname"] as? String)!,
+                                               lastName: (object["UserLname"] as? String)!,
+                                               email: (object["UserEmail"] as? String?)!!,
+                                               avatar: (object["PhotoUrl"] as? String?)!!,
+                                               intUserID: (object["UserId"] as? Int)!,
+                                               strUsername: (object["Username"] as? String)!)
+                        self.appdata.arrFriends.append(p)
+                    }
+                    DispatchQueue.main.async {
+                        self.peopleTableView.reloadData()
+                    }
+                }
+                
+            case .failure(let error):
+                print("Get all users error")
+                print(error)
+            }
+        }
     }
     
     @IBAction func cartButtonClicked(_ sender: Any) {
