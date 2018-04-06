@@ -15,7 +15,6 @@ class Person {
     var avatar: String = ""
     var intUserID: Int = 0
     var strUsername: String = ""
-    //    var friendshipType: String = ""
     
     init(firstName: String, lastName: String, email: String, avatar: String, intUserID: Int, strUsername: String) {
         self.firstName = firstName
@@ -24,10 +23,9 @@ class Person {
         self.avatar = avatar
         self.intUserID = intUserID
         self.strUsername = strUsername
-        //        self.friendshipType = friendshipType
     }
     
     func description() -> String {
-        return "\(self.intUserID) \(self.strUsername )\(self.firstName) \(self.lastName) \(self.email) \(self.avatar) "
+        return "\(self.intUserID) \(self.strUsername ) \(self.firstName) \(self.lastName)"
     }
 }
