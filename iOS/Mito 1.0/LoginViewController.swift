@@ -79,7 +79,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         Alamofire.request("https://api.projectmito.io/v1/users/all", method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success:
-                let authHeader = response.response?.allHeaderFields["Authorization"] ?? ""
                 if let dictionary = response.result.value {
 //                    print("All Users?: \(dictionary)")
                     let objUsers = dictionary as! NSArray
@@ -88,9 +87,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                         let objPerson = Person(firstName: objPerson2["userFname"] as! String, lastName: objPerson2["userLname"] as! String, email: objPerson2["userEmail"] as! String, avatar: objPerson2["photoURL"] as! String, intUserID: objPerson2["userId"] as! Int, strUsername: objPerson2["username"] as! String)
                         self.appdata.arrPendingFriends.append(objPerson)
                     }
-                    DispatchQueue.main.async {
-                        UserDefaults.standard.set(authHeader, forKey: "Authorization")
-                    }
+          
                 }
                 
             case .failure(let error):
@@ -119,11 +116,13 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                         self.performSegue(withIdentifier: "login", sender: self)
                         UserDefaults.standard.set(dictionary, forKey: "UserInfo")
                         UserDefaults.standard.set(authHeader, forKey: "Authorization")
+                        print("Authorization: \(UserDefaults.standard.object(forKey: "Authorization"))")
                         if UserDefaults.standard.object(forKey: "UserInfo") != nil {
                             let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
                             self.appdata.intCurrentUserID = (data["userId"] as? Int)!
                         }
                         self.fnLoadAllUsers()
+                        print("Authorization: \(UserDefaults.standard.object(forKey: "Authorization"))")
                     }
                 }
                 

@@ -34,5 +34,6 @@ class MeViewController: UIViewController {
             self.userDOB.text = data["userDOB"] as? String
             self.photoURL.text = data["photoURL"] as? String
         }
+        print("Tom Brady \(UserDefaults.standard.object(forKey: "UserInfo"))")
     }
 }

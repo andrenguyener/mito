@@ -20,9 +20,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.rowHeight = 133
         
         let userURL = "https://api.projectmito.io/v1/friend/\(appdata.intCurrentUserID)"
-        print("userURL: \(userURL)")
+//        print("userURL: \(userURL)")
         peopleUrl = URL(string: userURL)
-        loadPeopleData()
+//        loadPeopleData()
+        print("Authorization: \(UserDefaults.standard.object(forKey: "Authorization"))")
+        
     }
 
     override func didReceiveMemoryWarning() {

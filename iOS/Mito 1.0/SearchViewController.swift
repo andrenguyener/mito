@@ -8,6 +8,7 @@
 
 import UIKit
 import UserNotifications
+import Alamofire
 
 var myIndex = 0
 
@@ -60,7 +61,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
 
-        urlPeopleCall = URL(string: "https://api.projectmito.io/v1/friend/\(appdata.intCurrentUserID)")
+//        urlPeopleCall = URL(string: "https://api.projectmito.io/v1/friend/\(appdata.intCurrentUserID)")
         fnLoadFriendData()
         print("FriendsCount \(appdata.arrFriends.count)")
         fnLoadProductData()
@@ -117,40 +118,72 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // Loading Friends (people tab)
     // POST: inserting (attach object) / GET request: put key word in the URL
     func fnLoadFriendData() {
-        let urlGetFriends = URL(string: (urlPeopleCall?.absoluteString)! + "/1")
-        print(urlGetFriends?.absoluteString)
-        let task = URLSession.shared.dataTask(with: urlGetFriends!) { (data, response, error) in
-            if error != nil {
-                print("ERROR")
-            } else {
-                if let content = data {
-                    do {
-                        let objPeopleData = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSArray
-                        for obj in objPeopleData {
-                            let object = obj as! NSDictionary
-                            print(object)
-                            let p: Person = Person(firstName: (object["UserFname"] as? String)!,
-                                                   lastName: (object["UserLname"] as? String)!,
-                                                   email: (object["UserEmail"] as? String?)!!,
-                                                   avatar: (object["PhotoUrl"] as? String?)!!,
-                                                   intUserID: (object["UserId"] as? Int)!,
-                                                   strUsername: (object["Username"] as? String)!)
-                            self.appdata.arrFriends.append(p)
-                        }
+        let urlGetFriends = URL(string: (urlPeopleCall?.absoluteString)! + "1")
+        print("Correct url: \(urlGetFriends?.absoluteString)")
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        print(UserDefaults.standard.object(forKey: "UserInfo"))
+        print("Authorization again \(UserDefaults.standard.object(forKey: "Authorization") as! String)")
+        Alamofire.request(urlGetFriends!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                let authHeader = response.response?.allHeaderFields["Authorization"] ?? ""
+                if let dictionary = response.result.value {
+                    let dict2 = dictionary as! NSArray
+                    for obj in dict2 {
+                        let object = obj as! NSDictionary
+                        print(object)
+                        let p: Person = Person(firstName: (object["UserFname"] as? String)!,
+                                               lastName: (object["UserLname"] as? String)!,
+                                               email: (object["UserEmail"] as? String?)!!,
+                                               avatar: (object["PhotoUrl"] as? String?)!!,
+                                               intUserID: (object["UserId"] as? Int)!,
+                                               strUsername: (object["Username"] as? String)!)
+                        self.appdata.arrFriends.append(p)
                         DispatchQueue.main.async {
-                            self.peopleTableView.reloadData()
-                            self.productPeopleTab.isEnabled = true
-                            print("Finished loading people")
+                            UserDefaults.standard.set(authHeader, forKey: "Authorization")
                         }
-                    } catch {
-                        print("Loading People (Catch)")
                     }
-                } else {
-                    print("Error")
                 }
+                
+            case .failure(let error):
+                print("Get all users error")
+                print(error)
             }
         }
-        task.resume()
+//        let task = URLSession.shared.dataTask(with: urlGetFriends!) { (data, response, error) in
+//            if error != nil {
+//                print("ERROR")
+//            } else {
+//                if let content = data {
+//                    do {
+//                        let objPeopleData = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSArray
+//                        for obj in objPeopleData {
+//                            let object = obj as! NSDictionary
+//                            print(object)
+//                            let p: Person = Person(firstName: (object["UserFname"] as? String)!,
+//                                                   lastName: (object["UserLname"] as? String)!,
+//                                                   email: (object["UserEmail"] as? String?)!!,
+//                                                   avatar: (object["PhotoUrl"] as? String?)!!,
+//                                                   intUserID: (object["UserId"] as? Int)!,
+//                                                   strUsername: (object["Username"] as? String)!)
+//                            self.appdata.arrFriends.append(p)
+//                        }
+//                        DispatchQueue.main.async {
+//                            self.peopleTableView.reloadData()
+//                            self.productPeopleTab.isEnabled = true
+//                            print("Finished loading people")
+//                        }
+//                    } catch {
+//                        print("Loading People (Catch)")
+//                    }
+//                } else {
+//                    print("Error")
+//                }
+//            }
+//        }
+//        task.resume()
     }
     
     // Access first dictionary object in the dictionary
