@@ -92,13 +92,14 @@ class FriendStore {
     }
 
     // Accept/Decline friend request
-    updateFriendRequest(userId, friendId) {
+    updateFriendRequest(userId, friendId, friendType, notificationType) {
         return new Promise((resolve) => {
             let procedureName = "uspcUpdateFriend";
             var request = this.request(procedureName);
             request.addParameter('user1Id', TYPES.Int, userId);
             request.addParameter('user2Id', TYPES.Int, friendId);
-
+            request.addParameter('user1Id', TYPES.NVarChar, friendType);
+            request.addParameter('user2Id', TYPES.NVarChar, notificationType);
             request.on('doneProc', function (rowCount, more) {
                 resolve("Friend Request Sent");
             });
