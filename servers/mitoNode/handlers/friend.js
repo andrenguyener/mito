@@ -42,10 +42,12 @@ const FriendHandler = (friendStore) => {
 
     // Add a new friend
     router.post('/v1/friend', (req, res) => {
-        let userId = req.body.userId;
+        const userJSON = req.get('X-User');
+        const user = JSON.parse(userJSON);
+        console.log(user);
         let friendId = req.body.friendId;
         friendStore
-            .insert(userId, friendId)
+            .insert(user.userId, friendId)
             .then((message) => {
                 res.send(message);
             })
@@ -56,22 +58,32 @@ const FriendHandler = (friendStore) => {
             });
     });
 
-    // Get all pending requests of given User
-    router.post('v1/friend/pendingrequest', (req, res) => {
-        // Userid
-        // bit 0 or 1 // 0 = all non friends (pending) 1 = all friends except pending
-        let userId = req.body.userId;
-        let bit = req
-    })
-
     // Update (upgrade/downgrade) friend status
     router.patch('', (req, res) => {
 
     });
 
     // Update friend request (accept/decline)
-    router.patch('', (req, res) => {
-
+    router.patch('/v1/friend/request', (req, res) => {
+        // @User1Id INT,
+        // @User2Id INT,
+        // @FriendTypeToUpdate NVARCHAR(25), friend, unfriend, blocked
+        // @FriendTypeRequestResponse NVARCHAR(25)
+        const userJSON = req.get('X-User');
+        const user = JSON.parse(userJSON);
+        let friendId = req.body.friendId;
+        let friendType = req.body.friendType;
+        let notificationType = req.body.notificationType
+        friendStore
+            .updateFriendRequest(user.userId, friendId, friendType, notificationType)
+            .then((message) => {
+                res.send(message);
+            })
+            .catch(err => {
+                if (err !== breakSignal) {
+                    console.log(err);
+                }
+            });
     });
 
     // Delete a friend from the UserId
