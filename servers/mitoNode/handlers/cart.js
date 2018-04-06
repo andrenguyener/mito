@@ -18,8 +18,18 @@ const CartHandler = (cartStore) => {
     const router = express.Router();
 
     // Get items in cart
-    router.get('', (req, res) => {
-
+    router.get('v1/cart/retrieve/:userId', (req, res) => {
+        cartStore
+        .get(req.params.userId)
+        .then(cart => {
+            console.log(cart)
+            res.json(cart)
+        })
+        .catch(error => {
+            if (error != breakSignal) {
+                console.log(error)
+            }
+        })
 
     });
 

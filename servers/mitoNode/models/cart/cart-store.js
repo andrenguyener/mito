@@ -16,8 +16,35 @@ class CartStore {
         });
     }
 
-    // Get items in cart
-    get() {
+    // Get items in cart based on a given userId
+    get(userId) {
+        return new Request((resolve) => {
+            let procedureName = "uspcGetUserCartItemList";
+            var request = this.request(procedureName)
+            request.addParameter('UserId', TYPES.Int, userId);
+            let jsonArray = []
+            request.on("row", columns => {
+                var rowObject = {};
+                columns.forEach(column => {
+                    if (column.value === null) {
+                        console.log('NULL')
+                    } else {
+                        rowObject[column.metadata.colName] = column.value
+                    }
+                })
+                jsonArray.push(rowObject);
+            })
+            request.on("doneProc", (rowCount, more) => {
+                resolve("successfully retrieved the user cart")
+            })
+            this.sql.callProcedure(request)
+        })
+            .then(jsonArray => {
+                return jsonArray;
+            })
+            .catch(error => {
+                console.log(error)
+            })
 
     }
 
