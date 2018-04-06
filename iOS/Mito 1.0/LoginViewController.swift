@@ -81,7 +81,13 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             case .success:
                 let authHeader = response.response?.allHeaderFields["Authorization"] ?? ""
                 if let dictionary = response.result.value {
-                    print("All Users?: \(dictionary)")
+//                    print("All Users?: \(dictionary)")
+                    let objUsers = dictionary as! NSArray
+                    for objUser in objUsers {
+                        let objPerson2 = objUser as! NSDictionary
+                        let objPerson = Person(firstName: objPerson2["userFname"] as! String, lastName: objPerson2["userLname"] as! String, email: objPerson2["userEmail"] as! String, avatar: objPerson2["photoURL"] as! String, intUserID: objPerson2["userId"] as! Int, strUsername: objPerson2["username"] as! String)
+                        self.appdata.arrPendingFriends.append(objPerson)
+                    }
                     DispatchQueue.main.async {
                         UserDefaults.standard.set(authHeader, forKey: "Authorization")
                     }
@@ -96,7 +102,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     // Opening Login Page
     @IBAction func btnLoginPressed(_ sender: Any) {
-        fnLoadAllUsers()
         let parameters: Parameters = [
             "userEmail": username.text!,
             "password": password.text!
@@ -116,9 +121,9 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                         UserDefaults.standard.set(authHeader, forKey: "Authorization")
                         if UserDefaults.standard.object(forKey: "UserInfo") != nil {
                             let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
-                            //userID = data["userId"] as? Int
                             self.appdata.intCurrentUserID = (data["userId"] as? Int)!
                         }
+                        self.fnLoadAllUsers()
                     }
                 }
                 

@@ -17,9 +17,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBOutlet weak var tblviewNotification: UITableView!
     
-    
-    var urlPeopleCall = URL(string: "https://api.projectmito.io/v1/friend/")
-    
     @IBAction func segmentControl(_ sender: Any) {
         print(segment.selectedSegmentIndex)
 //        if segment.selectedSegmentIndex == 0 {
@@ -34,7 +31,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         tblviewNotification.delegate = self
         tblviewNotification.dataSource = self
         tblviewNotification.rowHeight = 100
-        print(appdata.arrFriends.count)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -42,12 +38,12 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return appdata.arrFriends.count
+        return appdata.arrPendingFriends.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tblviewNotification.dequeueReusableCell(withIdentifier: "cellNotification", for: indexPath) as! NotificationTableViewCell
-        let objPerson = appdata.arrFriends[indexPath.row]
+        let objPerson = appdata.arrPendingFriends[indexPath.row]
         cell.strFirstNameLastName.text = "\(objPerson.firstName) \(objPerson.lastName)"
         cell.strUsername.text =  objPerson.strUsername
         let urlPersonImage = URL(string:"\(objPerson.avatar)")
