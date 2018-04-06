@@ -90,7 +90,7 @@ func main() {
 	redisClient := redis.NewClient(&redis.Options{
 		Addr: redisAddr,
 	})
-	redisStore := sessions.NewRedisStore(redisClient, time.Hour)
+	redisStore := sessions.NewRedisStore(redisClient, time.Hour*24*365)
 
 	// Connection to SQL
 	// Create connection string
