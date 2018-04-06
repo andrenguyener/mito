@@ -90,7 +90,7 @@ func main() {
 	redisClient := redis.NewClient(&redis.Options{
 		Addr: redisAddr,
 	})
-	redisStore := sessions.NewRedisStore(redisClient, time.Hour)
+	redisStore := sessions.NewRedisStore(redisClient, time.Hour*24*365)
 
 	// Connection to SQL
 	// Create connection string
@@ -161,6 +161,8 @@ func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/v1/users", ctx.UsersHandler)
 	mux.HandleFunc("/v1/users/me", ctx.UsersMeHandler)
+	mux.HandleFunc("/v1/users/all", ctx.UsersAllHandler)
+	mux.HandleFunc("/v1/users/validate", ctx.UsersValidateHandler)
 	mux.HandleFunc("/v1/users/id", ctx.UsersIDHandler)
 	mux.HandleFunc("/v1/sessions", ctx.SessionsHandler)
 	mux.HandleFunc("/v1/sessions/mine", ctx.SessionsMineHandler)
@@ -169,13 +171,6 @@ func main() {
 	mux.Handle("/v1/ws", ctx.NewWebSocketsHandler(notifier))
 	fmt.Printf("server is listening at https://%s\n", addr)
 
-	// mux.Handle("/v1/channels", NewServiceProxy(splitMitoNodeAddrs, ctx))
-	// mux.Handle("/v1/channels/", NewServiceProxy(splitMitoNodeAddrs, ctx))
-	// mux.Handle("/v1/messages/", NewServiceProxy(splitMitoNodeAddrs, ctx))
-	// mux.Handle("/v1/summary", NewServiceProxy(splitSummaryAddrs, ctx))
-	// mux.Handle("/v1/payments", NewServiceProxy(splitMitoNodeAddrs, ctx))
-	// mux.Handle("/v1/payments/", NewServiceProxy(splitMitoNodeAddrs, ctx))
-	// mux.Handle("/v1/email", NewServiceProxy(splitMitoNodeAddrs, ctx))
 	mux.Handle("/v1/address", NewServiceProxy(splitMitoNodeAddrs, ctx))
 	mux.Handle("/v1/address/", NewServiceProxy(splitMitoNodeAddrs, ctx))
 	mux.Handle("/v1/friend", NewServiceProxy(splitMitoNodeAddrs, ctx))

@@ -4,7 +4,7 @@ Insert an address for the given userId and return the newly made addressId
 as an output parameter
 */
 
-ALTER PROC InsertUserAddress
+ALTER PROC uspInsertUserAddress
 @userId INT,
 @streetAddress1 NVARCHAR(100),
 @streetAddress2 NVARCHAR(100),
@@ -16,19 +16,19 @@ ALTER PROC InsertUserAddress
 AS
 	--retrieve matching StreetAddressId based on the given streetaddress1 and streetaddress 2
 	DECLARE @streetAddressId INT
-	EXEC GetStreetAddressId @streetAddress1, @streetAddress2, @StreetAddress_Id = @streetAddressId OUT
+	EXEC uspGetStreetAddressId @streetAddress1, @streetAddress2, @StreetAddress_Id = @streetAddressId OUT
 
 	-- retrieve matching CityId based on the given city name
 	DECLARE @cityId INT
-	EXEC GetCityId @cityName, @City_Id = @cityId OUT
+	EXEC uspGetCityId @cityName, @City_Id = @cityId OUT
 
 	-- retrieve matching ZipCodeId based on the given zip code
 	DECLARE @zipCodeId INT
-	EXEC GetZipCodeId @zipCode, @ZipCode_Id = @zipCodeId OUT
+	EXEC uspGetZipCodeId @zipCode, @ZipCode_Id = @zipCodeId OUT
 
 	-- retrieve matching StateId based on the given state name
 	DECLARE @stateId INT
-	EXEC GetStateId @stateName, @State_Id = @stateId OUT
+	EXEC uspGetStateId @stateName, @State_Id = @stateId OUT
 
 	-- a placeholder for newly added Address Scope_Identity()
 	DECLARE @newAddressId INT
@@ -42,7 +42,7 @@ AS
 			RETURN
 		END
 	--insert the address into the ADDRESS table first
-	EXEC InsertAddress @streetAddress1,@streetAddress2, @cityName, 
+	EXEC uspInsertAddress @streetAddress1,@streetAddress2, @cityName, 
 	@stateName, @zipCode, @Address_Id = @newAddressId OUT
 
 	IF EXISTS (SELECT * FROM USER_ADDRESS WHERE AddressId = @newAddressId AND UserId = @UserId)
@@ -61,6 +61,7 @@ AS
 		ELSE
 			COMMIT TRAN addUserAddress
 
+EXEC sp_rename 'InsertUserAddress', 'uspInsertUserAddress'
 /*
 DECLARE @Test INT
 EXEC InsertUserAddress 7,'124 Pizza Way', '2nd Floor', 'Seattle', 'WA', '98144', 

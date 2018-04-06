@@ -5,7 +5,7 @@ return an AddressId if this address exists, else return NULL
 warning: if the components of address do not exist, it adds the address into the database
 */
 
-CREATE PROC GetAddressId
+ALTER PROC uspGetAddressId
 @streetAddress1 NVARCHAR(100),
 @streetAddress2 NVARCHAR(100),
 @cityName NVARCHAR(75),
@@ -15,19 +15,19 @@ CREATE PROC GetAddressId
 AS
 	--retrieve matching StreetAddressId based on the given streetaddress1 and streetaddress 2
 	DECLARE @streetAddressId INT
-	EXEC GetStreetAddressId @streetAddress1, @streetAddress2, @StreetAddress_Id = @streetAddressId OUT
+	EXEC uspGetStreetAddressId @streetAddress1, @streetAddress2, @StreetAddress_Id = @streetAddressId OUT
 
 	-- retrieve matching CityId based on the given city name
 	DECLARE @cityId INT
-	EXEC GetCityId @cityName, @City_Id = @cityId OUT
+	EXEC uspGetCityId @cityName, @City_Id = @cityId OUT
 
 	-- retrieve matching ZipCodeId based on the given zip code
 	DECLARE @zipCodeId INT
-	EXEC GetZipCodeId @zipCode, @ZipCode_Id = @zipCodeId OUT
+	EXEC uspGetZipCodeId @zipCode, @ZipCode_Id = @zipCodeId OUT
 
 	-- retrieve matching StateId based on the given state name
 	DECLARE @stateId INT
-	EXEC GetStateId @stateName, @State_Id = @stateId OUT
+	EXEC uspGetStateId @stateName, @State_Id = @stateId OUT
 	IF @streetAddressId IS NULL OR @cityId IS NULL
 	OR @zipCodeId IS NULL OR @stateId IS NULL
 		BEGIN
@@ -41,29 +41,23 @@ AS
 GO		
 
 DECLARE @Test INT
-EXEC GetAddressId '124 Pizza Way', '2nd Floor', 'Seattle', 'WA', '98144', 
+EXEC uspGetAddressId '124 Pizza Way', '2nd Floor', 'Seattle', 'WA', '98144', 
 @MatchedAddress_ID = @TEST OUT
 PRINT @Test
 
+EXEC sp_rename 'GetAddressId', 'uspGetAddressId'
 
 /*
-@params: user address information
-update the given address to be a default user address
+@params: user address id
+update the given address based on the addressId 
+to be default's user address
 
 may need to optimize the UPDATE IsDefault statement to a table function instead
 */
-CREATE PROC UpdateUserDefaultAddress
+ALTER PROC uspUpdateUserDefaultAddress
 @userId INT,
-@streetAddress1 NVARCHAR(100),
-@streetAddress2 NVARCHAR(100),
-@cityName NVARCHAR(75),
-@stateName NVARCHAR(30),
-@zipCode NVARCHAR(12)
+@ExistingAddressId INT
 AS
-	DECLARE @ExistingAddressId INT 
-	EXEC GetAddressId @streetAddress1, @streetAddress2, @cityName, @stateName, 
-	@zipCode, @MatchedAddress_ID = @ExistingAddressId OUT
-
 	IF @ExistingAddressId IS NULL
 		BEGIN
 			PRINT'This address does not exist in the database'
@@ -88,7 +82,9 @@ AS
 			RETURN
 		END
 
+EXEC sp_rename 'UpdateUserDefaultAddress', 'uspUpdateUserDefaultAddress'
+
 --testing code
---EXEC UpdateUserDefaultAddress 7,'124 Pizza Way', '2nd Floor', 'Seattle', 'WA', '98144'
---SELECT * FROM USER_ADDRESS
+EXEC uspUpdateUserDefaultAddress 7,7
+SELECT * FROM USER_ADDRESS
 

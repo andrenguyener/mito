@@ -2,7 +2,7 @@
 Update the username of the given UserId
 */
 
-ALTER PROC UpdateUsername
+ALTER PROC uspUpdateUsername
 @newUsername NVARCHAR(50),
 @userId INT
 AS
@@ -31,4 +31,5 @@ AS
 		COMMIT TRAN
 GO
 
-EXEC UpdateUsername 'andre', 7
+-- EXEC UpdateUsername 'andre', 7
+EXEC sp_rename 'UpdateUsername', 'uspUpdateUsername'

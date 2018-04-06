@@ -4,7 +4,7 @@ GetFriendId queries the FRIEND table with 2 usernames to find whether they are f
 or not (order is not important). If the 2 usernames are friend, then it will return the FriendId of the pair
 If the 2 usernames are NOT friend, it will return NULL
 */
-CREATE PROC GetFriendIdByUsersId
+CREATE PROC uspGetFriendIdByUsersId
 @UserId1 INT,
 @UserId2 INT,
 @MatchedFriendId INT OUT
@@ -31,3 +31,5 @@ AS
 			AND User2Id = @UserId2)
 		END
 GO
+
+EXEC sp_rename 'GetFriendIdByUsersId', 'uspGetFriendIdByUsersId'

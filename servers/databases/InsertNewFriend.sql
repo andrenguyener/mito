@@ -4,14 +4,10 @@
 	@Username1 sent a friend request to @Username2
 	@FriendType will always be "Pending"
 */
-ALTER PROC insertFriend
-	@Username1 nvarchar(50),
-	@Username2 nvarchar(50)
+ALTER PROC uspRequestFriend
+@User1Id INT,
+@User2Id INT
 AS
-	DECLARE @User1Id INT 
-	DECLARE @User2Id INT
-	EXEC GetUserId @Username1, @User_Id = @User1Id OUT
-	EXEC GetUserId @Username2, @User_Id = @User2Id OUT
 	-- Check both users already exist in the [USER] database
 	IF @User1Id IS NULL OR @User2Id IS NULL
 		BEGIN
@@ -20,7 +16,7 @@ AS
 			RETURN
 		END
 	DECLARE @FriendId INT
-	EXEC GetFriendId @Username1, @Username2, @MatchedFriendId = @FriendId OUT
+	EXEC uspGetFriendId @User1Id, @User2Id, @MatchedFriendId = @FriendId OUT
 	
 	IF @FriendId IS NOT NULL
 		BEGIN
@@ -31,7 +27,7 @@ AS
 
 	--Get the FriendTypeId of Pending since this is the default type when inserting a new friend
 	DECLARE @FriendTypeId INT
-	EXEC GetFriendTypeId 'Pending', @FriendType_ID = @FriendTypeId OUT
+	EXEC uspGetFriendTypeId 'Pending', @FriendType_ID = @FriendTypeId OUT
 
 	-- Check @FriendType exists in FRIEND database
 	IF @FriendTypeId IS NULL
@@ -42,7 +38,7 @@ AS
 		END
 
 	DECLARE @NotificationTypeId INT
-	EXEC GetNotificationType 'Pending', @NotificationType_ID = @NotificationTypeId OUT
+	EXEC uspGetNotificationType 'Pending', @NotificationType_ID = @NotificationTypeId OUT
 	IF @NotificationTypeId IS NULL
 		BEGIN
 			PRINT 'Friend request is not a type of notification'
@@ -64,7 +60,7 @@ AS
 			ELSE
 				COMMIT TRAN insertIntoFriend
 
-		EXEC InsertNotification @FriendId, @NotificationTypeId, 0, @TodaysDate
+		EXEC uspInsertNotification @FriendId, @NotificationTypeId, 0, @TodaysDate
 		IF @@ERROR <> 0
 			ROLLBACK TRAN insertNotification
 		ELSE

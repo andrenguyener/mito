@@ -1,8 +1,8 @@
-ALTER PROC GetUserFriendsIdList
+ALTER PROC uspGetUserFriendsIdList
 @UserId INT
 AS
 	DECLARE @NotFriendType INT
-	EXEC GetFriendTypeId 'Pending', @FriendType_Id = @NotFriendType OUT
+	EXEC uspGetFriendTypeId 'Pending', @FriendType_Id = @NotFriendType OUT
 	DECLARE @totalFriendCount INT = (SELECT COUNT(*) FROM FRIEND WHERE (User1Id = @UserId OR User2Id = @UserId)
 		AND FriendTypeId <> @NotFriendType)
 	IF @totalFriendCount < 1
@@ -39,3 +39,5 @@ AS
 		END
 		SELECT * FROM @friendsIdList
 GO
+
+EXEC sp_rename 'GetUserFriendsIdList', 'uspGetUserFriendsIdList'

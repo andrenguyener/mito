@@ -23,9 +23,12 @@ const FriendHandler = (friendStore) => {
     });
 
     // Get all the friends of a given UserId
-    router.get('/v1/friend/:userId', (req, res) => {
+    router.get('/v1/friend/:friendType', (req, res) => {
+        const userJSON = req.get('X-User');
+        const user = JSON.parse(userJSON);
+        console.log(user);
         friendStore
-            .getAll(req.params.userId)
+            .getAll(user.userId, req.params.friendType)
             .then(friend => {
                 console.log(friend);
                 res.json(friend);
@@ -39,10 +42,12 @@ const FriendHandler = (friendStore) => {
 
     // Add a new friend
     router.post('/v1/friend', (req, res) => {
-        let userId = req.body.userId;
+        const userJSON = req.get('X-User');
+        const user = JSON.parse(userJSON);
+        console.log(user);
         let friendId = req.body.friendId;
         friendStore
-            .insert(userId, friendId)
+            .insert(user.userId, friendId)
             .then((message) => {
                 res.send(message);
             })
@@ -59,8 +64,26 @@ const FriendHandler = (friendStore) => {
     });
 
     // Update friend request (accept/decline)
-    router.patch('', (req, res) => {
-
+    router.patch('/v1/friend/request', (req, res) => {
+        // @User1Id INT,
+        // @User2Id INT,
+        // @FriendTypeToUpdate NVARCHAR(25), friend, unfriend, blocked
+        // @FriendTypeRequestResponse NVARCHAR(25)
+        const userJSON = req.get('X-User');
+        const user = JSON.parse(userJSON);
+        let friendId = req.body.friendId;
+        let friendType = req.body.friendType;
+        let notificationType = req.body.notificationType
+        friendStore
+            .updateFriendRequest(user.userId, friendId, friendType, notificationType)
+            .then((message) => {
+                res.send(message);
+            })
+            .catch(err => {
+                if (err !== breakSignal) {
+                    console.log(err);
+                }
+            });
     });
 
     // Delete a friend from the UserId

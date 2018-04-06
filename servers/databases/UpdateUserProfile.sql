@@ -1,6 +1,6 @@
 SELECT * FROM [USER]
 
-ALTER PROC UpdateUserProfile
+ALTER PROC uspUpdateUserProfile
 @Id INT,
 @Fname NVARCHAR(50),
 @Lname NVARCHAR(50),
@@ -37,4 +37,4 @@ GO
 
 SELECT * FROM [USER] WHERE UserId = 7
 
---EXEC UpdateUserProfile 7, 'Sopheaky', 'Neaky', 'sneak@uw.edu', 'PHOTOURL', '1/01/2008', 'sneak'
+EXEC sp_rename 'UpdateUserProfile', 'uspUpdateUserProfile'

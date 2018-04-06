@@ -115,13 +115,11 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                         self.performSegue(withIdentifier: "login", sender: self)
                         UserDefaults.standard.set(dictionary, forKey: "UserInfo")
                         UserDefaults.standard.set(authHeader, forKey: "Authorization")
-                        print("Authorization: \(UserDefaults.standard.object(forKey: "Authorization"))")
                         if UserDefaults.standard.object(forKey: "UserInfo") != nil {
                             let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
                             self.appdata.intCurrentUserID = (data["userId"] as? Int)!
                         }
                         self.fnLoadAllUsers()
-                        print("Authorization: \(UserDefaults.standard.object(forKey: "Authorization"))")
                     }
                 }
                 
@@ -129,51 +127,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                 print(error)
             }
         }
-        
-        //        let u = username.text
-        //        let p = password.text
-        //        let JSONObj: [String: Any] = [
-        //            "userEmail": u!,
-        //            "password": p!
-        //        ]
-        //        //var success = false
-        //        let jsonData = try? JSONSerialization.data(withJSONObject: JSONObj)
-        //        let url = URL(string: "https://api.projectmito.io/v1/sessions")!
-        //        var request = URLRequest(url: url)
-        //        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        //        request.httpMethod = "POST"
-        //        request.httpBody = jsonData
-        //        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-        //            // Check fundamental networking error
-        //            guard let data = data, error == nil else {
-        //                print("error=\(String(describing: error))")
-        //                return
-        //            }
-        //
-        //            // Check HTTP error
-        //            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
-        //                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-        //                print("response = \(String(describing: response))")
-        //            }
-        //
-        //            // Success
-        //            let responseString = String(data: data, encoding: .utf8)
-        //            let data2 = responseString?.data(using: .utf8)
-        //            let dictionary = try? JSONSerialization.jsonObject(with: data2!, options: .mutableLeaves)
-        //            DispatchQueue.main.async {
-        //                if (dictionary != nil) {
-        //                    self.performSegue(withIdentifier: "login", sender: self)
-        //                    UserDefaults.standard.set(dictionary, forKey: "UserInfo")
-        //                    if UserDefaults.standard.object(forKey: "UserInfo") != nil {
-        //                        let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
-        //                        //userID = data["userId"] as? Int
-        //                        self.appdata.intCurrentUserID = (data["userId"] as? Int)!
-        //                    }
-        //                }
-        //            }
-        //            //success = true
-        //        }
-        //        task.resume()
+
     }
     
     @IBAction func btnSignUpPressed(_ sender: Any) {
@@ -236,42 +190,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             }
         }
     }
-    
-    //        let jsonData = try? JSONSerialization.data(withJSONObject: JSONObj)
-    //        let url = URL(string: "https://api.projectmito.io/v1/users")!
-    //        var request = URLRequest(url: url)
-    //        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    //        request.httpMethod = "POST"
-    //        request.httpBody = jsonData
-    //        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-    //            guard let data = data, error == nil else {                                                 // check for fundamental networking error
-    //                print("error=\(String(describing: error))")
-    //                return
-    //            }
-    //
-    //            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode > 300 {           // check for http errors
-    //                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-    //                print("response = \(String(describing: response))")
-    //            }
-    //
-    //            let responseString = String(data: data, encoding: .utf8)
-    //            let data2 = responseString?.data(using: .utf8)
-    //            let dictionary = try? JSONSerialization.jsonObject(with: data2!, options: .mutableLeaves)
-    //            DispatchQueue.main.async {
-    //                if (dictionary != nil) {
-    //                    self.performSegue(withIdentifier: "signUpToAddress", sender: self)
-    //                    UserDefaults.standard.set(dictionary, forKey: "UserInfo")
-    //                    //print(UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary)
-    //                    if UserDefaults.standard.object(forKey: "UserInfo") != nil {
-    //                        let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
-    //                        //userID = data["userId"] as? Int
-    //                        self.appdata.intCurrentUserID = (data["userId"] as? Int)!
-    //                    }
-    //                }
-    //            }
-    //            //success = true
-    //        }
-    //        task.resume()
     
     
     
@@ -337,38 +255,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         
     }
         
-        
-//        let jsonData = try? JSONSerialization.data(withJSONObject: JSONObj)
-//        let url = URL(string: "https://api.projectmito.io/v1/address")!
-//        var request = URLRequest(url: url)
-//        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//        request.httpMethod = "POST"
-//        request.httpBody = jsonData
-//        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-//            guard let data = data, error == nil else {                                                 // check for fundamental networking error
-//                print("error=\(String(describing: error))")
-//                return
-//            }
-//
-//            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode > 300 {           // check for http errors
-//                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-//                print("response = \(String(describing: response))")
-//            }
-//
-//            let responseString = String(data: data, encoding: .utf8)
-//            let data2 = responseString?.data(using: .utf8)
-//            let dictionary = try? JSONSerialization.jsonObject(with: data2!, options: .mutableLeaves)
-//            DispatchQueue.main.async {
-//                if (dictionary != nil) {
-//                    self.performSegue(withIdentifier: "createAccount", sender: self)
-//                    //                    UserDefaults.standard.set(dictionary, forKey: "AddressInfo")
-//                    //                    print(UserDefaults.standard.object(forKey: "AddressInfo") as! NSDictionary)
-//                }
-//            }
-//            //success = true
-//        }
-//        task.resume()
-//    }
+    
     
     @IBAction func btnStatePressed(_ sender: Any) {
         if pickerviewStateAA.isHidden {
@@ -403,50 +290,87 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
     
     func fnLoadStateData() {
-        let task = URLSession.shared.dataTask(with: urlStates!) { (data, response, error) in
-            if error != nil {
-                print("ERROR")
-            } else {
-                if let content = data {
-                    do {
-                        let objStateData = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
-                        for obj in objStateData {
-                            let stateObj = State(abbrev: obj.key as! String, value: obj.value as! String)
-                            self.appdata.arrStates.append(stateObj)
-                        }
-                    } catch {
-                        print("Catch")
+        
+        Alamofire.request(urlStates!, method: .get, encoding: JSONEncoding.default).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value as! NSDictionary?{
+                    for obj in dictionary {
+                        let stateObj = State(abbrev: obj.key as! String, value: obj.value as! String)
+                        self.appdata.arrStates.append(stateObj)
                     }
-                } else {
-                    print("Error")
+                    
                 }
+                
+            case .failure(let error):
+                print("Get all users error")
+                print(error)
             }
         }
-        task.resume()
+        
+//        let task = URLSession.shared.dataTask(with: urlStates!) { (data, response, error) in
+//            if error != nil {
+//                print("ERROR")
+//            } else {
+//                if let content = data {
+//                    do {
+//                        let objStateData = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
+//                        for obj in objStateData {
+//                            let stateObj = State(abbrev: obj.key as! String, value: obj.value as! String)
+//                            self.appdata.arrStates.append(stateObj)
+//                        }
+//                    } catch {
+//                        print("Catch")
+//                    }
+//                } else {
+//                    print("Error")
+//                }
+//            }
+//        }
+//        task.resume()
     }
     
     func fnLoadMonthData() {
-        let task = URLSession.shared.dataTask(with: urlMonths!) { (data, response, error) in
-            if error != nil {
-                print("ERROR")
-            } else {
-                if let content = data {
-                    do {
-                        let objMonthData = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
-                        for obj in objMonthData {
-                            let objMonthValues = obj.value as! NSDictionary
-                            let objMonth = Month(strName: objMonthValues["name"] as! String, strAbbrev: objMonthValues["short"] as! String, intNum: objMonthValues["number"] as! Int, intNumDays: objMonthValues["days"] as! Int)
-                            self.appdata.arrMonths.append(objMonth)
-                        }
-                    } catch {
-                        print("Catch")
+
+        Alamofire.request(urlMonths!, method: .get, encoding: JSONEncoding.default).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value as! NSDictionary?{
+                    for obj in dictionary {
+                        let objMonthValues = obj.value as! NSDictionary
+                        let objMonth = Month(strName: objMonthValues["name"] as! String, strAbbrev: objMonthValues["short"] as! String, intNum: objMonthValues["number"] as! Int, intNumDays: objMonthValues["days"] as! Int)
+                        self.appdata.arrMonths.append(objMonth)
                     }
-                } else {
-                    print("Error")
+                    
                 }
+                
+            case .failure(let error):
+                print("Get all users error")
+                print(error)
             }
         }
-        task.resume()
+        
+//        let task = URLSession.shared.dataTask(with: urlMonths!) { (data, response, error) in
+//            if error != nil {
+//                print("ERROR")
+//            } else {
+//                if let content = data {
+//                    do {
+//                        let objMonthData = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
+//                        for obj in objMonthData {
+//                            let objMonthValues = obj.value as! NSDictionary
+//                            let objMonth = Month(strName: objMonthValues["name"] as! String, strAbbrev: objMonthValues["short"] as! String, intNum: objMonthValues["number"] as! Int, intNumDays: objMonthValues["days"] as! Int)
+//                            self.appdata.arrMonths.append(objMonth)
+//                        }
+//                    } catch {
+//                        print("Catch")
+//                    }
+//                } else {
+//                    print("Error")
+//                }
+//            }
+//        }
+//        task.resume()
     }
     
     func fnSortMonthsByNumber(this: Month, that: Month) -> Bool {
