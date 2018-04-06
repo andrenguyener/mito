@@ -32,6 +32,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var urlAllUserCall = URL(string: "https://api.projectmito.io/v1/users/all")
     var urlAmazonProductCall = URL(string: "https://api.projectmito.io/v1/amazonhashtest/" )
     let urlAmazonOriginal = URL(string: "https://api.projectmito.io/v1/amazonhashtest/" )
+    
+    let arrSections = ["Friends", "Other people on Mito"]
+    var arrFriendsAndAllMitoUsers: [[Person]] = []
 
     @IBAction func switchTab(_ sender: UISegmentedControl) {
         if productPeopleTab.selectedSegmentIndex == 0 {
@@ -63,12 +66,15 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         searchBar.returnKeyType = UIReturnKeyType.done
 
 //        urlPeopleCall = URL(string: "https://api.projectmito.io/v1/friend/\(appdata.intCurrentUserID)")
-        fnLoadFriendData()
+//        fnLoadFriendData()
         print("FriendsCount \(appdata.arrFriends.count)")
         fnLoadProductData()
         peopleTableView.reloadData()
         productTableView.reloadData()
         spinnerProductSearch.isHidden = true
+        self.arrFriendsAndAllMitoUsers.append(appdata.arrFriends)
+        print("All Users Count: \(appdata.arrAllUsers.count)")
+        self.arrFriendsAndAllMitoUsers.append(appdata.arrAllUsers)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -114,75 +120,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         productPeopleTab.isEnabled = false
         fnLoadProductData()
         productTableView.reloadData()
-    }
-    
-    // Loading Friends (people tab)
-    // POST: inserting (attach object) / GET request: put key word in the URL
-    func fnLoadFriendData() {
-        let urlGetFriends = URL(string: (urlPeopleCall?.absoluteString)! + "1")
-        let headers: HTTPHeaders = [
-            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
-        ]
-        print("fnLoadFriendData: \(UserDefaults.standard.object(forKey: "Authorization"))")
-        Alamofire.request(urlGetFriends!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-//                let authHeader = response.response?.allHeaderFields["Authorization"] ?? ""
-                if let dictionary = response.result.value {
-                    let dict2 = dictionary as! NSArray
-                    for obj in dict2 {
-                        let object = obj as! NSDictionary
-//                        print(object)
-                        let p: Person = Person(firstName: (object["UserFname"] as? String)!,
-                                               lastName: (object["UserLname"] as? String)!,
-                                               email: (object["UserEmail"] as? String?)!!,
-                                               avatar: (object["PhotoUrl"] as? String?)!!,
-                                               intUserID: (object["UserId"] as? Int)!,
-                                               strUsername: (object["Username"] as? String)!)
-                        self.appdata.arrFriends.append(p)
-//                        DispatchQueue.main.async {
-//                            UserDefaults.standard.set(authHeader, forKey: "Authorization")
-//                        }
-                    }
-                }
-                
-            case .failure(let error):
-                print("Get all users error")
-                print(error)
-            }
-        }
-//        let task = URLSession.shared.dataTask(with: urlGetFriends!) { (data, response, error) in
-//            if error != nil {
-//                print("ERROR")
-//            } else {
-//                if let content = data {
-//                    do {
-//                        let objPeopleData = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSArray
-//                        for obj in objPeopleData {
-//                            let object = obj as! NSDictionary
-//                            print(object)
-//                            let p: Person = Person(firstName: (object["UserFname"] as? String)!,
-//                                                   lastName: (object["UserLname"] as? String)!,
-//                                                   email: (object["UserEmail"] as? String?)!!,
-//                                                   avatar: (object["PhotoUrl"] as? String?)!!,
-//                                                   intUserID: (object["UserId"] as? Int)!,
-//                                                   strUsername: (object["Username"] as? String)!)
-//                            self.appdata.arrFriends.append(p)
-//                        }
-//                        DispatchQueue.main.async {
-//                            self.peopleTableView.reloadData()
-//                            self.productPeopleTab.isEnabled = true
-//                            print("Finished loading people")
-//                        }
-//                    } catch {
-//                        print("Loading People (Catch)")
-//                    }
-//                } else {
-//                    print("Error")
-//                }
-//            }
-//        }
-//        task.resume()
     }
     
     // Access first dictionary object in the dictionary
@@ -283,17 +220,38 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         task.resume()
     }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+//
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        return 1
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if productPeopleTab.selectedSegmentIndex == 1 {
-            return appdata.arrAllUsers.count
+            return self.arrFriendsAndAllMitoUsers[section].count
         } else {
             return appdata.arrProductSearchResults.count
         }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if productPeopleTab.selectedSegmentIndex == 1 {
+            return self.arrSections[section]
+        } else {
+            return ""
+        }
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return arrFriendsAndAllMitoUsers.count
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if productPeopleTab.selectedSegmentIndex == 1 {
+            return self.arrFriendsAndAllMitoUsers[section].count
+        } else {
+            return appdata.arrProductSearchResults.count
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -340,3 +298,4 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
 }
+

@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import Alamofire
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     var peopleUrl = URL(string: "https://api.projectmito.io/v1/friend/")
+    var urlPeopleCall = URL(string: "https://api.projectmito.io/v1/friend/")
     var appdata = AppData.shared
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +26,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         peopleUrl = URL(string: userURL)
 //        loadPeopleData()
         print("Authorization: \(UserDefaults.standard.object(forKey: "Authorization"))")
-        
+        self.fnLoadFriendData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,6 +54,43 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.descr.text = "\(feedItemObj.descr)"
         cell.whatHappened.numberOfLines = 2
         return cell
+    }
+    
+    // Loading Friends (people tab)
+    // POST: inserting (attach object) / GET request: put key word in the URL
+    func fnLoadFriendData() {
+        let urlGetFriends = URL(string: (urlPeopleCall?.absoluteString)! + "1")
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        print("fnLoadFriendData: \(UserDefaults.standard.object(forKey: "Authorization"))")
+        Alamofire.request(urlGetFriends!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                //                let authHeader = response.response?.allHeaderFields["Authorization"] ?? ""
+                if let dictionary = response.result.value {
+                    let dict2 = dictionary as! NSArray
+                    for obj in dict2 {
+                        let object = obj as! NSDictionary
+                        //                        print(object)
+                        let p: Person = Person(firstName: (object["UserFname"] as? String)!,
+                                               lastName: (object["UserLname"] as? String)!,
+                                               email: (object["UserEmail"] as? String?)!!,
+                                               avatar: (object["PhotoUrl"] as? String?)!!,
+                                               intUserID: (object["UserId"] as? Int)!,
+                                               strUsername: (object["Username"] as? String)!)
+                        self.appdata.arrFriends.append(p)
+                        //                        DispatchQueue.main.async {
+                        //                            UserDefaults.standard.set(authHeader, forKey: "Authorization")
+                        //                        }
+                    }
+                }
+                
+            case .failure(let error):
+                print("Get all users error")
+                print(error)
+            }
+        }
     }
     
     // Loading Friends (people tab)
