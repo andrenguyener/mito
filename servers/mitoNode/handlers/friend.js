@@ -23,10 +23,12 @@ const FriendHandler = (friendStore) => {
     });
 
     // Get all the friends of a given UserId
-    router.get('/v1/friend/:userId/:friendType', (req, res) => {
-
+    router.get('/v1/friend/:friendType', (req, res) => {
+        const userJSON = req.get('X-User');
+        const user = JSON.parse(userJSON);
+        console.log(user);
         friendStore
-            .getAll(req.params.userId, req.params.friendType)
+            .getAll(user.userId, req.params.friendType)
             .then(friend => {
                 console.log(friend);
                 res.json(friend);
