@@ -25,6 +25,21 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Roboto-Black.tff</string>
+		<string>Roboto-BlackItalic.tff</string>
+		<string>Roboto-Bold.tff</string>
+		<string>Roboto-BoldItalic.tff</string>
+		<string>Roboto-Italic.tff</string>
+		<string>Roboto-Light.tff</string>
+		<string>Roboto-LightItalic.tff</string>
+		<string>Roboto-Medium.tff</string>
+		<string>Roboto-MediumItalic.tff</string>
+		<string>Roboto-Regular.tff</string>
+		<string>Roboto-Thin.tff</string>
+		<string>Roboto-ThinItalic.tff</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

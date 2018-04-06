@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class PeopleDetailsViewController: UIViewController {
 
@@ -22,17 +23,57 @@ class PeopleDetailsViewController: UIViewController {
     }
     
     func loadPersonData() {
-        print("PeopleDetailsViewController Index: \(myIndex)")
-        print(appdata.arrFriends[myIndex].description())
-        let friend = appdata.arrFriends[myIndex]
+        let friend = appdata.arrAllUsers[myIndex]
         lblName.text = "\(friend.firstName) \(friend.lastName)"
         lblEmail.text = "\(friend.email)"
         let url = URL(string:"\(friend.avatar)")
         if let data = try? Data(contentsOf: url!) {
             img.image = UIImage(data: data)!
         }
+        print("\(lblName.text)'s ID: \(friend.intUserID)")
     }
 
+    @IBAction func fnAddFriend(_ sender: Any) {
+        print(appdata.arrAllUsers[myIndex].description())
+        print(appdata.intCurrentUserID)
+        let intUser2Id = appdata.arrAllUsers[myIndex].intUserID
+        
+        let parameters: Parameters = [
+            "friendId": intUser2Id
+        ]
+        
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        print(UserDefaults.standard.object(forKey: "Authorization"))
+        
+        Alamofire.request("https://api.projectmito.io/v1/friend", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
+            switch response.result {
+            case .success:
+                
+                if let dictionary = response.result.value {
+                    print("Request: \(response.request)")
+                    print("JSON: \(dictionary)") // serialized json response
+                    DispatchQueue.main.async {
+                        self.fnAlertRequestSent()
+                    }
+                }
+                
+                
+            case .failure(let error):
+                print("Request: \(response.request)")
+                print(error)
+            }
+        }
+    }
+    
+    func fnAlertRequestSent() {
+        let alertController = UIAlertController(title: "Done", message: "Friend Request Sent", preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(defaultAction)
+        present(alertController, animated: true, completion: nil)
+    }
+    
     @IBAction func backButton(_ sender: Any) {
         performSegue(withIdentifier: "segPeopleDetailsToSearchView", sender: self)
     }

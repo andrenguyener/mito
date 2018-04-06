@@ -12,7 +12,10 @@ class AppData: NSObject {
     static let shared = AppData()
     open var intCurrentUserID: Int = 0
     open var intCurrIndex: Int = -1
+    
     open var arrFriends: [Person] = []
+    open var arrAllUsers: [Person] = []
+    open var arrPendingFriends: [Person] = []
     
     open var arrProductSearchResults: [Product] = []
     

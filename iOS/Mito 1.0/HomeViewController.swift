@@ -20,9 +20,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.rowHeight = 133
         
         let userURL = "https://api.projectmito.io/v1/friend/\(appdata.intCurrentUserID)"
-        print("userURL: \(userURL)")
+//        print("userURL: \(userURL)")
         peopleUrl = URL(string: userURL)
-        loadPeopleData()
+//        loadPeopleData()
+        print("Authorization: \(UserDefaults.standard.object(forKey: "Authorization"))")
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,7 +66,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                         let myJson = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSArray
                         for obj in myJson {
                             let object = obj as! NSDictionary
-                            let p: Person = Person(firstName: (object["UserFname"] as? String)!, lastName: (object["UserLname"] as? String)!, email: (object["UserEmail"] as? String!)!, avatar: (object["PhotoUrl"] as? String!)!)
+                            let p: Person = Person(firstName: (object["UserFname"] as? String)!, lastName: (object["UserLname"] as? String)!, email: (object["UserEmail"] as? String?)!!, avatar: (object["PhotoUrl"] as? String?)!!, intUserID: (object["UserID"] as? Int?)!!, strUsername: (object["Username"] as? String)!)
                             self.appdata.arrFriends.append(p)
                         }
   
