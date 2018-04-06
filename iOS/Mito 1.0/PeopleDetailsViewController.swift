@@ -23,7 +23,7 @@ class PeopleDetailsViewController: UIViewController {
     }
     
     func loadPersonData() {
-        let friend = appdata.arrPendingFriends[myIndex]
+        let friend = appdata.arrAllUsers[myIndex]
         lblName.text = "\(friend.firstName) \(friend.lastName)"
         lblEmail.text = "\(friend.email)"
         let url = URL(string:"\(friend.avatar)")
@@ -34,9 +34,9 @@ class PeopleDetailsViewController: UIViewController {
     }
 
     @IBAction func fnAddFriend(_ sender: Any) {
-        print(appdata.arrPendingFriends[myIndex].description())
+        print(appdata.arrAllUsers[myIndex].description())
         print(appdata.intCurrentUserID)
-        let intUser2Id = appdata.arrPendingFriends[myIndex].intUserID
+        let intUser2Id = appdata.arrAllUsers[myIndex].intUserID
         
         let parameters: Parameters = [
             "friendId": intUser2Id
