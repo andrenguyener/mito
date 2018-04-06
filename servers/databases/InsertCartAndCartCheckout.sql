@@ -75,7 +75,7 @@ SumPrice NUMERIC(12,2))
 -- populate the temp table @CART with values from user's CART
 -- only select MOST RECENT (DATETIME) of distinct products in the cart
 INSERT INTO @CART
-EXEC dbo.uspGetUserCartItemList @UserId
+EXEC dbo.uspcGetUserCartItemList @UserId
 
 DECLARE @Count INT = (SELECT COUNT(*) FROM @CART)
 DECLARE @SumCartPrice NUMERIC(12,2) = (SELECT SUM(SumPrice) FROM @CART)
