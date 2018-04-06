@@ -45,7 +45,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //            fnLoadPeopleData()
             UIView.transition(from: productView, to: peopleView, duration: 0, options: .showHideTransitionViews)
             peopleTableView.reloadData()
-            print(appdata.arrPendingFriends.count)
+            print("All Users Count: \(appdata.arrAllUsers.count)")
         }
     }
     
@@ -132,7 +132,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let dict2 = dictionary as! NSArray
                     for obj in dict2 {
                         let object = obj as! NSDictionary
-                        print(object)
+//                        print(object)
                         let p: Person = Person(firstName: (object["UserFname"] as? String)!,
                                                lastName: (object["UserLname"] as? String)!,
                                                email: (object["UserEmail"] as? String?)!!,
@@ -290,7 +290,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if productPeopleTab.selectedSegmentIndex == 1 {
-            return appdata.arrPendingFriends.count
+            return appdata.arrAllUsers.count
         } else {
             return appdata.arrProductSearchResults.count
         }
@@ -325,7 +325,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
-            let objPerson = appdata.arrPendingFriends[indexPath.row]
+            let objPerson = appdata.arrAllUsers[indexPath.row]
             let urlPeopleImage = URL(string:"\(objPerson.avatar)")
             let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
             if let data = try? Data(contentsOf: urlPeopleImage!) {
