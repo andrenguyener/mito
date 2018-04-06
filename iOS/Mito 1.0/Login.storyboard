@@ -14,9 +14,6 @@
         <array key="Roboto-Regular.ttf">
             <string>Roboto-Regular</string>
         </array>
-        <array key="Roboto-Thin.ttf">
-            <string>Roboto-Thin</string>
-        </array>
         <array key="Roboto-ThinItalic.ttf">
             <string>Roboto-ThinItalic</string>
         </array>
@@ -34,20 +31,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mito" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sXV-vw-dvc">
-                                <rect key="frame" x="16" y="71" width="343" height="157"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="157" id="Okq-Xm-YYR"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Roboto-Thin" family="Roboto" pointSize="100"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TQZ-rQ-MLe">
                                 <rect key="frame" x="16" y="571" width="343" height="38"/>
                                 <color key="backgroundColor" red="0.54759299621107782" green="0.90761817895431474" blue="0.57195356956158849" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="38" id="ilR-bj-K96"/>
+                                    <constraint firstAttribute="height" constant="38" id="wIT-4n-9US"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                 <state key="normal" title="LOG IN">
@@ -58,7 +46,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gS8-lv-B80">
-                                <rect key="frame" x="154.5" y="617" width="67" height="30"/>
+                                <rect key="frame" x="155" y="617" width="67" height="30"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                 <state key="normal" title="or Sign up">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -68,7 +56,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="jms-jt-aDl" userLabel="UsernamePassword">
-                                <rect key="frame" x="20" y="293.5" width="335" height="80"/>
+                                <rect key="frame" x="20" y="294" width="335" height="80"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="39o-Wv-VpO">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
@@ -84,21 +72,26 @@
                                     </textField>
                                 </subviews>
                             </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mitodesignblack.png" translatesAutoresizingMaskIntoConstraints="NO" id="REU-qp-z2d">
+                                <rect key="frame" x="77" y="49" width="221" height="138"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="138" id="XCI-OY-Ao2"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="jms-jt-aDl" firstAttribute="centerX" secondItem="Es7-sx-xiV" secondAttribute="centerX" id="3Al-hj-yvK"/>
-                            <constraint firstAttribute="trailing" secondItem="jms-jt-aDl" secondAttribute="trailing" constant="20" id="6em-Up-yf7"/>
-                            <constraint firstItem="sXV-vw-dvc" firstAttribute="trailing" secondItem="Es7-sx-xiV" secondAttribute="trailingMargin" id="6zl-u9-5q4"/>
-                            <constraint firstAttribute="bottom" secondItem="gS8-lv-B80" secondAttribute="bottom" constant="20" symbolic="YES" id="F4o-pT-lSh"/>
-                            <constraint firstItem="sXV-vw-dvc" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="TQZ-rQ-MLe" secondAttribute="trailing" id="HvK-lW-XJ4"/>
-                            <constraint firstItem="TQZ-rQ-MLe" firstAttribute="centerX" secondItem="gS8-lv-B80" secondAttribute="centerX" id="SCf-Ux-mNg"/>
-                            <constraint firstItem="jms-jt-aDl" firstAttribute="centerY" secondItem="Es7-sx-xiV" secondAttribute="centerY" id="VH8-tx-88g"/>
-                            <constraint firstItem="jms-jt-aDl" firstAttribute="leading" secondItem="Es7-sx-xiV" secondAttribute="leading" constant="20" id="Ym4-Ki-Ibm"/>
-                            <constraint firstItem="sXV-vw-dvc" firstAttribute="leading" secondItem="TQZ-rQ-MLe" secondAttribute="leading" id="cri-XP-Ikb"/>
-                            <constraint firstItem="sXV-vw-dvc" firstAttribute="leading" secondItem="Es7-sx-xiV" secondAttribute="leadingMargin" id="emr-Gt-s92"/>
-                            <constraint firstItem="gS8-lv-B80" firstAttribute="top" secondItem="TQZ-rQ-MLe" secondAttribute="bottom" constant="8" symbolic="YES" id="jUZ-A4-esl"/>
-                            <constraint firstItem="sXV-vw-dvc" firstAttribute="top" secondItem="qdR-a4-Tpe" secondAttribute="bottom" constant="51" id="yZ0-aq-SdH"/>
+                            <constraint firstItem="jms-jt-aDl" firstAttribute="centerY" secondItem="Es7-sx-xiV" secondAttribute="centerY" id="55g-QL-YYr"/>
+                            <constraint firstItem="gS8-lv-B80" firstAttribute="leading" secondItem="Es7-sx-xiV" secondAttribute="leading" constant="155" id="8ON-nk-Pei"/>
+                            <constraint firstItem="TQZ-rQ-MLe" firstAttribute="trailing" secondItem="Es7-sx-xiV" secondAttribute="trailingMargin" id="8r3-s4-C9N"/>
+                            <constraint firstItem="gS8-lv-B80" firstAttribute="top" secondItem="TQZ-rQ-MLe" secondAttribute="bottom" constant="8" symbolic="YES" id="AYd-0Z-CVI"/>
+                            <constraint firstItem="REU-qp-z2d" firstAttribute="centerX" secondItem="jms-jt-aDl" secondAttribute="centerX" id="R9c-pV-6by"/>
+                            <constraint firstItem="REU-qp-z2d" firstAttribute="leading" secondItem="Es7-sx-xiV" secondAttribute="leadingMargin" constant="61" id="V6I-NL-xzk"/>
+                            <constraint firstItem="REU-qp-z2d" firstAttribute="top" secondItem="qdR-a4-Tpe" secondAttribute="bottom" constant="29" id="Zk2-ju-Hfc"/>
+                            <constraint firstAttribute="bottom" secondItem="gS8-lv-B80" secondAttribute="bottom" constant="20" symbolic="YES" id="gk0-2x-VbS"/>
+                            <constraint firstItem="TQZ-rQ-MLe" firstAttribute="leading" secondItem="Es7-sx-xiV" secondAttribute="leadingMargin" id="iZA-O6-QTK"/>
+                            <constraint firstItem="jms-jt-aDl" firstAttribute="leading" secondItem="Es7-sx-xiV" secondAttribute="leadingMargin" constant="4" id="oNO-cb-7qR"/>
+                            <constraint firstItem="jms-jt-aDl" firstAttribute="centerX" secondItem="TQZ-rQ-MLe" secondAttribute="centerX" id="osI-Vo-Lgs"/>
                         </constraints>
                     </view>
                     <connections>
@@ -110,7 +103,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fPE-RK-iyf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-762" y="-780"/>
+            <point key="canvasLocation" x="-762.39999999999998" y="-780.35982008995506"/>
         </scene>
         <!--Welcome-->
         <scene sceneID="mEU-rU-f6g">
@@ -124,18 +117,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mito" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sNq-LN-SkY">
-                                <rect key="frame" x="55" y="274.5" width="265" height="117.5"/>
-                                <fontDescription key="fontDescription" name="Roboto-Thin" family="Roboto" pointSize="100"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sEX-f4-4my">
-                                <rect key="frame" x="109" y="190" width="157" height="29.5"/>
+                                <rect key="frame" x="109" y="190" width="157" height="30"/>
                                 <fontDescription key="fontDescription" name="Roboto-ThinItalic" family="Roboto" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mitodesignblack.png" translatesAutoresizingMaskIntoConstraints="NO" id="yjX-lx-n3Q">
+                                <rect key="frame" x="67" y="269" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="yjX-lx-n3Q" secondAttribute="height" multiplier="15:8" id="hSx-IJ-fFl"/>
+                                </constraints>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q1a-vf-2EB">
                                 <rect key="frame" x="20" y="28" width="335" height="619"/>
                                 <connections>
@@ -145,17 +138,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="sNq-LN-SkY" firstAttribute="leading" secondItem="gWj-Ww-utY" secondAttribute="leading" constant="55" id="09J-k6-azt"/>
                             <constraint firstItem="q1a-vf-2EB" firstAttribute="top" secondItem="NGk-QZ-xGn" secondAttribute="bottom" constant="8" id="A96-A7-Cbr"/>
                             <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="sEX-f4-4my" secondAttribute="trailing" constant="109" id="Cud-W7-kGC"/>
-                            <constraint firstItem="sNq-LN-SkY" firstAttribute="top" secondItem="sEX-f4-4my" secondAttribute="bottom" constant="55" id="Ho3-Ln-fhU"/>
-                            <constraint firstAttribute="trailing" secondItem="sNq-LN-SkY" secondAttribute="trailing" constant="55" id="K7r-Lh-RWV"/>
+                            <constraint firstItem="yjX-lx-n3Q" firstAttribute="top" secondItem="sEX-f4-4my" secondAttribute="bottom" constant="49.5" id="HOV-9J-rlD"/>
                             <constraint firstItem="sEX-f4-4my" firstAttribute="leading" relation="lessThanOrEqual" secondItem="gWj-Ww-utY" secondAttribute="leading" constant="110" id="O1S-JW-c1o"/>
                             <constraint firstItem="S1d-Tu-bJu" firstAttribute="top" secondItem="q1a-vf-2EB" secondAttribute="bottom" constant="20" id="RxY-Vx-qD8"/>
+                            <constraint firstItem="yjX-lx-n3Q" firstAttribute="centerX" secondItem="gWj-Ww-utY" secondAttribute="centerX" id="S8r-S7-m5w"/>
                             <constraint firstItem="q1a-vf-2EB" firstAttribute="leading" secondItem="gWj-Ww-utY" secondAttribute="leading" constant="20" id="WnE-v6-gLj"/>
                             <constraint firstItem="sEX-f4-4my" firstAttribute="centerX" secondItem="gWj-Ww-utY" secondAttribute="centerX" id="aFt-2a-yyS"/>
                             <constraint firstAttribute="trailing" secondItem="q1a-vf-2EB" secondAttribute="trailing" constant="20" id="fhf-g6-aHP"/>
-                            <constraint firstItem="S1d-Tu-bJu" firstAttribute="top" secondItem="sNq-LN-SkY" secondAttribute="bottom" constant="275" id="uZR-x3-L2z"/>
+                            <constraint firstItem="yjX-lx-n3Q" firstAttribute="leading" secondItem="gWj-Ww-utY" secondAttribute="leadingMargin" constant="51" id="mx3-6d-UtQ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="yjX-lx-n3Q" secondAttribute="trailing" constant="52" id="pv3-jA-HOw"/>
+                            <constraint firstItem="yjX-lx-n3Q" firstAttribute="centerY" secondItem="gWj-Ww-utY" secondAttribute="centerY" id="sEW-az-dAf"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -557,6 +551,9 @@
             <point key="canvasLocation" x="461" y="867"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="mitodesignblack.png" width="2000" height="1173"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Tk8-BD-Yxk"/>
         <segue reference="cTu-G9-fQe"/>

@@ -94,13 +94,9 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             "friendType": "Friend",
             "notificationType": "Friend"
         ]
-        print(person.intUserID)
-        print(appdata.intCurrentUserID)
-        
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
-        
         Alamofire.request(urlAcceptFriendRequest!, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
             switch response.result {
             case .success:
@@ -111,21 +107,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                         self.appdata.arrPendingFriends.removeAll()
                         self.fnPendingRequestsData()
                     }
-//                    let dict2 = dictionary as! NSArray
-//                    for obj in dict2 {
-//                        let object = obj as! NSDictionary
-//                        print(object)
-//                        let p: Person = Person(firstName: (object["UserFname"] as? String)!,
-//                                               lastName: (object["UserLname"] as? String)!,
-//                                               email: (object["UserEmail"] as? String?)!!,
-//                                               avatar: (object["PhotoUrl"] as? String?)!!,
-//                                               intUserID: (object["UserId"] as? Int)!,
-//                                               strUsername: (object["Username"] as? String)!)
-//                        self.appdata.arrPendingFriends.append(p)
-//                        DispatchQueue.main.async {
-//                            self.tblviewNotification.reloadData()
-//                        }
-//                    }
                 }
                 
             case .failure(let error):

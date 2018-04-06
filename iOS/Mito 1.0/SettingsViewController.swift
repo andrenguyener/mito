@@ -9,7 +9,7 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
-
+    var appdata = AppData.shared
     //Login
     @IBAction func settingsToHome(_ sender: Any) {
         self.performSegue(withIdentifier: "settingsToMe", sender: self)
@@ -17,6 +17,9 @@ class SettingsViewController: UIViewController {
     @IBAction func signout(_ sender: Any) {
         performSegue(withIdentifier: "signOut", sender: self)
         UserDefaults.standard.removeObject(forKey: "UserInfo")
+        appdata.arrAllUsers.removeAll()
+        appdata.arrFriends.removeAll()
+        appdata.arrPendingFriends.removeAll()
         if UserDefaults.standard.object(forKey: "UserInfo") == nil {
             print("Data is gone")
         } else {
