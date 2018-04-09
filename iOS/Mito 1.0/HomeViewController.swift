@@ -49,11 +49,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 //        print("userURL: \(userURL)")
         peopleUrl = URL(string: userURL)
 //        loadPeopleData()
-        print("Authorization: \(UserDefaults.standard.object(forKey: "Authorization"))")
+        print("Authorization: \(String(describing: UserDefaults.standard.object(forKey: "Authorization")))")
 //        self.fnLoadFriendData()
 //        self.fnLoadAllUsers()
         print("All Users count: \(appdata.arrAllUsers.count)")
-        socket = WebSocket(url: URL(string: "wss://api.projectmito.io/v1/ws?auth=\(UserDefaults.standard.object(forKey: "Authorization"))")!)
+        socket = WebSocket(url: URL(string: "wss://api.projectmito.io/v1/ws?auth=\(String(describing: UserDefaults.standard.object(forKey: "Authorization")))")!)
         socket.delegate = self
         socket.connect()
     }
