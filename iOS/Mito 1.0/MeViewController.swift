@@ -9,6 +9,7 @@
 import UIKit
 
 class MeViewController: UIViewController {
+    var appdata = AppData.shared
 
     @IBOutlet weak var userID: UILabel!
     @IBOutlet weak var userEmail: UILabel!
@@ -34,6 +35,6 @@ class MeViewController: UIViewController {
             self.userDOB.text = data["userDOB"] as? String
             self.photoURL.text = data["photoURL"] as? String
         }
-        print("Tom Brady \(UserDefaults.standard.object(forKey: "UserInfo"))")
+        print("\(self.userFname) \(self.userLname)'s ID: appdata.intCurrentUserID")
     }
 }

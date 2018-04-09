@@ -108,7 +108,7 @@
         <!--Welcome-->
         <scene sceneID="mEU-rU-f6g">
             <objects>
-                <viewController title="Welcome" id="vJa-9R-Sbw" customClass="LoginViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Welcome" id="vJa-9R-Sbw" customClass="WelcomeViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NGk-QZ-xGn"/>
                         <viewControllerLayoutGuide type="bottom" id="S1d-Tu-bJu"/>
@@ -132,7 +132,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q1a-vf-2EB">
                                 <rect key="frame" x="20" y="28" width="335" height="619"/>
                                 <connections>
-                                    <segue destination="dxW-1I-3se" kind="show" id="ZPJ-OI-9Hk"/>
+                                    <segue destination="dxW-1I-3se" kind="show" identifier="toHome" id="ZPJ-OI-9Hk"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -151,6 +151,11 @@
                             <constraint firstAttribute="trailingMargin" secondItem="yjX-lx-n3Q" secondAttribute="trailing" constant="52" id="pv3-jA-HOw"/>
                             <constraint firstItem="yjX-lx-n3Q" firstAttribute="centerY" secondItem="gWj-Ww-utY" secondAttribute="centerY" id="sEW-az-dAf"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="q1a-vf-2EB"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Zo-Vx-26j" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -555,7 +560,7 @@
         <image name="mitodesignblack.png" width="2000" height="1173"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Tk8-BD-Yxk"/>
-        <segue reference="cTu-G9-fQe"/>
+        <segue reference="iia-I7-aut"/>
+        <segue reference="Fma-AT-nbz"/>
     </inferredMetricsTieBreakers>
 </document>
