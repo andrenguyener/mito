@@ -26,7 +26,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         peopleUrl = URL(string: userURL)
 //        loadPeopleData()
         print("Authorization: \(UserDefaults.standard.object(forKey: "Authorization"))")
-        self.fnLoadFriendData()
+//        self.fnLoadFriendData()
+//        self.fnLoadAllUsers()
+        print("All Users count: \(appdata.arrAllUsers.count)")
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,6 +56,30 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.descr.text = "\(feedItemObj.descr)"
         cell.whatHappened.numberOfLines = 2
         return cell
+    }
+    
+    func fnLoadAllUsers() {
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request("https://api.projectmito.io/v1/users/all", method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    let objUsers = dictionary as! NSArray
+                    for objUser in objUsers {
+                        let objPerson2 = objUser as! NSDictionary
+                        let objPerson = Person(firstName: objPerson2["userFname"] as! String, lastName: objPerson2["userLname"] as! String, email: objPerson2["userEmail"] as! String, avatar: objPerson2["photoURL"] as! String, intUserID: objPerson2["userId"] as! Int, strUsername: objPerson2["username"] as! String)
+                        self.appdata.arrAllUsers.append(objPerson)
+                    }
+                    
+                }
+                
+            case .failure(let error):
+                print("Get all users error")
+                print(error)
+            }
+        }
     }
     
     // Loading Friends (people tab)
