@@ -4,7 +4,7 @@
 const express = require('express');
 
 const Order = require('./../models/order/order-class');
-const sendToMQ = require('./message-queue');
+const sendToMQ = require('./rabbit-queue');
 
 const CartHandler = (cartStore) => {
     if (!cartStore) {
@@ -28,6 +28,11 @@ const CartHandler = (cartStore) => {
             .then(cart => {
                 console.log(cart)
                 res.json(cart)
+                const data = {
+                    type: 'cart-get',
+                    cart: cart
+                };
+                sendToMQ(req, data);
             })
             .catch(error => {
                 if (error != breakSignal) {
