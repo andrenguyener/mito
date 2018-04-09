@@ -8,13 +8,37 @@
 
 import UIKit
 import Alamofire
+import Starscream
 
-class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, WebSocketDelegate {
+    func websocketDidConnect(socket: WebSocketClient) {
+        print("websocket is connected")
+    }
+    
+    func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
+        if let e = error as? WSError {
+            print("websocket is disconnected: \(e.message)")
+        } else if let e = error {
+            print("websocket is disconnected: \(e.localizedDescription)")
+        } else {
+            print("websocket disconnected")
+        }
+    }
+    
+    func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
+        print("Received text: \(text)")
+    }
+    
+    func websocketDidReceiveData(socket: WebSocketClient, data: Data) {
+        print("Received data: \(data.count)")
+    }
+    
 
     @IBOutlet weak var tableView: UITableView!
     var peopleUrl = URL(string: "https://api.projectmito.io/v1/friend/")
     var urlPeopleCall = URL(string: "https://api.projectmito.io/v1/friend/")
     var appdata = AppData.shared
+    var socket: WebSocket!
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -29,6 +53,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 //        self.fnLoadFriendData()
 //        self.fnLoadAllUsers()
         print("All Users count: \(appdata.arrAllUsers.count)")
+        socket = WebSocket(url: URL(string: "wss://api.projectmito.io/v1/ws?auth=\(UserDefaults.standard.object(forKey: "Authorization"))")!)
+        socket.delegate = self
+        socket.connect()
     }
 
     override func didReceiveMemoryWarning() {
