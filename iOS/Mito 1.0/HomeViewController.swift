@@ -50,12 +50,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         peopleUrl = URL(string: userURL)
 //        loadPeopleData()
         print("Authorization: \(String(describing: UserDefaults.standard.object(forKey: "Authorization")))")
+        let authToken = (String(describing: UserDefaults.standard.object(forKey: "Authorization")))
 //        self.fnLoadFriendData()
 //        self.fnLoadAllUsers()
         print("All Users count: \(appdata.arrAllUsers.count)")
-        socket = WebSocket(url: URL(string: "wss://api.projectmito.io/v1/ws?auth=\(String(describing: UserDefaults.standard.object(forKey: "Authorization")))")!)
-        socket.delegate = self
-        socket.connect()
+
+//        var request = URLRequest(url: URL(string: "wss://api.projectmito.io/v1/ws?auth=\(String(describing: UserDefaults.standard.object(forKey: "Authorization")))")!)
+//        var request = URLRequest(url: URL(string: "wss://api.projectmito.io/v1/ws?auth=\(authToken)")!)
+//        request.timeoutInterval = 5
+//        socket = WebSocket(request: request)
+//        
+//        socket.delegate = self
+//        socket.connect()
     }
 
     override func didReceiveMemoryWarning() {
