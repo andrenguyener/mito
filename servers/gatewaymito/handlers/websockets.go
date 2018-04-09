@@ -1,9 +1,12 @@
 package handlers
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
+	"strconv"
 	"sync"
 
 	"github.com/gorilla/websocket"
@@ -50,18 +53,23 @@ func (wsh *WebSocketsHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) 
 		http.Error(w, fmt.Sprintf("Error connecting to websocket: %v", err), http.StatusInternalServerError)
 		return
 	}
-	go wsh.notifier.AddClient(conn)
+	go wsh.notifier.AddClient(conn, sessState.User.UserId)
+}
+
+type Connection struct {
+	userID int
+	conn   *websocket.Conn
 }
 
 type Notifier struct {
-	clients []*websocket.Conn
+	clients []Connection
 	eventQ  <-chan amqp.Delivery
 	mx      sync.RWMutex
 }
 
 func NewNotifier(evt <-chan amqp.Delivery) *Notifier {
 	notifier := &Notifier{
-		clients: []*websocket.Conn{},
+		clients: []Connection{},
 		eventQ:  evt,
 	}
 
@@ -69,27 +77,55 @@ func NewNotifier(evt <-chan amqp.Delivery) *Notifier {
 	return notifier
 }
 
-func (n *Notifier) AddClient(client *websocket.Conn) {
+func (n *Notifier) AddClient(client *websocket.Conn, userId int) {
 	n.mx.Lock()
-	n.clients = append(n.clients, client)
+	userConnection := Connection{
+		conn:   client,
+		userID: userId,
+	}
+	n.clients = append(n.clients, userConnection)
 	n.mx.Unlock()
-	sliceClients := []*websocket.Conn{}
+	sliceClients := []Connection{}
 	for {
 		// if there is an error (user disconnects)
 		// removes the disconnected client from the slice
-		if _, _, err := client.NextReader(); err != nil {
+		_, r, err := client.NextReader()
+		if err != nil {
 			client.Close()
 			n.mx.Lock()
+
 			for i := range n.clients {
-				if (n.clients[i]) != client {
-					sliceClients = append(sliceClients, n.clients[i])
+				if (n.clients[i].conn) == client {
+					sliceClients = append(n.clients[:i], n.clients[i+1:]...)
 				}
 			}
 			n.clients = sliceClients
 			n.mx.Unlock()
 			break
 		}
+
+		userBytes, err := ioutil.ReadAll(r)
+		if err != nil {
+			fmt.Printf("error: %v", err)
+		}
+		userString := string(userBytes[:])
+		userInt, err := strconv.Atoi(userString)
+		if err != nil {
+			fmt.Printf("error: %v", err)
+		}
+		for i := range n.clients {
+			if (n.clients[i].conn) == client {
+				n.clients[i].userID = userInt
+				break
+			}
+		}
+
+		fmt.Println(userString)
 	}
+}
+
+type userID struct {
+	userID int `json:"userIdOut"`
 }
 
 func (n *Notifier) start() {
@@ -97,11 +133,24 @@ func (n *Notifier) start() {
 		event := <-n.eventQ
 		n.mx.RLock()
 		log.Println(n.clients)
+
+		var userDoc userID
+
+		err := json.Unmarshal(event.Body, &userDoc)
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		fmt.Printf("%+v", userDoc)
+
 		for _, client := range n.clients {
-			err := client.WriteMessage(websocket.TextMessage, event.Body)
-			if err != nil {
-				log.Printf("Error: %v", err)
+			if userDoc.userID == client.userID {
+				err := client.conn.WriteMessage(websocket.TextMessage, event.Body)
+				if err != nil {
+					log.Printf("Error: %v", err)
+				}
 			}
+
 		}
 		n.mx.RUnlock()
 	}

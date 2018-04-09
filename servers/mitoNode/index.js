@@ -50,8 +50,8 @@ const portNum = parseInt(port);
 
 const amqp = require("amqplib");
 const qName = "testQ";
-// const mqAddr = process.env.MQADDR || "rabbit:5672";
-const mqAddr = process.env.MQADDR || "localhost:5672"
+const mqAddr = process.env.MQADDR || "rabbit:5672";
+// const mqAddr = process.env.MQADDR || "localhost:5672"
 const mqURL = `amqp://${mqAddr}`;
 var Request = require('tedious').Request;
 var TYPES = require('tedious').TYPES;
@@ -82,17 +82,17 @@ var TYPES = require('tedious').TYPES;
         // All of the following APIs require the user to be authenticated.
         // If the user is not authenticated,
         // respond immediately with the status code 401 (Unauthorized).
-        // app.use((req, res, next) => {
-        //     const userJSON = req.get('X-User');
-        //     if (!userJSON) {
-        //         res.set('Content-Type', 'text/plain');
-        //         res.status(401).send('no X-User header found in the request');
-        //         // Stop continuing.
-        //         return;
-        //     }
-        //     // Invoke next chained handler if the user is authenticated.
-        //     next();
-        // });
+        app.use((req, res, next) => {
+            const userJSON = req.get('X-User');
+            if (!userJSON) {
+                res.set('Content-Type', 'text/plain');
+                res.status(401).send('no X-User header found in the request');
+                // Stop continuing.
+                return;
+            }
+            // Invoke next chained handler if the user is authenticated.
+            next();
+        });
 
         // Connect to RabbitMQ.
         let connection = await amqp.connect(mqURL);
