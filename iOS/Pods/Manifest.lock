@@ -1,12 +1,15 @@
 PODS:
   - Alamofire (4.7.0)
+  - Starscream (3.0.4)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
+  - Starscream (~> 3.0.2)
 
 SPEC CHECKSUMS:
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
+  Starscream: f5da93fe6984c77b694366bf7299b7dc63a76f26
 
-PODFILE CHECKSUM: 3d0de526963cf3984722c6ba1aaa2272b5c95be0
+PODFILE CHECKSUM: e2850689d20e13644cf1df8e572d0612a2c206d5
 
 COCOAPODS: 1.4.0
