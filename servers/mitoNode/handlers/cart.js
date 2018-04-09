@@ -4,7 +4,7 @@
 const express = require('express');
 
 const Order = require('./../models/order/order-class');
-const sendToMQ = require('./message-queue');
+const sendToMQ = require('./rabbit-queue');
 
 const CartHandler = (cartStore) => {
     if (!cartStore) {
@@ -18,13 +18,32 @@ const CartHandler = (cartStore) => {
     const router = express.Router();
 
     // Get items in cart
-    router.get('', (req, res) => {
-
+    router.get('/v1/cart/retrieve', (req, res) => {
+        const userJSON = req.get('X-User');
+        const user = JSON.parse(userJSON);
+        var userId = user.userId;
+        console.log(userId);
+        cartStore
+            .get(userId)
+            .then(cart => {
+                console.log(cart)
+                res.json(cart)
+                const data = {
+                    type: 'cart-get',
+                    cart: cart
+                };
+                sendToMQ(req, data);
+            })
+            .catch(error => {
+                if (error != breakSignal) {
+                    console.log(error)
+                }
+            })
 
     });
 
     // Add items to cart
-    router.post('v1/cart', (req, res) => {
+    router.post('/v1/cart', (req, res) => {
         const userJSON = req.get('X-User');
         const user = JSON.parse(userJSON);
         let amazonASIN = req.body.amazonASIN;
@@ -43,7 +62,7 @@ const CartHandler = (cartStore) => {
     });
 
     // Process checkout of cart
-    router.post('v1/cart/process', (req, res) => {
+    router.post('/v1/cart/process', (req, res) => {
         const userJSON = req.get('X-User');
         const user = JSON.parse(userJSON);
         let userAddressId = req.body.userAddressId;
