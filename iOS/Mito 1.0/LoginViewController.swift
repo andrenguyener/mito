@@ -273,41 +273,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     //////////// Keyboard Functions, Superview ////////
     
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField == password {
-            
-        }
-    }
 
-    // 250 is size of keyboard
-    
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
-            if self.view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= 75
-            }
-        }
-        //        username.returnKeyType = .next
-        //        password.returnKeyType = .done
-        
-    }
-    
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
-            if self.view.frame.origin.y == -75 {
-                self.view.frame.origin.y += 75
-            }
-        }
-    }
-    
-    @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
-        if username != nil && password != nil {
-            username.resignFirstResponder()
-            password.resignFirstResponder()
-        }
-    }
-    
     func fnLoadStateData() {
         Alamofire.request(urlStates!, method: .get, encoding: JSONEncoding.default).validate().responseJSON { response in
             switch response.result {
@@ -367,11 +333,9 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         }
         super.viewDidLoad()
         
-//        let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
-//        self.view.addGestureRecognizer(tap)
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
-        self.view.addGestureRecognizer(tapGesture)
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
+//        self.view.addGestureRecognizer(tapGesture)
         
         self.hideKeyboard()
         
@@ -381,28 +345,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         //            performSegue(withIdentifier: "login", sender: self)
         //        }
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
-    
-    
-    
-    //    func NotificationStuff() {
-    //        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-    //        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-    //        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in
-    //
-    //        })
-    //        let content = UNMutableNotificationContent()
-    //        content.title = "Notification"
-    //        content.subtitle = "Notification subtitle"
-    //        content.body = "Andre has sent you a friend request"
-    //        content.badge = 1
-    //        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-    //        let request = UNNotificationRequest(identifier: "timerDone", content: content, trigger: trigger)
-    //        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-    //    }
 }
 
 extension UIViewController {
@@ -415,3 +357,59 @@ extension UIViewController {
         view.endEditing(true)
     }
 }
+
+
+///// ================= /////
+
+// 250 is size of keyboard
+
+//    @objc func keyboardWillShow(notification: NSNotification) {
+//        if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
+//            if self.view.frame.origin.y == 0 {
+//                self.view.frame.origin.y -= 75
+//            }
+//        }
+//        //        username.returnKeyType = .next
+//        //        password.returnKeyType = .done
+//
+//    }
+//
+//    @objc func keyboardWillHide(notification: NSNotification) {
+//        if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
+//            if self.view.frame.origin.y == -75 {
+//                self.view.frame.origin.y += 75
+//            }
+//        }
+//    }
+
+//    @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
+//        if username != nil && password != nil {
+//            username.resignFirstResponder()
+//            password.resignFirstResponder()
+//        }
+//    }
+
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        if textField == password {
+//
+//        }
+//    }
+
+//// =========================== ////
+
+
+//    func NotificationStuff() {
+//        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+//        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in
+//
+//        })
+//        let content = UNMutableNotificationContent()
+//        content.title = "Notification"
+//        content.subtitle = "Notification subtitle"
+//        content.body = "Andre has sent you a friend request"
+//        content.badge = 1
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+//        let request = UNNotificationRequest(identifier: "timerDone", content: content, trigger: trigger)
+//        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+//    }
