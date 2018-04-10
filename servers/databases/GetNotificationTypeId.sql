@@ -6,10 +6,11 @@ output param: matching notification type Id
 
 ALTER PROC uspGetNotificationType
 @NotificationType NVARCHAR(50),
+@CategoryName NVARCHAR(50),
 @NotificationType_ID INT OUT
 AS
 	SET @NotificationType_ID = (SELECT NotificationTypeId FROM NOTIFICATION_TYPE 
-	WHERE NotificationType = @NotificationType)
+	WHERE NotificationType = @NotificationType AND Category = @CategoryName)
 GO
 
 EXEC sp_rename 'GetNotificationType', 'uspGetNotificationType'

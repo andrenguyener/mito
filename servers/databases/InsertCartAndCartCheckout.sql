@@ -87,14 +87,17 @@ DECLARE @ProdID INT
 DECLARE @Qty INT
 DECLARE @OrderID INT
 DECLARE @ItemPrice NUMERIC(12,2)
-DECLARE @PendingStatusId INT = (SELECT OrderUserConfirmationId FROM ORDER_USER_CONFIRMATION
-								WHERE OrderUserConfirmation = 'Pending') 
+DECLARE @PendingStatusId INT 
+EXEC dbo.uspGetUserConfirmationTypeId 'Pending', @Type_Id = @PendingStatusId OUT 
 DECLARE @TodaysDate DATE = (SELECT GETDATE())
+DECLARE @NotificationTypeId INT
+EXEC dbo.uspGetNotificationType 'Pending', 'Orders', @NotificationType_Id = @NotificationTypeId OUT
 -- SET XACT_ABORT ON will render the transaction uncommittable
 -- when the constraint violation occurs.
 SET XACT_ABORT ON
 
 BEGIN TRY
+BEGIN TRANSACTION InsertNotification
 BEGIN TRANSACTION G1
 EXEC dbo.uspCreatePurchaseOrder @UserId, @UserAddressId, @RecipientId, @Message, 
 @TodaysDate, @GiftOption, @PendingStatusId, @SumCartPrice, @Order_Id = @OrderID OUT
@@ -160,6 +163,11 @@ BEGIN CATCH
         ROLLBACK TRANSACTION G1
     END
 END CATCH
+EXEC uspInsertNotification @NotificationTypeId, @UserId, @RecipientId, @TodaysDate
+	IF @@ERROR <> 0 
+		ROLLBACK TRAN insertNotification
+	ELSE
+		COMMIT TRAN insertNotification
 
 -- example cart processing
 SELECT * FROM CART
@@ -167,4 +175,5 @@ SELECT * FROM ORDER_PRODUCT
 SELECT * FROM [ORDER]
 EXEC dbo.uspcInsertIntoCart '1245','12.00',7,5
 EXEC dbo.uspcInsertIntoCart '10394','12.00',7,5
-EXEC dbo.uspcProcessCheckout 7, 7, 8, 'Testing checkout cart', 0
+EXEC dbo.uspcProcessCheckout 7, 7, 34, 'Testing checkout cart', 0
+
