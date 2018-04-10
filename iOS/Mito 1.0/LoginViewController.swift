@@ -145,6 +145,9 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var passwordConfSU: UITextField!
     @IBOutlet weak var userEmailSU: UITextField!
     
+    @IBOutlet weak var signupScrollView: UIScrollView!
+    
+    
     var strMonth = ""
     var strDay = ""
     var strYear = ""
@@ -205,6 +208,8 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var pickerviewStateAA: UIPickerView!
     @IBOutlet weak var btnChooseState: UIButton!
     
+    
+    
     var strState = ""
     
     @IBAction func btnCreateAccountPressed(_ sender: Any) {
@@ -264,12 +269,18 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         appdata.arrStates.sort(by: fnSortStateAlphabetically)
     }
     
+    
+    
+    //////////// Keyboard Functions, Superview ////////
+    
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == password {
             
         }
     }
 
+    // 250 is size of keyboard
     
     @objc func keyboardWillShow(notification: NSNotification) {
         if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
@@ -343,6 +354,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         return this.value < that.value
     }
     
+    
     override func viewDidLoad() {
         if monthPicker != nil {
             monthPicker.isHidden = true
@@ -355,24 +367,26 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         }
         super.viewDidLoad()
         
-        ///check for font
-        for family: String in UIFont.familyNames
-        {
-            print("\(family)")
-            for names: String in UIFont.fontNames(forFamilyName: family)
-            {
-                print("== \(names)")
-            }
-        }
+//        let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
+//        self.view.addGestureRecognizer(tap)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
         self.view.addGestureRecognizer(tapGesture)
+        
+        self.hideKeyboard()
+        
         //        if UserDefaults.standard.object(forKey: "UserInfo") == nil {
         //            print("There is no local data")
         //        } else {
         //            performSegue(withIdentifier: "login", sender: self)
         //        }
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    
     
     //    func NotificationStuff() {
     //        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -389,4 +403,15 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     //        let request = UNNotificationRequest(identifier: "timerDone", content: content, trigger: trigger)
     //        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     //    }
+}
+
+extension UIViewController {
+    func hideKeyboard() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }
