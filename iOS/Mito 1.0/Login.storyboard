@@ -402,7 +402,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="AddressNickname" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="733-2a-k0w">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="733-2a-k0w">
                                         <rect key="frame" x="0.0" y="24" width="303" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -558,6 +558,7 @@
                     <connections>
                         <outlet property="address1AA" destination="rJz-P9-Kg7" id="4or-d7-Wsf"/>
                         <outlet property="address2AA" destination="xIz-7p-sjT" id="0rS-Ll-sqT"/>
+                        <outlet property="addressNickname" destination="733-2a-k0w" id="hdh-vw-TYb"/>
                         <outlet property="btnChooseState" destination="0ez-fv-Hkb" id="B7b-6t-1PD"/>
                         <outlet property="cityAA" destination="j7b-HR-Hwa" id="PoF-fL-f8H"/>
                         <outlet property="pickerviewStateAA" destination="eql-j2-IXw" id="fWg-EC-oUh"/>
@@ -584,6 +585,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="iia-I7-aut"/>
-        <segue reference="cTu-G9-fQe"/>
+        <segue reference="Fma-AT-nbz"/>
     </inferredMetricsTieBreakers>
 </document>

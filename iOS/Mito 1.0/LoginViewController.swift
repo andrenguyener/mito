@@ -42,7 +42,10 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 3
+        if monthPicker != nil && !monthPicker.isHidden {
+            return 3
+        }
+        return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -62,12 +65,14 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if component == 0 && monthPicker != nil && !monthPicker.isHidden {
-            return appdata.arrMonths[row].strName
-        } else if component == 1 && monthPicker != nil && !monthPicker.isHidden {
-            return appdata.arrDays[row]
-        } else if component == 2 && monthPicker != nil && !monthPicker.isHidden {
-            return appdata.arrYears[row]
+        if monthPicker != nil && !monthPicker.isHidden {
+            if component == 0 {
+                return appdata.arrMonths[row].strName
+            } else if component == 1 {
+                return appdata.arrDays[row]
+            } else {
+                return appdata.arrYears[row]
+            }
         } else if pickerviewStateAA != nil && !pickerviewStateAA.isHidden {
             return appdata.arrStates[row].value
         } else {
@@ -84,11 +89,14 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             strYear = appdata.arrYears[monthPicker.selectedRow(inComponent: 2)]
             strUserDOB = "\(strMonth)/\(strDay)/\(strYear)"
             btnMonth.setTitle(strUserDOB, for: .normal)
-        } else {
-            btnChooseState.setTitle(appdata.arrStates[row].abbrev, for: .normal)
+        } else if pickerviewStateAA != nil && !pickerviewStateAA.isHidden {
             pickerviewStateAA.isHidden = true
-            btnNext.isHidden = false
+            strState = appdata.arrStates[row].value
+            btnChooseState.setTitle(appdata.arrStates[row].abbrev, for: .normal)
         }
+//        } else if monthPicker.isHidden {
+//            btnNext.isHidden = false
+//        }
     }
     
     // Opening Login Page
@@ -188,13 +196,16 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     // Add Address page
     
+    @IBOutlet weak var addressNickname: UITextField!
     @IBOutlet weak var address1AA: UITextField!
     @IBOutlet weak var address2AA: UITextField!
     @IBOutlet weak var cityAA: UITextField!
-    @IBOutlet weak var stateAA: UITextField!
+    @IBOutlet weak var stateAA: UITextField! // can't figure out what this is
     @IBOutlet weak var zipcodeAA: UITextField!
     @IBOutlet weak var pickerviewStateAA: UIPickerView!
     @IBOutlet weak var btnChooseState: UIButton!
+    
+    var strState = ""
     
     @IBAction func btnCreateAccountPressed(_ sender: Any) {
         var userID: Int?
@@ -205,20 +216,20 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             print("userId = \(String(describing: data["userId"]))")
             appdata.intCurrentUserID = userID!
         }
-        let address1 = address1AA.text
-        let address2 = address2AA.text
-        let city = cityAA.text
-        let state = stateAA.text
+        let alias = addressNickname.text
+        let strAddress1 = address1AA.text
+        let strAddress2 = address2AA.text
+        let strCity = cityAA.text
+        let strState = stateAA.text
         let zipcode = zipcodeAA.text
-        let alias = "Home Address"
         
         let parameters: Parameters = [
             "userId": userID!,
-            "streetAddress1": address1!,
-            "streetAddress2": address2!,
-            "cityName": city!,
+            "streetAddress1": strAddress1!,
+            "streetAddress2": strAddress2!,
+            "cityName": strCity!,
             "zipCode": zipcode!,
-            "stateName": state!,
+            "stateName": strState!,
             "aliasName": alias
         ]
         
@@ -238,7 +249,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                         //                    print(UserDefaults.standard.object(forKey: "AddressInfo") as! NSDictionary)
                     }
                 }
-                
                 
             case .failure(let error):
                 print(error)
