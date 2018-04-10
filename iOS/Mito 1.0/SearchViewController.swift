@@ -64,6 +64,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func fnLoadFriendsAndAllUsers() {
+        self.arrFriendsAndAllMitoUsers.removeAll()
         self.appdata.arrFriends.removeAll()
         self.fnLoadFriendData()
         self.appdata.arrAllUsers.removeAll()
@@ -122,9 +123,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     }
                     self.arrFriendsAndAllMitoUsers.append(self.appdata.arrAllUsers)
                     print("All Users count: \(self.appdata.arrAllUsers.count)")
-//                    DispatchQueue.main.async {
-//                        self.peopleTableView.reloadData()
-//                    }
                 }
                 
             case .failure(let error):
@@ -266,15 +264,17 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if productPeopleTab.selectedSegmentIndex == 1 {
-            print(section)
+            print("People: \(section)")
             return self.arrSections[section]
         } else {
+            print("Product: \(section)")
             return "Test"
         }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         if productPeopleTab.selectedSegmentIndex == 1 {
+            print("Friends and All Users Count: \(arrFriendsAndAllMitoUsers.count)")
             return arrFriendsAndAllMitoUsers.count
         } else {
             return 1
