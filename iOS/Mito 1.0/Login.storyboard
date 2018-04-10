@@ -72,11 +72,9 @@
                                     </textField>
                                 </subviews>
                             </stackView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mitodesignblack.png" translatesAutoresizingMaskIntoConstraints="NO" id="REU-qp-z2d">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="mitodesignblack.png" translatesAutoresizingMaskIntoConstraints="NO" id="REU-qp-z2d">
                                 <rect key="frame" x="77" y="49" width="221" height="138"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="138" id="XCI-OY-Ao2"/>
-                                </constraints>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -85,9 +83,6 @@
                             <constraint firstItem="gS8-lv-B80" firstAttribute="leading" secondItem="Es7-sx-xiV" secondAttribute="leading" constant="155" id="8ON-nk-Pei"/>
                             <constraint firstItem="TQZ-rQ-MLe" firstAttribute="trailing" secondItem="Es7-sx-xiV" secondAttribute="trailingMargin" id="8r3-s4-C9N"/>
                             <constraint firstItem="gS8-lv-B80" firstAttribute="top" secondItem="TQZ-rQ-MLe" secondAttribute="bottom" constant="8" symbolic="YES" id="AYd-0Z-CVI"/>
-                            <constraint firstItem="REU-qp-z2d" firstAttribute="centerX" secondItem="jms-jt-aDl" secondAttribute="centerX" id="R9c-pV-6by"/>
-                            <constraint firstItem="REU-qp-z2d" firstAttribute="leading" secondItem="Es7-sx-xiV" secondAttribute="leadingMargin" constant="61" id="V6I-NL-xzk"/>
-                            <constraint firstItem="REU-qp-z2d" firstAttribute="top" secondItem="qdR-a4-Tpe" secondAttribute="bottom" constant="29" id="Zk2-ju-Hfc"/>
                             <constraint firstAttribute="bottom" secondItem="gS8-lv-B80" secondAttribute="bottom" constant="20" symbolic="YES" id="gk0-2x-VbS"/>
                             <constraint firstItem="TQZ-rQ-MLe" firstAttribute="leading" secondItem="Es7-sx-xiV" secondAttribute="leadingMargin" id="iZA-O6-QTK"/>
                             <constraint firstItem="jms-jt-aDl" firstAttribute="leading" secondItem="Es7-sx-xiV" secondAttribute="leadingMargin" constant="4" id="oNO-cb-7qR"/>
@@ -584,7 +579,7 @@
         <image name="mitodesignblack.png" width="2000" height="1173"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="iia-I7-aut"/>
-        <segue reference="Fma-AT-nbz"/>
+        <segue reference="Tk8-BD-Yxk"/>
+        <segue reference="cTu-G9-fQe"/>
     </inferredMetricsTieBreakers>
 </document>

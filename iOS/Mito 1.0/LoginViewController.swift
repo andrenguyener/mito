@@ -10,7 +10,7 @@ import UIKit
 import UserNotifications
 import Alamofire
 
-class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
     // Error-Handling
     // Name constraints?
@@ -263,6 +263,13 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         }
         appdata.arrStates.sort(by: fnSortStateAlphabetically)
     }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == password {
+            
+        }
+    }
+
     
     @objc func keyboardWillShow(notification: NSNotification) {
         if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
