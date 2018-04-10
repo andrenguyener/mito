@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Eua-Q9-CQ1">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -28,11 +28,11 @@
                         <viewControllerLayoutGuide type="bottom" id="XO9-cN-TZX"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Es7-sx-xiV">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TQZ-rQ-MLe">
-                                <rect key="frame" x="16" y="571" width="343" height="38"/>
+                                <rect key="frame" x="16" y="472" width="288" height="38"/>
                                 <color key="backgroundColor" red="0.54759299621107782" green="0.90761817895431474" blue="0.57195356956158849" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="wIT-4n-9US"/>
@@ -46,7 +46,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gS8-lv-B80">
-                                <rect key="frame" x="155" y="617" width="67" height="30"/>
+                                <rect key="frame" x="155" y="518" width="70" height="30"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                 <state key="normal" title="or Sign up">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -55,38 +55,38 @@
                                     <action selector="btnSignUpPressed:" destination="jVO-xl-sXb" eventType="touchUpInside" id="U3U-S1-oB1"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="mitodesignblack.png" translatesAutoresizingMaskIntoConstraints="NO" id="REU-qp-z2d">
+                                <rect key="frame" x="77" y="49" width="221" height="138"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="jms-jt-aDl" userLabel="UsernamePassword">
-                                <rect key="frame" x="20" y="294" width="335" height="80"/>
+                                <rect key="frame" x="36" y="369" width="248" height="80"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="39o-Wv-VpO">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="248" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i9J-yt-UsC">
-                                        <rect key="frame" x="0.0" y="50" width="335" height="30"/>
+                                        <rect key="frame" x="0.0" y="50" width="248" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                 </subviews>
                             </stackView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="mitodesignblack.png" translatesAutoresizingMaskIntoConstraints="NO" id="REU-qp-z2d">
-                                <rect key="frame" x="77" y="49" width="221" height="138"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="jms-jt-aDl" firstAttribute="centerY" secondItem="Es7-sx-xiV" secondAttribute="centerY" id="55g-QL-YYr"/>
                             <constraint firstItem="gS8-lv-B80" firstAttribute="leading" secondItem="Es7-sx-xiV" secondAttribute="leading" constant="155" id="8ON-nk-Pei"/>
                             <constraint firstItem="TQZ-rQ-MLe" firstAttribute="trailing" secondItem="Es7-sx-xiV" secondAttribute="trailingMargin" id="8r3-s4-C9N"/>
                             <constraint firstItem="gS8-lv-B80" firstAttribute="top" secondItem="TQZ-rQ-MLe" secondAttribute="bottom" constant="8" symbolic="YES" id="AYd-0Z-CVI"/>
+                            <constraint firstItem="jms-jt-aDl" firstAttribute="leading" secondItem="Es7-sx-xiV" secondAttribute="leadingMargin" constant="20" id="ODJ-ZI-iPm"/>
                             <constraint firstAttribute="bottom" secondItem="gS8-lv-B80" secondAttribute="bottom" constant="20" symbolic="YES" id="gk0-2x-VbS"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="jms-jt-aDl" secondAttribute="trailing" constant="20" id="hCv-nx-tnu"/>
                             <constraint firstItem="TQZ-rQ-MLe" firstAttribute="leading" secondItem="Es7-sx-xiV" secondAttribute="leadingMargin" id="iZA-O6-QTK"/>
-                            <constraint firstItem="jms-jt-aDl" firstAttribute="leading" secondItem="Es7-sx-xiV" secondAttribute="leadingMargin" constant="4" id="oNO-cb-7qR"/>
-                            <constraint firstItem="jms-jt-aDl" firstAttribute="centerX" secondItem="TQZ-rQ-MLe" secondAttribute="centerX" id="osI-Vo-Lgs"/>
+                            <constraint firstItem="TQZ-rQ-MLe" firstAttribute="top" secondItem="jms-jt-aDl" secondAttribute="bottom" constant="23" id="v2r-Kf-04y"/>
                         </constraints>
                     </view>
                     <connections>
@@ -109,17 +109,17 @@
                         <viewControllerLayoutGuide type="bottom" id="S1d-Tu-bJu"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="gWj-Ww-utY">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sEX-f4-4my">
-                                <rect key="frame" x="109" y="190" width="157" height="30"/>
+                                <rect key="frame" x="97" y="155.5" width="126.5" height="30"/>
                                 <fontDescription key="fontDescription" name="Roboto-ThinItalic" family="Roboto" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mitodesignblack.png" translatesAutoresizingMaskIntoConstraints="NO" id="yjX-lx-n3Q">
-                                <rect key="frame" x="67" y="269" width="240" height="128"/>
+                                <rect key="frame" x="67" y="234.5" width="185" height="99"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="yjX-lx-n3Q" secondAttribute="height" multiplier="15:8" id="hSx-IJ-fFl"/>
                                 </constraints>
@@ -406,11 +406,11 @@
                         <viewControllerLayoutGuide type="bottom" id="cm1-jK-ng7"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="qw0-4N-m76">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aGd-oE-TcP">
-                                <rect key="frame" x="16" y="20" width="343" height="35"/>
+                                <rect key="frame" x="16" y="20" width="288" height="25.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="aGd-oE-TcP" secondAttribute="height" multiplier="343:59" constant="139.52542372881356" id="12l-Rc-lyK"/>
                                 </constraints>
@@ -419,58 +419,58 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="PGp-mo-oIW">
-                                <rect key="frame" x="36" y="63" width="303" height="542"/>
+                                <rect key="frame" x="36" y="13" width="248" height="542"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address Nickname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9TY-rv-b49">
-                                        <rect key="frame" x="0.0" y="0.0" width="303" height="20"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="248" height="20"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="733-2a-k0w">
-                                        <rect key="frame" x="0.0" y="24" width="303" height="30"/>
+                                        <rect key="frame" x="0.0" y="24" width="248" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address 1:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xO1-Vh-xSd">
-                                        <rect key="frame" x="0.0" y="58" width="303" height="20"/>
+                                        <rect key="frame" x="0.0" y="58" width="248" height="20"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rJz-P9-Kg7">
-                                        <rect key="frame" x="0.0" y="82" width="303" height="30"/>
+                                        <rect key="frame" x="0.0" y="82" width="248" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address 2:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fDd-p4-aEr">
-                                        <rect key="frame" x="0.0" y="116" width="303" height="20"/>
+                                        <rect key="frame" x="0.0" y="116" width="248" height="20"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xIz-7p-sjT">
-                                        <rect key="frame" x="0.0" y="140" width="303" height="30"/>
+                                        <rect key="frame" x="0.0" y="140" width="248" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXe-YI-ihJ">
-                                        <rect key="frame" x="0.0" y="174" width="303" height="20"/>
+                                        <rect key="frame" x="0.0" y="174" width="248" height="20"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="j7b-HR-Hwa">
-                                        <rect key="frame" x="0.0" y="198" width="303" height="30"/>
+                                        <rect key="frame" x="0.0" y="198" width="248" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jxi-BM-Uxn">
-                                        <rect key="frame" x="0.0" y="232" width="303" height="32"/>
+                                        <rect key="frame" x="0.0" y="232" width="248" height="32"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="State" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9YN-tj-LXq">
                                                 <rect key="frame" x="0.0" y="0.0" width="40.5" height="32"/>
@@ -479,7 +479,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ez-fv-Hkb">
-                                                <rect key="frame" x="40.5" y="0.0" width="262.5" height="32"/>
+                                                <rect key="frame" x="40.5" y="0.0" width="207.5" height="32"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                 <state key="normal" title="Select State">
                                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -503,16 +503,16 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eql-j2-IXw">
-                                        <rect key="frame" x="0.0" y="268" width="303" height="216"/>
+                                        <rect key="frame" x="0.0" y="268" width="248" height="216"/>
                                     </pickerView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zipcode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Smx-Cl-CJn">
-                                        <rect key="frame" x="0.0" y="488" width="303" height="20"/>
+                                        <rect key="frame" x="0.0" y="488" width="248" height="20"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vPC-bh-u6c">
-                                        <rect key="frame" x="0.0" y="512" width="303" height="30"/>
+                                        <rect key="frame" x="0.0" y="512" width="248" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -552,7 +552,7 @@
                                 </variation>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ir-XT-LMA">
-                                <rect key="frame" x="20" y="615" width="335" height="32"/>
+                                <rect key="frame" x="20" y="521" width="280" height="27"/>
                                 <color key="backgroundColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="9Ir-XT-LMA" secondAttribute="height" multiplier="187:18" id="p47-V1-qJ5"/>
@@ -609,7 +609,7 @@
         <image name="mitodesignblack.png" width="2000" height="1173"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="iia-I7-aut"/>
+        <segue reference="Tk8-BD-Yxk"/>
         <segue reference="cTu-G9-fQe"/>
     </inferredMetricsTieBreakers>
 </document>

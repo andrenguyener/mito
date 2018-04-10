@@ -147,7 +147,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     @IBOutlet weak var signupScrollView: UIScrollView!
     
-    
     var strMonth = ""
     var strDay = ""
     var strYear = ""
@@ -320,6 +319,16 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         return this.value < that.value
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        activeTextField = textField
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    var activeTextField: UITextField!
     
     override func viewDidLoad() {
         if monthPicker != nil {
@@ -331,19 +340,50 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             pickerviewStateAA.delegate = self
             pickerviewStateAA.dataSource = self
         }
+//        activeTextField = username
+//        activeTextField.delegate = self
         super.viewDidLoad()
-        
+        self.hideKeyboard()
+        let center: NotificationCenter = NotificationCenter.default
+        center.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        center.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
         
 //        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
 //        self.view.addGestureRecognizer(tapGesture)
         
-        self.hideKeyboard()
+//        self.hideKeyboard()
         
         //        if UserDefaults.standard.object(forKey: "UserInfo") == nil {
         //            print("There is no local data")
         //        } else {
         //            performSegue(withIdentifier: "login", sender: self)
         //        }
+    }
+    
+    @objc func keyboardDidShow(notification: Notification) {
+        let info: NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        print("Keyboard Height: \(keyboardSize.height)")
+        print("Text Box: \(self.activeTextField.frame)")
+        let keyboardY = self.view.frame.size.height - keyboardSize.height
+        let editingTextFieldY: CGFloat! = self.activeTextField?.frame.origin.y // returns 0 every time
+        
+        if editingTextFieldY > keyboardY - 60 {
+            UIView.animate(withDuration: 0.25, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                self.view.frame = CGRect(x: 0, y: self.view.frame.origin.y - (editingTextFieldY! - (keyboardY - 60)), width: self.view.bounds.width, height: self.view.bounds.height)
+            }, completion: nil)
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: Notification) {
+        UIView.animate(withDuration: 0.25, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            self.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
+        }, completion: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardDidHide, object: nil)
     }
 }
 
@@ -352,7 +392,7 @@ extension UIViewController {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
-    
+
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
@@ -386,12 +426,6 @@ extension UIViewController {
 //        if username != nil && password != nil {
 //            username.resignFirstResponder()
 //            password.resignFirstResponder()
-//        }
-//    }
-
-//    func textFieldDidBeginEditing(_ textField: UITextField) {
-//        if textField == password {
-//
 //        }
 //    }
 
