@@ -26,25 +26,34 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var monthPicker: UIPickerView!
     @IBOutlet weak var btnMonth: UIButton!
+    @IBOutlet weak var btnNext: UIButton!
+    
     var urlStates = URL(string: "https://api.myjson.com/bins/penjf") // JSON file containing US states
-    var urlMonths = URL(string: "https://api.myjson.com/bins/vwhqz") // JSON file containing months
+    var urlMonths = URL(string: "https://api.myjson.com/bins/1175mz") // JSON file containing months
     
     var appdata = AppData.shared
     
     @IBAction func btnMonthPressed(_ sender: Any) {
         if monthPicker.isHidden == true {
             monthPicker.isHidden = false
+            btnNext.isHidden = true
         }
         appdata.arrMonths.sort(by: fnSortMonthsByNumber)
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+        return 3
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if monthPicker != nil && !monthPicker.isHidden {
-            return appdata.arrMonths.count
+            if component == 0 {
+                return appdata.arrMonths.count
+            } else if component == 1 {
+                return appdata.arrDays.count
+            } else {
+                return appdata.arrYears.count
+            }
         } else if (pickerviewStateAA != nil) && !pickerviewStateAA.isHidden {
             return appdata.arrStates.count
         } else {
@@ -53,8 +62,12 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if monthPicker != nil && !monthPicker.isHidden {
+        if component == 0 && monthPicker != nil && !monthPicker.isHidden {
             return appdata.arrMonths[row].strName
+        } else if component == 1 && monthPicker != nil && !monthPicker.isHidden {
+            return appdata.arrDays[row]
+        } else if component == 2 && monthPicker != nil && !monthPicker.isHidden {
+            return appdata.arrYears[row]
         } else if pickerviewStateAA != nil && !pickerviewStateAA.isHidden {
             return appdata.arrStates[row].value
         } else {
@@ -64,11 +77,17 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if monthPicker != nil && !monthPicker.isHidden {
-            btnMonth.setTitle(appdata.arrMonths[row].strAbbrev, for: .normal)
             monthPicker.isHidden = true
+            btnNext.isHidden = false
+            strMonth = String(appdata.arrMonths[row].intNum)
+            strDay = appdata.arrDays[monthPicker.selectedRow(inComponent: 1)]
+            strYear = appdata.arrYears[monthPicker.selectedRow(inComponent: 2)]
+            strUserDOB = "\(strMonth)/\(strDay)/\(strYear)"
+            btnMonth.setTitle(strUserDOB, for: .normal)
         } else {
             btnChooseState.setTitle(appdata.arrStates[row].abbrev, for: .normal)
             pickerviewStateAA.isHidden = true
+            btnNext.isHidden = false
         }
     }
     
@@ -82,11 +101,9 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         Alamofire.request("https://api.projectmito.io/v1/sessions", method: .post, parameters: parameters, encoding: JSONEncoding.default).validate().responseJSON { response in
             switch response.result {
             case .success:
-                
-                //                print("Response: \(String(describing: response.response))") // http url response
+                // http url response
                 let authHeader = response.response?.allHeaderFields["Authorization"] ?? ""
                 if let dictionary = response.result.value {
-//                    print("JSON: \(dictionary)") // serialized json response
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "login", sender: self)
                         UserDefaults.standard.set(dictionary, forKey: "UserInfo")
@@ -95,7 +112,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                             let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
                             self.appdata.intCurrentUserID = (data["userId"] as? Int)!
                         }
-//                        self.fnLoadAllUsers()
                     }
                 }
                 
@@ -115,48 +131,52 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     // Sign up page
     
     @IBOutlet weak var userFnameSU: UITextField!
+    @IBOutlet weak var strLastName: UITextField!
     @IBOutlet weak var usernameSU: UITextField!
     @IBOutlet weak var passwordSU: UITextField!
     @IBOutlet weak var passwordConfSU: UITextField!
     @IBOutlet weak var userEmailSU: UITextField!
     
+    var strMonth = ""
+    var strDay = ""
+    var strYear = ""
+    var strUserDOB = ""
+    
     @IBAction func btnNextPressed(_ sender: Any) {
-        let uFname = userFnameSU.text
-        let uname = usernameSU.text
-        let pass = passwordSU.text
-        let passConf = passwordConfSU.text
-        let uEmail = userEmailSU.text
+        let strFirstName = userFnameSU.text
+        let strLastName = self.strLastName.text
+        let strUserName = usernameSU.text
+        let strPassword = passwordSU.text
+        let strPasswordConfirmation = passwordConfSU.text
+        let strEmail = userEmailSU.text
+        let strUserDOB = "\(strMonth)/\(strDay)/\(strYear)"
+        print(strUserDOB)
         
         // Should have last name field so we don't default to Smith
         let parameters: Parameters = [
-            "userFname": uFname!,
-            "userLname": "Smith",
-            "username": uname!,
-            "userEmail": uEmail!,
-            "password": pass!,
-            "passwordConf": passConf!,
-            "userDOB": "01/01/2000"
+            "userFname": strFirstName!,
+            "userLname": strLastName!,
+            "username": strUserName!,
+            "userEmail": strEmail!,
+            "password": strPassword!,
+            "passwordConf": strPasswordConfirmation!,
+            "userDOB": strUserDOB
         ]
         Alamofire.request("https://api.projectmito.io/v1/users", method: .post, parameters: parameters, encoding: JSONEncoding.default).validate().responseJSON { response in
             switch response.result {
             case .success:
-                
-                //                print("Response: \(String(describing: response.response))") // http url response
+                // http url response
                 let authHeader = response.response?.allHeaderFields["Authorization"] ?? ""
                 if let dictionary = response.result.value {
                     print("JSON: \(dictionary)") // serialized json response
                     self.performSegue(withIdentifier: "signUpToAddress", sender: self)
                     DispatchQueue.main.async {
-                        
                         UserDefaults.standard.set(dictionary, forKey: "UserInfo")
                         UserDefaults.standard.set(authHeader, forKey: "Authorization")
-                        //print(UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary)
                         if UserDefaults.standard.object(forKey: "UserInfo") != nil {
                             let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
-                            //userID = data["userId"] as? Int
                             self.appdata.intCurrentUserID = (data["userId"] as? Int)!
                         }
-                        
                     }
                 }
                 
@@ -165,9 +185,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             }
         }
     }
-    
-    
-    
     
     // Add Address page
     
@@ -229,8 +246,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         }
         
     }
-        
-    
     
     @IBAction func btnStatePressed(_ sender: Any) {
         if pickerviewStateAA.isHidden {
@@ -290,7 +305,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                 if let dictionary = response.result.value as! NSDictionary?{
                     for obj in dictionary {
                         let objMonthValues = obj.value as! NSDictionary
-                        let objMonth = Month(strName: objMonthValues["name"] as! String, strAbbrev: objMonthValues["short"] as! String, intNum: objMonthValues["number"] as! Int, intNumDays: objMonthValues["days"] as! Int)
+                        let objMonth = Month(strName: objMonthValues["name"] as! String, strAbbrev: objMonthValues["short"] as! String, strNum: objMonthValues["number"] as! String, intNumDays: objMonthValues["days"] as! Int)
                         self.appdata.arrMonths.append(objMonth)
                     }
                     
