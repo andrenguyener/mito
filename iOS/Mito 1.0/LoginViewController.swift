@@ -159,7 +159,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                         
                     }
                 }
-            
                 
             case .failure(let error):
                 print(error)
@@ -237,6 +236,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         if pickerviewStateAA.isHidden {
             pickerviewStateAA.isHidden = false
         }
+        appdata.arrStates.sort(by: fnSortStateAlphabetically)
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -266,7 +266,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
     
     func fnLoadStateData() {
-        
         Alamofire.request(urlStates!, method: .get, encoding: JSONEncoding.default).validate().responseJSON { response in
             switch response.result {
             case .success:
@@ -275,7 +274,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                         let stateObj = State(abbrev: obj.key as! String, value: obj.value as! String)
                         self.appdata.arrStates.append(stateObj)
                     }
-                    
                 }
                 
             case .failure(let error):
@@ -283,31 +281,9 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                 print(error)
             }
         }
-        
-//        let task = URLSession.shared.dataTask(with: urlStates!) { (data, response, error) in
-//            if error != nil {
-//                print("ERROR")
-//            } else {
-//                if let content = data {
-//                    do {
-//                        let objStateData = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
-//                        for obj in objStateData {
-//                            let stateObj = State(abbrev: obj.key as! String, value: obj.value as! String)
-//                            self.appdata.arrStates.append(stateObj)
-//                        }
-//                    } catch {
-//                        print("Catch")
-//                    }
-//                } else {
-//                    print("Error")
-//                }
-//            }
-//        }
-//        task.resume()
     }
     
     func fnLoadMonthData() {
-
         Alamofire.request(urlMonths!, method: .get, encoding: JSONEncoding.default).validate().responseJSON { response in
             switch response.result {
             case .success:
@@ -325,32 +301,14 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                 print(error)
             }
         }
-        
-//        let task = URLSession.shared.dataTask(with: urlMonths!) { (data, response, error) in
-//            if error != nil {
-//                print("ERROR")
-//            } else {
-//                if let content = data {
-//                    do {
-//                        let objMonthData = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
-//                        for obj in objMonthData {
-//                            let objMonthValues = obj.value as! NSDictionary
-//                            let objMonth = Month(strName: objMonthValues["name"] as! String, strAbbrev: objMonthValues["short"] as! String, intNum: objMonthValues["number"] as! Int, intNumDays: objMonthValues["days"] as! Int)
-//                            self.appdata.arrMonths.append(objMonth)
-//                        }
-//                    } catch {
-//                        print("Catch")
-//                    }
-//                } else {
-//                    print("Error")
-//                }
-//            }
-//        }
-//        task.resume()
     }
     
     func fnSortMonthsByNumber(this: Month, that: Month) -> Bool {
         return this.intNum < that.intNum
+    }
+    
+    func fnSortStateAlphabetically(this: State, that: State) -> Bool {
+        return this.value < that.value
     }
     
     override func viewDidLoad() {
