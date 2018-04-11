@@ -35,13 +35,6 @@ IF @AmazonASIN IS NULL
 		RETURN
 	END
 
-IF @Qty < 1
-	BEGIN
-		PRINT'Quantity must be at least 1'
-		RAISERROR('@Qty cannot be less than 1', 11,1)
-		RETURN
-	END
-
 DECLARE @CurrentDateTime DATETIME = (SELECT GETDATE())
 
 BEGIN TRAN InsertToCart
@@ -173,7 +166,8 @@ EXEC uspInsertNotification @NotificationTypeId, @UserId, @RecipientId, @TodaysDa
 SELECT * FROM CART
 SELECT * FROM ORDER_PRODUCT
 SELECT * FROM [ORDER]
-EXEC dbo.uspcInsertIntoCart '1245','12.00',7,5
-EXEC dbo.uspcInsertIntoCart '10394','12.00',7,5
+EXEC dbo.uspcInsertIntoCart '1245','12.00',7,0
+EXEC dbo.uspcInsertIntoCart '10394','12.00',7,10
+EXEC dbo.uspcGetUserCartItemList 7
 EXEC dbo.uspcProcessCheckout 7, 7, 34, 'Testing checkout cart', 0
 
