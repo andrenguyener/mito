@@ -5,10 +5,10 @@ A stored procedure to insert notification into the table
 @SendFrom: always 0 // might need to modify
 @NotifcationDate: the date of when the notification is inserted
 */
-CREATE PROC uspInsertNotification
-@FriendId INT,
+ALTER PROC uspInsertNotification
 @NotificationTypeId INT,
-@SendFrom BIT,
+@SendFrom INT,
+@SendTo INT,
 @NotificationDate DATETIME
 AS
 	IF @NotificationDate IS NULL 
@@ -16,8 +16,8 @@ AS
 		SET @NotificationDate = GETDATE()
 		END
 	BEGIN TRAN
-	INSERT INTO NOTIFICATION (FriendId, NotificationTypeId, SendFrom, NotificationDate)
-	VALUES (@FriendId, @NotificationTypeId, @SendFrom, @NotificationDate)
+	INSERT INTO NOTIFICATION (NotificationTypeId, SendFrom, NotificationDate, SendTo)
+	VALUES (@NotificationTypeId, @SendFrom, @NotificationDate, @SendTo)
 
 	IF @@ERROR <> 0 
 		ROLLBACK TRAN

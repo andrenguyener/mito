@@ -36,6 +36,14 @@ AS
 	--Get a new FriendTypeId that the friend will update to  
 	DECLARE @NewFriendTypeId INT
 	EXEC uspGetFriendTypeId @FriendTypeToUpdate, @FriendType_Id = @NewFriendTypeId OUT
+	--Check if the requested friend type update already existed
+	--if it does, cancel the transaction
+	IF EXISTS (SELECT * FROM FRIEND WHERE FriendId = @FriendId AND FriendTypeId = @NewFriendTypeId)
+		BEGIN
+		PRINT'This friendship is already established'
+		RAISERROR('@FriendId and @NewFriendTypeId cannot exist before',11,1)
+		RETURN
+		END
 	DECLARE @Delete BIT = 0
 	--If the new friend type to update is 'Unfriend', prompt deleted
 	IF @FriendTypeToUpdate = 'Unfriend'
@@ -53,12 +61,12 @@ AS
 	*/
 
 	DECLARE @NotificationTypeId INT 
-	EXEC uspGetNotificationType @FriendTypeRequestResponse, @NotificationType_ID = @NotificationTypeId OUT
+	EXEC uspGetNotificationType @FriendTypeRequestResponse, 'Friends', @NotificationType_ID = @NotificationTypeId OUT
 	
 	DECLARE @TodaysDate DATETIME = GETDATE()
 	--determine if the sender is a User1 or User2 in FriendTable
-	DECLARE @SendFromUser BIT
-	EXEC uspUser1orUser2 @FriendId, @User1Id, @User1 = @SendFromUser OUT
+	--DECLARE @SendFromUser BIT
+	--EXEC uspUser1orUser2 @FriendId, @User1Id, @User1 = @SendFromUser OUT
 
 	BEGIN TRAN insertNotification
 		--Update the friend type based on the FriendId
@@ -69,8 +77,8 @@ AS
 			ELSE
 				COMMIT TRAN updateFriend
 		
-		-- Insert a new notification that @Username2 accepted @Username1's friend request
-		EXEC uspInsertNotification @FriendId, @NotificationTypeId, @SendFromUser, @TodaysDate
+		-- Insert a new notification that @User1 accepted @User2 friend request
+		EXEC uspInsertNotification @NotificationTypeId, @User1Id, @User2Id, @TodaysDate
 		IF @@ERROR <> 0 
 			ROLLBACK TRAN insertNotification
 		ELSE
