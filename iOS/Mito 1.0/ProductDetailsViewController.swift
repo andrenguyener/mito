@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import Alamofire
 
 class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     var arrQuantity = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10+"]
+    var urlAddToMitoCart = URL(string: "https://api.projectmito.io/v1/cart")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,19 +88,46 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     @IBAction func btnAddToCartPressed(_ sender: Any) {
         let objCurrentProduct = appdata.arrProductSearchResults[appdata.intCurrIndex]
-        if (appdata.arrCartLineItems.count > 0) {
-            for objLineItem in appdata.arrCartLineItems {
-                if objLineItem.objProduct.ASIN == objCurrentProduct.ASIN {
-                    objLineItem.intQuantity += (Int)(lblQuantity.text!)!
-                } else {
-                    appdata.arrCartLineItems.append(LineItem(objProduct: objCurrentProduct, intQty: (Int)(lblQuantity.text!)!))
+        let intAmazonPrice = (Double)(objCurrentProduct.price)!
+        let intQuantity = (Int)(lblQuantity.text!)!
+        let parameters: Parameters = [
+            "amazonASIN": objCurrentProduct.ASIN,
+            "amazonPrice": intAmazonPrice,
+            "quantity": intQuantity
+        ]
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlAddToMitoCart!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
+            switch response.result {
+            case .success:
+                self.fnAlertAddedToCart()
+                if let dictionary = response.result.value {
+                    let myJson = dictionary as! NSDictionary
+                    // Any code for storing locally
                 }
+                
+            case .failure(let error):
+                print("Product could not be added to cart")
+                print(error)
             }
-        } else {
-            appdata.arrCartLineItems.append(LineItem(objProduct: objCurrentProduct, intQty: (Int)(lblQuantity.text!)!))
         }
-        self.fnAlertAddedToCart()
     }
+        
+//        let objCurrentProduct = appdata.arrProductSearchResults[appdata.intCurrIndex]
+//        if (appdata.arrCartLineItems.count > 0) {
+//            for objLineItem in appdata.arrCartLineItems {
+//                if objLineItem.objProduct.ASIN == objCurrentProduct.ASIN {
+//                    objLineItem.intQuantity += (Int)(lblQuantity.text!)!
+//                } else {
+//                    appdata.arrCartLineItems.append(LineItem(objProduct: objCurrentProduct, intQty: (Int)(lblQuantity.text!)!))
+//                }
+//            }
+//        } else {
+//            appdata.arrCartLineItems.append(LineItem(objProduct: objCurrentProduct, intQty: (Int)(lblQuantity.text!)!))
+//        }
+//        self.fnAlertAddedToCart()
+//    }
     
     func fnAlertAddedToCart() {
         let alertController = UIAlertController(title: "Done", message: "Added to cart!", preferredStyle: .alert)

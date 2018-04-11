@@ -4,7 +4,7 @@
 const express = require('express');
 
 const Friend = require('./../models/friend/friend-class');
-const sendToMQ = require('./message-queue');
+const sendToMQ = require('./rabbit-queue');
 
 const FriendHandler = (friendStore) => {
     if (!friendStore) {
@@ -32,6 +32,13 @@ const FriendHandler = (friendStore) => {
             .then(friend => {
                 console.log(friend);
                 res.json(friend);
+                const data = {
+                    type: 'friend-get',
+                    friend: friend,
+                    userIdOut: user.userId
+                };
+                console.log(data);
+                sendToMQ(req, data);
             })
             .catch(err => {
                 if (err !== breakSignal) {

@@ -11,13 +11,13 @@ import Foundation
 class Month {
     var strName: String
     var strAbbrev: String
-    var intNum: Int
+    var intNum: String
     var intNumDays: Int
     
-    init(strName: String, strAbbrev: String, intNum: Int, intNumDays: Int) {
+    init(strName: String, strAbbrev: String, strNum: String, intNumDays: Int) {
         self.strName = strName
         self.strAbbrev = strAbbrev
-        self.intNum = intNum
+        self.intNum = strNum
         self.intNumDays = intNumDays
     }
     

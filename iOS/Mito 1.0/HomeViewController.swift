@@ -26,6 +26,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
+        
         print("Received text: \(text)")
     }
     
@@ -49,11 +50,19 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 //        print("userURL: \(userURL)")
         peopleUrl = URL(string: userURL)
 //        loadPeopleData()
-        print("Authorization: \(UserDefaults.standard.object(forKey: "Authorization"))")
+        print("Authorization: \(String(describing: UserDefaults.standard.object(forKey: "Authorization")))")
+        let authToken = UserDefaults.standard.object(forKey: "Authorization") as! String
 //        self.fnLoadFriendData()
 //        self.fnLoadAllUsers()
-        print("All Users count: \(appdata.arrAllUsers.count)")
-        socket = WebSocket(url: URL(string: "wss://api.projectmito.io/v1/ws?auth=\(UserDefaults.standard.object(forKey: "Authorization"))")!)
+
+//        var request = URLRequest(url: URL(string: "wss://api.projectmito.io/v1/ws?auth=\(String(describing: UserDefaults.standard.object(forKey: "Authorization")))")!)
+        var urlWebsocket = "wss://api.projectmito.io/v1/ws?auth=\(authToken)"
+        urlWebsocket = urlWebsocket.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
+        var request = URLRequest(url: URL(string: urlWebsocket)!)
+        print("Request: \(request)")
+        request.timeoutInterval = 5
+        socket = WebSocket(request: request)
+        
         socket.delegate = self
         socket.connect()
     }

@@ -35,7 +35,7 @@ func (ctx *Context) NewWebSocketsHandler(notifier *Notifier) *WebSocketsHandler 
 
 func (wsh *WebSocketsHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
-	sessState := SessionState{}
+	sessState := &SessionState{}
 	_, err := sessions.GetState(r, wsh.ctx.SessionKey, wsh.ctx.SessionStore, sessState)
 	if err != nil {
 		auth := r.URL.Query().Get("auth")
@@ -53,7 +53,7 @@ func (wsh *WebSocketsHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) 
 		http.Error(w, fmt.Sprintf("Error connecting to websocket: %v", err), http.StatusInternalServerError)
 		return
 	}
-	go wsh.notifier.AddClient(conn, sessState.User.UserId)
+	wsh.notifier.AddClient(conn, sessState.User.UserId)
 }
 
 type Connection struct {
@@ -86,6 +86,7 @@ func (n *Notifier) AddClient(client *websocket.Conn, userId int) {
 	n.clients = append(n.clients, userConnection)
 	n.mx.Unlock()
 	sliceClients := []Connection{}
+
 	for {
 		// if there is an error (user disconnects)
 		// removes the disconnected client from the slice
@@ -106,12 +107,12 @@ func (n *Notifier) AddClient(client *websocket.Conn, userId int) {
 
 		userBytes, err := ioutil.ReadAll(r)
 		if err != nil {
-			fmt.Printf("error: %v", err)
+			fmt.Printf("Error: %v", err)
 		}
 		userString := string(userBytes[:])
 		userInt, err := strconv.Atoi(userString)
 		if err != nil {
-			fmt.Printf("error: %v", err)
+			fmt.Printf("Error: %v", err)
 		}
 		for i := range n.clients {
 			if (n.clients[i].conn) == client {
@@ -120,31 +121,36 @@ func (n *Notifier) AddClient(client *websocket.Conn, userId int) {
 			}
 		}
 
-		fmt.Println(userString)
+		fmt.Printf("user string: %v", userString)
 	}
 }
 
 type userID struct {
-	userID int `json:"userIdOut"`
+	UserID    int    `json:"userIdOut"`
+	EventType string `json:"type"`
+	EventData string `json:"friend"`
 }
 
 func (n *Notifier) start() {
 	for {
 		event := <-n.eventQ
 		n.mx.RLock()
-		log.Println(n.clients)
-
-		var userDoc userID
+		// log.Printf("clients: %v", n.clients)
+		// log.Printf("Event: %v", event)
+		// log.Printf("Event Body: %v", event.Body)
+		userDoc := &userID{}
 
 		err := json.Unmarshal(event.Body, &userDoc)
 		if err != nil {
 			fmt.Println(err)
 		}
-
-		fmt.Printf("%+v", userDoc)
+		// no := string(event.Body[:])
+		// log.Printf("String Event: %v", no)
+		log.Println(userDoc)
 
 		for _, client := range n.clients {
-			if userDoc.userID == client.userID {
+			if userDoc.UserID == client.userID {
+				log.Println(event.Body)
 				err := client.conn.WriteMessage(websocket.TextMessage, event.Body)
 				if err != nil {
 					log.Printf("Error: %v", err)
