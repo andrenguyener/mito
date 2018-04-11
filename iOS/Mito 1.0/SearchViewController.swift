@@ -187,6 +187,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         for itemObj in arrItem {
                             let item = itemObj as! NSDictionary
                             let strASIN = self.fnAccesStringinObj(dictObj: item, strAttribute: "ASIN")
+                            print(strASIN)
                             var strImageURL = ""
                             if item["LargeImage"] != nil {
                                 let objLargeImage = self.fnAccessFirstDictionaryInArray(dictObj: item, arrName: "LargeImage")

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class CartViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -14,6 +15,8 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var cartTableView: UITableView!
     @IBOutlet weak var cartNumber: UILabel!
     @IBOutlet weak var cartPrice: UILabel!
+    
+    var urlGetMitoCartCall = URL(string: "https://api.projectmito.io/v1/cart/retrieve")
     
     @IBAction func finishShopping(_ sender: Any) {
         performSegue(withIdentifier: "toCheckout", sender: self)
@@ -35,6 +38,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fnLoadMitoCart()
         var priceSum: Decimal
         priceSum = 0.00
         formatter.numberStyle = .currency
@@ -90,6 +94,29 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             appdata.arrCartLineItems.removeAll()
         }
     }
+    
+    func fnLoadMitoCart() {
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlGetMitoCartCall!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    let first = dictionary as! NSArray
+                    print(first)
+                    let firstDict = first[0] as! NSDictionary
+                    print(firstDict)
+                    print(firstDict["AmazonItemId"] as! Int)
+                }
+                
+            case .failure(let error):
+                print("Get Amazon Product error")
+                print(error)
+            }
+        }
+    }
+    
     var appdata = AppData.shared
     
     @IBAction func checkoutToCart(_ sender: Any) {
