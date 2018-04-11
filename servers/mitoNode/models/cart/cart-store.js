@@ -60,7 +60,7 @@ class CartStore {
             let procedureName = "uspcInsertIntoCart";
             var request = this.request(procedureName);
             request.addParameter('UserId', TYPES.Int, userId);
-            request.addParameter('AmazonASIN', TYPES.Int, amazonASIN);
+            request.addParameter('AmazonASIN', TYPES.VarChar, amazonASIN);
             request.addParameter('AmazonPrice', TYPES.Numeric, amazonPrice);
             request.addParameter('Qty', TYPES.Int, quantity);
 

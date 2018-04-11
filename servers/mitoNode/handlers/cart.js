@@ -30,7 +30,8 @@ const CartHandler = (cartStore) => {
                 res.json(cart)
                 const data = {
                     type: 'cart-get',
-                    cart: cart
+                    cart: cart,
+                    userIdOut: userId
                 };
                 sendToMQ(req, data);
             })

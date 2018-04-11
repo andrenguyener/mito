@@ -12,7 +12,7 @@ const publicKeyAmazon = "AKIAJSRYKM2YU35LEDSQ";
 const secretKeyAmazon = "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";
 var chrsz = 8;
 // invokeRequest("harry+potter", "All", "");
-function invokeRequest(keyword) {
+function invokeRequest(type, keyword, pageNumber) {
 
     // if (getAccessKeyId() == "AWS Access Key ID") {
     //     alert("Please provide an AWS Access Key ID");
@@ -25,8 +25,20 @@ function invokeRequest(keyword) {
     // }
     // keyword = keyword.replace(/ /g,"+");
 
-    // var unsignedUrl2 = `http://webservices.amazon.com/onca/xml?Service=AWSECommerceService&Operation=ItemSearch&SubscriptionId=AKIAJSRYKM2YU35LEDSQ&AssociateTag=mitoteam-20&SearchIndex=All&Keywords=${keyword}&ItemPage=${itemPage}ResponseGroup=Images,ItemAttributes,Offers,Reviews`
-    var unsignedUrl = `http://webservices.amazon.com/onca/xml?Service=AWSECommerceService&Operation=ItemSearch&SubscriptionId=AKIAJSRYKM2YU35LEDSQ&AssociateTag=mitoteam-20&SearchIndex=All&Keywords=${keyword}&ResponseGroup=Images,ItemAttributes,Offers,Reviews`
+    // var unsignedUrl = `http://webservices.amazon.com/onca/xml?Service=AWSECommerceService&Operation=ItemSearch&SubscriptionId=AKIAJSRYKM2YU35LEDSQ&AssociateTag=mitoteam-20&SearchIndex=All&Keywords=${keyword}&ResponseGroup=Images,ItemAttributes,Offers,Reviews`
+    var unsignedUrl = "";
+    switch (type) {
+        case "keyword":
+            unsignedUrl = `http://webservices.amazon.com/onca/xml?Service=AWSECommerceService&Operation=ItemSearch&SubscriptionId=AKIAJSRYKM2YU35LEDSQ&AssociateTag=mitoteam-20&SearchIndex=All&Keywords=${keyword}&ResponseGroup=Images,ItemAttributes,Offers,Reviews`
+
+            break;
+        case "page":
+            unsignedUrl = `http://webservices.amazon.com/onca/xml?Service=AWSECommerceService&Operation=ItemSearch&SubscriptionId=AKIAJSRYKM2YU35LEDSQ&AssociateTag=mitoteam-20&SearchIndex=All&Keywords=${keyword}&ItemPage=${pageNumber}&ResponseGroup=Images,ItemAttributes,Offers,Reviews`
+
+            break;
+        default:
+            unsignedURL = `http://webservices.amazon.com/onca/xml?Service=AWSECommerceService&Operation=ItemSearch&SubscriptionId=AKIAJSRYKM2YU35LEDSQ&AssociateTag=mitoteam-20&SearchIndex=All&Keywords=${keyword}&ResponseGroup=Images,ItemAttributes,Offers,Reviews`
+    }
     // var unsignedUrl = document.getElementById("UnsignedURL").value;
     if (unsignedUrl == "") {
         alert("Please provide a URL");
@@ -230,17 +242,52 @@ const AmazonHashHandler = () => {
 
     });
 
-    router.get('/v1/amazonhash/:keyword', (req, res) => {
+    router.post('/v1/amazonhash', (req, res) => {
 
-        let keyword = req.params.keyword;
-        let urlString = invokeRequest(keyword);
-        res.json(urlString)
+        let keyword = req.body.keyword;
+        let type = "keyword";
+        console.log(req.body);
+        let urlString = invokeRequest(type, keyword, 2);
+        console.log(urlString);
+        axios.get(urlString)
+            .then(function (response) {
+                var xml = response.data
+                parseString(xml, function (err, result) {
+                    console.log(result);
+                    res.json(result);
+                });
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
 
     });
 
-    router.get('/v1/amazonhashtest/:keyword', (req, res) => {
+    router.post('/v1/amazonhashtest', (req, res) => {
 
-        let keyword = req.params.keyword;
+        let keyword = req.body.keyword;
+        let pageNumber = req.body.pageNumber;
+        let type = "page";
+        let urlString = invokeRequest(type, keyword, pageNumber);
+        console.log(`pagenumber: ${pageNumber} keyword: ${keyword}`)
+        console.log(urlString);
+        axios.get(urlString)
+            .then(function (response) {
+                var xml = response.data
+                parseString(xml, function (err, result) {
+                    console.log(result);
+                    res.json(result);
+                });
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    });
+
+    router.get('/v1/amazonitem', (req, res) => {
+        let itemASIN = req.body.itemASIN;
         // let pageItem = req.params.pageItem
         let urlString = invokeRequest(keyword);
 
@@ -257,7 +304,6 @@ const AmazonHashHandler = () => {
                 console.log(error);
             });
     });
-
 
 
 
