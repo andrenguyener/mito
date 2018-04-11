@@ -25,13 +25,13 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var productContainer: UIView!
     @IBOutlet weak var peopleContainer: UIView!
-    var intPageNum = 1
+    var strPageNum = 1
     var strSearchQuery = ""
     var appdata = AppData.shared
     var urlPeopleCall = URL(string: "https://api.projectmito.io/v1/friend/")
     var urlAllUserCall = URL(string: "https://api.projectmito.io/v1/users/all")
-    var urlAmazonProductCall = URL(string: "https://api.projectmito.io/v1/amazonhashtest/" )
-    let urlAmazonOriginal = URL(string: "https://api.projectmito.io/v1/amazonhashtest/" )
+    var urlAmazonProductCall = URL(string: "https://api.projectmito.io/v1/amazonhashtest" )
+    let urlAmazonOriginal = URL(string: "https://api.projectmito.io/v1/amazonhashtest" )
     
     let arrSections = ["Friends", "Other people on Mito"]
     var arrFriendsAndAllMitoUsers: [[Person]] = []
@@ -161,9 +161,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         searchBar.resignFirstResponder()
         appdata.arrProductSearchResults.removeAll()
-        let urlString = (urlAmazonOriginal?.absoluteString)!
-        print(urlString)
-        urlAmazonProductCall = URL(string: urlString)
+//        let urlString = (urlAmazonOriginal?.absoluteString)!
+//        print(urlString)
+//        urlAmazonProductCall = URL(string: urlString)
         productPeopleTab.isEnabled = false
         fnLoadProductData() // pass in parameters
         productTableView.reloadData()
@@ -173,14 +173,16 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func fnLoadProductData() {
         let parameters: Parameters = [
             "keyword": strSearchQuery,
-            "pageNumber": String(intPageNum)
+            "pageNumber": "1"
         ]
-        print(strSearchQuery)
-        print(intPageNum)
+        print("Search Query: \(parameters["keyword"])")
+        print("Page Number: \(parameters["pageNumber"])")
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
-        Alamofire.request(urlAmazonProductCall!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+        print(headers)
+        print("Amazon URL: \(urlAmazonProductCall)")
+        Alamofire.request(urlAmazonProductCall!, method: .get, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success:
                 if let dictionary = response.result.value {
