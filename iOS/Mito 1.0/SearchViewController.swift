@@ -13,7 +13,7 @@ import Alamofire
 var myIndex = 0
 
 class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
-
+    
     
     @IBOutlet weak var peopleTableView: UITableView!
     @IBOutlet weak var productTableView: UITableView!
@@ -25,9 +25,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var productContainer: UIView!
     @IBOutlet weak var peopleContainer: UIView!
-    var refresher: UIRefreshControl!
-    
-    var pageNum = 1
+    var intPageNum = 1
     var strSearchQuery = ""
     var appdata = AppData.shared
     var urlPeopleCall = URL(string: "https://api.projectmito.io/v1/friend/")
@@ -37,14 +35,12 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     let arrSections = ["Friends", "Other people on Mito"]
     var arrFriendsAndAllMitoUsers: [[Person]] = []
-
+    
     @IBAction func switchTab(_ sender: UISegmentedControl) {
         if productPeopleTab.selectedSegmentIndex == 0 {
             UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
         } else {
-            print("People Tab FriendsCount \(appdata.arrFriends.count)")
             fnLoadFriendsAndAllUsers()
-            print("Friends Count: \(appdata.arrFriends.count)")
             UIView.transition(from: productView, to: peopleView, duration: 0, options: .showHideTransitionViews)
         }
     }
@@ -61,26 +57,18 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
-
-        print("First FriendsCount \(appdata.arrFriends.count)")
-        fnLoadProductData()
+        
         peopleTableView.reloadData()
         productTableView.reloadData()
         spinnerProductSearch.isHidden = true
-        
-        refresher = UIRefreshControl()
-        refresher.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refresher.addTarget(self, action: #selector(SearchViewController.fnLoadFriendsAndAllUsers), for: UIControlEvents.valueChanged)
-        peopleTableView.addSubview(refresher)
     }
     
-    @objc func fnLoadFriendsAndAllUsers() {
+    func fnLoadFriendsAndAllUsers() {
+        self.arrFriendsAndAllMitoUsers.removeAll()
+        self.appdata.arrFriends.removeAll()
         self.fnLoadFriendData()
+        self.appdata.arrAllUsers.removeAll()
         self.fnLoadAllUsers()
-        self.arrFriendsAndAllMitoUsers.append(appdata.arrFriends)
-        self.arrFriendsAndAllMitoUsers.append(appdata.arrAllUsers)
-        self.peopleTableView.reloadData()
-        refresher.endRefreshing()
     }
     
     // Loading Friends (people tab)
@@ -97,7 +85,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let dict2 = dictionary as! NSArray
                     for obj in dict2 {
                         let object = obj as! NSDictionary
-                        //                        print(object)
                         let p: Person = Person(firstName: (object["UserFname"] as? String)!,
                                                lastName: (object["UserLname"] as? String)!,
                                                email: (object["UserEmail"] as? String?)!!,
@@ -106,9 +93,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                                strUsername: (object["Username"] as? String)!)
                         self.appdata.arrFriends.append(p)
                     }
-//                    DispatchQueue.main.async {
-//                        self.peopleTableView.reloadData()
-//                    }
+                    self.arrFriendsAndAllMitoUsers.append(self.appdata.arrFriends)
+                    print("Friends count: \(self.appdata.arrFriends.count)")
+                    DispatchQueue.main.async {
+                        self.peopleTableView.reloadData()
+                    }
                 }
                 
             case .failure(let error):
@@ -132,9 +121,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         let objPerson = Person(firstName: objPerson2["userFname"] as! String, lastName: objPerson2["userLname"] as! String, email: objPerson2["userEmail"] as! String, avatar: objPerson2["photoURL"] as! String, intUserID: objPerson2["userId"] as! Int, strUsername: objPerson2["username"] as! String)
                         self.appdata.arrAllUsers.append(objPerson)
                     }
-                    DispatchQueue.main.async {
-                        self.peopleTableView.reloadData()
-                    }
+                    self.arrFriendsAndAllMitoUsers.append(self.appdata.arrAllUsers)
+                    print("All Users count: \(self.appdata.arrAllUsers.count)")
                 }
                 
             case .failure(let error):
@@ -173,15 +161,22 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         searchBar.resignFirstResponder()
         appdata.arrProductSearchResults.removeAll()
-        let urlString = (urlAmazonOriginal?.absoluteString)! + strSearchQuery
+        let urlString = (urlAmazonOriginal?.absoluteString)!
+        print(urlString)
         urlAmazonProductCall = URL(string: urlString)
         productPeopleTab.isEnabled = false
-        fnLoadProductData()
+        fnLoadProductData() // pass in parameters
         productTableView.reloadData()
     }
-
+    
     // Product Tab View
     func fnLoadProductData() {
+        let parameters: Parameters = [
+            "keyword": strSearchQuery,
+            "pageNumber": String(intPageNum)
+        ]
+        print(strSearchQuery)
+        print(intPageNum)
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
@@ -190,6 +185,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             case .success:
                 if let dictionary = response.result.value {
                     let myJson = dictionary as! NSDictionary
+                    print(myJson)
                     let itemSearchResponse = myJson["ItemSearchResponse"] as! NSDictionary
                     let objItems = self.fnAccessFirstDictionaryInArray(dictObj: itemSearchResponse, arrName: "Items")
                     if objItems["Item"] == nil {
@@ -199,6 +195,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         for itemObj in arrItem {
                             let item = itemObj as! NSDictionary
                             let strASIN = self.fnAccesStringinObj(dictObj: item, strAttribute: "ASIN")
+                            print(strASIN)
                             var strImageURL = ""
                             if item["LargeImage"] != nil {
                                 let objLargeImage = self.fnAccessFirstDictionaryInArray(dictObj: item, arrName: "LargeImage")
@@ -251,6 +248,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             self.appdata.arrProductSearchResults.append(product)
                         }
                     }
+                    print("Product Table Size: \(self.appdata.arrProductSearchResults.count)")
                     DispatchQueue.main.async {
                         self.productTableView.reloadData()
                         self.productPeopleTab.isEnabled = true
@@ -275,14 +273,21 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if productPeopleTab.selectedSegmentIndex == 1 {
+            print("People: \(section)")
             return self.arrSections[section]
         } else {
-            return nil
+            print("Product: \(section)")
+            return "Test"
         }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return arrFriendsAndAllMitoUsers.count
+        if productPeopleTab.selectedSegmentIndex == 1 {
+            print("Friends and All Users Count: \(arrFriendsAndAllMitoUsers.count)")
+            return arrFriendsAndAllMitoUsers.count
+        } else {
+            return 1
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -301,6 +306,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             performSegue(withIdentifier: "productDetail", sender: self)
         } else {
             myIndex = indexPath.row
+            print("didSelectRowAt Index: \(myIndex)")
             performSegue(withIdentifier: "searchToMitoProfile", sender: self)
         }
     }
@@ -348,4 +354,3 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return arrTemp[0] as! String
     }
 }
-

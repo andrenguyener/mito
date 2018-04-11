@@ -54,7 +54,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let authToken = UserDefaults.standard.object(forKey: "Authorization") as! String
 //        self.fnLoadFriendData()
 //        self.fnLoadAllUsers()
-        print("All Users count: \(appdata.arrAllUsers.count)")
 
 //        var request = URLRequest(url: URL(string: "wss://api.projectmito.io/v1/ws?auth=\(String(describing: UserDefaults.standard.object(forKey: "Authorization")))")!)
         var urlWebsocket = "wss://api.projectmito.io/v1/ws?auth=\(authToken)"
