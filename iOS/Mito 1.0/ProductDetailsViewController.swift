@@ -87,10 +87,13 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     
     @IBAction func btnAddToCartPressed(_ sender: Any) {
+        let objCurrentProduct = appdata.arrProductSearchResults[appdata.intCurrIndex]
+        let intAmazonPrice = (Double)(objCurrentProduct.price)!
+        let intQuantity = (Int)(lblQuantity.text!)!
         let parameters: Parameters = [
-            "amazonASIN": "",
-            "amazonPrice": 12.3,
-            "quantity": 12
+            "amazonASIN": objCurrentProduct.ASIN,
+            "amazonPrice": intAmazonPrice,
+            "quantity": intQuantity
         ]
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
@@ -98,13 +101,14 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
         Alamofire.request(urlAddToMitoCart!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
             switch response.result {
             case .success:
+                self.fnAlertAddedToCart()
                 if let dictionary = response.result.value {
                     let myJson = dictionary as! NSDictionary
                     // Any code for storing locally
                 }
                 
             case .failure(let error):
-                print("Get Amazon Product error")
+                print("Product could not be added to cart")
                 print(error)
             }
         }

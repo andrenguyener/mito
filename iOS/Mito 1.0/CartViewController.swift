@@ -103,11 +103,18 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             switch response.result {
             case .success:
                 if let dictionary = response.result.value {
-                    let first = dictionary as! NSArray
-                    print(first)
-                    let firstDict = first[0] as! NSDictionary
-                    print(firstDict)
-                    print(firstDict["AmazonItemId"] as! Int)
+                    let arrCartItems = dictionary as! NSArray
+                    for objCartItem in arrCartItems {
+                        let dictCartItem = objCartItem as! NSDictionary
+                        let amazonPrice = dictCartItem["AmazonItemPrice"] as! Int
+                        let pprice = String(amazonPrice)
+                        print(dictCartItem)
+                        let objectItem = Product(image: "123", ASIN: dictCartItem["AmazonItemId"] as! String, title: dictCartItem["AmazonItemId"] as! String, publisher: "publisher", price: pprice, description: "description")
+                        let intQuantity = dictCartItem["Quantity"] as! Int
+                        let lineItem = LineItem(objProduct: objectItem, intQty: intQuantity)
+                        self.appdata.arrCartLineItems.append(lineItem)
+                    }
+                    print(self.appdata.arrCartLineItems.count)
                 }
                 
             case .failure(let error):

@@ -25,7 +25,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var productContainer: UIView!
     @IBOutlet weak var peopleContainer: UIView!
-    var pageNum = 1
+    var intPageNum = 1
     var strSearchQuery = ""
     var appdata = AppData.shared
     var urlPeopleCall = URL(string: "https://api.projectmito.io/v1/friend/")
@@ -161,15 +161,22 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         searchBar.resignFirstResponder()
         appdata.arrProductSearchResults.removeAll()
-        let urlString = (urlAmazonOriginal?.absoluteString)! + strSearchQuery
+        let urlString = (urlAmazonOriginal?.absoluteString)!
+        print(urlString)
         urlAmazonProductCall = URL(string: urlString)
         productPeopleTab.isEnabled = false
-        fnLoadProductData()
+        fnLoadProductData() // pass in parameters
         productTableView.reloadData()
     }
     
     // Product Tab View
     func fnLoadProductData() {
+        let parameters: Parameters = [
+            "keyword": strSearchQuery,
+            "pageNumber": String(intPageNum)
+        ]
+        print(strSearchQuery)
+        print(intPageNum)
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
@@ -178,6 +185,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             case .success:
                 if let dictionary = response.result.value {
                     let myJson = dictionary as! NSDictionary
+                    print(myJson)
                     let itemSearchResponse = myJson["ItemSearchResponse"] as! NSDictionary
                     let objItems = self.fnAccessFirstDictionaryInArray(dictObj: itemSearchResponse, arrName: "Items")
                     if objItems["Item"] == nil {
