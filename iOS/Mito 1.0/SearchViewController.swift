@@ -35,6 +35,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     let arrSections = ["Friends", "Other people on Mito"]
     var arrFriendsAndAllMitoUsers: [[Person]] = []
+    var arrCurrentFriendsAndAllMitoUsers: [[Person]] = []
     
     @IBAction func switchTab(_ sender: UISegmentedControl) {
         if productPeopleTab.selectedSegmentIndex == 0 {
@@ -44,7 +45,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             UIView.transition(from: productView, to: peopleView, duration: 0, options: .showHideTransitionViews)
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         peopleTableView.delegate = self
@@ -61,6 +62,17 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         peopleTableView.reloadData()
         productTableView.reloadData()
         spinnerProductSearch.isHidden = true
+    }
+    
+    func setUpSearchBar() {
+        appdata.arrAllUsers.filter { (person) -> Bool in
+            guard let text = searchBar.text else { return false}
+            person.description().contains(Character(searchBar.text!))
+        }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonDidChange selectedScope: Int) {
+        
     }
     
     func fnLoadFriendsAndAllUsers() {
@@ -146,26 +158,31 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     // Pressed Enter
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        spinnerProductSearch.isHidden = false
-        spinnerProductSearch.startAnimating()
+        if productPeopleTab.selectedSegmentIndex == 0 {
+            spinnerProductSearch.isHidden = false
+            spinnerProductSearch.startAnimating()
+            if (searchBar.text!.count > 0) {
+                strSearchQuery = ""
+                strSearchQuery = searchBar.text!.replacingOccurrences(of: " ", with: "+")
+            } else {
+                strSearchQuery = "Amazon"
+                searchBar.text = "Amazon"
+            }
+            searchBar.resignFirstResponder()
+            appdata.arrProductSearchResults.removeAll()
+            let urlString = (urlAmazonOriginal?.absoluteString)! + strSearchQuery
+            urlAmazonProductCall = URL(string: urlString)
+            productPeopleTab.isEnabled = false
+            fnLoadProductData()
+            productTableView.reloadData()
+        } else {
+            
+        }
+        
         if (productPeopleTab.selectedSegmentIndex == 1) {
             UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
             productPeopleTab.selectedSegmentIndex = 0
         }
-        if (searchBar.text!.count > 0) {
-            strSearchQuery = ""
-            strSearchQuery = searchBar.text!.replacingOccurrences(of: " ", with: "+")
-        } else {
-            strSearchQuery = "Amazon"
-            searchBar.text = "Amazon"
-        }
-        searchBar.resignFirstResponder()
-        appdata.arrProductSearchResults.removeAll()
-        let urlString = (urlAmazonOriginal?.absoluteString)! + strSearchQuery
-        urlAmazonProductCall = URL(string: urlString)
-        productPeopleTab.isEnabled = false
-        fnLoadProductData()
-        productTableView.reloadData()
     }
     
     // Product Tab View
