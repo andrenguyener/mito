@@ -182,7 +182,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         ]
         print(headers)
         print("Amazon URL: \(urlAmazonProductCall)")
-        Alamofire.request(urlAmazonProductCall!, method: .get, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+        Alamofire.request(urlAmazonProductCall!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success:
                 if let dictionary = response.result.value {
