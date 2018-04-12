@@ -35,12 +35,13 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var recipientName: UILabel!
     
     let formatter = NumberFormatter()
+    var intNumItems = 0
+    var priceSum : Decimal = 0.00
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        appdata.arrCartLineItems.removeAll()
         fnLoadMitoCart()
-        var priceSum: Decimal
-        priceSum = 0.00
         formatter.numberStyle = .currency
         formatter.locale = Locale(identifier: "en_US")
         for element in appdata.arrCartLineItems {
@@ -51,7 +52,6 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
                 priceSum += totalAmt
             }
         }
-        var intNumItems = 0
         for objCartItem in appdata.arrCartLineItems {
             intNumItems += objCartItem.intQuantity
         }
@@ -114,7 +114,20 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
                         let lineItem = LineItem(objProduct: objectItem, intQty: intQuantity)
                         self.appdata.arrCartLineItems.append(lineItem)
                     }
-                    print(self.appdata.arrCartLineItems.count)
+                    var strItems = "items"
+                    if self.intNumItems == 1 {
+                        strItems = "item"
+                    }
+                    self.cartNumber.text = "Cart has \(self.intNumItems) \(strItems)"
+                    
+                    // rounds 2 decimal places for priceSum
+                    let tempSum = Double(truncating: self.priceSum as NSNumber)
+                    let temp2Sum = Double(round(100 * tempSum)/100)
+                    
+                    self.cartPrice.text = "$\(temp2Sum)"
+                    DispatchQueue.main.async {
+                        self.cartTableView.reloadData()
+                    }
                 }
                 
             case .failure(let error):
