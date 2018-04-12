@@ -17,6 +17,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var cartPrice: UILabel!
     
     var urlGetMitoCartCall = URL(string: "https://api.projectmito.io/v1/cart/retrieve")
+    var urlAlterMitoCart = URL(string: "https://api.projectmito.io/v1/cart")
     
     @IBAction func finishShopping(_ sender: Any) {
         performSegue(withIdentifier: "toCheckout", sender: self)
@@ -186,7 +187,50 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         cell.lblSellerName.text = cartObj.objProduct.publisher
         cell.btnQuantity.setTitle((String)(cartObj.intQuantity), for: .normal)
+        cell.btnQuantity.tag = indexPath.row
+        cell.btnQuantity.addTarget(self, action: #selector(self.fnRemoveItem(_:)), for: .touchUpInside)
         return cell
+    }
+    
+    @objc func fnRemoveItem(_ button: UIButton) {
+        print(button.tag)
+        let intLineItemIndex = button.tag
+        fnMakeCallToRemoveItem(intLineItemIndex: intLineItemIndex)
+        appdata.arrCartLineItems.remove(at: intLineItemIndex)
+    }
+    
+    func fnMakeCallToRemoveItem(intLineItemIndex: Int) {
+        let objCurrentProduct = appdata.arrCartLineItems[intLineItemIndex].objProduct
+        print(objCurrentProduct.values())
+        var intAmazonPrice : Decimal = 0.00
+        let itemPrice = objCurrentProduct.price // change later
+        if let number = formatter.number(from: itemPrice) {
+            intAmazonPrice = number.decimalValue
+        }
+        let parameters: Parameters = [
+            "amazonASIN": objCurrentProduct.ASIN,
+            "amazonPrice": intAmazonPrice,
+            "quantity": 0
+        ]
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlAlterMitoCart!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    print(dictionary)
+                    DispatchQueue.main.async {
+                        self.cartTableView.reloadData()
+                    }
+                    // Any code for storing locally
+                }
+                
+            case .failure(let error):
+                print("Product could not be added to cart")
+                print(error)
+            }
+        }
     }
     
 }
