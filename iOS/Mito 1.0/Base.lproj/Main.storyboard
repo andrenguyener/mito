@@ -999,8 +999,8 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VEt-Fh-mHZ">
-                                                                    <rect key="frame" x="0.0" y="81" width="30" height="27"/>
-                                                                    <state key="normal" title="Qty"/>
+                                                                    <rect key="frame" x="0.0" y="81" width="45" height="27"/>
+                                                                    <state key="normal" title="Delete"/>
                                                                 </button>
                                                             </subviews>
                                                         </stackView>
@@ -1020,7 +1020,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="btnQuantity" destination="VEt-Fh-mHZ" id="8d5-L2-brb"/>
+                                            <outlet property="btnDelete" destination="VEt-Fh-mHZ" id="8d5-L2-brb"/>
                                             <outlet property="imgItemImage" destination="WXz-Qa-jgh" id="1r8-uK-q1G"/>
                                             <outlet property="lblItemName" destination="rsV-cY-dGJ" id="7jQ-bq-Nd8"/>
                                             <outlet property="lblPrice" destination="8db-2w-phI" id="iAO-QM-vzm"/>
@@ -1474,6 +1474,7 @@
                         <outlet property="img" destination="2VX-4k-3cu" id="Xdx-l5-yIt"/>
                         <outlet property="lblEmail" destination="fZd-x7-rdQ" id="TFf-5A-aga"/>
                         <outlet property="lblName" destination="k1g-f7-mfA" id="Q0T-y5-OaF"/>
+                        <outlet property="lblNumFriends" destination="Rwi-hr-9PZ" id="8Rx-nb-aDj"/>
                         <segue destination="5ev-RP-TnR" kind="show" identifier="segPeopleDetailsToSearchView" id="kS1-pK-LOk"/>
                     </connections>
                 </viewController>

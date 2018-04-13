@@ -16,6 +16,7 @@ class PeopleDetailsViewController: UIViewController {
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblEmail: UILabel!
     @IBOutlet weak var img: UIImageView!
+    @IBOutlet weak var lblNumFriends: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,7 @@ class PeopleDetailsViewController: UIViewController {
         let friend = appdata.arrAllUsers[myIndex]
         lblName.text = "\(friend.firstName) \(friend.lastName)"
         lblEmail.text = "\(friend.email)"
+//        lblNumFriends.text =
         let url = URL(string:"\(friend.avatar)")
         if let data = try? Data(contentsOf: url!) {
             img.image = UIImage(data: data)!
@@ -66,6 +68,7 @@ class PeopleDetailsViewController: UIViewController {
             }
         }
     }
+
     
     func fnAlertRequestSent() {
         let alertController = UIAlertController(title: "Done", message: "Friend Request Sent", preferredStyle: .alert)

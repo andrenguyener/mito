@@ -15,7 +15,7 @@ class CartTableViewCell: UITableViewCell {
     @IBOutlet weak var lblItemName: UILabel!
     @IBOutlet weak var lblSellerName: UILabel!
     @IBOutlet weak var lblPrice: UILabel!
-    @IBOutlet weak var btnQuantity: UIButton!
+    @IBOutlet weak var btnDelete: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
