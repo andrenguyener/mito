@@ -423,7 +423,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXd-TL-RFe">
-                                <rect key="frame" x="117" y="20" width="141.5" height="43"/>
+                                <rect key="frame" x="117.5" y="20" width="141.5" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="sGD-uo-CBn"/>
                                 </constraints>
@@ -946,7 +946,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cart has 0 items: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="svl-x9-EzE">
-                                <rect key="frame" x="16" y="101" width="133" height="20"/>
+                                <rect key="frame" x="16" y="101" width="132.5" height="20"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -961,62 +961,91 @@
                                 <rect key="frame" x="16" y="163" width="343" height="427"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cartCell" rowHeight="158" id="ExR-FD-V61" customClass="CartTableViewCell" customModule="Mito_1_0" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="343" height="158"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cartCell" rowHeight="180" id="ExR-FD-V61" customClass="CartTableViewCell" customModule="Mito_1_0" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="343" height="180"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ExR-FD-V61" id="WOD-8o-eza">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="157.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="179.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="sfM-oJ-pDo">
-                                                    <rect key="frame" x="14" y="25" width="315" height="108"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="KCg-Jk-y9B">
+                                                    <rect key="frame" x="15" y="16" width="313" height="148"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WXz-Qa-jgh">
-                                                            <rect key="frame" x="0.0" y="0.0" width="94" height="108"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" secondItem="WXz-Qa-jgh" secondAttribute="height" multiplier="93:107" id="woA-6V-TV7"/>
-                                                            </constraints>
-                                                        </imageView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="fDj-D7-W7Y">
-                                                            <rect key="frame" x="108" y="0.0" width="207" height="108"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="sfM-oJ-pDo">
+                                                            <rect key="frame" x="0.0" y="0.0" width="313" height="118"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rsV-cY-dGJ">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="74" height="27"/>
-                                                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seller" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJE-kI-NPy">
-                                                                    <rect key="frame" x="0.0" y="27" width="22.5" height="27"/>
-                                                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="9"/>
-                                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8db-2w-phI">
-                                                                    <rect key="frame" x="0.0" y="54" width="34" height="27"/>
-                                                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="t0a-22-nNR">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="313" height="108"/>
+                                                                    <subviews>
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WXz-Qa-jgh">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="94" height="108"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" secondItem="WXz-Qa-jgh" secondAttribute="height" multiplier="93:107" id="woA-6V-TV7"/>
+                                                                            </constraints>
+                                                                        </imageView>
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="fDj-D7-W7Y">
+                                                                            <rect key="frame" x="108" y="0.0" width="205" height="108"/>
+                                                                            <subviews>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rsV-cY-dGJ">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="74" height="41.5"/>
+                                                                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
+                                                                                    <nil key="textColor"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seller" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJE-kI-NPy">
+                                                                                    <rect key="frame" x="0.0" y="41.5" width="22.5" height="25"/>
+                                                                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="9"/>
+                                                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8db-2w-phI">
+                                                                                    <rect key="frame" x="0.0" y="66.5" width="34" height="41.5"/>
+                                                                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
+                                                                                    <nil key="textColor"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                            </subviews>
+                                                                        </stackView>
+                                                                    </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="bottom" secondItem="fDj-D7-W7Y" secondAttribute="bottom" id="He9-QK-9Bb"/>
+                                                                    </constraints>
+                                                                </stackView>
+                                                            </subviews>
+                                                        </stackView>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="wiU-bb-mXd">
+                                                            <rect key="frame" x="0.0" y="118" width="313" height="30"/>
+                                                            <subviews>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ieo-lu-Cca">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="156.5" height="30"/>
+                                                                    <state key="normal" title="Quantity"/>
+                                                                </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VEt-Fh-mHZ">
-                                                                    <rect key="frame" x="0.0" y="81" width="45" height="27"/>
+                                                                    <rect key="frame" x="156.5" y="0.0" width="156.5" height="30"/>
                                                                     <state key="normal" title="Delete"/>
                                                                 </button>
                                                             </subviews>
                                                         </stackView>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstAttribute="trailing" secondItem="fDj-D7-W7Y" secondAttribute="trailing" id="Jq4-T3-Hv3"/>
-                                                        <constraint firstItem="fDj-D7-W7Y" firstAttribute="leading" secondItem="WXz-Qa-jgh" secondAttribute="trailing" constant="14" id="UJH-Fe-rxb"/>
-                                                        <constraint firstAttribute="bottom" secondItem="fDj-D7-W7Y" secondAttribute="bottom" id="ZTN-ew-hpO"/>
+                                                        <constraint firstItem="wiU-bb-mXd" firstAttribute="top" secondItem="sfM-oJ-pDo" secondAttribute="bottom" id="DC0-Pl-XqF"/>
+                                                        <constraint firstItem="wiU-bb-mXd" firstAttribute="top" secondItem="sfM-oJ-pDo" secondAttribute="bottom" id="EQu-Jo-hqi"/>
+                                                        <constraint firstAttribute="bottom" secondItem="wiU-bb-mXd" secondAttribute="bottom" id="MTN-9t-g29"/>
+                                                        <constraint firstItem="sfM-oJ-pDo" firstAttribute="top" secondItem="KCg-Jk-y9B" secondAttribute="top" id="YrR-A0-nYu"/>
+                                                        <constraint firstAttribute="trailing" secondItem="wiU-bb-mXd" secondAttribute="trailing" id="b1g-NO-KHs"/>
+                                                        <constraint firstItem="sfM-oJ-pDo" firstAttribute="leading" secondItem="KCg-Jk-y9B" secondAttribute="leading" id="bAr-Hj-QvZ"/>
+                                                        <constraint firstAttribute="trailing" secondItem="sfM-oJ-pDo" secondAttribute="trailing" id="dm5-sI-Kda"/>
+                                                        <constraint firstItem="wiU-bb-mXd" firstAttribute="leading" secondItem="KCg-Jk-y9B" secondAttribute="leading" id="hmQ-mR-Haz"/>
                                                     </constraints>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="sfM-oJ-pDo" firstAttribute="leading" secondItem="WOD-8o-eza" secondAttribute="leading" constant="14" id="1lG-BS-0qt"/>
-                                                <constraint firstAttribute="trailing" secondItem="sfM-oJ-pDo" secondAttribute="trailing" constant="14" id="5UI-d2-gxZ"/>
-                                                <constraint firstItem="sfM-oJ-pDo" firstAttribute="top" secondItem="WOD-8o-eza" secondAttribute="top" constant="25" id="Rjs-ov-WpP"/>
-                                                <constraint firstAttribute="bottom" secondItem="sfM-oJ-pDo" secondAttribute="bottom" constant="25" id="l2a-MZ-d2m"/>
+                                                <constraint firstItem="KCg-Jk-y9B" firstAttribute="centerX" secondItem="WOD-8o-eza" secondAttribute="centerX" id="1XM-NH-wrw"/>
+                                                <constraint firstItem="KCg-Jk-y9B" firstAttribute="centerY" secondItem="WOD-8o-eza" secondAttribute="centerY" id="Cs2-iE-Rbk"/>
+                                                <constraint firstItem="KCg-Jk-y9B" firstAttribute="leading" secondItem="WOD-8o-eza" secondAttribute="leadingMargin" id="cQi-eo-g50"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="KCg-Jk-y9B" secondAttribute="bottom" constant="5" id="gGU-v4-tdS"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="KCg-Jk-y9B" secondAttribute="trailing" id="omm-Hn-ZWQ"/>
+                                                <constraint firstItem="KCg-Jk-y9B" firstAttribute="top" secondItem="WOD-8o-eza" secondAttribute="topMargin" constant="5" id="qga-g9-AUB"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
