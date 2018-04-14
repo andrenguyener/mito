@@ -27,8 +27,6 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print("objCartItem: \(objCartItem)")
-        print("Quantity \(appdata.arrQuantity[row])")
         pickerviewEditQuantity.isHidden = true
         let intNewQuantity = Int(appdata.arrQuantity[row])!
         fnUpdateLineItemQuantity(objIndex: objCartItem, intNewQuantity: intNewQuantity)
@@ -155,6 +153,10 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    func fnGetCartSubTotal() {
+        
+    }
+    
     func fnLoadMitoCart() {
         appdata.arrCartLineItems.removeAll()
         let headers: HTTPHeaders = [
@@ -175,18 +177,30 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
                         let lineItem = LineItem(objProduct: objectItem, intQty: intQuantity)
                         self.appdata.arrCartLineItems.append(lineItem)
                     }
-                    var strItems = "items"
-                    if self.intNumItems == 1 {
-                        strItems = "item"
-                    }
-                    self.cartNumber.text = "Cart has \(self.intNumItems) \(strItems)"
-                    
-                    // rounds 2 decimal places for priceSum
-                    let tempSum = Double(truncating: self.priceSum as NSNumber)
-                    let temp2Sum = Double(round(100 * tempSum)/100)
-                    
-                    self.cartPrice.text = "$\(temp2Sum)"
                     DispatchQueue.main.async {
+                        self.intNumItems = 0
+                        for element in self.appdata.arrCartLineItems {
+                            let itemPrice = element.objProduct.price // change later
+                            if let number = self.formatter.number(from: itemPrice) {
+                                let amount = number.decimalValue
+                                let totalAmt = amount * (Decimal)(element.intQuantity)
+                                self.priceSum += totalAmt
+                            }
+                        }
+                        for objCartItem in self.appdata.arrCartLineItems {
+                            self.intNumItems += objCartItem.intQuantity
+                        }
+                        var strItems = "items"
+                        if self.intNumItems == 1 {
+                            strItems = "item"
+                        }
+                        self.cartNumber.text = "Cart has \(self.intNumItems) \(strItems)"
+                        
+                        // rounds 2 decimal places for priceSum
+                        let tempSum = Double(truncating: self.priceSum as NSNumber)
+                        let temp2Sum = Double(round(100 * tempSum)/100)
+                        
+                        self.cartPrice.text = "$\(temp2Sum)"
                         self.cartTableView.reloadData()
                     }
                 }
