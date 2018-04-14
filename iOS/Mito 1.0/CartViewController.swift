@@ -188,6 +188,8 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.lblSellerName.text = String(cartObj.intQuantity) //cartObj.objProduct.publisher
         cell.btnDelete.tag = indexPath.row
         cell.btnDelete.addTarget(self, action: #selector(self.fnRemoveItem(_:)), for: .touchUpInside)
+        cell.btnEditQuantity.tag = indexPath.row
+        cell.btnEditQuantity.addTarget(self, action: #selector(self.fnEditQuantity(_:)), for: .touchUpInside)
         return cell
     }
     
@@ -196,6 +198,10 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         let intLineItemIndex = button.tag
         fnMakeCallToRemoveItem(intLineItemIndex: intLineItemIndex)
         appdata.arrCartLineItems.remove(at: intLineItemIndex)
+    }
+    
+    @objc func fnEditQuantity(_ button: UIButton) {
+        print(button.tag)
     }
     
     func fnMakeCallToRemoveItem(intLineItemIndex: Int) {
