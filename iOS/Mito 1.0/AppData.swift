@@ -16,6 +16,7 @@ class AppData: NSObject {
     open var arrFriends: [Person] = []
     open var arrAllUsers: [Person] = []
     open var arrPendingFriends: [Person] = []
+    open var arrQuantity = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10+"]
     
     open var arrProductSearchResults: [Product] = []
     

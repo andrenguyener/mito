@@ -9,12 +9,30 @@
 import UIKit
 import Alamofire
 
-class CartViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class CartViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return appdata.arrQuantity.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return appdata.arrQuantity[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        print("Quantity \(appdata.arrQuantity[row])")
+    }
+    
 
     //User's Cart
     @IBOutlet weak var cartTableView: UITableView!
     @IBOutlet weak var cartNumber: UILabel!
     @IBOutlet weak var cartPrice: UILabel!
+    @IBOutlet weak var pickerviewEditQuantity: UIPickerView!
     
     var urlGetMitoCartCall = URL(string: "https://api.projectmito.io/v1/cart/retrieve")
     var urlAlterMitoCart = URL(string: "https://api.projectmito.io/v1/cart")
@@ -22,6 +40,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func finishShopping(_ sender: Any) {
         performSegue(withIdentifier: "toCheckout", sender: self)
     }
+    
     @IBAction func backButton(_ sender: Any) {
         performSegue(withIdentifier: "cartToHome", sender: self)
     }
@@ -41,6 +60,8 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        pickerviewEditQuantity.dataSource = self
+        pickerviewEditQuantity.delegate = self
         appdata.arrCartLineItems.removeAll()
         fnLoadMitoCart()
         formatter.numberStyle = .currency
@@ -201,7 +222,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @objc func fnEditQuantity(_ button: UIButton) {
-        print(button.tag)
+        print("Button Tag: \(button.tag)")
     }
     
     func fnMakeCallToRemoveItem(intLineItemIndex: Int) {

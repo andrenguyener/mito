@@ -1080,6 +1080,9 @@
                                     <constraint firstAttribute="width" constant="92" id="kco-jB-0pD"/>
                                 </constraints>
                             </imageView>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y8N-PG-Y96">
+                                <rect key="frame" x="28" y="226" width="320" height="216"/>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -1087,7 +1090,9 @@
                             <constraint firstItem="LGj-Wv-dqw" firstAttribute="top" secondItem="BwF-qQ-dL0" secondAttribute="bottom" constant="8" symbolic="YES" id="6Xp-de-UEQ"/>
                             <constraint firstAttribute="bottom" secondItem="o0k-x2-XBB" secondAttribute="bottom" constant="20" symbolic="YES" id="8bY-Hp-cr4"/>
                             <constraint firstItem="19M-VW-LLK" firstAttribute="centerX" secondItem="3Yt-AX-8vw" secondAttribute="centerX" id="B4b-Sw-5Jc"/>
+                            <constraint firstItem="Y8N-PG-Y96" firstAttribute="centerX" secondItem="vGd-ry-6ZR" secondAttribute="centerX" id="CSf-6M-AVF"/>
                             <constraint firstAttribute="trailing" secondItem="19M-VW-LLK" secondAttribute="trailing" id="KsM-16-3Ax"/>
+                            <constraint firstItem="Y8N-PG-Y96" firstAttribute="centerY" secondItem="vGd-ry-6ZR" secondAttribute="centerY" id="MLL-PR-h14"/>
                             <constraint firstItem="3Yt-AX-8vw" firstAttribute="top" secondItem="svl-x9-EzE" secondAttribute="bottom" constant="42" id="NEn-Uo-sHb"/>
                             <constraint firstItem="svl-x9-EzE" firstAttribute="leading" secondItem="3Yt-AX-8vw" secondAttribute="leading" id="NoZ-bq-XQx"/>
                             <constraint firstItem="svl-x9-EzE" firstAttribute="top" secondItem="19M-VW-LLK" secondAttribute="bottom" constant="9" id="STM-3B-oYL"/>
@@ -1105,6 +1110,7 @@
                         <outlet property="cartNumber" destination="svl-x9-EzE" id="yMR-4c-rk1"/>
                         <outlet property="cartPrice" destination="f1n-JT-FAF" id="51x-aO-2tZ"/>
                         <outlet property="cartTableView" destination="3Yt-AX-8vw" id="cP9-Rn-K3g"/>
+                        <outlet property="pickerviewEditQuantity" destination="Y8N-PG-Y96" id="9Pz-85-Z4b"/>
                         <segue destination="5ev-RP-TnR" kind="show" identifier="cartToHome" id="4Df-8F-JjS"/>
                         <segue destination="XCS-Ex-cdl" kind="show" identifier="toCheckout" animates="NO" id="2Se-oB-5nh"/>
                     </connections>
