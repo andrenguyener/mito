@@ -465,7 +465,7 @@
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mYM-uR-Wdp" userLabel="Cart">
-                                        <rect key="frame" x="312" y="47" width="22" height="23"/>
+                                        <rect key="frame" x="312" y="47" width="43" height="23"/>
                                         <state key="normal" image="Cart Solid White Icon.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -476,8 +476,9 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="mYM-uR-Wdp" secondAttribute="trailing" constant="20" id="2rb-fj-Sl3"/>
                                     <constraint firstItem="0Bi-17-Cej" firstAttribute="top" secondItem="dns-wn-RGZ" secondAttribute="top" constant="38" id="3Vq-ol-LMM"/>
-                                    <constraint firstItem="mYM-uR-Wdp" firstAttribute="leading" secondItem="0Bi-17-Cej" secondAttribute="trailing" constant="79" id="9JG-ec-3JH"/>
+                                    <constraint firstItem="mYM-uR-Wdp" firstAttribute="leading" secondItem="0Bi-17-Cej" secondAttribute="trailing" priority="750" constant="79" id="9JG-ec-3JH"/>
                                     <constraint firstItem="mYM-uR-Wdp" firstAttribute="top" secondItem="dns-wn-RGZ" secondAttribute="top" constant="47" id="FPM-hS-yjs"/>
                                     <constraint firstItem="0Bi-17-Cej" firstAttribute="centerX" secondItem="dns-wn-RGZ" secondAttribute="centerX" id="TxN-5Y-MuV"/>
                                 </constraints>
@@ -1606,6 +1607,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="4Df-8F-JjS"/>
-        <segue reference="cI7-Td-TzM"/>
+        <segue reference="IOv-WN-4XC"/>
     </inferredMetricsTieBreakers>
 </document>
