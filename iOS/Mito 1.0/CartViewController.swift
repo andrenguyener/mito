@@ -11,6 +11,7 @@ import Alamofire
 
 class CartViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
+    var appdata = AppData.shared
     var objCartItem = 0
     var urlAddToMitoCart = URL(string: "https://api.projectmito.io/v1/cart")
     
@@ -44,7 +45,6 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         Alamofire.request(urlAddToMitoCart!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
             switch response.result {
             case .success:
-//                self.fnAlertAddedToCart()
                 if let dictionary = response.result.value {
                     print(dictionary)
                     // Any code for storing locally
@@ -55,7 +55,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }
                 
             case .failure(let error):
-                print("Product could not be added to cart")
+                print("Line item quantity could not updated")
                 print(error)
             }
         }
@@ -93,44 +93,20 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if pickerviewEditQuantity != nil {
+        print("Number of items: \(intNumItems)")
+        if cartTableView != nil {
             pickerviewEditQuantity.dataSource = self
             pickerviewEditQuantity.delegate = self
             pickerviewEditQuantity.isHidden = true
-        }
-//        appdata.arrCartLineItems.removeAll()
-        fnLoadMitoCart()
-        formatter.numberStyle = .currency
-        formatter.locale = Locale(identifier: "en_US")
-        for element in appdata.arrCartLineItems {
-            let itemPrice = element.objProduct.price // change later
-            if let number = formatter.number(from: itemPrice) {
-                let amount = number.decimalValue
-                let totalAmt = amount * (Decimal)(element.intQuantity)
-                priceSum += totalAmt
-            }
-        }
-        for objCartItem in appdata.arrCartLineItems {
-            intNumItems += objCartItem.intQuantity
-        }
-        if cartTableView != nil {
+            fnLoadMitoCart()
             cartTableView.delegate = self
             cartTableView.dataSource = self
             cartTableView.rowHeight = 106
-            var strItems = "items"
-            if intNumItems == 1 {
-                strItems = "item"
-            }
-            cartNumber.text = "Cart has \(intNumItems) \(strItems)"
-            
-            // rounds 2 decimal places for priceSum
-            let tempSum = Double(truncating: priceSum as NSNumber)
-            let temp2Sum = Double(round(100 * tempSum)/100)
-            
-            cartPrice.text = "$\(temp2Sum)"
         } else if itemCountCheckout != nil {
+            fnGetCartSubTotal()
             itemCountCheckout.text = String(intNumItems)
             shippingCheckout.text = "FREE"
+            priceSum = 4.00
             let tax: Decimal = priceSum * 0.12
             
             // rounds double with 2 digits precision
@@ -154,7 +130,33 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func fnGetCartSubTotal() {
+        self.intNumItems = 0
+        for element in self.appdata.arrCartLineItems {
+            let itemPrice = element.objProduct.price // change later
+            if let number = self.formatter.number(from: itemPrice) {
+                let amount = number.decimalValue
+                let totalAmt = amount * (Decimal)(element.intQuantity)
+                self.priceSum += totalAmt
+            }
+        }
+        for objCartItem in self.appdata.arrCartLineItems {
+            self.intNumItems += objCartItem.intQuantity
+        }
+    }
+    
+    func fnSetCartLabels() {
+        var strItems = "items"
+        if self.intNumItems == 1 {
+            strItems = "item"
+        }
+        self.cartNumber.text = "Cart has \(self.intNumItems) \(strItems)"
         
+        // rounds 2 decimal places for priceSum
+        let tempSum = Double(truncating: self.priceSum as NSNumber)
+        let temp2Sum = Double(round(100 * tempSum)/100)
+        
+        self.cartPrice.text = "$\(temp2Sum)"
+        print("Number of items: \(intNumItems)")
     }
     
     func fnLoadMitoCart() {
@@ -178,29 +180,9 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
                         self.appdata.arrCartLineItems.append(lineItem)
                     }
                     DispatchQueue.main.async {
-                        self.intNumItems = 0
-                        for element in self.appdata.arrCartLineItems {
-                            let itemPrice = element.objProduct.price // change later
-                            if let number = self.formatter.number(from: itemPrice) {
-                                let amount = number.decimalValue
-                                let totalAmt = amount * (Decimal)(element.intQuantity)
-                                self.priceSum += totalAmt
-                            }
-                        }
-                        for objCartItem in self.appdata.arrCartLineItems {
-                            self.intNumItems += objCartItem.intQuantity
-                        }
-                        var strItems = "items"
-                        if self.intNumItems == 1 {
-                            strItems = "item"
-                        }
-                        self.cartNumber.text = "Cart has \(self.intNumItems) \(strItems)"
-                        
-                        // rounds 2 decimal places for priceSum
-                        let tempSum = Double(truncating: self.priceSum as NSNumber)
-                        let temp2Sum = Double(round(100 * tempSum)/100)
-                        
-                        self.cartPrice.text = "$\(temp2Sum)"
+                        print("Number of items: \(self.intNumItems)")
+                        self.fnGetCartSubTotal()
+                        self.fnSetCartLabels()
                         self.cartTableView.reloadData()
                     }
                 }
@@ -211,8 +193,6 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
     }
-    
-    var appdata = AppData.shared
     
     @IBAction func checkoutToCart(_ sender: Any) {
         performSegue(withIdentifier: "checkoutToCart", sender: self)
