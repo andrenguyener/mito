@@ -11,6 +11,9 @@ import Alamofire
 
 class CartViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
+    var objCartItem = 0
+    var urlAddToMitoCart = URL(string: "https://api.projectmito.io/v1/cart")
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -24,9 +27,41 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        print("objCartItem: \(objCartItem)")
         print("Quantity \(appdata.arrQuantity[row])")
+        pickerviewEditQuantity.isHidden = true
+        let intNewQuantity = Int(appdata.arrQuantity[row])!
+        fnUpdateLineItemQuantity(objIndex: objCartItem, intNewQuantity: intNewQuantity)
     }
     
+    func fnUpdateLineItemQuantity(objIndex: Int, intNewQuantity: Int) {
+        let parameters: Parameters = [
+            "amazonASIN": appdata.arrCartLineItems[objIndex].objProduct.ASIN,
+            "amazonPrice": appdata.arrCartLineItems[objIndex].objProduct.price,
+            "quantity": intNewQuantity
+        ]
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlAddToMitoCart!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
+            switch response.result {
+            case .success:
+//                self.fnAlertAddedToCart()
+                if let dictionary = response.result.value {
+                    print(dictionary)
+                    // Any code for storing locally
+                }
+                DispatchQueue.main.async {
+                    self.fnLoadMitoCart()
+                    self.cartTableView.reloadData()
+                }
+                
+            case .failure(let error):
+                print("Product could not be added to cart")
+                print(error)
+            }
+        }
+    }
 
     //User's Cart
     @IBOutlet weak var cartTableView: UITableView!
@@ -60,9 +95,12 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        pickerviewEditQuantity.dataSource = self
-        pickerviewEditQuantity.delegate = self
-        appdata.arrCartLineItems.removeAll()
+        if pickerviewEditQuantity != nil {
+            pickerviewEditQuantity.dataSource = self
+            pickerviewEditQuantity.delegate = self
+            pickerviewEditQuantity.isHidden = true
+        }
+//        appdata.arrCartLineItems.removeAll()
         fnLoadMitoCart()
         formatter.numberStyle = .currency
         formatter.locale = Locale(identifier: "en_US")
@@ -118,6 +156,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func fnLoadMitoCart() {
+        appdata.arrCartLineItems.removeAll()
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
@@ -222,7 +261,9 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @objc func fnEditQuantity(_ button: UIButton) {
+        pickerviewEditQuantity.isHidden = false
         print("Button Tag: \(button.tag)")
+        objCartItem = button.tag
     }
     
     func fnMakeCallToRemoveItem(intLineItemIndex: Int) {
