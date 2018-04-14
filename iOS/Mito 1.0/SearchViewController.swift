@@ -61,6 +61,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         peopleTableView.reloadData()
         productTableView.reloadData()
         spinnerProductSearch.isHidden = true
+        strPageNum = 1
     }
     
     func fnLoadFriendsAndAllUsers() {
@@ -94,7 +95,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         self.appdata.arrFriends.append(p)
                     }
                     self.arrFriendsAndAllMitoUsers.append(self.appdata.arrFriends)
-                    print("Friends count: \(self.appdata.arrFriends.count)")
                     DispatchQueue.main.async {
                         self.peopleTableView.reloadData()
                     }
@@ -122,7 +122,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         self.appdata.arrAllUsers.append(objPerson)
                     }
                     self.arrFriendsAndAllMitoUsers.append(self.appdata.arrAllUsers)
-                    print("All Users count: \(self.appdata.arrAllUsers.count)")
                 }
                 
             case .failure(let error):
@@ -173,21 +172,16 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func fnLoadProductData() {
         let parameters: Parameters = [
             "keyword": strSearchQuery,
-            "pageNumber": "1"
+            "pageNumber": strPageNum
         ]
-        print("Search Query: \(parameters["keyword"])")
-        print("Page Number: \(parameters["pageNumber"])")
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
-        print(headers)
-        print("Amazon URL: \(urlAmazonProductCall)")
         Alamofire.request(urlAmazonProductCall!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success:
                 if let dictionary = response.result.value {
                     let myJson = dictionary as! NSDictionary
-                    print(myJson)
                     let itemSearchResponse = myJson["ItemSearchResponse"] as! NSDictionary
                     let objItems = self.fnAccessFirstDictionaryInArray(dictObj: itemSearchResponse, arrName: "Items")
                     if objItems["Item"] == nil {
@@ -197,7 +191,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         for itemObj in arrItem {
                             let item = itemObj as! NSDictionary
                             let strASIN = self.fnAccesStringinObj(dictObj: item, strAttribute: "ASIN")
-                            print(strASIN)
                             var strImageURL = ""
                             if item["LargeImage"] != nil {
                                 let objLargeImage = self.fnAccessFirstDictionaryInArray(dictObj: item, arrName: "LargeImage")
@@ -250,7 +243,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             self.appdata.arrProductSearchResults.append(product)
                         }
                     }
-                    print("Product Table Size: \(self.appdata.arrProductSearchResults.count)")
                     DispatchQueue.main.async {
                         self.productTableView.reloadData()
                         self.productPeopleTab.isEnabled = true
@@ -317,6 +309,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Product
         if productPeopleTab.selectedSegmentIndex == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "productCell", for: indexPath) as! ProductTableViewCell
+            print("Row focus: \(indexPath.row)")
+            if (indexPath.row == appdata.arrProductSearchResults.count - 1) {
+                strPageNum += 1
+                fnLoadProductData()
+            }
             let objProduct = appdata.arrProductSearchResults[indexPath.row]
             let urlProductImage = URL(string: "\(objProduct.image)")
             if let data = try? Data(contentsOf: urlProductImage!) {
