@@ -44,6 +44,45 @@ class FriendStore {
 
     }
 
+    // Get the number of mutual friend
+    getMutualFriends(id1, id2) {
+        return new Promise((resolve) => {
+            let procedureName = "uspcGetMutualFriendCount";
+            var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
+                if (err) {
+                    console.log(err)
+                }
+            })
+            request.addParameter('UserId1', TYPES.Int, id1);
+            request.addParameter('UserId2', TYPES.Int, id2);
+            let jsonArray = []
+            request.on('row', function (columns) {
+                var rowObject = {};
+                columns.forEach(function (column) {
+                    if (column.value === null) {
+                        console.log('NULL');
+                    } else {
+                        rowObject[column.metadata.colName] = column.value;
+                    }
+                });
+                jsonArray.push(rowObject)
+            });
+
+            request.on('doneProc', function (rowCount, more) {
+                console.log(jsonArray);
+                resolve(jsonArray);
+            });
+
+            this.sql.callProcedure(request)
+        })
+            .then((jsonArray) => {
+                return jsonArray
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
     // Get all friends of a UserId
     getAll(id, friendType) {
         return new Promise((resolve) => {

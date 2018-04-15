@@ -47,6 +47,31 @@ const FriendHandler = (friendStore) => {
             });
     });
 
+    // get the count of mutual friends
+    router.get('/v1/friend/mutual/:friendUserId', (req, res) => {
+        const userJSON = req.get('X-User');
+        const user = JSON.parse(userJSON);
+        console.log(user);
+        friendStore
+            .getMutualFriends(user.userId, req.params.friendUserId)
+            .then(friend => {
+                console.log(friend);
+                res.json(friend);
+                const data = {
+                    type: 'friend-get',
+                    friend: friend,
+                    userIdOut: user.userId
+                };
+                console.log(data);
+                sendToMQ(req, data);
+            })
+            .catch(err => {
+                if (err !== breakSignal) {
+                    console.log(err);
+                }
+            });
+    });
+
     // Add a new friend
     router.post('/v1/friend', (req, res) => {
         const userJSON = req.get('X-User');
