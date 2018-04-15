@@ -32,7 +32,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MfP-sC-TgG" userLabel="Top Nav">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="mitowhiteonly.png" translatesAutoresizingMaskIntoConstraints="NO" id="Lsh-xd-xCG">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mitowhiteonly.png" translatesAutoresizingMaskIntoConstraints="NO" id="Lsh-xd-xCG">
                                         <rect key="frame" x="141" y="38" width="92" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="CTT-8L-4uY"/>
@@ -55,6 +55,8 @@
                                 <color key="backgroundColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="m8Q-ax-wXZ" firstAttribute="top" secondItem="MfP-sC-TgG" secondAttribute="top" constant="90" id="Aot-DR-M98"/>
+                                    <constraint firstItem="m8Q-ax-wXZ" firstAttribute="top" secondItem="Lsh-xd-xCG" secondAttribute="bottom" constant="4" id="Gi7-L6-hbj"/>
+                                    <constraint firstItem="Lsh-xd-xCG" firstAttribute="centerX" secondItem="m8Q-ax-wXZ" secondAttribute="centerX" id="gEr-q8-aOK"/>
                                     <constraint firstAttribute="bottom" secondItem="m8Q-ax-wXZ" secondAttribute="bottom" constant="12" id="zLq-HT-Sl8"/>
                                 </constraints>
                             </view>
@@ -100,6 +102,9 @@
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dTB-aY-jrI">
                                                             <rect key="frame" x="121" y="54" width="92" height="21"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="21" id="fiV-m9-6KY"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="9"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -625,15 +630,19 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r8k-PY-kCT" userLabel="Green Top Nav">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="sbe-Z7-f9y">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="sbe-Z7-f9y">
                                         <rect key="frame" x="10" y="52" width="355" height="56"/>
                                         <subviews>
                                             <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="1tB-1o-Hvx">
-                                                <rect key="frame" x="0.0" y="0.0" width="318" height="56"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="333" height="56"/>
                                                 <color key="barTintColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <scopeButtonTitles>
+                                                    <string>Products</string>
+                                                    <string>People</string>
+                                                </scopeButtonTitles>
                                             </searchBar>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UjG-eE-Nc2">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UjG-eE-Nc2" userLabel="Cart">
                                                 <rect key="frame" x="333" y="0.0" width="22" height="56"/>
                                                 <state key="normal" image="Cart Solid White Icon.png"/>
                                                 <connections>
@@ -642,8 +651,7 @@
                                             </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="UjG-eE-Nc2" firstAttribute="leading" secondItem="1tB-1o-Hvx" secondAttribute="trailing" constant="15" id="5RW-Zc-Mm0"/>
-                                            <constraint firstAttribute="trailing" secondItem="UjG-eE-Nc2" secondAttribute="trailing" id="IMw-pf-Nda"/>
+                                            <constraint firstItem="UjG-eE-Nc2" firstAttribute="leading" secondItem="1tB-1o-Hvx" secondAttribute="trailing" id="5RW-Zc-Mm0"/>
                                             <constraint firstAttribute="bottom" secondItem="UjG-eE-Nc2" secondAttribute="bottom" id="JZ8-EV-heU"/>
                                             <constraint firstItem="1tB-1o-Hvx" firstAttribute="top" secondItem="sbe-Z7-f9y" secondAttribute="top" id="LcZ-U0-hW3"/>
                                             <constraint firstItem="UjG-eE-Nc2" firstAttribute="top" secondItem="sbe-Z7-f9y" secondAttribute="top" id="O3z-c3-rOK"/>
@@ -1483,9 +1491,9 @@
                     </view>
                     <connections>
                         <outlet property="img" destination="2VX-4k-3cu" id="Xdx-l5-yIt"/>
-                        <outlet property="lblEmail" destination="fZd-x7-rdQ" id="TFf-5A-aga"/>
                         <outlet property="lblName" destination="k1g-f7-mfA" id="Q0T-y5-OaF"/>
                         <outlet property="lblNumFriends" destination="Rwi-hr-9PZ" id="8Rx-nb-aDj"/>
+                        <outlet property="lblUsername" destination="fZd-x7-rdQ" id="TFf-5A-aga"/>
                         <segue destination="5ev-RP-TnR" kind="show" identifier="segPeopleDetailsToSearchView" id="kS1-pK-LOk"/>
                     </connections>
                 </viewController>
@@ -1606,7 +1614,7 @@
         <image name="swirlsearch" width="2257" height="5634"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4Df-8F-JjS"/>
-        <segue reference="IOv-WN-4XC"/>
+        <segue reference="kS1-pK-LOk"/>
+        <segue reference="Huf-aH-vL3"/>
     </inferredMetricsTieBreakers>
 </document>

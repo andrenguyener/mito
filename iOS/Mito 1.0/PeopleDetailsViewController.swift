@@ -14,7 +14,7 @@ class PeopleDetailsViewController: UIViewController {
     var appdata = AppData.shared
     
     @IBOutlet weak var lblName: UILabel!
-    @IBOutlet weak var lblEmail: UILabel!
+    @IBOutlet weak var lblUsername: UILabel!
     @IBOutlet weak var img: UIImageView!
     @IBOutlet weak var lblNumFriends: UIButton!
     
@@ -26,13 +26,12 @@ class PeopleDetailsViewController: UIViewController {
     func loadPersonData() {
         let friend = appdata.arrAllUsers[myIndex]
         lblName.text = "\(friend.firstName) \(friend.lastName)"
-        lblEmail.text = "\(friend.email)"
+        lblUsername.text = "@\(friend.strUsername)"
 //        lblNumFriends.text =
         let url = URL(string:"\(friend.avatar)")
         if let data = try? Data(contentsOf: url!) {
             img.image = UIImage(data: data)!
         }
-        print("\(lblName.text)'s ID: \(friend.intUserID)")
     }
 
     @IBAction func fnAddFriend(_ sender: Any) {
@@ -47,7 +46,6 @@ class PeopleDetailsViewController: UIViewController {
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
-        print(UserDefaults.standard.object(forKey: "Authorization"))
         
         Alamofire.request("https://api.projectmito.io/v1/friend", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
             switch response.result {
@@ -63,7 +61,7 @@ class PeopleDetailsViewController: UIViewController {
                 
                 
             case .failure(let error):
-                print("Request: \(response.request)")
+                print("Request: \(String(describing: response.request))")
                 print(error)
             }
         }
