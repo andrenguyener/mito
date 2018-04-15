@@ -18,6 +18,10 @@ class AppData: NSObject {
     open var arrPendingFriends: [Person] = []
     open var arrQuantity = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10+"]
     
+    open var arrFriendsAndAllMitoUsers: [[Person]] = []
+    
+    open var arrSections = ["Friends", "Other people on Mito"]
+    
     open var arrProductSearchResults: [Product] = []
     
     open var arrMonths: [Month] = []

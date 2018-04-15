@@ -31,10 +31,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var urlPeopleCall = URL(string: "https://api.projectmito.io/v1/friend/")
     var urlAllUserCall = URL(string: "https://api.projectmito.io/v1/users/all")
     var urlAmazonProductCall = URL(string: "https://api.projectmito.io/v1/amazonhashtest" )
-    let urlAmazonOriginal = URL(string: "https://api.projectmito.io/v1/amazonhashtest" )
-    
-    let arrSections = ["Friends", "Other people on Mito"]
-    var arrFriendsAndAllMitoUsers: [[Person]] = []
     
     @IBAction func switchTab(_ sender: UISegmentedControl) {
         if productPeopleTab.selectedSegmentIndex == 0 {
@@ -65,10 +61,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func fnLoadFriendsAndAllUsers() {
-        self.arrFriendsAndAllMitoUsers.removeAll()
+        self.appdata.arrFriendsAndAllMitoUsers.removeAll()
         self.appdata.arrFriends.removeAll()
-        self.fnLoadFriendData()
         self.appdata.arrAllUsers.removeAll()
+        self.fnLoadFriendData()
         self.fnLoadAllUsers()
     }
     
@@ -94,7 +90,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                                strUsername: (object["Username"] as? String)!)
                         self.appdata.arrFriends.append(p)
                     }
-                    self.arrFriendsAndAllMitoUsers.append(self.appdata.arrFriends)
+                    self.appdata.arrFriendsAndAllMitoUsers.append(self.appdata.arrFriends)
                     DispatchQueue.main.async {
                         self.peopleTableView.reloadData()
                     }
@@ -121,7 +117,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         let objPerson = Person(firstName: objPerson2["userFname"] as! String, lastName: objPerson2["userLname"] as! String, email: objPerson2["userEmail"] as! String, avatar: objPerson2["photoURL"] as! String, intUserID: objPerson2["userId"] as! Int, strUsername: objPerson2["username"] as! String)
                         self.appdata.arrAllUsers.append(objPerson)
                     }
-                    self.arrFriendsAndAllMitoUsers.append(self.appdata.arrAllUsers)
+                    self.appdata.arrFriendsAndAllMitoUsers.append(self.appdata.arrAllUsers)
                 }
                 
             case .failure(let error):
@@ -159,17 +155,14 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             searchBar.text = "Amazon"
         }
         searchBar.resignFirstResponder()
-        appdata.arrProductSearchResults.removeAll()
-//        let urlString = (urlAmazonOriginal?.absoluteString)!
-//        print(urlString)
-//        urlAmazonProductCall = URL(string: urlString)
         productPeopleTab.isEnabled = false
-        fnLoadProductData() // pass in parameters
-        productTableView.reloadData()
+        fnLoadProductData()
+//        productTableView.reloadData()
     }
     
     // Product Tab View
     func fnLoadProductData() {
+        appdata.arrProductSearchResults.removeAll()
         let parameters: Parameters = [
             "keyword": strSearchQuery,
             "pageNumber": strPageNum
@@ -259,7 +252,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if productPeopleTab.selectedSegmentIndex == 1 {
-            return self.arrFriendsAndAllMitoUsers[section].count
+            return self.appdata.arrFriendsAndAllMitoUsers[section].count
         } else {
             return appdata.arrProductSearchResults.count
         }
@@ -267,18 +260,16 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if productPeopleTab.selectedSegmentIndex == 1 {
-            print("People: \(section)")
-            return self.arrSections[section]
+            return self.appdata.arrSections[section]
         } else {
-            print("Product: \(section)")
-            return "Test"
+            return "Products"
         }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         if productPeopleTab.selectedSegmentIndex == 1 {
-            print("Friends and All Users Count: \(arrFriendsAndAllMitoUsers.count)")
-            return arrFriendsAndAllMitoUsers.count
+            print("Friends and All Users Count: \(self.appdata.arrFriendsAndAllMitoUsers.count)")
+            return self.appdata.arrFriendsAndAllMitoUsers.count
         } else {
             return 1
         }
@@ -286,7 +277,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if productPeopleTab.selectedSegmentIndex == 1 {
-            return self.arrFriendsAndAllMitoUsers[section].count
+            return self.appdata.arrFriendsAndAllMitoUsers[section].count
         } else {
             return appdata.arrProductSearchResults.count
         }
@@ -300,7 +291,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             performSegue(withIdentifier: "productDetail", sender: self)
         } else {
             myIndex = indexPath.row
-            print("didSelectRowAt Index: \(myIndex)")
             performSegue(withIdentifier: "searchToMitoProfile", sender: self)
         }
     }
@@ -325,7 +315,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return cell
         } else { // People
             let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
-            let objPerson = arrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
+            let objPerson = self.appdata.arrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
             let urlPeopleImage = URL(string:"\(objPerson.avatar)")
             let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
             if let data = try? Data(contentsOf: urlPeopleImage!) {

@@ -50,15 +50,13 @@ class PeopleDetailsViewController: UIViewController {
         Alamofire.request("https://api.projectmito.io/v1/friend", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
             switch response.result {
             case .success:
-                
                 if let dictionary = response.result.value {
-                    print("Request: \(response.request)")
+                    print("Request: \(String(describing: response.request))")
                     print("JSON: \(dictionary)") // serialized json response
                     DispatchQueue.main.async {
                         self.fnAlertRequestSent()
                     }
                 }
-                
                 
             case .failure(let error):
                 print("Request: \(String(describing: response.request))")
@@ -66,7 +64,6 @@ class PeopleDetailsViewController: UIViewController {
             }
         }
     }
-
     
     func fnAlertRequestSent() {
         let alertController = UIAlertController(title: "Done", message: "Friend Request Sent", preferredStyle: .alert)
