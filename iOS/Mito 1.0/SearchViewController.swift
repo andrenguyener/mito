@@ -66,6 +66,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.appdata.arrAllUsers.removeAll()
         self.fnLoadFriendData()
         self.fnLoadAllUsers()
+        self.appdata.arrCurrFriendsAndAllMitoUsers = self.appdata.arrFriendsAndAllMitoUsers
+        self.appdata.arrCurrFriends = self.appdata.arrFriends
+        self.appdata.arrCurrAllUsers = self.appdata.arrAllUsers
     }
     
     // Loading Friends (people tab)
@@ -92,6 +95,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     }
                     self.appdata.arrFriendsAndAllMitoUsers.append(self.appdata.arrFriends)
                     DispatchQueue.main.async {
+                        self.appdata.arrCurrFriendsAndAllMitoUsers = self.appdata.arrFriendsAndAllMitoUsers
                         self.peopleTableView.reloadData()
                     }
                 }
@@ -118,6 +122,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         self.appdata.arrAllUsers.append(objPerson)
                     }
                     self.appdata.arrFriendsAndAllMitoUsers.append(self.appdata.arrAllUsers)
+                    self.appdata.arrCurrFriendsAndAllMitoUsers = self.appdata.arrFriendsAndAllMitoUsers
                 }
                 
             case .failure(let error):
@@ -131,12 +136,72 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         performSegue(withIdentifier: "searchToCart", sender: self)
     }
     
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        if (productPeopleTab.selectedSegmentIndex == 1) {
-            UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
+//    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+//        if (productPeopleTab.selectedSegmentIndex == 1) {
+//            UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
+//        }
+//        productPeopleTab.selectedSegmentIndex = 0
+//        return true
+//    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if productPeopleTab.selectedSegmentIndex == 1 {
+            if (searchBar.text?.isEmpty)! {
+                appdata.arrCurrFriendsAndAllMitoUsers = appdata.arrFriendsAndAllMitoUsers
+                appdata.arrCurrAllUsers = appdata.arrAllUsers
+                appdata.arrCurrFriends = appdata.arrFriends
+                peopleTableView.reloadData()
+                return
+//                fnLoadFriendsAndAllUsers()
+            } else {
+                print("Friends Count: \(appdata.arrFriends.count)")
+                print("All Users Count: \(appdata.arrAllUsers.count)")
+                filterFriends(text: searchText)
+                filterAllUsers(text: searchText)
+                print("Friends Count: \(appdata.arrFriends.count)")
+                print("All Users Count: \(appdata.arrAllUsers.count)")
+                appdata.arrCurrFriendsAndAllMitoUsers.removeAll()
+                appdata.arrCurrFriendsAndAllMitoUsers.append(appdata.arrCurrFriends)
+                appdata.arrCurrFriendsAndAllMitoUsers.append(appdata.arrCurrAllUsers)
+                print(appdata.arrCurrFriendsAndAllMitoUsers.count)
+//                appdata.arrCurrFriendsAndAllMitoUsers = appdata.arrFriendsAndAllMitoUsers.filter({ objGroup -> Bool in
+//                    return objGroup[0].firstName.contains(searchText)
+//                })
+                peopleTableView.reloadData()
+            }
+//            print(appdata.arrFriends.count)
+//            filterFriends(text: searchText)
+//            print(appdata.arrFriends.count)
+//            print(appdata.arrAllUsers.count)
+//            filterAllUsers(text: searchText)
+//            print(appdata.arrAllUsers.count)
+//            fnLoadFriendsAndAllUsers()
+//            filterFriendsAndUsers(text: searchText)
         }
-        productPeopleTab.selectedSegmentIndex = 0
-        return true
+    }
+    
+    func filterFriends(text: String) {
+        appdata.arrCurrFriends = appdata.arrFriends.filter({ person -> Bool in
+            return person.firstName.lowercased().contains(text.lowercased())
+        })
+    }
+    
+    func filterAllUsers(text: String) {
+        appdata.arrCurrAllUsers = appdata.arrAllUsers.filter({ person -> Bool in
+            return person.firstName.lowercased().contains(text.lowercased())
+        })
+    }
+    
+    func filterFriendsAndUsers(text: String) {
+        print(appdata.arrFriendsAndAllMitoUsers.count)
+        
+        appdata.arrFriendsAndAllMitoUsers = appdata.arrFriendsAndAllMitoUsers.filter({ objPersonGroup -> Bool in
+            return objPersonGroup.contains(where: { (person) -> Bool in
+                person.firstName.contains(text.lowercased())
+            })
+        })
+        print(appdata.arrFriendsAndAllMitoUsers.count)
+        productTableView.reloadData()
     }
     
     // Pressed Enter
@@ -252,7 +317,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if productPeopleTab.selectedSegmentIndex == 1 {
-            return self.appdata.arrFriendsAndAllMitoUsers[section].count
+            return self.appdata.arrCurrFriendsAndAllMitoUsers[section].count
         } else {
             return appdata.arrProductSearchResults.count
         }
@@ -269,7 +334,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func numberOfSections(in tableView: UITableView) -> Int {
         if productPeopleTab.selectedSegmentIndex == 1 {
             print("Friends and All Users Count: \(self.appdata.arrFriendsAndAllMitoUsers.count)")
-            return self.appdata.arrFriendsAndAllMitoUsers.count
+            return self.appdata.arrCurrFriendsAndAllMitoUsers.count
         } else {
             return 1
         }
@@ -277,7 +342,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if productPeopleTab.selectedSegmentIndex == 1 {
-            return self.appdata.arrFriendsAndAllMitoUsers[section].count
+            return self.appdata.arrCurrFriendsAndAllMitoUsers[section].count
         } else {
             return appdata.arrProductSearchResults.count
         }
@@ -315,7 +380,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return cell
         } else { // People
             let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
-            let objPerson = self.appdata.arrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
+            print("Section: \(indexPath.section)")
+            print("Row: \(indexPath.row)")
+            let objPerson = self.appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
             let urlPeopleImage = URL(string:"\(objPerson.avatar)")
             let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
             if let data = try? Data(contentsOf: urlPeopleImage!) {
