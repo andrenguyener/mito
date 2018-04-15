@@ -1,8 +1,7 @@
---returns the number of mutual friend between 2 users
-CREATE PROC uspcGetMutualFriendCount
+--returns a list of mutual friend between 2 users
+ALTER PROC uspcGetMutualFriendCount
 @UserId1 INT,
-@UserId2 INT,
-@MutualFriendsCount INT OUT
+@UserId2 INT
 AS
 	BEGIN
 	-- stores the list of user1's friend in a table variable
@@ -16,17 +15,16 @@ AS
 	EXEC uspGetUserFriendsIdList @UserId2, 1
 	
 	-- count the same id appears in both list
-	SET @MutualFriendsCount =
-	(SELECT COUNT(*) 
-	FROM @User1FriendIdList List1
-	JOIN @User2FriendIdList List2 ON List1.FriendId = List2.FriendId)
+	SELECT UserId, Username, UserFname, UserLname,UserEmail, PhotoUrl FROM [USER] U
+	JOIN 
+	(SELECT List1.FriendId FROM @User1FriendIdList List1
+	JOIN @User2FriendIdList List2 ON List1.FriendId = List2.FriendId
+	) UserFriendList
+	ON U.UserId = UserFriendList.FriendId
 	END
 GO
 
+-- test example
 EXEC dbo.uspcGetUserFriendsById 7,1
 EXEC dbo.uspcGetUserFriendsById 3,1
-
--- test example
-DECLARE @Test INT
-EXEC dbo.uspcGetMutualFriendCount 7, 3, @MutualFriendsCount = @Test OUT
-PRINT @Test
+EXEC dbo.uspcGetMutualFriendCount 7, 3
