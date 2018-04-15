@@ -22,7 +22,7 @@ ADD GrandTotal NUMERIC(12,2) NOT NULL
 EXEC sp_rename 'uspInsertIntoCart', 'uspcInsertIntoCart'
 
 ALTER PROC uspcInsertIntoCart
-@AmazonASIN INT,
+@AmazonASIN NVARCHAR(50),
 @AmazonPrice NUMERIC(12,2),
 @UserId INT,
 @Qty INT
@@ -32,13 +32,6 @@ IF @AmazonASIN IS NULL
 	BEGIN
 		PRINT'Amazon Product ASIN is not provided'
 		RAISERROR('@AmazonASIN cannot be NULL',11,1)
-		RETURN
-	END
-
-IF @Qty < 1
-	BEGIN
-		PRINT'Quantity must be at least 1'
-		RAISERROR('@Qty cannot be less than 1', 11,1)
 		RETURN
 	END
 
@@ -67,7 +60,7 @@ AS
 -- create a temp cart
 DECLARE @CART TABLE 
 (tempCartId INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-AmazonASIN INT NOT NULL,
+AmazonASIN NVARCHAR(50) NOT NULL,
 Qty INT NOT NULL,
 AmazonItemPrice NUMERIC(12,2) NOT NULL,
 SumPrice NUMERIC(12,2))
@@ -82,7 +75,7 @@ DECLARE @SumCartPrice NUMERIC(12,2) = (SELECT SUM(SumPrice) FROM @CART)
 -- CartId in the temp @CART table
 DECLARE @ID INT
 -- AmazonItemId in the temp @CART table
-DECLARE @ProdID INT
+DECLARE @ProdID NVARCHAR(50)
 -- Most recent/update quantity
 DECLARE @Qty INT
 DECLARE @OrderID INT
@@ -173,7 +166,8 @@ EXEC uspInsertNotification @NotificationTypeId, @UserId, @RecipientId, @TodaysDa
 SELECT * FROM CART
 SELECT * FROM ORDER_PRODUCT
 SELECT * FROM [ORDER]
-EXEC dbo.uspcInsertIntoCart '1245','12.00',7,5
-EXEC dbo.uspcInsertIntoCart '10394','12.00',7,5
+EXEC dbo.uspcInsertIntoCart '1245','12.00',7,15
+EXEC dbo.uspcInsertIntoCart '10394','12.00',7,10
+EXEC dbo.uspcGetUserCartItemList 7
 EXEC dbo.uspcProcessCheckout 7, 7, 34, 'Testing checkout cart', 0
 
