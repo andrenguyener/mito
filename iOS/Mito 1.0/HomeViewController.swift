@@ -125,7 +125,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
-        print("fnLoadFriendData: \(UserDefaults.standard.object(forKey: "Authorization"))")
         Alamofire.request(urlGetFriends!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success:
@@ -134,7 +133,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                     let dict2 = dictionary as! NSArray
                     for obj in dict2 {
                         let object = obj as! NSDictionary
-                        //                        print(object)
                         let p: Person = Person(firstName: (object["UserFname"] as? String)!,
                                                lastName: (object["UserLname"] as? String)!,
                                                email: (object["UserEmail"] as? String?)!!,
