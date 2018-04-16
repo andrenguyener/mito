@@ -11,6 +11,7 @@ import UserNotifications
 import Alamofire
 
 var myIndex = 0
+var mySection = 0
 
 class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
@@ -89,12 +90,15 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let dict2 = dictionary as! NSArray
                     for obj in dict2 {
                         let object = obj as! NSDictionary
+                        print(object)
                         let p: Person = Person(firstName: (object["UserFname"] as? String)!,
                                                lastName: (object["UserLname"] as? String)!,
                                                email: (object["UserEmail"] as? String?)!!,
                                                avatar: (object["PhotoUrl"] as? String?)!!,
                                                intUserID: (object["UserId"] as? Int)!,
                                                strUsername: (object["Username"] as? String)!)
+//                        ,
+//                        intNumFriends: (object["NumFriends"] as? Int)!
                         self.appdata.arrFriends.append(p)
                     }
                     self.appdata.arrFriendsAndAllMitoUsers.append(self.appdata.arrFriends)
@@ -122,7 +126,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let objUsers = dictionary as! NSArray
                     for objUser in objUsers {
                         let objPerson2 = objUser as! NSDictionary
+                        print(objPerson2)
                         let objPerson = Person(firstName: objPerson2["userFname"] as! String, lastName: objPerson2["userLname"] as! String, email: objPerson2["userEmail"] as! String, avatar: objPerson2["photoURL"] as! String, intUserID: objPerson2["userId"] as! Int, strUsername: objPerson2["username"] as! String)
+//                        , intNumFriends: objPerson2["NumFriends"] as! Int
                         self.appdata.arrAllUsers.append(objPerson)
                     }
                     self.appdata.arrFriendsAndAllMitoUsers.append(self.appdata.arrAllUsers)
@@ -340,6 +346,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             performSegue(withIdentifier: "productDetail", sender: self)
         } else {
             myIndex = indexPath.row
+            mySection = indexPath.section
             performSegue(withIdentifier: "searchToMitoProfile", sender: self)
         }
     }

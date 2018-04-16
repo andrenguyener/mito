@@ -207,8 +207,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var pickerviewStateAA: UIPickerView!
     @IBOutlet weak var btnChooseState: UIButton!
     
-    
-    
     var strState = ""
     
     @IBAction func btnCreateAccountPressed(_ sender: Any) {
@@ -234,7 +232,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             "cityName": strCity!,
             "zipCode": zipcode!,
             "stateName": strState!,
-            "aliasName": alias
+            "aliasName": alias!
         ]
         
         let headers: HTTPHeaders = [

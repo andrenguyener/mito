@@ -60,6 +60,8 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                                                avatar: (object["PhotoUrl"] as? String?)!!,
                                                intUserID: (object["UserId"] as? Int)!,
                                                strUsername: (object["Username"] as? String)!)
+//                        ,
+//                        intNumFriends: (object["NumFriends"] as! Int)
                         self.appdata.arrPendingFriends.append(p)
                         DispatchQueue.main.async {
                             self.tblviewNotification.reloadData()

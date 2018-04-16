@@ -24,9 +24,12 @@ class PeopleDetailsViewController: UIViewController {
     }
     
     func loadPersonData() {
-        let friend = appdata.arrAllUsers[myIndex]
+        print(mySection)
+        print(myIndex)
+        let friend = appdata.arrCurrFriendsAndAllMitoUsers[mySection][myIndex]
         lblName.text = "\(friend.firstName) \(friend.lastName)"
         lblUsername.text = "@\(friend.strUsername)"
+//        print(friend.intNumFriends)
 //        lblNumFriends.text =
         let url = URL(string:"\(friend.avatar)")
         if let data = try? Data(contentsOf: url!) {
