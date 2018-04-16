@@ -12,7 +12,6 @@ class RoundedImage: UIImageView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        layer.borderWidth = 1/UIScreen.main.nativeScale
         // creates circular imageview (temporary, known to slow down table views)
         layer.cornerRadius = self.layer.frame.size.width / 2;
         layer.masksToBounds = true

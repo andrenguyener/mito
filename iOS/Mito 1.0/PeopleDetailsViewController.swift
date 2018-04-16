@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import UIKit
 
 class PeopleDetailsViewController: UIViewController {
 
@@ -17,6 +18,7 @@ class PeopleDetailsViewController: UIViewController {
     @IBOutlet weak var lblUsername: UILabel!
     @IBOutlet weak var img: UIImageView!
     @IBOutlet weak var lblNumFriends: UIButton!
+    @IBOutlet weak var addFriendbtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
