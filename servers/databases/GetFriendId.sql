@@ -26,7 +26,6 @@ AS
 	-- If not found, simply return a NULL output 
 	IF @MatchedFriendId IS NULL
 		BEGIN
-		PRINT 'Found NULL'
 		SET @MatchedFriendId = (SELECT FriendId FROM FRIEND WHERE User1Id = @User2Id 
 			AND User2Id = @User1Id)
 		END

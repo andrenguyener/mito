@@ -30,7 +30,8 @@ AS
 	IF EXISTS(SELECT * FROM FRIEND WHERE (User1Id = @UserId OR User2Id = @UserId)
 		AND FriendTypeId = @NotFriendType )
 		BEGIN
-		SELECT UserId, Username, UserFname, UserLname,UserEmail, PhotoUrl FROM [USER] U
+		SELECT UserId, Username, UserFname, UserLname,UserEmail, PhotoUrl, NumFriends
+		FROM [USER] U
 		JOIN (SELECT * FROM @friendsIdList) UserFriendList
 		ON U.UserId = UserFriendList.FriendId
 		--FOR JSON AUTO, WITHOUT_ARRAY_WRAPPER

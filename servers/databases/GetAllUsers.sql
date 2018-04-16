@@ -10,7 +10,8 @@ As
 	SET NOCOUNT ON
 	IF EXISTS(SELECT UserId, UserFname, UserLname,UserEmail,PhotoUrl, UserDOB, Username FROM [USER])
 		BEGIN
-		SELECT UserId, UserFname, UserLname,UserEmail,PhotoUrl, UserDOB, Username FROM [USER]
+		SELECT UserId, UserFname, UserLname,UserEmail,PhotoUrl, 
+		UserDOB, Username, NumFriends FROM [USER]
 		--FOR JSON AUTO, WITHOUT_ARRAY_WRAPPER
 		END
 	ELSE
