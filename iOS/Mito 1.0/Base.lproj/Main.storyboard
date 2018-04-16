@@ -1497,9 +1497,9 @@
                     </view>
                     <connections>
                         <outlet property="addFriendbtn" destination="szw-Dz-dqC" id="imc-a5-0pc"/>
+                        <outlet property="btnNumFriends" destination="Rwi-hr-9PZ" id="8Rx-nb-aDj"/>
                         <outlet property="img" destination="2VX-4k-3cu" id="Xdx-l5-yIt"/>
                         <outlet property="lblName" destination="k1g-f7-mfA" id="Q0T-y5-OaF"/>
-                        <outlet property="lblNumFriends" destination="Rwi-hr-9PZ" id="8Rx-nb-aDj"/>
                         <outlet property="lblUsername" destination="fZd-x7-rdQ" id="TFf-5A-aga"/>
                         <segue destination="5ev-RP-TnR" kind="show" identifier="segPeopleDetailsToSearchView" id="kS1-pK-LOk"/>
                     </connections>

@@ -17,7 +17,7 @@ class PeopleDetailsViewController: UIViewController {
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblUsername: UILabel!
     @IBOutlet weak var img: UIImageView!
-    @IBOutlet weak var lblNumFriends: UIButton!
+    @IBOutlet weak var btnNumFriends: UIButton!
     @IBOutlet weak var addFriendbtn: UIButton!
     
     override func viewDidLoad() {
@@ -29,10 +29,10 @@ class PeopleDetailsViewController: UIViewController {
         print(mySection)
         print(myIndex)
         let friend = appdata.arrCurrFriendsAndAllMitoUsers[mySection][myIndex]
+        print(friend)
         lblName.text = "\(friend.firstName) \(friend.lastName)"
         lblUsername.text = "@\(friend.strUsername)"
-//        print(friend.intNumFriends)
-//        lblNumFriends.text =
+        btnNumFriends.setTitle("\(friend.intNumFriends) friends", for: .normal)
         let url = URL(string:"\(friend.avatar)")
         if let data = try? Data(contentsOf: url!) {
             img.image = UIImage(data: data)!

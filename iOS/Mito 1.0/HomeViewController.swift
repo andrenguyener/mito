@@ -105,8 +105,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                     let objUsers = dictionary as! NSArray
                     for objUser in objUsers {
                         let objPerson2 = objUser as! NSDictionary
-                        let objPerson = Person(firstName: objPerson2["userFname"] as! String, lastName: objPerson2["userLname"] as! String, email: objPerson2["userEmail"] as! String, avatar: objPerson2["photoURL"] as! String, intUserID: objPerson2["userId"] as! Int, strUsername: objPerson2["username"] as! String)
-//                        , intNumFriends: objPerson2["NumFriends"] as! Int
+                        let objPerson = Person(firstName: objPerson2["userFname"] as! String, lastName: objPerson2["userLname"] as! String, email: objPerson2["userEmail"] as! String, avatar: objPerson2["photoURL"] as! String, intUserID: objPerson2["userId"] as! Int, strUsername: objPerson2["username"] as! String, intNumFriends: objPerson2["NumFriends"] as! Int)
                         self.appdata.arrAllUsers.append(objPerson)
                     }
                     
@@ -141,8 +140,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                                                email: (object["UserEmail"] as? String?)!!,
                                                avatar: (object["PhotoUrl"] as? String?)!!,
                                                intUserID: (object["UserId"] as? Int)!,
-                                               strUsername: (object["Username"] as? String)!)
-//                        ,intNumFriends: (object["NumFriends"] as! Int)
+                                               strUsername: (object["Username"] as? String)!,
+                                               intNumFriends: (object["NumFriends"] as! Int))
                         self.appdata.arrFriends.append(p)
                         //                        DispatchQueue.main.async {
                         //                            UserDefaults.standard.set(authHeader, forKey: "Authorization")
