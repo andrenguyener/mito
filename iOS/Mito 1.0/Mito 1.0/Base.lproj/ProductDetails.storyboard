@@ -37,13 +37,13 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GTz-CR-asI">
-                                        <rect key="frame" x="83" y="96" width="209" height="209"/>
+                                        <rect key="frame" x="83" y="98" width="209" height="209"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="209" id="9wb-kN-HhL"/>
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="cI8-iX-4I4" userLabel="Title Stack View">
-                                        <rect key="frame" x="20" y="50" width="335" height="36"/>
+                                        <rect key="frame" x="20" y="50" width="335" height="38"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H3a-LP-2zx">
                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="20"/>
@@ -52,15 +52,15 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Publisher" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yoe-L6-xNv">
-                                                <rect key="frame" x="0.0" y="25" width="335" height="11"/>
-                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="9"/>
+                                                <rect key="frame" x="0.0" y="25" width="335" height="13"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="11"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="vUt-xN-Ool" userLabel="Product_Info View">
-                                        <rect key="frame" x="20" y="315" width="335" height="128"/>
+                                        <rect key="frame" x="20" y="317" width="335" height="128"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AMD-hj-WHc">
                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="32"/>
@@ -110,7 +110,7 @@
                                             <constraint firstItem="GI8-0O-WGK" firstAttribute="trailing" secondItem="pTd-Il-3Ti" secondAttribute="trailing" id="zqM-O3-M4F"/>
                                         </constraints>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vrN-o3-owS">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vrN-o3-owS" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
                                         <rect key="frame" x="20" y="591" width="335" height="36"/>
                                         <color key="backgroundColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
@@ -122,7 +122,7 @@
                                         </connections>
                                     </button>
                                     <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hhQ-PI-9uG">
-                                        <rect key="frame" x="20" y="448" width="335" height="216"/>
+                                        <rect key="frame" x="20" y="450" width="335" height="216"/>
                                     </pickerView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
