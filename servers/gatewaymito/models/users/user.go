@@ -24,6 +24,7 @@ type User struct {
 	UserLname    string `json:"userLname"`
 	UserDOB      string `json:"userDOB"`
 	PhotoUrl     string `json:"photoURL"`
+	NumFriends   int    `json:"NumFriends"`
 }
 
 //Credentials represents user sign-in credentials
