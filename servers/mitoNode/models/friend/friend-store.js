@@ -48,14 +48,45 @@ class FriendStore {
     getAll(id, friendType) {
         return new Promise((resolve) => {
             let procedureName = "uspcGetUserFriendsById";
-            var request = new Request(`${procedureName}`, function (err, rowCount, rows) {
-                if (err) {
-                    console.log(err);
-                }
-            });
+            var request = this.request(procedureName);
 
             request.addParameter('UserId', TYPES.Int, id);
             request.addParameter('isFriend', TYPES.Int, friendType)
+            let jsonArray = []
+            request.on('row', function (columns) {
+                var rowObject = {};
+                columns.forEach(function (column) {
+                    if (column.value === null) {
+                        console.log('NULL');
+                    } else {
+                        rowObject[column.metadata.colName] = column.value;
+                    }
+                });
+                jsonArray.push(rowObject)
+            });
+
+            request.on('doneProc', function (rowCount, more) {
+                console.log(jsonArray);
+                resolve(jsonArray);
+            });
+
+            this.sql.callProcedure(request)
+        })
+            .then((jsonArray) => {
+                return jsonArray
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
+    // Get status type of another user
+    getType(id, friendId) {
+        return new Promise((resolve) => {
+            let procedureName = "uspcGetUserFriendTypeByUserId";
+            var request = this.request(procedureName);
+            request.addParameter('UserId1', TYPES.Int, id);
+            request.addParameter('UserId2', TYPES.Int, friendId);
             let jsonArray = []
             request.on('row', function (columns) {
                 var rowObject = {};
