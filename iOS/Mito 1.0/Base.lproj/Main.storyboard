@@ -880,7 +880,6 @@
                                 <exclude reference="y34-oo-vk9"/>
                                 <exclude reference="va9-Dd-nB3"/>
                                 <exclude reference="DHp-hZ-6In"/>
-                                <exclude reference="uPe-gp-1lw"/>
                             </mask>
                         </variation>
                     </view>
@@ -1616,6 +1615,7 @@
         <image name="swirlsearch" width="2257" height="5634"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="39f-jC-Icg"/>
         <segue reference="kS1-pK-LOk"/>
         <segue reference="IOv-WN-4XC"/>
     </inferredMetricsTieBreakers>

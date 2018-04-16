@@ -18,6 +18,11 @@ class TableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        // creates circular imageview (temporary, known to slow down table views) 
+        img.layer.cornerRadius = self.img.frame.size.width / 2;
+        img.layer.masksToBounds = true
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -25,5 +30,6 @@ class TableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
 
 }

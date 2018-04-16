@@ -9,7 +9,7 @@
 import UIKit
 
 
-// Creates rounded corners on buttons. Does not show in storyboard
+// Creates slightly rounded corners on buttons. Does not show in storyboard
 class RoundedButton: UIButton {
     override func awakeFromNib() {
         super.awakeFromNib()

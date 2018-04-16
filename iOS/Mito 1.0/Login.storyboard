@@ -161,6 +161,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NAW-0F-lYy"/>
                     </view>
+                    <connections>
+                        <segue destination="dxW-1I-3se" kind="show" identifier="toHome" id="w0D-AY-Abr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Zo-Vx-26j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -623,14 +626,14 @@
                 <viewControllerPlaceholder storyboardIdentifier="UITabBarController-5ev-RP-TnR" storyboardName="Main" referencedIdentifier="UITabBarController-5ev-RP-TnR" id="dxW-1I-3se" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N6P-7a-cps" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="461" y="867"/>
+            <point key="canvasLocation" x="-141" y="642"/>
         </scene>
     </scenes>
     <resources>
         <image name="mitodesignblack.png" width="2000" height="1173"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="iia-I7-aut"/>
-        <segue reference="Fma-AT-nbz"/>
+        <segue reference="Tk8-BD-Yxk"/>
+        <segue reference="cTu-G9-fQe"/>
     </inferredMetricsTieBreakers>
 </document>
