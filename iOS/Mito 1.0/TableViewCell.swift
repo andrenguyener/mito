@@ -20,8 +20,8 @@ class TableViewCell: UITableViewCell {
         // Initialization code
         
         // creates circular imageview (temporary, known to slow down table views) 
-        img.layer.cornerRadius = self.img.frame.size.width / 2;
-        img.layer.masksToBounds = true
+//        img.layer.cornerRadius = self.img.frame.size.width / 2;
+//        img.layer.masksToBounds = true
 
     }
 

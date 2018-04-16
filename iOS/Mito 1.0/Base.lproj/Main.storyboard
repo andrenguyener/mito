@@ -811,7 +811,7 @@
                                                             <rect key="frame" x="326" y="35" width="45" height="30"/>
                                                             <state key="normal" title="+"/>
                                                         </button>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vY4-we-02b">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vY4-we-02b" customClass="RoundedImage" customModule="Mito_1_0" customModuleProvider="target">
                                                             <rect key="frame" x="20" y="10" width="88" height="88"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="88" id="WHU-by-QeR"/>
