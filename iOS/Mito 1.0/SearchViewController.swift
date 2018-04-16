@@ -12,6 +12,7 @@ import Alamofire
 
 var myIndex = 0
 var mySection = 0
+var intSegmentedIndex = 0
 
 class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
@@ -42,6 +43,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             fnLoadFriendsAndAllUsers()
             UIView.transition(from: productView, to: peopleView, duration: 0, options: .showHideTransitionViews)
         }
+        intSegmentedIndex = productPeopleTab.selectedSegmentIndex
     }
     
     override func viewDidLoad() {
@@ -60,8 +62,13 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         peopleTableView.reloadData()
         productTableView.reloadData()
         spinnerProductSearch.isHidden = true
+//        productPeopleTab.selectedSegmentIndex = intSegmentedIndex
         strProductResultsPageNumber = 1
     }
+    
+//    func viewWillAppear() {
+//        productPeopleTab.selectedSegmentIndex = intSegmentedIndex
+//    }
     
     func fnLoadFriendsAndAllUsers() {
         self.appdata.arrFriendsAndAllMitoUsers.removeAll()
@@ -195,10 +202,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         spinnerProductSearch.isHidden = false
         spinnerProductSearch.startAnimating()
-        if (productPeopleTab.selectedSegmentIndex == 1) {
-            UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
-            productPeopleTab.selectedSegmentIndex = 0
-        }
+//        if (productPeopleTab.selectedSegmentIndex == 1) {
+//            UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
+//            productPeopleTab.selectedSegmentIndex = 0
+//        }
         if (searchBar.text!.count > 0) {
             strSearchQuery = ""
             strSearchQuery = searchBar.text!.replacingOccurrences(of: " ", with: "+")
@@ -326,15 +333,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if productPeopleTab.selectedSegmentIndex == 1 {
-            return self.appdata.arrCurrFriendsAndAllMitoUsers[section].count
-        } else {
-            return appdata.arrProductSearchResults.count
-        }
-        
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if productPeopleTab.selectedSegmentIndex == 0 {
             myIndex = indexPath.row
@@ -352,10 +350,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Product
         if productPeopleTab.selectedSegmentIndex == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "productCell", for: indexPath) as! ProductTableViewCell
-            if (indexPath.row == appdata.arrProductSearchResults.count - 1) {
-                strProductResultsPageNumber += 1
-                fnLoadProductData()
-            }
+//            if (indexPath.row == appdata.arrProductSearchResults.count - 1) {
+//                strProductResultsPageNumber += 1
+//                fnLoadProductData()
+//            }
             let objProduct = appdata.arrProductSearchResults[indexPath.row]
             let urlProductImage = URL(string: "\(objProduct.image)")
             if let data = try? Data(contentsOf: urlProductImage!) {
