@@ -226,15 +226,14 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var pickerviewStateAA: UIPickerView!
     @IBOutlet weak var btnChooseState: UIButton!
     
-    
-    
     var strState = ""
     
     @IBAction func btnCreateAccountPressed(_ sender: Any) {
         var userID: Int?
         
+
         print("global var: \(self.appdata.tempAccountHolder)")
-        
+
         let parametersAccount : Parameters = self.appdata.tempAccountHolder
         
         print("parametersAccount: \(parametersAccount)")
@@ -376,15 +375,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         return this.value < that.value
     }
     
-//    func textFieldDidBeginEditing(_ textField: UITextField) {
-//        activeTextField = textField
-//    }
-//    
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        textField.resignFirstResponder()
-//        return true
-//    }
-    
     var activeTextField: UITextField!
     
     override func viewDidLoad() {
@@ -397,51 +387,9 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             pickerviewStateAA.delegate = self
             pickerviewStateAA.dataSource = self
         }
-//        activeTextField = username
-//        activeTextField.delegate = self
         super.viewDidLoad()
         self.hideKeyboard()
-//        let center: NotificationCenter = NotificationCenter.default
-//        center.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-//        center.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
-        
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
-//        self.view.addGestureRecognizer(tapGesture)
-        
-//        self.hideKeyboard()
-        
-        //        if UserDefaults.standard.object(forKey: "UserInfo") == nil {
-        //            print("There is no local data")
-        //        } else {
-        //            performSegue(withIdentifier: "login", sender: self)
-        //        }
     }
-    
-//    @objc func keyboardDidShow(notification: Notification) {
-//        let info: NSDictionary = notification.userInfo! as NSDictionary
-//        let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
-//        print("Keyboard Height: \(keyboardSize.height)")
-//        print("Text Box: \(self.activeTextField.frame)")
-//        let keyboardY = self.view.frame.size.height - keyboardSize.height
-//        let editingTextFieldY: CGFloat! = self.activeTextField?.frame.origin.y // returns 0 every time
-//
-//        if editingTextFieldY > keyboardY - 60 {
-//            UIView.animate(withDuration: 0.25, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
-//                self.view.frame = CGRect(x: 0, y: self.view.frame.origin.y - (editingTextFieldY! - (keyboardY - 60)), width: self.view.bounds.width, height: self.view.bounds.height)
-//            }, completion: nil)
-//        }
-//    }
-//
-//    @objc func keyboardWillHide(notification: Notification) {
-//        UIView.animate(withDuration: 0.25, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
-//            self.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
-//        }, completion: nil)
-//    }
-//
-//    override func viewWillDisappear(_ animated: Bool) {
-//        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-//        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardDidHide, object: nil)
-//    }
 }
 
 extension UIViewController {
@@ -454,53 +402,3 @@ extension UIViewController {
         view.endEditing(true)
     }
 }
-
-
-///// ================= /////
-
-// 250 is size of keyboard
-
-//    @objc func keyboardWillShow(notification: NSNotification) {
-//        if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
-//            if self.view.frame.origin.y == 0 {
-//                self.view.frame.origin.y -= 75
-//            }
-//        }
-//        //        username.returnKeyType = .next
-//        //        password.returnKeyType = .done
-//
-//    }
-//
-//    @objc func keyboardWillHide(notification: NSNotification) {
-//        if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
-//            if self.view.frame.origin.y == -75 {
-//                self.view.frame.origin.y += 75
-//            }
-//        }
-//    }
-
-//    @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
-//        if username != nil && password != nil {
-//            username.resignFirstResponder()
-//            password.resignFirstResponder()
-//        }
-//    }
-
-//// =========================== ////
-
-
-//    func NotificationStuff() {
-//        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-//        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in
-//
-//        })
-//        let content = UNMutableNotificationContent()
-//        content.title = "Notification"
-//        content.subtitle = "Notification subtitle"
-//        content.body = "Andre has sent you a friend request"
-//        content.badge = 1
-//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-//        let request = UNNotificationRequest(identifier: "timerDone", content: content, trigger: trigger)
-//        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-//    }

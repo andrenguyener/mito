@@ -15,8 +15,16 @@ class AppData: NSObject {
     open var intCurrIndex: Int = -1
     
     open var arrFriends: [Person] = []
+    open var arrCurrFriends: [Person] = []
     open var arrAllUsers: [Person] = []
+    open var arrCurrAllUsers: [Person] = []
     open var arrPendingFriends: [Person] = []
+    open var arrQuantity = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10+"]
+    
+    open var arrFriendsAndAllMitoUsers: [[Person]] = []
+    open var arrCurrFriendsAndAllMitoUsers: [[Person]] = []
+    
+    open var arrSections = ["Friends", "Other people on Mito"]
     
     open var arrProductSearchResults: [Product] = []
     

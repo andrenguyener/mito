@@ -11,6 +11,8 @@ import UserNotifications
 import Alamofire
 
 var myIndex = 0
+var mySection = 0
+var intSegmentedIndex = 0
 
 class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
@@ -25,24 +27,23 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var productContainer: UIView!
     @IBOutlet weak var peopleContainer: UIView!
-    var strPageNum = 1
+    var strProductResultsPageNumber = 1
     var strSearchQuery = ""
     var appdata = AppData.shared
     var urlPeopleCall = URL(string: "https://api.projectmito.io/v1/friend/")
     var urlAllUserCall = URL(string: "https://api.projectmito.io/v1/users/all")
     var urlAmazonProductCall = URL(string: "https://api.projectmito.io/v1/amazonhashtest" )
-    let urlAmazonOriginal = URL(string: "https://api.projectmito.io/v1/amazonhashtest" )
     
-    let arrSections = ["Friends", "Other people on Mito"]
-    var arrFriendsAndAllMitoUsers: [[Person]] = []
-    
+    // Clear searchBar.text and transition to the other view
     @IBAction func switchTab(_ sender: UISegmentedControl) {
+        searchBar.text = ""
         if productPeopleTab.selectedSegmentIndex == 0 {
             UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
         } else {
             fnLoadFriendsAndAllUsers()
             UIView.transition(from: productView, to: peopleView, duration: 0, options: .showHideTransitionViews)
         }
+        intSegmentedIndex = productPeopleTab.selectedSegmentIndex
     }
     
     override func viewDidLoad() {
@@ -61,14 +62,25 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         peopleTableView.reloadData()
         productTableView.reloadData()
         spinnerProductSearch.isHidden = true
+//        productPeopleTab.selectedSegmentIndex = intSegmentedIndex
+        strProductResultsPageNumber = 1
     }
     
+//    func viewWillAppear() {
+//        productPeopleTab.selectedSegmentIndex = intSegmentedIndex
+//    }
+    
     func fnLoadFriendsAndAllUsers() {
-        self.arrFriendsAndAllMitoUsers.removeAll()
+        self.appdata.arrFriendsAndAllMitoUsers.removeAll()
         self.appdata.arrFriends.removeAll()
-        self.fnLoadFriendData()
         self.appdata.arrAllUsers.removeAll()
+        self.fnLoadFriendData()
         self.fnLoadAllUsers()
+        
+        // Use arrFriendsAndAllMitoUsers and display filtered results in arrCurrFriendsAndAllMitoUsers
+        self.appdata.arrCurrFriendsAndAllMitoUsers = self.appdata.arrFriendsAndAllMitoUsers
+        self.appdata.arrCurrFriends = self.appdata.arrFriends
+        self.appdata.arrCurrAllUsers = self.appdata.arrAllUsers
     }
     
     // Loading Friends (people tab)
@@ -90,12 +102,13 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                                email: (object["UserEmail"] as? String?)!!,
                                                avatar: (object["PhotoUrl"] as? String?)!!,
                                                intUserID: (object["UserId"] as? Int)!,
-                                               strUsername: (object["Username"] as? String)!)
+                                               strUsername: (object["Username"] as? String)!,
+                                               intNumFriends: (object["NumFriends"] as? Int)!)
                         self.appdata.arrFriends.append(p)
                     }
-                    self.arrFriendsAndAllMitoUsers.append(self.appdata.arrFriends)
-                    print("Friends count: \(self.appdata.arrFriends.count)")
+                    self.appdata.arrFriendsAndAllMitoUsers.append(self.appdata.arrFriends)
                     DispatchQueue.main.async {
+                        self.appdata.arrCurrFriendsAndAllMitoUsers = self.appdata.arrFriendsAndAllMitoUsers
                         self.peopleTableView.reloadData()
                     }
                 }
@@ -118,11 +131,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let objUsers = dictionary as! NSArray
                     for objUser in objUsers {
                         let objPerson2 = objUser as! NSDictionary
-                        let objPerson = Person(firstName: objPerson2["userFname"] as! String, lastName: objPerson2["userLname"] as! String, email: objPerson2["userEmail"] as! String, avatar: objPerson2["photoURL"] as! String, intUserID: objPerson2["userId"] as! Int, strUsername: objPerson2["username"] as! String)
+                        let objPerson = Person(firstName: objPerson2["userFname"] as! String, lastName: objPerson2["userLname"] as! String, email: objPerson2["userEmail"] as! String, avatar: objPerson2["photoURL"] as! String, intUserID: objPerson2["userId"] as! Int, strUsername: objPerson2["username"] as! String, intNumFriends: objPerson2["NumFriends"] as! Int)
                         self.appdata.arrAllUsers.append(objPerson)
                     }
-                    self.arrFriendsAndAllMitoUsers.append(self.appdata.arrAllUsers)
-                    print("All Users count: \(self.appdata.arrAllUsers.count)")
+                    self.appdata.arrFriendsAndAllMitoUsers.append(self.appdata.arrAllUsers)
+                    self.appdata.arrCurrFriendsAndAllMitoUsers = self.appdata.arrFriendsAndAllMitoUsers
                 }
                 
             case .failure(let error):
@@ -136,22 +149,63 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         performSegue(withIdentifier: "searchToCart", sender: self)
     }
     
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        if (productPeopleTab.selectedSegmentIndex == 1) {
-            UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
+//    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+//        if (productPeopleTab.selectedSegmentIndex == 1) {
+//            UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
+//        }
+//        productPeopleTab.selectedSegmentIndex = 0
+//        return true
+//    }
+    
+    // Once text changes, filter friends and all users, then merge into arrCurrFriendsAndAllMitoUsers
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if productPeopleTab.selectedSegmentIndex == 1 {
+            if (searchBar.text?.isEmpty)! {
+                appdata.arrCurrFriendsAndAllMitoUsers = appdata.arrFriendsAndAllMitoUsers
+                appdata.arrCurrAllUsers = appdata.arrAllUsers
+                appdata.arrCurrFriends = appdata.arrFriends
+                peopleTableView.reloadData()
+                return
+            } else {
+                filterFriends(text: searchText)
+                filterAllUsers(text: searchText)
+                appdata.arrCurrFriendsAndAllMitoUsers.removeAll()
+                appdata.arrCurrFriendsAndAllMitoUsers.append(appdata.arrCurrFriends)
+                appdata.arrCurrFriendsAndAllMitoUsers.append(appdata.arrCurrAllUsers)
+                peopleTableView.reloadData()
+            }
         }
-        productPeopleTab.selectedSegmentIndex = 0
-        return true
     }
     
-    // Pressed Enter
+    func filterFriends(text: String) {
+        appdata.arrCurrFriends = appdata.arrFriends.filter({ person -> Bool in
+            return person.firstName.lowercased().contains(text.lowercased())
+        })
+    }
+    
+    func filterAllUsers(text: String) {
+        appdata.arrCurrAllUsers = appdata.arrAllUsers.filter({ person -> Bool in
+            return person.firstName.lowercased().contains(text.lowercased())
+        })
+    }
+    
+//    func filterFriendsAndUsers(text: String) {
+//        appdata.arrFriendsAndAllMitoUsers = appdata.arrFriendsAndAllMitoUsers.filter({ objPersonGroup -> Bool in
+//            return objPersonGroup.contains(where: { (person) -> Bool in
+//                person.firstName.contains(text.lowercased())
+//            })
+//        })
+//        productTableView.reloadData()
+//    }
+    
+    // Pressed Enter (Only for product search at the moment)
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         spinnerProductSearch.isHidden = false
         spinnerProductSearch.startAnimating()
-        if (productPeopleTab.selectedSegmentIndex == 1) {
-            UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
-            productPeopleTab.selectedSegmentIndex = 0
-        }
+//        if (productPeopleTab.selectedSegmentIndex == 1) {
+//            UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
+//            productPeopleTab.selectedSegmentIndex = 0
+//        }
         if (searchBar.text!.count > 0) {
             strSearchQuery = ""
             strSearchQuery = searchBar.text!.replacingOccurrences(of: " ", with: "+")
@@ -160,34 +214,26 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             searchBar.text = "Amazon"
         }
         searchBar.resignFirstResponder()
-        appdata.arrProductSearchResults.removeAll()
-//        let urlString = (urlAmazonOriginal?.absoluteString)!
-//        print(urlString)
-//        urlAmazonProductCall = URL(string: urlString)
         productPeopleTab.isEnabled = false
-        fnLoadProductData() // pass in parameters
-        productTableView.reloadData()
+        fnLoadProductData()
+//        productTableView.reloadData()
     }
     
     // Product Tab View
     func fnLoadProductData() {
+        appdata.arrProductSearchResults.removeAll()
         let parameters: Parameters = [
             "keyword": strSearchQuery,
-            "pageNumber": "1"
+            "pageNumber": strProductResultsPageNumber
         ]
-        print("Search Query: \(parameters["keyword"])")
-        print("Page Number: \(parameters["pageNumber"])")
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
-        print(headers)
-        print("Amazon URL: \(urlAmazonProductCall)")
         Alamofire.request(urlAmazonProductCall!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success:
                 if let dictionary = response.result.value {
                     let myJson = dictionary as! NSDictionary
-                    print(myJson)
                     let itemSearchResponse = myJson["ItemSearchResponse"] as! NSDictionary
                     let objItems = self.fnAccessFirstDictionaryInArray(dictObj: itemSearchResponse, arrName: "Items")
                     if objItems["Item"] == nil {
@@ -197,7 +243,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         for itemObj in arrItem {
                             let item = itemObj as! NSDictionary
                             let strASIN = self.fnAccesStringinObj(dictObj: item, strAttribute: "ASIN")
-                            print(strASIN)
                             var strImageURL = ""
                             if item["LargeImage"] != nil {
                                 let objLargeImage = self.fnAccessFirstDictionaryInArray(dictObj: item, arrName: "LargeImage")
@@ -250,7 +295,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             self.appdata.arrProductSearchResults.append(product)
                         }
                     }
-                    print("Product Table Size: \(self.appdata.arrProductSearchResults.count)")
                     DispatchQueue.main.async {
                         self.productTableView.reloadData()
                         self.productPeopleTab.isEnabled = true
@@ -267,7 +311,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if productPeopleTab.selectedSegmentIndex == 1 {
-            return self.arrFriendsAndAllMitoUsers[section].count
+            return self.appdata.arrCurrFriendsAndAllMitoUsers[section].count
         } else {
             return appdata.arrProductSearchResults.count
         }
@@ -275,30 +319,18 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if productPeopleTab.selectedSegmentIndex == 1 {
-            print("People: \(section)")
-            return self.arrSections[section]
+            return self.appdata.arrSections[section]
         } else {
-            print("Product: \(section)")
-            return "Test"
+            return "Products"
         }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         if productPeopleTab.selectedSegmentIndex == 1 {
-            print("Friends and All Users Count: \(arrFriendsAndAllMitoUsers.count)")
-            return arrFriendsAndAllMitoUsers.count
+            return self.appdata.arrCurrFriendsAndAllMitoUsers.count
         } else {
             return 1
         }
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if productPeopleTab.selectedSegmentIndex == 1 {
-            return self.arrFriendsAndAllMitoUsers[section].count
-        } else {
-            return appdata.arrProductSearchResults.count
-        }
-        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -308,15 +340,20 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             performSegue(withIdentifier: "productDetail", sender: self)
         } else {
             myIndex = indexPath.row
-            print("didSelectRowAt Index: \(myIndex)")
+            mySection = indexPath.section
             performSegue(withIdentifier: "searchToMitoProfile", sender: self)
         }
     }
     
+    // People tab will always show arrCurrFriendsAndAllMitoUsers
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Product
         if productPeopleTab.selectedSegmentIndex == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "productCell", for: indexPath) as! ProductTableViewCell
+//            if (indexPath.row == appdata.arrProductSearchResults.count - 1) {
+//                strProductResultsPageNumber += 1
+//                fnLoadProductData()
+//            }
             let objProduct = appdata.arrProductSearchResults[indexPath.row]
             let urlProductImage = URL(string: "\(objProduct.image)")
             if let data = try? Data(contentsOf: urlProductImage!) {
@@ -328,7 +365,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return cell
         } else { // People
             let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
-            let objPerson = arrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
+            let objPerson = self.appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
             let urlPeopleImage = URL(string:"\(objPerson.avatar)")
             let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
             if let data = try? Data(contentsOf: urlPeopleImage!) {

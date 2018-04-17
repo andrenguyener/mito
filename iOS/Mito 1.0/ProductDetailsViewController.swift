@@ -11,8 +11,9 @@ import Alamofire
 
 class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    var arrQuantity = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10+"]
+    var appdata = AppData.shared
     var urlAddToMitoCart = URL(string: "https://api.projectmito.io/v1/cart")
+    let formatter = NumberFormatter()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,8 +41,6 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
         // Dispose of any resources that can be recreated.
     }
 
-    
-    var appdata = AppData.shared
     //PEOPLE DETAIL SEGUE
 
     
@@ -70,15 +69,15 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return arrQuantity.count
+        return appdata.arrQuantity.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return arrQuantity[row]
+        return appdata.arrQuantity[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        lblQuantity.text = arrQuantity[row]
+        lblQuantity.text = appdata.arrQuantity[row]
         pickerviewQuantity.isHidden = true
         btnQuantity.isHidden = false
         lblQuantity.isHidden = false
@@ -88,7 +87,12 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     @IBAction func btnAddToCartPressed(_ sender: Any) {
         let objCurrentProduct = appdata.arrProductSearchResults[appdata.intCurrIndex]
-        let intAmazonPrice = (Double)(objCurrentProduct.price)!
+        print(objCurrentProduct.values())
+        var intAmazonPrice : Decimal = 0.00
+        let itemPrice = objCurrentProduct.price // change later
+        if let number = formatter.number(from: itemPrice) {
+            intAmazonPrice = number.decimalValue
+        }
         let intQuantity = (Int)(lblQuantity.text!)!
         let parameters: Parameters = [
             "amazonASIN": objCurrentProduct.ASIN,
@@ -103,7 +107,7 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
             case .success:
                 self.fnAlertAddedToCart()
                 if let dictionary = response.result.value {
-                    let myJson = dictionary as! NSDictionary
+                    print(dictionary)
                     // Any code for storing locally
                 }
                 

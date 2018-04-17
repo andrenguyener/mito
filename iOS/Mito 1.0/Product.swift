@@ -24,4 +24,8 @@ class Product {
         self.price = price
         self.description = description
     }
+    
+    func values() -> String {
+        return "\(self.image) \(self.ASIN) \(self.title) \(self.publisher) \(self.price) \(self.description)"
+    }
 }

@@ -8,14 +8,17 @@
 
 import UIKit
 import Alamofire
+import UIKit
 
 class PeopleDetailsViewController: UIViewController {
 
     var appdata = AppData.shared
     
     @IBOutlet weak var lblName: UILabel!
-    @IBOutlet weak var lblEmail: UILabel!
+    @IBOutlet weak var lblUsername: UILabel!
     @IBOutlet weak var img: UIImageView!
+    @IBOutlet weak var btnNumFriends: UIButton!
+    @IBOutlet weak var addFriendbtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,14 +26,17 @@ class PeopleDetailsViewController: UIViewController {
     }
     
     func loadPersonData() {
-        let friend = appdata.arrAllUsers[myIndex]
+        print(mySection)
+        print(myIndex)
+        let friend = appdata.arrCurrFriendsAndAllMitoUsers[mySection][myIndex]
+        print(friend)
         lblName.text = "\(friend.firstName) \(friend.lastName)"
-        lblEmail.text = "\(friend.email)"
+        lblUsername.text = "@\(friend.strUsername)"
+        btnNumFriends.setTitle("\(friend.intNumFriends) friends", for: .normal)
         let url = URL(string:"\(friend.avatar)")
         if let data = try? Data(contentsOf: url!) {
             img.image = UIImage(data: data)!
         }
-        print("\(lblName.text)'s ID: \(friend.intUserID)")
     }
 
     @IBAction func fnAddFriend(_ sender: Any) {
@@ -45,23 +51,20 @@ class PeopleDetailsViewController: UIViewController {
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
-        print(UserDefaults.standard.object(forKey: "Authorization"))
         
         Alamofire.request("https://api.projectmito.io/v1/friend", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
             switch response.result {
             case .success:
-                
                 if let dictionary = response.result.value {
-                    print("Request: \(response.request)")
+                    print("Request: \(String(describing: response.request))")
                     print("JSON: \(dictionary)") // serialized json response
                     DispatchQueue.main.async {
                         self.fnAlertRequestSent()
                     }
                 }
                 
-                
             case .failure(let error):
-                print("Request: \(response.request)")
+                print("Request: \(String(describing: response.request))")
                 print(error)
             }
         }
