@@ -12,10 +12,8 @@ As
 	SET NOCOUNT ON
 	IF EXISTS(SELECT UserId FROM [USER] WHERE UserId = @UserId)
 		BEGIN
-		DECLARE @FriendCount INT
-		EXEC dbo.uspGetUserFriendCount @UserId, @Count = @FriendCount OUT
 		SELECT UserId, UserFname, UserLname,UserEmail,PhotoUrl, 
-		UserDOB, Username, @FriendCount AS NumFriends 
+		UserDOB, Username, NumFriends 
 		FROM [USER] WHERE UserId = @UserId
 		--FOR JSON AUTO, WITHOUT_ARRAY_WRAPPER
 		END
