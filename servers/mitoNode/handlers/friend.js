@@ -90,6 +90,23 @@ const FriendHandler = (friendStore) => {
             });
     });
 
+    // Get friend type of 2 users
+    router.post('/v1/friend/type', (req, res) => {
+        const userJSON = req.get('X-User');
+        const user = JSON.parse(userJSON);
+        let friendId = req.body.friendId;
+        friendStore
+            .getType(user.userId, friendId)
+            .then((message) => {
+                res.send(message);
+            })
+            .catch(err => {
+                if (err !== breakSignal) {
+                    console.log(err);
+                }
+            });
+    });
+
     // Update (upgrade/downgrade) friend status
     router.patch('', (req, res) => {
 

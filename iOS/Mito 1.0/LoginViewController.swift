@@ -30,7 +30,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     var urlStates = URL(string: "https://api.myjson.com/bins/penjf") // JSON file containing US states
     var urlMonths = URL(string: "https://api.myjson.com/bins/1175mz") // JSON file containing months
-    
+//    var tempAccountHolder : Parameters = (Dictionary<String, Any>)()
     var appdata = AppData.shared
     
     @IBAction func btnMonthPressed(_ sender: Any) {
@@ -172,28 +172,47 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             "passwordConf": strPasswordConfirmation!,
             "userDOB": strUserDOB
         ]
-        Alamofire.request("https://api.projectmito.io/v1/users", method: .post, parameters: parameters, encoding: JSONEncoding.default).validate().responseJSON { response in
+        
+        self.appdata.tempAccountHolder = parameters
+        print(self.appdata.tempAccountHolder)
+    
+        Alamofire.request("https://api.projectmito.io/v1/users/validate", method: .post, parameters: parameters, encoding: JSONEncoding.default).validate().responseJSON { response in
             switch response.result {
             case .success:
                 // http url response
-                let authHeader = response.response?.allHeaderFields["Authorization"] ?? ""
                 if let dictionary = response.result.value {
                     print("JSON: \(dictionary)") // serialized json response
                     self.performSegue(withIdentifier: "signUpToAddress", sender: self)
-                    DispatchQueue.main.async {
-                        UserDefaults.standard.set(dictionary, forKey: "UserInfo")
-                        UserDefaults.standard.set(authHeader, forKey: "Authorization")
-                        if UserDefaults.standard.object(forKey: "UserInfo") != nil {
-                            let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
-                            self.appdata.intCurrentUserID = (data["userId"] as? Int)!
-                        }
-                    }
+                    
                 }
-                
+
             case .failure(let error):
                 print(error)
             }
         }
+
+//        Alamofire.request("https://api.projectmito.io/v1/users", method: .post, parameters: parameters, encoding: JSONEncoding.default).validate().responseJSON { response in
+//            switch response.result {
+//            case .success:
+//                // http url response
+//                let authHeader = response.response?.allHeaderFields["Authorization"] ?? ""
+//                if let dictionary = response.result.value {
+//                    print("JSON: \(dictionary)") // serialized json response
+//                    self.performSegue(withIdentifier: "signUpToAddress", sender: self)
+//                    DispatchQueue.main.async {
+//                        UserDefaults.standard.set(dictionary, forKey: "UserInfo")
+//                        UserDefaults.standard.set(authHeader, forKey: "Authorization")
+//                        if UserDefaults.standard.object(forKey: "UserInfo") != nil {
+//                            let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+//                            self.appdata.intCurrentUserID = (data["userId"] as? Int)!
+//                        }
+//                    }
+//                }
+//
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
     }
     
     // Add Address page
@@ -213,52 +232,90 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     @IBAction func btnCreateAccountPressed(_ sender: Any) {
         var userID: Int?
-        if UserDefaults.standard.object(forKey: "UserInfo") != nil {
-            let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
-            userID = data["userId"] as? Int
-            print("data = \(data)")
-            print("userId = \(String(describing: data["userId"]))")
-            appdata.intCurrentUserID = userID!
-        }
-        let alias = addressNickname.text
-        let strAddress1 = address1AA.text
-        let strAddress2 = address2AA.text
-        let strCity = cityAA.text
-        let strState = stateAA.text
-        let zipcode = zipcodeAA.text
         
-        let parameters: Parameters = [
-            "userId": userID!,
-            "streetAddress1": strAddress1!,
-            "streetAddress2": strAddress2!,
-            "cityName": strCity!,
-            "zipCode": zipcode!,
-            "stateName": strState!,
-            "aliasName": alias
-        ]
+        print("global var: \(self.appdata.tempAccountHolder)")
         
-        let headers: HTTPHeaders = [
-            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
-        ]
+        let parametersAccount : Parameters = self.appdata.tempAccountHolder
         
-        Alamofire.request("https://api.projectmito.io/v1/address", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+        print("parametersAccount: \(parametersAccount)")
+        
+        Alamofire.request("https://api.projectmito.io/v1/users", method: .post, parameters: parametersAccount, encoding: JSONEncoding.default).validate().responseJSON { response in
             switch response.result {
             case .success:
-                
+                // http url response
+                let authHeader = response.response?.allHeaderFields["Authorization"] ?? ""
                 if let dictionary = response.result.value {
                     print("JSON: \(dictionary)") // serialized json response
+//                    self.performSegue(withIdentifier: "signUpToAddress", sender: self)
                     DispatchQueue.main.async {
-                        self.performSegue(withIdentifier: "createAccount", sender: self)
-                        //                    UserDefaults.standard.set(dictionary, forKey: "AddressInfo")
-                        //                    print(UserDefaults.standard.object(forKey: "AddressInfo") as! NSDictionary)
+                        UserDefaults.standard.set(dictionary, forKey: "UserInfo")
+                        UserDefaults.standard.set(authHeader, forKey: "Authorization")
+                        if UserDefaults.standard.object(forKey: "UserInfo") != nil {
+                            let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+                            self.appdata.intCurrentUserID = (data["userId"] as? Int)!
+                        }
+                        
+                        if UserDefaults.standard.object(forKey: "UserInfo") != nil {
+                            let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+                            userID = data["userId"] as? Int
+                            print("data = \(data)")
+                            print("userId = \(String(describing: data["userId"]))")
+                            self.appdata.intCurrentUserID = userID!
+                        }
+                        let alias = self.addressNickname.text
+                        let strAddress1 = self.address1AA.text
+                        let strAddress2 = self.address2AA.text
+                        let strCity = self.cityAA.text
+                        let strState = self.stateAA.text
+                        let zipcode = self.zipcodeAA.text
+                        
+                        let parametersAddress: Parameters = [
+                            "userId": userID!,
+                            "streetAddress1": strAddress1!,
+                            "streetAddress2": strAddress2!,
+                            "cityName": strCity!,
+                            "zipCode": zipcode!,
+                            "stateName": strState!,
+                            "aliasName": alias
+                        ]
+                        
+                        self.addAddress(parameterAddress: parametersAddress)
                     }
                 }
-                
+
             case .failure(let error):
                 print(error)
             }
         }
         
+        
+        
+        
+        
+    }
+    
+    func addAddress(parameterAddress: Parameters) {
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+    
+        Alamofire.request("https://api.projectmito.io/v1/address", method: .post, parameters: parameterAddress, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+                case .success:
+    
+                    if let dictionary = response.result.value {
+                        print("JSON: \(dictionary)") // serialized json response
+                        DispatchQueue.main.async {
+                            self.performSegue(withIdentifier: "createAccount", sender: self)
+                            //                    UserDefaults.standard.set(dictionary, forKey: "AddressInfo")
+                            //                    print(UserDefaults.standard.object(forKey: "AddressInfo") as! NSDictionary)
+                        }
+                    }
+    
+                case .failure(let error):
+                    print(error)
+            }
+        }
     }
     
     @IBAction func btnStatePressed(_ sender: Any) {
