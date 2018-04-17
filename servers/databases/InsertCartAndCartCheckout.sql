@@ -51,7 +51,7 @@ GO
 EXEC sp_rename 'uspProcessCheckout', 'uspcProcessCheckout'
 ALTER PROC uspcProcessCheckout
 @UserId INT,
-@UserAddressId INT,
+@SenderAddressId INT,
 @RecipientId INT,
 @Message NVARCHAR(1000),
 @GiftOption BIT
@@ -92,7 +92,7 @@ SET XACT_ABORT ON
 BEGIN TRY
 BEGIN TRANSACTION InsertNotification
 BEGIN TRANSACTION G1
-EXEC dbo.uspCreatePurchaseOrder @UserId, @UserAddressId, @RecipientId, @Message, 
+EXEC dbo.uspCreatePurchaseOrder @UserId, @SenderAddressId, @RecipientId, @Message, 
 @TodaysDate, @GiftOption, @PendingStatusId, @SumCartPrice, @Order_Id = @OrderID OUT
 
 IF @OrderID IS NULL
@@ -166,7 +166,7 @@ EXEC uspInsertNotification @NotificationTypeId, @UserId, @RecipientId, @TodaysDa
 SELECT * FROM CART
 SELECT * FROM ORDER_PRODUCT
 SELECT * FROM [ORDER]
-EXEC dbo.uspcInsertIntoCart '1245','12.00',7,15
+EXEC dbo.uspcInsertIntoCart '1245','12.00',7,0
 EXEC dbo.uspcInsertIntoCart '10394','12.00',7,10
 EXEC dbo.uspcGetUserCartItemList 7
 EXEC dbo.uspcProcessCheckout 7, 7, 34, 'Testing checkout cart', 0

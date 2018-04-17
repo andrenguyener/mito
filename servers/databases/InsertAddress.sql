@@ -1,5 +1,5 @@
-EXEC sp_rename 'uspInsertAddress', 'uspcInsertAddress'
-ALTER PROC uspcInsertAddress
+EXEC sp_rename 'uspcInsertAddress', 'uspInsertAddress'
+ALTER PROC uspInsertAddress
 @streetAddress1 NVARCHAR(100),
 @streetAddress2 NVARCHAR(100),
 @cityName NVARCHAR(75),

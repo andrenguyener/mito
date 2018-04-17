@@ -3,8 +3,8 @@
 Insert an address for the given userId and return the newly made addressId
 as an output parameter
 */
-
-ALTER PROC uspInsertUserAddress
+EXEC sp_rename 'uspInsertUserAddress', 'uspcInsertUserAddress'
+ALTER PROC uspcInsertUserAddress
 @userId INT,
 @streetAddress1 NVARCHAR(100),
 @streetAddress2 NVARCHAR(100),
@@ -61,7 +61,7 @@ AS
 		ELSE
 			COMMIT TRAN addUserAddress
 
-EXEC sp_rename 'InsertUserAddress', 'uspInsertUserAddress'
+
 /*
 DECLARE @Test INT
 EXEC InsertUserAddress 7,'124 Pizza Way', '2nd Floor', 'Seattle', 'WA', '98144', 
