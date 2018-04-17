@@ -18,7 +18,7 @@ AS
 	-- Check if the UserId has an address in USER_ADDRESS
 	IF EXISTS (SELECT * FROM USER_ADDRESS WHERE UserId = @UserId)
 
-	(SELECT U.UserId, U.UserFname, U.UserLname, U.UserEmail,U.Username, UA.UserAddressId,
+	(SELECT UA.UserAddressId, A.AddressId, UA.Alias,
 		SA.StreetAddress, StreetAddress2, CityName, StateName, ZipCode, UA.IsDefault FROM [USER] U
 		JOIN USER_ADDRESS UA ON U.UserId = UA.UserId
 		JOIN [ADDRESS] A ON UA.AddressId = A.AddressId
@@ -39,7 +39,7 @@ GO
 EXEC sp_rename 'GetUserAddressById', 'uspGetUserAddressById'
 
 -- example success (uncomment the line below): 7 is a valid userId
-EXEC uspGetUserAddressById 7
+EXEC uspcGetUserAddressById 7
 
 -- example error (uncomment the line below): 3 is a valid user but doesn't have any address
 --EXEC GetUserAddressById 3
