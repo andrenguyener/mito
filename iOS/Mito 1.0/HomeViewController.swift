@@ -27,7 +27,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
         
-        print("Received text: \(text)")
+//        print("Received text: \(text)")
+        let jsonData = text.data(using: .utf8)
+        let dictionary = try? JSONSerialization.jsonObject(with: jsonData!, options: .mutableLeaves)
+        print(dictionary)
     }
     
     func websocketDidReceiveData(socket: WebSocketClient, data: Data) {

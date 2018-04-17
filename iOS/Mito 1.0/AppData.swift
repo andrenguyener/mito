@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class AppData: NSObject {
     static let shared = AppData()
@@ -44,4 +45,6 @@ class AppData: NSObject {
         FeedItem(avatar: "sarah.png", descr: "Heres something to help you get through all those nights of ERD's yo!", time: "1d", whatHappened: "Sarah Phillips sent a gift to JJ Guo"),
         FeedItem(avatar: "jj.png", descr: "bro tonight is the night to ERD! Enjoy the gift.", time: "3d", whatHappened: "JJ Guo sent a gift to Sopheak Neak")
     ]
+    
+    open var tempAccountHolder : Parameters = (Dictionary<String, Any>)()
 }

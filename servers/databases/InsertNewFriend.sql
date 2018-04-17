@@ -40,7 +40,7 @@ AS
 		END
 
 	DECLARE @NotificationTypeId INT
-	EXEC uspGetNotificationType 'Pending', @NotificationType_ID = @NotificationTypeId OUT
+	EXEC uspGetNotificationType 'Pending', 'Friends', @NotificationType_ID = @NotificationTypeId OUT
 	IF @NotificationTypeId IS NULL
 		BEGIN
 			PRINT 'Friend request is not a type of notification'
@@ -56,13 +56,13 @@ AS
 			-- INSERT friendship between @Username1 and @Username2 in FRIEND table
 			BEGIN TRAN insertIntoFriend
 			INSERT INTO FRIEND (User1Id, User2Id, FriendTypeId, IsDeleted) VALUES (@User1Id, @User2Id, @FriendTypeId, 0)
-			SET @FriendId = (SELECT SCOPE_IDENTITY())
+			--SET @FriendId = (SELECT SCOPE_IDENTITY())
 			IF @@ERROR <> 0
 				ROLLBACK TRAN insertIntoFriend
 			ELSE
 				COMMIT TRAN insertIntoFriend
 
-		EXEC uspInsertNotification @FriendId, @NotificationTypeId, 0, @TodaysDate
+		EXEC uspInsertNotification @NotificationTypeId, @User1Id, @User2Id, @TodaysDate
 		IF @@ERROR <> 0
 			ROLLBACK TRAN insertNotification
 		ELSE

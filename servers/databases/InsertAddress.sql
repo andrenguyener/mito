@@ -1,4 +1,5 @@
-ALTER PROC uspInsertAddress
+EXEC sp_rename 'uspInsertAddress', 'uspcInsertAddress'
+ALTER PROC uspcInsertAddress
 @streetAddress1 NVARCHAR(100),
 @streetAddress2 NVARCHAR(100),
 @cityName NVARCHAR(75),
@@ -46,5 +47,3 @@ AS
 		ELSE
 			COMMIT TRAN addAddress
 		END
-
-EXEC sp_rename 'InsertAddress', 'uspInsertAddress'
