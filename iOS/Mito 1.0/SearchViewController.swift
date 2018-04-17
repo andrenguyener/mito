@@ -34,6 +34,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var urlAllUserCall = URL(string: "https://api.projectmito.io/v1/users/all")
     var urlAmazonProductCall = URL(string: "https://api.projectmito.io/v1/amazonhashtest" )
     
+    // used to keep track of orginal url call for checks
+    var ogAmazonProductCall = URL(string: "https://api.projectmito.io/v1/amazonhashtest" )
+    
+    @IBOutlet weak var swirlSearchImg: UIImageView!
+    
     // Clear searchBar.text and transition to the other view
     @IBAction func switchTab(_ sender: UISegmentedControl) {
         searchBar.text = ""
@@ -41,6 +46,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
         } else {
             fnLoadFriendsAndAllUsers()
+            swirlSearchImg.isHidden = true
             UIView.transition(from: productView, to: peopleView, duration: 0, options: .showHideTransitionViews)
         }
         intSegmentedIndex = productPeopleTab.selectedSegmentIndex
@@ -51,10 +57,14 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         peopleTableView.delegate = self
         peopleTableView.dataSource = self
         peopleTableView.rowHeight = 106
-        
+    
         productTableView.delegate = self
         productTableView.dataSource = self
         productTableView.rowHeight = 106
+        
+        if peopleTableView == nil {
+            swirlSearchImg.isHidden = false
+        }
         
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
@@ -293,6 +303,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             }
                             let product: Product = Product(image: strImageURL, ASIN: strASIN, title: title, publisher: publisher_brand, price: formattedPrice, description: itemFeature)
                             self.appdata.arrProductSearchResults.append(product)
+                            self.swirlSearchImg.isHidden = true
                         }
                     }
                     DispatchQueue.main.async {

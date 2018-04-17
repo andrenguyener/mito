@@ -701,6 +701,7 @@
                                         </prototypes>
                                     </tableView>
                                 </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="WBt-vu-arn" firstAttribute="leading" secondItem="uPe-gp-1lw" secondAttribute="leading" id="DKe-dw-FVX"/>
                                     <constraint firstAttribute="bottom" secondItem="WBt-vu-arn" secondAttribute="bottom" constant="-7.5" id="p9z-EX-ETQ"/>
@@ -775,6 +776,7 @@
                                         </prototypes>
                                     </tableView>
                                 </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="wxt-cx-BMB" firstAttribute="leading" secondItem="U7j-JY-MnK" secondAttribute="leading" id="CkN-rz-UTO"/>
                                     <constraint firstAttribute="trailing" secondItem="wxt-cx-BMB" secondAttribute="trailing" id="Lke-wL-0oc"/>
@@ -835,23 +837,17 @@
                                     <constraint firstAttribute="bottom" secondItem="Cy8-QW-6iy" secondAttribute="bottom" constant="12" id="z4f-El-SCN"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swirlsearch" translatesAutoresizingMaskIntoConstraints="NO" id="y34-oo-vk9">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="swirlsearch" translatesAutoresizingMaskIntoConstraints="NO" id="y34-oo-vk9">
                                 <rect key="frame" x="79" y="169" width="154" height="390"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <containerView opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="va9-Dd-nB3">
                                 <rect key="frame" x="0.0" y="300" width="414" height="397"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <connections>
-                                    <segue destination="nQF-H2-qeS" kind="embed" identifier="searchToProduct" id="kuy-pM-UUn"/>
-                                </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DHp-hZ-6In">
                                 <rect key="frame" x="0.0" y="300" width="414" height="387"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <connections>
-                                    <segue destination="KMH-Dg-FRZ" kind="embed" identifier="searchToPeople" id="czg-X6-pf6"/>
-                                </connections>
                             </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -877,7 +873,6 @@
                         <viewLayoutGuide key="safeArea" id="Ryj-xw-gjc"/>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="y34-oo-vk9"/>
                                 <exclude reference="va9-Dd-nB3"/>
                                 <exclude reference="DHp-hZ-6In"/>
                             </mask>
@@ -897,6 +892,7 @@
                         <outlet property="productView" destination="U7j-JY-MnK" id="kgh-sR-tSc"/>
                         <outlet property="searchBar" destination="1tB-1o-Hvx" id="YWZ-9e-Rnf"/>
                         <outlet property="spinnerProductSearch" destination="hJx-uD-rHs" id="taG-3y-aYt"/>
+                        <outlet property="swirlSearchImg" destination="y34-oo-vk9" id="e2K-oY-UVl"/>
                         <segue destination="UPq-qC-84m" kind="show" identifier="searchToCart" id="IOv-WN-4XC"/>
                         <segue destination="BHS-cQ-fVw" kind="show" identifier="productDetail" id="jFg-kD-bop"/>
                         <segue destination="mKW-hw-jiX" kind="show" identifier="searchToMitoProfile" id="39f-jC-Icg"/>
@@ -1538,69 +1534,6 @@
             </objects>
             <point key="canvasLocation" x="461" y="867"/>
         </scene>
-        <!--ProductView-->
-        <scene sceneID="1dT-pp-zIa">
-            <objects>
-                <viewController title="ProductView" id="nQF-H2-qeS" customClass="ProductViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ZqT-Jh-MBr">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="397"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Product" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="z6j-Ua-QHw">
-                                <rect key="frame" x="40" y="183.5" width="334" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KZf-qV-M6v">
-                                <rect key="frame" x="184" y="325" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="checkSearchString:" destination="nQF-H2-qeS" eventType="touchUpInside" id="YCj-gf-mEZ"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="z6j-Ua-QHw" firstAttribute="leading" secondItem="ZqT-Jh-MBr" secondAttribute="leadingMargin" constant="20" id="9ta-rA-u19"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="z6j-Ua-QHw" secondAttribute="trailing" constant="20" id="jpo-ZT-wJK"/>
-                            <constraint firstItem="z6j-Ua-QHw" firstAttribute="centerY" secondItem="ZqT-Jh-MBr" secondAttribute="centerY" id="oGL-QM-F92"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="FFR-jz-S8X"/>
-                    </view>
-                    <connections>
-                        <outlet property="searchTextField" destination="z6j-Ua-QHw" id="3S1-SU-fxf"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uRK-5w-OVX" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4896" y="322"/>
-        </scene>
-        <!--PeopleView-->
-        <scene sceneID="47r-YW-b07">
-            <objects>
-                <viewController title="PeopleView" id="KMH-Dg-FRZ" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="lE7-Hf-zbL">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="387"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="People" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IOz-gU-rkk">
-                                <rect key="frame" x="159" y="255" width="97" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="TKe-NG-NGm"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fQf-B4-8jT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4973" y="284"/>
-        </scene>
         <!--ProductDetails-->
         <scene sceneID="83J-XO-LKI">
             <objects>
@@ -1813,8 +1746,7 @@
         <image name="swirlsearch" width="2257" height="5634"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2Se-oB-5nh"/>
         <segue reference="4Df-8F-JjS"/>
-        <segue reference="Huf-aH-vL3"/>
+        <segue reference="IOv-WN-4XC"/>
     </inferredMetricsTieBreakers>
 </document>
