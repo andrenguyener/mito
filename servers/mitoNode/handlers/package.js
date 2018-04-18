@@ -24,6 +24,7 @@ const PackageHandler = (packageStore) => {
 
     });
 
+    // Get pending packages of user
     router.get('/v1/package/pending', (req, res) => {
         const userJSON = req.get('X-User');
         const user = JSON.parse(userJSON);
@@ -43,7 +44,7 @@ const PackageHandler = (packageStore) => {
                 if (error != breakSignal) {
                     console.log(error)
                 }
-            })
+            });
     });
 
     // Accept/Deny incoming package

@@ -10,19 +10,23 @@ class PackageStore {
     }
 
     request(procedure) {
-        return new Request(`${procedure}`), function (err) {
+        return new Request((`${procedure}`), function (err) {
             if (err) {
                 console.log(err);
             }
-        }
+        });
     }
 
     //get all the users incoming packages
     getPending(id) {
         return new Promise((resolve) => {
             let procedureName = "uspcGetMyPendingPackages";
+            // var request = new Request(`${procedureName}`, function (err, rowCount, rows) {
+            //     if (err) {
+            //         console.log(err);
+            //     }
+            // });
             var request = this.request(procedureName);
-
             request.addParameter('UserId', TYPES.Int, id);
             let jsonArray = []
             request.on('row', function (columns) {
