@@ -2,7 +2,7 @@ ALTER PROC uspGetOrderInformationForZinc
 @OrderId INT,
 @UserResponse NVARCHAR(50)
 AS
-	IF @UserResponse <> 'Denied'
+	IF @UserResponse = 'Accepted'
 	BEGIN
 	DECLARE @SenderId INT = (SELECT SenderId FROM [ORDER] WHERE OrderId = @OrderId)
 	DECLARE @RecipientId INT = (SELECT RecipientId FROM [ORDER] WHERE OrderId = @OrderId)

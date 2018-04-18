@@ -11,7 +11,9 @@ BEGIN
 		END
 	DECLARE @PendingTypeId INT
 	EXEC dbo.uspGetUserConfirmationTypeId 'Pending', @Type_Id = @PendingTypeId OUT
-	SELECT OrderId, SenderId, OrderMessage, OrderDate FROM [ORDER] 
+	SELECT OrderId, SenderId, U.UserFname, U.UserLname, U.PhotoUrl,
+	OrderMessage, OrderDate, GiftOption FROM [ORDER] O
+	JOIN [USER] U ON O.SenderId = U.UserId 
 	WHERE RecipientId = @UserId AND OrderUserConfirmation = @PendingTypeId
 	ORDER BY OrderDate DESC
 END
