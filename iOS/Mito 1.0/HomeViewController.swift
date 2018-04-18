@@ -31,6 +31,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let jsonData = text.data(using: .utf8)
         let dictionary = try? JSONSerialization.jsonObject(with: jsonData!, options: .mutableLeaves)
         print(dictionary)
+        print("Notification")
     }
     
     func websocketDidReceiveData(socket: WebSocketClient, data: Data) {

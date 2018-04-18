@@ -87,17 +87,23 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     @IBAction func btnAddToCartPressed(_ sender: Any) {
         let objCurrentProduct = appdata.arrProductSearchResults[appdata.intCurrIndex]
-        print(objCurrentProduct.values())
+        print(objCurrentProduct.title)
         var intAmazonPrice : Decimal = 0.00
         let itemPrice = objCurrentProduct.price // change later
+        formatter.numberStyle = .currency
+        formatter.locale = Locale(identifier: "en_US")
+        print(objCurrentProduct.price)
         if let number = formatter.number(from: itemPrice) {
             intAmazonPrice = number.decimalValue
         }
+        print(intAmazonPrice)
         let intQuantity = (Int)(lblQuantity.text!)!
         let parameters: Parameters = [
             "amazonASIN": objCurrentProduct.ASIN,
             "amazonPrice": intAmazonPrice,
-            "quantity": intQuantity
+            "quantity": intQuantity,
+            "productImageUrl": objCurrentProduct.image,
+            "productName": objCurrentProduct.title
         ]
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
