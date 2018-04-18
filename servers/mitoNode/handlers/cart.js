@@ -22,11 +22,9 @@ const CartHandler = (cartStore) => {
         const userJSON = req.get('X-User');
         const user = JSON.parse(userJSON);
         var userId = user.userId;
-        console.log(userId);
         cartStore
             .get(userId)
             .then(cart => {
-                console.log(cart)
                 res.json(cart)
                 const data = {
                     type: 'cart-get',
@@ -48,10 +46,12 @@ const CartHandler = (cartStore) => {
         const userJSON = req.get('X-User');
         const user = JSON.parse(userJSON);
         let amazonASIN = req.body.amazonASIN;
+        let productName = req.body.productName;
+        let productImageUrl = req.body.productImageUrl;
         let amazonPrice = req.body.amazonPrice;
         let quantity = req.body.quantity;
         cartStore
-            .insert(user.userId, amazonASIN, amazonPrice, quantity)
+            .insert(user.userId, amazonASIN, productName, productImageUrl, amazonPrice, quantity)
             .then((cart) => {
                 res.send(cart);
             })
@@ -66,12 +66,13 @@ const CartHandler = (cartStore) => {
     router.post('/v1/cart/process', (req, res) => {
         const userJSON = req.get('X-User');
         const user = JSON.parse(userJSON);
-        let userAddressId = req.body.userAddressId;
+        let senderAddressId = req.body.senderAddressId;
         let recipientId = req.body.recipientId;
+        let cardId = req.body.cardId;
         let message = req.body.message;
         let giftOption = req.body.giftOption;
         cartStore
-            .insert(user.userId, userAddressId, recipientId, message, giftOption)
+            .process(user.userId, senderAddressId, recipientId, cardId, message, giftOption)
             .then((cart) => {
                 res.send(cart);
             })

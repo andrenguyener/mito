@@ -18,9 +18,11 @@ const AddressHandler = (addressStore) => {
     const router = express.Router();
 
     // Get all the addresses of the User
-    router.get('/v1/address/:userId', (req, res) => {
+    router.get('/v1/address', (req, res) => {
+        let userJSON = JSON.parse(req.get('X-User'));
+        let userId = userJSON.userId;
         addressStore
-            .getAll(req.params.userId)
+            .getAll(userId)
             .then(address => {
                 console.log(address)
                 res.json(address)
@@ -33,15 +35,15 @@ const AddressHandler = (addressStore) => {
     });
 
     // Insert an address for the User
-    router.post('/v1/address', (req, res) => {
+    router.post('/v1/address/insert', (req, res) => {
         let streetAddress1 = req.body.streetAddress1;
         let streetAddress2 = req.body.streetAddress2;
         let cityName = req.body.cityName;
         let zipCode = req.body.zipCode;
         let stateName = req.body.stateName;
-        // let userJSON = JSON.parse(req.get('X-User'));
-        // let userId = userJSON.userId;
-        let userId = req.body.userId;
+        let userJSON = JSON.parse(req.get('X-User'));
+        let userId = userJSON.userId;
+        // let userId = req.body.userId;
         let aliasName = req.body.aliasName;
         let address = new Address(userId, streetAddress1, streetAddress2, cityName, zipCode, stateName, aliasName);
 

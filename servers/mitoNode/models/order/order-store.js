@@ -2,10 +2,19 @@
 
 var Request = require('tedious').Request;
 var TYPES = require('tedious').TYPES;
+
 class OrderStore {
 
     constructor(sql) {
         this.sql = sql;
+    }
+
+    request(procedure) {
+        return new Request((`${procedure}`), function (err) {
+            if (err) {
+                console.log(err);
+            }
+        });
     }
 
     // Make an order (not to zinc yet until there is an address) - Add order to Order page

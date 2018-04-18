@@ -50,6 +50,13 @@ type Updates struct {
 	UserLname string `json:"userLname"`
 }
 
+//PasswordUpdate representes allowed password updates to a user profile
+type PasswordUpdate struct {
+	UserPassword        string `json:"password"`
+	UserNewPassword     string `jspon:"passwordNew"`
+	UserNewPasswordConf string `jspon:"passwordNewConf"`
+}
+
 //Validate validates the new user and returns an error if
 //any of the validation rules fail, or nil if its valid
 func (nu *NewUser) Validate() error {
@@ -86,7 +93,7 @@ func (nu *NewUser) ToUser() (*User, error) {
 		Username:  nu.Username,
 		UserFname: nu.UserFname,
 		UserLname: nu.UserLname,
-		PhotoUrl:  gravatarBasePhotoURL + photoURL,
+		PhotoUrl:  gravatarBasePhotoURL + photoURL + "&d=mm",
 		UserDOB:   nu.UserDOB,
 	}
 
@@ -134,5 +141,30 @@ func (u *User) ApplyUpdates(updates *Updates) error {
 	}
 	u.UserFname = updates.UserFname
 	u.UserLname = updates.UserLname
+
+	return nil
+}
+
+func (u *User) ApplyPasswordUpdate(update *PasswordUpdate) error {
+	err := u.Authenticate(update.UserPassword)
+	if err != nil {
+		return err
+	}
+
+	if len(update.UserNewPassword) < 6 {
+
+		return fmt.Errorf("password must be atleast 6 characters")
+	}
+	if strings.Compare(update.UserNewPassword, update.UserNewPasswordConf) != 0 {
+
+		return fmt.Errorf("passwords do not match")
+	}
+
+	hashPass, err := bcrypt.GenerateFromPassword([]byte(update.UserNewPassword), bcryptCost)
+	if err != nil {
+		return err
+	}
+	u.PasswordHash = hashPass
+
 	return nil
 }

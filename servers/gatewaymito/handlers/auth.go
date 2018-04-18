@@ -213,6 +213,61 @@ func (ctx *Context) UsersMeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// UsersPasswordHandler allows users to update their password
+func (ctx *Context) UsersPasswordHandler(w http.ResponseWriter, r *http.Request) {
+
+	// get the session state
+	sessionState := &SessionState{}
+
+	// get the state of the browser that is accessing their page
+	sessionID, err := sessions.GetState(r, ctx.SessionKey, ctx.SessionStore, sessionState)
+	if err != nil {
+		http.Error(w, "Error cannot get session state: "+err.Error(), http.StatusUnauthorized)
+		return
+	}
+	sessionUser := sessionState.User
+	switch r.Method {
+	case "PATCH":
+
+		// decode the request body into users userupdate struct
+		userUpdates := &users.Updates{}
+		err = json.NewDecoder(r.Body).Decode(userUpdates)
+		if err != nil {
+			http.Error(w, "Error cannot decode JSON updates: "+err.Error(), http.StatusBadRequest)
+		}
+
+		// updates the user in mongo stroe
+		err = ctx.UserStore.Update(sessionUser.UserId, userUpdates)
+
+		if err != nil {
+			http.Error(w, "Error cannot update user: "+err.Error(), http.StatusBadRequest)
+		}
+
+		// deletes previous name fields from trie store
+		ctx.TrieStore.Remove(sessionState.User.UserFname, sessionState.User.UserId)
+		ctx.TrieStore.Remove(sessionState.User.UserLname, sessionState.User.UserId)
+
+		// update the session state with the user
+		sessionState.User.UserFname = userUpdates.UserFname
+		sessionState.User.UserLname = userUpdates.UserLname
+
+		err = ctx.SessionStore.Save(sessionID, sessionState)
+		if err != nil {
+			http.Error(w, "Error cannot save session: "+err.Error(), http.StatusBadRequest)
+		}
+
+		// Insert the updated user fields into the trie.
+		ctx.TrieStore.Insert(sessionState.User.UserFname, sessionState.User.UserId)
+		ctx.TrieStore.Insert(sessionState.User.UserLname, sessionState.User.UserId)
+
+		respond(w, sessionUser)
+
+	default:
+		http.Error(w, "method must be GET or PATCH", http.StatusMethodNotAllowed)
+		return
+	}
+}
+
 // UsersValidateHandler allows users to check if the inputted credentials are valid
 func (ctx *Context) UsersValidateHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
@@ -319,6 +374,12 @@ func (ctx *Context) SessionsHandler(w http.ResponseWriter, r *http.Request) {
 		err = user.Authenticate(newSession.Password)
 		if err != nil {
 			http.Error(w, "invalid credentials authenticate", http.StatusUnauthorized)
+			return
+		}
+
+		user, err = ctx.UserStore.GetByID(user.UserId)
+		if err != nil {
+			http.Error(w, "invalid unable to get user", http.StatusUnauthorized)
 			return
 		}
 
