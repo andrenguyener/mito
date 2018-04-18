@@ -30,7 +30,7 @@ class AddressStore {
             request.addParameter('cityName', TYPES.VarChar, address.cityName);
             request.addParameter('zipCode', TYPES.VarChar, address.zipCode);
             request.addParameter('stateName', TYPES.VarChar, address.stateName);
-            request.addParameter('aliasName', TYPES.VarChar, "test");
+            request.addParameter('aliasName', TYPES.VarChar, address.aliasName);
             // request.addOutputParameter('Address_Id', addressId);
 
             // request.on('returnValue', function (parameterName, value, metadata) { 

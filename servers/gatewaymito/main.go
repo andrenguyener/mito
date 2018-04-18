@@ -183,5 +183,7 @@ func main() {
 	mux.Handle("/v1/amazonsearch/", NewServiceProxy(splitMitoNodeAddrs, ctx))
 	mux.Handle("/v1/cart", NewServiceProxy(splitMitoNodeAddrs, ctx))
 	mux.Handle("/v1/cart/", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/package", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/package/", NewServiceProxy(splitMitoNodeAddrs, ctx))
 	log.Fatal(http.ListenAndServeTLS(addr, tlscert, tlskey, corsHandler))
 }

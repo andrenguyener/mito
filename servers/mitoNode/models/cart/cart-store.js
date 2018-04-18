@@ -40,7 +40,6 @@ class CartStore {
             });
 
             request.on('doneProc', function (rowCount, more) {
-                console.log(jsonArray);
                 resolve(jsonArray);
             });
 
@@ -55,12 +54,14 @@ class CartStore {
     }
 
     // Add items to cart
-    insert(userId, amazonASIN, amazonPrice, quantity) {
+    insert(userId, amazonASIN, productName, productImageUrl, amazonPrice, quantity) {
         return new Promise((resolve) => {
             let procedureName = "uspcInsertIntoCart";
             var request = this.request(procedureName);
             request.addParameter('UserId', TYPES.Int, userId);
             request.addParameter('AmazonASIN', TYPES.VarChar, amazonASIN);
+            request.addParameter('Name', TYPES.VarChar, productName);
+            request.addParameter('ImageUrl', TYPES.VarChar, productImageUrl);
             request.addParameter('AmazonPrice', TYPES.Numeric, amazonPrice);
             request.addParameter('Qty', TYPES.Int, quantity);
 
@@ -96,13 +97,14 @@ class CartStore {
     }
 
     // process cart items for checkout
-    process(userId, userAddressId, recipientId, message, giftOption) {
+    process(userId, userAddressId, recipientId, cardId, message, giftOption) {
         return new Promise((resolve) => {
             let procedureName = "uspcProcessCheckout";
             var request = this.request(procedureName);
             request.addParameter('UserId', TYPES.Int, userId);
             request.addParameter('SenderAddressId', TYPES.Int, userAddressId);
             request.addParameter('RecipientId', TYPES.Int, recipientId);
+            request.addParameter('CardId', TYPES.Int, cardId);
             request.addParameter('Message', TYPES.NVarChar, message);
             request.addParameter('GiftOption', TYPES.Int, giftOption);
 
