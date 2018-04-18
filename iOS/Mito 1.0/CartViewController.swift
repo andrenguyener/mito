@@ -207,6 +207,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func fnFinishCheckout() {
         let parameters: Parameters = [
+            "cardId": 1,
             "senderAddressId": 7,
             "recipientId": 36,
             "message": "First Checkout",

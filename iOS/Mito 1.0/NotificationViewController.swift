@@ -20,6 +20,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     
     var urlPeopleCall = URL(string: "https://api.projectmito.io/v1/friend/")
     var urlAcceptFriendRequest = URL(string: "https://api.projectmito.io/v1/friend/request")
+    var urlGetPendingPackages = URL(string: "https://api.projectmito.io/v1/package/pending")
     
     @IBAction func segmentControl(_ sender: Any) {
         print(segment.selectedSegmentIndex)
@@ -38,6 +39,25 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         tblviewNotification.delegate = self
         tblviewNotification.dataSource = self
         tblviewNotification.rowHeight = 100
+        fnGetPendingPackages()
+    }
+    
+    func fnGetPendingPackages() {
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlGetPendingPackages!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    print(dictionary)
+                }
+                
+            case .failure(let error):
+                print("Get all addresses error")
+                print(error)
+            }
+        }
     }
     
     func fnPendingRequestsData() {

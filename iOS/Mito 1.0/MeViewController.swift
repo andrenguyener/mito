@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import Alamofire
 
 class MeViewController: UIViewController {
     var appdata = AppData.shared
+    
+    var urlGetMyAddresses = URL(string: "https://api.projectmito.io/v1/address/")
 
     @IBOutlet weak var userID: UILabel!
     @IBOutlet weak var userEmail: UILabel!
@@ -36,5 +39,25 @@ class MeViewController: UIViewController {
             self.photoURL.text = data["photoURL"] as? String
         }
         print("\(self.userFname) \(self.userLname)'s ID: appdata.intCurrentUserID")
+        fnPrintOutCurrentAddresses()
+        
+    }
+    
+    func fnPrintOutCurrentAddresses() {
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlGetMyAddresses!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    print(dictionary)
+                }
+                
+            case .failure(let error):
+                print("Get all addresses error")
+                print(error)
+            }
+        }
     }
 }
