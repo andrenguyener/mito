@@ -14,6 +14,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     var appdata = AppData.shared
     var objCartItem = 0
     var urlAddToMitoCart = URL(string: "https://api.projectmito.io/v1/cart")
+    var urlCheckoutMitoCart = URL(string: "https://api.projectmito.io/v1/cart/process")
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -98,10 +99,10 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             pickerviewEditQuantity.dataSource = self
             pickerviewEditQuantity.delegate = self
             pickerviewEditQuantity.isHidden = true
-            fnLoadMitoCart()
             cartTableView.delegate = self
             cartTableView.dataSource = self
             cartTableView.rowHeight = 106
+            fnLoadMitoCart()
         } else if itemCountCheckout != nil {
             fnGetCartSubTotal()
             itemCountCheckout.text = String(intNumItems)
@@ -131,13 +132,23 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func fnGetCartSubTotal() {
         self.intNumItems = 0
+        self.priceSum = 0.0
         for element in self.appdata.arrCartLineItems {
-            let itemPrice = element.objProduct.price // change later
-            if let number = self.formatter.number(from: itemPrice) {
-                let amount = number.decimalValue
-                let totalAmt = amount * (Decimal)(element.intQuantity)
+            let itemPrice = "$" + element.objProduct.price // change later
+            formatter.numberStyle = .currency
+            formatter.locale = Locale(identifier: "en_US")
+            var decAmazonPrice: Decimal = 0.0
+            if let number = formatter.number(from: itemPrice) {
+                decAmazonPrice = number.decimalValue
+                let totalAmt = decAmazonPrice * (Decimal)(element.intQuantity)
                 self.priceSum += totalAmt
             }
+            print("Total Price: \(self.priceSum)")
+//            if let number = self.formatter.number(from: itemPrice) {
+//                let amount = number.decimalValue
+//                let totalAmt = amount * (Decimal)(element.intQuantity)
+//                self.priceSum += totalAmt
+//            }
         }
         for objCartItem in self.appdata.arrCartLineItems {
             self.intNumItems += objCartItem.intQuantity
@@ -154,9 +165,9 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         // rounds 2 decimal places for priceSum
         let tempSum = Double(truncating: self.priceSum as NSNumber)
         let temp2Sum = Double(round(100 * tempSum)/100)
-        
+        print("Number of items: \(self.intNumItems)")
+        print("Total Price: \(temp2Sum)")
         self.cartPrice.text = "$\(temp2Sum)"
-        print("Number of items: \(intNumItems)")
     }
     
     func fnLoadMitoCart() {
@@ -171,10 +182,10 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
                     let arrCartItems = dictionary as! NSArray
                     for objCartItem in arrCartItems {
                         let dictCartItem = objCartItem as! NSDictionary
-                        let amazonPrice = dictCartItem["AmazonItemPrice"] as! Int
+                        let amazonPrice = dictCartItem["AmazonItemPrice"] as! Double
                         let pprice = String(amazonPrice)
                         print(dictCartItem)
-                        let objectItem = Product(image: "123", ASIN: dictCartItem["AmazonItemId"] as! String, title: dictCartItem["AmazonItemId"] as! String, publisher: "publisher", price: pprice, description: "description")
+                        let objectItem = Product(image: dictCartItem["ProductImageUrl"] as! String, ASIN: dictCartItem["AmazonItemId"] as! String, title: dictCartItem["ProductName"] as! String, publisher: "publisher", price: pprice, description: "description")
                         let intQuantity = dictCartItem["Quantity"] as! Int
                         let lineItem = LineItem(objProduct: objectItem, intQty: intQuantity)
                         self.appdata.arrCartLineItems.append(lineItem)
@@ -199,7 +210,34 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func finishCheckout(_ sender: Any) {
+        self.fnFinishCheckout()
         performSegue(withIdentifier: "checkoutFinish", sender: self)
+    }
+    
+    func fnFinishCheckout() {
+        let parameters: Parameters = [
+            "senderAddressId": 7,
+            "recipientId": 36,
+            "message": "First Checkout",
+            "giftOption": 1
+        ]
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlCheckoutMitoCart!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    print(dictionary)
+                    // Any code for storing locally
+                }
+                
+            case .failure(let error):
+                print("Checkout could not be processed")
+                print(error)
+            }
+        }
+        
     }
     
     //CheckOutComplete Page
@@ -232,7 +270,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.imgItemImage.contentMode = .scaleAspectFit
         }
         cell.lblItemName.text = cartObj.objProduct.title
-        let strPrice = cartObj.objProduct.price
+        let strPrice = "$" + cartObj.objProduct.price
         formatter.numberStyle = .currency
         if let number = formatter.number(from: strPrice) {
             let dblPrice = number.decimalValue

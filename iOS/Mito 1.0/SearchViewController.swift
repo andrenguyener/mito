@@ -302,6 +302,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 publisher_brand = "Brand"
                             }
                             let product: Product = Product(image: strImageURL, ASIN: strASIN, title: title, publisher: publisher_brand, price: formattedPrice, description: itemFeature)
+                            print(product.title)
                             self.appdata.arrProductSearchResults.append(product)
                             self.swirlSearchImg.isHidden = true
                         }
