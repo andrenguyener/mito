@@ -64,8 +64,7 @@ class AddressStore {
             let procedureName = "uspcGetUserAddressById";
             var request = this.request(procedureName);
 
-            request.addParameter('UserId', TYPES.VarChar, id);
-
+            request.addParameter('UserId', TYPES.Int, id);
             let jsonArray = []
             request.on('row', function (columns) {
                 var rowObject = {};

@@ -71,7 +71,7 @@ const CartHandler = (cartStore) => {
         let message = req.body.message;
         let giftOption = req.body.giftOption;
         cartStore
-            .insert(user.userId, userAddressId, recipientId, message, giftOption)
+            .process(user.userId, userAddressId, recipientId, message, giftOption)
             .then((cart) => {
                 res.send(cart);
             })

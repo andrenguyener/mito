@@ -101,7 +101,7 @@ class CartStore {
             let procedureName = "uspcProcessCheckout";
             var request = this.request(procedureName);
             request.addParameter('UserId', TYPES.Int, userId);
-            request.addParameter('UserAddressId', TYPES.Int, userAddressId);
+            request.addParameter('SenderAddressId', TYPES.Int, userAddressId);
             request.addParameter('RecipientId', TYPES.Int, recipientId);
             request.addParameter('Message', TYPES.NVarChar, message);
             request.addParameter('GiftOption', TYPES.Int, giftOption);
@@ -112,8 +112,8 @@ class CartStore {
 
             this.sql.callProcedure(request);
         })
-            .then(() => {
-
+            .then((message) => {
+                return message
             })
             .catch((err) => {
                 console.log(err);

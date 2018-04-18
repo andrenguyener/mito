@@ -19,8 +19,11 @@ const AddressHandler = (addressStore) => {
 
     // Get all the addresses of the User
     router.get('/v1/address/:userId', (req, res) => {
+        const userJSON = req.get('X-User');
+        const user = JSON.parse(userJSON);
+        let userAddressId = req.body.userAddressId;
         addressStore
-            .getAll(req.params.userId)
+            .getAll(req.params.userId, userAddressId)
             .then(address => {
                 console.log(address)
                 res.json(address)
