@@ -107,7 +107,6 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             fnGetCartSubTotal()
             itemCountCheckout.text = String(intNumItems)
             shippingCheckout.text = "FREE"
-            priceSum = 4.00
             let tax: Decimal = priceSum * 0.12
             
             // rounds double with 2 digits precision
@@ -144,11 +143,6 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self.priceSum += totalAmt
             }
             print("Total Price: \(self.priceSum)")
-//            if let number = self.formatter.number(from: itemPrice) {
-//                let amount = number.decimalValue
-//                let totalAmt = amount * (Decimal)(element.intQuantity)
-//                self.priceSum += totalAmt
-//            }
         }
         for objCartItem in self.appdata.arrCartLineItems {
             self.intNumItems += objCartItem.intQuantity
@@ -182,10 +176,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
                     let arrCartItems = dictionary as! NSArray
                     for objCartItem in arrCartItems {
                         let dictCartItem = objCartItem as! NSDictionary
-                        let amazonPrice = dictCartItem["AmazonItemPrice"] as! Double
-                        let pprice = String(amazonPrice)
-                        print(dictCartItem)
-                        let objectItem = Product(image: dictCartItem["ProductImageUrl"] as! String, ASIN: dictCartItem["AmazonItemId"] as! String, title: dictCartItem["ProductName"] as! String, publisher: "publisher", price: pprice, description: "description")
+                        let objectItem = Product(image: dictCartItem["ProductImageUrl"] as! String, ASIN: dictCartItem["AmazonItemId"] as! String, title: dictCartItem["ProductName"] as! String, publisher: "publisher", price: String(dictCartItem["AmazonItemPrice"] as! Double), description: "description")
                         let intQuantity = dictCartItem["Quantity"] as! Int
                         let lineItem = LineItem(objProduct: objectItem, intQty: intQuantity)
                         self.appdata.arrCartLineItems.append(lineItem)
