@@ -56,6 +56,7 @@ AS
 				ROLLBACK TRAN UpdateOrder
 			ELSE
 				COMMIT TRAN UpdateOrder
+	EXEC dbo.uspGetOrderInformationForZinc @OrderId, @Response 
 	EXEC dbo.uspInsertNotification @NotificationTypeId, @UserId, @SenderId, @TodaysDate
 	IF @@ERROR <> 0 
 		ROLLBACK TRAN CreateNotification

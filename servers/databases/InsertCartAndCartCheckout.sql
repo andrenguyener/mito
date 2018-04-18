@@ -22,9 +22,11 @@ ADD GrandTotal NUMERIC(12,2) NOT NULL
 EXEC sp_rename 'uspInsertIntoCart', 'uspcInsertIntoCart'
 
 ALTER PROC uspcInsertIntoCart
-@AmazonASIN NVARCHAR(50),
-@AmazonPrice NUMERIC(12,2),
 @UserId INT,
+@AmazonASIN NVARCHAR(50),
+@Name NVARCHAR(100),
+@ImageUrl NVARCHAR(MAX),
+@AmazonPrice NUMERIC(12,2),
 @Qty INT
 AS
 
@@ -38,7 +40,8 @@ IF @AmazonASIN IS NULL
 DECLARE @CurrentDateTime DATETIME = (SELECT GETDATE())
 
 BEGIN TRAN InsertToCart
-	INSERT INTO CART VALUES(@UserId, @AmazonASIN, @Qty, @AmazonPrice, @CurrentDateTime)
+	INSERT INTO CART(UserId, AmazonItemId, Quantity, AmazonItemPrice, CartDateTime, ProductImageUrl, ProductName) 
+	VALUES(@UserId, @AmazonASIN, @Qty, @AmazonPrice, @CurrentDateTime, @ImageUrl, @Name)
 IF @@ERROR <> 0
 	ROLLBACK TRAN InsertToCart
 ELSE
@@ -54,7 +57,8 @@ ALTER PROC uspcProcessCheckout
 @SenderAddressId INT,
 @RecipientId INT,
 @Message NVARCHAR(1000),
-@GiftOption BIT
+@GiftOption BIT,
+@CardId INT
 AS
 
 -- create a temp cart
@@ -63,7 +67,9 @@ DECLARE @CART TABLE
 AmazonASIN NVARCHAR(50) NOT NULL,
 Qty INT NOT NULL,
 AmazonItemPrice NUMERIC(12,2) NOT NULL,
-SumPrice NUMERIC(12,2))
+SumPrice NUMERIC(12,2),
+ProductImageUrl NVARCHAR(MAX),
+ProductName NVARCHAR(100))
 
 -- populate the temp table @CART with values from user's CART
 -- only select MOST RECENT (DATETIME) of distinct products in the cart
@@ -80,6 +86,8 @@ DECLARE @ProdID NVARCHAR(50)
 DECLARE @Qty INT
 DECLARE @OrderID INT
 DECLARE @ItemPrice NUMERIC(12,2)
+DECLARE @ImageUrl NVARCHAR(MAX)
+DECLARE @ProdName NVARCHAR(100)
 DECLARE @PendingStatusId INT 
 EXEC dbo.uspGetUserConfirmationTypeId 'Pending', @Type_Id = @PendingStatusId OUT 
 DECLARE @TodaysDate DATE = (SELECT GETDATE())
@@ -93,7 +101,7 @@ BEGIN TRY
 BEGIN TRANSACTION InsertNotification
 BEGIN TRANSACTION G1
 EXEC dbo.uspCreatePurchaseOrder @UserId, @SenderAddressId, @RecipientId, @Message, 
-@TodaysDate, @GiftOption, @PendingStatusId, @SumCartPrice, @Order_Id = @OrderID OUT
+@TodaysDate, @GiftOption, @PendingStatusId, @SumCartPrice, @CardId, @Order_Id = @OrderID OUT
 
 IF @OrderID IS NULL
 	BEGIN
@@ -108,6 +116,8 @@ WHILE @Count > 0 --begin loop to process all rows from #CART; @Count is number o
         SET @ProdID = (SELECT TOP 1 AmazonASIN FROM @CART WHERE tempCartId = @ID)
         SET @Qty = (SELECT Qty FROM @CART WHERE tempCartId = @ID)
 		SET @ItemPrice = (SELECT AmazonItemPrice FROM @CART WHERE tempCartId = @ID)
+		SET @ImageUrl = (SELECT ProductImageUrl FROM @CART WHERE tempCartId = @ID)
+		SET @ProdName = (SELECT ProductName FROM @CART WHERE tempCartId = @ID)
     --'old-school'error-handling method
     -- sp_addmessage 50011, 11, 'OrderID cannot be NULL' was previously added to system
     IF @OrderID IS NULL
@@ -115,7 +125,8 @@ WHILE @Count > 0 --begin loop to process all rows from #CART; @Count is number o
 			RAISERROR (50011, 11, 1)
         END
     ELSE
-	INSERT INTO ORDER_PRODUCT(OrderId,AmazonItemId,Quantity, AmazonItemPrice) VALUES (@OrderID, @ProdID, @Qty, @ItemPrice)
+	INSERT INTO ORDER_PRODUCT(OrderId,AmazonItemId,Quantity, AmazonItemPrice, ProductImageUrl, ProductName) 
+	VALUES (@OrderID, @ProdID, @Qty, @ItemPrice, @ImageUrl, @ProdName)
         -- Clean-up the row just INSERTed into tblLINE_ITEM by DELETING it from #CART
         DELETE 
         FROM @CART 
@@ -168,6 +179,6 @@ SELECT * FROM ORDER_PRODUCT
 SELECT * FROM [ORDER]
 EXEC dbo.uspcInsertIntoCart '1245','12.00',7,0
 EXEC dbo.uspcInsertIntoCart '10394','12.00',7,10
-EXEC dbo.uspcGetUserCartItemList 7
-EXEC dbo.uspcProcessCheckout 7, 7, 34, 'Testing checkout cart', 0
+EXEC dbo.uspcGetUserCartItemList 34
+EXEC dbo.uspcProcessCheckout 34, 7, 3, 'Testing checkout cart', 0
 

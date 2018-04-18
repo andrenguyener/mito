@@ -5,7 +5,8 @@ ALTER PROC uspcGetUserCartItemList
 @UserId INT
 AS
 BEGIN
-	SELECT C.AmazonItemId, Quantity, AmazonItemPrice, AmazonItemPrice * Quantity AS SumPrice
+	SELECT C.AmazonItemId, Quantity, AmazonItemPrice, AmazonItemPrice * Quantity AS SumPrice, 
+	ProductImageUrl, ProductName
 	FROM CART C
 	JOIN 
 	(SELECT AmazonItemId, MAX(CartDateTime) AS MostRecentDate
