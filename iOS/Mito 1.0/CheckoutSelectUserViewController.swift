@@ -9,13 +9,39 @@
 import UIKit
 
 class CheckoutSelectUserViewController: UIViewController {
-
-    @IBOutlet weak var img: UIImageView!
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+    }
+    
+    @IBAction func btnEditCheckoutToCart(_ sender: Any) {
+        performSegue(withIdentifier: "editCheckoutToCart", sender: self)
+    }
+    
+    @IBAction func btnEditCheckoutToChooseFriend(_ sender: Any) {
+        performSegue(withIdentifier: "checkoutToChooseFriend", sender: self)
+    }
+    @IBAction func btnPaymentMethodToEditCheckout(_ sender: Any) {
+        performSegue(withIdentifier: "paymentMethodToEditCheckout", sender: self)
+    }
+    
+    
+    @IBAction func btnCancelAddPaymentMethod (_ sender: Any) {
+        performSegue(withIdentifier: "paymentMethodToEditCheckout", sender: self)
+    }
+    
+    
+    @IBAction func btnContinueToOrderSummary(_ sender: Any) {
+        performSegue(withIdentifier: "editCheckoutToOrderSummary", sender: self)
+    }
+    
+    @IBAction func btnAddNewPaymentMethod(_ sender: Any) {
+        performSegue(withIdentifier: "editCheckoutToPaymentMethod", sender: self)
+    }
+    
+    
+    @IBAction func btnChoosePersonToEditCheckout(_ sender: Any) {
+        performSegue(withIdentifier: "choosePersonToEditCheckout", sender: self)
     }
 }

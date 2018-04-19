@@ -15,6 +15,12 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     var objCartItem = 0
     var urlAddToMitoCart = URL(string: "https://api.projectmito.io/v1/cart")
     var urlCheckoutMitoCart = URL(string: "https://api.projectmito.io/v1/cart/process")
+
+    @IBAction func btnOrderSummaryToEditCheckout(_ sender: Any) {
+        performSegue(withIdentifier: "orderSummaryToEditCheckoutt", sender: self)
+    }
+    
+    
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -71,8 +77,8 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     var urlGetMitoCartCall = URL(string: "https://api.projectmito.io/v1/cart/retrieve")
     var urlAlterMitoCart = URL(string: "https://api.projectmito.io/v1/cart")
     
-    @IBAction func finishShopping(_ sender: Any) {
-        performSegue(withIdentifier: "toCheckout", sender: self)
+    @IBAction func btnEditCheckout(_ sender: Any) {
+        performSegue(withIdentifier: "checkoutToEditCheckout", sender: self)
     }
     
     @IBAction func backButton(_ sender: Any) {
@@ -197,9 +203,10 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    @IBAction func checkoutToCart(_ sender: Any) {
-        performSegue(withIdentifier: "checkoutToCart", sender: self)
+    @IBAction func btnGoToEditCheckout(_ sender: Any) {
+        performSegue(withIdentifier: "cartoEditCheckout", sender: self)
     }
+    
     
     @IBAction func finishCheckout(_ sender: Any) {
         self.fnFinishCheckout()
