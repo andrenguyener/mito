@@ -42,6 +42,37 @@ class MeViewController: UIViewController {
         fnGetPendingPackages()
 //        fnPrintOutCurrentAddresses()
 //        fnGetCurrentOrders()
+//        fnInsertNewAddress()
+    }
+    
+    func fnInsertNewAddress() {
+        let urlInsertNewAddress = URL(string: "https://api.projectmito.io/v1/address/insert")
+        let parameters: Parameters = [
+            "streetAddress1": "123 NE St",
+            "streetAddress2": "A-403-4",
+            "cityName": "Houston",
+            "stateName": "Texas",
+            "zipCode": 77005,
+            "aliasName": "H-Town"
+        ]
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlInsertNewAddress!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    print(dictionary)
+//                    let arrAddress = dictionary as! NSArray
+//                    let elem = arrAddress[0] as! NSDictionary
+//                    print(elem)
+                }
+                
+            case .failure(let error):
+                print("Insert new address error")
+                print(error)
+            }
+        }
     }
     
     func fnPrintOutCurrentAddresses() {
