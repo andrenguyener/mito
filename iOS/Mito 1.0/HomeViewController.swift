@@ -56,6 +56,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 //        loadPeopleData()
         print("Authorization: \(String(describing: UserDefaults.standard.object(forKey: "Authorization")))")
         let authToken = UserDefaults.standard.object(forKey: "Authorization") as! String
+        self.fnLoadCurrUserAddresses()
 //        self.fnLoadFriendData()
 //        self.fnLoadAllUsers()
 
@@ -69,6 +70,33 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         socket.delegate = self
         socket.connect()
+    }
+    
+    func fnLoadCurrUserAddresses() {
+        let urlGetMyAddresses = URL(string: "https://api.projectmito.io/v1/address/")
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlGetMyAddresses!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    self.appdata.arrCurrUserAddresses.removeAll()
+                    let arrAddresses = dictionary as! NSArray
+                    for elem in arrAddresses {
+                        let objAddress = elem as! NSDictionary
+                        let objAddressObject = Address(intAddressID: objAddress["AddressId"] as! Int, strAddressAlias: objAddress["Alias"] as! String, strCityName: objAddress["CityName"] as! String, strStateName: objAddress["StateName"] as! String, strStreetAddress1: objAddress["StreetAddress"] as! String, strStreetAddress2: objAddress["StreetAddress2"] as! String, strZipCode: objAddress["ZipCode"] as! String)
+                        print("\(objAddress["Alias"] as! String) \(objAddress["AddressId"])")
+                        self.appdata.arrCurrUserAddresses.append(objAddressObject)
+                    }
+                    print("This user has \(self.appdata.arrCurrUserAddresses.count) addresses")
+                }
+                
+            case .failure(let error):
+                print("Get all addresses error")
+                print(error)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -97,94 +125,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.whatHappened.numberOfLines = 2
         return cell
     }
-    
-    func fnLoadAllUsers() {
-        let headers: HTTPHeaders = [
-            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
-        ]
-        Alamofire.request("https://api.projectmito.io/v1/users/all", method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                if let dictionary = response.result.value {
-                    let objUsers = dictionary as! NSArray
-                    for objUser in objUsers {
-                        let objPerson2 = objUser as! NSDictionary
-                        let objPerson = Person(firstName: objPerson2["userFname"] as! String, lastName: objPerson2["userLname"] as! String, email: objPerson2["userEmail"] as! String, avatar: objPerson2["photoURL"] as! String, intUserID: objPerson2["userId"] as! Int, strUsername: objPerson2["username"] as! String, intNumFriends: objPerson2["NumFriends"] as! Int)
-                        self.appdata.arrAllUsers.append(objPerson)
-                    }
-                    
-                }
-                
-            case .failure(let error):
-                print("Get all users error")
-                print(error)
-            }
-        }
-    }
-    
-    // Loading Friends (people tab)
-    // POST: inserting (attach object) / GET request: put key word in the URL
-    func fnLoadFriendData() {
-        let urlGetFriends = URL(string: (urlPeopleCall?.absoluteString)! + "1")
-        let headers: HTTPHeaders = [
-            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
-        ]
-        Alamofire.request(urlGetFriends!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                //                let authHeader = response.response?.allHeaderFields["Authorization"] ?? ""
-                if let dictionary = response.result.value {
-                    let dict2 = dictionary as! NSArray
-                    for obj in dict2 {
-                        let object = obj as! NSDictionary
-                        let p: Person = Person(firstName: (object["UserFname"] as? String)!,
-                                               lastName: (object["UserLname"] as? String)!,
-                                               email: (object["UserEmail"] as? String?)!!,
-                                               avatar: (object["PhotoUrl"] as? String?)!!,
-                                               intUserID: (object["UserId"] as? Int)!,
-                                               strUsername: (object["Username"] as? String)!,
-                                               intNumFriends: (object["NumFriends"] as! Int))
-                        self.appdata.arrFriends.append(p)
-                        //                        DispatchQueue.main.async {
-                        //                            UserDefaults.standard.set(authHeader, forKey: "Authorization")
-                        //                        }
-                    }
-                }
-
-            case .failure(let error):
-                print("Get all users error")
-                print(error)
-            }
-        }
-    }
-    
-//    // Loading Friends (people tab)
-//    // POST: inserting (attach object) / GET request: put key word in the URL
-//    func loadPeopleData() {
-//        let task = URLSession.shared.dataTask(with: peopleUrl!) { (data, response, error) in
-//            if error != nil {
-//                print("ERROR")
-//            } else {
-//                if let content = data {
-//                    do {
-//                        let myJson = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSArray
-//                        for obj in myJson {
-//                            let object = obj as! NSDictionary
-//                            let p: Person = Person(firstName: (object["UserFname"] as? String)!, lastName: (object["UserLname"] as? String)!, email: (object["UserEmail"] as? String?)!!, avatar: (object["PhotoUrl"] as? String?)!!, intUserID: (object["UserID"] as? Int?)!!, strUsername: (object["Username"] as? String)!)
-//                            self.appdata.arrFriends.append(p)
-//                        }
-//
-//                    } catch {
-//                        print("Catch")
-//                    }
-//                } else {
-//                    print("Error")
-//                }
-//            }
-//        }
-//        task.resume()
-//    }
-    
 
     @IBAction func cart(_ sender: Any) {
         performSegue(withIdentifier: "homeToCart", sender: self)

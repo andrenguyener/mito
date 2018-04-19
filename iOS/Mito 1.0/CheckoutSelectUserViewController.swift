@@ -14,7 +14,6 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
     @IBOutlet weak var tblviewPeople: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.appdata.arrCurrFriendsAndAllMitoUsers[section].count
     }
@@ -55,6 +54,7 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
     @IBOutlet weak var lblCreditCardNumber: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
+//        fnLoadCurrUserAddresses()
         if tblviewPeople != nil {
             tblviewPeople.delegate = self
             tblviewPeople.dataSource = self
@@ -200,8 +200,6 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
     @IBOutlet weak var lblRecipient: UILabel!
     @IBOutlet weak var imgRecipientImage: RoundedImage!
     
-    
-
     
     @IBAction func btnContinueToOrderSummary(_ sender: Any) {
         performSegue(withIdentifier: "editCheckoutToOrderSummary", sender: self)

@@ -14,7 +14,6 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     var appdata = AppData.shared
     var objCartItem = 0
     var urlAddToMitoCart = URL(string: "https://api.projectmito.io/v1/cart")
-    var urlCheckoutMitoCart = URL(string: "https://api.projectmito.io/v1/cart/process")
 
     @IBAction func btnOrderSummaryToEditCheckout(_ sender: Any) {
         performSegue(withIdentifier: "orderSummaryToEditCheckout", sender: self)
@@ -225,9 +224,10 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func fnFinishCheckout() {
+        let urlCheckoutMitoCart = URL(string: "https://api.projectmito.io/v1/cart/process")
         let parameters: Parameters = [
             "cardId": 1,
-            "senderAddressId": appdata.intCurrentUserID,
+            "senderAddressId": appdata.arrCurrUserAddresses[0].intAddressID,
             "recipientId": appdata.personRecipient.intUserID,
             "message": "First Checkout",
             "giftOption": 1

@@ -11,8 +11,6 @@ import Alamofire
 
 class MeViewController: UIViewController {
     var appdata = AppData.shared
-    
-    var urlGetMyAddresses = URL(string: "https://api.projectmito.io/v1/address/")
 
     @IBOutlet weak var userID: UILabel!
     @IBOutlet weak var userEmail: UILabel!
@@ -107,12 +105,12 @@ class MeViewController: UIViewController {
     func fnInsertNewAddress() {
         let urlInsertNewAddress = URL(string: "https://api.projectmito.io/v1/address/insert")
         let parameters: Parameters = [
-            "streetAddress1": "Potomac St",
+            "streetAddress1": "Ash St",
             "streetAddress2": "",
-            "cityName": "Chicago",
-            "stateName": "Illinois",
-            "zipCode": 60007,
-            "aliasName": "Chi-Town"
+            "cityName": "Portland",
+            "stateName": "Oregon",
+            "zipCode": 97035,
+            "aliasName": "P-Town"
         ]
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
@@ -132,6 +130,7 @@ class MeViewController: UIViewController {
     }
     
     func fnLoadCurrUserAddresses() {
+        let urlGetMyAddresses = URL(string: "https://api.projectmito.io/v1/address/")
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
