@@ -26,6 +26,19 @@ class MeViewController: UIViewController {
         performSegue(withIdentifier: "meToSettings", sender: self)
     }
     
+    @IBAction func loadCurrentUserAddresses(_ sender: Any) {
+    }
+    @IBAction func loadCurrentOrders(_ sender: Any) {
+    }
+    @IBAction func fnInsertNewAddress(_ sender: Any) {
+    }
+    @IBAction func fnAcceptOrDeclinePackage(_ sender: Any) {
+    }
+    @IBAction func fnGetPendingPackages(_ sender: Any) {
+    }
+    @IBOutlet weak var fnGetIncomingPackages: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if UserDefaults.standard.object(forKey: "UserInfo") != nil {
@@ -47,7 +60,7 @@ class MeViewController: UIViewController {
 //        fnGetIncomingPackages()
     }
     
-    func fnGetIncomingPackages() {
+    func fnGetIncomingPackages2() {
         let urlGetIncomingPackage = URL(string: "https://api.projectmito.io/v1/package/incoming")
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
