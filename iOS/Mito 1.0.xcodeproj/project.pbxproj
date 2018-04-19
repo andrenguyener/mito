@@ -54,6 +54,7 @@
 		B272D90A2077646A00E53276 /* mitodesignblack.png in Resources */ = {isa = PBXBuildFile; fileRef = B272D9042077646A00E53276 /* mitodesignblack.png */; };
 		B272DC2620439E2200EE2121 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = B272DC2520439E2200EE2121 /* Product.swift */; };
 		B272DC2E2043BBE400EE2121 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B272DC2D2043BBE400EE2121 /* AppData.swift */; };
+		B277629520883DE40071C672 /* CheckoutSelectUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B277629420883DE40071C672 /* CheckoutSelectUserViewController.swift */; };
 		B298CB012084607900EED243 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B298CB002084607900EED243 /* RoundedButton.swift */; };
 		B298CB052084722500EED243 /* RoundedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B298CB042084722500EED243 /* RoundedImage.swift */; };
 		B298CB072084780B00EED243 /* RoundedWithBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B298CB062084780B00EED243 /* RoundedWithBorder.swift */; };
@@ -161,6 +162,7 @@
 		B272DC2A2043BA8700EE2121 /* Cart Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cart Icon.png"; sourceTree = "<group>"; };
 		B272DC2B2043BA8700EE2121 /* Notification Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Notification Icon.png"; sourceTree = "<group>"; };
 		B272DC2D2043BBE400EE2121 /* AppData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
+		B277629420883DE40071C672 /* CheckoutSelectUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutSelectUserViewController.swift; sourceTree = "<group>"; };
 		B298CB002084607900EED243 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		B298CB042084722500EED243 /* RoundedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedImage.swift; sourceTree = "<group>"; };
 		B298CB062084780B00EED243 /* RoundedWithBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedWithBorder.swift; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 				B29AEC61203FC9C100110EF9 /* AppDelegate.swift */,
 				B247196F20454733006CF6C2 /* CartTableViewCell.swift */,
 				B247196D20453917006CF6C2 /* CartViewController.swift */,
+				B277629420883DE40071C672 /* CheckoutSelectUserViewController.swift */,
 				DA27C21B204356B400CCFD60 /* FeedItem.swift */,
 				DA27C2192043550A00CCFD60 /* HomeTableViewCell.swift */,
 				DA27C217204353FF00CCFD60 /* HomeViewController.swift */,
@@ -658,6 +661,7 @@
 				B272DC2620439E2200EE2121 /* Product.swift in Sources */,
 				DA27C21C204356B400CCFD60 /* FeedItem.swift in Sources */,
 				DACCDE2B2060617000CD59D9 /* Month.swift in Sources */,
+				B277629520883DE40071C672 /* CheckoutSelectUserViewController.swift in Sources */,
 				DA27C218204353FF00CCFD60 /* HomeViewController.swift in Sources */,
 				B2F849472043CAA900CBD83A /* SettingsViewController.swift in Sources */,
 				DA42CC0A2064909900900C7D /* LineItem.swift in Sources */,
