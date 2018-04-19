@@ -10,6 +10,9 @@ import UIKit
 
 class CheckoutSelectUserViewController: UIViewController {
     
+    var appdata = AppData.shared
+    
+    @IBOutlet weak var lblCreditCardNumber: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,6 +26,7 @@ class CheckoutSelectUserViewController: UIViewController {
         performSegue(withIdentifier: "checkoutToChooseFriend", sender: self)
     }
     @IBAction func btnPaymentMethodToEditCheckout(_ sender: Any) {
+        appdata.strCardNumber = lblCreditCardNumber.text!
         performSegue(withIdentifier: "paymentMethodToEditCheckout", sender: self)
     }
     

@@ -93,6 +93,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var taxCheckout: UILabel!
     @IBOutlet weak var imgRecipient: UIImageView!
     @IBOutlet weak var recipientName: UILabel!
+    @IBOutlet weak var lblCreditCardNumber: UILabel!
     
     let formatter = NumberFormatter()
     var intNumItems = 0
@@ -130,6 +131,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
                 imgRecipient.contentMode = .scaleAspectFit
             }
             recipientName.text = "Sopheaky Neaky"
+            lblCreditCardNumber.text = appdata.strCardNumber
         } else {
             appdata.arrCartLineItems.removeAll()
         }
@@ -331,5 +333,6 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
     }
+    
     
 }
