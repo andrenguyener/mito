@@ -27,16 +27,25 @@ class MeViewController: UIViewController {
     }
     
     @IBAction func loadCurrentUserAddresses(_ sender: Any) {
+        fnLoadCurrUserAddresses()
     }
     @IBAction func loadCurrentOrders(_ sender: Any) {
+        fnGetCurrentOrders()
     }
     @IBAction func fnInsertNewAddress(_ sender: Any) {
+        fnInsertNewAddress()
     }
     @IBAction func fnAcceptOrDeclinePackage(_ sender: Any) {
+        fnAcceptOrDeclinePackage()
     }
     @IBAction func fnGetPendingPackages(_ sender: Any) {
+        fnGetPendingPackages()
     }
-    @IBOutlet weak var fnGetIncomingPackages: UIButton!
+    @IBAction func fnGetIncomingPackages(_ sender: Any) {
+        fnGetIncomingPackages2()
+    }
+    
+    
     
     
     override func viewDidLoad() {
