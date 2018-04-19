@@ -10,6 +10,7 @@ import UIKit
 
 class CheckoutSelectUserViewController: UIViewController {
 
+    @IBOutlet weak var img: UIImageView!
     
     
     
