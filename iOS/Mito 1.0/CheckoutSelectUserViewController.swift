@@ -61,6 +61,15 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
             tblviewPeople.rowHeight = 106
             searchBar.delegate = self
             fnLoadFriendsAndAllUsers()
+        } else if lblRecipient != nil {
+            lblRecipient.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
+            let urlPersonImage = URL(string: "\(appdata.personRecipient.avatar)")
+            let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
+            if let data = try? Data(contentsOf: urlPersonImage!) {
+                imgRecipientImage.image = UIImage(data: data)!
+            } else if let data = try? Data(contentsOf: defaultURL!){
+                imgRecipientImage.image = UIImage(data: data)
+            }
         }
     }
     
@@ -188,6 +197,11 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
         performSegue(withIdentifier: "paymentMethodToEditCheckout", sender: self)
     }
     
+    @IBOutlet weak var lblRecipient: UILabel!
+    @IBOutlet weak var imgRecipientImage: RoundedImage!
+    
+    
+
     
     @IBAction func btnContinueToOrderSummary(_ sender: Any) {
         performSegue(withIdentifier: "editCheckoutToOrderSummary", sender: self)

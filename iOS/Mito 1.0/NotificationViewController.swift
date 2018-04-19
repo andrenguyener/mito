@@ -24,11 +24,12 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBAction func segmentControl(_ sender: Any) {
         print(segment.selectedSegmentIndex)
-//        if segment.selectedSegmentIndex == 0 {
-//            UIView.transition(from: packageInView, to: notificationView, duration: 0, options: .showHideTransitionViews)
-//        } else {
-//            UIView.transition(from: notificationView, to: packageInView, duration: 0, options: .showHideTransitionViews)
-//        }
+        if segment.selectedSegmentIndex == 0 {
+            UIView.transition(from: packageInView, to: notificationView, duration: 0, options: .showHideTransitionViews)
+        } else {
+            fnGetPendingPackages()
+            UIView.transition(from: notificationView, to: packageInView, duration: 0, options: .showHideTransitionViews)
+        }
     }
 
     override func viewDidLoad() {
@@ -43,6 +44,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func fnGetPendingPackages() {
+        let urlGetPendingPackages = URL(string: "https://api.projectmito.io/v1/package/pending")
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
@@ -51,10 +53,18 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             case .success:
                 if let dictionary = response.result.value {
                     print(dictionary)
+                    let arrPackages = dictionary as! NSArray
+                    for objPackageTemp in arrPackages {
+                        let elem = objPackageTemp as! NSDictionary
+                        print(elem)
+                        let objPackage = Package(intGiftOption: elem["GiftOption"] as! Int, strOrderDate: elem["OrderDate"] as! String, intOrderID: elem["OrderId"] as! Int, strOrderMessage: elem["OrderMessage"] as! String, strPhotoUrl: elem["PhotoUrl"] as! String, intSenderID: elem["SenderId"] as! Int, strUserFName: elem["UserFname"] as! String, strUserLName: elem["UserLname"] as! String)//
+                        self.appdata.arrCurrUserPackages.append(objPackage)
+                    }
+                    print("User has \(self.appdata.arrCurrUserPackages.count) packages")
                 }
                 
             case .failure(let error):
-                print("Get all addresses error")
+                print("Get pending packages error")
                 print(error)
             }
         }

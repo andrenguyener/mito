@@ -17,10 +17,8 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     var urlCheckoutMitoCart = URL(string: "https://api.projectmito.io/v1/cart/process")
 
     @IBAction func btnOrderSummaryToEditCheckout(_ sender: Any) {
-        performSegue(withIdentifier: "orderSummaryToEditCheckoutt", sender: self)
+        performSegue(withIdentifier: "orderSummaryToEditCheckout", sender: self)
     }
-    
-    
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -139,7 +137,10 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             } else if let data = try? Data(contentsOf: defaultURL!){
                 imgRecipient.image = UIImage(data: data)
             }
-        } else {
+        } else if lblNotifyYouMessage != nil {
+            lblNotifyYouMessage.text = "We will notify you when \(appdata.personRecipient.firstName) accepts!"
+        }
+        else {
             appdata.arrCartLineItems.removeAll()
         }
     }
@@ -217,6 +218,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
+    @IBOutlet weak var lblNotifyYouMessage: UILabel!
     @IBAction func finishCheckout(_ sender: Any) {
         self.fnFinishCheckout()
         performSegue(withIdentifier: "checkoutFinish", sender: self)
@@ -225,8 +227,8 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     func fnFinishCheckout() {
         let parameters: Parameters = [
             "cardId": 1,
-            "senderAddressId": 7,
-            "recipientId": 36,
+            "senderAddressId": appdata.intCurrentUserID,
+            "recipientId": appdata.personRecipient.intUserID,
             "message": "First Checkout",
             "giftOption": 1
         ]
@@ -340,6 +342,6 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
     }
-    
+
     
 }
