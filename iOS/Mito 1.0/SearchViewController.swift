@@ -43,6 +43,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBAction func switchTab(_ sender: UISegmentedControl) {
         searchBar.text = ""
         if productPeopleTab.selectedSegmentIndex == 0 {
+            if peopleTableView == nil {
+                swirlSearchImg.isHidden = false
+            }
             UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
         } else {
             fnLoadFriendsAndAllUsers()
