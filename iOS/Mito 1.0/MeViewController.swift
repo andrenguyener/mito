@@ -39,10 +39,57 @@ class MeViewController: UIViewController {
             self.photoURL.text = data["photoURL"] as? String
         }
 //        print("\(self.userFname) \(self.userLname)'s ID: appdata.intCurrentUserID")
-        fnGetPendingPackages()
-//        fnPrintOutCurrentAddresses()
+//        fnGetPendingPackages()
+        fnLoadCurrUserAddresses()
 //        fnGetCurrentOrders()
 //        fnInsertNewAddress()
+//        fnAcceptOrDeclinePackage()
+//        fnGetIncomingPackages()
+    }
+    
+    func fnGetIncomingPackages() {
+        let urlGetIncomingPackage = URL(string: "https://api.projectmito.io/v1/package/incoming")
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlGetIncomingPackage!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    print(dictionary)
+                    print("Hello")
+                }
+                
+            case .failure(let error):
+                print("Get incoming packages error")
+                print(error)
+            }
+        }
+    }
+    
+    func fnAcceptOrDeclinePackage() {
+        let urlAcceptOrDeclinePackage = URL(string: "https://api.projectmito.io/v1/package/")
+        let parameters: Parameters = [
+            "senderId": 7,
+            "orderId": 42,
+            "response": "Accepted",
+            "shippingAddressId": 8
+        ]
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlAcceptOrDeclinePackage!, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    print(dictionary)
+                }
+                
+            case .failure(let error):
+                print("Accept or decline package error")
+                print(error)
+            }
+        }
     }
     
     func fnInsertNewAddress() {
@@ -63,9 +110,6 @@ class MeViewController: UIViewController {
             case .success:
                 if let dictionary = response.result.value {
                     print(dictionary)
-//                    let arrAddress = dictionary as! NSArray
-//                    let elem = arrAddress[0] as! NSDictionary
-//                    print(elem)
                 }
                 
             case .failure(let error):
@@ -75,7 +119,7 @@ class MeViewController: UIViewController {
         }
     }
     
-    func fnPrintOutCurrentAddresses() {
+    func fnLoadCurrUserAddresses() {
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
