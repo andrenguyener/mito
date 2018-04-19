@@ -45,9 +45,6 @@ class MeViewController: UIViewController {
         fnGetIncomingPackages2()
     }
     
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         if UserDefaults.standard.object(forKey: "UserInfo") != nil {
@@ -60,13 +57,6 @@ class MeViewController: UIViewController {
             self.userDOB.text = data["userDOB"] as? String
             self.photoURL.text = data["photoURL"] as? String
         }
-//        print("\(self.userFname) \(self.userLname)'s ID: appdata.intCurrentUserID")
-//        fnGetPendingPackages()
-        fnLoadCurrUserAddresses()
-//        fnGetCurrentOrders()
-//        fnInsertNewAddress()
-//        fnAcceptOrDeclinePackage()
-//        fnGetIncomingPackages()
     }
     
     func fnGetIncomingPackages2() {
@@ -93,9 +83,9 @@ class MeViewController: UIViewController {
         let urlAcceptOrDeclinePackage = URL(string: "https://api.projectmito.io/v1/package/")
         let parameters: Parameters = [
             "senderId": 7,
-            "orderId": 42,
+            "orderId": 19,
             "response": "Accepted",
-            "shippingAddressId": 8
+            "shippingAddressId": 24
         ]
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
@@ -117,12 +107,12 @@ class MeViewController: UIViewController {
     func fnInsertNewAddress() {
         let urlInsertNewAddress = URL(string: "https://api.projectmito.io/v1/address/insert")
         let parameters: Parameters = [
-            "streetAddress1": "123 NE St",
-            "streetAddress2": "A-403-4",
-            "cityName": "Houston",
-            "stateName": "Texas",
-            "zipCode": 77005,
-            "aliasName": "H-Town"
+            "streetAddress1": "Potomac St",
+            "streetAddress2": "",
+            "cityName": "Chicago",
+            "stateName": "Illinois",
+            "zipCode": 60007,
+            "aliasName": "Chi-Town"
         ]
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
@@ -149,10 +139,12 @@ class MeViewController: UIViewController {
             switch response.result {
             case .success:
                 if let dictionary = response.result.value {
+                    self.appdata.arrCurrUserAddresses.removeAll()
                     let arrAddresses = dictionary as! NSArray
                     for elem in arrAddresses {
                         let objAddress = elem as! NSDictionary
                         let objAddressObject = Address(intAddressID: objAddress["AddressId"] as! Int, strAddressAlias: objAddress["Alias"] as! String, strCityName: objAddress["CityName"] as! String, strStateName: objAddress["StateName"] as! String, strStreetAddress1: objAddress["StreetAddress"] as! String, strStreetAddress2: objAddress["StreetAddress2"] as! String, strZipCode: objAddress["ZipCode"] as! String)
+                        print("\(objAddress["Alias"] as! String) \(objAddress["AddressId"])")
                         self.appdata.arrCurrUserAddresses.append(objAddressObject)
                     }
                     print("This user has \(self.appdata.arrCurrUserAddresses.count) addresses")
