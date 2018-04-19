@@ -25,6 +25,12 @@ class Product {
         self.description = description
     }
     
+    init(image: String, ASIN: String, title: String) {
+        self.image = image
+        self.ASIN = ASIN
+        self.title = title
+    }
+    
     func values() -> String {
         return "\(self.image) \(self.ASIN) \(self.title) \(self.publisher) \(self.price) \(self.description)"
     }

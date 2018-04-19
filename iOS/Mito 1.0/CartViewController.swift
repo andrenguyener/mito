@@ -179,6 +179,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
                         let objectItem = Product(image: dictCartItem["ProductImageUrl"] as! String, ASIN: dictCartItem["AmazonItemId"] as! String, title: dictCartItem["ProductName"] as! String, publisher: "publisher", price: String(dictCartItem["AmazonItemPrice"] as! Double), description: "description")
                         let intQuantity = dictCartItem["Quantity"] as! Int
                         let lineItem = LineItem(objProduct: objectItem, intQty: intQuantity)
+                        print(objectItem.values())
                         self.appdata.arrCartLineItems.append(lineItem)
                     }
                     DispatchQueue.main.async {

@@ -38,9 +38,10 @@ class MeViewController: UIViewController {
             self.userDOB.text = data["userDOB"] as? String
             self.photoURL.text = data["photoURL"] as? String
         }
-        print("\(self.userFname) \(self.userLname)'s ID: appdata.intCurrentUserID")
-        fnPrintOutCurrentAddresses()
-        
+//        print("\(self.userFname) \(self.userLname)'s ID: appdata.intCurrentUserID")
+        fnGetPendingPackages()
+//        fnPrintOutCurrentAddresses()
+//        fnGetCurrentOrders()
     }
     
     func fnPrintOutCurrentAddresses() {
@@ -51,11 +52,73 @@ class MeViewController: UIViewController {
             switch response.result {
             case .success:
                 if let dictionary = response.result.value {
-                    print(dictionary)
+                    let arrAddresses = dictionary as! NSArray
+                    for elem in arrAddresses {
+                        let objAddress = elem as! NSDictionary
+                        let objAddressObject = Address(intAddressID: objAddress["AddressId"] as! Int, strAddressAlias: objAddress["Alias"] as! String, strCityName: objAddress["CityName"] as! String, strStateName: objAddress["StateName"] as! String, strStreetAddress1: objAddress["StreetAddress"] as! String, strStreetAddress2: objAddress["StreetAddress2"] as! String, strZipCode: objAddress["ZipCode"] as! String)
+                        self.appdata.arrCurrUserAddresses.append(objAddressObject)
+                    }
+                    print("This user has \(self.appdata.arrCurrUserAddresses.count) addresses")
                 }
                 
             case .failure(let error):
                 print("Get all addresses error")
+                print(error)
+            }
+        }
+    }
+    
+    func fnGetCurrentOrders() {
+        let urlGetMyOrders = URL(string: "https://api.projectmito.io/v1/order/products")
+        let parameters: Parameters = [
+            "orderId": 42
+        ]
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlGetMyOrders!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    let arrLineItems = dictionary as! NSArray
+                    for elem in arrLineItems {
+                        let objLineItemTemp = elem as! NSDictionary
+                        let objProduct = Product(image: objLineItemTemp["ProductImageUrl"] as! String, ASIN: objLineItemTemp["AmazonItemId"] as! String, title: objLineItemTemp["ProductName"] as! String)
+                        let intQty = objLineItemTemp["Quantity"] as! Int
+                        let objLineItem = LineItem(objProduct: objProduct, intQty: intQty)
+                        self.appdata.arrCurrUserCurrCart.append(objLineItem)
+                    }
+                    print("User has \(self.appdata.arrCurrUserCurrCart.count) line items")
+                }
+                
+            case .failure(let error):
+                print("Get current orders error")
+                print(error)
+            }
+        }
+    }
+    
+    func fnGetPendingPackages() {
+        let urlGetPendingPackages = URL(string: "https://api.projectmito.io/v1/package/pending")
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlGetPendingPackages!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    print(dictionary)
+                    let arrPackages = dictionary as! NSArray
+                    for objPackageTemp in arrPackages {
+                        let elem = objPackageTemp as! NSDictionary
+                        let objPackage = Package(intGiftOption: elem["GiftOption"] as! Int, strOrderDate: elem["OrderDate"] as! String, intOrderID: elem["OrderId"] as! Int, strOrderMessage: elem["OrderMessage"] as! String, strPhotoUrl: elem["PhotoUrl"] as! String, intSenderID: elem["SenderId"] as! Int, strUserFName: elem["UserFname"] as! String, strUserLName: elem["UserLname"] as! String)//
+                        self.appdata.arrCurrUserPackages.append(objPackage)
+                    }
+                    print("User has \(self.appdata.arrCurrUserPackages.count) packages")
+                }
+                
+            case .failure(let error):
+                print("Get pending packages error")
                 print(error)
             }
         }
