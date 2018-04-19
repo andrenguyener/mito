@@ -14,6 +14,7 @@ class AppData: NSObject {
     open var intCurrentUserID: Int = 0
     open var intCurrIndex: Int = -1
     open var strCardNumber = ""
+    open var personRecipient: Person = Person(firstName: "", lastName: "", email: "", avatar: "", intUserID: 0, strUsername: "", intNumFriends: 0)
     
     open var arrFriends: [Person] = []
     open var arrCurrFriends: [Person] = []

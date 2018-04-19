@@ -326,7 +326,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if productPeopleTab.selectedSegmentIndex == 1 {
-            return self.appdata.arrCurrFriendsAndAllMitoUsers[section].count
+            return self.appdata.arrCurrFriendsAndAllMitoUsers[section].count // 10
         } else {
             return appdata.arrProductSearchResults.count
         }

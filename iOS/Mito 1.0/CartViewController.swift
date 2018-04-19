@@ -130,8 +130,15 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
                 imgRecipient.image = UIImage(data: data)
                 imgRecipient.contentMode = .scaleAspectFit
             }
-            recipientName.text = "Sopheaky Neaky"
+            recipientName.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
             lblCreditCardNumber.text = appdata.strCardNumber
+            let urlPersonImage = URL(string: "\(appdata.personRecipient.avatar)")
+            let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
+            if let data = try? Data(contentsOf: urlPersonImage!) {
+                imgRecipient.image = UIImage(data: data)!
+            } else if let data = try? Data(contentsOf: defaultURL!){
+                imgRecipient.image = UIImage(data: data)
+            }
         } else {
             appdata.arrCartLineItems.removeAll()
         }
