@@ -187,11 +187,14 @@ class MeViewController: UIViewController {
     }
     
     func fnGetPendingPackages() {
-        let urlGetPendingPackages = URL(string: "https://api.projectmito.io/v1/package/pending")
+        let urlGetPendingPackages = URL(string: "https://api.projectmito.io/v1/package/")
+        let parameters: Parameters = [
+            "type": "Pending"
+        ]
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
-        Alamofire.request(urlGetPendingPackages!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+        Alamofire.request(urlGetPendingPackages!, method: .get, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success:
                 if let dictionary = response.result.value {

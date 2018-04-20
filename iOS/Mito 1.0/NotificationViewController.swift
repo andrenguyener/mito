@@ -20,7 +20,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     
     var urlPeopleCall = URL(string: "https://api.projectmito.io/v1/friend/")
     var urlAcceptFriendRequest = URL(string: "https://api.projectmito.io/v1/friend/request")
-    var urlGetPendingPackages = URL(string: "https://api.projectmito.io/v1/package/pending")
     
     @IBAction func segmentControl(_ sender: Any) {
         if segment.selectedSegmentIndex == 0 {
@@ -50,12 +49,15 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func fnGetPendingPackages() {
-        appdata.arrCurrUserPackages.removeAll()
-        let urlGetPendingPackages = URL(string: "https://api.projectmito.io/v1/package/pending")
+        self.appdata.arrCurrUserPackages.removeAll()
+        let urlGetPendingPackages = URL(string: "https://api.projectmito.io/v1/package")
+        let parameters: Parameters = [
+            "type": "Pending"
+        ]
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
-        Alamofire.request(urlGetPendingPackages!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+        Alamofire.request(urlGetPendingPackages!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success:
                 if let dictionary = response.result.value {
@@ -63,7 +65,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     let arrPackages = dictionary as! NSArray
                     for objPackageTemp in arrPackages {
                         let elem = objPackageTemp as! NSDictionary
-                        print(elem)
                         let objPackage = Package(intGiftOption: elem["GiftOption"] as! Int, strOrderDate: elem["OrderDate"] as! String, intOrderID: elem["OrderId"] as! Int, strOrderMessage: elem["OrderMessage"] as! String, strPhotoUrl: elem["PhotoUrl"] as! String, intSenderID: elem["SenderId"] as! Int, strUserFName: elem["UserFname"] as! String, strUserLName: elem["UserLname"] as! String)//
                         self.appdata.arrCurrUserPackages.append(objPackage)
                     }
