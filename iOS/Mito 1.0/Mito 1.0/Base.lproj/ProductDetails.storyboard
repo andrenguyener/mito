@@ -60,31 +60,31 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="vUt-xN-Ool" userLabel="Product_Info View">
-                                        <rect key="frame" x="20" y="317" width="335" height="128"/>
+                                        <rect key="frame" x="20" y="317" width="335" height="104"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AMD-hj-WHc">
-                                                <rect key="frame" x="0.0" y="0.0" width="335" height="32"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="26"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="25"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DPq-Fd-8Bo">
-                                                <rect key="frame" x="0.0" y="32" width="87" height="32"/>
+                                                <rect key="frame" x="0.0" y="26" width="335" height="26"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pTd-Il-3Ti">
-                                                <rect key="frame" x="0.0" y="64" width="335" height="32"/>
+                                                <rect key="frame" x="0.0" y="52" width="335" height="26"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="GI8-0O-WGK" userLabel="Quantity Stack View">
-                                                <rect key="frame" x="0.0" y="96" width="335" height="32"/>
+                                                <rect key="frame" x="0.0" y="78" width="335" height="26"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ek-bs-E18">
-                                                        <rect key="frame" x="0.0" y="0.0" width="167.5" height="32"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ek-bs-E18">
+                                                        <rect key="frame" x="0.0" y="0.0" width="167.5" height="26"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                         <state key="normal" title="Quantity"/>
                                                         <connections>
@@ -93,7 +93,7 @@
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5jK-jt-lJx">
-                                                        <rect key="frame" x="167.5" y="0.0" width="167.5" height="32"/>
+                                                        <rect key="frame" x="167.5" y="0.0" width="167.5" height="26"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -105,9 +105,13 @@
                                             </stackView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="pTd-Il-3Ti" firstAttribute="trailing" secondItem="AMD-hj-WHc" secondAttribute="trailing" id="7Fe-xe-b1O"/>
+                                            <constraint firstItem="AMD-hj-WHc" firstAttribute="leading" secondItem="vUt-xN-Ool" secondAttribute="leading" id="RCm-8h-d84"/>
+                                            <constraint firstAttribute="trailing" secondItem="AMD-hj-WHc" secondAttribute="trailing" id="WII-OW-kWw"/>
+                                            <constraint firstItem="DPq-Fd-8Bo" firstAttribute="leading" secondItem="vUt-xN-Ool" secondAttribute="leading" id="bdK-hD-4pY"/>
                                             <constraint firstAttribute="trailing" secondItem="GI8-0O-WGK" secondAttribute="trailing" id="c5N-5f-hjG"/>
-                                            <constraint firstItem="GI8-0O-WGK" firstAttribute="trailing" secondItem="pTd-Il-3Ti" secondAttribute="trailing" id="zqM-O3-M4F"/>
+                                            <constraint firstAttribute="trailing" secondItem="DPq-Fd-8Bo" secondAttribute="trailing" id="eYi-8Z-NVJ"/>
+                                            <constraint firstItem="pTd-Il-3Ti" firstAttribute="leading" secondItem="vUt-xN-Ool" secondAttribute="leading" id="hpp-97-kvc"/>
+                                            <constraint firstAttribute="trailing" secondItem="pTd-Il-3Ti" secondAttribute="trailing" id="nE5-Py-UL8"/>
                                         </constraints>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vrN-o3-owS" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
@@ -122,7 +126,7 @@
                                         </connections>
                                     </button>
                                     <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hhQ-PI-9uG">
-                                        <rect key="frame" x="20" y="450" width="335" height="216"/>
+                                        <rect key="frame" x="20" y="423" width="335" height="216"/>
                                     </pickerView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -137,13 +141,13 @@
                                     <constraint firstItem="cI8-iX-4I4" firstAttribute="leading" secondItem="1yK-pd-ga6" secondAttribute="leading" constant="20" id="GW7-aH-5uR"/>
                                     <constraint firstItem="hhQ-PI-9uG" firstAttribute="leading" secondItem="1yK-pd-ga6" secondAttribute="leading" constant="20" id="Hyu-Q1-lCg"/>
                                     <constraint firstAttribute="trailing" secondItem="cI8-iX-4I4" secondAttribute="trailing" constant="20" id="OyU-hc-XyC"/>
-                                    <constraint firstItem="vrN-o3-owS" firstAttribute="centerX" secondItem="1yK-pd-ga6" secondAttribute="centerX" id="Qfu-ul-a45"/>
                                     <constraint firstAttribute="trailing" secondItem="GTz-CR-asI" secondAttribute="trailing" constant="83" id="WT4-Sl-Hvo"/>
                                     <constraint firstAttribute="trailing" secondItem="vUt-xN-Ool" secondAttribute="trailing" constant="20" id="aWQ-cS-hR0"/>
                                     <constraint firstItem="vUt-xN-Ool" firstAttribute="leading" secondItem="1yK-pd-ga6" secondAttribute="leading" constant="20" id="f1S-y5-MOB"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kyB-32-OBo" secondAttribute="trailing" constant="20" symbolic="YES" id="g9y-fb-bsu"/>
                                     <constraint firstItem="vUt-xN-Ool" firstAttribute="top" secondItem="GTz-CR-asI" secondAttribute="bottom" constant="10" id="gvR-pX-8IM"/>
                                     <constraint firstItem="GTz-CR-asI" firstAttribute="leading" secondItem="1yK-pd-ga6" secondAttribute="leading" constant="83" id="hSN-ut-ndf"/>
-                                    <constraint firstItem="hhQ-PI-9uG" firstAttribute="top" secondItem="vUt-xN-Ool" secondAttribute="bottom" constant="5" id="jOp-d9-Enl"/>
+                                    <constraint firstItem="hhQ-PI-9uG" firstAttribute="top" secondItem="vUt-xN-Ool" secondAttribute="bottom" constant="2" id="jOp-d9-Enl"/>
                                     <constraint firstItem="hhQ-PI-9uG" firstAttribute="centerX" secondItem="1yK-pd-ga6" secondAttribute="centerX" id="pgE-bI-lYt"/>
                                     <constraint firstItem="vUt-xN-Ool" firstAttribute="centerX" secondItem="1yK-pd-ga6" secondAttribute="centerX" id="qPd-Gq-ZzG"/>
                                     <constraint firstAttribute="bottom" secondItem="vrN-o3-owS" secondAttribute="bottom" constant="20" id="tED-c3-I48"/>
@@ -157,6 +161,7 @@
                             <constraint firstItem="BCW-qz-l9J" firstAttribute="bottom" secondItem="1yK-pd-ga6" secondAttribute="bottom" id="4ci-6b-Kig"/>
                             <constraint firstItem="1yK-pd-ga6" firstAttribute="centerX" secondItem="oYD-z9-NlW" secondAttribute="centerX" id="HED-r7-DOw"/>
                             <constraint firstItem="BCW-qz-l9J" firstAttribute="trailing" secondItem="1yK-pd-ga6" secondAttribute="trailing" id="WzW-oe-WFa"/>
+                            <constraint firstItem="hhQ-PI-9uG" firstAttribute="bottom" secondItem="BCW-qz-l9J" secondAttribute="bottom" constant="-8" id="YKv-nl-v0m"/>
                             <constraint firstItem="1yK-pd-ga6" firstAttribute="centerX" secondItem="oYD-z9-NlW" secondAttribute="centerX" id="gPP-zS-Ad8"/>
                             <constraint firstItem="1yK-pd-ga6" firstAttribute="centerX" secondItem="oYD-z9-NlW" secondAttribute="centerX" id="mRp-NV-KhW"/>
                             <constraint firstItem="1yK-pd-ga6" firstAttribute="leading" secondItem="BCW-qz-l9J" secondAttribute="leading" id="nMD-2n-XJV"/>
