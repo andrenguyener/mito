@@ -68,15 +68,15 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="599"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellPackage" rowHeight="132" id="7Af-9J-7R2" customClass="PackageTableViewCell" customModule="Mito_1_0" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="375" height="132"/>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellPackage" rowHeight="119" id="7Af-9J-7R2" customClass="PackageTableViewCell" customModule="Mito_1_0" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="375" height="119"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7Af-9J-7R2" id="Mz4-6Z-wEk">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="131.66666666666666"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="118.66666666666667"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AQV-sv-hGy">
-                                                            <rect key="frame" x="15" y="21" width="88" height="88"/>
+                                                            <rect key="frame" x="15" y="15.666666666666664" width="88" height="88"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="88" id="f4d-Ql-Vxh"/>
                                                                 <constraint firstAttribute="width" secondItem="AQV-sv-hGy" secondAttribute="height" multiplier="1:1" id="fhc-Lu-KJn"/>
@@ -90,11 +90,11 @@
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6yP-kd-XUl" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
-                                                            <rect key="frame" x="182" y="79" width="85" height="30"/>
+                                                            <rect key="frame" x="182" y="78" width="85" height="30"/>
                                                             <color key="backgroundColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="4jx-EK-bXV"/>
-                                                                <constraint firstAttribute="width" constant="85" id="Ufk-oj-2aO"/>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="85" id="Ufk-oj-2aO"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                             <state key="normal" title="Accept">
@@ -105,11 +105,11 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1oZ-UJ-wef" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
-                                                            <rect key="frame" x="275" y="79" width="85" height="30"/>
+                                                            <rect key="frame" x="275" y="78" width="85" height="30"/>
                                                             <color key="backgroundColor" red="0.93274111680000005" green="0.93274111680000005" blue="0.93274111680000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="6Pw-CT-2y2"/>
-                                                                <constraint firstAttribute="width" constant="85" id="c2m-Xj-ayY"/>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="85" id="c2m-Xj-ayY"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                             <state key="normal" title="Deny">
@@ -124,7 +124,8 @@
                                                         <constraint firstItem="AQV-sv-hGy" firstAttribute="centerY" secondItem="Mz4-6Z-wEk" secondAttribute="centerY" id="67Z-II-hFC"/>
                                                         <constraint firstItem="3Mh-cs-WSU" firstAttribute="top" secondItem="Mz4-6Z-wEk" secondAttribute="topMargin" constant="10" id="9MQ-Ma-aH7"/>
                                                         <constraint firstItem="3Mh-cs-WSU" firstAttribute="leading" secondItem="AQV-sv-hGy" secondAttribute="trailing" constant="8" id="Wi1-pq-oTa"/>
-                                                        <constraint firstAttribute="bottomMargin" secondItem="1oZ-UJ-wef" secondAttribute="bottom" constant="12" id="Z8L-Hb-1MO"/>
+                                                        <constraint firstItem="6yP-kd-XUl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Mz4-6Z-wEk" secondAttribute="leading" constant="20" symbolic="YES" id="YSr-Eh-vlr"/>
+                                                        <constraint firstAttribute="bottomMargin" secondItem="1oZ-UJ-wef" secondAttribute="bottom" id="Z8L-Hb-1MO"/>
                                                         <constraint firstItem="1oZ-UJ-wef" firstAttribute="centerY" secondItem="6yP-kd-XUl" secondAttribute="centerY" id="cLo-bY-RVT"/>
                                                         <constraint firstItem="3Mh-cs-WSU" firstAttribute="trailing" secondItem="Mz4-6Z-wEk" secondAttribute="trailingMargin" id="iSg-e8-4f6"/>
                                                         <constraint firstItem="AQV-sv-hGy" firstAttribute="leading" secondItem="Mz4-6Z-wEk" secondAttribute="leadingMargin" id="jjW-Xy-CLW"/>
@@ -149,30 +150,30 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r68-ot-V1i" userLabel="Notification">
-                                <rect key="frame" x="0.0" y="130" width="375" height="488"/>
+                                <rect key="frame" x="0.0" y="130" width="375" height="599"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="d63-uF-5nI">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="488"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="599"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellNotification" rowHeight="119" id="bJu-JZ-QHb" customClass="NotificationTableViewCell" customModule="Mito_1_0" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="375" height="119"/>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellNotification" rowHeight="118" id="bJu-JZ-QHb" customClass="NotificationTableViewCell" customModule="Mito_1_0" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="375" height="118"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bJu-JZ-QHb" id="69R-5r-aFv">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="118.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="117.66666666666667"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ekH-sZ-74u">
-                                                            <rect key="frame" x="15" y="15" width="88" height="88"/>
+                                                            <rect key="frame" x="15" y="15" width="87.666666666666671" height="87.666666666666671"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="ekH-sZ-74u" secondAttribute="height" multiplier="1:1" id="0ht-RH-Rgj"/>
                                                             </constraints>
                                                         </imageView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="uHW-pS-lqp">
-                                                            <rect key="frame" x="121" y="33" width="76.5" height="42"/>
+                                                            <rect key="frame" x="120.66666666666667" y="21" width="254.33333333333331" height="42"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="40X-rH-w4U">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="76.5" height="21"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="254.33333333333334" height="21"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="21" id="DYv-P9-UnV"/>
                                                                     </constraints>
@@ -181,7 +182,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dTB-aY-jrI">
-                                                                    <rect key="frame" x="0.0" y="21" width="76.5" height="21"/>
+                                                                    <rect key="frame" x="0.0" y="21" width="254.33333333333334" height="21"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="21" id="fiV-m9-6KY"/>
                                                                     </constraints>
@@ -192,10 +193,10 @@
                                                             </subviews>
                                                         </stackView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y95-jw-Npn" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
-                                                            <rect key="frame" x="227" y="71" width="65" height="32"/>
+                                                            <rect key="frame" x="182" y="77" width="85" height="30"/>
                                                             <color key="backgroundColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="65" id="Sev-tT-dxg"/>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="85" id="Sev-tT-dxg"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                             <state key="normal" title="Confirm">
@@ -203,10 +204,11 @@
                                                             </state>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VpT-vs-6yc" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
-                                                            <rect key="frame" x="295" y="71" width="65" height="32"/>
+                                                            <rect key="frame" x="275" y="77" width="85" height="30"/>
                                                             <color key="backgroundColor" red="0.93274111675126903" green="0.93274111675126903" blue="0.93274111675126903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="65" id="wgY-4s-fhN"/>
+                                                                <constraint firstAttribute="height" constant="30" id="sOt-oU-Iy2"/>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="85" id="wgY-4s-fhN"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                             <state key="normal" title="Decline">
@@ -215,16 +217,17 @@
                                                         </button>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="VpT-vs-6yc" firstAttribute="leading" secondItem="Y95-jw-Npn" secondAttribute="trailing" constant="3" id="2VP-nz-oxI"/>
+                                                        <constraint firstItem="VpT-vs-6yc" firstAttribute="leading" secondItem="Y95-jw-Npn" secondAttribute="trailing" constant="8" id="2VP-nz-oxI"/>
                                                         <constraint firstItem="ekH-sZ-74u" firstAttribute="leading" secondItem="69R-5r-aFv" secondAttribute="leadingMargin" id="6vD-hs-0Ej"/>
                                                         <constraint firstItem="ekH-sZ-74u" firstAttribute="centerY" secondItem="69R-5r-aFv" secondAttribute="centerY" id="7UA-fe-wE3"/>
                                                         <constraint firstAttribute="trailingMargin" secondItem="VpT-vs-6yc" secondAttribute="trailing" id="E7s-ha-3bW"/>
-                                                        <constraint firstItem="uHW-pS-lqp" firstAttribute="top" secondItem="69R-5r-aFv" secondAttribute="topMargin" constant="22" id="Iaz-vh-wvx"/>
+                                                        <constraint firstItem="VpT-vs-6yc" firstAttribute="centerY" secondItem="Y95-jw-Npn" secondAttribute="centerY" id="FFH-UF-pe1"/>
+                                                        <constraint firstItem="uHW-pS-lqp" firstAttribute="top" secondItem="69R-5r-aFv" secondAttribute="topMargin" constant="10" id="Iaz-vh-wvx"/>
                                                         <constraint firstItem="Y95-jw-Npn" firstAttribute="top" secondItem="VpT-vs-6yc" secondAttribute="top" id="bEx-Na-odF"/>
-                                                        <constraint firstAttribute="bottomMargin" secondItem="VpT-vs-6yc" secondAttribute="bottom" constant="5" id="bb8-6L-6Z1"/>
                                                         <constraint firstItem="Y95-jw-Npn" firstAttribute="baseline" secondItem="VpT-vs-6yc" secondAttribute="firstBaseline" id="c8L-Nu-eyC"/>
                                                         <constraint firstItem="Y95-jw-Npn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="69R-5r-aFv" secondAttribute="leading" constant="20" symbolic="YES" id="eP6-As-dhB"/>
-                                                        <constraint firstAttribute="bottomMargin" secondItem="Y95-jw-Npn" secondAttribute="bottom" constant="5" id="iHo-p6-SDj"/>
+                                                        <constraint firstAttribute="bottomMargin" secondItem="Y95-jw-Npn" secondAttribute="bottom" id="iHo-p6-SDj"/>
+                                                        <constraint firstAttribute="trailing" secondItem="uHW-pS-lqp" secondAttribute="trailing" id="lOO-El-2dR"/>
                                                         <constraint firstItem="VpT-vs-6yc" firstAttribute="baseline" secondItem="Y95-jw-Npn" secondAttribute="firstBaseline" id="otM-UZ-cVo"/>
                                                         <constraint firstItem="ekH-sZ-74u" firstAttribute="top" secondItem="69R-5r-aFv" secondAttribute="topMargin" constant="4" id="qGf-Ob-pc2"/>
                                                         <constraint firstItem="uHW-pS-lqp" firstAttribute="leading" secondItem="ekH-sZ-74u" secondAttribute="trailing" constant="18" id="y4r-bC-ORw"/>
@@ -266,11 +269,6 @@
                             <constraint firstItem="CWB-eH-sni" firstAttribute="bottom" secondItem="zyl-dg-pJg" secondAttribute="bottom" id="w1q-tq-lfM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zyl-dg-pJg"/>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="r68-ot-V1i"/>
-                            </mask>
-                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Notification" image="Notification Icon" id="y7E-EB-PS0">
                         <color key="badgeColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -285,7 +283,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gdz-Oq-dMf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2056.8000000000002" y="1460.4197901049477"/>
+            <point key="canvasLocation" x="2055" y="1459.8591549295775"/>
         </scene>
         <!--Me-->
         <scene sceneID="1RP-aC-Yg0">
