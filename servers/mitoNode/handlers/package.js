@@ -25,12 +25,13 @@ const PackageHandler = (packageStore) => {
     });
 
     // Get pending packages of user
-    router.get('/v1/package/pending', (req, res) => {
+    router.post('/v1/package', (req, res) => {
         const userJSON = req.get('X-User');
         const user = JSON.parse(userJSON);
         var userId = user.userId;
+        let type = req.body.type;
         packageStore
-            .getPending(userId)
+            .getPackages(userId, type)
             .then(packages => {
                 res.json(packages)
                 // const data = {

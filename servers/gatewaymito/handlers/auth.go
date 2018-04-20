@@ -229,41 +229,31 @@ func (ctx *Context) UsersPasswordHandler(w http.ResponseWriter, r *http.Request)
 	switch r.Method {
 	case "PATCH":
 
-		// decode the request body into users userupdate struct
-		userUpdates := &users.Updates{}
-		err = json.NewDecoder(r.Body).Decode(userUpdates)
+		passwordUpdates := &users.PasswordUpdate{}
+		err = json.NewDecoder(r.Body).Decode(passwordUpdates)
 		if err != nil {
 			http.Error(w, "Error cannot decode JSON updates: "+err.Error(), http.StatusBadRequest)
 		}
 
-		// updates the user in mongo stroe
-		err = ctx.UserStore.Update(sessionUser.UserId, userUpdates)
-
+		sessionUser.ApplyPasswordUpdate(passwordUpdates)
 		if err != nil {
-			http.Error(w, "Error cannot update user: "+err.Error(), http.StatusBadRequest)
+			http.Error(w, "Error cannot apply password updates: "+err.Error(), http.StatusBadRequest)
 		}
 
-		// deletes previous name fields from trie store
-		ctx.TrieStore.Remove(sessionState.User.UserFname, sessionState.User.UserId)
-		ctx.TrieStore.Remove(sessionState.User.UserLname, sessionState.User.UserId)
-
-		// update the session state with the user
-		sessionState.User.UserFname = userUpdates.UserFname
-		sessionState.User.UserLname = userUpdates.UserLname
+		err = ctx.UserStore.UpdatePassword(sessionUser)
+		if err != nil {
+			http.Error(w, "Error cannot apply password updates: "+err.Error(), http.StatusBadRequest)
+		}
 
 		err = ctx.SessionStore.Save(sessionID, sessionState)
 		if err != nil {
 			http.Error(w, "Error cannot save session: "+err.Error(), http.StatusBadRequest)
 		}
 
-		// Insert the updated user fields into the trie.
-		ctx.TrieStore.Insert(sessionState.User.UserFname, sessionState.User.UserId)
-		ctx.TrieStore.Insert(sessionState.User.UserLname, sessionState.User.UserId)
-
 		respond(w, sessionUser)
 
 	default:
-		http.Error(w, "method must be GET or PATCH", http.StatusMethodNotAllowed)
+		http.Error(w, "method must be PATCH", http.StatusMethodNotAllowed)
 		return
 	}
 }
