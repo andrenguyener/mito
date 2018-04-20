@@ -18,9 +18,9 @@ class PackageStore {
     }
 
     //get all the users incoming packages
-    getPending(id) {
+    getPackages(id, type) {
         return new Promise((resolve) => {
-            let procedureName = "uspcGetMyPendingPackages";
+            let procedureName = "uspcGetMyPackages";
             // var request = new Request(`${procedureName}`, function (err, rowCount, rows) {
             //     if (err) {
             //         console.log(err);
@@ -28,6 +28,7 @@ class PackageStore {
             // });
             var request = this.request(procedureName);
             request.addParameter('UserId', TYPES.Int, id);
+            request.addParameter('Type', TYPES.NVarChar, type); //Pending, Accepted, Denied
             let jsonArray = []
             request.on('row', function (columns) {
                 var rowObject = {};
@@ -58,7 +59,7 @@ class PackageStore {
     //
     getIncoming(id) {
         return new Promise((resolve) => {
-            let procedureName = "uspcGetUserFriendsById";
+            // let procedureName = "uspcGetUserFriendsById";
             var request = this.request(procedureName);
 
             request.addParameter('UserId', TYPES.Int, id);

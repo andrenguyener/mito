@@ -19,13 +19,17 @@ const PackageHandler = (packageStore) => {
 
     // Deals with anything we are receving, incoming packgages, updating packaging (yes/no), get pending
 
+    // Get all incoming package
+    router.get('/v1/package/incoming', (req, res) => {
+
+    });
 
     // Get pending packages of user
     router.post('/v1/package', (req, res) => {
         const userJSON = req.get('X-User');
         const user = JSON.parse(userJSON);
         var userId = user.userId;
-        var type = req.body.type;
+        let type = req.body.type;
         packageStore
             .getPackages(userId, type)
             .then(packages => {
@@ -71,8 +75,6 @@ const PackageHandler = (packageStore) => {
             })
     });
 
-    // Get package details (array of objects)
-    // 
 
     // get incoming package
     //
