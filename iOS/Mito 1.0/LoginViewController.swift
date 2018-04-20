@@ -275,7 +275,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                             "cityName": strCity!,
                             "zipCode": zipcode!,
                             "stateName": strState!,
-                            "aliasName": alias
+                            "aliasName": alias!
                         ]
                         
                         self.addAddress(parameterAddress: parametersAddress)

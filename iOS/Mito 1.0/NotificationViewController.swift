@@ -185,8 +185,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         Alamofire.request(urlAcceptFriendRequest!, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
             switch response.result {
             case .success:
-                if let dictionary = response.result.value {
-//                    print(dictionary)
+                if response.result.value != nil {
                     DispatchQueue.main.async {
                         self.tblviewNotification.reloadData()
                         self.appdata.arrPendingFriends.removeAll()

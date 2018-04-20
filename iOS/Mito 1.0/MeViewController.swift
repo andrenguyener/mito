@@ -143,7 +143,7 @@ class MeViewController: UIViewController {
                     for elem in arrAddresses {
                         let objAddress = elem as! NSDictionary
                         let objAddressObject = Address(intAddressID: objAddress["AddressId"] as! Int, strAddressAlias: objAddress["Alias"] as! String, strCityName: objAddress["CityName"] as! String, strStateName: objAddress["StateName"] as! String, strStreetAddress1: objAddress["StreetAddress"] as! String, strStreetAddress2: objAddress["StreetAddress2"] as! String, strZipCode: objAddress["ZipCode"] as! String)
-                        print("\(objAddress["Alias"] as! String) \(objAddress["AddressId"])")
+                        print("\(objAddress["Alias"] as! String) \(String(describing: objAddress["AddressId"]))")
                         self.appdata.arrCurrUserAddresses.append(objAddressObject)
                     }
                     print("This user has \(self.appdata.arrCurrUserAddresses.count) addresses")
