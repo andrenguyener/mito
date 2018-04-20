@@ -179,13 +179,26 @@ func (ss *SqlStore) Insert(newUser *NewUser) (*User, error) {
 	return user, err
 }
 
-//Update applies UserUpdates to the given user ID
-func (ss *SqlStore) Update(userID int, updates *Updates) error {
+//Update applies passwordUpdates to the given user ID
+func (ss *SqlStore) Update(userID int, updates *PasswordUpdate) error {
 
 	// col := ms.collection
 	// userupdates := bson.M{"$set": updates}
 	// err := col.UpdateId(userID, userupdates)
 	// return err
+	return nil
+}
+
+//UpdatePassword applies updated password to a given user
+func (ss *SqlStore) UpdatePassword(user *User) error {
+	_, err := ss.database.Exec("uspcUpdatePassword",
+		sql.Named("UserFname", user.UserId),
+		sql.Named("UserLname", user.PasswordHash))
+	if err != nil {
+		return fmt.Errorf("Error updating user password %s", err)
+	}
+	fmt.Println(user)
+
 	return nil
 }
 

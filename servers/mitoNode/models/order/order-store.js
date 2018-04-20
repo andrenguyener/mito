@@ -22,9 +22,38 @@ class OrderStore {
 
     }
 
-    // Get information about order
-    get() {
+    // Get information and products about order
+    get(orderId) {
+        return new Promise((resolve) => {
+            let procedureName = "uspcGetOrderDetails";
+            var request = this.request(procedureName);
 
+            request.addParameter('OrderId', TYPES.Int, orderId);
+            let jsonArray = []
+            request.on('row', function (columns) {
+                var rowObject = {};
+                columns.forEach(function (column) {
+                    if (column.value === null) {
+                        console.log('NULL');
+                    } else {
+                        rowObject[column.metadata.colName] = column.value;
+                    }
+                });
+                jsonArray.push(rowObject)
+            });
+            request.on('doneProc', function (rowCount, more) {
+                console.log(jsonArray);
+                resolve(jsonArray);
+            });
+
+            this.sql.callProcedure(request)
+        })
+            .then((jsonArray) => {
+                return jsonArray
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }
 
     // Get all complete orders

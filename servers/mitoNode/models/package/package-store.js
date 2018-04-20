@@ -116,7 +116,7 @@ class PackageStore {
             });
 
             request.on('doneProc', function (rowCount, more) {
-                console.log(jsonArray);
+                // console.log(jsonArray);
                 resolve(jsonArray);
             });
 
@@ -125,7 +125,31 @@ class PackageStore {
             .then((jsonArray) => {
                 // user accpeted package
                 if (jsonArray.length > 0) {
-                    return jsonArray
+                    var parsedJsonArray = {};
+                    var amazonProducts = [];
+
+                    for (var i = 0; i < jsonArray.length; i++) {
+                        if (i == 0) {
+                            for (let key in jsonArray[i]) {
+
+                                console.log(`Key = ${key} Value = ${jsonArray[0][key]}`);
+
+                                if (key != "AmazonItemId" && key != "Quantity") {
+                                    parsedJsonArray[key] = jsonArray[0][key];
+                                }
+
+                            }
+                        }
+                        var product = {};
+                        product["AmazonItemId"] = jsonArray[i]["AmazonItemId"];
+                        product["Quantity"] = jsonArray[i]["Quantity"];
+                        amazonProducts.push(product);
+                    }
+
+                    parsedJsonArray["AmazonProducts"] = amazonProducts;
+                    console.log(`Parsed JSON array = ${JSON.stringify(parsedJsonArray, null, 4)}`)
+                    // console.log(jsonArray[0]);
+                    return parsedJsonArray
                 } else { // user denied package
                     return "User denied package"
                 }
@@ -139,3 +163,37 @@ class PackageStore {
 }
 
 module.exports = PackageStore;
+
+/*
+
+Parsed JSON array = {
+    "OrderId": 42,
+    "GrandTotal": 58,
+    "BillingFname": "John",
+    "BillingLname": "Doe",
+    "BillingStreet1": "123 Pizza Way",
+    "BillingStreet2": "2nd floor",
+    "BillingCity": "Seattle",
+    "BillingState": "WA",
+    "BillingZip": "98144",
+    "ShippingFname": "Tom",
+    "ShippingLname": "Brady",
+    "ShippingStreet1": "124 Pizza Way",
+    "ShippingStreet2": "2nd Floor",
+    "ShippingCity": "Seattle",
+    "ShippingZip": "98144",
+    "GiftOption": false,
+    "AmazonProducts": [
+        {
+            "AmazonItemId": "B003CT4B0G",
+            "Quantity": 1,
+        },
+        {
+            "AmazonItemId": "B003CT4B0G",
+            "Quantity": 1,
+        }
+    ]
+
+}
+
+*/
