@@ -34,9 +34,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var urlAllUserCall = URL(string: "https://api.projectmito.io/v1/users/all")
     var urlAmazonProductCall = URL(string: "https://api.projectmito.io/v1/amazonhashtest" )
     
-    // used to keep track of orginal url call for checks
-    var ogAmazonProductCall = URL(string: "https://api.projectmito.io/v1/amazonhashtest" )
-    
     @IBOutlet weak var swirlSearchImg: UIImageView!
     
     // Clear searchBar.text and transition to the other view
@@ -72,8 +69,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
         
-        peopleTableView.reloadData()
-        productTableView.reloadData()
+//        peopleTableView.reloadData()
+//        productTableView.reloadData()
         spinnerProductSearch.isHidden = true
 //        productPeopleTab.selectedSegmentIndex = intSegmentedIndex
         strProductResultsPageNumber = 1
@@ -90,7 +87,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.fnLoadFriendData()
         self.fnLoadAllUsers()
         
-        // Use arrFriendsAndAllMitoUsers and display filtered results in arrCurrFriendsAndAllMitoUsers
         self.appdata.arrCurrFriendsAndAllMitoUsers = self.appdata.arrFriendsAndAllMitoUsers
         self.appdata.arrCurrFriends = self.appdata.arrFriends
         self.appdata.arrCurrAllUsers = self.appdata.arrAllUsers
@@ -202,23 +198,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         })
     }
     
-//    func filterFriendsAndUsers(text: String) {
-//        appdata.arrFriendsAndAllMitoUsers = appdata.arrFriendsAndAllMitoUsers.filter({ objPersonGroup -> Bool in
-//            return objPersonGroup.contains(where: { (person) -> Bool in
-//                person.firstName.contains(text.lowercased())
-//            })
-//        })
-//        productTableView.reloadData()
-//    }
-    
     // Pressed Enter (Only for product search at the moment)
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         spinnerProductSearch.isHidden = false
         spinnerProductSearch.startAnimating()
-//        if (productPeopleTab.selectedSegmentIndex == 1) {
-//            UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
-//            productPeopleTab.selectedSegmentIndex = 0
-//        }
         if (searchBar.text!.count > 0) {
             strSearchQuery = ""
             strSearchQuery = searchBar.text!.replacingOccurrences(of: " ", with: "+")
@@ -229,7 +212,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         searchBar.resignFirstResponder()
         productPeopleTab.isEnabled = false
         fnLoadProductData()
-//        productTableView.reloadData()
     }
     
     // Product Tab View
@@ -328,6 +310,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if productPeopleTab.selectedSegmentIndex == 1 {
             return self.appdata.arrCurrFriendsAndAllMitoUsers[section].count // 10
         } else {
+            print(appdata.arrProductSearchResults.count)
             return appdata.arrProductSearchResults.count
         }
     }
@@ -364,6 +347,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Product
         if productPeopleTab.selectedSegmentIndex == 0 {
+            print("Row \(indexPath.row)")
             let cell = tableView.dequeueReusableCell(withIdentifier: "productCell", for: indexPath) as! ProductTableViewCell
 //            if (indexPath.row == appdata.arrProductSearchResults.count - 1) {
 //                strProductResultsPageNumber += 1

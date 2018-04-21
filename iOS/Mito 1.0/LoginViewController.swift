@@ -102,24 +102,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             return ""
         }
     }
-
-    
-//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        if monthPicker != nil && !monthPicker.isHidden {
-//            monthPicker.isHidden = true
-//            confirmPicker.isHidden = true
-//            btnNext.isHidden = false
-//            strMonth = String(appdata.arrMonths[row].intNum)
-//            strDay = appdata.arrDays[monthPicker.selectedRow(inComponent: 1)]
-//            strYear = appdata.arrYears[monthPicker.selectedRow(inComponent: 2)]
-//            strUserDOB = "\(strMonth)/\(strDay)/\(strYear)"
-//            btnMonth.setTitle(strUserDOB, for: .normal)
-//        } else if pickerviewStateAA != nil && !pickerviewStateAA.isHidden {
-//            pickerviewStateAA.isHidden = true
-//            strState = appdata.arrStates[row].value
-//            btnChooseState.setTitle(appdata.arrStates[row].abbrev, for: .normal)
-//        }
-//    }
     
     // Opening Login Page
     @IBAction func btnLoginPressed(_ sender: Any) {
