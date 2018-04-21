@@ -441,7 +441,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="PGp-mo-oIW">
-                                                <rect key="frame" x="20" y="65.5" width="335" height="542"/>
+                                                <rect key="frame" x="20" y="65.5" width="335" height="322"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address Nickname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9TY-rv-b49">
                                                         <rect key="frame" x="0.0" y="0.0" width="335" height="20"/>
@@ -512,29 +512,46 @@
                                                             </button>
                                                         </subviews>
                                                     </stackView>
+                                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="UH1-xf-5ij">
+                                                        <rect key="frame" x="0.0" y="266" width="335" height="0.0"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Kg-1N-elm">
+                                                                <rect key="frame" x="0.0" y="0.0" width="48" height="0.0"/>
+                                                                <state key="normal" title="Cancel"/>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ecX-Ql-4lU">
+                                                                <rect key="frame" x="298" y="0.0" width="37" height="0.0"/>
+                                                                <state key="normal" title="Done"/>
+                                                                <connections>
+                                                                    <action selector="btnSelectBirthdayDone:" destination="WyY-un-hcv" eventType="touchUpInside" id="aaE-0T-FWP"/>
+                                                                    <action selector="btnSelectStateDone:" destination="Eua-Q9-CQ1" eventType="touchUpInside" id="rH7-18-0hL"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="State:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eOA-aA-qaP">
-                                                        <rect key="frame" x="0.0" y="268" width="271" height="20.5"/>
+                                                        <rect key="frame" x="0.0" y="268" width="335" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TC3-w8-VvJ">
-                                                        <rect key="frame" x="0.0" y="258.5" width="271" height="30"/>
+                                                        <rect key="frame" x="0.0" y="268" width="335" height="30"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eql-j2-IXw">
-                                                        <rect key="frame" x="0.0" y="268" width="320" height="216"/>
+                                                    <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eql-j2-IXw">
+                                                        <rect key="frame" x="0.0" y="266" width="320" height="0.0"/>
                                                     </pickerView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ZIP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Smx-Cl-CJn">
-                                                        <rect key="frame" x="0.0" y="488" width="335" height="20"/>
+                                                        <rect key="frame" x="0.0" y="268" width="335" height="20"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vPC-bh-u6c">
-                                                        <rect key="frame" x="0.0" y="512" width="335" height="30"/>
+                                                        <rect key="frame" x="0.0" y="292" width="335" height="30"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -544,7 +561,9 @@
                                                     <constraint firstAttribute="trailing" secondItem="TC3-w8-VvJ" secondAttribute="trailing" placeholder="YES" id="0GX-ZZ-D4M"/>
                                                     <constraint firstItem="Smx-Cl-CJn" firstAttribute="width" secondItem="9TY-rv-b49" secondAttribute="width" id="1s7-8d-Cq9"/>
                                                     <constraint firstAttribute="trailing" secondItem="TXe-YI-ihJ" secondAttribute="trailing" id="4S0-4Z-Oio"/>
+                                                    <constraint firstItem="UH1-xf-5ij" firstAttribute="leading" secondItem="PGp-mo-oIW" secondAttribute="leading" id="6p3-a1-gVc"/>
                                                     <constraint firstAttribute="trailing" secondItem="eOA-aA-qaP" secondAttribute="trailing" id="7ao-6J-M7G"/>
+                                                    <constraint firstAttribute="trailing" secondItem="UH1-xf-5ij" secondAttribute="trailing" id="87O-lw-YrJ"/>
                                                     <constraint firstItem="rJz-P9-Kg7" firstAttribute="width" secondItem="9TY-rv-b49" secondAttribute="width" id="8eD-DG-wiU"/>
                                                     <constraint firstAttribute="trailing" secondItem="fDd-p4-aEr" secondAttribute="trailing" id="BZH-G2-CAW"/>
                                                     <constraint firstAttribute="trailing" secondItem="733-2a-k0w" secondAttribute="trailing" id="CSk-Sc-nWn"/>
@@ -629,6 +648,7 @@
                         <outlet property="addressNickname" destination="733-2a-k0w" id="hdh-vw-TYb"/>
                         <outlet property="btnChooseState" destination="0ez-fv-Hkb" id="B7b-6t-1PD"/>
                         <outlet property="cityAA" destination="j7b-HR-Hwa" id="PoF-fL-f8H"/>
+                        <outlet property="confirmStatePicker" destination="UH1-xf-5ij" id="GH5-MM-eIG"/>
                         <outlet property="pickerviewStateAA" destination="eql-j2-IXw" id="fWg-EC-oUh"/>
                         <outlet property="stateAA" destination="TC3-w8-VvJ" id="823-Ix-NdF"/>
                         <outlet property="zipcodeAA" destination="vPC-bh-u6c" id="5wI-sZ-emX"/>

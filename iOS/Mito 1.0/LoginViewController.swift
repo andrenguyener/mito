@@ -28,10 +28,10 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var btnMonth: UIButton!
     @IBOutlet weak var btnNext: UIButton!
     @IBOutlet weak var confirmPicker: UIStackView!
+    @IBOutlet weak var confirmStatePicker: UIStackView!
     
     var urlStates = URL(string: "https://api.myjson.com/bins/penjf") // JSON file containing US states
     var urlMonths = URL(string: "https://api.myjson.com/bins/1175mz") // JSON file containing months
-//    var tempAccountHolder : Parameters = (Dictionary<String, Any>)()
     var appdata = AppData.shared
     
     @IBAction func btnBirthdayPressed(_ sender: Any) {
@@ -40,7 +40,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             confirmPicker.isHidden = false
             btnNext.isHidden = true
         }
-        monthPicker.selectRow(2, inComponent: 0, animated: false)
+        monthPicker.selectRow(2, inComponent: 0, animated: false) // Pre-select row not working
         appdata.arrMonths.sort(by: fnSortMonthsByNumber)
     }
     
@@ -54,6 +54,15 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         strUserDOB = "\(strMonth)/\(strDay)/\(strYear)"
         btnMonth.setTitle(strUserDOB, for: .normal)
     }
+    
+    @IBAction func btnSelectStateDone(_ sender: Any) {
+        pickerviewStateAA.isHidden = true
+        confirmStatePicker.isHidden = true
+        let objStateSelected = appdata.arrStates[pickerviewStateAA.selectedRow(inComponent: 0)]
+        strState = objStateSelected.value
+        btnChooseState.setTitle(objStateSelected.abbrev, for: .normal)
+    }
+    
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         if monthPicker != nil && !monthPicker.isHidden {
@@ -333,6 +342,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBAction func btnStatePressed(_ sender: Any) {
         if pickerviewStateAA.isHidden {
             pickerviewStateAA.isHidden = false
+            confirmStatePicker.isHidden = false
         }
         appdata.arrStates.sort(by: fnSortStateAlphabetically)
     }
