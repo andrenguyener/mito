@@ -282,20 +282,36 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qJA-Cb-HOt">
                                                         <rect key="frame" x="0.0" y="348.5" width="320" height="32"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Month" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kkC-yD-JmX">
-                                                                <rect key="frame" x="0.0" y="0.0" width="49.5" height="32"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Birthday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kkC-yD-JmX">
+                                                                <rect key="frame" x="0.0" y="0.0" width="64.5" height="32"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="meo-OE-pr4">
-                                                                <rect key="frame" x="49.5" y="0.0" width="270.5" height="32"/>
+                                                                <rect key="frame" x="64.5" y="0.0" width="255.5" height="32"/>
                                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
-                                                                <state key="normal" title="Select Month">
+                                                                <state key="normal" title="Select Birthday">
                                                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 </state>
                                                                 <connections>
-                                                                    <action selector="btnMonthPressed:" destination="WyY-un-hcv" eventType="touchUpInside" id="zJ7-oe-L29"/>
+                                                                    <action selector="btnBirthdayPressed:" destination="WyY-un-hcv" eventType="touchUpInside" id="zJ7-oe-L29"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="2lJ-zx-ls0">
+                                                        <rect key="frame" x="0.0" y="380.5" width="335" height="0.0"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gpq-D7-QBU">
+                                                                <rect key="frame" x="0.0" y="0.0" width="48" height="0.0"/>
+                                                                <state key="normal" title="Cancel"/>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sM1-Js-sC1">
+                                                                <rect key="frame" x="298" y="0.0" width="37" height="0.0"/>
+                                                                <state key="normal" title="Done"/>
+                                                                <connections>
+                                                                    <action selector="btnSelectBirthdayDone:" destination="WyY-un-hcv" eventType="touchUpInside" id="Ifv-kA-Y88"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -314,7 +330,9 @@
                                                     <constraint firstItem="8rI-gc-UMe" firstAttribute="width" secondItem="Ljh-3o-PE2" secondAttribute="width" id="dEp-se-nwi"/>
                                                     <constraint firstItem="kLZ-kE-kzA" firstAttribute="width" secondItem="Ljh-3o-PE2" secondAttribute="width" id="hHN-5b-A44"/>
                                                     <constraint firstItem="2h6-SM-hUZ" firstAttribute="width" secondItem="Ljh-3o-PE2" secondAttribute="width" id="iZP-J2-eJI"/>
+                                                    <constraint firstAttribute="trailing" secondItem="2lJ-zx-ls0" secondAttribute="trailing" id="kWD-tO-LOS"/>
                                                     <constraint firstItem="guy-jO-d3B" firstAttribute="width" secondItem="Ljh-3o-PE2" secondAttribute="width" id="kyp-c8-nLl"/>
+                                                    <constraint firstItem="2lJ-zx-ls0" firstAttribute="leading" secondItem="JSi-F7-D59" secondAttribute="leading" id="mTE-oR-qTk"/>
                                                     <constraint firstItem="HlH-uu-ygQ" firstAttribute="width" secondItem="Ljh-3o-PE2" secondAttribute="width" id="oWI-bp-2VU"/>
                                                     <constraint firstItem="cWz-qJ-w56" firstAttribute="width" secondItem="Ljh-3o-PE2" secondAttribute="width" id="wiU-TZ-QfG"/>
                                                     <constraint firstItem="fXf-Rv-ach" firstAttribute="width" secondItem="Ljh-3o-PE2" secondAttribute="width" id="x4h-jQ-LyA"/>
@@ -386,6 +404,7 @@
                     <connections>
                         <outlet property="btnMonth" destination="meo-OE-pr4" id="dKd-yU-Y8d"/>
                         <outlet property="btnNext" destination="mN7-H5-WHv" id="9c1-dX-JVe"/>
+                        <outlet property="confirmPicker" destination="2lJ-zx-ls0" id="TFU-qa-b74"/>
                         <outlet property="monthPicker" destination="guy-jO-d3B" id="wwE-6e-kbV"/>
                         <outlet property="passwordConfSU" destination="NFe-9a-357" id="1YR-V9-Q48"/>
                         <outlet property="passwordSU" destination="2h6-SM-hUZ" id="Bmt-mY-hdK"/>

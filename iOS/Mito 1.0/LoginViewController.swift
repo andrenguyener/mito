@@ -27,18 +27,32 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var monthPicker: UIPickerView!
     @IBOutlet weak var btnMonth: UIButton!
     @IBOutlet weak var btnNext: UIButton!
+    @IBOutlet weak var confirmPicker: UIStackView!
     
     var urlStates = URL(string: "https://api.myjson.com/bins/penjf") // JSON file containing US states
     var urlMonths = URL(string: "https://api.myjson.com/bins/1175mz") // JSON file containing months
 //    var tempAccountHolder : Parameters = (Dictionary<String, Any>)()
     var appdata = AppData.shared
     
-    @IBAction func btnMonthPressed(_ sender: Any) {
+    @IBAction func btnBirthdayPressed(_ sender: Any) {
         if monthPicker.isHidden == true {
             monthPicker.isHidden = false
+            confirmPicker.isHidden = false
             btnNext.isHidden = true
         }
+        monthPicker.selectRow(2, inComponent: 0, animated: false)
         appdata.arrMonths.sort(by: fnSortMonthsByNumber)
+    }
+    
+    @IBAction func btnSelectBirthdayDone(_ sender: Any) {
+        monthPicker.isHidden = true
+        confirmPicker.isHidden = true
+        btnNext.isHidden = false
+        strMonth = String(appdata.arrMonths[monthPicker.selectedRow(inComponent: 0)].intNum)
+        strDay = appdata.arrDays[monthPicker.selectedRow(inComponent: 1)]
+        strYear = appdata.arrYears[monthPicker.selectedRow(inComponent: 2)]
+        strUserDOB = "\(strMonth)/\(strDay)/\(strYear)"
+        btnMonth.setTitle(strUserDOB, for: .normal)
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -79,25 +93,24 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             return ""
         }
     }
+
     
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if monthPicker != nil && !monthPicker.isHidden {
-            monthPicker.isHidden = true
-            btnNext.isHidden = false
-            strMonth = String(appdata.arrMonths[row].intNum)
-            strDay = appdata.arrDays[monthPicker.selectedRow(inComponent: 1)]
-            strYear = appdata.arrYears[monthPicker.selectedRow(inComponent: 2)]
-            strUserDOB = "\(strMonth)/\(strDay)/\(strYear)"
-            btnMonth.setTitle(strUserDOB, for: .normal)
-        } else if pickerviewStateAA != nil && !pickerviewStateAA.isHidden {
-            pickerviewStateAA.isHidden = true
-            strState = appdata.arrStates[row].value
-            btnChooseState.setTitle(appdata.arrStates[row].abbrev, for: .normal)
-        }
-//        } else if monthPicker.isHidden {
+//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+//        if monthPicker != nil && !monthPicker.isHidden {
+//            monthPicker.isHidden = true
+//            confirmPicker.isHidden = true
 //            btnNext.isHidden = false
+//            strMonth = String(appdata.arrMonths[row].intNum)
+//            strDay = appdata.arrDays[monthPicker.selectedRow(inComponent: 1)]
+//            strYear = appdata.arrYears[monthPicker.selectedRow(inComponent: 2)]
+//            strUserDOB = "\(strMonth)/\(strDay)/\(strYear)"
+//            btnMonth.setTitle(strUserDOB, for: .normal)
+//        } else if pickerviewStateAA != nil && !pickerviewStateAA.isHidden {
+//            pickerviewStateAA.isHidden = true
+//            strState = appdata.arrStates[row].value
+//            btnChooseState.setTitle(appdata.arrStates[row].abbrev, for: .normal)
 //        }
-    }
+//    }
     
     // Opening Login Page
     @IBAction func btnLoginPressed(_ sender: Any) {
