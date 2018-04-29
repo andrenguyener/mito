@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class MeViewController: UIViewController {
+class MeViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     var appdata = AppData.shared
 
     @IBOutlet weak var userID: UILabel!
@@ -19,6 +19,7 @@ class MeViewController: UIViewController {
     @IBOutlet weak var userLname: UILabel!
     @IBOutlet weak var userDOB: UILabel!
     @IBOutlet weak var photoURL: UILabel!
+    @IBOutlet weak var imgProfilePic: UIImageView!
     
     @IBAction func meToSettings(_ sender: Any) {
         performSegue(withIdentifier: "meToSettings", sender: self)
@@ -55,6 +56,30 @@ class MeViewController: UIViewController {
             self.userDOB.text = data["userDOB"] as? String
             self.photoURL.text = data["photoURL"] as? String
         }
+    }
+    
+    @IBAction func btnEditProfilePicture(_ sender: Any) {
+        fnImportImage()
+    }
+    
+    func fnImportImage() {
+        let image = UIImagePickerController()
+        image.delegate = self
+        image.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        image.allowsEditing = false
+        self.present(image, animated: true) {
+            
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            print(image)
+            imgProfilePic.image = image
+        } else {
+            print("Error")
+        }
+        self.dismiss(animated: true, completion: nil)
     }
     
     func fnGetIncomingPackages2() {

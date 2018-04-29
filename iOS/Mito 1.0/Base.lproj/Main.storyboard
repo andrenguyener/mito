@@ -315,9 +315,12 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="90" id="Lxe-6U-gUv"/>
                                                 </constraints>
-                                                <state key="normal" title="Button">
+                                                <state key="normal" title="Edit Profile Picture">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="btnEditProfilePicture:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="lG5-L7-eCY"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -401,7 +404,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Fs1-h8-PX9">
-                                <rect key="frame" x="20" y="271" width="202" height="180"/>
+                                <rect key="frame" x="20" y="428" width="335" height="180"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fsv-I5-Xyw">
                                         <rect key="frame" x="0.0" y="0.0" width="202" height="30"/>
@@ -447,16 +450,28 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="F6P-cl-QIG">
+                                <rect key="frame" x="96" y="238" width="182" height="182"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lyj-rC-s4x">
+                                        <rect key="frame" x="0.0" y="0.0" width="182" height="182"/>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Fs1-h8-PX9" firstAttribute="leading" secondItem="Xbx-PN-3NB" secondAttribute="leading" constant="20" id="Omq-I7-mjk"/>
+                            <constraint firstItem="Fs1-h8-PX9" firstAttribute="centerX" secondItem="6yQ-Yc-SmM" secondAttribute="centerX" id="2iK-TR-8WO"/>
+                            <constraint firstItem="Xbx-PN-3NB" firstAttribute="bottom" secondItem="Fs1-h8-PX9" secondAttribute="bottom" constant="10" id="3HZ-ye-EGZ"/>
+                            <constraint firstItem="F6P-cl-QIG" firstAttribute="top" secondItem="NTQ-p3-5Hn" secondAttribute="bottom" constant="8" id="Dit-bU-ohC"/>
+                            <constraint firstItem="F6P-cl-QIG" firstAttribute="centerX" secondItem="6yQ-Yc-SmM" secondAttribute="centerX" id="J1t-HO-Dbc"/>
                             <constraint firstItem="NTQ-p3-5Hn" firstAttribute="leading" secondItem="Xbx-PN-3NB" secondAttribute="leading" constant="20" id="VR4-Is-kFW"/>
                             <constraint firstItem="NTQ-p3-5Hn" firstAttribute="top" secondItem="Xbx-PN-3NB" secondAttribute="top" constant="20" id="Xqt-U6-Y6D"/>
-                            <constraint firstItem="Xbx-PN-3NB" firstAttribute="bottom" secondItem="Fs1-h8-PX9" secondAttribute="bottom" constant="167" id="ekU-FA-6ib"/>
-                            <constraint firstItem="Xbx-PN-3NB" firstAttribute="trailing" secondItem="Fs1-h8-PX9" secondAttribute="trailing" constant="153" id="gEa-ag-LJd"/>
+                            <constraint firstItem="Xbx-PN-3NB" firstAttribute="trailing" secondItem="Fs1-h8-PX9" secondAttribute="trailing" constant="20" id="bfP-qH-g3T"/>
+                            <constraint firstItem="F6P-cl-QIG" firstAttribute="leading" secondItem="Xbx-PN-3NB" secondAttribute="leading" constant="96" id="fVB-5n-9tW"/>
+                            <constraint firstItem="Fs1-h8-PX9" firstAttribute="top" secondItem="F6P-cl-QIG" secondAttribute="bottom" constant="8" id="gMO-MK-Oxh"/>
+                            <constraint firstItem="Fs1-h8-PX9" firstAttribute="leading" secondItem="Xbx-PN-3NB" secondAttribute="leading" constant="20" id="h9q-6H-gij"/>
                             <constraint firstItem="Xbx-PN-3NB" firstAttribute="trailing" secondItem="NTQ-p3-5Hn" secondAttribute="trailing" constant="20" id="leF-bx-Lfw"/>
-                            <constraint firstItem="Fs1-h8-PX9" firstAttribute="top" secondItem="NTQ-p3-5Hn" secondAttribute="bottom" constant="41" id="qhq-vt-J1Z"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Xbx-PN-3NB"/>
                         <variation key="default">
@@ -476,6 +491,7 @@
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="imgProfilePic" destination="Lyj-rC-s4x" id="Afg-4Z-Gn2"/>
                         <outlet property="photoURL" destination="hvl-bQ-WjS" id="y9c-tg-MBu"/>
                         <outlet property="userDOB" destination="S0I-Fu-lcL" id="2dG-me-ehR"/>
                         <outlet property="userEmail" destination="7Yf-yx-eOF" id="RFz-aX-bmg"/>
@@ -488,7 +504,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E8s-FG-YQa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="460" y="2193"/>
+            <point key="canvasLocation" x="460" y="2192.6536731634183"/>
         </scene>
         <!--Settings-->
         <scene sceneID="2C3-4u-ABc">

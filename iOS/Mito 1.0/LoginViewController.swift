@@ -392,6 +392,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             pickerviewStateAA.delegate = self
             pickerviewStateAA.dataSource = self
         }
+        appdata.printHi()
         super.viewDidLoad()
         self.hideKeyboard()
     }

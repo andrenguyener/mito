@@ -51,4 +51,8 @@ class AppData: NSObject {
     ]
     
     open var tempAccountHolder : Parameters = (Dictionary<String, Any>)()
+    
+    open func printHi() {
+        print("Hi")
+    }
 }
