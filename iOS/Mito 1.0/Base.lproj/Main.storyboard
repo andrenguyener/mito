@@ -285,7 +285,7 @@
             </objects>
             <point key="canvasLocation" x="2055" y="1459.8591549295775"/>
         </scene>
-        <!--Me-->
+        <!--Me View Controller-->
         <scene sceneID="1RP-aC-Yg0">
             <objects>
                 <viewController id="Ela-Xp-3K3" customClass="MeViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
@@ -294,7 +294,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="NTQ-p3-5Hn">
-                                <rect key="frame" x="20" y="40" width="335" height="190"/>
+                                <rect key="frame" x="20" y="84" width="335" height="190"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vXe-bD-9fp">
                                         <rect key="frame" x="0.0" y="0.0" width="162.5" height="190"/>
@@ -451,10 +451,10 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="F6P-cl-QIG">
-                                <rect key="frame" x="96" y="238" width="182" height="182"/>
+                                <rect key="frame" x="96" y="282" width="182" height="138"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lyj-rC-s4x">
-                                        <rect key="frame" x="0.0" y="0.0" width="182" height="182"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="182" height="138"/>
                                     </imageView>
                                 </subviews>
                             </stackView>
@@ -486,9 +486,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Me" image="Person.png" id="Ikz-vn-Abe">
-                        <color key="badgeColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </tabBarItem>
+                    <navigationItem key="navigationItem" id="VUn-n1-lTJ"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="imgProfilePic" destination="Lyj-rC-s4x" id="Afg-4Z-Gn2"/>
@@ -504,7 +502,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E8s-FG-YQa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="460" y="2192.6536731634183"/>
+            <point key="canvasLocation" x="1399.2" y="2192.6536731634183"/>
         </scene>
         <!--Settings-->
         <scene sceneID="2C3-4u-ABc">
@@ -515,17 +513,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DlS-02-2Em">
-                                <rect key="frame" x="20" y="20" width="34" height="30"/>
+                                <rect key="frame" x="20" y="64" width="34" height="30"/>
                                 <state key="normal" title="Back"/>
                                 <connections>
                                     <action selector="settingsToHome:" destination="8y5-fW-uZG" eventType="touchUpInside" id="igg-ZT-NTn"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="aau-YT-r95">
-                                <rect key="frame" x="20" y="83" width="335" height="564"/>
+                                <rect key="frame" x="20" y="127" width="335" height="471"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AOn-Si-y3v">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="85.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="70"/>
                                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                         <state key="normal" title="Edit Profile">
@@ -533,7 +531,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gac-qa-YXU">
-                                        <rect key="frame" x="0.0" y="95.5" width="335" height="86"/>
+                                        <rect key="frame" x="0.0" y="80" width="335" height="70.5"/>
                                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                         <state key="normal" title="Cards">
@@ -541,7 +539,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CUf-EX-Siv">
-                                        <rect key="frame" x="0.0" y="191.5" width="335" height="85.5"/>
+                                        <rect key="frame" x="0.0" y="160.5" width="335" height="70"/>
                                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                         <state key="normal" title="Blocked User">
@@ -549,7 +547,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8qb-nD-n6t">
-                                        <rect key="frame" x="0.0" y="287" width="335" height="85.5"/>
+                                        <rect key="frame" x="0.0" y="240.5" width="335" height="70"/>
                                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                         <state key="normal" title="Notifications">
@@ -557,7 +555,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J0G-p0-DVc">
-                                        <rect key="frame" x="0.0" y="382.5" width="335" height="86"/>
+                                        <rect key="frame" x="0.0" y="320.5" width="335" height="70.5"/>
                                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                         <state key="normal" title="Change Password">
@@ -565,7 +563,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gcj-Wh-e2k">
-                                        <rect key="frame" x="0.0" y="478.5" width="335" height="85.5"/>
+                                        <rect key="frame" x="0.0" y="401" width="335" height="70"/>
                                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                         <state key="normal" title="Sign Out">
@@ -578,7 +576,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXd-TL-RFe">
-                                <rect key="frame" x="117" y="20" width="141.5" height="43"/>
+                                <rect key="frame" x="117" y="64" width="141.5" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="sGD-uo-CBn"/>
                                 </constraints>
@@ -608,7 +606,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ooY-HR-NjK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1230" y="2193"/>
+            <point key="canvasLocation" x="2168.8000000000002" y="2192.6536731634183"/>
         </scene>
         <!--Home-->
         <scene sceneID="ZzX-kK-snC">
@@ -1716,7 +1714,7 @@
                         <segue destination="k7B-N4-R6E" kind="relationship" relationship="viewControllers" id="Txd-3r-D3I"/>
                         <segue destination="gAK-KX-AAt" kind="relationship" relationship="viewControllers" id="Xta-FM-2bW"/>
                         <segue destination="zTg-1Y-lm9" kind="relationship" relationship="viewControllers" id="sLv-ep-LaA"/>
-                        <segue destination="Ela-Xp-3K3" kind="relationship" relationship="viewControllers" id="jOd-k8-Wqi"/>
+                        <segue destination="SrB-hV-fOq" kind="relationship" relationship="viewControllers" id="jOd-k8-Wqi"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uyj-9O-ouf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1737,7 +1735,7 @@
                 <viewControllerPlaceholder storyboardName="Login" referencedIdentifier="Open" id="7Du-fU-wfA" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="anr-at-uAk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2104" y="2192"/>
+            <point key="canvasLocation" x="3043.1999999999998" y="2191.304347826087"/>
         </scene>
         <!--ChooseFriend-->
         <scene sceneID="uuf-FR-odA">
@@ -2175,6 +2173,27 @@
             </objects>
             <point key="canvasLocation" x="3742" y="473"/>
         </scene>
+        <!--Me-->
+        <scene sceneID="Ec9-TK-bWS">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SrB-hV-fOq" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Me" image="Person.png" id="Ikz-vn-Abe">
+                        <color key="badgeColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ci2-V1-yY0">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Ela-Xp-3K3" kind="relationship" relationship="rootViewController" id="04p-qd-tzh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LAQ-7d-nXc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="460" y="2192.6536731634183"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Cart Solid White Icon.png" width="22" height="23"/>
@@ -2189,7 +2208,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="3vp-Ra-gLm"/>
-        <segue reference="4Df-8F-JjS"/>
+        <segue reference="OxN-eG-nJb"/>
         <segue reference="IOv-WN-4XC"/>
     </inferredMetricsTieBreakers>
 </document>
