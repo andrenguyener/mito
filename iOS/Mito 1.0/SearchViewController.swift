@@ -65,20 +65,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if peopleTableView == nil {
             swirlSearchImg.isHidden = false
         }
-        
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
-        
-//        peopleTableView.reloadData()
-//        productTableView.reloadData()
         spinnerProductSearch.isHidden = true
-//        productPeopleTab.selectedSegmentIndex = intSegmentedIndex
         strProductResultsPageNumber = 1
     }
-    
-//    func viewWillAppear() {
-//        productPeopleTab.selectedSegmentIndex = intSegmentedIndex
-//    }
     
     func fnLoadFriendsAndAllUsers() {
         self.appdata.arrFriendsAndAllMitoUsers.removeAll()
@@ -118,6 +109,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     self.appdata.arrFriendsAndAllMitoUsers.append(self.appdata.arrFriends)
                     DispatchQueue.main.async {
                         self.appdata.arrCurrFriendsAndAllMitoUsers = self.appdata.arrFriendsAndAllMitoUsers
+                        if self.appdata.arrCurrFriendsAndAllMitoUsers[0].count > self.appdata.arrCurrFriendsAndAllMitoUsers[1].count {
+                            let temp = self.appdata.arrCurrFriendsAndAllMitoUsers[0]
+                            self.appdata.arrCurrFriendsAndAllMitoUsers[0] = self.appdata.arrCurrFriendsAndAllMitoUsers[1]
+                            self.appdata.arrCurrFriendsAndAllMitoUsers[1] = temp
+                        }
                         self.peopleTableView.reloadData()
                     }
                 }

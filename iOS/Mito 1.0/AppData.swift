@@ -55,4 +55,45 @@ class AppData: NSObject {
     open func printHi() {
         print("Hi")
     }
+    
+    open func fnLoadStateData() {
+        var urlStates = URL(string: "https://api.myjson.com/bins/penjf") // JSON file containing US states
+        Alamofire.request(urlStates!, method: .get, encoding: JSONEncoding.default).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value as! NSDictionary?{
+                    for obj in dictionary {
+                        let stateObj = State(abbrev: obj.key as! String, value: obj.value as! String)
+                        self.arrStates.append(stateObj)
+//                        self.appdata.arrStates.append(stateObj)
+                    }
+                }
+                
+            case .failure(let error):
+                print("Get all users error")
+                print(error)
+            }
+        }
+    }
+    
+    open func fnLoadMonthData() {
+        var urlMonths = URL(string: "https://api.myjson.com/bins/1175mz") // JSON file containing months
+        Alamofire.request(urlMonths!, method: .get, encoding: JSONEncoding.default).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value as! NSDictionary?{
+                    for obj in dictionary {
+                        let objMonthValues = obj.value as! NSDictionary
+                        let objMonth = Month(strName: objMonthValues["name"] as! String, strAbbrev: objMonthValues["short"] as! String, strNum: objMonthValues["number"] as! String, intNumDays: objMonthValues["days"] as! Int)
+                        self.arrMonths.append(objMonth)
+                    }
+                    
+                }
+                
+            case .failure(let error):
+                print("Get all users error")
+                print(error)
+            }
+        }
+    }
 }
