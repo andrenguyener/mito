@@ -304,9 +304,13 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if productPeopleTab.selectedSegmentIndex == 1 {
-            return self.appdata.arrCurrFriendsAndAllMitoUsers[section].count // 10
+            if self.appdata.arrCurrFriendsAndAllMitoUsers[section].count >= 10 {
+                return 10
+            } else {
+                return self.appdata.arrCurrFriendsAndAllMitoUsers[section].count
+            }
+//            return 10 //self.appdata.arrCurrFriendsAndAllMitoUsers[section].count // 10
         } else {
-            print(appdata.arrProductSearchResults.count)
             return appdata.arrProductSearchResults.count
         }
     }
@@ -359,6 +363,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             cell.price.text = objProduct.price
             return cell
         } else { // People
+            print("Section length: \(self.appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section].count)")
+            print("Section: \(indexPath.section)")
+            print("Row: \(indexPath.row)")
             let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
             let objPerson = self.appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
             let urlPeopleImage = URL(string:"\(objPerson.avatar)")

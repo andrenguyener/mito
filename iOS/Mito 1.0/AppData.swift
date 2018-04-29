@@ -57,7 +57,7 @@ class AppData: NSObject {
     }
     
     open func fnLoadStateData() {
-        var urlStates = URL(string: "https://api.myjson.com/bins/penjf") // JSON file containing US states
+        let urlStates = URL(string: "https://api.myjson.com/bins/penjf") // JSON file containing US states
         Alamofire.request(urlStates!, method: .get, encoding: JSONEncoding.default).validate().responseJSON { response in
             switch response.result {
             case .success:
@@ -77,7 +77,7 @@ class AppData: NSObject {
     }
     
     open func fnLoadMonthData() {
-        var urlMonths = URL(string: "https://api.myjson.com/bins/1175mz") // JSON file containing months
+        let urlMonths = URL(string: "https://api.myjson.com/bins/1175mz") // JSON file containing months
         Alamofire.request(urlMonths!, method: .get, encoding: JSONEncoding.default).validate().responseJSON { response in
             switch response.result {
             case .success:

@@ -123,21 +123,7 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
             }
         }
     }
-        
-//        let objCurrentProduct = appdata.arrProductSearchResults[appdata.intCurrIndex]
-//        if (appdata.arrCartLineItems.count > 0) {
-//            for objLineItem in appdata.arrCartLineItems {
-//                if objLineItem.objProduct.ASIN == objCurrentProduct.ASIN {
-//                    objLineItem.intQuantity += (Int)(lblQuantity.text!)!
-//                } else {
-//                    appdata.arrCartLineItems.append(LineItem(objProduct: objCurrentProduct, intQty: (Int)(lblQuantity.text!)!))
-//                }
-//            }
-//        } else {
-//            appdata.arrCartLineItems.append(LineItem(objProduct: objCurrentProduct, intQty: (Int)(lblQuantity.text!)!))
-//        }
-//        self.fnAlertAddedToCart()
-//    }
+
     
     func fnAlertAddedToCart() {
         let alertController = UIAlertController(title: "Done", message: "Added to cart!", preferredStyle: .alert)
@@ -148,6 +134,7 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     @IBAction func backSearch(_ sender: Any) {
         appdata.arrProductSearchResults.removeAll()
+        print("Pressed back")
         self.performSegue(withIdentifier: "backToTabController", sender: self)
     }
     

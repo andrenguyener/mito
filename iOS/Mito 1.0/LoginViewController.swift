@@ -71,8 +71,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         return emailTest.evaluate(with: text)
     }
     
-    
-    
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var monthPicker: UIPickerView!
@@ -213,9 +211,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         let strPasswordConfirmation = passwordConfSU.text
         let strEmail = userEmailSU.text
         let strUserDOB = "\(strMonth)/\(strDay)/\(strYear)"
-        print(strUserDOB)
         
-        // Should have last name field so we don't default to Smith
         let parameters: Parameters = [
             "userFname": strFirstName!,
             "userLname": strLastName!,
