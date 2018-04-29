@@ -21,6 +21,42 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     // State dropdown
     // Verify real address before continuing?
     
+    // Error Validation
+    
+    @IBAction func textFieldPasswordChecker(_ sender: Any) {
+        if fnPasswordLessThanSixCharacters(text: passwordSU.text!) {
+            passwordSU.textColor = UIColor.red
+        } else {
+            passwordSU.textColor = UIColor.black
+        }
+    }
+    
+    func fnPasswordLessThanSixCharacters(text: String) -> Bool {
+        var result = false
+        if text.count < 6 {
+            result = true
+        }
+        return result
+    }
+    
+    @IBAction func textFieldConfirmPassword(_ sender: Any) {
+        if fnPasswordsDoNotMatch(text: passwordConfSU.text!) {
+            passwordSU.textColor = UIColor.red
+            passwordConfSU.textColor = UIColor.red
+        } else {
+            passwordSU.textColor = UIColor.black
+            passwordConfSU.textColor = UIColor.black
+        }
+    }
+    
+    func fnPasswordsDoNotMatch(text: String) -> Bool {
+        var result = false
+        if text != passwordSU.text {
+            result = true
+        }
+        return result
+    }
+    
     
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
