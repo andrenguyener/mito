@@ -55,6 +55,7 @@
 		B272DC2620439E2200EE2121 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = B272DC2520439E2200EE2121 /* Product.swift */; };
 		B272DC2E2043BBE400EE2121 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B272DC2D2043BBE400EE2121 /* AppData.swift */; };
 		B277629520883DE40071C672 /* CheckoutSelectUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B277629420883DE40071C672 /* CheckoutSelectUserViewController.swift */; };
+		B28562DA2096E98000E8CC28 /* KeyboardDone.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28562D92096E98000E8CC28 /* KeyboardDone.swift */; };
 		B298CB012084607900EED243 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B298CB002084607900EED243 /* RoundedButton.swift */; };
 		B298CB052084722500EED243 /* RoundedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B298CB042084722500EED243 /* RoundedImage.swift */; };
 		B298CB072084780B00EED243 /* RoundedWithBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B298CB062084780B00EED243 /* RoundedWithBorder.swift */; };
@@ -164,6 +165,7 @@
 		B272DC2B2043BA8700EE2121 /* Notification Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Notification Icon.png"; sourceTree = "<group>"; };
 		B272DC2D2043BBE400EE2121 /* AppData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 		B277629420883DE40071C672 /* CheckoutSelectUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutSelectUserViewController.swift; sourceTree = "<group>"; };
+		B28562D92096E98000E8CC28 /* KeyboardDone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardDone.swift; sourceTree = "<group>"; };
 		B298CB002084607900EED243 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		B298CB042084722500EED243 /* RoundedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedImage.swift; sourceTree = "<group>"; };
 		B298CB062084780B00EED243 /* RoundedWithBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedWithBorder.swift; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 				DA27C21B204356B400CCFD60 /* FeedItem.swift */,
 				DA27C2192043550A00CCFD60 /* HomeTableViewCell.swift */,
 				DA27C217204353FF00CCFD60 /* HomeViewController.swift */,
+				B28562D92096E98000E8CC28 /* KeyboardDone.swift */,
 				DA42CC092064909900900C7D /* LineItem.swift */,
 				B25490082058AE92000123D0 /* Login.storyboard */,
 				B2F8494E2043D71000CBD83A /* LoginViewController.swift */,
@@ -649,6 +652,7 @@
 				DAD995332042389B007A7687 /* Person.swift in Sources */,
 				B29AEC64203FC9C100110EF9 /* PeopleDetailsViewController.swift in Sources */,
 				DAD9A1A0204FD1C800E3AA5F /* ProductTableViewCell.swift in Sources */,
+				B28562DA2096E98000E8CC28 /* KeyboardDone.swift in Sources */,
 				B29AEC62203FC9C100110EF9 /* AppDelegate.swift in Sources */,
 				DAC178BE2088385A0039AA08 /* Package.swift in Sources */,
 				DACCDE29206057C500CD59D9 /* State.swift in Sources */,
