@@ -234,6 +234,8 @@
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
+                                                    <outlet property="btnConfirm" destination="Y95-jw-Npn" id="oFR-Xi-YLx"/>
+                                                    <outlet property="btnDecline" destination="VpT-vs-6yc" id="v6a-ek-fHs"/>
                                                     <outlet property="imgPerson" destination="ekH-sZ-74u" id="a5l-ce-thF"/>
                                                     <outlet property="strFirstNameLastName" destination="40X-rH-w4U" id="e1K-0C-329"/>
                                                     <outlet property="strUsername" destination="dTB-aY-jrI" id="bG4-Y0-coF"/>
@@ -309,7 +311,7 @@
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w79-KV-MTd">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w79-KV-MTd">
                                                 <rect key="frame" x="0.0" y="100" width="162.5" height="90"/>
                                                 <color key="backgroundColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -2208,7 +2210,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="3vp-Ra-gLm"/>
-        <segue reference="OxN-eG-nJb"/>
+        <segue reference="4Df-8F-JjS"/>
         <segue reference="IOv-WN-4XC"/>
     </inferredMetricsTieBreakers>
 </document>

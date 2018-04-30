@@ -18,7 +18,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var segment: UISegmentedControl!
     @IBOutlet weak var tblviewNotification: UITableView!
     
-    var urlPeopleCall = URL(string: "https://api.projectmito.io/v1/friend/")
     var urlAcceptFriendRequest = URL(string: "https://api.projectmito.io/v1/friend/request")
     
     @IBAction func segmentControl(_ sender: Any) {
@@ -82,11 +81,11 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func fnGetPendingFriendRequests() {
-        let urlGetFriends = URL(string: (urlPeopleCall?.absoluteString)! + "0")
+        let urlGetPendingFriendRequests = URL(string: "https://api.projectmito.io/v1/friend/0")
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
-        Alamofire.request(urlGetFriends!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+        Alamofire.request(urlGetPendingFriendRequests!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success:
                 if let dictionary = response.result.value {
@@ -102,9 +101,10 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                                                strUsername: (object["Username"] as? String)!,
                                                intNumFriends: (object["NumFriends"] as! Int))
                         self.appdata.arrPendingFriends.append(p)
-                        DispatchQueue.main.async {
-                            self.tblviewNotification.reloadData()
-                        }
+                    }
+                    print("Pending Friend Requests: \(self.appdata.arrPendingFriends.count)")
+                    DispatchQueue.main.async {
+                        self.tblviewNotification.reloadData()
                     }
                 }
                 
@@ -138,10 +138,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if segment.selectedSegmentIndex == 0 {
-            let person = appdata.arrPendingFriends[indexPath.row]
-            self.fnAcceptFriendRequest(person: person)
-        } else {
+        if segment.selectedSegmentIndex == 1 {
             let package = appdata.arrCurrUserPackages[indexPath.row]
             print("\(appdata.arrCurrUserAddresses.count)")
             fnAcceptOrDeclinePackage(response: "Accepted", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[0].intAddressID)
@@ -174,9 +171,38 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
-    func fnAcceptFriendRequest(person: Person) {
+    @objc func fnAcceptFriendRequest(_ button: UIButton) {
+        print(appdata.arrPendingFriends[button.tag].intUserID)
         let parameters: Parameters = [
-            "friendId": person.intUserID,
+            "friendId": appdata.arrPendingFriends[button.tag].intUserID,
+            "friendType": "Friend",
+            "notificationType": "Friend"
+        ]
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlAcceptFriendRequest!, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
+            switch response.result {
+            case .success:
+                if response.result.value != nil {
+                    DispatchQueue.main.async {
+                        self.tblviewNotification.reloadData()
+                        self.appdata.arrPendingFriends.removeAll()
+                        self.fnGetPendingFriendRequests()
+                    }
+                }
+                
+            case .failure(let error):
+                print("Get pending users error")
+                print(error)
+            }
+        }
+    }
+    
+    @objc func fnDeclineFriendRequest(_ button: UIButton) {
+        print(appdata.arrPendingFriends[button.tag].intUserID)
+        let parameters: Parameters = [
+            "friendId": appdata.arrPendingFriends[button.tag].intUserID,
             "friendType": "Friend",
             "notificationType": "Friend"
         ]
@@ -202,6 +228,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // Friend Requests
         if segment.selectedSegmentIndex == 0 {
             let cell = tblviewNotification.dequeueReusableCell(withIdentifier: "cellNotification", for: indexPath) as! NotificationTableViewCell
             if appdata.arrPendingFriends.count > 0 {
@@ -215,9 +242,13 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                 } else if let data = try? Data(contentsOf: defaultURL!){
                     cell.imgPerson.image = UIImage(data: data)
                 }
+                cell.btnConfirm.tag = indexPath.row
+                cell.btnConfirm.addTarget(self, action: #selector(self.fnAcceptFriendRequest(_:)), for: .touchUpInside)
+                cell.btnDecline.tag = indexPath.row
+                cell.btnDecline.addTarget(self, action: #selector(self.fnDeclineFriendRequest(_:)), for: .touchUpInside)
             }
             return cell
-        } else {
+        } else { // In
             let cell = tblviewPackage.dequeueReusableCell(withIdentifier: "cellPackage", for: indexPath) as! PackageTableViewCell
             let objPackage = appdata.arrCurrUserPackages[indexPath.row]
             cell.strFnameLname.text = "\(objPackage.strUserFName) \(objPackage.strUserLName)"

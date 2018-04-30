@@ -95,6 +95,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             case .success:
                 if let dictionary = response.result.value {
                     let dict2 = dictionary as! NSArray
+                    print(dict2)
                     for obj in dict2 {
                         let object = obj as! NSDictionary
                         let p: Person = Person(firstName: (object["UserFname"] as? String)!,
@@ -107,13 +108,19 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         self.appdata.arrFriends.append(p)
                     }
                     self.appdata.arrFriendsAndAllMitoUsers.append(self.appdata.arrFriends)
+                    print("Loaded all friends")
                     DispatchQueue.main.async {
                         self.appdata.arrCurrFriendsAndAllMitoUsers = self.appdata.arrFriendsAndAllMitoUsers
-                        if self.appdata.arrCurrFriendsAndAllMitoUsers[0].count > self.appdata.arrCurrFriendsAndAllMitoUsers[1].count {
-                            let temp = self.appdata.arrCurrFriendsAndAllMitoUsers[0]
-                            self.appdata.arrCurrFriendsAndAllMitoUsers[0] = self.appdata.arrCurrFriendsAndAllMitoUsers[1]
-                            self.appdata.arrCurrFriendsAndAllMitoUsers[1] = temp
+                        print(self.appdata.arrCurrFriendsAndAllMitoUsers.count)
+                        print(self.appdata.arrCurrFriendsAndAllMitoUsers[0].count)
+                        if self.appdata.arrCurrFriendsAndAllMitoUsers.count > 1 {
+                            print(self.appdata.arrCurrFriendsAndAllMitoUsers[1].count)
                         }
+//                        if self.appdata.arrCurrFriendsAndAllMitoUsers.count > 0 && self.appdata.arrCurrFriendsAndAllMitoUsers[0].count > self.appdata.arrCurrFriendsAndAllMitoUsers[1].count {
+//                            let temp = self.appdata.arrCurrFriendsAndAllMitoUsers[0]
+//                            self.appdata.arrCurrFriendsAndAllMitoUsers[0] = self.appdata.arrCurrFriendsAndAllMitoUsers[1]
+//                            self.appdata.arrCurrFriendsAndAllMitoUsers[1] = temp
+//                        }
                         self.peopleTableView.reloadData()
                     }
                 }
@@ -142,6 +149,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     self.appdata.arrFriendsAndAllMitoUsers.append(self.appdata.arrAllUsers)
                     self.appdata.arrCurrFriendsAndAllMitoUsers = self.appdata.arrFriendsAndAllMitoUsers
                 }
+                print("Loaded all users")
                 
             case .failure(let error):
                 print("Get all users error")
@@ -363,9 +371,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             cell.price.text = objProduct.price
             return cell
         } else { // People
-            print("Section length: \(self.appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section].count)")
-            print("Section: \(indexPath.section)")
-            print("Row: \(indexPath.row)")
             let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
             let objPerson = self.appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
             let urlPeopleImage = URL(string:"\(objPerson.avatar)")
