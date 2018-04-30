@@ -145,6 +145,8 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
+    // Accept currently creates errors above
+    
     func fnAcceptOrDeclinePackage(response: String, senderId: Int, orderId: Int, shippingAddressId: Int) {
         let urlAcceptOrDeclinePackage = URL(string: "https://api.projectmito.io/v1/package/")
         let parameters: Parameters = [
