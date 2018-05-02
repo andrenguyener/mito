@@ -228,7 +228,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         Alamofire.request("https://api.projectmito.io/v1/users/validate", method: .post, parameters: parameters, encoding: JSONEncoding.default).validate().responseJSON { response in
             switch response.result {
             case .success:
-                // http url response
                 if let dictionary = response.result.value {
                     print("JSON: \(dictionary)") // serialized json response
                     self.performSegue(withIdentifier: "signUpToAddress", sender: self)
@@ -236,32 +235,12 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                 }
 
             case .failure(let error):
+                if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                    print("Data: \(utf8Text)") // original server data as UTF8 string
+                }
                 print(error)
             }
         }
-
-//        Alamofire.request("https://api.projectmito.io/v1/users", method: .post, parameters: parameters, encoding: JSONEncoding.default).validate().responseJSON { response in
-//            switch response.result {
-//            case .success:
-//                // http url response
-//                let authHeader = response.response?.allHeaderFields["Authorization"] ?? ""
-//                if let dictionary = response.result.value {
-//                    print("JSON: \(dictionary)") // serialized json response
-//                    self.performSegue(withIdentifier: "signUpToAddress", sender: self)
-//                    DispatchQueue.main.async {
-//                        UserDefaults.standard.set(dictionary, forKey: "UserInfo")
-//                        UserDefaults.standard.set(authHeader, forKey: "Authorization")
-//                        if UserDefaults.standard.object(forKey: "UserInfo") != nil {
-//                            let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
-//                            self.appdata.intCurrentUserID = (data["userId"] as? Int)!
-//                        }
-//                    }
-//                }
-//
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
     }
     
     // Add Address page
