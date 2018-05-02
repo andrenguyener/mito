@@ -85,6 +85,7 @@ class PeopleDetailsViewController: UIViewController {
         if segue.identifier == "segPeopleDetailsToSearchView" {
             let tabBarController = segue.destination as! UITabBarController
             tabBarController.selectedIndex = 1
+            
         }
     }
 }
