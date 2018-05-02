@@ -23,6 +23,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var imgSender: UIImageView!
     @IBOutlet weak var strPackageSenderName: UILabel!
     
+    var refresher: UIRefreshControl!
     
     var urlAcceptFriendRequest = URL(string: "https://api.projectmito.io/v1/friend/request")
     
@@ -51,6 +52,10 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             tblviewPackage.delegate = self
             tblviewPackage.dataSource = self
             tblviewPackage.rowHeight = 100
+            refresher = UIRefreshControl()
+            refresher.attributedTitle = NSAttributedString(string: "Pull to refresh")
+            refresher.addTarget(self, action: #selector(NotificationViewController.fnRefreshData), for: UIControlEvents.valueChanged)
+            tblviewNotification.addSubview(refresher)
             fnGetPendingPackages()
         } else {
             let objIncomingPackage = appdata.arrCurrUserPackages[intOrderID]
@@ -65,6 +70,10 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             print(appdata.arrCurrUserPackages[intOrderID].intOrderID)
             fnGetOrderDetails()
         }
+    }
+    
+    @objc func fnRefreshData() {
+        fnGetPendingFriendRequests()
     }
     
     func fnGetOrderDetails() {
@@ -125,6 +134,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     
     func fnGetPendingFriendRequests() {
         let urlGetPendingFriendRequests = URL(string: "https://api.projectmito.io/v1/friend/0")
+        appdata.arrPendingFriends.removeAll()
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
@@ -135,7 +145,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     let dict2 = dictionary as! NSArray
                     for obj in dict2 {
                         let object = obj as! NSDictionary
-                        print(object)
                         let p: Person = Person(firstName: (object["UserFname"] as? String)!,
                                                lastName: (object["UserLname"] as? String)!,
                                                email: (object["UserEmail"] as? String?)!!,
@@ -148,6 +157,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     print("Pending Friend Requests: \(self.appdata.arrPendingFriends.count)")
                     DispatchQueue.main.async {
                         self.tblviewNotification.reloadData()
+                        self.refresher.endRefreshing()
                     }
                 }
                 
@@ -186,7 +196,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     @IBAction func btnAcceptAndChooseReceivingAddress(_ sender: Any) {
         boolSender = false
         performSegue(withIdentifier: "PackageToChooseReceivingAddress", sender: self)
-    }    
+    }
     
     func fnAcceptOrDeclinePackage(response: String, senderId: Int, orderId: Int, shippingAddressId: Int) {
         let urlAcceptOrDeclinePackage = URL(string: "https://api.projectmito.io/v1/package/")
