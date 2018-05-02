@@ -9,6 +9,8 @@
 import UIKit
 import Alamofire
 
+var intOrderID = 1
+
 class NotificationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var appdata = AppData.shared
 
@@ -17,6 +19,10 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var tblviewPackage: UITableView!
     @IBOutlet weak var segment: UISegmentedControl!
     @IBOutlet weak var tblviewNotification: UITableView!
+    
+    @IBOutlet weak var imgSender: UIImageView!
+    @IBOutlet weak var strPackageSenderName: UILabel!
+    
     
     var urlAcceptFriendRequest = URL(string: "https://api.projectmito.io/v1/friend/request")
     
@@ -35,16 +41,53 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tblviewPackage.isHidden = true
-        appdata.arrPendingFriends.removeAll()
-        self.fnGetPendingFriendRequests()
-        tblviewNotification.delegate = self
-        tblviewNotification.dataSource = self
-        tblviewNotification.rowHeight = 100
-        tblviewPackage.delegate = self
-        tblviewPackage.dataSource = self
-        tblviewPackage.rowHeight = 100
-        fnGetPendingPackages()
+        if tblviewPackage != nil && tblviewNotification != nil {
+            tblviewPackage.isHidden = true
+            appdata.arrPendingFriends.removeAll()
+            self.fnGetPendingFriendRequests()
+            tblviewNotification.delegate = self
+            tblviewNotification.dataSource = self
+            tblviewNotification.rowHeight = 100
+            tblviewPackage.delegate = self
+            tblviewPackage.dataSource = self
+            tblviewPackage.rowHeight = 100
+            fnGetPendingPackages()
+        } else {
+            let objIncomingPackage = appdata.arrCurrUserPackages[intOrderID]
+            strPackageSenderName.text = "\(objIncomingPackage.strUserFName) \(objIncomingPackage.strUserLName)"
+            let urlPersonImage = URL(string:"\(objIncomingPackage.strPhotoUrl)")
+            let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
+            if let data = try? Data(contentsOf: urlPersonImage!) {
+                imgSender.image = UIImage(data: data)!
+            } else if let data = try? Data(contentsOf: defaultURL!){
+                imgSender.image = UIImage(data: data)
+            }
+            print(appdata.arrCurrUserPackages[intOrderID].intOrderID)
+            fnGetOrderDetails()
+        }
+    }
+    
+    func fnGetOrderDetails() {
+        let urlGetOrderDetails = URL(string: "https://api.projectmito.io/v1/order/products")
+        let parameters: Parameters = [
+            "orderId": appdata.arrCurrUserPackages[intOrderID].intOrderID
+        ]
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlGetOrderDetails!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    print("Successfully pulled down")
+                    print(dictionary)
+                }
+                
+            case .failure(let error):
+                print("Get order details error")
+                print(error)
+            }
+        }
     }
     
     func fnGetPendingPackages() {
@@ -129,13 +172,17 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if segment.selectedSegmentIndex == 1 {
-            let package = appdata.arrCurrUserPackages[indexPath.row]
-            print("\(appdata.arrCurrUserAddresses.count)")
-            fnAcceptOrDeclinePackage(response: "Accepted", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[0].intAddressID)
+            intOrderID = indexPath.row
+            performSegue(withIdentifier: "NotificationToPackageDetails", sender: self)
         }
     }
     
     // Accept currently creates errors above
+    
+    @IBAction func btnPackageDetailsBackToNotification(_ sender: Any) {
+        performSegue(withIdentifier: "PackageDetailsBackToNotification", sender: self)
+    }
+    
     
     func fnAcceptOrDeclinePackage(response: String, senderId: Int, orderId: Int, shippingAddressId: Int) {
         let urlAcceptOrDeclinePackage = URL(string: "https://api.projectmito.io/v1/package/")

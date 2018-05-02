@@ -9,6 +9,8 @@
 import UIKit
 import Alamofire
 
+var boolSender = true
+
 class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var tblviewPeople: UITableView!
@@ -79,6 +81,7 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
     var appdata = AppData.shared
     
     @IBOutlet weak var lblCreditCardNumber: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 //        fnLoadCurrUserAddresses()
