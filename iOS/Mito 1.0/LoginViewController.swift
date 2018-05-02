@@ -223,7 +223,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         ]
         
         self.appdata.tempAccountHolder = parameters
-        print(self.appdata.tempAccountHolder)
+        print("Temp Account Holder: \(self.appdata.tempAccountHolder)")
     
         Alamofire.request("https://api.projectmito.io/v1/users/validate", method: .post, parameters: parameters, encoding: JSONEncoding.default).validate().responseJSON { response in
             switch response.result {

@@ -100,9 +100,6 @@
                                                             <state key="normal" title="Accept">
                                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </state>
-                                                            <connections>
-                                                                <action selector="btnAcceptPackage:" destination="zTg-1Y-lm9" eventType="touchUpInside" id="EOS-qC-ZkV"/>
-                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1oZ-UJ-wef" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
                                                             <rect key="frame" x="275" y="78" width="85" height="30"/>
@@ -115,9 +112,6 @@
                                                             <state key="normal" title="Deny">
                                                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </state>
-                                                            <connections>
-                                                                <action selector="btnDenyPackage:" destination="zTg-1Y-lm9" eventType="touchUpInside" id="nEk-dT-RGY"/>
-                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <constraints>
@@ -134,6 +128,8 @@
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
+                                                    <outlet property="btnAccept" destination="6yP-kd-XUl" id="w3l-DO-WyT"/>
+                                                    <outlet property="btnDeny" destination="1oZ-UJ-wef" id="JOZ-RU-hi2"/>
                                                     <outlet property="imgPerson" destination="AQV-sv-hGy" id="NeT-0X-VZd"/>
                                                     <outlet property="strFnameLname" destination="3Mh-cs-WSU" id="arF-FI-p8k"/>
                                                 </connections>

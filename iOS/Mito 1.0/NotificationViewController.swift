@@ -115,16 +115,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
-    @IBAction func btnAcceptPackage(_ sender: Any) {
-        print("Hypothetical accept")
-//        fnAcceptOrDeclinePackage(response: "Accepted")
-    }
-
-    @IBAction func btnDenyPackage(_ sender: Any) {
-        print("Hypothetical denied")
-//        fnAcceptOrDeclinePackage(response: "Denied")
-    }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -163,7 +153,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             case .success:
                 if let dictionary = response.result.value {
                     print(dictionary)
-                    print("Success")
+                    print("\(response): Successful")
                 }
                 
             case .failure(let error):
@@ -173,10 +163,15 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
-    @objc func fnAcceptFriendRequest(_ button: UIButton) {
+    @objc func btnAcceptFriendRequest(_ button: UIButton) {
         print(appdata.arrPendingFriends[button.tag].intUserID)
+        let intUserID = appdata.arrPendingFriends[button.tag].intUserID
+        fnAcceptFriendRequest(intUserID: intUserID)
+    }
+    
+    func fnAcceptFriendRequest(intUserID: Int) {
         let parameters: Parameters = [
-            "friendId": appdata.arrPendingFriends[button.tag].intUserID,
+            "friendId": intUserID,
             "friendType": "Friend",
             "notificationType": "Friend"
         ]
@@ -187,26 +182,32 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             switch response.result {
             case .success:
                 if response.result.value != nil {
-                    DispatchQueue.main.async {
-                        self.tblviewNotification.reloadData()
-                        self.appdata.arrPendingFriends.removeAll()
-                        self.fnGetPendingFriendRequests()
-                    }
+                   print("Successfully accepted friend request")
+                }
+                DispatchQueue.main.async {
+                    self.tblviewNotification.reloadData()
+                    self.appdata.arrPendingFriends.removeAll()
+                    self.fnGetPendingFriendRequests()
                 }
                 
             case .failure(let error):
-                print("Get pending users error")
+                print("Could not accept user")
                 print(error)
             }
         }
     }
     
-    @objc func fnDeclineFriendRequest(_ button: UIButton) {
+    @objc func btnDeclineFriendRequest(_ button: UIButton) {
         print(appdata.arrPendingFriends[button.tag].intUserID)
+//        let intUserID = appdata.arrPendingFriends[button.tag].intUserID
+//        fnDeclineFriendRequest(intUserID: intUserID)
+    }
+    
+    func fnDeclineFriendRequest(intUserID: Int) {
         let parameters: Parameters = [
-            "friendId": appdata.arrPendingFriends[button.tag].intUserID,
-            "friendType": "Friend",
-            "notificationType": "Friend"
+            "friendId": intUserID,
+            "friendType": "Unfriend",
+            "notificationType": "Unfriend"
         ]
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
@@ -223,10 +224,20 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                 }
                 
             case .failure(let error):
-                print("Get pending users error")
+                print("Decline friend request error")
                 print(error)
             }
         }
+    }
+    
+    @objc func btnAcceptPackage(_ button: UIButton) {
+        let package = appdata.arrCurrUserPackages[button.tag]
+        fnAcceptOrDeclinePackage(response: "Accepted", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[0].intAddressID)
+    }
+    
+    @objc func btnDenyPackage(_ button: UIButton) {
+        let package = appdata.arrCurrUserPackages[button.tag]
+        fnAcceptOrDeclinePackage(response: "Denied", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[0].intAddressID)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -245,9 +256,9 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     cell.imgPerson.image = UIImage(data: data)
                 }
                 cell.btnConfirm.tag = indexPath.row
-                cell.btnConfirm.addTarget(self, action: #selector(self.fnAcceptFriendRequest(_:)), for: .touchUpInside)
+                cell.btnConfirm.addTarget(self, action: #selector(self.btnAcceptFriendRequest(_:)), for: .touchUpInside)
                 cell.btnDecline.tag = indexPath.row
-                cell.btnDecline.addTarget(self, action: #selector(self.fnDeclineFriendRequest(_:)), for: .touchUpInside)
+                cell.btnDecline.addTarget(self, action: #selector(self.btnDeclineFriendRequest(_:)), for: .touchUpInside)
             }
             return cell
         } else { // In
@@ -261,6 +272,10 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             } else if let data = try? Data(contentsOf: defaultURL!){
                 cell.imgPerson.image = UIImage(data: data)
             }
+            cell.btnAccept.tag = indexPath.row
+            cell.btnAccept.addTarget(self, action: #selector(self.btnAcceptPackage(_:)), for: .touchUpInside)
+            cell.btnDeny.tag = indexPath.row
+            cell.btnDeny.addTarget(self, action: #selector(self.btnDenyPackage(_:)), for: .touchUpInside)
             return cell
         }
     }

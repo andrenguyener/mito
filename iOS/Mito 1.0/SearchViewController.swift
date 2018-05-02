@@ -45,7 +45,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
             UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
         } else {
-            fnLoadFriendsAndAllUsers()
+            appdata.fnLoadFriendsAndAllUsers(tableview: peopleTableView)
             swirlSearchImg.isHidden = true
             UIView.transition(from: productView, to: peopleView, duration: 0, options: .showHideTransitionViews)
         }
@@ -69,93 +69,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         searchBar.returnKeyType = UIReturnKeyType.done
         spinnerProductSearch.isHidden = true
         strProductResultsPageNumber = 1
-    }
-    
-    func fnLoadFriendsAndAllUsers() {
-        self.appdata.arrFriendsAndAllMitoUsers.removeAll()
-        self.appdata.arrFriends.removeAll()
-        self.appdata.arrAllUsers.removeAll()
-        self.fnLoadFriendData()
-        self.fnLoadAllUsers()
-        
-        self.appdata.arrCurrFriendsAndAllMitoUsers = self.appdata.arrFriendsAndAllMitoUsers
-        self.appdata.arrCurrFriends = self.appdata.arrFriends
-        self.appdata.arrCurrAllUsers = self.appdata.arrAllUsers
-    }
-    
-    // Loading Friends (people tab)
-    // POST: inserting (attach object) / GET request: put key word in the URL
-    func fnLoadFriendData() {
-        let urlGetFriends = URL(string: (urlPeopleCall?.absoluteString)! + "1")
-        let headers: HTTPHeaders = [
-            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
-        ]
-        Alamofire.request(urlGetFriends!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                if let dictionary = response.result.value {
-                    let dict2 = dictionary as! NSArray
-                    print(dict2)
-                    for obj in dict2 {
-                        let object = obj as! NSDictionary
-                        let p: Person = Person(firstName: (object["UserFname"] as? String)!,
-                                               lastName: (object["UserLname"] as? String)!,
-                                               email: (object["UserEmail"] as? String?)!!,
-                                               avatar: (object["PhotoUrl"] as? String?)!!,
-                                               intUserID: (object["UserId"] as? Int)!,
-                                               strUsername: (object["Username"] as? String)!,
-                                               intNumFriends: (object["NumFriends"] as? Int)!)
-                        self.appdata.arrFriends.append(p)
-                    }
-                    self.appdata.arrFriendsAndAllMitoUsers.append(self.appdata.arrFriends)
-                    print("Loaded all friends")
-                    DispatchQueue.main.async {
-                        self.appdata.arrCurrFriendsAndAllMitoUsers = self.appdata.arrFriendsAndAllMitoUsers
-                        print(self.appdata.arrCurrFriendsAndAllMitoUsers.count)
-                        print(self.appdata.arrCurrFriendsAndAllMitoUsers[0].count)
-                        if self.appdata.arrCurrFriendsAndAllMitoUsers.count > 1 {
-                            print(self.appdata.arrCurrFriendsAndAllMitoUsers[1].count)
-                        }
-//                        if self.appdata.arrCurrFriendsAndAllMitoUsers.count > 0 && self.appdata.arrCurrFriendsAndAllMitoUsers[0].count > self.appdata.arrCurrFriendsAndAllMitoUsers[1].count {
-//                            let temp = self.appdata.arrCurrFriendsAndAllMitoUsers[0]
-//                            self.appdata.arrCurrFriendsAndAllMitoUsers[0] = self.appdata.arrCurrFriendsAndAllMitoUsers[1]
-//                            self.appdata.arrCurrFriendsAndAllMitoUsers[1] = temp
-//                        }
-                        self.peopleTableView.reloadData()
-                    }
-                }
-                
-            case .failure(let error):
-                print("Get all users error")
-                print(error)
-            }
-        }
-    }
-    
-    func fnLoadAllUsers() {
-        let headers: HTTPHeaders = [
-            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
-        ]
-        Alamofire.request(urlAllUserCall!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                if let dictionary = response.result.value {
-                    let objUsers = dictionary as! NSArray
-                    for objUser in objUsers {
-                        let objPerson2 = objUser as! NSDictionary
-                        let objPerson = Person(firstName: objPerson2["userFname"] as! String, lastName: objPerson2["userLname"] as! String, email: objPerson2["userEmail"] as! String, avatar: objPerson2["photoURL"] as! String, intUserID: objPerson2["userId"] as! Int, strUsername: objPerson2["username"] as! String, intNumFriends: objPerson2["NumFriends"] as! Int)
-                        self.appdata.arrAllUsers.append(objPerson)
-                    }
-                    self.appdata.arrFriendsAndAllMitoUsers.append(self.appdata.arrAllUsers)
-                    self.appdata.arrCurrFriendsAndAllMitoUsers = self.appdata.arrFriendsAndAllMitoUsers
-                }
-                print("Loaded all users")
-                
-            case .failure(let error):
-                print("Get all users error")
-                print(error)
-            }
-        }
+        fnLoadProductData()
     }
     
     @IBAction func cartButtonClicked(_ sender: Any) {

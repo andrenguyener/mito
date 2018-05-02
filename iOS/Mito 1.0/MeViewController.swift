@@ -128,7 +128,7 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
     }
     
     func fnInsertNewAddress() {
-        let urlInsertNewAddress = URL(string: "https://api.projectmito.io/v1/address/insert")
+        let urlInsertNewAddress = URL(string: "https://api.projectmito.io/v1/address/")
         let parameters: Parameters = [
             "streetAddress1": "Ash St",
             "streetAddress2": "",

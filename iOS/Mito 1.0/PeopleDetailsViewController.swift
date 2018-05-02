@@ -40,9 +40,9 @@ class PeopleDetailsViewController: UIViewController {
     }
 
     @IBAction func fnAddFriend(_ sender: Any) {
-        print(appdata.arrAllUsers[myIndex].description())
-        print(appdata.intCurrentUserID)
-        let intUser2Id = appdata.arrAllUsers[myIndex].intUserID
+        let friend = appdata.arrCurrFriendsAndAllMitoUsers[mySection][myIndex]
+        print(friend.description())
+        let intUser2Id = friend.intUserID
         
         let parameters: Parameters = [
             "friendId": intUser2Id

@@ -12,6 +12,9 @@ class PackageTableViewCell: UITableViewCell {
 
     @IBOutlet weak var imgPerson: UIImageView!
     @IBOutlet weak var strFnameLname: UITextField!
+    @IBOutlet weak var btnAccept: RoundedButton!
+    @IBOutlet weak var btnDeny: RoundedButton!
+    
     
     
     override func awakeFromNib() {

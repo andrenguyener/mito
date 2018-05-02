@@ -96,4 +96,89 @@ class AppData: NSObject {
             }
         }
     }
+    
+    open func fnLoadFriendsAndAllUsers(tableview: UITableView) {
+        self.arrFriendsAndAllMitoUsers.removeAll()
+        self.arrFriends.removeAll()
+        self.arrAllUsers.removeAll()
+        self.fnLoadFriendData(tableview: tableview)
+        self.fnLoadAllUsers(tableview: tableview)
+        
+        self.arrCurrFriendsAndAllMitoUsers = self.arrFriendsAndAllMitoUsers
+        self.arrCurrFriends = self.arrFriends
+        self.arrCurrAllUsers = self.arrAllUsers
+    }
+    
+    // pass in the table needed to be refreshed
+    open func fnLoadFriendData(tableview: UITableView) {
+        let urlPeopleCall = URL(string: "https://api.projectmito.io/v1/friend/")
+        let urlGetFriends = URL(string: (urlPeopleCall?.absoluteString)! + "1")
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlGetFriends!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    let dict2 = dictionary as! NSArray
+                    for obj in dict2 {
+                        let object = obj as! NSDictionary
+                        let p: Person = Person(firstName: (object["UserFname"] as? String)!,
+                                               lastName: (object["UserLname"] as? String)!,
+                                               email: (object["UserEmail"] as? String?)!!,
+                                               avatar: (object["PhotoUrl"] as? String?)!!,
+                                               intUserID: (object["UserId"] as? Int)!,
+                                               strUsername: (object["Username"] as? String)!,
+                                               intNumFriends: (object["NumFriends"] as? Int)!)
+                        self.arrFriends.append(p)
+                    }
+                    self.arrFriendsAndAllMitoUsers.append(self.arrFriends)
+                    print("Number of friends: \(self.arrFriends.count)")
+                    DispatchQueue.main.async {
+                        self.arrCurrFriendsAndAllMitoUsers = self.arrFriendsAndAllMitoUsers
+                        if self.arrCurrFriendsAndAllMitoUsers.count > 1 && self.arrCurrFriendsAndAllMitoUsers[0].count > self.arrCurrFriendsAndAllMitoUsers[1].count {
+                            let temp = self.arrCurrFriendsAndAllMitoUsers[0]
+                            self.arrCurrFriendsAndAllMitoUsers[0] = self.arrCurrFriendsAndAllMitoUsers[1]
+                            self.arrCurrFriendsAndAllMitoUsers[1] = temp
+                        }
+                        tableview.reloadData()
+                    }
+                }
+                
+            case .failure(let error):
+                print("Get all users error")
+                print(error)
+            }
+        }
+    }
+    
+    open func fnLoadAllUsers(tableview: UITableView) {
+        let urlAllUserCall = URL(string: "https://api.projectmito.io/v1/users/all")
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlAllUserCall!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    let objUsers = dictionary as! NSArray
+                    for objUser in objUsers {
+                        let objPerson2 = objUser as! NSDictionary
+                        let objPerson = Person(firstName: objPerson2["userFname"] as! String, lastName: objPerson2["userLname"] as! String, email: objPerson2["userEmail"] as! String, avatar: objPerson2["photoURL"] as! String, intUserID: objPerson2["userId"] as! Int, strUsername: objPerson2["username"] as! String, intNumFriends: objPerson2["NumFriends"] as! Int)
+                        self.arrAllUsers.append(objPerson)
+                    }
+                    self.arrFriendsAndAllMitoUsers.append(self.arrAllUsers)
+                    self.arrCurrFriendsAndAllMitoUsers = self.arrFriendsAndAllMitoUsers
+                    print("Number of Mito users: \(self.arrAllUsers.count)")
+                }
+                DispatchQueue.main.async {
+                    tableview.reloadData()
+                }
+                
+            case .failure(let error):
+                print("Get all users error")
+                print(error)
+            }
+        }
+    }
 }
