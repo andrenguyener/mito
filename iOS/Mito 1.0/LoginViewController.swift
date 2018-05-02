@@ -110,7 +110,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         btnChooseState.setTitle(objStateSelected.abbrev, for: .normal)
     }
     
-    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         if monthPicker != nil && !monthPicker.isHidden {
             return 3
@@ -237,6 +236,11 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             case .failure(let error):
                 if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
                     print("Data: \(utf8Text)") // original server data as UTF8 string
+                    if utf8Text.contains("username") {
+                        self.usernameSU.textColor = UIColor.red
+                    } else if utf8Text.contains("email") {
+                        self.userEmailSU.textColor = UIColor.red
+                    }
                 }
                 print(error)
             }
