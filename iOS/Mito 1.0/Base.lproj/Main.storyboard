@@ -2225,96 +2225,108 @@
                                     <constraint firstItem="GGE-2J-I79" firstAttribute="leading" secondItem="VLP-AE-vau" secondAttribute="leading" constant="16" id="lqq-tC-veg"/>
                                 </constraints>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Wsp-0n-pJG" userLabel="Sender Information Stack">
-                                <rect key="frame" x="16" y="124" width="343" height="150"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="0x7-4H-RRO">
+                                <rect key="frame" x="20" y="124" width="335" height="467"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Send to:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yPH-nU-KeJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="61.5" height="20"/>
-                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="4ci-i9-Qen" userLabel="ImageLabelStackView">
-                                        <rect key="frame" x="0.0" y="25" width="250" height="115"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Wsp-0n-pJG" userLabel="Sender Information Stack">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="150"/>
                                         <subviews>
-                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rtm-71-V4I" customClass="RoundedImage" customModule="Mito_1_0" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="115" id="l27-fq-AnT"/>
-                                                </constraints>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K4o-T2-a5F">
-                                                <rect key="frame" x="135" y="47.5" width="115" height="20"/>
-                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send To" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yPH-nU-KeJ">
+                                                <rect key="frame" x="0.0" y="0.0" width="72" height="19.5"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="4ci-i9-Qen" userLabel="ImageLabelStackView">
+                                                <rect key="frame" x="0.0" y="24.5" width="250" height="115"/>
+                                                <subviews>
+                                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rtm-71-V4I" customClass="RoundedImage" customModule="Mito_1_0" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="115" id="l27-fq-AnT"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K4o-T2-a5F">
+                                                        <rect key="frame" x="135" y="47.5" width="115" height="20"/>
+                                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="250" id="Q0C-zA-fi6"/>
+                                                </constraints>
+                                            </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sh0-5l-yS0">
+                                                <rect key="frame" x="0.0" y="144.5" width="104" height="5.5"/>
+                                                <state key="normal" title="Choose Person"/>
+                                                <connections>
+                                                    <action selector="btnEditCheckoutToChooseFriend:" destination="JEb-Gy-hD1" eventType="touchUpInside" id="37X-0d-0PS"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="250" id="Q0C-zA-fi6"/>
+                                            <constraint firstAttribute="height" constant="150" id="XzP-yg-Le9"/>
                                         </constraints>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sh0-5l-yS0">
-                                        <rect key="frame" x="0.0" y="145" width="104" height="5"/>
-                                        <state key="normal" title="Choose Person"/>
-                                        <connections>
-                                            <action selector="btnEditCheckoutToChooseFriend:" destination="JEb-Gy-hD1" eventType="touchUpInside" id="37X-0d-0PS"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="akm-pB-H9N" userLabel="Payment Method Stack">
+                                        <rect key="frame" x="0.0" y="158.5" width="335" height="150"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment Method" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="a6g-WJ-bxo">
+                                                <rect key="frame" x="0.0" y="0.0" width="152" height="50"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Card ending in digit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SuT-AB-KwU">
+                                                <rect key="frame" x="0.0" y="50" width="146" height="50"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
+                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R8l-IA-vIp">
+                                                <rect key="frame" x="0.0" y="100" width="192" height="50"/>
+                                                <state key="normal" title="Add a new payment method"/>
+                                                <connections>
+                                                    <action selector="btnAddNewPaymentMethod:" destination="JEb-Gy-hD1" eventType="touchUpInside" id="6rd-wM-pi5"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="QLD-yf-dG7" userLabel="Select Address Stack">
+                                        <rect key="frame" x="0.0" y="317" width="335" height="150"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="LiH-DW-3V4">
+                                                <rect key="frame" x="0.0" y="0.0" width="133.5" height="50"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r96-W3-QY1">
+                                                <rect key="frame" x="0.0" y="50" width="62.5" height="50"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
+                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Kj-x0-tcT">
+                                                <rect key="frame" x="0.0" y="100" width="159" height="50"/>
+                                                <state key="normal" title="Select existing address"/>
+                                                <connections>
+                                                    <action selector="btnSelectExistingAddress:" destination="JEb-Gy-hD1" eventType="touchUpInside" id="v6a-OC-WnL"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="XzP-yg-Le9"/>
+                                    <constraint firstItem="QLD-yf-dG7" firstAttribute="width" secondItem="Wsp-0n-pJG" secondAttribute="width" id="DpL-Gu-Oiq"/>
+                                    <constraint firstAttribute="trailing" secondItem="Wsp-0n-pJG" secondAttribute="trailing" id="MUk-1P-Zfq"/>
+                                    <constraint firstAttribute="trailing" secondItem="QLD-yf-dG7" secondAttribute="trailing" id="RHy-7w-qRv"/>
+                                    <constraint firstAttribute="trailing" secondItem="akm-pB-H9N" secondAttribute="trailing" id="Vi4-5n-5vn"/>
+                                    <constraint firstItem="QLD-yf-dG7" firstAttribute="height" secondItem="Wsp-0n-pJG" secondAttribute="height" id="XTL-Oe-dUj"/>
+                                    <constraint firstItem="akm-pB-H9N" firstAttribute="height" secondItem="Wsp-0n-pJG" secondAttribute="height" id="h3P-ly-HBB"/>
+                                    <constraint firstItem="akm-pB-H9N" firstAttribute="width" secondItem="Wsp-0n-pJG" secondAttribute="width" id="zGR-Uf-mmy"/>
                                 </constraints>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="akm-pB-H9N" userLabel="Payment Method Stack">
-                                <rect key="frame" x="16" y="311" width="192" height="73.5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Payment Method" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="a6g-WJ-bxo">
-                                        <rect key="frame" x="0.0" y="0.0" width="152" height="23.5"/>
-                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Card ending in digit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SuT-AB-KwU">
-                                        <rect key="frame" x="0.0" y="23.5" width="146" height="20"/>
-                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
-                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R8l-IA-vIp">
-                                        <rect key="frame" x="0.0" y="43.5" width="192" height="30"/>
-                                        <state key="normal" title="Add a new payment method"/>
-                                        <connections>
-                                            <action selector="btnAddNewPaymentMethod:" destination="JEb-Gy-hD1" eventType="touchUpInside" id="6rd-wM-pi5"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="QLD-yf-dG7" userLabel="Select Address Stack">
-                                <rect key="frame" x="16" y="415" width="159" height="73.5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Select Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="LiH-DW-3V4">
-                                        <rect key="frame" x="0.0" y="0.0" width="133.5" height="23.5"/>
-                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r96-W3-QY1">
-                                        <rect key="frame" x="0.0" y="23.5" width="62.5" height="20"/>
-                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
-                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Kj-x0-tcT">
-                                        <rect key="frame" x="0.0" y="43.5" width="159" height="30"/>
-                                        <state key="normal" title="Select existing address"/>
-                                        <connections>
-                                            <action selector="btnSelectExistingAddress:" destination="JEb-Gy-hD1" eventType="touchUpInside" id="v6a-OC-WnL"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sc9-ja-jfC" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
                                 <rect key="frame" x="16" y="611" width="343" height="46"/>
@@ -2333,16 +2345,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Wsp-0n-pJG" firstAttribute="top" secondItem="VLP-AE-vau" secondAttribute="bottom" constant="20" id="Aiu-HS-jL3"/>
+                            <constraint firstItem="sc9-ja-jfC" firstAttribute="top" secondItem="0x7-4H-RRO" secondAttribute="bottom" constant="20" id="CZj-vY-wq4"/>
                             <constraint firstItem="VLP-AE-vau" firstAttribute="top" secondItem="RMT-pi-dw0" secondAttribute="top" id="DgB-Dm-N3F"/>
-                            <constraint firstItem="VLP-AE-vau" firstAttribute="centerX" secondItem="Wsp-0n-pJG" secondAttribute="centerX" id="Kbo-sB-Mx6"/>
+                            <constraint firstItem="VLP-AE-vau" firstAttribute="centerX" secondItem="0x7-4H-RRO" secondAttribute="centerX" id="Gas-vp-pRA"/>
                             <constraint firstItem="sc9-ja-jfC" firstAttribute="trailing" secondItem="RMT-pi-dw0" secondAttribute="trailingMargin" id="YhO-CN-e7x"/>
                             <constraint firstItem="sc9-ja-jfC" firstAttribute="leading" secondItem="RMT-pi-dw0" secondAttribute="leadingMargin" id="bOy-oN-9sN"/>
                             <constraint firstItem="sc9-ja-jfC" firstAttribute="bottom" secondItem="9zd-Eq-ArB" secondAttribute="bottom" constant="-10" id="bno-sF-eiu"/>
-                            <constraint firstItem="sc9-ja-jfC" firstAttribute="trailing" secondItem="Wsp-0n-pJG" secondAttribute="trailing" id="dQi-8d-Pl7"/>
+                            <constraint firstItem="9zd-Eq-ArB" firstAttribute="trailing" secondItem="0x7-4H-RRO" secondAttribute="trailing" constant="20" id="eLQ-bu-BnT"/>
                             <constraint firstItem="VuK-Bg-WSG" firstAttribute="top" secondItem="9zd-Eq-ArB" secondAttribute="top" constant="5" id="fDY-xZ-5Bn"/>
                             <constraint firstItem="VLP-AE-vau" firstAttribute="leading" secondItem="RMT-pi-dw0" secondAttribute="leading" id="fi7-9x-tff"/>
-                            <constraint firstItem="Wsp-0n-pJG" firstAttribute="leading" secondItem="sc9-ja-jfC" secondAttribute="leading" id="ykz-Sb-s7D"/>
+                            <constraint firstItem="0x7-4H-RRO" firstAttribute="leading" secondItem="9zd-Eq-ArB" secondAttribute="leading" constant="20" id="nna-aj-zvH"/>
+                            <constraint firstItem="0x7-4H-RRO" firstAttribute="top" secondItem="VLP-AE-vau" secondAttribute="bottom" constant="20" id="nwx-Mh-OWB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9zd-Eq-ArB"/>
                     </view>
@@ -2375,7 +2388,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ESz-AJ-FsE"/>
-        <segue reference="kcf-T7-nAo"/>
+        <segue reference="eNC-Nf-pOF"/>
         <segue reference="2rk-ch-wix"/>
         <segue reference="wfB-se-wui"/>
     </inferredMetricsTieBreakers>

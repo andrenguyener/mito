@@ -230,10 +230,8 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         Alamofire.request("https://api.projectmito.io/v1/users/validate", method: .post, parameters: parameters, encoding: JSONEncoding.default).validate().responseJSON { response in
             switch response.result {
             case .success:
-                if let dictionary = response.result.value {
-                    print("JSON: \(dictionary)") // serialized json response
+                if response.result.value != nil {
                     self.performSegue(withIdentifier: "signUpToAddress", sender: self)
-                    
                 }
 
             case .failure(let error):
