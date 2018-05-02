@@ -33,10 +33,7 @@ class PeopleDetailsViewController: UIViewController {
         lblName.text = "\(friend.firstName) \(friend.lastName)"
         lblUsername.text = "@\(friend.strUsername)"
         btnNumFriends.setTitle("\(friend.intNumFriends) friends", for: .normal)
-        let url = URL(string:"\(friend.avatar)")
-        if let data = try? Data(contentsOf: url!) {
-            img.image = UIImage(data: data)!
-        }
+        appdata.fnDisplaySimpleImage(strImageURL: friend.avatar, img: img)
     }
 
     @IBAction func fnAddFriend(_ sender: Any) {

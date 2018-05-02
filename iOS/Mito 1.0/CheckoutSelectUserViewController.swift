@@ -67,15 +67,11 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tblviewAddress != nil {
             appdata.address = appdata.arrCurrUserAddresses[indexPath.row]
-//            _ = navigationController?.popViewController(animated: true)
             if boolSender {
                 performSegue(withIdentifier: "ChooseAddressToCheckout", sender: self)
             } else {
                 let package = appdata.arrCurrUserPackages[intOrderID]
                 appdata.address = appdata.arrCurrUserAddresses[indexPath.row]
-                print("Sender ID: \(package.intSenderID)")
-                print("Order ID: \(package.intOrderID)")
-                print("Address: \(appdata.arrCurrUserAddresses[indexPath.row].strAddressAlias)")
                 fnAcceptOrDeclinePackage(response: "Accepted", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[indexPath.row].intAddressID)
                 performSegue(withIdentifier: "CompleteChooseReceivingAddress", sender: self)
             }
@@ -130,13 +126,14 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
             tblviewAddress.rowHeight = 106
         } else if lblRecipient != nil {
             lblRecipient.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
-            let urlPersonImage = URL(string: "\(appdata.personRecipient.avatar)")
-            let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
-            if let data = try? Data(contentsOf: urlPersonImage!) {
-                imgRecipientImage.image = UIImage(data: data)!
-            } else if let data = try? Data(contentsOf: defaultURL!){
-                imgRecipientImage.image = UIImage(data: data)
-            }
+            appdata.fnDisplaySimpleImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipientImage)
+//            let urlPersonImage = URL(string: "\(appdata.personRecipient.avatar)")
+//            let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
+//            if let data = try? Data(contentsOf: urlPersonImage!) {
+//                imgRecipientImage.image = UIImage(data: data)!
+//            } else if let data = try? Data(contentsOf: defaultURL!){
+//                imgRecipientImage.image = UIImage(data: data)
+//            }
             lblAddressNickname.text = appdata.address.strAddressAlias
         }
     }

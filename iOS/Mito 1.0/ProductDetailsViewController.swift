@@ -17,14 +17,10 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("i added item to cart")
         pickerviewQuantity.isHidden = true
         pickerviewQuantity.delegate = self
         pickerviewQuantity.dataSource = self
-        let url = URL(string: "\(appdata.arrProductSearchResults[appdata.intCurrIndex].image)")
-        if let data = try? Data(contentsOf: url!) {
-            prodImage.image = UIImage(data: data)!
-        }
+        appdata.fnDisplaySimpleImage(strImageURL: appdata.arrProductSearchResults[appdata.intCurrIndex].image, img: prodImage)
         prodTitle.text = appdata.arrProductSearchResults[appdata.intCurrIndex].title
         prodPub.text = appdata.arrProductSearchResults[appdata.intCurrIndex].publisher
         prodPrice.text = appdata.arrProductSearchResults[appdata.intCurrIndex].price

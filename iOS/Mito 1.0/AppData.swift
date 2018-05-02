@@ -189,4 +189,14 @@ class AppData: NSObject {
         alertController.addAction(defaultAction)
         return alertController
     }
+    
+    open func fnDisplaySimpleImage(strImageURL: String, img: UIImageView) {
+        let urlImage = URL(string:"\(strImageURL)")
+        let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
+        if let data = try? Data(contentsOf: urlImage!) {
+            img.image = UIImage(data: data)!
+        } else if let data = try? Data(contentsOf: defaultURL!){
+            img.image = UIImage(data: data)
+        }
+    }
 }
