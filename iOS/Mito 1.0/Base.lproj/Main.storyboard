@@ -267,11 +267,6 @@
                             <constraint firstItem="CWB-eH-sni" firstAttribute="bottom" secondItem="zyl-dg-pJg" secondAttribute="bottom" id="w1q-tq-lfM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zyl-dg-pJg"/>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="r68-ot-V1i"/>
-                            </mask>
-                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Notification" image="Notification Icon" id="y7E-EB-PS0">
                         <color key="badgeColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

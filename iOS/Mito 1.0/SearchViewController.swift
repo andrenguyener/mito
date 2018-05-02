@@ -62,6 +62,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         productTableView.dataSource = self
         productTableView.rowHeight = 106
         
+        peopleTableView.keyboardDismissMode = .onDrag //UIScrollViewKeyboardDismissMode.interactive
+        
         if peopleTableView == nil {
             swirlSearchImg.isHidden = false
         }
