@@ -196,6 +196,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var userEmailSU: UITextField!
     
     @IBOutlet weak var signupScrollView: UIScrollView!
+    @IBOutlet weak var addressScrollView: UIScrollView!
     
     var strMonth = ""
     var strDay = ""
@@ -384,7 +385,12 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             pickerviewStateAA.dataSource = self
         }
         super.viewDidLoad()
-        
+        if signupScrollView != nil {
+            signupScrollView.keyboardDismissMode = .onDrag
+        }
+        if addressScrollView != nil {
+            addressScrollView.keyboardDismissMode = .onDrag
+        }
         self.hideKeyboard()
     }
     
