@@ -40,8 +40,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
 
     @IBOutlet weak var tableView: UITableView!
-    var peopleUrl = URL(string: "https://api.projectmito.io/v1/friend/")
-    var urlPeopleCall = URL(string: "https://api.projectmito.io/v1/friend/")
     var appdata = AppData.shared
     var socket: WebSocket!
     override func viewDidLoad() {
@@ -51,14 +49,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.rowHeight = 133
         
         let userURL = "https://api.projectmito.io/v1/friend/\(appdata.intCurrentUserID)"
-//        print("userURL: \(userURL)")
-        peopleUrl = URL(string: userURL)
-//        loadPeopleData()
         print("Authorization: \(String(describing: UserDefaults.standard.object(forKey: "Authorization")))")
         let authToken = UserDefaults.standard.object(forKey: "Authorization") as! String
         self.fnLoadCurrUserAddresses()
-//        self.fnLoadFriendData()
-//        self.fnLoadAllUsers()
 
 //        var request = URLRequest(url: URL(string: "wss://api.projectmito.io/v1/ws?auth=\(String(describing: UserDefaults.standard.object(forKey: "Authorization")))")!)
         var urlWebsocket = "wss://api.projectmito.io/v1/ws?auth=\(authToken)"

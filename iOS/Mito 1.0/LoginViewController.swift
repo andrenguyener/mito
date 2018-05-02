@@ -89,6 +89,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         }
         monthPicker.selectRow(2, inComponent: 0, animated: false) // Pre-select row not working
         appdata.arrMonths.sort(by: fnSortMonthsByNumber)
+        appdata.arrYears.sort(by: fnSortYearChronologically)
     }
     
     @IBAction func btnSelectBirthdayDone(_ sender: Any) {
@@ -170,6 +171,9 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                             let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
                             self.appdata.intCurrentUserID = (data["userId"] as? Int)!
                         }
+                        let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+                        print("UserInfo: \(data["UserInfo"])")
+                        print("UserID: \(data["userId"])")
                     }
                 }
                 
@@ -184,6 +188,12 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     @IBAction func btnSignUpPressed(_ sender: Any) {
         self.performSegue(withIdentifier: "signup", sender: self)
+        let date = Date()
+        let calendar = Calendar.current
+        let year = calendar.component(.year, from: date)
+        for num in 1850...year {
+            appdata.arrYears.append(String(num))
+        }
         appdata.fnLoadMonthData()
         appdata.fnLoadStateData()
     }
@@ -370,6 +380,10 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     func fnSortStateAlphabetically(this: State, that: State) -> Bool {
         return this.value < that.value
+    }
+    
+    func fnSortYearChronologically(this: String, that: String) -> Bool {
+        return Int(this)! > Int(that)!
     }
     
     var activeTextField: UITextField!

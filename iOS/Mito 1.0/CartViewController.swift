@@ -13,7 +13,6 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var appdata = AppData.shared
     var intLineItemIndex = 0
-    var urlAddToMitoCart = URL(string: "https://api.projectmito.io/v1/cart")
 
     @IBAction func btnOrderSummaryToEditCheckout(_ sender: Any) {
         performSegue(withIdentifier: "orderSummaryToEditCheckout", sender: self)
@@ -49,6 +48,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
+        let urlAddToMitoCart = URL(string: "https://api.projectmito.io/v1/cart")
         Alamofire.request(urlAddToMitoCart!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
             switch response.result {
             case .success:
@@ -132,13 +132,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
             recipientName.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
             lblCreditCardNumber.text = appdata.strCardNumber
-            let urlPersonImage = URL(string: "\(appdata.personRecipient.avatar)")
-            let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
-            if let data = try? Data(contentsOf: urlPersonImage!) {
-                imgRecipient.image = UIImage(data: data)!
-            } else if let data = try? Data(contentsOf: defaultURL!){
-                imgRecipient.image = UIImage(data: data)
-            }
+            appdata.fnDisplaySimpleImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipient)
         } else if lblNotifyYouMessage != nil {
             lblNotifyYouMessage.text = "We will notify you when \(appdata.personRecipient.firstName) accepts!"
         }
