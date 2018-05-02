@@ -182,4 +182,11 @@ class AppData: NSObject {
             }
         }
     }
+    
+    open func fnDisplayAlert(title: String, message: String) -> UIAlertController {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(defaultAction)
+        return alertController
+    }
 }

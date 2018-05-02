@@ -112,7 +112,8 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
         Alamofire.request(urlAddToMitoCart!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
             switch response.result {
             case .success:
-                self.fnAlertAddedToCart()
+                let alert = self.appdata.fnDisplayAlert(title: "Done!", message: "Added to cart!")
+                self.present(alert, animated: true, completion: nil)
                 if let dictionary = response.result.value {
                     print(dictionary)
                     // Any code for storing locally
@@ -123,14 +124,6 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 print(error)
             }
         }
-    }
-
-    
-    func fnAlertAddedToCart() {
-        let alertController = UIAlertController(title: "Done", message: "Added to cart!", preferredStyle: .alert)
-        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alertController.addAction(defaultAction)
-        present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func backSearch(_ sender: Any) {
