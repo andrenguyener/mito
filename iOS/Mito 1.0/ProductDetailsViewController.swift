@@ -78,6 +78,7 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         lblQuantity.text = appdata.arrQuantity[row]
+        btnQuantity.setTitle("Quantity: \(appdata.arrQuantity[row])", for: .normal)
         pickerviewQuantity.isHidden = true
         btnQuantity.isHidden = false
         lblQuantity.isHidden = false

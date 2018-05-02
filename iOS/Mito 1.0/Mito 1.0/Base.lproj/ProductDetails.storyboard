@@ -86,7 +86,7 @@
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ek-bs-E18">
                                                         <rect key="frame" x="0.0" y="0.0" width="140" height="18"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
-                                                        <state key="normal" title="Quantity"/>
+                                                        <state key="normal" title="Quantity: 1"/>
                                                         <connections>
                                                             <action selector="btnQty:" destination="bBe-HJ-G2Q" eventType="touchUpInside" id="PT8-YY-nGk"/>
                                                             <action selector="btnQuantityPressed:" destination="iOa-rf-R6J" eventType="touchUpInside" id="z1t-8B-CBQ"/>
