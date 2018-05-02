@@ -14,11 +14,25 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
     @IBOutlet weak var tblviewPeople: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
+    @IBOutlet weak var tblviewAddress: UITableView!
+    @IBOutlet weak var lblAddressNickname: UILabel!
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tblviewAddress != nil {
+            return self.appdata.arrCurrUserAddresses.count
+        }
         return self.appdata.arrCurrFriendsAndAllMitoUsers[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if tblviewAddress != nil {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "AddressTableViewCell", for: indexPath) as! AddressTableViewCell
+            let objAddress = self.appdata.arrCurrUserAddresses[indexPath.row]
+            cell.strAddressNickname.text = objAddress.strAddressAlias
+            cell.strAddressStreet.text = "\(objAddress.strStreetAddress1) \(objAddress.strStreetAddress2)"
+            cell.strCityStateZIP.text = "\(objAddress.strCityName), \(objAddress.strStateName) \(objAddress.strZipCode)"
+            return cell
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
         let objPerson = self.appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
         let urlPeopleImage = URL(string:"\(objPerson.avatar)")
@@ -35,16 +49,31 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if tblviewAddress != nil {
+            return "Addresses"
+        }
         return self.appdata.arrSections[section]
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        if tblviewAddress != nil {
+            return 1
+        }
         return self.appdata.arrCurrFriendsAndAllMitoUsers.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        appdata.personRecipient = appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
-        performSegue(withIdentifier: "choosePersonToEditCheckout", sender: self)
+        if tblviewAddress != nil {
+            print(appdata.arrCurrUserAddresses.count)
+            print(appdata.arrCurrUserAddresses[indexPath.row].strCityName)
+            print(appdata.arrCurrUserAddresses[indexPath.row].strAddressAlias)
+            appdata.address = appdata.arrCurrUserAddresses[indexPath.row]
+//            _ = navigationController?.popViewController(animated: true)
+            performSegue(withIdentifier: "ChooseAddressToCheckout", sender: self)
+        } else {
+            appdata.personRecipient = appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
+            performSegue(withIdentifier: "choosePersonToEditCheckout", sender: self)
+        }
     }
     
     var appdata = AppData.shared
@@ -59,6 +88,10 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
             tblviewPeople.rowHeight = 106
             searchBar.delegate = self
             appdata.fnLoadFriendsAndAllUsers(tableview: tblviewPeople)
+        } else if tblviewAddress != nil {
+            tblviewAddress.delegate = self
+            tblviewAddress.dataSource = self
+            tblviewAddress.rowHeight = 106
         } else if lblRecipient != nil {
             lblRecipient.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
             let urlPersonImage = URL(string: "\(appdata.personRecipient.avatar)")
@@ -68,6 +101,7 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
             } else if let data = try? Data(contentsOf: defaultURL!){
                 imgRecipientImage.image = UIImage(data: data)
             }
+            lblAddressNickname.text = appdata.address.strAddressAlias
         }
     }
     
@@ -131,6 +165,9 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
         performSegue(withIdentifier: "editCheckoutToPaymentMethod", sender: self)
     }
     
+    @IBAction func btnSelectExistingAddress(_ sender: Any) {
+        performSegue(withIdentifier: "editCheckoutToChooseAddress", sender: self)
+    }
     
     @IBAction func btnChoosePersonToEditCheckout(_ sender: Any) {
         performSegue(withIdentifier: "choosePersonToEditCheckout", sender: self)

@@ -15,6 +15,7 @@ class AppData: NSObject {
     open var intCurrIndex: Int = -1
     open var strCardNumber = ""
     open var personRecipient: Person = Person(firstName: "FName", lastName: "LName", email: "", avatar: "dd", intUserID: 0, strUsername: "", intNumFriends: 0)
+    open var address: Address = Address(intAddressID: 0, strAddressAlias: "Fake", strCityName: "", strStateName: "", strStreetAddress1: "", strStreetAddress2: "", strZipCode: "")
     
     open var arrFriends: [Person] = []
     open var arrCurrFriends: [Person] = []

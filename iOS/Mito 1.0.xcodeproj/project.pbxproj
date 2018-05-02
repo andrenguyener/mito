@@ -82,6 +82,7 @@
 		DA5D683E2058A45F00E86BE8 /* ProductDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA5D683C2058A45F00E86BE8 /* ProductDetails.storyboard */; };
 		DA625E8B2088FEC30068F319 /* PackageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA625E8A2088FEC30068F319 /* PackageTableViewCell.swift */; };
 		DA6CB7F22064E9B700962814 /* Back.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6CB7F12064E9B700962814 /* Back.png */; };
+		DAA9075E209963C400F151E1 /* AddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA9075D209963C400F151E1 /* AddressTableViewCell.swift */; };
 		DAC178BC2088240F0039AA08 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC178BB2088240F0039AA08 /* Address.swift */; };
 		DAC178BE2088385A0039AA08 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC178BD2088385A0039AA08 /* Package.swift */; };
 		DACCDE29206057C500CD59D9 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACCDE28206057C500CD59D9 /* State.swift */; };
@@ -197,6 +198,7 @@
 		DA5D683D2058A45F00E86BE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Mito 1.0/Base.lproj/ProductDetails.storyboard"; sourceTree = "<group>"; };
 		DA625E8A2088FEC30068F319 /* PackageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageTableViewCell.swift; sourceTree = "<group>"; };
 		DA6CB7F12064E9B700962814 /* Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Back.png; sourceTree = "<group>"; };
+		DAA9075D209963C400F151E1 /* AddressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressTableViewCell.swift; sourceTree = "<group>"; };
 		DAC178BB2088240F0039AA08 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		DAC178BD2088385A0039AA08 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		DACCDE28206057C500CD59D9 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 				B272DC272043BA8700EE2121 /* Icon */,
 				B272D8FE2077646A00E53276 /* Mito Text Design */,
 				DAC178BB2088240F0039AA08 /* Address.swift */,
+				DAA9075D209963C400F151E1 /* AddressTableViewCell.swift */,
 				B272DC2D2043BBE400EE2121 /* AppData.swift */,
 				B29AEC61203FC9C100110EF9 /* AppDelegate.swift */,
 				B247196F20454733006CF6C2 /* CartTableViewCell.swift */,
@@ -675,6 +678,7 @@
 				DA42CC0A2064909900900C7D /* LineItem.swift in Sources */,
 				B2471994204672DE006CF6C2 /* NotificationViewController.swift in Sources */,
 				DA27C21A2043550A00CCFD60 /* HomeTableViewCell.swift in Sources */,
+				DAA9075E209963C400F151E1 /* AddressTableViewCell.swift in Sources */,
 				B298CB012084607900EED243 /* RoundedButton.swift in Sources */,
 				DAD995312042386E007A7687 /* SearchViewController.swift in Sources */,
 				DA49F1DB2055EF9E0018ABA4 /* ProductViewController.swift in Sources */,

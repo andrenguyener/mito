@@ -227,7 +227,8 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         let urlCheckoutMitoCart = URL(string: "https://api.projectmito.io/v1/cart/process")
         let parameters: Parameters = [
             "cardId": 1,
-            "senderAddressId": appdata.arrCurrUserAddresses[0].intAddressID,
+            "senderAddressId": appdata.address.intAddressIDer
+            ,
             "recipientId": appdata.personRecipient.intUserID,
             "message": "First Checkout",
             "giftOption": 1
