@@ -41,7 +41,9 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         let parameters: Parameters = [
             "amazonASIN": appdata.arrCartLineItems[objIndex].objProduct.ASIN,
             "amazonPrice": appdata.arrCartLineItems[objIndex].objProduct.price,
-            "quantity": intNewQuantity
+            "quantity": intNewQuantity,
+            "productImageUrl": appdata.arrCartLineItems[objIndex].objProduct.image,
+            "productName": appdata.arrCartLineItems[objIndex].objProduct.title
         ]
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
@@ -151,7 +153,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             let itemPrice = "$" + element.objProduct.price // change later
             formatter.numberStyle = .currency
             formatter.locale = Locale(identifier: "en_US")
-            var decAmazonPrice: Decimal = 0.0
+            var decAmazonPrice: Decimal = 0.00
             if let number = formatter.number(from: itemPrice) {
                 decAmazonPrice = number.decimalValue
                 let totalAmt = decAmazonPrice * (Decimal)(element.intQuantity)
@@ -191,7 +193,9 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
                     let arrCartItems = dictionary as! NSArray
                     for objCartItem in arrCartItems {
                         let dictCartItem = objCartItem as! NSDictionary
+                        print(dictCartItem)
                         let objectItem = Product(image: dictCartItem["ProductImageUrl"] as! String, ASIN: dictCartItem["AmazonItemId"] as! String, title: dictCartItem["ProductName"] as! String, publisher: "publisher", price: String(dictCartItem["AmazonItemPrice"] as! Double), description: "description")
+                        print("AmazonItemPrice: \(objectItem.price)")
                         let intQuantity = dictCartItem["Quantity"] as! Int
                         let lineItem = LineItem(objProduct: objectItem, intQty: intQuantity)
                         print(objectItem.values())

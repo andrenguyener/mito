@@ -55,6 +55,7 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
             self.userLname.text = data["userLname"] as? String
             self.userDOB.text = data["userDOB"] as? String
             self.photoURL.text = data["photoURL"] as? String
+            print(data["userId"] as? String)
         }
     }
     
