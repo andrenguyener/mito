@@ -1748,6 +1748,9 @@
                                 <rect key="frame" x="66" y="528" width="49" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Accept"/>
+                                <connections>
+                                    <action selector="btnAcceptAndChooseReceivingAddress:" destination="klr-lX-eU9" eventType="touchUpInside" id="Ocr-hg-N51"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4eM-pX-URR">
                                 <rect key="frame" x="266" y="528" width="36" height="30"/>
@@ -1784,6 +1787,7 @@
                         <outlet property="imgSender" destination="lot-L2-wzT" id="jMT-kL-xb2"/>
                         <outlet property="strPackageSenderName" destination="Uif-5A-U2x" id="dWt-AA-W7h"/>
                         <segue destination="5ev-RP-TnR" kind="show" identifier="PackageDetailsBackToNotification" id="7Hd-YA-ayo"/>
+                        <segue destination="y1B-fc-fA5" kind="show" identifier="PackageToChooseReceivingAddress" id="kcf-T7-nAo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y09-FO-Wo6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2183,11 +2187,12 @@
                     <connections>
                         <outlet property="tblviewAddress" destination="JiR-sN-ga8" id="z3Q-wZ-O61"/>
                         <segue destination="JEb-Gy-hD1" kind="show" identifier="ChooseAddressToCheckout" id="ESz-AJ-FsE"/>
+                        <segue destination="5ev-RP-TnR" kind="show" identifier="CompleteChooseReceivingAddress" id="2rk-ch-wix"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9OU-am-Tho" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4607" y="1052"/>
+            <point key="canvasLocation" x="4782" y="1201"/>
         </scene>
         <!--Checkout-->
         <scene sceneID="zv4-1b-Ig8">
@@ -2375,7 +2380,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ESz-AJ-FsE"/>
-        <segue reference="7Hd-YA-ayo"/>
+        <segue reference="kcf-T7-nAo"/>
+        <segue reference="2rk-ch-wix"/>
         <segue reference="wfB-se-wui"/>
     </inferredMetricsTieBreakers>
 </document>

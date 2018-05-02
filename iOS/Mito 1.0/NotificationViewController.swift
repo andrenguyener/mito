@@ -183,6 +183,10 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         performSegue(withIdentifier: "PackageDetailsBackToNotification", sender: self)
     }
     
+    @IBAction func btnAcceptAndChooseReceivingAddress(_ sender: Any) {
+        boolSender = false
+        performSegue(withIdentifier: "PackageToChooseReceivingAddress", sender: self)
+    }    
     
     func fnAcceptOrDeclinePackage(response: String, senderId: Int, orderId: Int, shippingAddressId: Int) {
         let urlAcceptOrDeclinePackage = URL(string: "https://api.projectmito.io/v1/package/")

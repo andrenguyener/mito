@@ -66,15 +66,48 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tblviewAddress != nil {
-            print(appdata.arrCurrUserAddresses.count)
-            print(appdata.arrCurrUserAddresses[indexPath.row].strCityName)
-            print(appdata.arrCurrUserAddresses[indexPath.row].strAddressAlias)
             appdata.address = appdata.arrCurrUserAddresses[indexPath.row]
 //            _ = navigationController?.popViewController(animated: true)
-            performSegue(withIdentifier: "ChooseAddressToCheckout", sender: self)
+            if boolSender {
+                performSegue(withIdentifier: "ChooseAddressToCheckout", sender: self)
+            } else {
+                let package = appdata.arrCurrUserPackages[intOrderID]
+                appdata.address = appdata.arrCurrUserAddresses[indexPath.row]
+                print("Sender ID: \(package.intSenderID)")
+                print("Order ID: \(package.intOrderID)")
+                print("Address: \(appdata.arrCurrUserAddresses[indexPath.row].strAddressAlias)")
+                fnAcceptOrDeclinePackage(response: "Accepted", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[indexPath.row].intAddressID)
+                performSegue(withIdentifier: "CompleteChooseReceivingAddress", sender: self)
+            }
         } else {
             appdata.personRecipient = appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
             performSegue(withIdentifier: "choosePersonToEditCheckout", sender: self)
+        }
+    }
+    
+    func fnAcceptOrDeclinePackage(response: String, senderId: Int, orderId: Int, shippingAddressId: Int) {
+        let urlAcceptOrDeclinePackage = URL(string: "https://api.projectmito.io/v1/package/")
+        let parameters: Parameters = [
+            "senderId": senderId,
+            "orderId": orderId,
+            "response": response,
+            "shippingAddressId": shippingAddressId
+        ]
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlAcceptOrDeclinePackage!, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    print(dictionary)
+                    print("\(response): Successful")
+                }
+                
+            case .failure(let error):
+                print("Accept or decline package error")
+                print(error)
+            }
         }
     }
     
