@@ -82,9 +82,9 @@ AS
 			RETURN
 		END
 
-EXEC sp_rename 'UpdateUserDefaultAddress', 'uspUpdateUserDefaultAddress'
+EXEC sp_rename 'uspUpdateUserDefaultAddress', 'uspcUpdateUserDefaultAddress'
 
 --testing code
-EXEC uspUpdateUserDefaultAddress 7,7
+EXEC uspcUpdateUserDefaultAddress 7,7
 SELECT * FROM USER_ADDRESS
 
