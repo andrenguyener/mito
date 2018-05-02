@@ -174,10 +174,18 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                 }
                 
             case .failure(let error):
+                self.fnIncorrectLogin()
                 print(error)
             }
         }
 
+    }
+    
+    func fnIncorrectLogin() {
+        let alertController = UIAlertController(title: "Whoops!", message: "Incorrect email or password", preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(defaultAction)
+        present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func btnSignUpPressed(_ sender: Any) {
