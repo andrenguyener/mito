@@ -12,7 +12,7 @@ import Alamofire
 class CartViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
     var appdata = AppData.shared
-    var objCartItem = 0
+    var intLineItemIndex = 0
     var urlAddToMitoCart = URL(string: "https://api.projectmito.io/v1/cart")
 
     @IBAction func btnOrderSummaryToEditCheckout(_ sender: Any) {
@@ -34,16 +34,17 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         pickerviewEditQuantity.isHidden = true
         let intNewQuantity = Int(appdata.arrQuantity[row])!
-        fnUpdateLineItemQuantity(objIndex: objCartItem, intNewQuantity: intNewQuantity)
+        fnUpdateLineItemQuantity(intCartItemIndex: intLineItemIndex, intNewQuantity: intNewQuantity)
     }
     
-    func fnUpdateLineItemQuantity(objIndex: Int, intNewQuantity: Int) {
+    func fnUpdateLineItemQuantity(intCartItemIndex: Int, intNewQuantity: Int) {
+        let objCartLineItem = appdata.arrCartLineItems[intCartItemIndex]
         let parameters: Parameters = [
-            "amazonASIN": appdata.arrCartLineItems[objIndex].objProduct.ASIN,
-            "amazonPrice": appdata.arrCartLineItems[objIndex].objProduct.price,
+            "amazonASIN": objCartLineItem.objProduct.ASIN,
+            "amazonPrice": objCartLineItem.objProduct.price,
             "quantity": intNewQuantity,
-            "productImageUrl": appdata.arrCartLineItems[objIndex].objProduct.image,
-            "productName": appdata.arrCartLineItems[objIndex].objProduct.title
+            "productImageUrl": objCartLineItem.objProduct.image,
+            "productName": objCartLineItem.objProduct.title
         ]
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
@@ -301,51 +302,13 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @objc func fnRemoveItem(_ button: UIButton) {
-        print(button.tag)
         let intLineItemIndex = button.tag
-        fnMakeCallToRemoveItem(intLineItemIndex: intLineItemIndex)
+        fnUpdateLineItemQuantity(intCartItemIndex: intLineItemIndex, intNewQuantity: 0)
         appdata.arrCartLineItems.remove(at: intLineItemIndex)
     }
     
     @objc func fnEditQuantity(_ button: UIButton) {
         pickerviewEditQuantity.isHidden = false
-        print("Button Tag: \(button.tag)")
-        objCartItem = button.tag
+        intLineItemIndex = button.tag
     }
-    
-    func fnMakeCallToRemoveItem(intLineItemIndex: Int) {
-        let objCurrentProduct = appdata.arrCartLineItems[intLineItemIndex].objProduct
-        print(objCurrentProduct.values())
-        var intAmazonPrice : Decimal = 0.00
-        let itemPrice = objCurrentProduct.price // change later
-        if let number = formatter.number(from: itemPrice) {
-            intAmazonPrice = number.decimalValue
-        }
-        let parameters: Parameters = [
-            "amazonASIN": objCurrentProduct.ASIN,
-            "amazonPrice": intAmazonPrice,
-            "quantity": 0
-        ]
-        let headers: HTTPHeaders = [
-            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
-        ]
-        Alamofire.request(urlAlterMitoCart!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
-            switch response.result {
-            case .success:
-                if let dictionary = response.result.value {
-                    print(dictionary)
-                    DispatchQueue.main.async {
-                        self.cartTableView.reloadData()
-                    }
-                    // Any code for storing locally
-                }
-                
-            case .failure(let error):
-                print("Product could not be added to cart")
-                print(error)
-            }
-        }
-    }
-
-    
 }
