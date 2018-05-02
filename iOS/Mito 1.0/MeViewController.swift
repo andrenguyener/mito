@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import CoreGraphics
 
 class MeViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     var appdata = AppData.shared
@@ -68,15 +69,24 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
         image.delegate = self
         image.sourceType = UIImagePickerControllerSourceType.photoLibrary
         image.allowsEditing = false
-        self.present(image, animated: true) {
-            
-        }
+        self.present(image, animated: true)
+    }
+    
+    func fnCropImage(image: UIImage) -> CGImage {
+        let crop = CGRect(x: image.size.width / 2, y: image.size.height / 2, width: 200, height: 200)
+        let imageRef = CGImage.cropping(image.cgImage!)
+        var imageRef2 = image.cgImage!.cropping(to: crop)
+//        let imageRef = CGImageCreateWithImageInRect(image as! CGImage, crop)
+//        let image2 = image.cropp //CGImageCreateWithImageInRect(image, crop)
+        return imageRef2!
+        
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        if var image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             print(image)
-            imgProfilePic.image = image
+            let cgImage = fnCropImage(image: image)
+            imgProfilePic.image = UIImage(cgImage: cgImage)
         } else {
             print("Error")
         }
