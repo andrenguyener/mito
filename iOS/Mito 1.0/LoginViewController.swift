@@ -12,16 +12,7 @@ import Alamofire
 
 class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
-    // Error-Handling
-    // Name constraints?
-    // username should throw error if username is already taken, green checkmark if valid?
     // http://uigarage.net/wp-content/uploads/2016/10/2016-09-10-12.00.44.png
-    // two passwords must be equal
-    // send email to verify real email, code to determine if email is valid
-    // State dropdown
-    // Verify real address before continuing?
-    
-    // Error Validation
     
     @IBAction func textFieldPasswordChecker(_ sender: Any) {
         if fnPasswordLessThanSixCharacters(text: passwordSU.text!) {
@@ -192,12 +183,10 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         let calendar = Calendar.current
         let year = calendar.component(.year, from: date)
         appdata.arrYears.removeAll()
-        for num in 1850...year {
+        for num in 1900...year {
             appdata.arrYears.append(String(num))
         }
         appdata.arrMonths.removeAll()
-//        appdata.arrDays.removeAll()
-//        appdata.arrYears.removeAll()
         appdata.arrStates.removeAll()
         appdata.fnLoadMonthData()
         appdata.fnLoadStateData()
@@ -251,7 +240,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
 
             case .failure(let error):
                 if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-                    print("Data: \(utf8Text)") // original server data as UTF8 string
                     if utf8Text.contains("username") {
                         self.usernameSU.textColor = UIColor.red
                     } else if utf8Text.contains("email") {
@@ -269,7 +257,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var address1AA: UITextField!
     @IBOutlet weak var address2AA: UITextField!
     @IBOutlet weak var cityAA: UITextField!
-    @IBOutlet weak var stateAA: UITextField! // can't figure out what this is
+    @IBOutlet weak var stateAA: UITextField!
     @IBOutlet weak var zipcodeAA: UITextField!
     @IBOutlet weak var pickerviewStateAA: UIPickerView!
     @IBOutlet weak var btnChooseState: UIButton!
@@ -373,12 +361,8 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         appdata.arrStates.sort(by: fnSortStateAlphabetically)
     }
     
-    
-    
     //////////// Keyboard Functions, Superview ////////
-    
-    
-    
+
     func fnSortMonthsByNumber(this: Month, that: Month) -> Bool {
         return this.intNum < that.intNum
     }
@@ -413,7 +397,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         self.hideKeyboard()
     }
     
-    
     // add textfield as delegate of viewcontroller first
     // Start Editing The Text Field
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -442,8 +425,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
         UIView.commitAnimations()
     }
-    
-    
 }
 
 extension UIViewController {

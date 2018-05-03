@@ -101,7 +101,6 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Number of items: \(intNumItems)")
         if cartTableView != nil {
             pickerviewEditQuantity.dataSource = self
             pickerviewEditQuantity.delegate = self
@@ -188,12 +187,9 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
                     let arrCartItems = dictionary as! NSArray
                     for objCartItem in arrCartItems {
                         let dictCartItem = objCartItem as! NSDictionary
-                        print(dictCartItem)
                         let objectItem = Product(image: dictCartItem["ProductImageUrl"] as! String, ASIN: dictCartItem["AmazonItemId"] as! String, title: dictCartItem["ProductName"] as! String, publisher: "publisher", price: String(dictCartItem["AmazonItemPrice"] as! Double), description: "description")
-                        print("AmazonItemPrice: \(objectItem.price)")
                         let intQuantity = dictCartItem["Quantity"] as! Int
                         let lineItem = LineItem(objProduct: objectItem, intQty: intQuantity)
-                        print(objectItem.values())
                         self.appdata.arrCartLineItems.append(lineItem)
                     }
                     DispatchQueue.main.async {
@@ -215,8 +211,8 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         performSegue(withIdentifier: "cartoEditCheckout", sender: self)
     }
     
-    
     @IBOutlet weak var lblNotifyYouMessage: UILabel!
+    
     @IBAction func finishCheckout(_ sender: Any) {
         self.fnFinishCheckout()
         performSegue(withIdentifier: "checkoutFinish", sender: self)
