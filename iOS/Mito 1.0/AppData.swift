@@ -22,7 +22,7 @@ class AppData: NSObject {
     open var arrAllUsers: [Person] = []
     open var arrCurrAllUsers: [Person] = []
     open var arrPendingFriends: [Person] = []
-    open var arrQuantity = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10+"]
+    open var arrQuantity = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
     open var arrCurrUserAddresses: [Address] = []
     open var arrCurrUserCurrCart: [LineItem] = []
     open var arrCurrUserPackages: [Package] = []
