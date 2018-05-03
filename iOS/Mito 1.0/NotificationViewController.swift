@@ -23,7 +23,8 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var imgSender: UIImageView!
     @IBOutlet weak var strPackageSenderName: UILabel!
     
-    var refresher: UIRefreshControl!
+    var refresherNotification: UIRefreshControl!
+    var refresherPackage: UIRefreshControl!
     
     var urlAcceptFriendRequest = URL(string: "https://api.projectmito.io/v1/friend/request")
     
@@ -52,10 +53,14 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             tblviewPackage.delegate = self
             tblviewPackage.dataSource = self
             tblviewPackage.rowHeight = 100
-            refresher = UIRefreshControl()
-            refresher.attributedTitle = NSAttributedString(string: "Pull to refresh")
-            refresher.addTarget(self, action: #selector(NotificationViewController.fnRefreshData), for: UIControlEvents.valueChanged)
-            tblviewNotification.addSubview(refresher)
+            refresherNotification = UIRefreshControl()
+            refresherNotification.attributedTitle = NSAttributedString(string: "Pull to refresh")
+            refresherNotification.addTarget(self, action: #selector(NotificationViewController.fnRefreshNotifications), for: UIControlEvents.valueChanged)
+            tblviewNotification.addSubview(refresherNotification)
+            refresherPackage = UIRefreshControl()
+            refresherPackage.attributedTitle = NSAttributedString(string: "Pull to refresh")
+            refresherPackage.addTarget(self, action: #selector(NotificationViewController.fnRefreshPackages), for: UIControlEvents.valueChanged)
+            tblviewPackage.addSubview(refresherPackage)
             fnGetPendingPackages()
         } else {
             let objIncomingPackage = appdata.arrCurrUserPackages[intOrderID]
@@ -72,8 +77,12 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
-    @objc func fnRefreshData() {
+    @objc func fnRefreshNotifications() {
         fnGetPendingFriendRequests()
+    }
+    
+    @objc func fnRefreshPackages() {
+        fnGetPendingPackages()
     }
     
     func fnGetOrderDetails() {
@@ -123,6 +132,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                 }
                 DispatchQueue.main.async {
                     self.tblviewPackage.reloadData()
+                    self.refresherPackage.endRefreshing()
                 }
                 
             case .failure(let error):
@@ -157,7 +167,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     print("Pending Friend Requests: \(self.appdata.arrPendingFriends.count)")
                     DispatchQueue.main.async {
                         self.tblviewNotification.reloadData()
-                        self.refresher.endRefreshing()
+                        self.refresherNotification.endRefreshing()
                     }
                 }
                 

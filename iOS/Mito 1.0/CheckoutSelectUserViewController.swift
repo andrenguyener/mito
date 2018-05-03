@@ -73,7 +73,6 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
                 let package = appdata.arrCurrUserPackages[intOrderID]
                 appdata.address = appdata.arrCurrUserAddresses[indexPath.row]
                 fnAcceptOrDeclinePackage(response: "Accepted", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[indexPath.row].intAddressID)
-                performSegue(withIdentifier: "CompleteChooseReceivingAddress", sender: self)
             }
         } else {
             appdata.personRecipient = appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
@@ -98,6 +97,11 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
                 if let dictionary = response.result.value {
                     print(dictionary)
                     print("\(response): Successful")
+                }
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "CompleteChooseReceivingAddress", sender: self)
+                    let alert = self.appdata.fnDisplayAlert(title: "Success", message: "Package accepted!")
+                    self.present(alert, animated: true, completion: nil)
                 }
                 
             case .failure(let error):
