@@ -216,6 +216,8 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     print(dictionary)
                     print("\(response): Successful")
                 }
+                let alert = self.appdata.fnDisplayAlert(title: "Success!", message: "Packaged \(response)")
+                self.present(alert, animated: true, completion: nil)
                 
             case .failure(let error):
                 print("Accept or decline package error")
@@ -250,6 +252,10 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                 if response.result.value != nil {
                    print("Successfully accepted friend request")
                 }
+                if strFriendType == "Friend" {
+                    let alert = self.appdata.fnDisplayAlert(title: "Success!", message: "Friend request accepted")
+                    self.present(alert, animated: true, completion: nil)
+                }
                 DispatchQueue.main.async {
                     self.tblviewNotification.reloadData()
                     self.appdata.arrPendingFriends.removeAll()
@@ -262,33 +268,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             }
         }
     }
-    
-//    func fnDeclineFriendRequest(intUserID: Int) {
-//        let parameters: Parameters = [
-//            "friendId": intUserID,
-//            "friendType": "Unfriend",
-//            "notificationType": "Unfriend"
-//        ]
-//        let headers: HTTPHeaders = [
-//            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
-//        ]
-//        Alamofire.request(urlAcceptFriendRequest!, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
-//            switch response.result {
-//            case .success:
-//                if response.result.value != nil {
-//                    DispatchQueue.main.async {
-//                        self.tblviewNotification.reloadData()
-//                        self.appdata.arrPendingFriends.removeAll()
-//                        self.fnGetPendingFriendRequests()
-//                    }
-//                }
-//
-//            case .failure(let error):
-//                print("Decline friend request error")
-//                print(error)
-//            }
-//        }
-//    }
     
     @objc func btnAcceptPackage(_ button: UIButton) {
         let package = appdata.arrCurrUserPackages[button.tag]
