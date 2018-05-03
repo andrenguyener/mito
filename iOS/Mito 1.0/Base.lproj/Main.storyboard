@@ -624,7 +624,7 @@
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mYM-uR-Wdp" userLabel="Cart">
-                                        <rect key="frame" x="312.5" y="37.5" width="42.5" height="23"/>
+                                        <rect key="frame" x="333" y="37.5" width="22" height="23"/>
                                         <state key="normal" image="Cart Solid White Icon.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -636,7 +636,6 @@
                                 <color key="backgroundColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="mYM-uR-Wdp" secondAttribute="trailing" constant="20" id="2rb-fj-Sl3"/>
-                                    <constraint firstItem="mYM-uR-Wdp" firstAttribute="leading" secondItem="0Bi-17-Cej" secondAttribute="trailing" priority="750" constant="79" id="9JG-ec-3JH"/>
                                     <constraint firstItem="0Bi-17-Cej" firstAttribute="centerX" secondItem="dns-wn-RGZ" secondAttribute="centerX" id="TxN-5Y-MuV"/>
                                     <constraint firstAttribute="height" constant="104" id="gIl-br-JXh"/>
                                     <constraint firstItem="mYM-uR-Wdp" firstAttribute="centerY" secondItem="0Bi-17-Cej" secondAttribute="centerY" id="vJU-Ve-5sQ"/>
@@ -2192,48 +2191,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VLP-AE-vau" userLabel="Green Top Nav">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="104"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GGE-2J-I79">
-                                        <rect key="frame" x="16" y="34" width="48" height="30"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Cancel"/>
-                                        <connections>
-                                            <action selector="btnEditCheckoutToCart:" destination="JEb-Gy-hD1" eventType="touchUpInside" id="W1Y-fh-ewz"/>
-                                        </connections>
-                                    </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mitowhiteonly.png" translatesAutoresizingMaskIntoConstraints="NO" id="VuK-Bg-WSG">
-                                        <rect key="frame" x="141" y="25" width="92" height="48"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="92" id="ChI-0w-qOb"/>
-                                            <constraint firstAttribute="height" constant="48" id="zqD-It-oEd"/>
-                                        </constraints>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="104" id="ANa-yQ-xVw"/>
-                                    <constraint firstItem="VuK-Bg-WSG" firstAttribute="centerX" secondItem="VLP-AE-vau" secondAttribute="centerX" id="FZK-Tp-nje"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="GGE-2J-I79" secondAttribute="trailing" constant="20" symbolic="YES" id="KIE-hO-6xe"/>
-                                    <constraint firstItem="VuK-Bg-WSG" firstAttribute="centerY" secondItem="GGE-2J-I79" secondAttribute="centerY" id="Ox9-H7-mpG"/>
-                                    <constraint firstItem="GGE-2J-I79" firstAttribute="leading" secondItem="VLP-AE-vau" secondAttribute="leading" constant="16" id="lqq-tC-veg"/>
-                                </constraints>
-                            </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="0x7-4H-RRO">
-                                <rect key="frame" x="20" y="124" width="335" height="467"/>
+                                <rect key="frame" x="20" y="162" width="335" height="429"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Wsp-0n-pJG" userLabel="Sender Information Stack">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="150"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="143"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send To" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yPH-nU-KeJ">
-                                                <rect key="frame" x="0.0" y="0.0" width="73" height="19.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="72" height="23"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="4ci-i9-Qen" userLabel="ImageLabelStackView">
-                                                <rect key="frame" x="0.0" y="24.5" width="250" height="115"/>
+                                                <rect key="frame" x="0.0" y="28" width="250" height="115"/>
                                                 <subviews>
                                                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rtm-71-V4I" customClass="RoundedImage" customModule="Mito_1_0" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
@@ -2241,76 +2212,102 @@
                                                             <constraint firstAttribute="height" constant="115" id="l27-fq-AnT"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K4o-T2-a5F">
-                                                        <rect key="frame" x="135" y="47.5" width="115" height="20"/>
-                                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="QYI-xP-xcF">
+                                                        <rect key="frame" x="135" y="27.5" width="115" height="60"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K4o-T2-a5F">
+                                                                <rect key="frame" x="0.0" y="0.0" width="115" height="20"/>
+                                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sh0-5l-yS0" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="30" width="115" height="30"/>
+                                                                <color key="backgroundColor" red="0.5607843137254902" green="0.90196078431372551" blue="0.58431372549019611" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <state key="normal" title="Choose Person"/>
+                                                                <connections>
+                                                                    <action selector="btnEditCheckoutToChooseFriend:" destination="JEb-Gy-hD1" eventType="touchUpInside" id="37X-0d-0PS"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="250" id="Q0C-zA-fi6"/>
                                                 </constraints>
                                             </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sh0-5l-yS0">
-                                                <rect key="frame" x="0.0" y="144.5" width="104" height="5.5"/>
-                                                <state key="normal" title="Choose Person"/>
-                                                <connections>
-                                                    <action selector="btnEditCheckoutToChooseFriend:" destination="JEb-Gy-hD1" eventType="touchUpInside" id="37X-0d-0PS"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="150" id="XzP-yg-Le9"/>
+                                            <constraint firstAttribute="width" secondItem="Wsp-0n-pJG" secondAttribute="height" multiplier="335:143" id="0Se-k2-UWs"/>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" priority="750" constant="150" id="XzP-yg-Le9"/>
                                         </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="akm-pB-H9N" userLabel="Payment Method Stack">
-                                        <rect key="frame" x="0.0" y="158.5" width="335" height="150"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="akm-pB-H9N" userLabel="Payment Method Stack">
+                                        <rect key="frame" x="0.0" y="143" width="335" height="143"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment Method" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="a6g-WJ-bxo">
-                                                <rect key="frame" x="0.0" y="0.0" width="153.5" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="152" height="45.5"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Card ending in digit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SuT-AB-KwU">
-                                                <rect key="frame" x="0.0" y="50" width="149" height="50"/>
+                                                <rect key="frame" x="0.0" y="45.5" width="146" height="67.5"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R8l-IA-vIp">
-                                                <rect key="frame" x="0.0" y="100" width="192" height="50"/>
+                                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R8l-IA-vIp" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="113" width="200" height="30"/>
+                                                <color key="backgroundColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="Rp8-U7-UL1"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="qBT-5H-uGp"/>
+                                                </constraints>
+                                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Add a new payment method"/>
                                                 <connections>
                                                     <action selector="btnAddNewPaymentMethod:" destination="JEb-Gy-hD1" eventType="touchUpInside" id="6rd-wM-pi5"/>
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="akm-pB-H9N" secondAttribute="height" multiplier="335:143" id="Xlo-Bo-0A8"/>
+                                        </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="QLD-yf-dG7" userLabel="Select Address Stack">
-                                        <rect key="frame" x="0.0" y="317" width="335" height="150"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="QLD-yf-dG7" userLabel="Select Address Stack">
+                                        <rect key="frame" x="0.0" y="286" width="335" height="143"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="LiH-DW-3V4">
-                                                <rect key="frame" x="0.0" y="0.0" width="135.5" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="133.5" height="45.5"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r96-W3-QY1">
-                                                <rect key="frame" x="0.0" y="50" width="63" height="50"/>
+                                                <rect key="frame" x="0.0" y="45.5" width="62.5" height="67.5"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Kj-x0-tcT">
-                                                <rect key="frame" x="0.0" y="100" width="159" height="50"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Kj-x0-tcT" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="113" width="200" height="30"/>
+                                                <color key="backgroundColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="Igq-WO-yi6"/>
+                                                    <constraint firstAttribute="height" constant="30" id="UGy-xu-bro"/>
+                                                </constraints>
+                                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Select existing address"/>
                                                 <connections>
                                                     <action selector="btnSelectExistingAddress:" destination="JEb-Gy-hD1" eventType="touchUpInside" id="v6a-OC-WnL"/>
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="QLD-yf-dG7" secondAttribute="height" multiplier="335:143" id="nay-1h-Eny"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
@@ -2337,6 +2334,34 @@
                                     <action selector="btnContinueToOrderSummary:" destination="JEb-Gy-hD1" eventType="touchUpInside" id="jJD-aj-tjw"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VLP-AE-vau" userLabel="Green Top Nav">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="104"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GGE-2J-I79">
+                                        <rect key="frame" x="16" y="34" width="48" height="30"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="btnEditCheckoutToCart:" destination="JEb-Gy-hD1" eventType="touchUpInside" id="W1Y-fh-ewz"/>
+                                        </connections>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mitowhiteonly.png" translatesAutoresizingMaskIntoConstraints="NO" id="VuK-Bg-WSG">
+                                        <rect key="frame" x="141" y="25" width="92" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="92" id="ChI-0w-qOb"/>
+                                            <constraint firstAttribute="height" constant="48" id="zqD-It-oEd"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.5725490196078431" green="0.89803921568627454" blue="0.59607843137254901" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="104" id="ANa-yQ-xVw"/>
+                                    <constraint firstItem="VuK-Bg-WSG" firstAttribute="centerX" secondItem="VLP-AE-vau" secondAttribute="centerX" id="FZK-Tp-nje"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="GGE-2J-I79" secondAttribute="trailing" constant="20" symbolic="YES" id="KIE-hO-6xe"/>
+                                    <constraint firstItem="VuK-Bg-WSG" firstAttribute="centerY" secondItem="GGE-2J-I79" secondAttribute="centerY" id="Ox9-H7-mpG"/>
+                                    <constraint firstItem="GGE-2J-I79" firstAttribute="leading" secondItem="VLP-AE-vau" secondAttribute="leading" constant="16" id="lqq-tC-veg"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -2353,6 +2378,11 @@
                             <constraint firstItem="0x7-4H-RRO" firstAttribute="top" secondItem="VLP-AE-vau" secondAttribute="bottom" constant="20" id="nwx-Mh-OWB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9zd-Eq-ArB"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="VLP-AE-vau"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="imgRecipientImage" destination="rtm-71-V4I" id="IC0-Uj-IkJ"/>
@@ -2382,9 +2412,10 @@
         <image name="swirlsearch" width="2257" height="5634"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ESz-AJ-FsE"/>
+        <segue reference="Jxy-V8-rOh"/>
+        <segue reference="JK1-YT-Yc6"/>
         <segue reference="eNC-Nf-pOF"/>
-        <segue reference="2rk-ch-wix"/>
+        <segue reference="kS1-pK-LOk"/>
         <segue reference="wfB-se-wui"/>
     </inferredMetricsTieBreakers>
 </document>
