@@ -191,9 +191,14 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         let date = Date()
         let calendar = Calendar.current
         let year = calendar.component(.year, from: date)
+        appdata.arrYears.removeAll()
         for num in 1850...year {
             appdata.arrYears.append(String(num))
         }
+        appdata.arrMonths.removeAll()
+//        appdata.arrDays.removeAll()
+//        appdata.arrYears.removeAll()
+        appdata.arrStates.removeAll()
         appdata.fnLoadMonthData()
         appdata.fnLoadStateData()
     }
