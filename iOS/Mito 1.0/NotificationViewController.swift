@@ -225,16 +225,21 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @objc func btnAcceptFriendRequest(_ button: UIButton) {
-        print(appdata.arrPendingFriends[button.tag].intUserID)
         let intUserID = appdata.arrPendingFriends[button.tag].intUserID
-        fnAcceptFriendRequest(intUserID: intUserID)
+        fnAcceptOrDeclineFriendRequest(strFriendType: "Friend", intUserID: intUserID)
     }
     
-    func fnAcceptFriendRequest(intUserID: Int) {
+    @objc func btnDeclineFriendRequest(_ button: UIButton) {
+        print(appdata.arrPendingFriends[button.tag].intUserID)
+        let intUserID = appdata.arrPendingFriends[button.tag].intUserID
+        fnAcceptOrDeclineFriendRequest(strFriendType: "Unfriend", intUserID: intUserID)
+    }
+    
+    func fnAcceptOrDeclineFriendRequest(strFriendType: String, intUserID: Int) {
         let parameters: Parameters = [
             "friendId": intUserID,
-            "friendType": "Friend",
-            "notificationType": "Friend"
+            "friendType": strFriendType,
+            "notificationType": strFriendType
         ]
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
@@ -258,38 +263,32 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
-    @objc func btnDeclineFriendRequest(_ button: UIButton) {
-        print(appdata.arrPendingFriends[button.tag].intUserID)
-//        let intUserID = appdata.arrPendingFriends[button.tag].intUserID
-//        fnDeclineFriendRequest(intUserID: intUserID)
-    }
-    
-    func fnDeclineFriendRequest(intUserID: Int) {
-        let parameters: Parameters = [
-            "friendId": intUserID,
-            "friendType": "Unfriend",
-            "notificationType": "Unfriend"
-        ]
-        let headers: HTTPHeaders = [
-            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
-        ]
-        Alamofire.request(urlAcceptFriendRequest!, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
-            switch response.result {
-            case .success:
-                if response.result.value != nil {
-                    DispatchQueue.main.async {
-                        self.tblviewNotification.reloadData()
-                        self.appdata.arrPendingFriends.removeAll()
-                        self.fnGetPendingFriendRequests()
-                    }
-                }
-                
-            case .failure(let error):
-                print("Decline friend request error")
-                print(error)
-            }
-        }
-    }
+//    func fnDeclineFriendRequest(intUserID: Int) {
+//        let parameters: Parameters = [
+//            "friendId": intUserID,
+//            "friendType": "Unfriend",
+//            "notificationType": "Unfriend"
+//        ]
+//        let headers: HTTPHeaders = [
+//            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+//        ]
+//        Alamofire.request(urlAcceptFriendRequest!, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
+//            switch response.result {
+//            case .success:
+//                if response.result.value != nil {
+//                    DispatchQueue.main.async {
+//                        self.tblviewNotification.reloadData()
+//                        self.appdata.arrPendingFriends.removeAll()
+//                        self.fnGetPendingFriendRequests()
+//                    }
+//                }
+//
+//            case .failure(let error):
+//                print("Decline friend request error")
+//                print(error)
+//            }
+//        }
+//    }
     
     @objc func btnAcceptPackage(_ button: UIButton) {
         let package = appdata.arrCurrUserPackages[button.tag]
