@@ -73,18 +73,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         strProductResultsPageNumber = 1
         fnLoadProductData()
     }
-    
+
     @IBAction func cartButtonClicked(_ sender: Any) {
         performSegue(withIdentifier: "searchToCart", sender: self)
     }
-    
-//    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-//        if (productPeopleTab.selectedSegmentIndex == 1) {
-//            UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
-//        }
-//        productPeopleTab.selectedSegmentIndex = 0
-//        return true
-//    }
     
     // Once text changes, filter friends and all users, then merge into arrCurrFriendsAndAllMitoUsers
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
