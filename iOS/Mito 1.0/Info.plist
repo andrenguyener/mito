@@ -25,6 +25,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Your image is safe with me bro!</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Roboto-Black.tff</string>
@@ -44,8 +46,6 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Login</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Your image is safe with me bro!</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
