@@ -24,7 +24,7 @@ const PackageHandler = (packageStore) => {
 
     });
 
-    // Get pending packages of user
+    // Get pending/accepted/denied packages of user
     router.post('/v1/package', (req, res) => {
         const userJSON = req.get('X-User');
         const user = JSON.parse(userJSON);

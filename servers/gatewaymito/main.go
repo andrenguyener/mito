@@ -164,6 +164,7 @@ func main() {
 	mux.HandleFunc("/v1/users/all", ctx.UsersAllHandler)
 	mux.HandleFunc("/v1/users/validate", ctx.UsersValidateHandler)
 	mux.HandleFunc("/v1/users/password", ctx.UsersPasswordHandler)
+	mux.HandleFunc("/v1/users/personal", ctx.UsersPersonalHandler)
 	mux.HandleFunc("/v1/users/id", ctx.UsersIDHandler)
 	mux.HandleFunc("/v1/sessions", ctx.SessionsHandler)
 	mux.HandleFunc("/v1/sessions/mine", ctx.SessionsMineHandler)
@@ -188,5 +189,7 @@ func main() {
 	mux.Handle("/v1/order/", NewServiceProxy(splitMitoNodeAddrs, ctx))
 	mux.Handle("/v1/package", NewServiceProxy(splitMitoNodeAddrs, ctx))
 	mux.Handle("/v1/package/", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/payment", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/payment/", NewServiceProxy(splitMitoNodeAddrs, ctx))
 	log.Fatal(http.ListenAndServeTLS(addr, tlscert, tlskey, corsHandler))
 }

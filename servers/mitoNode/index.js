@@ -1,21 +1,40 @@
 // @ts-check
 "use strict";
 
-// orders, refund, friend, notification
 
 const express = require("express");
 const morgan = require("morgan");
 const app = express();
 var Connection = require('tedious').Connection;
+var ConnectionPool = require('tedious-connection-pool');
+// var CONFIG = require('./config.json');
 
 // config for your database
 var config = {
-    userName: 'mitoteam',
-    password: 'JABS2018!',
-    server: 'projectmito.database.windows.net',
-    options: { encrypt: true, database: 'projectmito' }
+    userName: "mitoteam",
+    password: "JABS2018!",
+    server: "projectmito.database.windows.net",
+    options: {
+        encrypt: true,
+        database: "projectmito"
+    }
 };
 
+var poolConfig = {
+    min: 1,
+    max: 20,
+    log: true
+};
+
+var connectionConfig = {
+    userName: "mitoteam",
+    password: "JABS2018!",
+    server: "projectmito.database.windows.net",
+    options: {
+        encrypt: true,
+        database: "projectmito"
+    }
+}
 
 const AddressStore = require("./models/address/address-store");
 const Address = require('./models/address/address-class');
@@ -41,6 +60,10 @@ const CartStore = require('./models/cart/cart-store');
 const Cart = require('./models/cart/cart-class');
 const CartHandler = require('./handlers/cart');
 
+const PaymentStore = require('./models/payment/payment-store');
+const Payment = require('./models/payment/payment-class');
+const PaymentHandler = require('./handlers/payment');
+
 const AmazonHashHandler = require('./handlers/amazon');
 
 
@@ -60,17 +83,21 @@ var TYPES = require('tedious').TYPES;
 (async () => {
     try {
         // TODO make connection a Promise 
-        let sql = await new Connection(config);
-        sql.on('connect', function (err) {
-            // If no error, then good to proceed. 
-            if (err) {
-                console.log(err)
-            } else {
-                console.log("Connected");
-                // executeStatement(connection);
-            }
-        });
+        // let sql = await new Connection(config);
+        // sql.on('connect', function (err) {
+        //     // If no error, then good to proceed. 
+        //     if (err) {
+        //         console.log(err)
+        //     } else {
+        //         console.log("Connected");
+        //         // executeStatement(connection);
+        //     }
+        // });
 
+        var sql = new ConnectionPool(poolConfig, connectionConfig);
+        sql.on('error', function (err) {
+            console.error(err);
+        });
 
 
         // Add global middlewares.
@@ -114,6 +141,7 @@ var TYPES = require('tedious').TYPES;
         let feedStore = new FeedStore(sql);
         let packageStore = new PackageStore(sql);
         let cartStore = new CartStore(sql);
+        let paymentStore = new PaymentStore(sql);
 
         // API resource handlers.
         app.use(AddressHandler(addressStore));
@@ -122,9 +150,11 @@ var TYPES = require('tedious').TYPES;
         app.use(FeedHandler(feedStore));
         app.use(PackageHandler(packageStore));
         app.use(CartHandler(cartStore));
+        app.use(PaymentHandler(paymentStore));
+
         app.use(AmazonHashHandler());
         app.listen(portNum, host, () => {
-            console.log(`server is listening at http://w${addr}`);
+            console.log(`server is listening at http://${addr}`);
         });
     } catch (err) {
         console.log(err);
