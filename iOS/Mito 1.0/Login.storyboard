@@ -58,7 +58,7 @@
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TQZ-rQ-MLe" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="100" width="334.5" height="38"/>
-                                        <color key="backgroundColor" red="0.54759299621107782" green="0.90761817895431474" blue="0.57195356956158849" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.25490196078431371" green="0.8666666666666667" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="38" id="wIT-4n-9US"/>
                                         </constraints>
@@ -140,6 +140,9 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sEX-f4-4my">
                                         <rect key="frame" x="0.0" y="0.0" width="295" height="22.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="295" id="2MF-8w-UyU"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="Roboto-ThinItalic" family="Roboto" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -408,7 +411,7 @@
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mN7-H5-WHv" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
                                 <rect key="frame" x="20" y="692" width="335" height="38"/>
-                                <color key="backgroundColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.25490196078431371" green="0.8666666666666667" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="Z1k-OD-pHV"/>
                                 </constraints>
@@ -667,7 +670,7 @@
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ir-XT-LMA" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
                                 <rect key="frame" x="20" y="692" width="335" height="38"/>
-                                <color key="backgroundColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.25490196078431371" green="0.8666666666666667" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="lel-XS-8Ax"/>
                                 </constraints>
@@ -725,7 +728,7 @@
         <image name="mitodesignblack.png" width="2000" height="1173"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Tk8-BD-Yxk"/>
+        <segue reference="iia-I7-aut"/>
         <segue reference="Fma-AT-nbz"/>
     </inferredMetricsTieBreakers>
 </document>
