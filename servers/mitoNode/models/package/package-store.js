@@ -20,33 +20,40 @@ class PackageStore {
     //get all the users incoming packages
     getPackages(id, type) {
         return new Promise((resolve) => {
-            let procedureName = "uspcGetMyPackages";
-            // var request = new Request(`${procedureName}`, function (err, rowCount, rows) {
-            //     if (err) {
-            //         console.log(err);
-            //     }
-            // });
-            var request = this.request(procedureName);
-            request.addParameter('UserId', TYPES.Int, id);
-            request.addParameter('Type', TYPES.NVarChar, type); //Pending, Accepted, Denied
-            let jsonArray = []
-            request.on('row', function (columns) {
-                var rowObject = {};
-                columns.forEach(function (column) {
-                    if (column.value === null) {
-                        console.log('NULL');
-                    } else {
-                        rowObject[column.metadata.colName] = column.value;
+            this.sql.acquire(function (err, connection) {
+                let procedureName = "uspcGetMyPackages";
+                // var request = new Request(`${procedureName}`, function (err, rowCount, rows) {
+                //     if (err) {
+                //         console.log(err);
+                //     }
+                // });
+                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
+                    if (err) {
+                        console.log(err)
                     }
+                    connection.release();
                 });
-                jsonArray.push(rowObject)
-            });
+                request.addParameter('UserId', TYPES.Int, id);
+                request.addParameter('Type', TYPES.NVarChar, type); //Pending, Accepted, Denied
+                let jsonArray = []
+                request.on('row', function (columns) {
+                    var rowObject = {};
+                    columns.forEach(function (column) {
+                        if (column.value === null) {
+                            console.log('NULL');
+                        } else {
+                            rowObject[column.metadata.colName] = column.value;
+                        }
+                    });
+                    jsonArray.push(rowObject)
+                });
 
-            request.on('doneProc', function (rowCount, more) {
-                resolve(jsonArray);
-            });
+                request.on('doneProc', function (rowCount, more) {
+                    resolve(jsonArray);
+                });
 
-            this.sql.callProcedure(request)
+                connection.callProcedure(request)
+            });
         })
             .then((jsonArray) => {
                 return jsonArray
@@ -56,72 +63,44 @@ class PackageStore {
             });
     }
 
-    //
-    getIncoming(id) {
-        return new Promise((resolve) => {
-            // let procedureName = "uspcGetUserFriendsById";
-            var request = this.request(procedureName);
-
-            request.addParameter('UserId', TYPES.Int, id);
-            request.addParameter('isFriend', TYPES.Int, friendType)
-            let jsonArray = []
-            request.on('row', function (columns) {
-                var rowObject = {};
-                columns.forEach(function (column) {
-                    if (column.value === null) {
-                        console.log('NULL');
-                    } else {
-                        rowObject[column.metadata.colName] = column.value;
-                    }
-                });
-                jsonArray.push(rowObject)
-            });
-
-            request.on('doneProc', function (rowCount, more) {
-                console.log(jsonArray);
-                resolve(jsonArray);
-            });
-
-            this.sql.callProcedure(request)
-        })
-            .then((jsonArray) => {
-                return jsonArray
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }
 
     // Update Accept/Deny incoming package
     update(userId, senderId, orderId, response, shippingAddressId) {
         return new Promise((resolve) => {
-            let procedureName = "uspcConfirmPackage";
-            var request = this.request(procedureName);
-
-            request.addParameter('UserId', TYPES.Int, userId);
-            request.addParameter('SenderId', TYPES.Int, senderId);
-            request.addParameter('OrderId', TYPES.Int, orderId);
-            request.addParameter('Response', TYPES.NVarChar, response);
-            request.addParameter('ShippingAddressId', TYPES.Int, shippingAddressId);
-            let jsonArray = []
-            request.on('row', function (columns) {
-                var rowObject = {};
-                columns.forEach(function (column) {
-                    if (column.value === null) {
-                        console.log('NULL');
-                    } else {
-                        rowObject[column.metadata.colName] = column.value;
+            this.sql.acquire(function (err, connection) {
+                let procedureName = "uspcConfirmPackage";
+                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
+                    if (err) {
+                        console.log(err)
                     }
+                    connection.release();
                 });
-                jsonArray.push(rowObject)
-            });
 
-            request.on('doneProc', function (rowCount, more) {
-                // console.log(jsonArray);
-                resolve(jsonArray);
-            });
+                request.addParameter('UserId', TYPES.Int, userId);
+                request.addParameter('SenderId', TYPES.Int, senderId);
+                request.addParameter('OrderId', TYPES.Int, orderId);
+                request.addParameter('Response', TYPES.NVarChar, response);
+                request.addParameter('ShippingAddressId', TYPES.Int, shippingAddressId);
+                let jsonArray = []
+                request.on('row', function (columns) {
+                    var rowObject = {};
+                    columns.forEach(function (column) {
+                        if (column.value === null) {
+                            console.log('NULL');
+                        } else {
+                            rowObject[column.metadata.colName] = column.value;
+                        }
+                    });
+                    jsonArray.push(rowObject)
+                });
 
-            this.sql.callProcedure(request)
+                request.on('doneProc', function (rowCount, more) {
+                    // console.log(jsonArray);
+                    resolve(jsonArray);
+                });
+
+                connection.callProcedure(request)
+            });
         })
             .then((jsonArray) => {
                 // user accpeted package
@@ -165,36 +144,4 @@ class PackageStore {
 
 module.exports = PackageStore;
 
-/*
 
-Parsed JSON array = {
-    "OrderId": 42,
-    "GrandTotal": 58,
-    "BillingFname": "John",
-    "BillingLname": "Doe",
-    "BillingStreet1": "123 Pizza Way",
-    "BillingStreet2": "2nd floor",
-    "BillingCity": "Seattle",
-    "BillingState": "WA",
-    "BillingZip": "98144",
-    "ShippingFname": "Tom",
-    "ShippingLname": "Brady",
-    "ShippingStreet1": "124 Pizza Way",
-    "ShippingStreet2": "2nd Floor",
-    "ShippingCity": "Seattle",
-    "ShippingZip": "98144",
-    "GiftOption": false,
-    "AmazonProducts": [
-        {
-            "AmazonItemId": "B003CT4B0G",
-            "Quantity": 1,
-        },
-        {
-            "AmazonItemId": "B003CT4B0G",
-            "Quantity": 1,
-        }
-    ]
-
-}
-
-*/

@@ -128,10 +128,12 @@ func (ctx *Context) UsersIDHandler(w http.ResponseWriter, r *http.Request) {
 		id := r.URL.Query().Get("id")
 		if len(id) == 0 {
 			http.Error(w, "please provide url", http.StatusBadRequest)
+			return
 		}
 		idInt, err := strconv.Atoi(id)
 		if err != nil {
 			http.Error(w, "error converting string to int", http.StatusBadRequest)
+			return
 		}
 		// decode the request body into newUser struct
 		// decoder := json.NewDecoder(r.Body)
@@ -147,6 +149,7 @@ func (ctx *Context) UsersIDHandler(w http.ResponseWriter, r *http.Request) {
 		user, err := ctx.UserStore.GetByID(idInt)
 		if err != nil {
 			http.Error(w, "fail error "+err.Error(), http.StatusBadRequest)
+			return
 		}
 		respond(w, user)
 	default:
@@ -179,14 +182,15 @@ func (ctx *Context) UsersMeHandler(w http.ResponseWriter, r *http.Request) {
 		err = json.NewDecoder(r.Body).Decode(userUpdates)
 		if err != nil {
 			http.Error(w, "Error cannot decode JSON updates: "+err.Error(), http.StatusBadRequest)
+			return
 		}
 
 		// updates the user in mongo stroe
-		err = ctx.UserStore.Update(sessionUser.UserId, userUpdates)
+		// err = ctx.UserStore.Update(sessionUser.UserId, userUpdates)
 
-		if err != nil {
-			http.Error(w, "Error cannot update user: "+err.Error(), http.StatusBadRequest)
-		}
+		// if err != nil {
+		// 	http.Error(w, "Error cannot update user: "+err.Error(), http.StatusBadRequest)
+		// }
 
 		// deletes previous name fields from trie store
 		ctx.TrieStore.Remove(sessionState.User.UserFname, sessionState.User.UserId)
@@ -225,6 +229,7 @@ func (ctx *Context) UsersPasswordHandler(w http.ResponseWriter, r *http.Request)
 		http.Error(w, "Error cannot get session state: "+err.Error(), http.StatusUnauthorized)
 		return
 	}
+
 	sessionUser := sessionState.User
 	switch r.Method {
 	case "PATCH":
@@ -233,24 +238,110 @@ func (ctx *Context) UsersPasswordHandler(w http.ResponseWriter, r *http.Request)
 		err = json.NewDecoder(r.Body).Decode(passwordUpdates)
 		if err != nil {
 			http.Error(w, "Error cannot decode JSON updates: "+err.Error(), http.StatusBadRequest)
+			return
 		}
-
-		sessionUser.ApplyPasswordUpdate(passwordUpdates)
+		user, err := ctx.UserStore.GetByEmail(sessionUser.UserEmail)
+		if err != nil {
+			http.Error(w, "Error cannot get user: "+err.Error(), http.StatusBadRequest)
+			return
+		}
+		err = user.ApplyPasswordUpdate(passwordUpdates)
 		if err != nil {
 			http.Error(w, "Error cannot apply password updates: "+err.Error(), http.StatusBadRequest)
+			return
 		}
 
-		err = ctx.UserStore.UpdatePassword(sessionUser)
+		err = ctx.UserStore.UpdatePassword(user)
 		if err != nil {
 			http.Error(w, "Error cannot apply password updates: "+err.Error(), http.StatusBadRequest)
+			return
 		}
+		sessionUser.PasswordHash = user.PasswordHash
+		err = ctx.SessionStore.Save(sessionID, sessionState)
+		if err != nil {
+			http.Error(w, "Error cannot save session: "+err.Error(), http.StatusBadRequest)
+			return
+		}
+
+		w.Header().Add(headerContentType, "text/plain")
+		w.Write([]byte("Password Changed"))
+
+	default:
+		http.Error(w, "method must be PATCH", http.StatusMethodNotAllowed)
+		return
+	}
+}
+
+// UsersPersonalHandler allows users to update their personal information
+func (ctx *Context) UsersPersonalHandler(w http.ResponseWriter, r *http.Request) {
+
+	// get the session state
+	sessionState := &SessionState{}
+
+	// get the state of the browser that is accessing their page
+	sessionID, err := sessions.GetState(r, ctx.SessionKey, ctx.SessionStore, sessionState)
+	if err != nil {
+		http.Error(w, "Error cannot get session state: "+err.Error(), http.StatusUnauthorized)
+		return
+	}
+
+	sessionUser := sessionState.User
+	switch r.Method {
+	case "PATCH":
+
+		personalUpdates := &users.PersonalUpdate{}
+		err = json.NewDecoder(r.Body).Decode(personalUpdates)
+		if err != nil {
+			http.Error(w, "Error cannot decode JSON updates: "+err.Error(), http.StatusBadRequest)
+			return
+		}
+		user, err := ctx.UserStore.GetByEmail(sessionUser.UserEmail)
+		if err != nil {
+			http.Error(w, "Error cannot get user: "+err.Error(), http.StatusBadRequest)
+			return
+		}
+		err = user.ValidatePersonalUpdate(personalUpdates)
+		if err != nil {
+			http.Error(w, "Error validating update: "+err.Error(), http.StatusBadRequest)
+		}
+
+		// checks to see if there isn't already a user in the User Store with the same email
+		userValidate, err := ctx.UserStore.GetByEmail(personalUpdates.UserEmail)
+		if err != users.ErrUserNotFound && userValidate != nil {
+			http.Error(w, "Error email already exists: "+personalUpdates.UserEmail, http.StatusBadRequest)
+			return
+		}
+
+		// checks to see if there isn't already a user in the User Store with the same username
+		userValidate, err = ctx.UserStore.GetByUserName(personalUpdates.Username)
+		if err != users.ErrUserNotFound && userValidate != nil {
+			http.Error(w, "Error username already exists: "+personalUpdates.Username, http.StatusBadRequest)
+			return
+		}
+
+		err = ctx.UserStore.UpdatePersonal(personalUpdates, sessionUser.UserId)
+		if err != nil {
+			http.Error(w, "Error cannot apply updates: "+err.Error(), http.StatusBadRequest)
+		}
+
+		sessionUser.UserFname = personalUpdates.UserFname
+		sessionUser.UserLname = personalUpdates.UserLname
+		sessionUser.UserDOB = personalUpdates.UserDOB
+		sessionUser.UserEmail = personalUpdates.UserEmail
+		sessionUser.Username = personalUpdates.Username
+		sessionUser.PhotoUrl = personalUpdates.PhotoUrl
 
 		err = ctx.SessionStore.Save(sessionID, sessionState)
 		if err != nil {
 			http.Error(w, "Error cannot save session: "+err.Error(), http.StatusBadRequest)
+			return
 		}
 
-		respond(w, sessionUser)
+		// w.WriteHeader(http.StatusCreated)
+		// respond(w, sessionUser)
+
+		w.Header().Add(headerContentType, "text/plain")
+		w.Write([]byte("Profile Updated"))
 
 	default:
 		http.Error(w, "method must be PATCH", http.StatusMethodNotAllowed)
@@ -325,6 +416,7 @@ func (ctx *Context) UsersAllHandler(w http.ResponseWriter, r *http.Request) {
 		users, err := ctx.UserStore.GetAll()
 		if err != nil {
 			http.Error(w, "Error cannot retrieve users "+err.Error(), http.StatusInternalServerError)
+			return
 		}
 
 		respond(w, users)
@@ -364,12 +456,6 @@ func (ctx *Context) SessionsHandler(w http.ResponseWriter, r *http.Request) {
 		err = user.Authenticate(newSession.Password)
 		if err != nil {
 			http.Error(w, "invalid credentials authenticate", http.StatusUnauthorized)
-			return
-		}
-
-		user, err = ctx.UserStore.GetByID(user.UserId)
-		if err != nil {
-			http.Error(w, "invalid unable to get user", http.StatusUnauthorized)
 			return
 		}
 
@@ -417,5 +503,6 @@ func respond(w http.ResponseWriter, value interface{}) {
 	w.Header().Add(headerContentType, contentTypeJSON)
 	if err := json.NewEncoder(w).Encode(value); err != nil {
 		http.Error(w, fmt.Sprintf("error encoding response value to JSON: %v", err), http.StatusInternalServerError)
+		return
 	}
 }

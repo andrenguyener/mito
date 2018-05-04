@@ -28,6 +28,9 @@ type Store interface {
 	//UpdatePassword applies password updates to the user
 	UpdatePassword(user *User) error
 
+	//UpdatePersonal applies personal updates to the user
+	UpdatePersonal(user *PersonalUpdate, userId int) error
+
 	//Delete deletes the user with the given ID
 	Delete(userID int) error
 
