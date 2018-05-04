@@ -11,7 +11,7 @@ import Alamofire
 
 var boolSender = true
 
-class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate {
+class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate, UITextViewDelegate {
     
     @IBOutlet weak var tblviewPeople: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -144,6 +144,20 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
             strRecipientName.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
             textviewWriteMessage.text = "What's it for?"
         }
+        if textviewWriteMessage != nil {
+            textviewWriteMessage.delegate = self
+        }
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        if textviewWriteMessage != nil {
+            if textviewWriteMessage.text.count == 0 {
+                textviewWriteMessage.text = "What's it for?"
+                textviewWriteMessage.textColor = UIColor.gray
+            } else if textviewWriteMessage.text.count > 0 {
+                textviewWriteMessage.textColor = UIColor.black
+            }
+        }
     }
     
     // Once text changes, filter friends and all users, then merge into arrCurrFriendsAndAllMitoUsers
@@ -182,8 +196,8 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
     
     @IBAction func btnEditCheckoutToChooseFriend(_ sender: Any) {
         performSegue(withIdentifier: "editCheckoutToChooseFriend", sender: self)
-//        fnLoadFriendsAndAllUsers()
     }
+    
     @IBAction func btnPaymentMethodToEditCheckout(_ sender: Any) {
         appdata.strCardNumber = lblCreditCardNumber.text!
         performSegue(withIdentifier: "paymentMethodToEditCheckout", sender: self)

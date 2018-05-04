@@ -2512,10 +2512,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="eD1-jf-ACa">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" text="What's it for?" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="eD1-jf-ACa">
                                 <rect key="frame" x="16" y="267" width="343" height="336"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <string key="text">sradtfyguhijokuyjeurytafdr65s6ftgyuhijokp,l,yrtekwjhbwdagsytrXzc 6tvghuijotkmlrew4 r3qenwbhgvdasFTXYZcvyunbijomghkpl;t, rmednwahvgYCFTZxv6c87y v9buviojgfkhlmr et,w3nqbedghasfctxz t8sradtfyguhijokuyjeurytafdr65s6ftgyuhijokp,l,yrtekwjhbwdagsytrXzc 6tvghuijotkmlrew4 r3qenwbhgvdasFTXYZcvyunbijomghkpl;t, rmednwahvgYCFTZxv6c87y v9buviojgfkhlmr et,w3nqbedghasfctxz t8sradtfyguhijokuyjeurytafdr65s6ftgyuhijokp,l,yrtekwjhbwdagsytrXzc 6tvghuijotkmlrew4 r3qenwbhgvdasFTXYZcvyunbijomghkpl;t, rmednwahvgYCFTZxv6c87y v9buviojgfkhlmr et,w3nqbedghasfctxz t8sradtfyguhijokuyjeurytafdr65s6ftgyuhijokp,l,yrtekwjhbwdagsytrXzc 6tvghuijotkmlrew4 r3qenwbhgvdasFTXYZcvyunbijomghkpl;t, rmednwahvgYCFTZxv6c87y v9buviojgfkhlmr et,w3nqbedghasfctxz t8</string>
+                                <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+                                <color key="textColor" red="0.78497099879999999" green="0.78906852009999995" blue="0.80279028419999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" enablesReturnKeyAutomatically="YES"/>
                             </textView>
