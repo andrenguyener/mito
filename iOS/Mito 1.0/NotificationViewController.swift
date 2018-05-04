@@ -62,6 +62,10 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             refresherPackage.addTarget(self, action: #selector(NotificationViewController.fnRefreshPackages), for: UIControlEvents.valueChanged)
             tblviewPackage.addSubview(refresherPackage)
             fnGetPendingPackages()
+        } else if imgSenderProfile != nil {
+            appdata.fnDisplaySimpleImage(strImageURL: appdata.arrCurrUserPackages[intOrderID].strPhotoUrl, img: imgSenderProfile)
+            strSenderName.text = "\(appdata.arrCurrUserPackages[intOrderID].strUserFName) \(appdata.arrCurrUserPackages[intOrderID].strUserLName)"
+            lblMessage.text = appdata.arrCurrUserPackages[intOrderID].strOrderMessage
         } else {
             let objIncomingPackage = appdata.arrCurrUserPackages[intOrderID]
             strPackageSenderName.text = "\(objIncomingPackage.strUserFName) \(objIncomingPackage.strUserLName)"

@@ -117,12 +117,14 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
     @IBOutlet weak var strRecipientName: UILabel!
     @IBOutlet weak var textviewWriteMessage: UITextView!
     
+    @IBAction func btnConfirmMessage(_ sender: Any) {
+        appdata.strOrderMessage = textviewWriteMessage.text
+    }
     
     @IBOutlet weak var lblCreditCardNumber: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        fnLoadCurrUserAddresses()
         if tblviewPeople != nil {
             tblviewPeople.delegate = self
             tblviewPeople.dataSource = self
@@ -136,14 +138,11 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
         } else if lblRecipient != nil {
             lblRecipient.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
             appdata.fnDisplaySimpleImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipientImage)
-//            let urlPersonImage = URL(string: "\(appdata.personRecipient.avatar)")
-//            let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
-//            if let data = try? Data(contentsOf: urlPersonImage!) {
-//                imgRecipientImage.image = UIImage(data: data)!
-//            } else if let data = try? Data(contentsOf: defaultURL!){
-//                imgRecipientImage.image = UIImage(data: data)
-//            }
             lblAddressNickname.text = appdata.address.strAddressAlias
+        } else if imgRecipientProfile != nil {
+            appdata.fnDisplaySimpleImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipientProfile)
+            strRecipientName.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
+            textviewWriteMessage.text = "What's it for?"
         }
     }
     

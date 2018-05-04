@@ -224,7 +224,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             "cardId": 1,
             "senderAddressId": appdata.address.intAddressID,
             "recipientId": appdata.personRecipient.intUserID,
-            "message": "First Checkout",
+            "message": appdata.strOrderMessage,
             "giftOption": 0
         ]
         let headers: HTTPHeaders = [

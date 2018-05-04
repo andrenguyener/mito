@@ -1807,10 +1807,8 @@
                         <viewLayoutGuide key="safeArea" id="4Z8-cM-CfV"/>
                     </view>
                     <connections>
-                        <outlet property="imgSender" destination="lot-L2-wzT" id="jMT-kL-xb2"/>
                         <outlet property="imgSenderProfile" destination="lot-L2-wzT" id="rtd-gu-ANq"/>
                         <outlet property="lblMessage" destination="U74-Ig-Gfh" id="RsX-TA-Y0r"/>
-                        <outlet property="strPackageSenderName" destination="Uif-5A-U2x" id="dWt-AA-W7h"/>
                         <outlet property="strSenderName" destination="Uif-5A-U2x" id="xdl-0u-i6c"/>
                         <segue destination="5ev-RP-TnR" kind="show" identifier="PackageDetailsBackToNotification" id="7Hd-YA-ayo"/>
                         <segue destination="y1B-fc-fA5" kind="show" identifier="PackageToChooseReceivingAddress" id="kcf-T7-nAo"/>
@@ -2532,6 +2530,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
+                                    <action selector="btnConfirmMessage:" destination="jmz-bN-xaL" eventType="touchUpInside" id="nyF-LG-20i"/>
                                     <segue destination="JEb-Gy-hD1" kind="show" id="n5u-Su-hpZ"/>
                                 </connections>
                             </button>
@@ -2581,7 +2580,7 @@
         <image name="swirlsearch" width="2257" height="5634"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JK1-YT-Yc6"/>
+        <segue reference="n5u-Su-hpZ"/>
         <segue reference="kcf-T7-nAo"/>
         <segue reference="7Hd-YA-ayo"/>
         <segue reference="wfB-se-wui"/>
