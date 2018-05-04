@@ -9,13 +9,13 @@ class FeedStore {
         this.sql = sql;
     }
 
-    request(procedure) {
-        return new Request(`${procedure}`), function (err) {
-            if (err) {
-                console.log(err);
-            }
-        }
-    }
+    // request(procedure) {
+    //     return new Request(`${procedure}`), function (err) {
+    //         if (err) {
+    //             console.log(err);
+    //         }
+    //     }
+    // }
 
     // Add User order to feed
     insert(feed) {

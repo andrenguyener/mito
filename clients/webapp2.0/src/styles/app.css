@@ -1,0 +1,38 @@
+/* Color Scheme */
+/* Breakpoints */
+html, body, #root, .App, .page-main-inner, #about-section, #business-section, #security-section, #home-section {
+  height: 100%;
+  width: 100%; }
+
+/* Navigation Bar */
+#logo {
+  position: absolute;
+  height: 70px;
+  top: 25px;
+  left: 50px;
+  z-index: 10;
+  font-size: 20px; }
+  #logo a {
+    color: green; }
+  #logo p:hover {
+    cursor: pointer;
+    color: lightGreen; }
+  @media (min-width: 768px) {
+    #logo {
+      left: 70px; } }
+
+#navigation-desktop {
+  background-color: transparent;
+  border-bottom: 0;
+  min-height: 0;
+  margin-top: 30px;
+  position: absolute;
+  right: 10px;
+  z-index: 100; }
+  #navigation-desktop a {
+    color: green;
+    margin-right: 40px; }
+    #navigation-desktop a:hover {
+      color: lightGreen; }
+  #navigation-desktop .selected {
+    color: lightGreen; }

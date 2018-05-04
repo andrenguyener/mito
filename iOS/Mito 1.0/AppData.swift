@@ -113,6 +113,7 @@ class AppData: NSObject {
         Alamofire.request(urlPeopleCall!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success:
+                print("Loaded all friends")
                 if let dictionary = response.result.value {
                     let dict2 = dictionary as! NSArray
                     for obj in dict2 {
@@ -127,8 +128,8 @@ class AppData: NSObject {
                         self.arrFriends.append(p)
                     }
                     self.arrFriendsAndAllMitoUsers.append(self.arrFriends)
+                    self.arrCurrFriendsAndAllMitoUsers = self.arrFriendsAndAllMitoUsers
                     DispatchQueue.main.async {
-                        self.arrCurrFriendsAndAllMitoUsers = self.arrFriendsAndAllMitoUsers
                         let arrZeroIdx = self.arrCurrFriendsAndAllMitoUsers[0]
                         if self.arrCurrFriendsAndAllMitoUsers.count > 1 && arrZeroIdx.count > self.arrCurrFriendsAndAllMitoUsers[1].count {
                             self.arrCurrFriendsAndAllMitoUsers[0] = self.arrCurrFriendsAndAllMitoUsers[1]
@@ -139,7 +140,7 @@ class AppData: NSObject {
                 }
                 
             case .failure(let error):
-                print("Get all users error")
+                print("Get all friends error")
                 print(error)
             }
         }
@@ -153,18 +154,27 @@ class AppData: NSObject {
         Alamofire.request(urlAllUserCall!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success:
+                print("Loaded all users")
                 if let dictionary = response.result.value {
                     let objUsers = dictionary as! NSArray
                     for objUser in objUsers {
                         let objPerson2 = objUser as! NSDictionary
-                        let objPerson = Person(firstName: objPerson2["userFname"] as! String, lastName: objPerson2["userLname"] as! String, email: objPerson2["userEmail"] as! String, avatar: objPerson2["photoURL"] as! String, intUserID: objPerson2["userId"] as! Int, strUsername: objPerson2["username"] as! String, intNumFriends: objPerson2["NumFriends"] as! Int)
-                        self.arrAllUsers.append(objPerson)
+                        let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+                        if objPerson2["userId"] as! Int != data["userId"] as! Int {
+                            let objPerson = Person(firstName: objPerson2["userFname"] as! String, lastName: objPerson2["userLname"] as! String, email: objPerson2["userEmail"] as! String, avatar: objPerson2["photoURL"] as! String, intUserID: objPerson2["userId"] as! Int, strUsername: objPerson2["username"] as! String, intNumFriends: objPerson2["NumFriends"] as! Int)
+                            self.arrAllUsers.append(objPerson)
+                        }
                     }
                     self.arrAllUsers.sort(by: self.fnSortMitoUsers)
                     self.arrFriendsAndAllMitoUsers.append(self.arrAllUsers)
                     self.arrCurrFriendsAndAllMitoUsers = self.arrFriendsAndAllMitoUsers
                 }
                 DispatchQueue.main.async {
+                    let arrZeroIdx = self.arrCurrFriendsAndAllMitoUsers[0]
+                    if self.arrCurrFriendsAndAllMitoUsers.count > 1 && arrZeroIdx.count > self.arrCurrFriendsAndAllMitoUsers[1].count {
+                        self.arrCurrFriendsAndAllMitoUsers[0] = self.arrCurrFriendsAndAllMitoUsers[1]
+                        self.arrCurrFriendsAndAllMitoUsers[1] = arrZeroIdx
+                    }
                     tableview.reloadData()
                 }
                 
@@ -176,7 +186,7 @@ class AppData: NSObject {
     }
     
     open func fnSortMitoUsers(this: Person, that: Person) -> Bool {
-        return this.intNumFriends > that.intNumFriends
+        return this.intNumFriends < that.intNumFriends
     }
     
     open func fnDisplayAlert(title: String, message: String) -> UIAlertController {

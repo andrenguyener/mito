@@ -126,9 +126,9 @@ func (n *Notifier) AddClient(client *websocket.Conn, userId int) {
 }
 
 type userID struct {
-	UserID    int    `json:"userIdOut"`
-	EventType string `json:"type"`
-	EventData string `json:"friend"`
+	UserID    int           `json:"userIdOut"`
+	EventType string        `json:"type"`
+	EventData []interface{} `json:"friend"`
 }
 
 func (n *Notifier) start() {

@@ -2,7 +2,6 @@ package users
 
 import (
 	"database/sql"
-	"encoding/json"
 	"fmt"
 	"log"
 
@@ -26,20 +25,6 @@ func NewSqlStore(database *sql.DB, dbname string, tablename string) *SqlStore {
 	}
 }
 
-type UpdateUser struct {
-	UserFname string `json:"userFname"`
-	UserLname string `json:"userLname"`
-	UserEmail string `json:"userEmail"`
-	Username  string `json:"username"`
-	UserDOB   string `json:"userDOB"`
-	PhotoURL  string `json:"photoURL"`
-}
-
-type UpdateUserPassword struct {
-	UserPassword     string `json:"password"`
-	UserPasswordConf string `json:"passwordConf"`
-}
-
 //GetByID returns the User with the given ID
 func (ss *SqlStore) GetByID(id int) (*User, error) {
 	user := &User{}
@@ -61,7 +46,7 @@ func (ss *SqlStore) GetByID(id int) (*User, error) {
 		// if err := json.Unmarshal([]byte(userString), user); err != nil {
 		// 	log.Fatal(err)
 		// }
-		fmt.Println(user)
+
 	}
 	if err := rows.Err(); err != nil {
 		log.Fatal(err)
@@ -110,13 +95,13 @@ func (ss *SqlStore) GetByEmail(email string) (*User, error) {
 
 	defer rows.Close()
 	for rows.Next() {
-		if err := rows.Scan(&user.UserId, &user.UserFname, &user.UserLname, &user.UserEmail, &user.PasswordHash, &user.PhotoUrl, &user.UserDOB, &user.Username, &user.NumFriends); err != nil {
-			log.Fatal(err)
+		if err := rows.Scan(&user.UserId, &user.UserFname, &user.UserLname, &user.UserEmail, &user.PasswordHash, &user.PhotoUrl, &user.UserDOB, &user.Username, &user.NumFriends, &user.IsDelete); err != nil {
+			log.Fatalf("Error scanning row %v", err)
 		}
-		fmt.Println(user)
+
 	}
 	if err := rows.Err(); err != nil {
-		log.Fatal(err)
+		log.Fatalf("Error in row %v", err)
 	}
 
 	return user, nil
@@ -125,7 +110,7 @@ func (ss *SqlStore) GetByEmail(email string) (*User, error) {
 //GetByUserName returns the User with the given Username
 func (ss *SqlStore) GetByUserName(username string) (*User, error) {
 	user := &User{}
-	var userString string
+	// var userString string
 	tsql := fmt.Sprintf("EXEC uspcGetUserByUsername @Username;")
 
 	rows, err := ss.database.Query(
@@ -140,10 +125,10 @@ func (ss *SqlStore) GetByUserName(username string) (*User, error) {
 		if err := rows.Scan(&user.UserId, &user.UserFname, &user.UserLname, &user.UserEmail, &user.PhotoUrl, &user.UserDOB, &user.Username); err != nil {
 			log.Fatal(err)
 		}
-		if err := json.Unmarshal([]byte(userString), user); err != nil {
-			log.Fatal(err)
-		}
-		fmt.Println(user)
+		// if err := json.Unmarshal([]byte(userString), user); err != nil {
+		// 	log.Fatal(err)
+		// }
+
 	}
 	if err := rows.Err(); err != nil {
 		log.Fatal(err)
@@ -179,13 +164,35 @@ func (ss *SqlStore) Insert(newUser *NewUser) (*User, error) {
 	return user, err
 }
 
-//Update applies UserUpdates to the given user ID
-func (ss *SqlStore) Update(userID int, updates *Updates) error {
+//Update applies passwordUpdates to the given user ID
+func (ss *SqlStore) Update(userID int, updates *PasswordUpdate) error {
 
 	// col := ms.collection
 	// userupdates := bson.M{"$set": updates}
 	// err := col.UpdateId(userID, userupdates)
 	// return err
+	return nil
+}
+
+//UpdatePassword applies updated password to a given user
+func (ss *SqlStore) UpdatePassword(user *User) error {
+	_, err := ss.database.Exec("uspcUpdatePassword",
+		sql.Named("UserId", user.UserId),
+		sql.Named("NewPass", user.PasswordHash))
+	if err != nil {
+		return fmt.Errorf("Error updating user password %s", err)
+	}
+
+	return nil
+}
+
+func (ss *SqlStore) UpdatePersonal(user *PersonalUpdate, userId int) error {
+	_, err := ss.database.Exec("uspcUpdatePassword",
+		sql.Named("UserId", userId),
+		sql.Named("NewPass", user.UserDOB))
+	if err != nil {
+		return fmt.Errorf("Error updating user password %s", err)
+	}
 	return nil
 }
 
@@ -257,7 +264,7 @@ func (ss *SqlStore) GetAll() ([]*User, error) {
 			log.Fatal(err)
 		}
 		users = append(users, user)
-		fmt.Println(user)
+
 	}
 	if err := rows.Err(); err != nil {
 		log.Fatal(err)

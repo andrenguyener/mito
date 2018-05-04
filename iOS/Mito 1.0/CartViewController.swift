@@ -281,7 +281,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let number = formatter.number(from: strPrice) {
             let dblPrice = number.decimalValue
             let intQty = (Double)(cartObj.intQuantity)
-            cell.lblPrice.text = (String)(describing: dblPrice * (Decimal)(intQty))
+            cell.lblPrice.text = "$\((String)(describing: dblPrice * (Decimal)(intQty)))"
         }
         cell.lblSellerName.text = String(cartObj.intQuantity) //cartObj.objProduct.publisher
         cell.btnDelete.tag = indexPath.row

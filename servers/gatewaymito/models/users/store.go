@@ -23,7 +23,13 @@ type Store interface {
 	Insert(newUser *NewUser) (*User, error)
 
 	//Update applies UserUpdates to the given user ID
-	Update(userID int, updates *Updates) error
+	// Update(userID int, updates *Updates) error
+
+	//UpdatePassword applies password updates to the user
+	UpdatePassword(user *User) error
+
+	//UpdatePersonal applies personal updates to the user
+	UpdatePersonal(user *PersonalUpdate, userId int) error
 
 	//Delete deletes the user with the given ID
 	Delete(userID int) error
