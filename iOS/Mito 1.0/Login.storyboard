@@ -136,10 +136,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="v8u-Sc-usx">
-                                <rect key="frame" x="40" y="243.5" width="295" height="180"/>
+                                <rect key="frame" x="40" y="240" width="295" height="187"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sEX-f4-4my">
-                                        <rect key="frame" x="0.0" y="0.0" width="295" height="22.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="295" height="29.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="295" id="2MF-8w-UyU"/>
                                         </constraints>
@@ -148,14 +148,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mitodesignblack.png" translatesAutoresizingMaskIntoConstraints="NO" id="yjX-lx-n3Q">
-                                        <rect key="frame" x="0.0" y="22.5" width="295" height="157.5"/>
+                                        <rect key="frame" x="0.0" y="29.5" width="295" height="157.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="yjX-lx-n3Q" secondAttribute="height" multiplier="15:8" id="nAO-Yx-kju"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="180" id="3Rf-Fl-H8L"/>
                                     <constraint firstItem="sEX-f4-4my" firstAttribute="leading" secondItem="v8u-Sc-usx" secondAttribute="leading" id="I84-5t-CTF"/>
                                     <constraint firstAttribute="trailing" secondItem="sEX-f4-4my" secondAttribute="trailing" id="r4Z-Ik-VWp"/>
                                 </constraints>

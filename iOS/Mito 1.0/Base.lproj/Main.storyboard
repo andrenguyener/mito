@@ -269,7 +269,7 @@
                         <viewLayoutGuide key="safeArea" id="zyl-dg-pJg"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Notification" image="Notification Icon" id="y7E-EB-PS0">
-                        <color key="badgeColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="badgeColor" red="0.25490196079999999" green="0.86666666670000003" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBarItem>
                     <connections>
                         <outlet property="notificationView" destination="r68-ot-V1i" id="d3m-AE-e30"/>
@@ -482,7 +482,7 @@
                         </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" image="Settings SG" selectedImage="Settings SG" id="18u-Au-n67">
-                        <color key="badgeColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="badgeColor" red="0.25490196079999999" green="0.86666666670000003" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBarItem>
                     <navigationItem key="navigationItem" id="VUn-n1-lTJ"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -763,7 +763,7 @@
                         </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" image="Home.png" id="FO9-5A-WxX">
-                        <color key="badgeColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="badgeColor" red="0.25490196079999999" green="0.86666666670000003" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBarItem>
                     <connections>
                         <outlet property="tableView" destination="zry-fA-7Ss" id="KjW-cH-gPd"/>
@@ -1037,7 +1037,7 @@
                         </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Search" image="search Grey" id="pJ4-uA-eMM">
-                        <color key="badgeColor" red="0.54759299620000002" green="0.90761817899999997" blue="0.57195356959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="badgeColor" red="0.25490196079999999" green="0.86666666670000003" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -2587,6 +2587,6 @@
         <segue reference="IT4-Vz-Cza"/>
         <segue reference="kcf-T7-nAo"/>
         <segue reference="7Hd-YA-ayo"/>
-        <segue reference="wfB-se-wui"/>
+        <segue reference="cI7-Td-TzM"/>
     </inferredMetricsTieBreakers>
 </document>
