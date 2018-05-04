@@ -67,6 +67,7 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tblviewAddress != nil {
             appdata.address = appdata.arrCurrUserAddresses[indexPath.row]
+            print(boolSender)
             if boolSender {
                 performSegue(withIdentifier: "ChooseAddressToCheckout", sender: self)
             } else {
@@ -74,9 +75,11 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
                 appdata.address = appdata.arrCurrUserAddresses[indexPath.row]
                 fnAcceptOrDeclinePackage(response: "Accepted", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[indexPath.row].intAddressID)
             }
+        } else if tblviewPeople != nil {
+            appdata.personRecipient = appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
+            self.performSegue(withIdentifier: "choosePersonToEditCheckout", sender: self)
         } else {
             appdata.personRecipient = appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
-            performSegue(withIdentifier: "choosePersonToEditCheckout", sender: self)
         }
     }
     
@@ -98,10 +101,13 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
                     print(dictionary)
                     print("\(response): Successful")
                 }
+                self.appdata.personRecipient = Person(firstName: "FName", lastName: "LName", email: "", avatar: "dd", intUserID: 0, strUsername: "", intNumFriends: 0)
                 DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "CompleteChooseReceivingAddress", sender: self)
-                    let alert = self.appdata.fnDisplayAlert(title: "Success", message: "Package accepted!")
-                    self.present(alert, animated: true, completion: nil)
+                    let alertController = UIAlertController(title: "Success!", message: "Your package has been confirmed!", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                        self.performSegue(withIdentifier: "CompleteChooseReceivingAddress", sender: self)
+                    }))
+                    self.present(alertController, animated: true, completion: nil)
                 }
                 
             case .failure(let error):

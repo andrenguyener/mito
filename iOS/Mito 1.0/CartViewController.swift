@@ -208,6 +208,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func btnGoToEditCheckout(_ sender: Any) {
+        boolSender = true
         performSegue(withIdentifier: "cartoEditCheckout", sender: self)
     }
     

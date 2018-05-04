@@ -202,6 +202,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if segment.selectedSegmentIndex == 1 {
+            boolSender = false
             intOrderID = indexPath.row
             performSegue(withIdentifier: "NotificationToPackageDetails", sender: self)
         }
