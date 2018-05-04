@@ -116,6 +116,9 @@
                                     </pickerView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H3a-LP-2zx">
                                         <rect key="frame" x="60.5" y="20" width="200" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="MIx-2w-dS0"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -130,7 +133,7 @@
                                     <constraint firstAttribute="bottom" secondItem="vrN-o3-owS" secondAttribute="bottom" constant="20" id="KRD-kH-vdf"/>
                                     <constraint firstItem="yoe-L6-xNv" firstAttribute="centerX" secondItem="1yK-pd-ga6" secondAttribute="centerX" id="Qxg-gk-CEw"/>
                                     <constraint firstItem="yoe-L6-xNv" firstAttribute="top" secondItem="H3a-LP-2zx" secondAttribute="bottom" constant="10" id="Rlw-UK-z0G"/>
-                                    <constraint firstItem="H3a-LP-2zx" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yoe-L6-xNv" secondAttribute="trailing" id="S6F-yA-Xbg"/>
+                                    <constraint firstItem="H3a-LP-2zx" firstAttribute="trailing" secondItem="yoe-L6-xNv" secondAttribute="trailing" id="S6F-yA-Xbg"/>
                                     <constraint firstItem="H3a-LP-2zx" firstAttribute="bottom" secondItem="kyB-32-OBo" secondAttribute="bottom" id="TIH-68-lrU"/>
                                     <constraint firstItem="vrN-o3-owS" firstAttribute="leading" secondItem="1yK-pd-ga6" secondAttribute="leading" constant="20" id="UpC-kf-tc5"/>
                                     <constraint firstItem="H3a-LP-2zx" firstAttribute="leading" secondItem="GTz-CR-asI" secondAttribute="leading" id="VRm-L1-5jg"/>
