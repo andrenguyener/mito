@@ -1775,7 +1775,7 @@
                                     <action selector="btnPackageDetailsBackToNotification:" destination="klr-lX-eU9" eventType="touchUpInside" id="vpg-XS-wAo"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U74-Ig-Gfh">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hello Friend" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U74-Ig-Gfh">
                                 <rect key="frame" x="20" y="336" width="339" height="264"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -2277,6 +2277,7 @@
                                         <rect key="frame" x="0.0" y="147" width="200" height="30"/>
                                         <color key="backgroundColor" red="0.56078431370000004" green="0.90196078430000004" blue="0.58431372550000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="KOM-zu-mQa"/>
                                             <constraint firstAttribute="width" constant="200" id="lyk-4D-S0J"/>
                                         </constraints>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2569,8 +2570,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="n5u-Su-hpZ"/>
-        <segue reference="kcf-T7-nAo"/>
+        <segue reference="eNC-Nf-pOF"/>
         <segue reference="7Hd-YA-ayo"/>
-        <segue reference="wfB-se-wui"/>
+        <segue reference="cI7-Td-TzM"/>
     </inferredMetricsTieBreakers>
 </document>
