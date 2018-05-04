@@ -43,12 +43,18 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i9J-yt-UsC">
                                         <rect key="frame" x="0.0" y="50" width="334.5" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TQZ-rQ-MLe" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="100" width="334.5" height="38"/>
@@ -218,6 +224,9 @@
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fws-oZ-uB6">
                                                         <rect key="frame" x="0.0" y="58" width="320" height="20.5"/>
@@ -230,6 +239,9 @@
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gS3-iL-nDh">
                                                         <rect key="frame" x="0.0" y="116.5" width="320" height="20"/>
@@ -242,6 +254,9 @@
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8rI-gc-UMe">
                                                         <rect key="frame" x="0.0" y="174.5" width="320" height="20"/>
@@ -254,6 +269,12 @@
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="textFieldPasswordChecker:" destination="WyY-un-hcv" eventType="editingDidEnd" id="IZw-p1-P0d"/>
+                                                        </connections>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Re-enter Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWz-qJ-w56">
                                                         <rect key="frame" x="0.0" y="232.5" width="320" height="20"/>
@@ -266,6 +287,12 @@
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="textFieldConfirmPassword:" destination="WyY-un-hcv" eventType="editingDidEnd" id="Iyc-3C-3yw"/>
+                                                        </connections>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXf-Rv-ach">
                                                         <rect key="frame" x="0.0" y="290.5" width="320" height="20"/>
@@ -278,24 +305,47 @@
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="textFieldVerifyEmail:" destination="WyY-un-hcv" eventType="editingDidEnd" id="1ny-6t-peI"/>
+                                                            <outlet property="delegate" destination="WyY-un-hcv" id="11X-0L-kcj"/>
+                                                        </connections>
                                                     </textField>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qJA-Cb-HOt">
                                                         <rect key="frame" x="0.0" y="348.5" width="320" height="32"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Month" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kkC-yD-JmX">
-                                                                <rect key="frame" x="0.0" y="0.0" width="49.5" height="32"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Birthday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kkC-yD-JmX">
+                                                                <rect key="frame" x="0.0" y="0.0" width="64.5" height="32"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="meo-OE-pr4">
-                                                                <rect key="frame" x="49.5" y="0.0" width="270.5" height="32"/>
+                                                                <rect key="frame" x="64.5" y="0.0" width="255.5" height="32"/>
                                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
-                                                                <state key="normal" title="Select Month">
+                                                                <state key="normal" title="Select Birthday">
                                                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 </state>
                                                                 <connections>
-                                                                    <action selector="btnMonthPressed:" destination="WyY-un-hcv" eventType="touchUpInside" id="zJ7-oe-L29"/>
+                                                                    <action selector="btnBirthdayPressed:" destination="WyY-un-hcv" eventType="touchUpInside" id="zJ7-oe-L29"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="2lJ-zx-ls0">
+                                                        <rect key="frame" x="0.0" y="380.5" width="335" height="0.0"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gpq-D7-QBU">
+                                                                <rect key="frame" x="0.0" y="0.0" width="48" height="0.0"/>
+                                                                <state key="normal" title="Cancel"/>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sM1-Js-sC1">
+                                                                <rect key="frame" x="298" y="0.0" width="37" height="0.0"/>
+                                                                <state key="normal" title="Done"/>
+                                                                <connections>
+                                                                    <action selector="btnSelectBirthdayDone:" destination="WyY-un-hcv" eventType="touchUpInside" id="Ifv-kA-Y88"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -314,7 +364,9 @@
                                                     <constraint firstItem="8rI-gc-UMe" firstAttribute="width" secondItem="Ljh-3o-PE2" secondAttribute="width" id="dEp-se-nwi"/>
                                                     <constraint firstItem="kLZ-kE-kzA" firstAttribute="width" secondItem="Ljh-3o-PE2" secondAttribute="width" id="hHN-5b-A44"/>
                                                     <constraint firstItem="2h6-SM-hUZ" firstAttribute="width" secondItem="Ljh-3o-PE2" secondAttribute="width" id="iZP-J2-eJI"/>
+                                                    <constraint firstAttribute="trailing" secondItem="2lJ-zx-ls0" secondAttribute="trailing" id="kWD-tO-LOS"/>
                                                     <constraint firstItem="guy-jO-d3B" firstAttribute="width" secondItem="Ljh-3o-PE2" secondAttribute="width" id="kyp-c8-nLl"/>
+                                                    <constraint firstItem="2lJ-zx-ls0" firstAttribute="leading" secondItem="JSi-F7-D59" secondAttribute="leading" id="mTE-oR-qTk"/>
                                                     <constraint firstItem="HlH-uu-ygQ" firstAttribute="width" secondItem="Ljh-3o-PE2" secondAttribute="width" id="oWI-bp-2VU"/>
                                                     <constraint firstItem="cWz-qJ-w56" firstAttribute="width" secondItem="Ljh-3o-PE2" secondAttribute="width" id="wiU-TZ-QfG"/>
                                                     <constraint firstItem="fXf-Rv-ach" firstAttribute="width" secondItem="Ljh-3o-PE2" secondAttribute="width" id="x4h-jQ-LyA"/>
@@ -386,6 +438,7 @@
                     <connections>
                         <outlet property="btnMonth" destination="meo-OE-pr4" id="dKd-yU-Y8d"/>
                         <outlet property="btnNext" destination="mN7-H5-WHv" id="9c1-dX-JVe"/>
+                        <outlet property="confirmPicker" destination="2lJ-zx-ls0" id="TFU-qa-b74"/>
                         <outlet property="monthPicker" destination="guy-jO-d3B" id="wwE-6e-kbV"/>
                         <outlet property="passwordConfSU" destination="NFe-9a-357" id="1YR-V9-Q48"/>
                         <outlet property="passwordSU" destination="2h6-SM-hUZ" id="Bmt-mY-hdK"/>
@@ -422,7 +475,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="PGp-mo-oIW">
-                                                <rect key="frame" x="20" y="65.5" width="335" height="542"/>
+                                                <rect key="frame" x="20" y="65.5" width="335" height="322"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address Nickname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9TY-rv-b49">
                                                         <rect key="frame" x="0.0" y="0.0" width="335" height="20"/>
@@ -435,6 +488,9 @@
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Street address or P.O. Box" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xO1-Vh-xSd">
                                                         <rect key="frame" x="0.0" y="58" width="335" height="20"/>
@@ -447,6 +503,9 @@
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apt, Suite, Unit, Building (optional)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fDd-p4-aEr">
                                                         <rect key="frame" x="0.0" y="116" width="335" height="20"/>
@@ -459,6 +518,9 @@
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXe-YI-ihJ">
                                                         <rect key="frame" x="0.0" y="174" width="335" height="20"/>
@@ -471,6 +533,9 @@
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jxi-BM-Uxn">
                                                         <rect key="frame" x="0.0" y="232" width="335" height="32"/>
@@ -493,39 +558,64 @@
                                                             </button>
                                                         </subviews>
                                                     </stackView>
+                                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="UH1-xf-5ij">
+                                                        <rect key="frame" x="0.0" y="266" width="335" height="0.0"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Kg-1N-elm">
+                                                                <rect key="frame" x="0.0" y="0.0" width="48" height="0.0"/>
+                                                                <state key="normal" title="Cancel"/>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ecX-Ql-4lU">
+                                                                <rect key="frame" x="298" y="0.0" width="37" height="0.0"/>
+                                                                <state key="normal" title="Done"/>
+                                                                <connections>
+                                                                    <action selector="btnSelectBirthdayDone:" destination="WyY-un-hcv" eventType="touchUpInside" id="aaE-0T-FWP"/>
+                                                                    <action selector="btnSelectStateDone:" destination="Eua-Q9-CQ1" eventType="touchUpInside" id="rH7-18-0hL"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="State:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eOA-aA-qaP">
-                                                        <rect key="frame" x="0.0" y="268" width="271" height="20.5"/>
+                                                        <rect key="frame" x="0.0" y="268" width="335" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TC3-w8-VvJ">
-                                                        <rect key="frame" x="0.0" y="258.5" width="271" height="30"/>
+                                                        <rect key="frame" x="0.0" y="268" width="335" height="30"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eql-j2-IXw">
-                                                        <rect key="frame" x="0.0" y="268" width="320" height="216"/>
+                                                    <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eql-j2-IXw">
+                                                        <rect key="frame" x="0.0" y="266" width="320" height="0.0"/>
                                                     </pickerView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ZIP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Smx-Cl-CJn">
-                                                        <rect key="frame" x="0.0" y="488" width="335" height="20"/>
+                                                        <rect key="frame" x="0.0" y="268" width="335" height="20"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vPC-bh-u6c">
-                                                        <rect key="frame" x="0.0" y="512" width="335" height="30"/>
+                                                        <rect key="frame" x="0.0" y="292" width="335" height="30"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="Eua-Q9-CQ1" id="yBE-r4-vIL"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="TC3-w8-VvJ" secondAttribute="trailing" placeholder="YES" id="0GX-ZZ-D4M"/>
                                                     <constraint firstItem="Smx-Cl-CJn" firstAttribute="width" secondItem="9TY-rv-b49" secondAttribute="width" id="1s7-8d-Cq9"/>
                                                     <constraint firstAttribute="trailing" secondItem="TXe-YI-ihJ" secondAttribute="trailing" id="4S0-4Z-Oio"/>
+                                                    <constraint firstItem="UH1-xf-5ij" firstAttribute="leading" secondItem="PGp-mo-oIW" secondAttribute="leading" id="6p3-a1-gVc"/>
                                                     <constraint firstAttribute="trailing" secondItem="eOA-aA-qaP" secondAttribute="trailing" id="7ao-6J-M7G"/>
+                                                    <constraint firstAttribute="trailing" secondItem="UH1-xf-5ij" secondAttribute="trailing" id="87O-lw-YrJ"/>
                                                     <constraint firstItem="rJz-P9-Kg7" firstAttribute="width" secondItem="9TY-rv-b49" secondAttribute="width" id="8eD-DG-wiU"/>
                                                     <constraint firstAttribute="trailing" secondItem="fDd-p4-aEr" secondAttribute="trailing" id="BZH-G2-CAW"/>
                                                     <constraint firstAttribute="trailing" secondItem="733-2a-k0w" secondAttribute="trailing" id="CSk-Sc-nWn"/>
@@ -608,8 +698,10 @@
                         <outlet property="address1AA" destination="rJz-P9-Kg7" id="4or-d7-Wsf"/>
                         <outlet property="address2AA" destination="xIz-7p-sjT" id="0rS-Ll-sqT"/>
                         <outlet property="addressNickname" destination="733-2a-k0w" id="hdh-vw-TYb"/>
+                        <outlet property="addressScrollView" destination="ei8-W3-G3w" id="bDl-vw-NE3"/>
                         <outlet property="btnChooseState" destination="0ez-fv-Hkb" id="B7b-6t-1PD"/>
                         <outlet property="cityAA" destination="j7b-HR-Hwa" id="PoF-fL-f8H"/>
+                        <outlet property="confirmStatePicker" destination="UH1-xf-5ij" id="GH5-MM-eIG"/>
                         <outlet property="pickerviewStateAA" destination="eql-j2-IXw" id="fWg-EC-oUh"/>
                         <outlet property="stateAA" destination="TC3-w8-VvJ" id="823-Ix-NdF"/>
                         <outlet property="zipcodeAA" destination="vPC-bh-u6c" id="5wI-sZ-emX"/>

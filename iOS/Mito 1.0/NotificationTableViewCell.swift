@@ -13,6 +13,8 @@ class NotificationTableViewCell: UITableViewCell {
     @IBOutlet weak var imgPerson: UIImageView!
     @IBOutlet weak var strFirstNameLastName: UILabel!
     @IBOutlet weak var strUsername: UILabel!
+    @IBOutlet weak var btnConfirm: RoundedButton!
+    @IBOutlet weak var btnDecline: RoundedButton!
     
     
     override func awakeFromNib() {

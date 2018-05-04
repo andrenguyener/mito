@@ -17,20 +17,15 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("i added item to cart")
         pickerviewQuantity.isHidden = true
         pickerviewQuantity.delegate = self
         pickerviewQuantity.dataSource = self
-        let url = URL(string: "\(appdata.arrProductSearchResults[appdata.intCurrIndex].image)")
-        if let data = try? Data(contentsOf: url!) {
-            prodImage.image = UIImage(data: data)!
-        }
+        appdata.fnDisplaySimpleImage(strImageURL: appdata.arrProductSearchResults[appdata.intCurrIndex].image, img: prodImage)
         prodTitle.text = appdata.arrProductSearchResults[appdata.intCurrIndex].title
         prodPub.text = appdata.arrProductSearchResults[appdata.intCurrIndex].publisher
         prodPrice.text = appdata.arrProductSearchResults[appdata.intCurrIndex].price
         
         prodDetail.text = appdata.arrProductSearchResults[appdata.intCurrIndex].description
-        print(appdata.arrProductSearchResults[appdata.intCurrIndex].title)
         //img.image = UIImage(named: "Andre2.png")
         // Do any additional setup after loading the view.
     }
@@ -78,6 +73,7 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         lblQuantity.text = appdata.arrQuantity[row]
+        btnQuantity.setTitle("Quantity: \(appdata.arrQuantity[row])", for: .normal)
         pickerviewQuantity.isHidden = true
         btnQuantity.isHidden = false
         lblQuantity.isHidden = false
@@ -87,20 +83,19 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     @IBAction func btnAddToCartPressed(_ sender: Any) {
         let objCurrentProduct = appdata.arrProductSearchResults[appdata.intCurrIndex]
-        print(objCurrentProduct.title)
-        var intAmazonPrice : Decimal = 0.00
+        var decAmazonPrice : Decimal = 0.00
         let itemPrice = objCurrentProduct.price // change later
         formatter.numberStyle = .currency
         formatter.locale = Locale(identifier: "en_US")
         print(objCurrentProduct.price)
         if let number = formatter.number(from: itemPrice) {
-            intAmazonPrice = number.decimalValue
+            decAmazonPrice = number.decimalValue
         }
-        print(intAmazonPrice)
+        print("decAmazonPrice: \(decAmazonPrice)")
         let intQuantity = (Int)(lblQuantity.text!)!
         let parameters: Parameters = [
             "amazonASIN": objCurrentProduct.ASIN,
-            "amazonPrice": intAmazonPrice,
+            "amazonPrice": decAmazonPrice,
             "quantity": intQuantity,
             "productImageUrl": objCurrentProduct.image,
             "productName": objCurrentProduct.title
@@ -111,7 +106,8 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
         Alamofire.request(urlAddToMitoCart!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
             switch response.result {
             case .success:
-                self.fnAlertAddedToCart()
+                let alert = self.appdata.fnDisplayAlert(title: "Done!", message: "Added to cart!")
+                self.present(alert, animated: true, completion: nil)
                 if let dictionary = response.result.value {
                     print(dictionary)
                     // Any code for storing locally
@@ -123,31 +119,10 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
             }
         }
     }
-        
-//        let objCurrentProduct = appdata.arrProductSearchResults[appdata.intCurrIndex]
-//        if (appdata.arrCartLineItems.count > 0) {
-//            for objLineItem in appdata.arrCartLineItems {
-//                if objLineItem.objProduct.ASIN == objCurrentProduct.ASIN {
-//                    objLineItem.intQuantity += (Int)(lblQuantity.text!)!
-//                } else {
-//                    appdata.arrCartLineItems.append(LineItem(objProduct: objCurrentProduct, intQty: (Int)(lblQuantity.text!)!))
-//                }
-//            }
-//        } else {
-//            appdata.arrCartLineItems.append(LineItem(objProduct: objCurrentProduct, intQty: (Int)(lblQuantity.text!)!))
-//        }
-//        self.fnAlertAddedToCart()
-//    }
-    
-    func fnAlertAddedToCart() {
-        let alertController = UIAlertController(title: "Done", message: "Added to cart!", preferredStyle: .alert)
-        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alertController.addAction(defaultAction)
-        present(alertController, animated: true, completion: nil)
-    }
     
     @IBAction func backSearch(_ sender: Any) {
         appdata.arrProductSearchResults.removeAll()
+        print("Pressed back")
         self.performSegue(withIdentifier: "backToTabController", sender: self)
     }
     

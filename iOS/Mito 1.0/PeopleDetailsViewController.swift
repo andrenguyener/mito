@@ -33,16 +33,13 @@ class PeopleDetailsViewController: UIViewController {
         lblName.text = "\(friend.firstName) \(friend.lastName)"
         lblUsername.text = "@\(friend.strUsername)"
         btnNumFriends.setTitle("\(friend.intNumFriends) friends", for: .normal)
-        let url = URL(string:"\(friend.avatar)")
-        if let data = try? Data(contentsOf: url!) {
-            img.image = UIImage(data: data)!
-        }
+        appdata.fnDisplaySimpleImage(strImageURL: friend.avatar, img: img)
     }
 
     @IBAction func fnAddFriend(_ sender: Any) {
-        print(appdata.arrAllUsers[myIndex].description())
-        print(appdata.intCurrentUserID)
-        let intUser2Id = appdata.arrAllUsers[myIndex].intUserID
+        let friend = appdata.arrCurrFriendsAndAllMitoUsers[mySection][myIndex]
+        print(friend.description())
+        let intUser2Id = friend.intUserID
         
         let parameters: Parameters = [
             "friendId": intUser2Id
@@ -85,6 +82,7 @@ class PeopleDetailsViewController: UIViewController {
         if segue.identifier == "segPeopleDetailsToSearchView" {
             let tabBarController = segue.destination as! UITabBarController
             tabBarController.selectedIndex = 1
+            
         }
     }
 }

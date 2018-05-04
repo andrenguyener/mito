@@ -12,33 +12,94 @@ import Alamofire
 
 class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
-    // Error-Handling
-    // Name constraints?
-    // username should throw error if username is already taken, green checkmark if valid?
     // http://uigarage.net/wp-content/uploads/2016/10/2016-09-10-12.00.44.png
-    // two passwords must be equal
-    // send email to verify real email, code to determine if email is valid
-    // State dropdown
-    // Verify real address before continuing?
     
+    @IBAction func textFieldPasswordChecker(_ sender: Any) {
+        if fnPasswordLessThanSixCharacters(text: passwordSU.text!) {
+            passwordSU.textColor = UIColor.red
+        } else {
+            passwordSU.textColor = UIColor.black
+        }
+    }
+    
+    func fnPasswordLessThanSixCharacters(text: String) -> Bool {
+        var result = false
+        if text.count < 6 {
+            result = true
+        }
+        return result
+    }
+    
+    @IBAction func textFieldConfirmPassword(_ sender: Any) {
+        if fnPasswordsDoNotMatch(text: passwordConfSU.text!) {
+            passwordSU.textColor = UIColor.red
+            passwordConfSU.textColor = UIColor.red
+        } else {
+            passwordSU.textColor = UIColor.black
+            passwordConfSU.textColor = UIColor.black
+        }
+    }
+    
+    func fnPasswordsDoNotMatch(text: String) -> Bool {
+        var result = false
+        if text != passwordSU.text {
+            result = true
+        }
+        return result
+    }
+    
+    @IBAction func textFieldVerifyEmail(_ sender: Any) {
+        if !fnVerifyEmail(text: userEmailSU.text!) {
+            userEmailSU.textColor = UIColor.red
+        } else {
+            userEmailSU.textColor = UIColor.black
+        }
+    }
+    
+    func fnVerifyEmail(text: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluate(with: text)
+    }
     
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var monthPicker: UIPickerView!
     @IBOutlet weak var btnMonth: UIButton!
     @IBOutlet weak var btnNext: UIButton!
+    @IBOutlet weak var confirmPicker: UIStackView!
+    @IBOutlet weak var confirmStatePicker: UIStackView!
     
-    var urlStates = URL(string: "https://api.myjson.com/bins/penjf") // JSON file containing US states
-    var urlMonths = URL(string: "https://api.myjson.com/bins/1175mz") // JSON file containing months
-//    var tempAccountHolder : Parameters = (Dictionary<String, Any>)()
     var appdata = AppData.shared
     
-    @IBAction func btnMonthPressed(_ sender: Any) {
+    @IBAction func btnBirthdayPressed(_ sender: Any) {
         if monthPicker.isHidden == true {
             monthPicker.isHidden = false
+            confirmPicker.isHidden = false
             btnNext.isHidden = true
         }
+        monthPicker.selectRow(2, inComponent: 0, animated: false) // Pre-select row not working
         appdata.arrMonths.sort(by: fnSortMonthsByNumber)
+        appdata.arrYears.sort(by: fnSortYearChronologically)
+    }
+    
+    @IBAction func btnSelectBirthdayDone(_ sender: Any) {
+        monthPicker.isHidden = true
+        confirmPicker.isHidden = true
+        btnNext.isHidden = false
+        strMonth = String(appdata.arrMonths[monthPicker.selectedRow(inComponent: 0)].intNum)
+        strDay = appdata.arrDays[monthPicker.selectedRow(inComponent: 1)]
+        strYear = appdata.arrYears[monthPicker.selectedRow(inComponent: 2)]
+        strUserDOB = "\(strMonth)/\(strDay)/\(strYear)"
+        btnMonth.setTitle(strUserDOB, for: .normal)
+    }
+    
+    @IBAction func btnSelectStateDone(_ sender: Any) {
+        pickerviewStateAA.isHidden = true
+        confirmStatePicker.isHidden = true
+        let objStateSelected = appdata.arrStates[pickerviewStateAA.selectedRow(inComponent: 0)]
+        strState = objStateSelected.value
+        btnChooseState.setTitle(objStateSelected.abbrev, for: .normal)
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -80,25 +141,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         }
     }
     
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if monthPicker != nil && !monthPicker.isHidden {
-            monthPicker.isHidden = true
-            btnNext.isHidden = false
-            strMonth = String(appdata.arrMonths[row].intNum)
-            strDay = appdata.arrDays[monthPicker.selectedRow(inComponent: 1)]
-            strYear = appdata.arrYears[monthPicker.selectedRow(inComponent: 2)]
-            strUserDOB = "\(strMonth)/\(strDay)/\(strYear)"
-            btnMonth.setTitle(strUserDOB, for: .normal)
-        } else if pickerviewStateAA != nil && !pickerviewStateAA.isHidden {
-            pickerviewStateAA.isHidden = true
-            strState = appdata.arrStates[row].value
-            btnChooseState.setTitle(appdata.arrStates[row].abbrev, for: .normal)
-        }
-//        } else if monthPicker.isHidden {
-//            btnNext.isHidden = false
-//        }
-    }
-    
     // Opening Login Page
     @IBAction func btnLoginPressed(_ sender: Any) {
         let parameters: Parameters = [
@@ -120,10 +162,15 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                             let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
                             self.appdata.intCurrentUserID = (data["userId"] as? Int)!
                         }
+                        let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+                        print("UserInfo: \(data["UserInfo"])")
+                        print("UserID: \(data["userId"])")
                     }
                 }
                 
             case .failure(let error):
+                let alert = self.appdata.fnDisplayAlert(title: "Whoops!", message: "Incorrect email or password")
+                self.present(alert, animated: true, completion: nil)
                 print(error)
             }
         }
@@ -132,8 +179,17 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     @IBAction func btnSignUpPressed(_ sender: Any) {
         self.performSegue(withIdentifier: "signup", sender: self)
-        self.fnLoadMonthData()
-        self.fnLoadStateData()
+        let date = Date()
+        let calendar = Calendar.current
+        let year = calendar.component(.year, from: date)
+        appdata.arrYears.removeAll()
+        for num in 1900...year {
+            appdata.arrYears.append(String(num))
+        }
+        appdata.arrMonths.removeAll()
+        appdata.arrStates.removeAll()
+        appdata.fnLoadMonthData()
+        appdata.fnLoadStateData()
     }
     
     // Sign up page
@@ -146,6 +202,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var userEmailSU: UITextField!
     
     @IBOutlet weak var signupScrollView: UIScrollView!
+    @IBOutlet weak var addressScrollView: UIScrollView!
     
     var strMonth = ""
     var strDay = ""
@@ -160,9 +217,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         let strPasswordConfirmation = passwordConfSU.text
         let strEmail = userEmailSU.text
         let strUserDOB = "\(strMonth)/\(strDay)/\(strYear)"
-        print(strUserDOB)
         
-        // Should have last name field so we don't default to Smith
         let parameters: Parameters = [
             "userFname": strFirstName!,
             "userLname": strLastName!,
@@ -174,45 +229,26 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         ]
         
         self.appdata.tempAccountHolder = parameters
-        print(self.appdata.tempAccountHolder)
+        print("Temp Account Holder: \(self.appdata.tempAccountHolder)")
     
         Alamofire.request("https://api.projectmito.io/v1/users/validate", method: .post, parameters: parameters, encoding: JSONEncoding.default).validate().responseJSON { response in
             switch response.result {
             case .success:
-                // http url response
-                if let dictionary = response.result.value {
-                    print("JSON: \(dictionary)") // serialized json response
+                if response.result.value != nil {
                     self.performSegue(withIdentifier: "signUpToAddress", sender: self)
-                    
                 }
 
             case .failure(let error):
+                if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                    if utf8Text.contains("username") {
+                        self.usernameSU.textColor = UIColor.red
+                    } else if utf8Text.contains("email") {
+                        self.userEmailSU.textColor = UIColor.red
+                    }
+                }
                 print(error)
             }
         }
-
-//        Alamofire.request("https://api.projectmito.io/v1/users", method: .post, parameters: parameters, encoding: JSONEncoding.default).validate().responseJSON { response in
-//            switch response.result {
-//            case .success:
-//                // http url response
-//                let authHeader = response.response?.allHeaderFields["Authorization"] ?? ""
-//                if let dictionary = response.result.value {
-//                    print("JSON: \(dictionary)") // serialized json response
-//                    self.performSegue(withIdentifier: "signUpToAddress", sender: self)
-//                    DispatchQueue.main.async {
-//                        UserDefaults.standard.set(dictionary, forKey: "UserInfo")
-//                        UserDefaults.standard.set(authHeader, forKey: "Authorization")
-//                        if UserDefaults.standard.object(forKey: "UserInfo") != nil {
-//                            let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
-//                            self.appdata.intCurrentUserID = (data["userId"] as? Int)!
-//                        }
-//                    }
-//                }
-//
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
     }
     
     // Add Address page
@@ -221,7 +257,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var address1AA: UITextField!
     @IBOutlet weak var address2AA: UITextField!
     @IBOutlet weak var cityAA: UITextField!
-    @IBOutlet weak var stateAA: UITextField! // can't figure out what this is
+    @IBOutlet weak var stateAA: UITextField!
     @IBOutlet weak var zipcodeAA: UITextField!
     @IBOutlet weak var pickerviewStateAA: UIPickerView!
     @IBOutlet weak var btnChooseState: UIButton!
@@ -275,7 +311,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                             "cityName": strCity!,
                             "zipCode": zipcode!,
                             "stateName": strState!,
-                            "aliasName": alias
+                            "aliasName": alias!
                         ]
                         
                         self.addAddress(parameterAddress: parametersAddress)
@@ -320,59 +356,23 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBAction func btnStatePressed(_ sender: Any) {
         if pickerviewStateAA.isHidden {
             pickerviewStateAA.isHidden = false
+            confirmStatePicker.isHidden = false
         }
         appdata.arrStates.sort(by: fnSortStateAlphabetically)
     }
     
-    
-    
     //////////// Keyboard Functions, Superview ////////
-    
 
-    func fnLoadStateData() {
-        Alamofire.request(urlStates!, method: .get, encoding: JSONEncoding.default).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                if let dictionary = response.result.value as! NSDictionary?{
-                    for obj in dictionary {
-                        let stateObj = State(abbrev: obj.key as! String, value: obj.value as! String)
-                        self.appdata.arrStates.append(stateObj)
-                    }
-                }
-                
-            case .failure(let error):
-                print("Get all users error")
-                print(error)
-            }
-        }
-    }
-    
-    func fnLoadMonthData() {
-        Alamofire.request(urlMonths!, method: .get, encoding: JSONEncoding.default).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                if let dictionary = response.result.value as! NSDictionary?{
-                    for obj in dictionary {
-                        let objMonthValues = obj.value as! NSDictionary
-                        let objMonth = Month(strName: objMonthValues["name"] as! String, strAbbrev: objMonthValues["short"] as! String, strNum: objMonthValues["number"] as! String, intNumDays: objMonthValues["days"] as! Int)
-                        self.appdata.arrMonths.append(objMonth)
-                    }
-                    
-                }
-                
-            case .failure(let error):
-                print("Get all users error")
-                print(error)
-            }
-        }
-    }
-    
     func fnSortMonthsByNumber(this: Month, that: Month) -> Bool {
         return this.intNum < that.intNum
     }
     
     func fnSortStateAlphabetically(this: State, that: State) -> Bool {
         return this.value < that.value
+    }
+    
+    func fnSortYearChronologically(this: String, that: String) -> Bool {
+        return Int(this)! > Int(that)!
     }
     
     var activeTextField: UITextField!
@@ -388,7 +388,42 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             pickerviewStateAA.dataSource = self
         }
         super.viewDidLoad()
+        if signupScrollView != nil {
+            signupScrollView.keyboardDismissMode = .onDrag
+        }
+        if addressScrollView != nil {
+            addressScrollView.keyboardDismissMode = .onDrag
+        }
         self.hideKeyboard()
+    }
+    
+    // add textfield as delegate of viewcontroller first
+    // Start Editing The Text Field
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        moveTextField(textField, moveDistance: -200, up: true)
+    }
+    
+    // Finish Editing The Text Field
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        moveTextField(textField, moveDistance: -200, up: false)
+    }
+    
+    // Hide the keyboard when the return key pressed
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    // Move the text field in a pretty animation!
+    func moveTextField(_ textField: UITextField, moveDistance: Int, up: Bool) {
+        let moveDuration = 0.3
+        let movement: CGFloat = CGFloat(up ? moveDistance : -moveDistance)
+        
+        UIView.beginAnimations("animateTextField", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(moveDuration)
+        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+        UIView.commitAnimations()
     }
 }
 

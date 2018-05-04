@@ -12,9 +12,11 @@ import Alamofire
 class CartViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
     var appdata = AppData.shared
-    var objCartItem = 0
-    var urlAddToMitoCart = URL(string: "https://api.projectmito.io/v1/cart")
-    var urlCheckoutMitoCart = URL(string: "https://api.projectmito.io/v1/cart/process")
+    var intLineItemIndex = 0
+
+    @IBAction func btnOrderSummaryToEditCheckout(_ sender: Any) {
+        performSegue(withIdentifier: "orderSummaryToEditCheckout", sender: self)
+    }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -31,18 +33,22 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         pickerviewEditQuantity.isHidden = true
         let intNewQuantity = Int(appdata.arrQuantity[row])!
-        fnUpdateLineItemQuantity(objIndex: objCartItem, intNewQuantity: intNewQuantity)
+        fnUpdateLineItemQuantity(intCartItemIndex: intLineItemIndex, intNewQuantity: intNewQuantity)
     }
     
-    func fnUpdateLineItemQuantity(objIndex: Int, intNewQuantity: Int) {
+    func fnUpdateLineItemQuantity(intCartItemIndex: Int, intNewQuantity: Int) {
+        let objCartLineItem = appdata.arrCartLineItems[intCartItemIndex]
         let parameters: Parameters = [
-            "amazonASIN": appdata.arrCartLineItems[objIndex].objProduct.ASIN,
-            "amazonPrice": appdata.arrCartLineItems[objIndex].objProduct.price,
-            "quantity": intNewQuantity
+            "amazonASIN": objCartLineItem.objProduct.ASIN,
+            "amazonPrice": objCartLineItem.objProduct.price,
+            "quantity": intNewQuantity,
+            "productImageUrl": objCartLineItem.objProduct.image,
+            "productName": objCartLineItem.objProduct.title
         ]
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
+        let urlAddToMitoCart = URL(string: "https://api.projectmito.io/v1/cart")
         Alamofire.request(urlAddToMitoCart!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
             switch response.result {
             case .success:
@@ -71,8 +77,8 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     var urlGetMitoCartCall = URL(string: "https://api.projectmito.io/v1/cart/retrieve")
     var urlAlterMitoCart = URL(string: "https://api.projectmito.io/v1/cart")
     
-    @IBAction func finishShopping(_ sender: Any) {
-        performSegue(withIdentifier: "toCheckout", sender: self)
+    @IBAction func btnEditCheckout(_ sender: Any) {
+        performSegue(withIdentifier: "checkoutToEditCheckout", sender: self)
     }
     
     @IBAction func backButton(_ sender: Any) {
@@ -87,6 +93,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var taxCheckout: UILabel!
     @IBOutlet weak var imgRecipient: UIImageView!
     @IBOutlet weak var recipientName: UILabel!
+    @IBOutlet weak var lblCreditCardNumber: UILabel!
     
     let formatter = NumberFormatter()
     var intNumItems = 0
@@ -94,7 +101,6 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Number of items: \(intNumItems)")
         if cartTableView != nil {
             pickerviewEditQuantity.dataSource = self
             pickerviewEditQuantity.delegate = self
@@ -123,8 +129,13 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
                 imgRecipient.image = UIImage(data: data)
                 imgRecipient.contentMode = .scaleAspectFit
             }
-            recipientName.text = "Sopheaky Neaky"
-        } else {
+            recipientName.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
+            lblCreditCardNumber.text = appdata.strCardNumber
+            appdata.fnDisplaySimpleImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipient)
+        } else if lblNotifyYouMessage != nil {
+            lblNotifyYouMessage.text = "We will notify you when \(appdata.personRecipient.firstName) accepts!"
+        }
+        else {
             appdata.arrCartLineItems.removeAll()
         }
     }
@@ -136,7 +147,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             let itemPrice = "$" + element.objProduct.price // change later
             formatter.numberStyle = .currency
             formatter.locale = Locale(identifier: "en_US")
-            var decAmazonPrice: Decimal = 0.0
+            var decAmazonPrice: Decimal = 0.00
             if let number = formatter.number(from: itemPrice) {
                 decAmazonPrice = number.decimalValue
                 let totalAmt = decAmazonPrice * (Decimal)(element.intQuantity)
@@ -196,9 +207,11 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    @IBAction func checkoutToCart(_ sender: Any) {
-        performSegue(withIdentifier: "checkoutToCart", sender: self)
+    @IBAction func btnGoToEditCheckout(_ sender: Any) {
+        performSegue(withIdentifier: "cartoEditCheckout", sender: self)
     }
+    
+    @IBOutlet weak var lblNotifyYouMessage: UILabel!
     
     @IBAction func finishCheckout(_ sender: Any) {
         self.fnFinishCheckout()
@@ -206,11 +219,13 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func fnFinishCheckout() {
+        let urlCheckoutMitoCart = URL(string: "https://api.projectmito.io/v1/cart/process")
         let parameters: Parameters = [
-            "senderAddressId": 7,
-            "recipientId": 36,
+            "cardId": 1,
+            "senderAddressId": appdata.address.intAddressID,
+            "recipientId": appdata.personRecipient.intUserID,
             "message": "First Checkout",
-            "giftOption": 1
+            "giftOption": 0
         ]
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
@@ -266,7 +281,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let number = formatter.number(from: strPrice) {
             let dblPrice = number.decimalValue
             let intQty = (Double)(cartObj.intQuantity)
-            cell.lblPrice.text = (String)(describing: dblPrice * (Decimal)(intQty))
+            cell.lblPrice.text = "$\((String)(describing: dblPrice * (Decimal)(intQty)))"
         }
         cell.lblSellerName.text = String(cartObj.intQuantity) //cartObj.objProduct.publisher
         cell.btnDelete.tag = indexPath.row
@@ -277,50 +292,13 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @objc func fnRemoveItem(_ button: UIButton) {
-        print(button.tag)
         let intLineItemIndex = button.tag
-        fnMakeCallToRemoveItem(intLineItemIndex: intLineItemIndex)
+        fnUpdateLineItemQuantity(intCartItemIndex: intLineItemIndex, intNewQuantity: 0)
         appdata.arrCartLineItems.remove(at: intLineItemIndex)
     }
     
     @objc func fnEditQuantity(_ button: UIButton) {
         pickerviewEditQuantity.isHidden = false
-        print("Button Tag: \(button.tag)")
-        objCartItem = button.tag
+        intLineItemIndex = button.tag
     }
-    
-    func fnMakeCallToRemoveItem(intLineItemIndex: Int) {
-        let objCurrentProduct = appdata.arrCartLineItems[intLineItemIndex].objProduct
-        print(objCurrentProduct.values())
-        var intAmazonPrice : Decimal = 0.00
-        let itemPrice = objCurrentProduct.price // change later
-        if let number = formatter.number(from: itemPrice) {
-            intAmazonPrice = number.decimalValue
-        }
-        let parameters: Parameters = [
-            "amazonASIN": objCurrentProduct.ASIN,
-            "amazonPrice": intAmazonPrice,
-            "quantity": 0
-        ]
-        let headers: HTTPHeaders = [
-            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
-        ]
-        Alamofire.request(urlAlterMitoCart!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
-            switch response.result {
-            case .success:
-                if let dictionary = response.result.value {
-                    print(dictionary)
-                    DispatchQueue.main.async {
-                        self.cartTableView.reloadData()
-                    }
-                    // Any code for storing locally
-                }
-                
-            case .failure(let error):
-                print("Product could not be added to cart")
-                print(error)
-            }
-        }
-    }
-    
 }
