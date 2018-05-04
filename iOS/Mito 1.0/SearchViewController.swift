@@ -160,7 +160,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 let objLargeImage = self.fnAccessFirstDictionaryInArray(dictObj: objImageSet, arrName: "LargeImage")
                                 strImageURL = self.fnAccesStringinObj(dictObj: objLargeImage, strAttribute: "URL")
                             } else {
-                                strImageURL = "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897"
+                                strImageURL = "https://www.yankee-division.com/uploads/1/7/6/5/17659643/notavailable_2_orig.jpg?210b"
                             }
                             let objItemAttribute = self.fnAccessFirstDictionaryInArray(dictObj: item, arrName: "ItemAttributes")
                             
@@ -280,7 +280,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
             let objPerson = self.appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
             let urlPeopleImage = URL(string:"\(objPerson.avatar)")
-            let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
+            let defaultURL = URL(string: "https://www.yankee-division.com/uploads/1/7/6/5/17659643/notavailable_2_orig.jpg?210b")
             if let data = try? Data(contentsOf: urlPeopleImage!) {
                 cell.img.image = UIImage(data: data)!
             } else if let data = try? Data(contentsOf: defaultURL!){

@@ -2143,9 +2143,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JiR-sN-ga8">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XOb-8q-VOF">
+                                <rect key="frame" x="124" y="47" width="126" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JiR-sN-ga8">
                                 <rect key="frame" x="0.0" y="76" width="375" height="591"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddressTableViewCell" rowHeight="145" id="kwd-yB-Q0C" customClass="AddressTableViewCell" customModule="Mito_1_0" customModuleProvider="target">
@@ -2194,16 +2199,14 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XOb-8q-VOF">
-                                <rect key="frame" x="124.5" y="47" width="126" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="XOb-8q-VOF" firstAttribute="top" secondItem="Zws-sV-Rq5" secondAttribute="top" constant="27" id="4S2-IS-y2Z"/>
+                            <constraint firstItem="JiR-sN-ga8" firstAttribute="trailing" secondItem="Zws-sV-Rq5" secondAttribute="trailing" id="5Pw-HF-bz9"/>
+                            <constraint firstItem="JiR-sN-ga8" firstAttribute="top" secondItem="XOb-8q-VOF" secondAttribute="bottom" constant="8" id="Iqc-8C-URr"/>
+                            <constraint firstItem="JiR-sN-ga8" firstAttribute="bottom" secondItem="Zws-sV-Rq5" secondAttribute="bottom" id="Svf-mN-PDY"/>
+                            <constraint firstItem="JiR-sN-ga8" firstAttribute="leading" secondItem="Zws-sV-Rq5" secondAttribute="leading" id="ia9-05-7r4"/>
                             <constraint firstItem="XOb-8q-VOF" firstAttribute="centerX" secondItem="oAx-US-ddD" secondAttribute="centerX" id="rY4-d8-MRi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Zws-sV-Rq5"/>
@@ -2580,9 +2583,9 @@
         <image name="swirlsearch" width="2257" height="5634"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="n5u-Su-hpZ"/>
+        <segue reference="ESz-AJ-FsE"/>
         <segue reference="kcf-T7-nAo"/>
-        <segue reference="7Hd-YA-ayo"/>
+        <segue reference="2rk-ch-wix"/>
         <segue reference="wfB-se-wui"/>
     </inferredMetricsTieBreakers>
 </document>
