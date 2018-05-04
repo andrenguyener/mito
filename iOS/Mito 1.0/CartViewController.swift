@@ -130,7 +130,11 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
                 imgRecipient.contentMode = .scaleAspectFit
             }
             recipientName.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
-            lblCreditCardNumber.text = appdata.strCardNumber
+            
+            // hide first 8 numbers of card information
+            let stars = String(repeating:"*", count:12)
+            let last4 = String(appdata.strCardNumber.suffix(4))
+            lblCreditCardNumber.text = "\(stars)\(last4)"
             appdata.fnDisplaySimpleImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipient)
         } else if lblNotifyYouMessage != nil {
             lblNotifyYouMessage.text = "We will notify you when \(appdata.personRecipient.firstName) accepts!"
