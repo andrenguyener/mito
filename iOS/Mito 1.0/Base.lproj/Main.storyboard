@@ -406,45 +406,45 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Fs1-h8-PX9">
-                                <rect key="frame" x="20" y="384" width="335" height="224"/>
+                                <rect key="frame" x="20" y="428" width="335" height="180"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fsv-I5-Xyw">
-                                        <rect key="frame" x="0.0" y="0.0" width="202" height="37.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="202" height="30"/>
                                         <state key="normal" title="Load Current User Addresses"/>
                                         <connections>
                                             <action selector="loadCurrentUserAddresses:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="gXF-KS-W4y"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gTl-jl-SVl">
-                                        <rect key="frame" x="0.0" y="37.5" width="132" height="37"/>
+                                        <rect key="frame" x="0.0" y="30" width="132" height="30"/>
                                         <state key="normal" title="Get Current Orders"/>
                                         <connections>
                                             <action selector="loadCurrentOrders:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="9b7-fN-JnV"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2TV-N5-l9j">
-                                        <rect key="frame" x="0.0" y="74.5" width="135" height="37.5"/>
+                                        <rect key="frame" x="0.0" y="60" width="135" height="30"/>
                                         <state key="normal" title="Insert New Address"/>
                                         <connections>
                                             <action selector="fnInsertNewAddress:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="jyF-6c-1D5"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o0A-zd-r6F">
-                                        <rect key="frame" x="0.0" y="112" width="184" height="37.5"/>
+                                        <rect key="frame" x="0.0" y="90" width="184" height="30"/>
                                         <state key="normal" title="Accept or Decline Package"/>
                                         <connections>
                                             <action selector="fnAcceptOrDeclinePackage:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="SCk-Nt-5FE"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jeq-GC-wZz">
-                                        <rect key="frame" x="0.0" y="149.5" width="155" height="37"/>
+                                        <rect key="frame" x="0.0" y="120" width="155" height="30"/>
                                         <state key="normal" title="Get Pending Packages"/>
                                         <connections>
                                             <action selector="fnGetPendingPackages:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="6SP-sL-mFq"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x9O-gk-cIg">
-                                        <rect key="frame" x="0.0" y="186.5" width="162" height="37.5"/>
+                                        <rect key="frame" x="0.0" y="150" width="162" height="30"/>
                                         <state key="normal" title="Get Incoming Packages"/>
                                         <connections>
                                             <action selector="fnGetIncomingPackages:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="oGZ-aN-dNh"/>
@@ -470,6 +470,7 @@
                         <viewLayoutGuide key="safeArea" id="Xbx-PN-3NB"/>
                         <variation key="default">
                             <mask key="subviews">
+                                <exclude reference="Lyj-rC-s4x"/>
                                 <exclude reference="iMS-Cy-5G5"/>
                                 <exclude reference="7Yf-yx-eOF"/>
                                 <exclude reference="g02-2W-kgd"/>

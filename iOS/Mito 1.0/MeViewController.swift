@@ -141,12 +141,12 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
     func fnInsertNewAddress() {
         let urlInsertNewAddress = URL(string: "https://api.projectmito.io/v1/address/")
         let parameters: Parameters = [
-            "streetAddress1": "Ash St",
+            "streetAddress1": "445 Mount Eden Road",
             "streetAddress2": "",
-            "cityName": "Portland",
-            "stateName": "Oregon",
-            "zipCode": 97035,
-            "aliasName": "P-Town"
+            "cityName": "Philadelphia",
+            "stateName": "Pennsylvania",
+            "zipCode": 19019,
+            "aliasName": "Apartment"
         ]
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
