@@ -144,7 +144,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let itemSearchResponse = myJson["ItemSearchResponse"] as! NSDictionary
                     let objItems = self.fnAccessFirstDictionaryInArray(dictObj: itemSearchResponse, arrName: "Items")
                     if objItems["Item"] == nil {
-                        print("Error")
+                        print("Item doesn't show up")
                     } else {
                         let arrItem = objItems["Item"] as! NSArray
                         for itemObj in arrItem {
@@ -199,7 +199,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 publisher_brand = "Brand"
                             }
                             let product: Product = Product(image: strImageURL, ASIN: strASIN, title: title, publisher: publisher_brand, price: formattedPrice, description: itemFeature)
-                            print(product.title)
                             self.appdata.arrProductSearchResults.append(product)
                             self.swirlSearchImg.isHidden = true
                         }
@@ -263,7 +262,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Product
         if productPeopleTab.selectedSegmentIndex == 0 {
-            print("Row \(indexPath.row)")
             let cell = tableView.dequeueReusableCell(withIdentifier: "productCell", for: indexPath) as! ProductTableViewCell
 //            if (indexPath.row == appdata.arrProductSearchResults.count - 1) {
 //                strProductResultsPageNumber += 1

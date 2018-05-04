@@ -26,7 +26,6 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
         prodPrice.text = appdata.arrProductSearchResults[appdata.intCurrIndex].price
         
         prodDetail.text = appdata.arrProductSearchResults[appdata.intCurrIndex].description
-        print(appdata.arrProductSearchResults[appdata.intCurrIndex].title)
         //img.image = UIImage(named: "Andre2.png")
         // Do any additional setup after loading the view.
     }
@@ -84,7 +83,6 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     @IBAction func btnAddToCartPressed(_ sender: Any) {
         let objCurrentProduct = appdata.arrProductSearchResults[appdata.intCurrIndex]
-        print(objCurrentProduct.title)
         var decAmazonPrice : Decimal = 0.00
         let itemPrice = objCurrentProduct.price // change later
         formatter.numberStyle = .currency
