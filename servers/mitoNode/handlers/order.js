@@ -17,11 +17,21 @@ const OrderHandler = (orderStore) => {
 
     const router = express.Router();
 
-    // TODO: Talk to Sopheak to decide how to handle pending/incoming packages
-
-    router.get('/v1/order/:orderId', (req, res) => {
-
-
+    // get all the products within an orderId
+    router.post('/v1/order/products', (req, res) => {
+        // let userJSON = JSON.parse(req.get('X-User'));
+        // let userId = userJSON.userId;
+        let orderId = req.body.orderId;
+        orderStore
+            .get(orderId)
+            .then(order => {
+                res.json(order);
+            })
+            .catch(err => {
+                if (err !== breakSignal) {
+                    console.log(err);
+                }
+            })
     });
 
     router.get('', (req, res) => {

@@ -12,7 +12,6 @@ ALTER PROC uspcInsertUserAddress
 @stateName NVARCHAR(30),
 @zipCode NVARCHAR(12),
 @aliasName NVARCHAR(50)
---@UserAddress_ID INT OUT
 AS
 	--retrieve matching StreetAddressId based on the given streetaddress1 and streetaddress 2
 	DECLARE @streetAddressId INT
@@ -52,10 +51,15 @@ AS
 			RETURN
 		END
 
+	DECLARE @Default INT = 1
+	IF (SELECT COUNT(*) FROM USER_ADDRESS WHERE UserId = @UserId) > 0
+		BEGIN
+			SET @Default = 0
+		END
+
 	BEGIN TRAN addUserAddress
 		INSERT INTO USER_ADDRESS(AddressId,UserId,IsDefault,Alias,IsDefaultCreatedDate,CreatedDate)
-		VALUES(@newAddressId,@userId,1,@aliasName,@todaysDate,@todaysDate)
-		--SET @UserAddress_ID = (SELECT SCOPE_IDENTITY())
+		VALUES(@newAddressId,@userId,@Default,@aliasName,@todaysDate,@todaysDate)
 		IF @@ERROR <> 0
 			ROLLBACK TRAN addUserAddress
 		ELSE

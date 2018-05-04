@@ -25,6 +25,7 @@ type User struct {
 	UserDOB      string `json:"userDOB"`
 	PhotoUrl     string `json:"photoURL"`
 	NumFriends   int    `json:"NumFriends"`
+	IsDelete     bool   `json:"isDelete"`
 }
 
 //Credentials represents user sign-in credentials
@@ -50,11 +51,21 @@ type Updates struct {
 	UserLname string `json:"userLname"`
 }
 
-//PasswordUpdate representes allowed password updates to a user profile
+//PasswordUpdate represents allowed password updates to a user profile
 type PasswordUpdate struct {
 	UserPassword        string `json:"password"`
-	UserNewPassword     string `jspon:"passwordNew"`
-	UserNewPasswordConf string `jspon:"passwordNewConf"`
+	UserNewPassword     string `json:"passwordNew"`
+	UserNewPasswordConf string `json:"passwordNewConf"`
+}
+
+//PersonalUpdate represents allowed updates to a user profile
+type PersonalUpdate struct {
+	UserFname string `json:"userFname"`
+	UserLname string `json:"userLname"`
+	UserDOB   string `json:"userDOB"`
+	UserEmail string `json:"userEmail"`
+	Username  string `json:"username"`
+	PhotoUrl  string `json:"photoURL"`
 }
 
 //Validate validates the new user and returns an error if
@@ -146,25 +157,37 @@ func (u *User) ApplyUpdates(updates *Updates) error {
 }
 
 func (u *User) ApplyPasswordUpdate(update *PasswordUpdate) error {
+
 	err := u.Authenticate(update.UserPassword)
 	if err != nil {
-		return err
+		return fmt.Errorf("Error Wrong Password")
 	}
 
 	if len(update.UserNewPassword) < 6 {
-
 		return fmt.Errorf("password must be atleast 6 characters")
 	}
 	if strings.Compare(update.UserNewPassword, update.UserNewPasswordConf) != 0 {
-
 		return fmt.Errorf("passwords do not match")
 	}
 
 	hashPass, err := bcrypt.GenerateFromPassword([]byte(update.UserNewPassword), bcryptCost)
 	if err != nil {
+		fmt.Print("Error Crypt")
 		return err
 	}
 	u.PasswordHash = hashPass
+	return nil
+}
+func (u *User) ValidatePersonalUpdate(update *PersonalUpdate) error {
+	_, err := mail.ParseAddress(update.UserEmail)
+	if err != nil {
+		return fmt.Errorf("invalid email: %s", err)
+	}
+
+	if len(update.Username) == 0 {
+
+		return fmt.Errorf("username must be atleast 1 character long")
+	}
 
 	return nil
 }

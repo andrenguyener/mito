@@ -37,7 +37,7 @@ fi
 # because it is default to 6379.
 docker run \
 -d \
--e ADDR=$MESSAGING_CONTAINER:80 \
+-e ADDR=:80 \
 -e MQADDR=$MQ_CONTAINER:5672 \
 -e REDISADDR=redissvr:6379 \
 --name $MESSAGING_CONTAINER \
