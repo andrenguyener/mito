@@ -1789,7 +1789,7 @@
                             <constraint firstAttribute="trailing" secondItem="Uif-5A-U2x" secondAttribute="trailing" constant="52" id="6P2-ys-qm5"/>
                             <constraint firstItem="lot-L2-wzT" firstAttribute="top" secondItem="4Z8-cM-CfV" secondAttribute="top" constant="147" id="6QL-Fq-Rsz"/>
                             <constraint firstItem="Wrg-Ie-2E7" firstAttribute="baseline" secondItem="4eM-pX-URR" secondAttribute="baseline" id="B54-St-jHn"/>
-                            <constraint firstItem="Uif-5A-U2x" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="lot-L2-wzT" secondAttribute="trailing" symbolic="YES" id="D33-Tc-hvY"/>
+                            <constraint firstItem="Uif-5A-U2x" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="lot-L2-wzT" secondAttribute="trailing" constant="8" symbolic="YES" id="D33-Tc-hvY"/>
                             <constraint firstItem="G1y-vy-BO0" firstAttribute="top" secondItem="4Z8-cM-CfV" secondAttribute="top" constant="20" id="DSc-F8-k8Q"/>
                             <constraint firstItem="4Z8-cM-CfV" firstAttribute="trailing" secondItem="4eM-pX-URR" secondAttribute="trailing" constant="73" id="GcO-5Z-jhq"/>
                             <constraint firstItem="lot-L2-wzT" firstAttribute="centerY" secondItem="Uif-5A-U2x" secondAttribute="centerY" id="HvW-4b-Efq"/>
@@ -1804,7 +1804,10 @@
                     </view>
                     <connections>
                         <outlet property="imgSender" destination="lot-L2-wzT" id="jMT-kL-xb2"/>
+                        <outlet property="imgSenderProfile" destination="lot-L2-wzT" id="rtd-gu-ANq"/>
+                        <outlet property="lblMessage" destination="U74-Ig-Gfh" id="RsX-TA-Y0r"/>
                         <outlet property="strPackageSenderName" destination="Uif-5A-U2x" id="dWt-AA-W7h"/>
+                        <outlet property="strSenderName" destination="Uif-5A-U2x" id="xdl-0u-i6c"/>
                         <segue destination="5ev-RP-TnR" kind="show" identifier="PackageDetailsBackToNotification" id="7Hd-YA-ayo"/>
                         <segue destination="y1B-fc-fA5" kind="show" identifier="PackageToChooseReceivingAddress" id="kcf-T7-nAo"/>
                     </connections>
@@ -2437,10 +2440,10 @@
             </objects>
             <point key="canvasLocation" x="3932" y="250"/>
         </scene>
-        <!--View Controller-->
+        <!--Checkout Select User View Controller-->
         <scene sceneID="IIU-ar-ycY">
             <objects>
-                <viewController id="jmz-bN-xaL" sceneMemberID="viewController">
+                <viewController id="jmz-bN-xaL" customClass="CheckoutSelectUserViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AHA-pg-VVB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2510,7 +2513,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="eD1-jf-ACa">
                                 <rect key="frame" x="16" y="267" width="343" height="336"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <mutableString key="text">sradtfyguhijokuyjeurytafdr65s6ftgyuhijokp,l,yrtekwjhbwdagsytrXzc 6tvghuijotkmlrew4 r3qenwbhgvdasFTXYZcvyunbijomghkpl;t, rmednwahvgYCFTZxv6c87y v9buviojgfkhlmr et,w3nqbedghasfctxz t8sradtfyguhijokuyjeurytafdr65s6ftgyuhijokp,l,yrtekwjhbwdagsytrXzc 6tvghuijotkmlrew4 r3qenwbhgvdasFTXYZcvyunbijomghkpl;t, rmednwahvgYCFTZxv6c87y v9buviojgfkhlmr et,w3nqbedghasfctxz t8sradtfyguhijokuyjeurytafdr65s6ftgyuhijokp,l,yrtekwjhbwdagsytrXzc 6tvghuijotkmlrew4 r3qenwbhgvdasFTXYZcvyunbijomghkpl;t, rmednwahvgYCFTZxv6c87y v9buviojgfkhlmr et,w3nqbedghasfctxz t8sradtfyguhijokuyjeurytafdr65s6ftgyuhijokp,l,yrtekwjhbwdagsytrXzc 6tvghuijotkmlrew4 r3qenwbhgvdasFTXYZcvyunbijomghkpl;t, rmednwahvgYCFTZxv6c87y v9buviojgfkhlmr et,w3nqbedghasfctxz t8</mutableString>
+                                <string key="text">sradtfyguhijokuyjeurytafdr65s6ftgyuhijokp,l,yrtekwjhbwdagsytrXzc 6tvghuijotkmlrew4 r3qenwbhgvdasFTXYZcvyunbijomghkpl;t, rmednwahvgYCFTZxv6c87y v9buviojgfkhlmr et,w3nqbedghasfctxz t8sradtfyguhijokuyjeurytafdr65s6ftgyuhijokp,l,yrtekwjhbwdagsytrXzc 6tvghuijotkmlrew4 r3qenwbhgvdasFTXYZcvyunbijomghkpl;t, rmednwahvgYCFTZxv6c87y v9buviojgfkhlmr et,w3nqbedghasfctxz t8sradtfyguhijokuyjeurytafdr65s6ftgyuhijokp,l,yrtekwjhbwdagsytrXzc 6tvghuijotkmlrew4 r3qenwbhgvdasFTXYZcvyunbijomghkpl;t, rmednwahvgYCFTZxv6c87y v9buviojgfkhlmr et,w3nqbedghasfctxz t8sradtfyguhijokuyjeurytafdr65s6ftgyuhijokp,l,yrtekwjhbwdagsytrXzc 6tvghuijotkmlrew4 r3qenwbhgvdasFTXYZcvyunbijomghkpl;t, rmednwahvgYCFTZxv6c87y v9buviojgfkhlmr et,w3nqbedghasfctxz t8</string>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" enablesReturnKeyAutomatically="YES"/>
                             </textView>
@@ -2551,6 +2554,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ZUi-71-dRE"/>
                     </view>
+                    <connections>
+                        <outlet property="imgRecipientProfile" destination="c3m-hZ-dPi" id="Wo3-zZ-yOs"/>
+                        <outlet property="strRecipientName" destination="RwI-DH-i6M" id="gxI-sF-rFk"/>
+                        <outlet property="textviewWriteMessage" destination="eD1-jf-ACa" id="uhQ-e2-k4A"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lwd-Ua-9eb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2570,8 +2578,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="n5u-Su-hpZ"/>
-        <segue reference="eNC-Nf-pOF"/>
+        <segue reference="kcf-T7-nAo"/>
         <segue reference="7Hd-YA-ayo"/>
-        <segue reference="cI7-Td-TzM"/>
+        <segue reference="wfB-se-wui"/>
     </inferredMetricsTieBreakers>
 </document>

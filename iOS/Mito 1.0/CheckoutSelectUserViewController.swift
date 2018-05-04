@@ -113,6 +113,11 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
     
     var appdata = AppData.shared
     
+    @IBOutlet weak var imgRecipientProfile: RoundedImage!
+    @IBOutlet weak var strRecipientName: UILabel!
+    @IBOutlet weak var textviewWriteMessage: UITextView!
+    
+    
     @IBOutlet weak var lblCreditCardNumber: UITextField!
     
     override func viewDidLoad() {
@@ -185,14 +190,12 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
         performSegue(withIdentifier: "paymentMethodToEditCheckout", sender: self)
     }
     
-    
     @IBAction func btnCancelAddPaymentMethod (_ sender: Any) {
         performSegue(withIdentifier: "paymentMethodToEditCheckout", sender: self)
     }
     
     @IBOutlet weak var lblRecipient: UILabel!
     @IBOutlet weak var imgRecipientImage: RoundedImage!
-    
     
     @IBAction func btnContinueToOrderSummary(_ sender: Any) {
         performSegue(withIdentifier: "editCheckoutToOrderSummary", sender: self)

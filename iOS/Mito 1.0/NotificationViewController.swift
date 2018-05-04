@@ -77,6 +77,12 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
+    @IBOutlet weak var imgSenderProfile: UIImageView!
+    @IBOutlet weak var strSenderName: UILabel!
+    @IBOutlet weak var lblMessage: UILabel!
+    
+    
+    
     @objc func fnRefreshNotifications() {
         fnGetPendingFriendRequests()
     }
