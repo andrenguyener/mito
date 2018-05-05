@@ -937,7 +937,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="sbe-Z7-f9y">
                                         <rect key="frame" x="10" y="28" width="355" height="56"/>
                                         <subviews>
-                                            <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="1tB-1o-Hvx">
+                                            <searchBar contentMode="redraw" placeholder="Search" backgroundImage="Mito Green Background.png" translatesAutoresizingMaskIntoConstraints="NO" id="1tB-1o-Hvx">
                                                 <rect key="frame" x="0.0" y="0.0" width="333" height="56"/>
                                                 <color key="barTintColor" red="0.25490196078431371" green="0.8666666666666667" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -2568,6 +2568,7 @@
         <image name="Cart Solid White Icon.png" width="22" height="23"/>
         <image name="GiftWhite.png" width="215" height="210"/>
         <image name="Home.png" width="24" height="23"/>
+        <image name="Mito Green Background.png" width="786" height="198"/>
         <image name="Notification Icon" width="23" height="23"/>
         <image name="Settings SG" width="25" height="25"/>
         <image name="You’re so nice!.png" width="267" height="33"/>
@@ -2577,8 +2578,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="IT4-Vz-Cza"/>
-        <segue reference="kcf-T7-nAo"/>
+        <segue reference="eNC-Nf-pOF"/>
         <segue reference="7Hd-YA-ayo"/>
-        <segue reference="cI7-Td-TzM"/>
+        <segue reference="IOv-WN-4XC"/>
     </inferredMetricsTieBreakers>
 </document>
