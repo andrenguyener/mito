@@ -32,6 +32,8 @@ class AppData: NSObject {
     
     open var arrSections = ["Friends", "Other people on Mito"]
     
+    open let strNoImageAvailable = "https://www.yankee-division.com/uploads/1/7/6/5/17659643/notavailable_2_orig.jpg?210b"
+    
     open var arrProductSearchResults: [Product] = []
     
     open var arrMonths: [Month] = []

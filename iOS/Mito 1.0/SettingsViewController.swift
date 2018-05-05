@@ -12,11 +12,11 @@ import Alamofire
 class SettingsViewController: UIViewController {
     var appdata = AppData.shared
     
-    var urlSignOut = URL(string: "https://api.projectmito.io/v1/sessions/mine")
     //Login
     @IBAction func settingsToHome(_ sender: Any) {
         self.performSegue(withIdentifier: "settingsToMe", sender: self)
     }
+    
     @IBAction func signout(_ sender: Any) {
         performSegue(withIdentifier: "signOut", sender: self)
         self.fnSignOut()
@@ -35,6 +35,7 @@ class SettingsViewController: UIViewController {
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
+        let urlSignOut = URL(string: "https://api.projectmito.io/v1/sessions/mine")
         Alamofire.request(urlSignOut!, method: .delete, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
             switch response.result {
             case .success:
@@ -44,7 +45,7 @@ class SettingsViewController: UIViewController {
                 }
                 
             case .failure(let error):
-                print("Product could not be added to cart")
+                print("User signed out")
                 print(error)
             }
         }

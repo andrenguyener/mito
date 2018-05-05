@@ -20,7 +20,6 @@ class WelcomeViewController: UIViewController {
     }
     
     func functionToCall() {
-        print("hello i delay")
         self.performSegue(withIdentifier: "toHome", sender: self)
     }
 }

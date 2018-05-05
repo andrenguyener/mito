@@ -53,14 +53,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             tblviewPackage.delegate = self
             tblviewPackage.dataSource = self
             tblviewPackage.rowHeight = 100
-            refresherNotification = UIRefreshControl()
-            refresherNotification.attributedTitle = NSAttributedString(string: "Pull to refresh")
-            refresherNotification.addTarget(self, action: #selector(NotificationViewController.fnRefreshNotifications), for: UIControlEvents.valueChanged)
-            tblviewNotification.addSubview(refresherNotification)
-            refresherPackage = UIRefreshControl()
-            refresherPackage.attributedTitle = NSAttributedString(string: "Pull to refresh")
-            refresherPackage.addTarget(self, action: #selector(NotificationViewController.fnRefreshPackages), for: UIControlEvents.valueChanged)
-            tblviewPackage.addSubview(refresherPackage)
+            fnAddRefreshersNotificationsAndPackages()
             fnGetPendingPackages()
         } else if imgSenderProfile != nil {
             appdata.fnDisplaySimpleImage(strImageURL: appdata.arrCurrUserPackages[intOrderID].strPhotoUrl, img: imgSenderProfile)
@@ -70,23 +63,33 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             let objIncomingPackage = appdata.arrCurrUserPackages[intOrderID]
             strPackageSenderName.text = "\(objIncomingPackage.strUserFName) \(objIncomingPackage.strUserLName)"
             let urlPersonImage = URL(string:"\(objIncomingPackage.strPhotoUrl)")
-            let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
-            if let data = try? Data(contentsOf: urlPersonImage!) {
-                imgSender.image = UIImage(data: data)!
-            } else if let data = try? Data(contentsOf: defaultURL!){
-                imgSender.image = UIImage(data: data)
-            }
+            appdata.fnDisplaySimpleImage(strImageURL: objIncomingPackage.strPhotoUrl, img: imgSender)
+//            let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
+//            if let data = try? Data(contentsOf: urlPersonImage!) {
+//                imgSender.image = UIImage(data: data)!
+//            } else if let data = try? Data(contentsOf: defaultURL!){
+//                imgSender.image = UIImage(data: data)
+//            }
             print(appdata.arrCurrUserPackages[intOrderID].intOrderID)
             fnGetOrderDetails()
         }
     }
     
+    func fnAddRefreshersNotificationsAndPackages() {
+        refresherNotification = UIRefreshControl()
+        refresherNotification.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refresherNotification.addTarget(self, action: #selector(NotificationViewController.fnRefreshNotifications), for: UIControlEvents.valueChanged)
+        tblviewNotification.addSubview(refresherNotification)
+        refresherPackage = UIRefreshControl()
+        refresherPackage.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refresherPackage.addTarget(self, action: #selector(NotificationViewController.fnRefreshPackages), for: UIControlEvents.valueChanged)
+        tblviewPackage.addSubview(refresherPackage)
+    }
+    
     @IBOutlet weak var imgSenderProfile: UIImageView!
     @IBOutlet weak var strSenderName: UILabel!
     @IBOutlet weak var lblMessage: UILabel!
-    
-    
-    
+
     @objc func fnRefreshNotifications() {
         fnGetPendingFriendRequests()
     }

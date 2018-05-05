@@ -14,9 +14,7 @@ class PackageTableViewCell: UITableViewCell {
     @IBOutlet weak var strFnameLname: UITextField!
     @IBOutlet weak var btnAccept: RoundedButton!
     @IBOutlet weak var btnDeny: RoundedButton!
-    
-    
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
