@@ -57,6 +57,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             fnGetPendingPackages()
         } else if imgSenderProfile != nil {
             appdata.fnDisplaySimpleImage(strImageURL: appdata.arrCurrUserPackages[intOrderID].strPhotoUrl, img: imgSenderProfile)
+            fnRetrieveIncomingOrderDetails(intOrderID: intOrderID)
             strSenderName.text = "\(appdata.arrCurrUserPackages[intOrderID].strUserFName) \(appdata.arrCurrUserPackages[intOrderID].strUserLName)"
             lblMessage.text = appdata.arrCurrUserPackages[intOrderID].strOrderMessage
         } else {
@@ -72,6 +73,29 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
 //            }
             print(appdata.arrCurrUserPackages[intOrderID].intOrderID)
             fnGetOrderDetails()
+        }
+    }
+    
+    func fnRetrieveIncomingOrderDetails(intOrderID: Int) {
+        let urlRetrieveIncomingOrderDetails = URL(string: "https://api.projectmito.io/v1/order/products")
+        let parameters: Parameters = [
+            "orderId": intOrderID
+        ]
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlRetrieveIncomingOrderDetails!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    print(dictionary)
+                    print("\(response): Successful")
+                }
+                
+            case .failure(let error):
+                print("Can't get order details")
+                print(error)
+            }
         }
     }
     

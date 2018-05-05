@@ -399,7 +399,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Fs1-h8-PX9">
-                                <rect key="frame" x="20" y="428" width="335" height="180"/>
+                                <rect key="frame" x="20" y="398" width="335" height="210"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fsv-I5-Xyw">
                                         <rect key="frame" x="0.0" y="0.0" width="202" height="30"/>
@@ -443,6 +443,13 @@
                                             <action selector="fnGetIncomingPackages:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="oGZ-aN-dNh"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DpV-1F-jTa">
+                                        <rect key="frame" x="0.0" y="180" width="123" height="30"/>
+                                        <state key="normal" title="Change Password"/>
+                                        <connections>
+                                            <action selector="btnChangePassword:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="PBs-Ef-1ED"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -463,13 +470,13 @@
                         <viewLayoutGuide key="safeArea" id="Xbx-PN-3NB"/>
                         <variation key="default">
                             <mask key="subviews">
+                                <exclude reference="xYb-A4-VIe"/>
                                 <exclude reference="iMS-Cy-5G5"/>
                                 <exclude reference="7Yf-yx-eOF"/>
                                 <exclude reference="g02-2W-kgd"/>
                                 <exclude reference="H2H-um-55X"/>
                                 <exclude reference="S0I-Fu-lcL"/>
                                 <exclude reference="hvl-bQ-WjS"/>
-                                <exclude reference="Fs1-h8-PX9"/>
                             </mask>
                         </variation>
                     </view>
