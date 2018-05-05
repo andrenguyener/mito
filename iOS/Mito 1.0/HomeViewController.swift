@@ -11,6 +11,9 @@ import Alamofire
 import Starscream
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, WebSocketDelegate {
+    
+    @IBOutlet weak var greenTopView: UIView!
+    
     func websocketDidConnect(socket: WebSocketClient) {
         print("websocket is connected")
     }
@@ -47,6 +50,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = 133
+        
+//        greenTopView.backgroundColor = UIColor(rgb: 41DD7C)
         
         let userURL = "https://api.projectmito.io/v1/friend/\(appdata.intCurrentUserID)"
         print("Authorization: \(String(describing: UserDefaults.standard.object(forKey: "Authorization")))")
