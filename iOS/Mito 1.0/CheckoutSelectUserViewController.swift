@@ -145,6 +145,11 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
             lblRecipient.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
             appdata.fnDisplaySimpleImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipientImage)
             lblAddressNickname.text = appdata.address.strAddressAlias
+            if appdata.strCardNumber.count > 0 {
+                let stars = String(repeating:"*", count:12)
+                let last4 = String(appdata.strCardNumber.suffix(4))
+                lblCreditCardNumberCheckoutProcess.text = "\(stars)\(last4)"
+            }
         } else if imgRecipientProfile != nil {
             appdata.fnDisplaySimpleImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipientProfile)
             strRecipientName.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
@@ -215,6 +220,8 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
     
     @IBOutlet weak var lblRecipient: UILabel!
     @IBOutlet weak var imgRecipientImage: RoundedImage!
+    
+    @IBOutlet weak var lblCreditCardNumberCheckoutProcess: UILabel!
     
     @IBAction func btnContinueToOrderSummary(_ sender: Any) {
         performSegue(withIdentifier: "editCheckoutToOrderSummary", sender: self)
