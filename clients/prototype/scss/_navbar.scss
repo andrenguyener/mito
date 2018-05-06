@@ -10,7 +10,12 @@
         &:hover,
         &:focus {
             color: darken($theme-primary, 10%);
+            cursor: pointer;
         }
+        img {
+            width: 40px
+        }
+        
     }
     .navbar-toggler {
         font-size: 12px;
@@ -63,7 +68,8 @@
                 color: $gray-darker;
                 &:hover,
                 &:focus {
-                    color: $theme-primary;
+                    color: #6FE28A;
+                    // background: #6FE28A;
                 }
             }
             .navbar-nav > li > a,

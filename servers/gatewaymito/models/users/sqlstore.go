@@ -145,7 +145,7 @@ func (ss *SqlStore) Insert(newUser *NewUser) (*User, error) {
 		return nil, fmt.Errorf("Error converting new user to user %s", err)
 	}
 	var newUserId int64
-	result, err := ss.database.Exec("uspcInsertUser",
+	_, err = ss.database.Exec("uspcInsertUser",
 		sql.Named("UserFname", user.UserFname),
 		sql.Named("UserLname", user.UserLname),
 		sql.Named("UserEmail", user.UserEmail),
@@ -157,9 +157,9 @@ func (ss *SqlStore) Insert(newUser *NewUser) (*User, error) {
 	if err != nil {
 		return nil, fmt.Errorf("Error inserting user %s", err)
 	}
-	fmt.Println(result)
+	// fmt.Println(result)
 	user.UserId = int(newUserId)
-	fmt.Println(user)
+	// fmt.Println(user)
 
 	return user, err
 }
