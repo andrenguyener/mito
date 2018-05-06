@@ -359,7 +359,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Fs1-h8-PX9">
-                                <rect key="frame" x="20" y="398" width="335" height="210"/>
+                                <rect key="frame" x="20" y="278" width="335" height="330"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fsv-I5-Xyw">
                                         <rect key="frame" x="0.0" y="0.0" width="202" height="30"/>
@@ -408,6 +408,32 @@
                                         <state key="normal" title="Change Password"/>
                                         <connections>
                                             <action selector="btnChangePassword:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="PBs-Ef-1ED"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4B-wJ-w9k">
+                                        <rect key="frame" x="0.0" y="210" width="42" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MVr-6R-m27">
+                                        <rect key="frame" x="0.0" y="240" width="42" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7u-ZN-vbf">
+                                        <rect key="frame" x="0.0" y="270" width="94" height="30"/>
+                                        <state key="normal" title="Choose Place"/>
+                                        <connections>
+                                            <action selector="fnPickPlace:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="G4D-wE-oIF"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XLd-IW-sik">
+                                        <rect key="frame" x="0.0" y="300" width="144" height="30"/>
+                                        <state key="normal" title="Get Current Location"/>
+                                        <connections>
+                                            <action selector="fnGetCurrentLocation:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="j68-TI-veI"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -493,6 +519,8 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="imgProfilePic" destination="Lyj-rC-s4x" id="Afg-4Z-Gn2"/>
+                        <outlet property="lblAddress" destination="MVr-6R-m27" id="50d-c3-Dpx"/>
+                        <outlet property="lblName" destination="C4B-wJ-w9k" id="1xP-UZ-omr"/>
                         <outlet property="photoURL" destination="hvl-bQ-WjS" id="y9c-tg-MBu"/>
                         <outlet property="userDOB" destination="S0I-Fu-lcL" id="2dG-me-ehR"/>
                         <outlet property="userEmail" destination="7Yf-yx-eOF" id="RFz-aX-bmg"/>

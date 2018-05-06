@@ -9,8 +9,11 @@
 import UIKit
 import UserNotifications
 import Alamofire
+import GooglePlaces
 
 class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+    
+    var placesClient: GMSPlacesClient!
     
     // http://uigarage.net/wp-content/uploads/2016/10/2016-09-10-12.00.44.png
     
