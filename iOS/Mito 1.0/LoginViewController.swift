@@ -152,21 +152,25 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             switch response.result {
             case .success:
                 // http url response
-                let authHeader = response.response?.allHeaderFields["Authorization"] ?? ""
-                if let dictionary = response.result.value {
-                    DispatchQueue.main.async {
-                        self.performSegue(withIdentifier: "login", sender: self)
-                        UserDefaults.standard.set(dictionary, forKey: "UserInfo")
-                        UserDefaults.standard.set(authHeader, forKey: "Authorization")
-                        if UserDefaults.standard.object(forKey: "UserInfo") != nil {
-                            let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
-                            self.appdata.intCurrentUserID = (data["userId"] as? Int)!
+                let authHeader = response.response?.allHeaderFields["Authorization"] as! String
+                if !authHeader.isEmpty {
+                    if let dictionary = response.result.value {
+                        DispatchQueue.main.async {
+                            self.performSegue(withIdentifier: "login", sender: self)
+                            UserDefaults.standard.set(dictionary, forKey: "UserInfo")
+                            UserDefaults.standard.set(authHeader, forKey: "Authorization")
+                            if UserDefaults.standard.object(forKey: "UserInfo") != nil {
+                                let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+                                self.appdata.intCurrentUserID = (data["userId"] as? Int)!
+                                print("UserInfo: \(String(describing: data["UserInfo"]))")
+                                print("UserID: \(String(describing: data["userId"]))")
+                            }
+//                            let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+                            
                         }
-                        let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
-                        print("UserInfo: \(data["UserInfo"])")
-                        print("UserID: \(data["userId"])")
                     }
                 }
+                
                 
             case .failure(let error):
                 let alert = self.appdata.fnDisplayAlert(title: "Whoops!", message: "Incorrect email or password")
@@ -278,45 +282,48 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             switch response.result {
             case .success:
                 // http url response
-                let authHeader = response.response?.allHeaderFields["Authorization"] ?? ""
-                if let dictionary = response.result.value {
-                    print("JSON: \(dictionary)") // serialized json response
-//                    self.performSegue(withIdentifier: "signUpToAddress", sender: self)
-                    DispatchQueue.main.async {
-                        UserDefaults.standard.set(dictionary, forKey: "UserInfo")
-                        UserDefaults.standard.set(authHeader, forKey: "Authorization")
-                        if UserDefaults.standard.object(forKey: "UserInfo") != nil {
-                            let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
-                            self.appdata.intCurrentUserID = (data["userId"] as? Int)!
+                let authHeader = response.response?.allHeaderFields["Authorization"] as! String
+                if !authHeader.isEmpty {
+                    if let dictionary = response.result.value {
+                        print("JSON: \(dictionary)") // serialized json response
+                        //                    self.performSegue(withIdentifier: "signUpToAddress", sender: self)
+                        DispatchQueue.main.async {
+                            UserDefaults.standard.set(dictionary, forKey: "UserInfo")
+                            UserDefaults.standard.set(authHeader, forKey: "Authorization")
+                            if UserDefaults.standard.object(forKey: "UserInfo") != nil {
+                                let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+                                self.appdata.intCurrentUserID = (data["userId"] as? Int)!
+                            }
+                            
+                            if UserDefaults.standard.object(forKey: "UserInfo") != nil {
+                                let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+                                userID = data["userId"] as? Int
+                                print("data = \(data)")
+                                print("userId = \(String(describing: data["userId"]))")
+                                self.appdata.intCurrentUserID = userID!
+                            }
+                            let alias = self.addressNickname.text
+                            let strAddress1 = self.address1AA.text
+                            let strAddress2 = self.address2AA.text
+                            let strCity = self.cityAA.text
+                            let strState = self.stateAA.text
+                            let zipcode = self.zipcodeAA.text
+                            
+                            let parametersAddress: Parameters = [
+                                "userId": userID!,
+                                "streetAddress1": strAddress1!,
+                                "streetAddress2": strAddress2!,
+                                "cityName": strCity!,
+                                "zipCode": zipcode!,
+                                "stateName": strState!,
+                                "aliasName": alias!
+                            ]
+                            
+                            self.addAddress(parameterAddress: parametersAddress)
                         }
-                        
-                        if UserDefaults.standard.object(forKey: "UserInfo") != nil {
-                            let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
-                            userID = data["userId"] as? Int
-                            print("data = \(data)")
-                            print("userId = \(String(describing: data["userId"]))")
-                            self.appdata.intCurrentUserID = userID!
-                        }
-                        let alias = self.addressNickname.text
-                        let strAddress1 = self.address1AA.text
-                        let strAddress2 = self.address2AA.text
-                        let strCity = self.cityAA.text
-                        let strState = self.stateAA.text
-                        let zipcode = self.zipcodeAA.text
-                        
-                        let parametersAddress: Parameters = [
-                            "userId": userID!,
-                            "streetAddress1": strAddress1!,
-                            "streetAddress2": strAddress2!,
-                            "cityName": strCity!,
-                            "zipCode": zipcode!,
-                            "stateName": strState!,
-                            "aliasName": alias!
-                        ]
-                        
-                        self.addAddress(parameterAddress: parametersAddress)
                     }
                 }
+                
 
             case .failure(let error):
                 print(error)

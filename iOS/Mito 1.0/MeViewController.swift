@@ -97,11 +97,14 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
     }
     
     func fnGetIncomingPackages2() {
-        let urlGetIncomingPackage = URL(string: "https://api.projectmito.io/v1/package/incoming")
+        let urlGetIncomingPackage = URL(string: "https://api.projectmito.io/v1/package")
+        let parameters: Parameters = [
+            "type": "Incoming"
+        ]
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
-        Alamofire.request(urlGetIncomingPackage!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+        Alamofire.request(urlGetIncomingPackage!, method: .post, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success:
                 if let dictionary = response.result.value {
@@ -226,14 +229,14 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
     }
     
     func fnGetPendingPackages() {
-        let urlGetPendingPackages = URL(string: "https://api.projectmito.io/v1/package/")
+        let urlGetPendingPackages = URL(string: "https://api.projectmito.io/v1/package")
         let parameters: Parameters = [
             "type": "Pending"
         ]
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
-        Alamofire.request(urlGetPendingPackages!, method: .get, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+        Alamofire.request(urlGetPendingPackages!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success:
                 if let dictionary = response.result.value {
@@ -259,7 +262,7 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
         let parameters: Parameters = [
             "password": "123456",
             "passwordNew": "asdfgh",
-            "passwordConf": "asdfgh"
+            "passwordNewConf": "asdfgh"
         ]
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
@@ -274,6 +277,9 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
             case .failure(let error):
                 print("Change password error")
                 print(error)
+                if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                    print(data)
+                }
             }
         }
     }
