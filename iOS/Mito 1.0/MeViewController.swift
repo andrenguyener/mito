@@ -44,19 +44,25 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
     @IBAction func fnGetIncomingPackages(_ sender: Any) {
         fnGetIncomingPackages2()
     }
+    @IBAction func btnChangePassword(_ sender: Any) {
+        fnChangePassword()
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         if UserDefaults.standard.object(forKey: "UserInfo") != nil {
             let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+            appdata.fnDisplaySimpleImage(strImageURL: data["photoURL"] as! String, img: imgProfilePic)
             self.userID.text = data["userId"] as? String
             self.userEmail.text = data["userEmail"] as? String
             self.username.text = data["username"] as? String
-            self.userFname.text = data["userFname"] as? String
+            // Prevent showing Optional("")
+            self.userFname.text = "\(String(describing: data["userFname"] as? String)) \(String(describing: data["userLname"]))"
             self.userLname.text = data["userLname"] as? String
             self.userDOB.text = data["userDOB"] as? String
             self.photoURL.text = data["photoURL"] as? String
-            print(data["userId"] as? String)
+//            print(data["userId"] as! String)
         }
     }
     
@@ -74,16 +80,13 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
     
     func fnCropImage(image: UIImage) -> CGImage {
         let crop = CGRect(x: image.size.width / 2, y: image.size.height / 2, width: 200, height: 200)
-        let imageRef = CGImage.cropping(image.cgImage!)
-        var imageRef2 = image.cgImage!.cropping(to: crop)
-//        let imageRef = CGImageCreateWithImageInRect(image as! CGImage, crop)
-//        let image2 = image.cropp //CGImageCreateWithImageInRect(image, crop)
+        let imageRef2 = image.cgImage!.cropping(to: crop)
         return imageRef2!
         
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if var image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             print(image)
             let cgImage = fnCropImage(image: image)
             imgProfilePic.image = UIImage(cgImage: cgImage)
@@ -141,12 +144,12 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
     func fnInsertNewAddress() {
         let urlInsertNewAddress = URL(string: "https://api.projectmito.io/v1/address/")
         let parameters: Parameters = [
-            "streetAddress1": "Ash St",
+            "streetAddress1": "445 Mount Eden Road",
             "streetAddress2": "",
-            "cityName": "Portland",
-            "stateName": "Oregon",
-            "zipCode": 97035,
-            "aliasName": "P-Town"
+            "cityName": "Philadelphia",
+            "stateName": "Pennsylvania",
+            "zipCode": 19019,
+            "aliasName": "Apartment"
         ]
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
@@ -246,6 +249,30 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
                 
             case .failure(let error):
                 print("Get pending packages error")
+                print(error)
+            }
+        }
+    }
+    
+    func fnChangePassword() {
+        let urlChangePassword = URL(string: "https://api.projectmito.io/v1/users/password")
+        let parameters: Parameters = [
+            "password": "123456",
+            "passwordNew": "asdfgh",
+            "passwordConf": "asdfgh"
+        ]
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlChangePassword!, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    print(dictionary)
+                }
+                
+            case .failure(let error):
+                print("Change password error")
                 print(error)
             }
         }

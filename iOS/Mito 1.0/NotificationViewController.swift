@@ -53,30 +53,67 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             tblviewPackage.delegate = self
             tblviewPackage.dataSource = self
             tblviewPackage.rowHeight = 100
-            refresherNotification = UIRefreshControl()
-            refresherNotification.attributedTitle = NSAttributedString(string: "Pull to refresh")
-            refresherNotification.addTarget(self, action: #selector(NotificationViewController.fnRefreshNotifications), for: UIControlEvents.valueChanged)
-            tblviewNotification.addSubview(refresherNotification)
-            refresherPackage = UIRefreshControl()
-            refresherPackage.attributedTitle = NSAttributedString(string: "Pull to refresh")
-            refresherPackage.addTarget(self, action: #selector(NotificationViewController.fnRefreshPackages), for: UIControlEvents.valueChanged)
-            tblviewPackage.addSubview(refresherPackage)
+            fnAddRefreshersNotificationsAndPackages()
             fnGetPendingPackages()
+        } else if imgSenderProfile != nil {
+            appdata.fnDisplaySimpleImage(strImageURL: appdata.arrCurrUserPackages[intOrderID].strPhotoUrl, img: imgSenderProfile)
+            fnRetrieveIncomingOrderDetails(intOrderID: intOrderID)
+            strSenderName.text = "\(appdata.arrCurrUserPackages[intOrderID].strUserFName) \(appdata.arrCurrUserPackages[intOrderID].strUserLName)"
+            lblMessage.text = appdata.arrCurrUserPackages[intOrderID].strOrderMessage
         } else {
             let objIncomingPackage = appdata.arrCurrUserPackages[intOrderID]
             strPackageSenderName.text = "\(objIncomingPackage.strUserFName) \(objIncomingPackage.strUserLName)"
             let urlPersonImage = URL(string:"\(objIncomingPackage.strPhotoUrl)")
-            let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
-            if let data = try? Data(contentsOf: urlPersonImage!) {
-                imgSender.image = UIImage(data: data)!
-            } else if let data = try? Data(contentsOf: defaultURL!){
-                imgSender.image = UIImage(data: data)
-            }
+            appdata.fnDisplaySimpleImage(strImageURL: objIncomingPackage.strPhotoUrl, img: imgSender)
+//            let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
+//            if let data = try? Data(contentsOf: urlPersonImage!) {
+//                imgSender.image = UIImage(data: data)!
+//            } else if let data = try? Data(contentsOf: defaultURL!){
+//                imgSender.image = UIImage(data: data)
+//            }
             print(appdata.arrCurrUserPackages[intOrderID].intOrderID)
             fnGetOrderDetails()
         }
     }
     
+    func fnRetrieveIncomingOrderDetails(intOrderID: Int) {
+        let urlRetrieveIncomingOrderDetails = URL(string: "https://api.projectmito.io/v1/order/products")
+        let parameters: Parameters = [
+            "orderId": intOrderID
+        ]
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlRetrieveIncomingOrderDetails!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    print(dictionary)
+                    print("\(response): Successful")
+                }
+                
+            case .failure(let error):
+                print("Can't get order details")
+                print(error)
+            }
+        }
+    }
+    
+    func fnAddRefreshersNotificationsAndPackages() {
+        refresherNotification = UIRefreshControl()
+        refresherNotification.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refresherNotification.addTarget(self, action: #selector(NotificationViewController.fnRefreshNotifications), for: UIControlEvents.valueChanged)
+        tblviewNotification.addSubview(refresherNotification)
+        refresherPackage = UIRefreshControl()
+        refresherPackage.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refresherPackage.addTarget(self, action: #selector(NotificationViewController.fnRefreshPackages), for: UIControlEvents.valueChanged)
+        tblviewPackage.addSubview(refresherPackage)
+    }
+    
+    @IBOutlet weak var imgSenderProfile: UIImageView!
+    @IBOutlet weak var strSenderName: UILabel!
+    @IBOutlet weak var lblMessage: UILabel!
+
     @objc func fnRefreshNotifications() {
         fnGetPendingFriendRequests()
     }
@@ -192,6 +229,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if segment.selectedSegmentIndex == 1 {
+            boolSender = false
             intOrderID = indexPath.row
             performSegue(withIdentifier: "NotificationToPackageDetails", sender: self)
         }

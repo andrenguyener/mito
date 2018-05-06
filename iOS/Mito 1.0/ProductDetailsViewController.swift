@@ -24,7 +24,6 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
         prodTitle.text = appdata.arrProductSearchResults[appdata.intCurrIndex].title
         prodPub.text = appdata.arrProductSearchResults[appdata.intCurrIndex].publisher
         prodPrice.text = appdata.arrProductSearchResults[appdata.intCurrIndex].price
-        
         prodDetail.text = appdata.arrProductSearchResults[appdata.intCurrIndex].description
         //img.image = UIImage(named: "Andre2.png")
         // Do any additional setup after loading the view.
@@ -35,9 +34,6 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    //PEOPLE DETAIL SEGUE
-
     
     // PRODUCT DETAIL SEGUE
     @IBOutlet weak var prodImage: UIImageView!

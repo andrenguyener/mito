@@ -130,7 +130,11 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
                 imgRecipient.contentMode = .scaleAspectFit
             }
             recipientName.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
-            lblCreditCardNumber.text = appdata.strCardNumber
+            
+            // hide first 8 numbers of card information
+            let stars = String(repeating:"*", count:12)
+            let last4 = String(appdata.strCardNumber.suffix(4))
+            lblCreditCardNumber.text = "\(stars)\(last4)"
             appdata.fnDisplaySimpleImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipient)
         } else if lblNotifyYouMessage != nil {
             lblNotifyYouMessage.text = "We will notify you when \(appdata.personRecipient.firstName) accepts!"
@@ -208,6 +212,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func btnGoToEditCheckout(_ sender: Any) {
+        boolSender = true
         performSegue(withIdentifier: "cartoEditCheckout", sender: self)
     }
     
@@ -224,7 +229,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             "cardId": 1,
             "senderAddressId": appdata.address.intAddressID,
             "recipientId": appdata.personRecipient.intUserID,
-            "message": "First Checkout",
+            "message": appdata.strOrderMessage,
             "giftOption": 0
         ]
         let headers: HTTPHeaders = [

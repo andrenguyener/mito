@@ -16,6 +16,8 @@ class AppData: NSObject {
     open var strCardNumber = ""
     open var personRecipient: Person = Person(firstName: "FName", lastName: "LName", email: "", avatar: "dd", intUserID: 0, strUsername: "", intNumFriends: 0)
     open var address: Address = Address(intAddressID: 0, strAddressAlias: "Fake", strCityName: "", strStateName: "", strStreetAddress1: "", strStreetAddress2: "", strZipCode: "")
+    open var strOrderMessage = "What's it for?"
+    open let mainMitoColor = "41DD7C"
     
     open var arrFriends: [Person] = []
     open var arrCurrFriends: [Person] = []
@@ -30,6 +32,8 @@ class AppData: NSObject {
     open var arrCurrFriendsAndAllMitoUsers: [[Person]] = []
     
     open var arrSections = ["Friends", "Other people on Mito"]
+    
+    open let strNoImageAvailable = "https://www.yankee-division.com/uploads/1/7/6/5/17659643/notavailable_2_orig.jpg?210b"
     
     open var arrProductSearchResults: [Product] = []
     
@@ -198,7 +202,7 @@ class AppData: NSObject {
     
     open func fnDisplaySimpleImage(strImageURL: String, img: UIImageView) {
         let urlImage = URL(string:"\(strImageURL)")
-        let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
+        let defaultURL = URL(string: "https://www.yankee-division.com/uploads/1/7/6/5/17659643/notavailable_2_orig.jpg?210b")
         if let data = try? Data(contentsOf: urlImage!) {
             img.image = UIImage(data: data)!
         } else if let data = try? Data(contentsOf: defaultURL!){

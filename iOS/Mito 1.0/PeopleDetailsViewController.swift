@@ -26,10 +26,7 @@ class PeopleDetailsViewController: UIViewController {
     }
     
     func loadPersonData() {
-        print(mySection)
-        print(myIndex)
         let friend = appdata.arrCurrFriendsAndAllMitoUsers[mySection][myIndex]
-        print(friend)
         lblName.text = "\(friend.firstName) \(friend.lastName)"
         lblUsername.text = "@\(friend.strUsername)"
         btnNumFriends.setTitle("\(friend.intNumFriends) friends", for: .normal)
@@ -38,7 +35,6 @@ class PeopleDetailsViewController: UIViewController {
 
     @IBAction func fnAddFriend(_ sender: Any) {
         let friend = appdata.arrCurrFriendsAndAllMitoUsers[mySection][myIndex]
-        print(friend.description())
         let intUser2Id = friend.intUserID
         
         let parameters: Parameters = [
@@ -56,7 +52,8 @@ class PeopleDetailsViewController: UIViewController {
                     print("Request: \(String(describing: response.request))")
                     print("JSON: \(dictionary)") // serialized json response
                     DispatchQueue.main.async {
-                        self.fnAlertRequestSent()
+                        let alert = self.appdata.fnDisplayAlert(title: "Done", message: "Friend Request Sent")
+                        self.present(alert, animated: true, completion: nil)
                     }
                 }
                 
@@ -65,13 +62,6 @@ class PeopleDetailsViewController: UIViewController {
                 print(error)
             }
         }
-    }
-    
-    func fnAlertRequestSent() {
-        let alertController = UIAlertController(title: "Done", message: "Friend Request Sent", preferredStyle: .alert)
-        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alertController.addAction(defaultAction)
-        present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func backButton(_ sender: Any) {

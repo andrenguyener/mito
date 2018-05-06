@@ -11,7 +11,7 @@ import Alamofire
 
 var boolSender = true
 
-class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate {
+class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate, UITextViewDelegate {
     
     @IBOutlet weak var tblviewPeople: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -38,7 +38,7 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
         let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
         let objPerson = self.appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
         let urlPeopleImage = URL(string:"\(objPerson.avatar)")
-        let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
+        let defaultURL = URL(string: "https://t3.ftcdn.net/jpg/00/64/67/80/240_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg")
         if let data = try? Data(contentsOf: urlPeopleImage!) {
             cell.img.image = UIImage(data: data)!
         } else if let data = try? Data(contentsOf: defaultURL!){
@@ -67,6 +67,7 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tblviewAddress != nil {
             appdata.address = appdata.arrCurrUserAddresses[indexPath.row]
+            print(boolSender)
             if boolSender {
                 performSegue(withIdentifier: "ChooseAddressToCheckout", sender: self)
             } else {
@@ -74,9 +75,11 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
                 appdata.address = appdata.arrCurrUserAddresses[indexPath.row]
                 fnAcceptOrDeclinePackage(response: "Accepted", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[indexPath.row].intAddressID)
             }
+        } else if tblviewPeople != nil {
+            appdata.personRecipient = appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
+            self.performSegue(withIdentifier: "choosePersonToEditCheckout", sender: self)
         } else {
             appdata.personRecipient = appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
-            performSegue(withIdentifier: "choosePersonToEditCheckout", sender: self)
         }
     }
     
@@ -98,10 +101,13 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
                     print(dictionary)
                     print("\(response): Successful")
                 }
+                self.appdata.personRecipient = Person(firstName: "FName", lastName: "LName", email: "", avatar: "dd", intUserID: 0, strUsername: "", intNumFriends: 0)
                 DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "CompleteChooseReceivingAddress", sender: self)
-                    let alert = self.appdata.fnDisplayAlert(title: "Success", message: "Package accepted!")
-                    self.present(alert, animated: true, completion: nil)
+                    let alertController = UIAlertController(title: "Success!", message: "Your package has been confirmed!", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                        self.performSegue(withIdentifier: "CompleteChooseReceivingAddress", sender: self)
+                    }))
+                    self.present(alertController, animated: true, completion: nil)
                 }
                 
             case .failure(let error):
@@ -113,11 +119,18 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
     
     var appdata = AppData.shared
     
+    @IBOutlet weak var imgRecipientProfile: RoundedImage!
+    @IBOutlet weak var strRecipientName: UILabel!
+    @IBOutlet weak var textviewWriteMessage: UITextView!
+    
+    @IBAction func btnConfirmMessage(_ sender: Any) {
+        appdata.strOrderMessage = textviewWriteMessage.text
+    }
+    
     @IBOutlet weak var lblCreditCardNumber: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        fnLoadCurrUserAddresses()
         if tblviewPeople != nil {
             tblviewPeople.delegate = self
             tblviewPeople.dataSource = self
@@ -131,14 +144,30 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
         } else if lblRecipient != nil {
             lblRecipient.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
             appdata.fnDisplaySimpleImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipientImage)
-//            let urlPersonImage = URL(string: "\(appdata.personRecipient.avatar)")
-//            let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
-//            if let data = try? Data(contentsOf: urlPersonImage!) {
-//                imgRecipientImage.image = UIImage(data: data)!
-//            } else if let data = try? Data(contentsOf: defaultURL!){
-//                imgRecipientImage.image = UIImage(data: data)
-//            }
             lblAddressNickname.text = appdata.address.strAddressAlias
+            if appdata.strCardNumber.count > 0 {
+                let stars = String(repeating:"*", count:12)
+                let last4 = String(appdata.strCardNumber.suffix(4))
+                lblCreditCardNumberCheckoutProcess.text = "\(stars)\(last4)"
+            }
+        } else if imgRecipientProfile != nil {
+            appdata.fnDisplaySimpleImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipientProfile)
+            strRecipientName.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
+            textviewWriteMessage.text = "What's it for?"
+        }
+        if textviewWriteMessage != nil {
+            textviewWriteMessage.delegate = self
+        }
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        if textviewWriteMessage != nil {
+            if textviewWriteMessage.text.count == 0 {
+                textviewWriteMessage.text = "What's it for?"
+                textviewWriteMessage.textColor = UIColor.gray
+            } else if textviewWriteMessage.text.count > 0 {
+                textviewWriteMessage.textColor = UIColor.black
+            }
         }
     }
     
@@ -178,13 +207,12 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
     
     @IBAction func btnEditCheckoutToChooseFriend(_ sender: Any) {
         performSegue(withIdentifier: "editCheckoutToChooseFriend", sender: self)
-//        fnLoadFriendsAndAllUsers()
     }
+    
     @IBAction func btnPaymentMethodToEditCheckout(_ sender: Any) {
         appdata.strCardNumber = lblCreditCardNumber.text!
         performSegue(withIdentifier: "paymentMethodToEditCheckout", sender: self)
     }
-    
     
     @IBAction func btnCancelAddPaymentMethod (_ sender: Any) {
         performSegue(withIdentifier: "paymentMethodToEditCheckout", sender: self)
@@ -193,6 +221,7 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
     @IBOutlet weak var lblRecipient: UILabel!
     @IBOutlet weak var imgRecipientImage: RoundedImage!
     
+    @IBOutlet weak var lblCreditCardNumberCheckoutProcess: UILabel!
     
     @IBAction func btnContinueToOrderSummary(_ sender: Any) {
         performSegue(withIdentifier: "editCheckoutToOrderSummary", sender: self)

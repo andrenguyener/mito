@@ -30,9 +30,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var strProductResultsPageNumber = 1
     var strSearchQuery = ""
     var appdata = AppData.shared
-    var urlPeopleCall = URL(string: "https://api.projectmito.io/v1/friend/")
-    var urlAllUserCall = URL(string: "https://api.projectmito.io/v1/users/all")
-    var urlAmazonProductCall = URL(string: "https://api.projectmito.io/v1/amazonhashtest" )
     
     @IBOutlet weak var swirlSearchImg: UIImageView!
     
@@ -112,22 +109,27 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     // Pressed Enter (Only for product search at the moment)
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        spinnerProductSearch.isHidden = false
-        spinnerProductSearch.startAnimating()
-        if (searchBar.text!.count > 0) {
-            strSearchQuery = ""
-            strSearchQuery = searchBar.text!.replacingOccurrences(of: " ", with: "+")
+        if productPeopleTab.selectedSegmentIndex == 0 {
+            spinnerProductSearch.isHidden = false
+            spinnerProductSearch.startAnimating()
+            if (searchBar.text!.count > 0) {
+                strSearchQuery = ""
+                strSearchQuery = searchBar.text!.replacingOccurrences(of: " ", with: "+")
+            } else {
+                strSearchQuery = "Amazon"
+                searchBar.text = "Amazon"
+            }
+            searchBar.resignFirstResponder()
+            productPeopleTab.isEnabled = false
+            fnLoadProductData()
         } else {
-            strSearchQuery = "Amazon"
-            searchBar.text = "Amazon"
+            // hide keyboard
         }
-        searchBar.resignFirstResponder()
-        productPeopleTab.isEnabled = false
-        fnLoadProductData()
     }
     
     // Product Tab View
     func fnLoadProductData() {
+        let urlAmazonProductCall = URL(string: "https://api.projectmito.io/v1/amazonhashtest")
         appdata.arrProductSearchResults.removeAll()
         let parameters: Parameters = [
             "keyword": strSearchQuery,
@@ -160,7 +162,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 let objLargeImage = self.fnAccessFirstDictionaryInArray(dictObj: objImageSet, arrName: "LargeImage")
                                 strImageURL = self.fnAccesStringinObj(dictObj: objLargeImage, strAttribute: "URL")
                             } else {
-                                strImageURL = "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897"
+                                strImageURL = "https://www.yankee-division.com/uploads/1/7/6/5/17659643/notavailable_2_orig.jpg?210b"
                             }
                             let objItemAttribute = self.fnAccessFirstDictionaryInArray(dictObj: item, arrName: "ItemAttributes")
                             
@@ -224,7 +226,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             } else {
                 return self.appdata.arrCurrFriendsAndAllMitoUsers[section].count
             }
-//            return 10 //self.appdata.arrCurrFriendsAndAllMitoUsers[section].count // 10
         } else {
             return appdata.arrProductSearchResults.count
         }
@@ -232,7 +233,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if productPeopleTab.selectedSegmentIndex == 1 {
-            return self.appdata.arrSections[section]
+            if self.appdata.arrSections.count == 2 {
+                return self.appdata.arrSections[section]
+            } else {
+                return "Other people on Mito"
+            }
         } else {
             return "Products"
         }
@@ -247,12 +252,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        myIndex = indexPath.row
         if productPeopleTab.selectedSegmentIndex == 0 {
-            myIndex = indexPath.row
             appdata.intCurrIndex = myIndex
             performSegue(withIdentifier: "productDetail", sender: self)
         } else {
-            myIndex = indexPath.row
             mySection = indexPath.section
             performSegue(withIdentifier: "searchToMitoProfile", sender: self)
         }
@@ -280,7 +284,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
             let objPerson = self.appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
             let urlPeopleImage = URL(string:"\(objPerson.avatar)")
-            let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
+            let defaultURL = URL(string: appdata.strNoImageAvailable)
             if let data = try? Data(contentsOf: urlPeopleImage!) {
                 cell.img.image = UIImage(data: data)!
             } else if let data = try? Data(contentsOf: defaultURL!){
