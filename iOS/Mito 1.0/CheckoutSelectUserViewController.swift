@@ -127,6 +127,12 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
         appdata.strOrderMessage = textviewWriteMessage.text
     }
     
+    @IBAction func btnDoneTypingMessage(_ sender: Any) {
+        appdata.strOrderMessage = textviewWriteMessage.text
+        performSegue(withIdentifier: "TypeMessageToCheckout", sender: self)
+    }
+    
+    
     @IBOutlet weak var lblCreditCardNumber: UITextField!
     
     override func viewDidLoad() {
