@@ -102,11 +102,22 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
         Alamofire.request(urlAddToMitoCart!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
             switch response.result {
             case .success:
-                let alert = self.appdata.fnDisplayAlert(title: "Done!", message: "Added to cart!")
-                self.present(alert, animated: true, completion: nil)
                 if let dictionary = response.result.value {
                     print(dictionary)
-                    // Any code for storing locally
+//                    DispatchQueue.main.async {
+//                        let alert = self.appdata.fnDisplayAlert(title: "Done!", message: "Added to cart!")
+//                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+//                            self.performSegue(withIdentifier: "backToTabController", sender: self)
+//                        }))
+//                        self.present(alert, animated: true, completion: nil)
+//                    }
+                }
+                DispatchQueue.main.async {
+                    let alertController = UIAlertController(title: "Done!", message: "Added to cart!", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                        self.performSegue(withIdentifier: "backToTabController", sender: self)
+                    }))
+                    self.present(alertController, animated: true, completion: nil)
                 }
                 
             case .failure(let error):
@@ -116,11 +127,15 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
         }
     }
     
-    @IBAction func backSearch(_ sender: Any) {
-        appdata.arrProductSearchResults.removeAll()
-        print("Pressed back")
-        self.performSegue(withIdentifier: "backToTabController", sender: self)
-    }
+//    @IBAction func backSearch(_ sender: Any) {
+//        fnProductDetailsToSearch()
+//    }
+//
+//    func fnProductDetailsToSearch() {
+//        appdata.arrProductSearchResults.removeAll()
+//        print("Pressed back")
+//        self.performSegue(withIdentifier: "backToTabController", sender: self)
+//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "backToTabController" {

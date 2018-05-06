@@ -200,6 +200,14 @@ class AppData: NSObject {
         return alertController
     }
     
+//    open func fnDisplayAlertSegue(strTitle: String, strMessage: String, strSegue: String) -> UIAlertController {
+//        let alertController = UIAlertController(title: strTitle, message: strMessage, preferredStyle: .alert)
+//        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+//            performSegue(withIdentifier: strSegue, sender: self)
+//        }))
+//        present(alertController, animated: true, completion: nil)
+//    }
+    
     open func fnDisplaySimpleImage(strImageURL: String, img: UIImageView) {
         let urlImage = URL(string:"\(strImageURL)")
         let defaultURL = URL(string: "https://www.yankee-division.com/uploads/1/7/6/5/17659643/notavailable_2_orig.jpg?210b")
