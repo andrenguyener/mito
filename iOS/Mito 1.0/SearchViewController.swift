@@ -99,13 +99,13 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func filterFriends(text: String) {
         appdata.arrCurrFriends = appdata.arrFriends.filter({ person -> Bool in
-            return person.firstName.lowercased().contains(text.lowercased())
+            return person.firstName.lowercased().contains(text.lowercased().trimmingCharacters(in: .whitespacesAndNewlines))
         })
     }
     
     func filterAllUsers(text: String) {
         appdata.arrCurrAllUsers = appdata.arrAllUsers.filter({ person -> Bool in
-            return person.firstName.lowercased().contains(text.lowercased())
+            return person.firstName.lowercased().contains(text.lowercased().trimmingCharacters(in: .whitespacesAndNewlines))
         })
     }
     

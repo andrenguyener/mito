@@ -104,13 +104,6 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
             case .success:
                 if let dictionary = response.result.value {
                     print(dictionary)
-//                    DispatchQueue.main.async {
-//                        let alert = self.appdata.fnDisplayAlert(title: "Done!", message: "Added to cart!")
-//                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-//                            self.performSegue(withIdentifier: "backToTabController", sender: self)
-//                        }))
-//                        self.present(alert, animated: true, completion: nil)
-//                    }
                 }
                 DispatchQueue.main.async {
                     let alertController = UIAlertController(title: "Done!", message: "Added to cart!", preferredStyle: .alert)
@@ -127,15 +120,15 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
         }
     }
     
-//    @IBAction func backSearch(_ sender: Any) {
-//        fnProductDetailsToSearch()
-//    }
-//
-//    func fnProductDetailsToSearch() {
-//        appdata.arrProductSearchResults.removeAll()
-//        print("Pressed back")
-//        self.performSegue(withIdentifier: "backToTabController", sender: self)
-//    }
+    @IBAction func backSearch(_ sender: Any) {
+        fnProductDetailsToSearch()
+    }
+
+    func fnProductDetailsToSearch() {
+        appdata.arrProductSearchResults.removeAll()
+        print("Pressed back")
+        self.performSegue(withIdentifier: "backToTabController", sender: self)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "backToTabController" {
