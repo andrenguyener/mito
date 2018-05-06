@@ -278,6 +278,7 @@
                         <outlet property="tblviewNotification" destination="d63-uF-5nI" id="KQS-cD-HCb"/>
                         <outlet property="tblviewPackage" destination="5l5-NT-Scx" id="EpR-Uv-kiT"/>
                         <segue destination="klr-lX-eU9" kind="show" identifier="NotificationToPackageDetails" id="8JP-z1-DgM"/>
+                        <segue destination="y1B-fc-fA5" kind="show" identifier="DirectAcceptPackage" id="ruP-Sx-HS5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gdz-Oq-dMf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2604,7 +2605,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="KIF-pf-1ei"/>
-        <segue reference="eNC-Nf-pOF"/>
+        <segue reference="ruP-Sx-HS5"/>
         <segue reference="Jjr-wW-Hse"/>
         <segue reference="IOv-WN-4XC"/>
     </inferredMetricsTieBreakers>

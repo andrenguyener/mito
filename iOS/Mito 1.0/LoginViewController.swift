@@ -367,6 +367,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         }
         appdata.arrStates.sort(by: fnSortStateAlphabetically)
     }
+   
     
     //////////// Keyboard Functions, Superview ////////
 
@@ -393,6 +394,9 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             pickerviewStateAA.isHidden = true
             pickerviewStateAA.delegate = self
             pickerviewStateAA.dataSource = self
+        }
+        if zipcodeAA != nil {
+            zipcodeAA.keyboardType = UIKeyboardType.decimalPad
         }
         super.viewDidLoad()
         if signupScrollView != nil {

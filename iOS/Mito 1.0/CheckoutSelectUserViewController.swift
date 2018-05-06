@@ -157,6 +157,7 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
                 lblCreditCardNumberCheckoutProcess.text = "\(stars)\(last4)"
             }
         } else if imgRecipientProfile != nil {
+            textviewWriteMessage.keyboardDismissMode = .onDrag
             appdata.fnDisplaySimpleImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipientProfile)
             strRecipientName.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
             textviewWriteMessage.text = "What's it for?"
