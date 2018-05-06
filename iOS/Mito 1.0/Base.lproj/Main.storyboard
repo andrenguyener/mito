@@ -992,7 +992,7 @@
                                     <constraint firstAttribute="bottom" secondItem="Cy8-QW-6iy" secondAttribute="bottom" constant="10" id="z4f-El-SCN"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swirlsearch" translatesAutoresizingMaskIntoConstraints="NO" id="y34-oo-vk9">
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swirlsearch" translatesAutoresizingMaskIntoConstraints="NO" id="y34-oo-vk9">
                                 <rect key="frame" x="70" y="169" width="187" height="390"/>
                             </imageView>
                             <containerView opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="va9-Dd-nB3">
@@ -2586,10 +2586,9 @@
         <image name="swirlsearch" width="2257" height="5634"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Jxy-V8-rOh"/>
-        <segue reference="JK1-YT-Yc6"/>
+        <segue reference="IT4-Vz-Cza"/>
         <segue reference="eNC-Nf-pOF"/>
         <segue reference="Jjr-wW-Hse"/>
-        <segue reference="wfB-se-wui"/>
+        <segue reference="IOv-WN-4XC"/>
     </inferredMetricsTieBreakers>
 </document>

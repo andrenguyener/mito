@@ -18,6 +18,7 @@ class AppData: NSObject {
     open var address: Address = Address(intAddressID: 0, strAddressAlias: "Fake", strCityName: "", strStateName: "", strStreetAddress1: "", strStreetAddress2: "", strZipCode: "")
     open var strOrderMessage = "What's it for?"
     open let mainMitoColor = "41DD7C"
+    open var strSearchQuery = ""
     
     open var arrFriends: [Person] = []
     open var arrCurrFriends: [Person] = []
