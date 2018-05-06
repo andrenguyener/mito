@@ -44,7 +44,6 @@ func (wsh *WebSocketsHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) 
 			return
 		}
 		r.Header.Del("X-User")
-
 	}
 
 	log.Println("received websocket upgrade request")
@@ -53,6 +52,9 @@ func (wsh *WebSocketsHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) 
 		http.Error(w, fmt.Sprintf("Error connecting to websocket: %v", err), http.StatusInternalServerError)
 		return
 	}
+	// if sessState.User.UserId != nil {
+
+	// }
 	wsh.notifier.AddClient(conn, sessState.User.UserId)
 }
 
@@ -150,7 +152,7 @@ func (n *Notifier) start() {
 
 		for _, client := range n.clients {
 			if userDoc.UserID == client.userID {
-				log.Println(event.Body)
+				// log.Println(event.Body)
 				err := client.conn.WriteMessage(websocket.TextMessage, event.Body)
 				if err != nil {
 					log.Printf("Error: %v", err)
