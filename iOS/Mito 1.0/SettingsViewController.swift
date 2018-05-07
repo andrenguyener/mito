@@ -31,6 +31,11 @@ class SettingsViewController: UIViewController {
         }
     }
     
+    @IBAction func btnChangePassword(_ sender: Any) {
+        performSegue(withIdentifier: "SettingsToChangePassword", sender: self)
+    }
+    
+    
     func fnSignOut() {
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
