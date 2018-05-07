@@ -231,7 +231,7 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
             self.userEmail.text = data["userEmail"] as? String
             self.username.text = data["username"] as? String
             // Prevent showing Optional("")
-            self.userFname.text = "\(String(describing: data["userFname"] as? String)) \(String(describing: data["userLname"]))"
+            self.userFname.text = "\(data["userFname"]!) \(data["userLname"]!)"
             self.userLname.text = data["userLname"] as? String
             self.userDOB.text = data["userDOB"] as? String
             self.photoURL.text = data["photoURL"] as? String
