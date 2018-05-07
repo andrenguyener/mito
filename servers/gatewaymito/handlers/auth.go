@@ -16,7 +16,7 @@ type UserId struct {
 	UserId int `json:"userId"`
 }
 
-// UsersHandler allows new users to sign up (POST) or return all the users (GET)
+// UsersHandler allows new users to sign up (POST) or return all the users (GET) #signup
 func (ctx *Context) UsersHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "POST":
@@ -117,7 +117,7 @@ func (ctx *Context) UsersHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// Gets the user by its ID
+// Gets the user by its ID #getbyid
 func (ctx *Context) UsersIDHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "GET":
@@ -158,7 +158,7 @@ func (ctx *Context) UsersIDHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// UsersMeHandler allows users to get their current session state
+// UsersMeHandler allows users to get their current session state #getstate
 func (ctx *Context) UsersMeHandler(w http.ResponseWriter, r *http.Request) {
 
 	// get the session state
@@ -217,7 +217,7 @@ func (ctx *Context) UsersMeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// UsersPasswordHandler allows users to update their password
+// UsersPasswordHandler allows users to update their password #changepassword
 func (ctx *Context) UsersPasswordHandler(w http.ResponseWriter, r *http.Request) {
 
 	// get the session state
@@ -272,7 +272,7 @@ func (ctx *Context) UsersPasswordHandler(w http.ResponseWriter, r *http.Request)
 	}
 }
 
-// UsersPersonalHandler allows users to update their personal information
+// UsersPersonalHandler allows users to update their personal information #changepersonal
 func (ctx *Context) UsersPersonalHandler(w http.ResponseWriter, r *http.Request) {
 
 	// get the session state
@@ -349,7 +349,7 @@ func (ctx *Context) UsersPersonalHandler(w http.ResponseWriter, r *http.Request)
 	}
 }
 
-// UsersValidateHandler allows users to check if the inputted credentials are valid
+// UsersValidateHandler allows users to check if the inputted credentials are valid #validate
 func (ctx *Context) UsersValidateHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "POST":
@@ -398,7 +398,7 @@ func (ctx *Context) UsersValidateHandler(w http.ResponseWriter, r *http.Request)
 	}
 }
 
-// UsersAllHandler allows users to retrieve all the users
+// UsersAllHandler allows users to retrieve all the users #getall
 func (ctx *Context) UsersAllHandler(w http.ResponseWriter, r *http.Request) {
 
 	// get the session state
@@ -426,7 +426,7 @@ func (ctx *Context) UsersAllHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// SessionsHandler allows existing users to sign in
+// SessionsHandler allows existing users to sign in #signin
 func (ctx *Context) SessionsHandler(w http.ResponseWriter, r *http.Request) {
 	// The request must be POST
 	if r.Method == "POST" {
@@ -444,7 +444,8 @@ func (ctx *Context) SessionsHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "invalid JSON", http.StatusBadRequest)
 			return
 		}
-
+		user := &users.User{}
+		// err != users.ErrUserNotFound && user != nil
 		if len(newSession.Email) != 0 {
 			// Gets the user with the email from User Store.
 			user, err := ctx.UserStore.GetByEmail(newSession.Email)
@@ -454,9 +455,9 @@ func (ctx *Context) SessionsHandler(w http.ResponseWriter, r *http.Request) {
 			}
 		} else {
 			// Gets the user with the email from User Store.
-			user, err := ctx.UserStore.GetByEmail(newSession.Email)
+			user, err := ctx.UserStore.GetByUserName(newSession.Username)
 			if err != nil {
-				http.Error(w, "invalid credentials email", http.StatusUnauthorized)
+				http.Error(w, "invalid credentials username", http.StatusUnauthorized)
 				return
 			}
 		}
@@ -489,7 +490,7 @@ func (ctx *Context) SessionsHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// SessionsMineHandler allows authenticated users to sign out
+// SessionsMineHandler allows authenticated users to sign out #signout
 func (ctx *Context) SessionsMineHandler(w http.ResponseWriter, r *http.Request) {
 	// The request must be DELETE
 	if r.Method == "DELETE" {
