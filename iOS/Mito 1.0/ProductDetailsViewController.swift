@@ -46,13 +46,27 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     @IBOutlet weak var btnQuantity: UIButton!
     @IBOutlet weak var btnAddToCart: UIButton!
     
+    @IBOutlet weak var confirmPicker: UIStackView!
+    
     @IBAction func btnQuantityPressed(_ sender: Any) {
         if pickerviewQuantity.isHidden {
             pickerviewQuantity.isHidden = false
+            confirmPicker.isHidden = false
             btnQuantity.isHidden = true
             lblQuantity.isHidden = true
             btnAddToCart.isHidden = true
         }
+    }
+    
+    @IBAction func btnDoneSelectingQuantity(_ sender: Any) {
+        let strQuantity = String(appdata.arrQuantity[pickerviewQuantity.selectedRow(inComponent: 0)])
+        lblQuantity.text = strQuantity
+        btnQuantity.setTitle("Quantity: \(strQuantity)", for: .normal)
+        pickerviewQuantity.isHidden = true
+        confirmPicker.isHidden = true
+        btnQuantity.isHidden = false
+        lblQuantity.isHidden = false
+        btnAddToCart.isHidden = false
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -68,12 +82,6 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        lblQuantity.text = appdata.arrQuantity[row]
-        btnQuantity.setTitle("Quantity: \(appdata.arrQuantity[row])", for: .normal)
-        pickerviewQuantity.isHidden = true
-        btnQuantity.isHidden = false
-        lblQuantity.isHidden = false
-        btnAddToCart.isHidden = false
     }
     
     

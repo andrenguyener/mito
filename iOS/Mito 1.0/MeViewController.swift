@@ -222,7 +222,7 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
     override func viewDidLoad() {
         super.viewDidLoad()
         placesClient = GMSPlacesClient.shared()
-        recognizer = PayCardsRecognizer(delegate: self, resultMode: .sync, container: self.view, frameColor: .green)
+//        recognizer = PayCardsRecognizer(delegate: self, resultMode: .sync, container: self.view, frameColor: .green)
 
         if UserDefaults.standard.object(forKey: "UserInfo") != nil {
             let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
