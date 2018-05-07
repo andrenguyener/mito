@@ -16,6 +16,7 @@ var intSegmentedIndex = 0
 
 class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
+    @IBOutlet weak var navController: UINavigationItem!
     
     @IBOutlet weak var peopleTableView: UITableView!
     @IBOutlet weak var productTableView: UITableView!
@@ -80,6 +81,20 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //            swirlSearchImg.isHidden = false
         }
 //        fnLoadProductData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Hide the navigation bar on the this view controller
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Show the navigation bar on other view controllers
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
     @IBAction func cartButtonClicked(_ sender: Any) {

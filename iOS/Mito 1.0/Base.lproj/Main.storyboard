@@ -297,7 +297,7 @@
                                 <rect key="frame" x="20" y="64" width="335" height="108"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lyj-rC-s4x">
-                                        <rect key="frame" x="124" y="0.0" width="87.5" height="87.5"/>
+                                        <rect key="frame" x="123.5" y="0.0" width="88" height="87.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Lyj-rC-s4x" secondAttribute="height" multiplier="1:1" id="PjY-Io-JZB"/>
                                             <constraint firstAttribute="width" constant="87.5" id="Yu7-St-PXF"/>
@@ -1002,10 +1002,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="sbe-Z7-f9y">
-                                        <rect key="frame" x="10" y="28" width="355" height="56"/>
+                                        <rect key="frame" x="10" y="72" width="355" height="23"/>
                                         <subviews>
                                             <searchBar contentMode="redraw" placeholder="Search" backgroundImage="Mito Green Background.png" translatesAutoresizingMaskIntoConstraints="NO" id="1tB-1o-Hvx">
-                                                <rect key="frame" x="0.0" y="0.0" width="333" height="56"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="333" height="23"/>
                                                 <color key="barTintColor" red="0.25490196078431371" green="0.8666666666666667" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <scopeButtonTitles>
@@ -1014,7 +1014,7 @@
                                                 </scopeButtonTitles>
                                             </searchBar>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UjG-eE-Nc2" userLabel="Cart">
-                                                <rect key="frame" x="333" y="0.0" width="22" height="56"/>
+                                                <rect key="frame" x="333" y="0.0" width="22" height="23"/>
                                                 <state key="normal" image="Cart Solid White Icon.png"/>
                                                 <connections>
                                                     <action selector="cartButtonClicked:" destination="gAK-KX-AAt" eventType="touchUpInside" id="tK2-6c-hRd"/>
@@ -1031,7 +1031,7 @@
                                         </constraints>
                                     </stackView>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Cy8-QW-6iy">
-                                        <rect key="frame" x="10" y="90" width="357" height="31"/>
+                                        <rect key="frame" x="10" y="101" width="357" height="20"/>
                                         <color key="backgroundColor" red="0.25490196078431371" green="0.8666666666666667" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <segments>
                                             <segment title="Products"/>
@@ -1095,11 +1095,10 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Search" image="search Grey" id="pJ4-uA-eMM">
-                        <color key="badgeColor" red="0.25490196079999999" green="0.86666666670000003" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </tabBarItem>
+                    <navigationItem key="navigationItem" id="q2o-wJ-IVz"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="navController" destination="q2o-wJ-IVz" id="q3y-DY-Kjk"/>
                         <outlet property="peopleContainer" destination="DHp-hZ-6In" id="dzd-EI-hTf"/>
                         <outlet property="peopleTableView" destination="WBt-vu-arn" id="zLF-1q-dYE"/>
                         <outlet property="peopleView" destination="uPe-gp-1lw" id="Lit-9L-cQ6"/>
@@ -1117,7 +1116,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aal-tH-Eyd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2056.8000000000002" y="550.97451274362822"/>
+            <point key="canvasLocation" x="2996" y="550.97451274362822"/>
         </scene>
         <!--Cart-->
         <scene sceneID="Cff-ft-geZ">
@@ -1131,7 +1130,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="104"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uIF-DS-KqV">
-                                        <rect key="frame" x="16" y="34" width="48" height="30"/>
+                                        <rect key="frame" x="16" y="78" width="48" height="30"/>
                                         <state key="normal" title="Cancel">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -1140,7 +1139,7 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mitowhiteonly.png" translatesAutoresizingMaskIntoConstraints="NO" id="LGj-Wv-dqw">
-                                        <rect key="frame" x="141.5" y="25" width="92" height="48"/>
+                                        <rect key="frame" x="141.5" y="69" width="92" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="Zs1-sq-41S"/>
                                             <constraint firstAttribute="width" constant="92" id="kco-jB-0pD"/>
@@ -1169,7 +1168,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Yt-AX-8vw">
-                                <rect key="frame" x="16" y="175" width="343" height="425"/>
+                                <rect key="frame" x="16" y="175" width="343" height="376"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cartCell" rowHeight="180" id="ExR-FD-V61" customClass="CartTableViewCell" customModule="Mito_1_0" customModuleProvider="target">
@@ -1275,7 +1274,7 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o0k-x2-XBB" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
-                                <rect key="frame" x="16" y="611" width="343" height="46"/>
+                                <rect key="frame" x="16" y="562" width="343" height="46"/>
                                 <color key="backgroundColor" red="0.25490196078431371" green="0.8666666666666667" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="YGy-XO-H0R"/>
@@ -1646,7 +1645,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9pi-Wq-U6E">
-                                <rect key="frame" x="0.0" y="30" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="74" width="375" height="44"/>
                                 <items>
                                     <navigationItem title="Title" id="ntj-Mp-nvD">
                                         <barButtonItem key="leftBarButtonItem" id="8K4-fL-4dx">
@@ -1671,7 +1670,7 @@
                                 </items>
                             </navigationBar>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="iIt-YC-sQM" userLabel="Profile Information">
-                                <rect key="frame" x="83" y="104" width="209" height="241"/>
+                                <rect key="frame" x="83" y="148" width="209" height="241"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FirstName LastName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1g-f7-mfA">
                                         <rect key="frame" x="24" y="0.0" width="161" height="21"/>
@@ -1755,7 +1754,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="55a-NT-Bh9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2940" y="551"/>
+            <point key="canvasLocation" x="3879.1999999999998" y="550.97451274362822"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="gFb-Q6-MNY">
@@ -1769,7 +1768,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="k7B-N4-R6E" kind="relationship" relationship="viewControllers" id="Txd-3r-D3I"/>
-                        <segue destination="gAK-KX-AAt" kind="relationship" relationship="viewControllers" id="Xta-FM-2bW"/>
+                        <segue destination="P24-cj-Wm6" kind="relationship" relationship="viewControllers" id="Xta-FM-2bW"/>
                         <segue destination="zTg-1Y-lm9" kind="relationship" relationship="viewControllers" id="sLv-ep-LaA"/>
                         <segue destination="V5H-sy-eFC" kind="relationship" relationship="viewControllers" id="Wmj-pu-416"/>
                     </connections>
@@ -2040,7 +2039,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Vu-Ol-Pgb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5288.8000000000002" y="433.13343328335833"/>
+            <point key="canvasLocation" x="6228" y="433.13343328335833"/>
         </scene>
         <!--PaymentMethod-->
         <scene sceneID="bjH-vb-tVn">
@@ -2193,7 +2192,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rMI-3L-PLu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3868" y="1143"/>
+            <point key="canvasLocation" x="4807.1999999999998" y="1142.8785607196403"/>
         </scene>
         <!--ChooseAddress-->
         <scene sceneID="Xxo-qr-Mob">
@@ -2280,7 +2279,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9OU-am-Tho" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4782" y="1201"/>
+            <point key="canvasLocation" x="5720.8000000000002" y="1200.4497751124438"/>
         </scene>
         <!--Checkout-->
         <scene sceneID="zv4-1b-Ig8">
@@ -2505,7 +2504,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="btm-76-Wiy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3932" y="250"/>
+            <point key="canvasLocation" x="4871.1999999999998" y="249.62518740629687"/>
         </scene>
         <!--Checkout Select User View Controller-->
         <scene sceneID="IIU-ar-ycY">
@@ -2664,6 +2663,27 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Zg-TG-gA2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1399.2" y="2192.6536731634183"/>
+        </scene>
+        <!--Search-->
+        <scene sceneID="7lY-b7-kxJ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="P24-cj-Wm6" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Search" image="search Grey" id="pJ4-uA-eMM">
+                        <color key="badgeColor" red="0.25490196079999999" green="0.86666666670000003" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0mI-Vi-Gzg">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="gAK-KX-AAt" kind="relationship" relationship="rootViewController" id="zvh-fh-JDW"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IXv-VM-CS6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2056.8000000000002" y="550.97451274362822"/>
         </scene>
     </scenes>
     <resources>
