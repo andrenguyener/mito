@@ -358,86 +358,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Fs1-h8-PX9">
-                                <rect key="frame" x="20" y="278" width="335" height="330"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fsv-I5-Xyw">
-                                        <rect key="frame" x="0.0" y="0.0" width="202" height="30"/>
-                                        <state key="normal" title="Load Current User Addresses"/>
-                                        <connections>
-                                            <action selector="loadCurrentUserAddresses:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="gXF-KS-W4y"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gTl-jl-SVl">
-                                        <rect key="frame" x="0.0" y="30" width="132" height="30"/>
-                                        <state key="normal" title="Get Current Orders"/>
-                                        <connections>
-                                            <action selector="loadCurrentOrders:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="9b7-fN-JnV"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2TV-N5-l9j">
-                                        <rect key="frame" x="0.0" y="60" width="135" height="30"/>
-                                        <state key="normal" title="Insert New Address"/>
-                                        <connections>
-                                            <action selector="fnInsertNewAddress:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="jyF-6c-1D5"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o0A-zd-r6F">
-                                        <rect key="frame" x="0.0" y="90" width="184" height="30"/>
-                                        <state key="normal" title="Accept or Decline Package"/>
-                                        <connections>
-                                            <action selector="fnAcceptOrDeclinePackage:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="SCk-Nt-5FE"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jeq-GC-wZz">
-                                        <rect key="frame" x="0.0" y="120" width="155" height="30"/>
-                                        <state key="normal" title="Get Pending Packages"/>
-                                        <connections>
-                                            <action selector="fnGetPendingPackages:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="6SP-sL-mFq"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x9O-gk-cIg">
-                                        <rect key="frame" x="0.0" y="150" width="162" height="30"/>
-                                        <state key="normal" title="Get Incoming Packages"/>
-                                        <connections>
-                                            <action selector="fnGetIncomingPackages:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="oGZ-aN-dNh"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DpV-1F-jTa">
-                                        <rect key="frame" x="0.0" y="180" width="123" height="30"/>
-                                        <state key="normal" title="Change Password"/>
-                                        <connections>
-                                            <action selector="btnChangePassword:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="PBs-Ef-1ED"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4B-wJ-w9k">
-                                        <rect key="frame" x="0.0" y="210" width="42" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MVr-6R-m27">
-                                        <rect key="frame" x="0.0" y="240" width="42" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7u-ZN-vbf">
-                                        <rect key="frame" x="0.0" y="270" width="94" height="30"/>
-                                        <state key="normal" title="Choose Place"/>
-                                        <connections>
-                                            <action selector="fnPickPlace:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="G4D-wE-oIF"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XLd-IW-sik">
-                                        <rect key="frame" x="0.0" y="300" width="144" height="30"/>
-                                        <state key="normal" title="Get Current Location"/>
-                                        <connections>
-                                            <action selector="fnGetCurrentLocation:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="j68-TI-veI"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xYb-A4-VIe">
                                 <rect key="frame" x="20" y="138" width="335" height="90"/>
                                 <subviews>
@@ -482,6 +402,103 @@
                                     <mask key="subviews">
                                         <exclude reference="2np-NQ-dZH"/>
                                         <exclude reference="w79-KV-MTd"/>
+                                    </mask>
+                                </variation>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Fs1-h8-PX9">
+                                <rect key="frame" x="20" y="338" width="335" height="270"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fsv-I5-Xyw">
+                                        <rect key="frame" x="0.0" y="0.0" width="202" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Load Current User Addresses"/>
+                                        <connections>
+                                            <action selector="loadCurrentUserAddresses:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="gXF-KS-W4y"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jrO-uD-Lf4">
+                                        <rect key="frame" x="0.0" y="0.0" width="199" height="30"/>
+                                        <state key="normal" title="Grab Credit Card Information"/>
+                                        <connections>
+                                            <action selector="btnScanCreditCard:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="wJh-6O-fqj"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gTl-jl-SVl">
+                                        <rect key="frame" x="0.0" y="30" width="132" height="30"/>
+                                        <state key="normal" title="Get Current Orders"/>
+                                        <connections>
+                                            <action selector="loadCurrentOrders:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="9b7-fN-JnV"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2TV-N5-l9j">
+                                        <rect key="frame" x="0.0" y="60" width="135" height="30"/>
+                                        <state key="normal" title="Insert New Address"/>
+                                        <connections>
+                                            <action selector="fnInsertNewAddress:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="jyF-6c-1D5"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o0A-zd-r6F">
+                                        <rect key="frame" x="0.0" y="90" width="184" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Accept or Decline Package"/>
+                                        <connections>
+                                            <action selector="fnAcceptOrDeclinePackage:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="SCk-Nt-5FE"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jeq-GC-wZz">
+                                        <rect key="frame" x="0.0" y="90" width="155" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Get Pending Packages"/>
+                                        <connections>
+                                            <action selector="fnGetPendingPackages:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="6SP-sL-mFq"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x9O-gk-cIg">
+                                        <rect key="frame" x="0.0" y="90" width="162" height="30"/>
+                                        <state key="normal" title="Get Incoming Packages"/>
+                                        <connections>
+                                            <action selector="fnGetIncomingPackages:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="oGZ-aN-dNh"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DpV-1F-jTa">
+                                        <rect key="frame" x="0.0" y="120" width="123" height="30"/>
+                                        <state key="normal" title="Change Password"/>
+                                        <connections>
+                                            <action selector="btnChangePassword:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="PBs-Ef-1ED"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4B-wJ-w9k">
+                                        <rect key="frame" x="0.0" y="150" width="42" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MVr-6R-m27">
+                                        <rect key="frame" x="0.0" y="180" width="42" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7u-ZN-vbf">
+                                        <rect key="frame" x="0.0" y="210" width="94" height="30"/>
+                                        <state key="normal" title="Choose Place"/>
+                                        <connections>
+                                            <action selector="fnPickPlace:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="G4D-wE-oIF"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XLd-IW-sik">
+                                        <rect key="frame" x="0.0" y="240" width="144" height="30"/>
+                                        <state key="normal" title="Get Current Location"/>
+                                        <connections>
+                                            <action selector="fnGetCurrentLocation:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="j68-TI-veI"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="Fsv-I5-Xyw"/>
+                                        <exclude reference="o0A-zd-r6F"/>
+                                        <exclude reference="jeq-GC-wZz"/>
                                     </mask>
                                 </variation>
                             </stackView>

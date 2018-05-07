@@ -7,35 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		10EB23E9ECC4B33E16933BB1EA560B6A /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601FCBF4830BD56A63C253EFD2CF1651 /* Timeline.swift */; };
-		17F2835A126F50854C9B6A43DC6E19E5 /* Starscream-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DF76338AFB31217F53FA049DC93CCA0F /* Starscream-dummy.m */; };
-		1B9EDEDC964E6B08F78920B4F4B9DB84 /* Alamofire-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F0F7B80D022BFDC26DCBB3AA6476AE3 /* Alamofire-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2CB546D40A649D966F064142F89EC5BB /* Starscream-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CF3DD391866AFE916F937482CB3A7DC /* Starscream-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3626B94094672CB1C9DEA32B9F9502E1 /* TaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D3CA2825E5B1D6161E5BEFA2474972 /* TaskDelegate.swift */; };
+		10EB23E9ECC4B33E16933BB1EA560B6A /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F618236CBD13B0763776D4E1182C29 /* Timeline.swift */; };
+		17F2835A126F50854C9B6A43DC6E19E5 /* Starscream-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F588C3415662D37C4507A2A072ED6F /* Starscream-dummy.m */; };
+		1B9EDEDC964E6B08F78920B4F4B9DB84 /* Alamofire-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 97B6671AB052CF8D12C6F30553D12AA3 /* Alamofire-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2CB546D40A649D966F064142F89EC5BB /* Starscream-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 106B29517F02E109D31B5EC2B6C4CFB1 /* Starscream-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3626B94094672CB1C9DEA32B9F9502E1 /* TaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484C8C0C8886242ECA3BBA601A948608 /* TaskDelegate.swift */; };
 		48C2D62561C3B90E3E621B86B9FD500E /* Pods-Mito 1.0-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B3FC6AAC355CDF0DE427CBC579C79CD5 /* Pods-Mito 1.0-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5387216E723A3C68E851CA15573CDD71 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = E993B59C80595A3F3760A92F9054EA0A /* Request.swift */; };
+		5387216E723A3C68E851CA15573CDD71 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9AF80B31F7789729C776F0C979C7D25 /* Request.swift */; };
 		5F536D3D5C151C206D3DAC4C2BC8E2C5 /* Pods-Mito 1.0-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D34AFFBA803C9CD1D48D2A06239ABDB /* Pods-Mito 1.0-dummy.m */; };
-		61200D01A1855D7920CEF835C8BE00B0 /* DispatchQueue+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE98DE1B3944EAD7BA7CF5E67BE053B /* DispatchQueue+Alamofire.swift */; };
-		62F65AD8DC4F0F9610F4B8B4738EC094 /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE14D77B38957CBFF44E838837057F04 /* ServerTrustPolicy.swift */; };
+		61200D01A1855D7920CEF835C8BE00B0 /* DispatchQueue+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C3726EF2F2423A9A5EBBD1AC9D6E33 /* DispatchQueue+Alamofire.swift */; };
+		62F65AD8DC4F0F9610F4B8B4738EC094 /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E24923857A99CC26FF3C15BA1A7DEC /* ServerTrustPolicy.swift */; };
 		73B9C996AED49ED7CF8EC2A6F1738059 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
-		74F9ABD54F6803FB6ADEDCC226EE554A /* Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FC4CBA843BC00145BE5A4E4EC55391 /* Compression.swift */; };
-		7B5FE28C7EA4122B0598738E54DBEBD8 /* SessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A348742D55D0037CD7079EAABD158170 /* SessionDelegate.swift */; };
-		7D8CC01E8C9EFFF9F4D65406CDE0AB66 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA0FD7F9488E802C44550A454C6767 /* Result.swift */; };
-		8906EDCEB118D7229A10104E208D920F /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1270707FC2BAD41B4E4D54CA90EA3C33 /* WebSocket.swift */; };
-		8988DF963B85D12F2A7EAAD14687B545 /* SSLSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DBFBE54D25697CC81BF3C67C7F1768 /* SSLSecurity.swift */; };
-		9ED2BB2981896E0A39EFA365503F58CE /* AFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25DC67D303F61EB3B3E8F9BDD620806 /* AFError.swift */; };
-		A2A6F71B727312BD45CC7A4AAD7B0AB7 /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED61746266822298874F02034379067 /* NetworkReachabilityManager.swift */; };
-		A9EEEA7477981DEEBC72432DE9990A4B /* Alamofire-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4194C4DA41DE7BDBDA68689EB5BD28A1 /* Alamofire-dummy.m */; };
-		AE1EF48399533730D0066E04B22CA2D6 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE2F818B7E62AEDF59BED1E940E0E96 /* SessionManager.swift */; };
-		B65FCF589DA398C3EFE0128064E510EC /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CFB7CDCD4FB5CFE7C7894F5420751E2 /* MultipartFormData.swift */; };
-		BBEFE2F9CEB73DC7BD97FFA66A0D9D4F /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D9C57F6C1EE52417C11DFCA00A7A8E /* Validation.swift */; };
-		BE5C67A07E289FE1F9BE27335B159997 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3E6EBCBA25E1442157293CFBD5AAC6 /* ParameterEncoding.swift */; };
+		74F9ABD54F6803FB6ADEDCC226EE554A /* Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCDC8DCCC1FC1FB2971EA4C2C373E8C /* Compression.swift */; };
+		7B5FE28C7EA4122B0598738E54DBEBD8 /* SessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3215262656D8AA81BA8DE87A0F429BBF /* SessionDelegate.swift */; };
+		7D8CC01E8C9EFFF9F4D65406CDE0AB66 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B7AEC37C83FBEE4D710AF047F15660 /* Result.swift */; };
+		8906EDCEB118D7229A10104E208D920F /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C89AA33F258298F3674619173F9744F /* WebSocket.swift */; };
+		8988DF963B85D12F2A7EAAD14687B545 /* SSLSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A215A15728F68B3B020EE6E8E63C1915 /* SSLSecurity.swift */; };
+		9ED2BB2981896E0A39EFA365503F58CE /* AFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59F48C3D1156012F6A5C202A690A9D3 /* AFError.swift */; };
+		A2A6F71B727312BD45CC7A4AAD7B0AB7 /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E297B69AB04C7EEE5C8BB262B46C967 /* NetworkReachabilityManager.swift */; };
+		A9EEEA7477981DEEBC72432DE9990A4B /* Alamofire-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B68654B72FFB5D0FB4A2E82AB3C88DCA /* Alamofire-dummy.m */; };
+		AE1EF48399533730D0066E04B22CA2D6 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A3A50AC0599B0CEE4F05A68F5BA646 /* SessionManager.swift */; };
+		B65FCF589DA398C3EFE0128064E510EC /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6405DE60C6D2551CFD255F5849048A94 /* MultipartFormData.swift */; };
+		BBEFE2F9CEB73DC7BD97FFA66A0D9D4F /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0424799823ADF6C075DA58008DA88B /* Validation.swift */; };
+		BE5C67A07E289FE1F9BE27335B159997 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546155B16EA8EDEEC08C16AC909FE947 /* ParameterEncoding.swift */; };
 		BE823602C639E4774B44F0B3BE9F924C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
-		CB6D60925223897FFA2662667DF83E8A /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D30709798E3A8F1051B6444B344C4A5 /* Response.swift */; };
-		EFD264FC408EBF3BA2528E70B08DDD94 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D77691E0CDFCFAA09CDE052620503D4 /* Notifications.swift */; };
+		CB6D60925223897FFA2662667DF83E8A /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E140B2DFA0CD2BD064203A2016E811F /* Response.swift */; };
+		EFD264FC408EBF3BA2528E70B08DDD94 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB00914D2A5F6793AA0C16FFF51FB2E /* Notifications.swift */; };
 		F1AF2484AC4EE951A0D4CC1CCFA85D86 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
-		F6BECD98B97CBFEBE2C96F0E9E72A6C0 /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688BFF9394030D9802F733F81EEDCA32 /* ResponseSerialization.swift */; };
-		F8B3D3092ED0417E8CDF32033F6122F5 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449D2EF414565F6B0F0305F32C05EF26 /* Alamofire.swift */; };
+		F6BECD98B97CBFEBE2C96F0E9E72A6C0 /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8CCA1FFB016ED177AEBBB0C299ED4A /* ResponseSerialization.swift */; };
+		F8B3D3092ED0417E8CDF32033F6122F5 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA6CF7922125F544E820ECFC4ACFBB1 /* Alamofire.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,61 +56,62 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		09E0D672048E0610D9B7D03E2E5599CF /* Alamofire.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Alamofire.xcconfig; sourceTree = "<group>"; };
-		0CFB7CDCD4FB5CFE7C7894F5420751E2 /* MultipartFormData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultipartFormData.swift; path = Source/MultipartFormData.swift; sourceTree = "<group>"; };
-		0EE98DE1B3944EAD7BA7CF5E67BE053B /* DispatchQueue+Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DispatchQueue+Alamofire.swift"; path = "Source/DispatchQueue+Alamofire.swift"; sourceTree = "<group>"; };
-		1270707FC2BAD41B4E4D54CA90EA3C33 /* WebSocket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WebSocket.swift; path = Sources/WebSocket.swift; sourceTree = "<group>"; };
-		1D30709798E3A8F1051B6444B344C4A5 /* Response.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Response.swift; path = Source/Response.swift; sourceTree = "<group>"; };
+		106B29517F02E109D31B5EC2B6C4CFB1 /* Starscream-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Starscream-umbrella.h"; sourceTree = "<group>"; };
+		11262008493C5BA1F2F225380F1B314D /* GoogleMapsCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMapsCore.framework; path = Maps/Frameworks/GoogleMapsCore.framework; sourceTree = "<group>"; };
+		168016D7CFD14AFC56FC41BF03C48467 /* GooglePlaces.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GooglePlaces.bundle; path = Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle; sourceTree = "<group>"; };
 		1D34AFFBA803C9CD1D48D2A06239ABDB /* Pods-Mito 1.0-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Mito 1.0-dummy.m"; sourceTree = "<group>"; };
-		2EBAE4D95C41BE8FF43BA9A495AB3026 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3600C5392F241FD4D7EAA589F0E2ABA5 /* GooglePlaces.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlaces.framework; path = Frameworks/GooglePlaces.framework; sourceTree = "<group>"; };
+		2BD352A824F87189A8322203A3A2EC1A /* PayCardsRecognizer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PayCardsRecognizer.framework; path = Source/PayCardsRecognizer.framework; sourceTree = "<group>"; };
+		3215262656D8AA81BA8DE87A0F429BBF /* SessionDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionDelegate.swift; path = Source/SessionDelegate.swift; sourceTree = "<group>"; };
+		323AB6615E44FD8A10C0643697EB33F6 /* GooglePlacePicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlacePicker.framework; path = Frameworks/GooglePlacePicker.framework; sourceTree = "<group>"; };
 		36354DC27A28471ABF9FE3D0F111AF59 /* Pods-Mito 1.0.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Mito 1.0.modulemap"; sourceTree = "<group>"; };
+		395F10A05B6A20F6E9738FF857964CF2 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = Maps/Frameworks/GoogleMaps.framework; sourceTree = "<group>"; };
 		3C88482E8640EE247151E7A80DFA4EAB /* Pods-Mito 1.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Mito 1.0.release.xcconfig"; sourceTree = "<group>"; };
+		3C89AA33F258298F3674619173F9744F /* WebSocket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WebSocket.swift; path = Sources/WebSocket.swift; sourceTree = "<group>"; };
+		3E140B2DFA0CD2BD064203A2016E811F /* Response.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Response.swift; path = Source/Response.swift; sourceTree = "<group>"; };
 		3FF85DBC8EBFA1B528F19A468EC164EE /* Pods_Mito_1_0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Mito_1_0.framework; path = "Pods-Mito 1.0.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4194C4DA41DE7BDBDA68689EB5BD28A1 /* Alamofire-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Alamofire-dummy.m"; sourceTree = "<group>"; };
-		449D2EF414565F6B0F0305F32C05EF26 /* Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = Source/Alamofire.swift; sourceTree = "<group>"; };
-		5C948B51B30E855C80F87974901630B5 /* Alamofire.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Alamofire.modulemap; sourceTree = "<group>"; };
-		5F0F7B80D022BFDC26DCBB3AA6476AE3 /* Alamofire-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-umbrella.h"; sourceTree = "<group>"; };
-		601FCBF4830BD56A63C253EFD2CF1651 /* Timeline.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Timeline.swift; path = Source/Timeline.swift; sourceTree = "<group>"; };
+		41E919C97E0D67597A69A655DC1532EF /* GoogleMaps.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
+		484C8C0C8886242ECA3BBA601A948608 /* TaskDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TaskDelegate.swift; path = Source/TaskDelegate.swift; sourceTree = "<group>"; };
+		546155B16EA8EDEEC08C16AC909FE947 /* ParameterEncoding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ParameterEncoding.swift; path = Source/ParameterEncoding.swift; sourceTree = "<group>"; };
+		5B0424799823ADF6C075DA58008DA88B /* Validation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Source/Validation.swift; sourceTree = "<group>"; };
+		5EB00914D2A5F6793AA0C16FFF51FB2E /* Notifications.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Notifications.swift; path = Source/Notifications.swift; sourceTree = "<group>"; };
+		6405DE60C6D2551CFD255F5849048A94 /* MultipartFormData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultipartFormData.swift; path = Source/MultipartFormData.swift; sourceTree = "<group>"; };
 		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		688BFF9394030D9802F733F81EEDCA32 /* ResponseSerialization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ResponseSerialization.swift; path = Source/ResponseSerialization.swift; sourceTree = "<group>"; };
+		6A64A365F769C00F3579E21C6BCFBD3D /* Starscream.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Starscream.modulemap; sourceTree = "<group>"; };
 		6B47EA14999A1347285302D2F51F5858 /* Starscream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Starscream.framework; path = Starscream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6D77691E0CDFCFAA09CDE052620503D4 /* Notifications.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Notifications.swift; path = Source/Notifications.swift; sourceTree = "<group>"; };
-		7215E32A3650A4945523CFCDDB20C4EA /* GooglePlacePicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlacePicker.framework; path = Frameworks/GooglePlacePicker.framework; sourceTree = "<group>"; };
-		74F284C1CE18F9A8A788F19D6B6A877F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		76F02F79F4E9B0DAC028F1BC1E04B561 /* GooglePlacePicker.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GooglePlacePicker.bundle; path = Frameworks/GooglePlacePicker.framework/Resources/GooglePlacePicker.bundle; sourceTree = "<group>"; };
-		7CFA0FD7F9488E802C44550A454C6767 /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Source/Result.swift; sourceTree = "<group>"; };
-		83D9C57F6C1EE52417C11DFCA00A7A8E /* Validation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Source/Validation.swift; sourceTree = "<group>"; };
-		8ED61746266822298874F02034379067 /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkReachabilityManager.swift; path = Source/NetworkReachabilityManager.swift; sourceTree = "<group>"; };
-		9177D28F3678F1C90986088F01B3416F /* GoogleMaps.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
+		6BA6CF7922125F544E820ECFC4ACFBB1 /* Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = Source/Alamofire.swift; sourceTree = "<group>"; };
+		6FD4D4FB47B78D077BF3CE0AC9978BE5 /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMapsBase.framework; path = Base/Frameworks/GoogleMapsBase.framework; sourceTree = "<group>"; };
+		71E24923857A99CC26FF3C15BA1A7DEC /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServerTrustPolicy.swift; path = Source/ServerTrustPolicy.swift; sourceTree = "<group>"; };
+		753C9678AF5BA2AF7A8F0434ED2BE4DE /* Starscream-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Starscream-prefix.pch"; sourceTree = "<group>"; };
+		7C477A30D44A2CB2AED4D8B3AA1B32FA /* GooglePlaces.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlaces.framework; path = Frameworks/GooglePlaces.framework; sourceTree = "<group>"; };
+		867D7FDD3EDA66561A5064BCB13D4DC5 /* Starscream.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Starscream.xcconfig; sourceTree = "<group>"; };
+		8E297B69AB04C7EEE5C8BB262B46C967 /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkReachabilityManager.swift; path = Source/NetworkReachabilityManager.swift; sourceTree = "<group>"; };
 		9357D42A8E018FAE5C4E639286AB88D6 /* Pods-Mito 1.0-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Mito 1.0-frameworks.sh"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		945025931151200BA2FEC8083D0592EB /* Pods-Mito 1.0-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Mito 1.0-acknowledgements.markdown"; sourceTree = "<group>"; };
-		94FC4CBA843BC00145BE5A4E4EC55391 /* Compression.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Compression.swift; path = Sources/Compression.swift; sourceTree = "<group>"; };
-		9C0C88715C949FC07050CAE26983C0D8 /* Starscream.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Starscream.modulemap; sourceTree = "<group>"; };
-		9C3E6EBCBA25E1442157293CFBD5AAC6 /* ParameterEncoding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ParameterEncoding.swift; path = Source/ParameterEncoding.swift; sourceTree = "<group>"; };
-		9CF3DD391866AFE916F937482CB3A7DC /* Starscream-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Starscream-umbrella.h"; sourceTree = "<group>"; };
-		A06293BD4CF54003BCB6FCB20AE9978F /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMapsBase.framework; path = Base/Frameworks/GoogleMapsBase.framework; sourceTree = "<group>"; };
-		A348742D55D0037CD7079EAABD158170 /* SessionDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionDelegate.swift; path = Source/SessionDelegate.swift; sourceTree = "<group>"; };
-		A7BFA3B51D976782E7352C974C36B2A3 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = Maps/Frameworks/GoogleMaps.framework; sourceTree = "<group>"; };
+		97B6671AB052CF8D12C6F30553D12AA3 /* Alamofire-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-umbrella.h"; sourceTree = "<group>"; };
+		99F588C3415662D37C4507A2A072ED6F /* Starscream-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Starscream-dummy.m"; sourceTree = "<group>"; };
+		A215A15728F68B3B020EE6E8E63C1915 /* SSLSecurity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SSLSecurity.swift; path = Sources/SSLSecurity.swift; sourceTree = "<group>"; };
 		A838C5FAA5264EDA453F9123AEBE5535 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B2C7366EC9EEFFB0327C4C94BFDF934D /* Starscream.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Starscream.xcconfig; sourceTree = "<group>"; };
-		B2DBFBE54D25697CC81BF3C67C7F1768 /* SSLSecurity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SSLSecurity.swift; path = Sources/SSLSecurity.swift; sourceTree = "<group>"; };
+		B38945913B304892BFCE9B9807F098F5 /* GooglePlacePicker.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GooglePlacePicker.bundle; path = Frameworks/GooglePlacePicker.framework/Resources/GooglePlacePicker.bundle; sourceTree = "<group>"; };
 		B3FC6AAC355CDF0DE427CBC579C79CD5 /* Pods-Mito 1.0-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Mito 1.0-umbrella.h"; sourceTree = "<group>"; };
-		B4D3CA2825E5B1D6161E5BEFA2474972 /* TaskDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TaskDelegate.swift; path = Source/TaskDelegate.swift; sourceTree = "<group>"; };
+		B68654B72FFB5D0FB4A2E82AB3C88DCA /* Alamofire-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Alamofire-dummy.m"; sourceTree = "<group>"; };
 		BFD92C4E2F68009646393C1295A552DF /* Pods-Mito 1.0-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Mito 1.0-resources.sh"; sourceTree = "<group>"; };
-		C226C7E11A426C8BB871D8DC506E0A4A /* GoogleMapsCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMapsCore.framework; path = Maps/Frameworks/GoogleMapsCore.framework; sourceTree = "<group>"; };
-		C2503355E4406267B6A551B27B3D02A5 /* Alamofire-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-prefix.pch"; sourceTree = "<group>"; };
 		C40F969DB3F48E24D734691E14ACC797 /* Pods-Mito 1.0-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Mito 1.0-acknowledgements.plist"; sourceTree = "<group>"; };
-		CD98E86F38FAD71BD60C9C6000274D53 /* Starscream-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Starscream-prefix.pch"; sourceTree = "<group>"; };
-		CDE2F818B7E62AEDF59BED1E940E0E96 /* SessionManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionManager.swift; path = Source/SessionManager.swift; sourceTree = "<group>"; };
-		DF76338AFB31217F53FA049DC93CCA0F /* Starscream-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Starscream-dummy.m"; sourceTree = "<group>"; };
+		C7ADDAF2ABEA4C689F7B2935E1D39A3E /* Alamofire-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-prefix.pch"; sourceTree = "<group>"; };
+		C9AF80B31F7789729C776F0C979C7D25 /* Request.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Request.swift; path = Source/Request.swift; sourceTree = "<group>"; };
+		CCCDC8DCCC1FC1FB2971EA4C2C373E8C /* Compression.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Compression.swift; path = Sources/Compression.swift; sourceTree = "<group>"; };
+		D2A3A50AC0599B0CEE4F05A68F5BA646 /* SessionManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionManager.swift; path = Source/SessionManager.swift; sourceTree = "<group>"; };
+		D5F618236CBD13B0763776D4E1182C29 /* Timeline.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Timeline.swift; path = Source/Timeline.swift; sourceTree = "<group>"; };
 		E24C53FDBA08B4ABAAA3A848FCEED021 /* Pods-Mito 1.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Mito 1.0.debug.xcconfig"; sourceTree = "<group>"; };
-		E25DC67D303F61EB3B3E8F9BDD620806 /* AFError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AFError.swift; path = Source/AFError.swift; sourceTree = "<group>"; };
-		E993B59C80595A3F3760A92F9054EA0A /* Request.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Request.swift; path = Source/Request.swift; sourceTree = "<group>"; };
-		F2CA2C89755B2B6D4CD1D0379085B88C /* GooglePlaces.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GooglePlaces.bundle; path = Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle; sourceTree = "<group>"; };
+		E57A194E3464746328CBC96E16ED9AD9 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E59F48C3D1156012F6A5C202A690A9D3 /* AFError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AFError.swift; path = Source/AFError.swift; sourceTree = "<group>"; };
+		E7C3726EF2F2423A9A5EBBD1AC9D6E33 /* DispatchQueue+Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DispatchQueue+Alamofire.swift"; path = "Source/DispatchQueue+Alamofire.swift"; sourceTree = "<group>"; };
+		EBBFE7C560F858B65D9E89D7B3AE5A5E /* Alamofire.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Alamofire.xcconfig; sourceTree = "<group>"; };
+		F16E9129C9457CC05425727747BF6EC9 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F17393078C12B2E14EF02EF5CA80E2AE /* Alamofire.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Alamofire.modulemap; sourceTree = "<group>"; };
+		F8B7AEC37C83FBEE4D710AF047F15660 /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Source/Result.swift; sourceTree = "<group>"; };
+		FB8CCA1FFB016ED177AEBBB0C299ED4A /* ResponseSerialization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ResponseSerialization.swift; path = Source/ResponseSerialization.swift; sourceTree = "<group>"; };
 		FD47CEFC6D516676491CBC99E1C7D072 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Alamofire.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FE14D77B38957CBFF44E838837057F04 /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServerTrustPolicy.swift; path = Source/ServerTrustPolicy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,85 +142,78 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0B1C55E975E9C0EDF858FF95F59407CE /* Base */ = {
+		159DEECAFD0BFEBB94CF9AF21D42F58A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				804493D44D8C1A4D58B3FB08D1B4A567 /* Frameworks */,
+				41E919C97E0D67597A69A655DC1532EF /* GoogleMaps.bundle */,
 			);
-			name = Base;
+			name = Resources;
 			sourceTree = "<group>";
 		};
-		0D5D1054EA297F36C3E7EDA26EE5325D /* GooglePlaces */ = {
+		1E007BCE76B2A1DB4D2E995AB3AD2C5F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CA8E6341D8920E2D3AC988338288362C /* Frameworks */,
-				7F2B50766C83339B873C77EC8596CD1B /* Resources */,
+				7C477A30D44A2CB2AED4D8B3AA1B32FA /* GooglePlaces.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2123C751DFBB65401A775FE455E6397B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				168016D7CFD14AFC56FC41BF03C48467 /* GooglePlaces.bundle */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29AE33CB1186436A5EB2D96759DE0DB4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2BD352A824F87189A8322203A3A2EC1A /* PayCardsRecognizer.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		364B83A0CCD6DB9584781C8CB3229352 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				395F10A05B6A20F6E9738FF857964CF2 /* GoogleMaps.framework */,
+				11262008493C5BA1F2F225380F1B314D /* GoogleMapsCore.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3B62F7FF1341EC7A7DA97366A1EE0C42 /* GooglePlaces */ = {
+			isa = PBXGroup;
+			children = (
+				1E007BCE76B2A1DB4D2E995AB3AD2C5F /* Frameworks */,
+				2123C751DFBB65401A775FE455E6397B /* Resources */,
 			);
 			name = GooglePlaces;
 			path = GooglePlaces;
 			sourceTree = "<group>";
 		};
-		10CCA431DD818EE069BF3E62A5263B49 /* Pods */ = {
+		3DB0F951CED66A49CBA1944BF7746193 /* PayCardsRecognizer */ = {
 			isa = PBXGroup;
 			children = (
-				9DBE0134BDBBC6C2F4D37F2BDEC42875 /* Alamofire */,
-				718D36A46074BC93672698ED8744B41C /* GoogleMaps */,
-				848AC475B528C74D3D69200FF9CCFE46 /* GooglePlacePicker */,
-				0D5D1054EA297F36C3E7EDA26EE5325D /* GooglePlaces */,
-				37B25FF2AE8BDFFF9B91E3D2B4C186B6 /* Starscream */,
+				29AE33CB1186436A5EB2D96759DE0DB4 /* Frameworks */,
 			);
-			name = Pods;
+			name = PayCardsRecognizer;
+			path = PayCardsRecognizer;
 			sourceTree = "<group>";
 		};
-		191BDBFC770F44C14A1AC08A46C0323A /* Support Files */ = {
+		487E7055509A39DC97678DC09CC7F016 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				5C948B51B30E855C80F87974901630B5 /* Alamofire.modulemap */,
-				09E0D672048E0610D9B7D03E2E5599CF /* Alamofire.xcconfig */,
-				4194C4DA41DE7BDBDA68689EB5BD28A1 /* Alamofire-dummy.m */,
-				C2503355E4406267B6A551B27B3D02A5 /* Alamofire-prefix.pch */,
-				5F0F7B80D022BFDC26DCBB3AA6476AE3 /* Alamofire-umbrella.h */,
-				2EBAE4D95C41BE8FF43BA9A495AB3026 /* Info.plist */,
+				F17393078C12B2E14EF02EF5CA80E2AE /* Alamofire.modulemap */,
+				EBBFE7C560F858B65D9E89D7B3AE5A5E /* Alamofire.xcconfig */,
+				B68654B72FFB5D0FB4A2E82AB3C88DCA /* Alamofire-dummy.m */,
+				C7ADDAF2ABEA4C689F7B2935E1D39A3E /* Alamofire-prefix.pch */,
+				97B6671AB052CF8D12C6F30553D12AA3 /* Alamofire-umbrella.h */,
+				E57A194E3464746328CBC96E16ED9AD9 /* Info.plist */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/Alamofire";
-			sourceTree = "<group>";
-		};
-		31E8DDB43D3692E5B4A3F363AF43E722 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				A7BFA3B51D976782E7352C974C36B2A3 /* GoogleMaps.framework */,
-				C226C7E11A426C8BB871D8DC506E0A4A /* GoogleMapsCore.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		37B25FF2AE8BDFFF9B91E3D2B4C186B6 /* Starscream */ = {
-			isa = PBXGroup;
-			children = (
-				94FC4CBA843BC00145BE5A4E4EC55391 /* Compression.swift */,
-				B2DBFBE54D25697CC81BF3C67C7F1768 /* SSLSecurity.swift */,
-				1270707FC2BAD41B4E4D54CA90EA3C33 /* WebSocket.swift */,
-				740F4946AE83D124ED50342137A586A1 /* Support Files */,
-			);
-			name = Starscream;
-			path = Starscream;
-			sourceTree = "<group>";
-		};
-		4F2D05629E401957541883E71B3DD55D /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				9177D28F3678F1C90986088F01B3416F /* GoogleMaps.bundle */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		6BBA00149A2D4FA9F42F454EA76E1856 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				7215E32A3650A4945523CFCDDB20C4EA /* GooglePlacePicker.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		6F07C710EF91BC53670B1AF63D5A07A7 /* Pods-Mito 1.0 */ = {
@@ -240,65 +234,27 @@
 			path = "Target Support Files/Pods-Mito 1.0";
 			sourceTree = "<group>";
 		};
-		718D36A46074BC93672698ED8744B41C /* GoogleMaps */ = {
-			isa = PBXGroup;
-			children = (
-				0B1C55E975E9C0EDF858FF95F59407CE /* Base */,
-				C2E75FC7789034E8A5FC5ACB702CE38B /* Maps */,
-			);
-			name = GoogleMaps;
-			path = GoogleMaps;
-			sourceTree = "<group>";
-		};
-		740F4946AE83D124ED50342137A586A1 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				74F284C1CE18F9A8A788F19D6B6A877F /* Info.plist */,
-				9C0C88715C949FC07050CAE26983C0D8 /* Starscream.modulemap */,
-				B2C7366EC9EEFFB0327C4C94BFDF934D /* Starscream.xcconfig */,
-				DF76338AFB31217F53FA049DC93CCA0F /* Starscream-dummy.m */,
-				CD98E86F38FAD71BD60C9C6000274D53 /* Starscream-prefix.pch */,
-				9CF3DD391866AFE916F937482CB3A7DC /* Starscream-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/Starscream";
-			sourceTree = "<group>";
-		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				10CCA431DD818EE069BF3E62A5263B49 /* Pods */,
+				B08128BDCF4C6C455FB4122CDDAFAE6E /* Pods */,
 				8DEDD35BAC37B4B1FB849BF0A2E75C74 /* Products */,
 				EF602D2820C4ED94462847C3F6D3A3B0 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		7F2B50766C83339B873C77EC8596CD1B /* Resources */ = {
+		8B0E79BDD5C59B3B311A24CA3CF0C53A /* Starscream */ = {
 			isa = PBXGroup;
 			children = (
-				F2CA2C89755B2B6D4CD1D0379085B88C /* GooglePlaces.bundle */,
+				CCCDC8DCCC1FC1FB2971EA4C2C373E8C /* Compression.swift */,
+				A215A15728F68B3B020EE6E8E63C1915 /* SSLSecurity.swift */,
+				3C89AA33F258298F3674619173F9744F /* WebSocket.swift */,
+				F6BBCA510B2635B8CE3C1B320287276E /* Support Files */,
 			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		804493D44D8C1A4D58B3FB08D1B4A567 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				A06293BD4CF54003BCB6FCB20AE9978F /* GoogleMapsBase.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		848AC475B528C74D3D69200FF9CCFE46 /* GooglePlacePicker */ = {
-			isa = PBXGroup;
-			children = (
-				6BBA00149A2D4FA9F42F454EA76E1856 /* Frameworks */,
-				C948FAA6C62A893F5E458886AA5092C2 /* Resources */,
-			);
-			name = GooglePlacePicker;
-			path = GooglePlacePicker;
+			name = Starscream;
+			path = Starscream;
 			sourceTree = "<group>";
 		};
 		8DEDD35BAC37B4B1FB849BF0A2E75C74 /* Products */ = {
@@ -311,61 +267,94 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9DBE0134BDBBC6C2F4D37F2BDEC42875 /* Alamofire */ = {
+		97ADB4B4AB91537EF51A7101C5B4E037 /* GoogleMaps */ = {
 			isa = PBXGroup;
 			children = (
-				E25DC67D303F61EB3B3E8F9BDD620806 /* AFError.swift */,
-				449D2EF414565F6B0F0305F32C05EF26 /* Alamofire.swift */,
-				0EE98DE1B3944EAD7BA7CF5E67BE053B /* DispatchQueue+Alamofire.swift */,
-				0CFB7CDCD4FB5CFE7C7894F5420751E2 /* MultipartFormData.swift */,
-				8ED61746266822298874F02034379067 /* NetworkReachabilityManager.swift */,
-				6D77691E0CDFCFAA09CDE052620503D4 /* Notifications.swift */,
-				9C3E6EBCBA25E1442157293CFBD5AAC6 /* ParameterEncoding.swift */,
-				E993B59C80595A3F3760A92F9054EA0A /* Request.swift */,
-				1D30709798E3A8F1051B6444B344C4A5 /* Response.swift */,
-				688BFF9394030D9802F733F81EEDCA32 /* ResponseSerialization.swift */,
-				7CFA0FD7F9488E802C44550A454C6767 /* Result.swift */,
-				FE14D77B38957CBFF44E838837057F04 /* ServerTrustPolicy.swift */,
-				A348742D55D0037CD7079EAABD158170 /* SessionDelegate.swift */,
-				CDE2F818B7E62AEDF59BED1E940E0E96 /* SessionManager.swift */,
-				B4D3CA2825E5B1D6161E5BEFA2474972 /* TaskDelegate.swift */,
-				601FCBF4830BD56A63C253EFD2CF1651 /* Timeline.swift */,
-				83D9C57F6C1EE52417C11DFCA00A7A8E /* Validation.swift */,
-				191BDBFC770F44C14A1AC08A46C0323A /* Support Files */,
+				E7CB154F89C2538CCF4080964753B692 /* Base */,
+				BA96CDB6A0E5B62D505DC2C38BC0F5C3 /* Maps */,
+			);
+			name = GoogleMaps;
+			path = GoogleMaps;
+			sourceTree = "<group>";
+		};
+		A7F8FED764E97EF72B355534D8D90147 /* GooglePlacePicker */ = {
+			isa = PBXGroup;
+			children = (
+				EC9FF6C777864CFF08B7AF3B736FD867 /* Frameworks */,
+				AAABC4F6A00780D78A35E166AEB21AEF /* Resources */,
+			);
+			name = GooglePlacePicker;
+			path = GooglePlacePicker;
+			sourceTree = "<group>";
+		};
+		AAABC4F6A00780D78A35E166AEB21AEF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B38945913B304892BFCE9B9807F098F5 /* GooglePlacePicker.bundle */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		B08128BDCF4C6C455FB4122CDDAFAE6E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B29F4987E19587FE76433FF0A62972D5 /* Alamofire */,
+				97ADB4B4AB91537EF51A7101C5B4E037 /* GoogleMaps */,
+				A7F8FED764E97EF72B355534D8D90147 /* GooglePlacePicker */,
+				3B62F7FF1341EC7A7DA97366A1EE0C42 /* GooglePlaces */,
+				3DB0F951CED66A49CBA1944BF7746193 /* PayCardsRecognizer */,
+				8B0E79BDD5C59B3B311A24CA3CF0C53A /* Starscream */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		B126A6ECE4F8BF68F1D37D34376582E6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6FD4D4FB47B78D077BF3CE0AC9978BE5 /* GoogleMapsBase.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B29F4987E19587FE76433FF0A62972D5 /* Alamofire */ = {
+			isa = PBXGroup;
+			children = (
+				E59F48C3D1156012F6A5C202A690A9D3 /* AFError.swift */,
+				6BA6CF7922125F544E820ECFC4ACFBB1 /* Alamofire.swift */,
+				E7C3726EF2F2423A9A5EBBD1AC9D6E33 /* DispatchQueue+Alamofire.swift */,
+				6405DE60C6D2551CFD255F5849048A94 /* MultipartFormData.swift */,
+				8E297B69AB04C7EEE5C8BB262B46C967 /* NetworkReachabilityManager.swift */,
+				5EB00914D2A5F6793AA0C16FFF51FB2E /* Notifications.swift */,
+				546155B16EA8EDEEC08C16AC909FE947 /* ParameterEncoding.swift */,
+				C9AF80B31F7789729C776F0C979C7D25 /* Request.swift */,
+				3E140B2DFA0CD2BD064203A2016E811F /* Response.swift */,
+				FB8CCA1FFB016ED177AEBBB0C299ED4A /* ResponseSerialization.swift */,
+				F8B7AEC37C83FBEE4D710AF047F15660 /* Result.swift */,
+				71E24923857A99CC26FF3C15BA1A7DEC /* ServerTrustPolicy.swift */,
+				3215262656D8AA81BA8DE87A0F429BBF /* SessionDelegate.swift */,
+				D2A3A50AC0599B0CEE4F05A68F5BA646 /* SessionManager.swift */,
+				484C8C0C8886242ECA3BBA601A948608 /* TaskDelegate.swift */,
+				D5F618236CBD13B0763776D4E1182C29 /* Timeline.swift */,
+				5B0424799823ADF6C075DA58008DA88B /* Validation.swift */,
+				487E7055509A39DC97678DC09CC7F016 /* Support Files */,
 			);
 			name = Alamofire;
 			path = Alamofire;
+			sourceTree = "<group>";
+		};
+		BA96CDB6A0E5B62D505DC2C38BC0F5C3 /* Maps */ = {
+			isa = PBXGroup;
+			children = (
+				364B83A0CCD6DB9584781C8CB3229352 /* Frameworks */,
+				159DEECAFD0BFEBB94CF9AF21D42F58A /* Resources */,
+			);
+			name = Maps;
 			sourceTree = "<group>";
 		};
 		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				D35AF013A5F0BAD4F32504907A52519E /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		C2E75FC7789034E8A5FC5ACB702CE38B /* Maps */ = {
-			isa = PBXGroup;
-			children = (
-				31E8DDB43D3692E5B4A3F363AF43E722 /* Frameworks */,
-				4F2D05629E401957541883E71B3DD55D /* Resources */,
-			);
-			name = Maps;
-			sourceTree = "<group>";
-		};
-		C948FAA6C62A893F5E458886AA5092C2 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				76F02F79F4E9B0DAC028F1BC1E04B561 /* GooglePlacePicker.bundle */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		CA8E6341D8920E2D3AC988338288362C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				3600C5392F241FD4D7EAA589F0E2ABA5 /* GooglePlaces.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -378,12 +367,42 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
+		E7CB154F89C2538CCF4080964753B692 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				B126A6ECE4F8BF68F1D37D34376582E6 /* Frameworks */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
+		EC9FF6C777864CFF08B7AF3B736FD867 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				323AB6615E44FD8A10C0643697EB33F6 /* GooglePlacePicker.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		EF602D2820C4ED94462847C3F6D3A3B0 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
 				6F07C710EF91BC53670B1AF63D5A07A7 /* Pods-Mito 1.0 */,
 			);
 			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		F6BBCA510B2635B8CE3C1B320287276E /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				F16E9129C9457CC05425727747BF6EC9 /* Info.plist */,
+				6A64A365F769C00F3579E21C6BCFBD3D /* Starscream.modulemap */,
+				867D7FDD3EDA66561A5064BCB13D4DC5 /* Starscream.xcconfig */,
+				99F588C3415662D37C4507A2A072ED6F /* Starscream-dummy.m */,
+				753C9678AF5BA2AF7A8F0434ED2BE4DE /* Starscream-prefix.pch */,
+				106B29517F02E109D31B5EC2B6C4CFB1 /* Starscream-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Starscream";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -660,7 +679,7 @@
 		};
 		3CDDAA4E6E953E593B31FCF4BABB6E78 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2C7366EC9EEFFB0327C4C94BFDF934D /* Starscream.xcconfig */;
+			baseConfigurationReference = 867D7FDD3EDA66561A5064BCB13D4DC5 /* Starscream.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -728,7 +747,7 @@
 		};
 		640A03786392A2237A4220CCD784F84B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2C7366EC9EEFFB0327C4C94BFDF934D /* Starscream.xcconfig */;
+			baseConfigurationReference = 867D7FDD3EDA66561A5064BCB13D4DC5 /* Starscream.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -760,7 +779,7 @@
 		};
 		A18C9CC7E37563F2891E7DC87F2DE6CE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 09E0D672048E0610D9B7D03E2E5599CF /* Alamofire.xcconfig */;
+			baseConfigurationReference = EBBFE7C560F858B65D9E89D7B3AE5A5E /* Alamofire.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -793,7 +812,7 @@
 		};
 		EA0ADC75B20BB62958101306980460E6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 09E0D672048E0610D9B7D03E2E5599CF /* Alamofire.xcconfig */;
+			baseConfigurationReference = EBBFE7C560F858B65D9E89D7B3AE5A5E /* Alamofire.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";

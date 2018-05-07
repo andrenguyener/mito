@@ -12,8 +12,9 @@ import CoreGraphics
 import GoogleMaps
 import GooglePlaces
 import GooglePlacePicker
+import PayCardsRecognizer
 
-class MeViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate {
+class MeViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate, PayCardsRecognizerPlatformDelegate {
     
     // https://developer.apple.com/documentation/corelocation/choosing_the_authorization_level_for_location_services/requesting_always_authorization
     var appdata = AppData.shared
@@ -23,6 +24,36 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
     
     var placesClient: GMSPlacesClient!
     let locationManager = CLLocationManager()
+    
+    var recognizer: PayCardsRecognizer!
+    
+    @IBAction func btnScanCreditCard(_ sender: Any) {
+//        recognizer.startCamera()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        recognizer.startCamera()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        recognizer.stopCamera()
+    }
+    
+    func payCardsRecognizer(_ payCardsRecognizer: PayCardsRecognizer, didRecognize result: PayCardsRecognizerResult) {
+//        result.recognizedNumber // Card number
+//        result.recognizedHolderName // Card holder
+//        result.recognizedExpireDateMonth // Expire month
+//        result.recognizedExpireDateYear // Expire year
+        print("Card Number: \(result.recognizedNumber)")
+        print("Holder name: \(result.recognizedHolderName)")
+        print("Expire Date Month: \(result.recognizedExpireDateMonth)")
+        print("Expire Date Year: \(result.recognizedExpireDateYear)")
+    }
+    
 
     @IBAction func fnPickPlace(_ sender: Any) {
         let center = CLLocationCoordinate2D(latitude: 37.788204, longitude: -122.411937)
@@ -164,6 +195,8 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
     override func viewDidLoad() {
         super.viewDidLoad()
         placesClient = GMSPlacesClient.shared()
+        recognizer = PayCardsRecognizer(delegate: self, resultMode: .sync, container: self.view, frameColor: .green)
+
         if UserDefaults.standard.object(forKey: "UserInfo") != nil {
             let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
             appdata.fnDisplaySimpleImage(strImageURL: data["photoURL"] as! String, img: imgProfilePic)
