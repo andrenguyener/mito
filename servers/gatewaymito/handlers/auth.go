@@ -445,15 +445,24 @@ func (ctx *Context) SessionsHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		// Gets the user with the email from User Store.
-		user, err := ctx.UserStore.GetByEmail(newSession.Email)
-		if err != nil {
-			http.Error(w, "invalid credentials email", http.StatusUnauthorized)
-			return
+		if len(newSession.Email) != 0 {
+			// Gets the user with the email from User Store.
+			user, err := ctx.UserStore.GetByEmail(newSession.Email)
+			if err != nil {
+				http.Error(w, "invalid credentials email", http.StatusUnauthorized)
+				return
+			}
+		} else {
+			// Gets the user with the email from User Store.
+			user, err := ctx.UserStore.GetByEmail(newSession.Email)
+			if err != nil {
+				http.Error(w, "invalid credentials email", http.StatusUnauthorized)
+				return
+			}
 		}
 
 		// Authenticates the user with the provided password
-		err = user.Authenticate(newSession.Password)
+		err := user.Authenticate(newSession.Password)
 		if err != nil {
 			http.Error(w, "invalid credentials authenticate", http.StatusUnauthorized)
 			return

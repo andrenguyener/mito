@@ -31,6 +31,7 @@ type User struct {
 //Credentials represents user sign-in credentials
 type Credentials struct {
 	Email    string `json:"userEmail"`
+	Username string `json:"username"`
 	Password string `json:"password"`
 }
 
