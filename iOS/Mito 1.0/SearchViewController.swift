@@ -281,10 +281,12 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if productPeopleTab.selectedSegmentIndex == 1 {
-            if self.appdata.arrCurrFriendsAndAllMitoUsers[section].count >= 10 {
-                return 10
+            let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+            let intNumFriends = data["NumFriends"] as? Int
+            if intNumFriends == 0 {
+                return min(self.appdata.arrCurrAllUsers.count, 10)
             } else {
-                return self.appdata.arrCurrFriendsAndAllMitoUsers[section].count
+                return min(self.appdata.arrCurrFriendsAndAllMitoUsers[section].count, 10)
             }
         } else {
             print("Product count: \(appdata.arrProductSearchResults.count)")
@@ -294,10 +296,12 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if productPeopleTab.selectedSegmentIndex == 1 {
-            if self.appdata.arrSections.count == 2 {
-                return self.appdata.arrSections[section]
-            } else {
+            let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+            let intNumFriends = data["NumFriends"] as? Int
+            if intNumFriends == 0 {
                 return "Other people on Mito"
+            } else {
+                return self.appdata.arrSections[section]
             }
         } else {
             return "Products"
@@ -306,7 +310,13 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func numberOfSections(in tableView: UITableView) -> Int {
         if productPeopleTab.selectedSegmentIndex == 1 {
-            return self.appdata.arrCurrFriendsAndAllMitoUsers.count
+            let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+            let intNumFriends = data["NumFriends"] as? Int
+            if intNumFriends == 0 {
+                return 1
+            } else {
+                return self.appdata.arrCurrFriendsAndAllMitoUsers.count
+            }
         } else {
             return 1
         }
@@ -345,19 +355,30 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return cell
         } else { // People
             let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
-            let objPerson = self.appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
-            let urlPeopleImage = URL(string:"\(objPerson.avatar)")
-            let defaultURL = URL(string: appdata.strNoImageAvailable)
-            if let data = try? Data(contentsOf: urlPeopleImage!) {
-                cell.img.image = UIImage(data: data)!
-            } else if let data = try? Data(contentsOf: defaultURL!){
-                cell.img.image = UIImage(data: data)
+            let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+            let intNumFriends = data["NumFriends"] as? Int
+            if intNumFriends == 0 {
+                let objPerson = self.appdata.arrCurrAllUsers[indexPath.row]
+                return fnLoadPersonCell(cell: cell, objPerson: objPerson)
+            } else {
+                let objPerson = self.appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
+                return fnLoadPersonCell(cell: cell, objPerson: objPerson)
             }
-            cell.name.text = "\(objPerson.firstName) \(objPerson.lastName)"
-            cell.handle.text = "\(objPerson.email)"
-            cell.friendshipType.text = "\(objPerson.avatar)"
-            return cell
         }
+    }
+    
+    func fnLoadPersonCell(cell: TableViewCell, objPerson: Person) -> TableViewCell {
+        let urlPeopleImage = URL(string:"\(objPerson.avatar)")
+        let defaultURL = URL(string: appdata.strNoImageAvailable)
+        if let data = try? Data(contentsOf: urlPeopleImage!) {
+            cell.img.image = UIImage(data: data)!
+        } else if let data = try? Data(contentsOf: defaultURL!){
+            cell.img.image = UIImage(data: data)
+        }
+        cell.name.text = "\(objPerson.firstName) \(objPerson.lastName)"
+        cell.handle.text = "\(objPerson.email)"
+        cell.friendshipType.text = "\(objPerson.avatar)"
+        return cell
     }
     
     // Access first dictionary object in the dictionary

@@ -171,6 +171,7 @@ class AppData: NSObject {
                         }
                     }
                     self.arrAllUsers.sort(by: self.fnSortMitoUsers)
+                    self.arrCurrAllUsers = self.arrAllUsers
                     self.arrFriendsAndAllMitoUsers.append(self.arrAllUsers)
                     self.arrCurrFriendsAndAllMitoUsers = self.arrFriendsAndAllMitoUsers
                 }

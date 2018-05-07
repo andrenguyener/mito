@@ -48,6 +48,14 @@ class SettingsViewController: UIViewController {
                     print(dictionary)
                     // Any code for storing locally
                 }
+                if UserDefaults.standard.object(forKey: "UserInfo") != nil {
+                    let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+                    self.appdata.intCurrentUserID = (data["userId"] as? Int)!
+                    print("UserInfo: \(String(describing: data["UserInfo"]))")
+                    print("UserID: \(String(describing: data["userId"]))")
+                } else {
+                    print("data[\"UserInfo\"] should be gone")
+                }
                 
             case .failure(let error):
                 print("User signed out")

@@ -51,6 +51,7 @@ class PasswordViewController: UIViewController {
                 print(error)
                 if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
                     print(data)
+                    print(utf8Text)
                 }
             }
         }

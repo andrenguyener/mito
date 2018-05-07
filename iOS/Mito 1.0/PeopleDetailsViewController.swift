@@ -26,11 +26,43 @@ class PeopleDetailsViewController: UIViewController {
     }
     
     func loadPersonData() {
+        fnCheckFriendStatus()
         let friend = appdata.arrCurrFriendsAndAllMitoUsers[mySection][myIndex]
         lblName.text = "\(friend.firstName) \(friend.lastName)"
         lblUsername.text = "@\(friend.strUsername)"
         btnNumFriends.setTitle("\(friend.intNumFriends) friends", for: .normal)
         appdata.fnDisplaySimpleImage(strImageURL: friend.avatar, img: img)
+    }
+    
+    func fnCheckFriendStatus() {
+        let intFriendID = appdata.arrCurrFriendsAndAllMitoUsers[mySection][myIndex].intUserID
+        let parameters: Parameters = [
+            "friendId": intFriendID
+        ]
+        
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        
+        Alamofire.request("https://api.projectmito.io/v1/friend/type", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    print(dictionary)
+                    if dictionary == "Friend" {
+                        self.addFriendbtn.setTitle("Friends", for: .normal)
+                    }
+                    DispatchQueue.main.async {
+//                        let alert = self.appdata.fnDisplayAlert(title: "Done", message: "Friend Request Sent")
+//                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+                
+            case .failure(let error):
+                print("Request: \(String(describing: response.request))")
+                print(error)
+            }
+        }
     }
 
     @IBAction func fnAddFriend(_ sender: Any) {
@@ -45,7 +77,7 @@ class PeopleDetailsViewController: UIViewController {
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
         
-        Alamofire.request("https://api.projectmito.io/v1/friend", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
+        Alamofire.request("https://api.projectmito.io/v1/friend", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success:
                 if let dictionary = response.result.value {
