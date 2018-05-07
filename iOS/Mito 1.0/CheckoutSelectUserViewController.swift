@@ -134,6 +134,7 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
     
     
     @IBOutlet weak var lblCreditCardNumber: UITextField!
+    @IBOutlet weak var lblChooseAddressHeading: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -147,6 +148,11 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
             tblviewAddress.delegate = self
             tblviewAddress.dataSource = self
             tblviewAddress.rowHeight = 106
+            if boolSender {
+                lblChooseAddressHeading.text = "Select Billing Address"
+            } else {
+                lblChooseAddressHeading.text = "Select Shipping Address"
+            }
         } else if lblRecipient != nil {
             lblRecipient.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
             appdata.fnDisplaySimpleImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipientImage)

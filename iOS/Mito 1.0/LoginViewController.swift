@@ -352,8 +352,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                         print("JSON: \(dictionary)") // serialized json response
                         DispatchQueue.main.async {
                             self.performSegue(withIdentifier: "createAccount", sender: self)
-                            //                    UserDefaults.standard.set(dictionary, forKey: "AddressInfo")
-                            //                    print(UserDefaults.standard.object(forKey: "AddressInfo") as! NSDictionary)
                         }
                     }
     

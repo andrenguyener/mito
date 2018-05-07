@@ -2275,6 +2275,7 @@
                         <viewLayoutGuide key="safeArea" id="Zws-sV-Rq5"/>
                     </view>
                     <connections>
+                        <outlet property="lblChooseAddressHeading" destination="XOb-8q-VOF" id="FTj-ix-xMX"/>
                         <outlet property="tblviewAddress" destination="JiR-sN-ga8" id="z3Q-wZ-O61"/>
                         <segue destination="JEb-Gy-hD1" kind="show" identifier="ChooseAddressToCheckout" id="ESz-AJ-FsE"/>
                         <segue destination="5ev-RP-TnR" kind="show" identifier="CompleteChooseReceivingAddress" id="2rk-ch-wix"/>
@@ -2660,9 +2661,9 @@
         <image name="swirlsearch" width="2257" height="5634"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KIF-pf-1ei"/>
+        <segue reference="ESz-AJ-FsE"/>
         <segue reference="ruP-Sx-HS5"/>
-        <segue reference="Jjr-wW-Hse"/>
+        <segue reference="2rk-ch-wix"/>
         <segue reference="IOv-WN-4XC"/>
     </inferredMetricsTieBreakers>
 </document>
