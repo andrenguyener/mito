@@ -13,11 +13,13 @@ import GoogleMaps
 import GooglePlaces
 import GooglePlacePicker
 import PayCardsRecognizer
+import Contacts
 
 class MeViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate, PayCardsRecognizerPlatformDelegate {
     
     // https://developer.apple.com/documentation/corelocation/choosing_the_authorization_level_for_location_services/requesting_always_authorization
     var appdata = AppData.shared
+    var contactStore = CNContactStore()
     
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblAddress: UILabel!
@@ -30,18 +32,43 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
     @IBAction func btnScanCreditCard(_ sender: Any) {
 //        recognizer.startCamera()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        recognizer.startCamera()
+    @IBAction func btnFetchContacts(_ sender: Any) {
+        contactStore.requestAccess(for: .contacts) { (success,error) in
+            if success {
+                print("Authorization success")
+            }
+        }
+        fnFetchContacts()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        recognizer.stopCamera()
+    func fnFetchContacts() {
+        let key = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey] as [CNKeyDescriptor]
+        let request = CNContactFetchRequest(keysToFetch: key)
+        var count = 0
+        try! contactStore.enumerateContacts(with: request) { (contact, stoppingPointer) in
+            let strFirstName = contact.givenName
+            let strLastName = contact.familyName
+            let strNumber = contact.phoneNumbers.first?.value.stringValue
+            if count <= 5 {
+                print("First Name: \(strFirstName)")
+                print("Last Name: \(strLastName)")
+                print("Number: \(strNumber)")
+            }
+            count += 1
+        }
     }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        recognizer.startCamera()
+//    }
+    
+//    override func viewDidDisappear(_ animated: Bool) {
+//        super.viewDidDisappear(animated)
+//
+//        recognizer.stopCamera()
+//    }
     
     func payCardsRecognizer(_ payCardsRecognizer: PayCardsRecognizer, didRecognize result: PayCardsRecognizerResult) {
 //        result.recognizedNumber // Card number

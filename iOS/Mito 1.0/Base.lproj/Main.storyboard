@@ -406,7 +406,7 @@
                                 </variation>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Fs1-h8-PX9">
-                                <rect key="frame" x="20" y="338" width="335" height="270"/>
+                                <rect key="frame" x="20" y="368" width="335" height="240"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fsv-I5-Xyw">
                                         <rect key="frame" x="0.0" y="0.0" width="202" height="30"/>
@@ -416,15 +416,23 @@
                                             <action selector="loadCurrentUserAddresses:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="gXF-KS-W4y"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bY1-RY-rvw">
+                                        <rect key="frame" x="0.0" y="0.0" width="122" height="30"/>
+                                        <state key="normal" title="Retrieve Contacts"/>
+                                        <connections>
+                                            <action selector="btnFetchContacts:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="WYw-pX-9rt"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jrO-uD-Lf4">
-                                        <rect key="frame" x="0.0" y="0.0" width="199" height="30"/>
+                                        <rect key="frame" x="0.0" y="30" width="199" height="30"/>
                                         <state key="normal" title="Grab Credit Card Information"/>
                                         <connections>
                                             <action selector="btnScanCreditCard:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="wJh-6O-fqj"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gTl-jl-SVl">
-                                        <rect key="frame" x="0.0" y="30" width="132" height="30"/>
+                                        <rect key="frame" x="0.0" y="60" width="132" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Get Current Orders"/>
                                         <connections>
                                             <action selector="loadCurrentOrders:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="9b7-fN-JnV"/>
@@ -455,39 +463,40 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x9O-gk-cIg">
                                         <rect key="frame" x="0.0" y="90" width="162" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Get Incoming Packages"/>
                                         <connections>
                                             <action selector="fnGetIncomingPackages:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="oGZ-aN-dNh"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DpV-1F-jTa">
-                                        <rect key="frame" x="0.0" y="120" width="123" height="30"/>
+                                        <rect key="frame" x="0.0" y="90" width="123" height="30"/>
                                         <state key="normal" title="Change Password"/>
                                         <connections>
                                             <action selector="btnChangePassword:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="PBs-Ef-1ED"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4B-wJ-w9k">
-                                        <rect key="frame" x="0.0" y="150" width="42" height="30"/>
+                                        <rect key="frame" x="0.0" y="120" width="42" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MVr-6R-m27">
-                                        <rect key="frame" x="0.0" y="180" width="42" height="30"/>
+                                        <rect key="frame" x="0.0" y="150" width="42" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7u-ZN-vbf">
-                                        <rect key="frame" x="0.0" y="210" width="94" height="30"/>
+                                        <rect key="frame" x="0.0" y="180" width="94" height="30"/>
                                         <state key="normal" title="Choose Place"/>
                                         <connections>
                                             <action selector="fnPickPlace:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="G4D-wE-oIF"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XLd-IW-sik">
-                                        <rect key="frame" x="0.0" y="240" width="144" height="30"/>
+                                        <rect key="frame" x="0.0" y="210" width="144" height="30"/>
                                         <state key="normal" title="Get Current Location"/>
                                         <connections>
                                             <action selector="fnGetCurrentLocation:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="j68-TI-veI"/>
@@ -497,8 +506,10 @@
                                 <variation key="default">
                                     <mask key="subviews">
                                         <exclude reference="Fsv-I5-Xyw"/>
+                                        <exclude reference="gTl-jl-SVl"/>
                                         <exclude reference="o0A-zd-r6F"/>
                                         <exclude reference="jeq-GC-wZz"/>
+                                        <exclude reference="x9O-gk-cIg"/>
                                     </mask>
                                 </variation>
                             </stackView>
