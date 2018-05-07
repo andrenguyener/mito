@@ -9,21 +9,12 @@ class AddressStore {
         this.sql = sql;
     }
 
-    request(procedure) {
-        return new Request((`${procedure}`), function (err) {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
-
-
     // insert() creates a new address in SqlServer.
     insert(address) {
         return new Promise((resolve) => {
             this.sql.acquire(function (err, connection) {
                 let procedureName = "uspcInsertUserAddress";
-                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
+                var request = Request(`${procedureName}`, (err, rowCount, rows) => {
                     if (err) {
                         console.log(err)
                     }
@@ -70,7 +61,7 @@ class AddressStore {
         return new Promise((resolve) => {
             this.sql.acquire(function (err, connection) {
                 let procedureName = "uspcGetUserAddressById";
-                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
+                var request = Request(`${procedureName}`, (err, rowCount, rows) => {
                     if (err) {
                         console.log(err)
                     }
@@ -112,7 +103,7 @@ class AddressStore {
         return new Promise((resolve) => {
             this.sql.acquire(function (err, connection) {
                 let procedureName = "uspcInsertUserAddress";
-                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
+                var request = Request(`${procedureName}`, (err, rowCount, rows) => {
                     if (err) {
                         console.log(err)
                     }

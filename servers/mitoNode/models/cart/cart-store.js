@@ -8,19 +8,12 @@ class CartStore {
         this.sql = sql;
     }
 
-    request(procedure) {
-        return new Request((`${procedure}`), function (err) {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
     // Get items in cart based on a given userId
     get(id) {
         return new Promise((resolve) => {
             this.sql.acquire(function (err, connection) {
                 let procedureName = "uspcGetUserCartItemList";
-                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
+                var request = Request(`${procedureName}`, (err, rowCount, rows) => {
                     if (err) {
                         console.log(err)
                     }
@@ -61,7 +54,7 @@ class CartStore {
         return new Promise((resolve) => {
             this.sql.acquire(function (err, connection) {
                 let procedureName = "uspcInsertIntoCart";
-                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
+                var request = Request(`${procedureName}`, (err, rowCount, rows) => {
                     if (err) {
                         console.log(err)
                     }
@@ -111,7 +104,7 @@ class CartStore {
         return new Promise((resolve) => {
             this.sql.acquire(function (err, connection) {
                 let procedureName = "uspcProcessCheckout";
-                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
+                var request = Request(`${procedureName}`, (err, rowCount, rows) => {
                     if (err) {
                         console.log(err)
                     }

@@ -8,24 +8,14 @@ class FriendStore {
         this.sql = sql;
     }
 
-    request(procedure, connection) {
-        return new Request((`${procedure}`), function (err) {
-            if (err) {
-                console.log(err);
-            }
-
-            connection.release();
-        });
-    }
-
     // Request a friend into SqlServer
     insert(userId, friendId) {
         return new Promise((resolve) => {
             this.sql.acquire(function (err, connection) {
                 let procedureName = "uspcRequestFriend";
-                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
+                var request = Request(`${procedureName}`, (err, rowCount, rows) => {
                     if (err) {
-                        console.log(err)
+                        console.log(err);
                     }
                     connection.release();
                 });
@@ -58,7 +48,7 @@ class FriendStore {
         return new Promise((resolve) => {
             this.sql.acquire(function (err, connection) {
                 let procedureName = "uspcGetMutualFriendCount";
-                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
+                var request = Request(`${procedureName}`, (err, rowCount, rows) => {
                     if (err) {
                         console.log(err)
                     }
@@ -101,7 +91,7 @@ class FriendStore {
         return new Promise((resolve) => {
             this.sql.acquire(function (err, connection) {
                 let procedureName = "uspcGetUserFriendsById";
-                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
+                var request = Request(`${procedureName}`, (err, rowCount, rows) => {
                     if (err) {
                         console.log(err)
                     }
@@ -144,7 +134,7 @@ class FriendStore {
         return new Promise((resolve) => {
             this.sql.acquire(function (err, connection) {
                 let procedureName = "uspcGetUserFriendTypeByUserId";
-                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
+                var request = Request(`${procedureName}`, (err, rowCount, rows) => {
                     if (err) {
                         console.log(err)
                     }
@@ -191,7 +181,7 @@ class FriendStore {
         return new Promise((resolve) => {
             this.sql.acquire(function (err, connection) {
                 let procedureName = "uspcUpdateFriend";
-                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
+                var request = Request(`${procedureName}`, (err, rowCount, rows) => {
                     if (err) {
                         console.log(err)
                     }

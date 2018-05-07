@@ -1,7 +1,7 @@
 'use strict';
 
-var Request = require('tedious').Request;
-var TYPES = require('tedious').TYPES;
+import Request = require('tedious').Request;
+import TYPES = require('tedious').TYPES;
 
 class PackageStore {
 
@@ -9,25 +9,17 @@ class PackageStore {
         this.sql = sql;
     }
 
-    request(procedure) {
-        return new Request((`${procedure}`), function (err) {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
-
     //get all the users incoming packages
     getPackages(id, type) {
         return new Promise((resolve) => {
-            this.sql.acquire(function (err, connection) {
+            this.sql.acqusire(function (err, connection) {
                 let procedureName = "uspcGetMyPackages";
-                // var request = new Request(`${procedureName}`, function (err, rowCount, rows) {
+                // var request = Request(`${procedureName}`, function (err, rowCount, rows) {
                 //     if (err) {
                 //         console.log(err);
                 //     }
                 // });
-                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
+                var request = Request(`${procedureName}`, (err, rowCount, rows) => {
                     if (err) {
                         console.log(err)
                     }
@@ -69,7 +61,7 @@ class PackageStore {
         return new Promise((resolve) => {
             this.sql.acquire(function (err, connection) {
                 let procedureName = "uspcConfirmPackage";
-                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
+                var request = Request(`${procedureName}`, (err, rowCount, rows) => {
                     if (err) {
                         console.log(err)
                     }

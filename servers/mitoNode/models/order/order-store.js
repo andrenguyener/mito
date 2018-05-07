@@ -9,14 +9,6 @@ class OrderStore {
         this.sql = sql;
     }
 
-    request(procedure) {
-        return new Request((`${procedure}`), function (err) {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
-
     // Make an order (not to zinc yet until there is an address) - Add order to Order page
     insert() {
 
@@ -27,7 +19,7 @@ class OrderStore {
         return new Promise((resolve) => {
             this.sql.acquire(function (err, connection) {
                 let procedureName = "uspcGetOrderDetails";
-                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
+                var request = Request(`${procedureName}`, (err, rowCount, rows) => {
                     if (err) {
                         console.log(err)
                     }
