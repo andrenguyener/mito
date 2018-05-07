@@ -51,10 +51,8 @@ class PeopleDetailsViewController: UIViewController {
                     print(dictionary)
                     if dictionary == "Friend" {
                         self.addFriendbtn.setTitle("Friends", for: .normal)
-                    }
-                    DispatchQueue.main.async {
-//                        let alert = self.appdata.fnDisplayAlert(title: "Done", message: "Friend Request Sent")
-//                        self.present(alert, animated: true, completion: nil)
+                        self.addFriendbtn.isEnabled = false
+                        self.addFriendbtn.backgroundColor = UIColor.gray
                     }
                 }
                 
