@@ -82,6 +82,7 @@
 		DA625E8B2088FEC30068F319 /* PackageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA625E8A2088FEC30068F319 /* PackageTableViewCell.swift */; };
 		DA6CB7F22064E9B700962814 /* Back.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6CB7F12064E9B700962814 /* Back.png */; };
 		DA6D6D12209E1B5300D74666 /* Mito Green Background.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6D6D11209E1B5000D74666 /* Mito Green Background.png */; };
+		DA92880C20A0B50E009EABD7 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA92880B20A0B50E009EABD7 /* PasswordViewController.swift */; };
 		DAA9075E209963C400F151E1 /* AddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA9075D209963C400F151E1 /* AddressTableViewCell.swift */; };
 		DAC178BC2088240F0039AA08 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC178BB2088240F0039AA08 /* Address.swift */; };
 		DAC178BE2088385A0039AA08 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC178BD2088385A0039AA08 /* Package.swift */; };
@@ -198,6 +199,7 @@
 		DA625E8A2088FEC30068F319 /* PackageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageTableViewCell.swift; sourceTree = "<group>"; };
 		DA6CB7F12064E9B700962814 /* Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Back.png; sourceTree = "<group>"; };
 		DA6D6D11209E1B5000D74666 /* Mito Green Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mito Green Background.png"; sourceTree = "<group>"; };
+		DA92880B20A0B50E009EABD7 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		DAA9075D209963C400F151E1 /* AddressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressTableViewCell.swift; sourceTree = "<group>"; };
 		DAC178BB2088240F0039AA08 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		DAC178BD2088385A0039AA08 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 				B2471993204672DE006CF6C2 /* NotificationViewController.swift */,
 				DAC178BD2088385A0039AA08 /* Package.swift */,
 				DA625E8A2088FEC30068F319 /* PackageTableViewCell.swift */,
+				DA92880B20A0B50E009EABD7 /* PasswordViewController.swift */,
 				DAD995322042389B007A7687 /* Person.swift */,
 				B29AEC63203FC9C100110EF9 /* PeopleDetailsViewController.swift */,
 				B272DC2520439E2200EE2121 /* Product.swift */,
@@ -599,11 +602,13 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Mito 1.0/Pods-Mito 1.0-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${PODS_ROOT}/PayCardsRecognizer/Source/PayCardsRecognizer.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PayCardsRecognizer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -635,9 +640,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Mito 1.0/Pods-Mito 1.0-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlacePicker/Frameworks/GooglePlacePicker.framework/Resources/GooglePlacePicker.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlacePicker.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -656,6 +668,7 @@
 				B29AEC64203FC9C100110EF9 /* PeopleDetailsViewController.swift in Sources */,
 				DAD9A1A0204FD1C800E3AA5F /* ProductTableViewCell.swift in Sources */,
 				B28562DA2096E98000E8CC28 /* KeyboardDone.swift in Sources */,
+				DA92880C20A0B50E009EABD7 /* PasswordViewController.swift in Sources */,
 				B29AEC62203FC9C100110EF9 /* AppDelegate.swift in Sources */,
 				DAC178BE2088385A0039AA08 /* Package.swift in Sources */,
 				DACCDE29206057C500CD59D9 /* State.swift in Sources */,

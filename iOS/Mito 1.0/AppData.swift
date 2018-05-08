@@ -18,6 +18,7 @@ class AppData: NSObject {
     open var address: Address = Address(intAddressID: 0, strAddressAlias: "Fake", strCityName: "", strStateName: "", strStreetAddress1: "", strStreetAddress2: "", strZipCode: "")
     open var strOrderMessage = "What's it for?"
     open let mainMitoColor = "41DD7C"
+    open var strSearchQuery = ""
     
     open var arrFriends: [Person] = []
     open var arrCurrFriends: [Person] = []
@@ -170,6 +171,7 @@ class AppData: NSObject {
                         }
                     }
                     self.arrAllUsers.sort(by: self.fnSortMitoUsers)
+                    self.arrCurrAllUsers = self.arrAllUsers
                     self.arrFriendsAndAllMitoUsers.append(self.arrAllUsers)
                     self.arrCurrFriendsAndAllMitoUsers = self.arrFriendsAndAllMitoUsers
                 }
@@ -199,6 +201,14 @@ class AppData: NSObject {
         alertController.addAction(defaultAction)
         return alertController
     }
+    
+//    open func fnDisplayAlertSegue(strTitle: String, strMessage: String, strSegue: String) -> UIAlertController {
+//        let alertController = UIAlertController(title: strTitle, message: strMessage, preferredStyle: .alert)
+//        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+//            performSegue(withIdentifier: strSegue, sender: self)
+//        }))
+//        present(alertController, animated: true, completion: nil)
+//    }
     
     open func fnDisplaySimpleImage(strImageURL: String, img: UIImageView) {
         let urlImage = URL(string:"\(strImageURL)")

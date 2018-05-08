@@ -9,8 +9,11 @@
 import UIKit
 import UserNotifications
 import Alamofire
+import GooglePlaces
 
 class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+    
+    var placesClient: GMSPlacesClient!
     
     // http://uigarage.net/wp-content/uploads/2016/10/2016-09-10-12.00.44.png
     
@@ -329,11 +332,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                 print(error)
             }
         }
-        
-        
-        
-        
-        
     }
     
     func addAddress(parameterAddress: Parameters) {
@@ -344,13 +342,10 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         Alamofire.request("https://api.projectmito.io/v1/address", method: .post, parameters: parameterAddress, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
                 case .success:
-    
                     if let dictionary = response.result.value {
                         print("JSON: \(dictionary)") // serialized json response
                         DispatchQueue.main.async {
                             self.performSegue(withIdentifier: "createAccount", sender: self)
-                            //                    UserDefaults.standard.set(dictionary, forKey: "AddressInfo")
-                            //                    print(UserDefaults.standard.object(forKey: "AddressInfo") as! NSDictionary)
                         }
                     }
     
@@ -367,6 +362,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         }
         appdata.arrStates.sort(by: fnSortStateAlphabetically)
     }
+   
     
     //////////// Keyboard Functions, Superview ////////
 
@@ -393,6 +389,9 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             pickerviewStateAA.isHidden = true
             pickerviewStateAA.delegate = self
             pickerviewStateAA.dataSource = self
+        }
+        if zipcodeAA != nil {
+            zipcodeAA.keyboardType = UIKeyboardType.decimalPad
         }
         super.viewDidLoad()
         if signupScrollView != nil {

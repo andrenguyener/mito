@@ -56,7 +56,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let userURL = "https://api.projectmito.io/v1/friend/\(appdata.intCurrentUserID)"
         print("Authorization: \(String(describing: UserDefaults.standard.object(forKey: "Authorization")))")
         let authToken = UserDefaults.standard.object(forKey: "Authorization") as! String
-        self.fnLoadCurrUserAddresses()
 
 //        var request = URLRequest(url: URL(string: "wss://api.projectmito.io/v1/ws?auth=\(String(describing: UserDefaults.standard.object(forKey: "Authorization")))")!)
         var urlWebsocket = "wss://api.projectmito.io/v1/ws?auth=\(authToken)"
@@ -68,34 +67,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         socket.delegate = self
         socket.connect()
-    }
-    
-    func fnLoadCurrUserAddresses() {
-        let urlGetMyAddresses = URL(string: "https://api.projectmito.io/v1/address/")
-        let headers: HTTPHeaders = [
-            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
-        ]
-        Alamofire.request(urlGetMyAddresses!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                if let dictionary = response.result.value {
-                    self.appdata.arrCurrUserAddresses.removeAll()
-                    let arrAddresses = dictionary as! NSArray
-                    for elem in arrAddresses {
-                        let objAddress = elem as! NSDictionary
-                        print(objAddress)
-                        let objAddressObject = Address(intAddressID: objAddress["AddressId"] as! Int, strAddressAlias: objAddress["Alias"] as! String, strCityName: objAddress["CityName"] as! String, strStateName: objAddress["StateName"] as! String, strStreetAddress1: objAddress["StreetAddress"] as! String, strStreetAddress2: objAddress["StreetAddress2"] as! String, strZipCode: objAddress["ZipCode"] as! String)
-                        print("\(objAddress["Alias"] as! String) \(String(describing: objAddress["AddressId"]))")
-                        self.appdata.arrCurrUserAddresses.append(objAddressObject)
-                    }
-                    print("This user has \(self.appdata.arrCurrUserAddresses.count) addresses")
-                }
-                
-            case .failure(let error):
-                print("Get all addresses error")
-                print(error)
-            }
-        }
     }
 
     override func didReceiveMemoryWarning() {

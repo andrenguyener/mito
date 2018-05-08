@@ -1,4 +1,4 @@
-//
+
 //  NotificationViewController.swift
 //  Mito 1.0
 //
@@ -318,11 +318,13 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @objc func btnAcceptPackage(_ button: UIButton) {
-        let package = appdata.arrCurrUserPackages[button.tag]
-        fnAcceptOrDeclinePackage(response: "Accepted", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[0].intAddressID)
+        boolSender = false
+        intOrderID = appdata.arrCurrUserPackages[button.tag].intOrderID
+        performSegue(withIdentifier: "DirectAcceptPackage", sender: self)
     }
     
     @objc func btnDenyPackage(_ button: UIButton) {
+        boolSender = false
         let package = appdata.arrCurrUserPackages[button.tag]
         fnAcceptOrDeclinePackage(response: "Denied", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[0].intAddressID)
     }

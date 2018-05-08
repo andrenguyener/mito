@@ -8,6 +8,9 @@
 
 import UIKit
 import Alamofire
+import GoogleMaps
+import GooglePlaces
+import GooglePlacePicker
 
 var boolSender = true
 
@@ -18,6 +21,8 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
     
     @IBOutlet weak var tblviewAddress: UITableView!
     @IBOutlet weak var lblAddressNickname: UILabel!
+    
+    var placesClient: GMSPlacesClient!
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tblviewAddress != nil {
@@ -117,6 +122,120 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
         }
     }
     
+    @IBAction func btnInsertNewAddress(_ sender: Any) {
+        fnLoadCurrUserAddresses()
+        fnInsertNewAddress()
+    }
+    
+    func fnInsertNewAddress() {
+        let center = CLLocationCoordinate2D(latitude: 37.788204, longitude: -122.411937)
+        let northEast = CLLocationCoordinate2D(latitude: center.latitude + 0.001, longitude: center.longitude + 0.001)
+        let southWest = CLLocationCoordinate2D(latitude: center.latitude - 0.001, longitude: center.longitude - 0.001)
+        let viewport = GMSCoordinateBounds(coordinate: northEast, coordinate: southWest)
+        let config = GMSPlacePickerConfig(viewport: viewport)
+        let placePicker = GMSPlacePicker(config: config)
+        
+        placePicker.pickPlace(callback: {(place, error) -> Void in
+            if let error = error {
+                print("Pick Place error: \(error.localizedDescription)")
+                return
+            }
+            
+            if let place = place {
+                let strFormattedAddress = place.formattedAddress?.components(separatedBy: ", ")
+                    .joined(separator: "\n")
+                let arrAddress = strFormattedAddress?.components(separatedBy: "\n")
+                let strStreet = arrAddress![0]
+                let strCity = arrAddress![1]
+                let strStateZip = arrAddress![2]
+                var strState = ""
+                var strZip = ""
+                if strStateZip.index(of: " ") != nil {
+                    strState = (strStateZip as NSString).substring(to: 2)
+                    strZip = (strStateZip as NSString).substring(from: 3)
+                }
+                let strCountry = arrAddress![(arrAddress?.count)! - 1]
+                let strAlias = place.name
+                self.fnAddNewAddress(strStreet: strStreet, strCity: strCity, strState: strState, strStateZip: strZip, strAlias: strAlias)
+                DispatchQueue.main.async {
+                    self.tblviewAddress.reloadData()
+                }
+            } else {
+                print("No place selected")
+            }
+        })
+    }
+    
+    func fnLoadCurrUserAddresses() {
+        let urlGetMyAddresses = URL(string: "https://api.projectmito.io/v1/address/")
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlGetMyAddresses!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    self.appdata.arrCurrUserAddresses.removeAll()
+                    let arrAddresses = dictionary as! NSArray
+                    for elem in arrAddresses {
+                        let objAddress = elem as! NSDictionary
+                        print(objAddress)
+                        var strAddress2 = ""
+                        if objAddress["StreetAddress2"] != nil {
+                            strAddress2 = objAddress["StreetAddress2"] as! String
+                        }
+                        let objAddressObject = Address(intAddressID: objAddress["AddressId"] as! Int, strAddressAlias: objAddress["Alias"] as! String, strCityName: objAddress["CityName"] as! String, strStateName: objAddress["StateName"] as! String, strStreetAddress1: objAddress["StreetAddress"] as! String, strStreetAddress2: strAddress2, strZipCode: objAddress["ZipCode"] as! String)
+                        print("\(objAddress["Alias"] as! String) \(String(describing: objAddress["AddressId"]))")
+                        self.appdata.arrCurrUserAddresses.append(objAddressObject)
+                    }
+                    print("This user has \(self.appdata.arrCurrUserAddresses.count) addresses")
+                }
+                DispatchQueue.main.async {
+                    if (self.appdata.arrCurrUserAddresses.count > 0) {
+                        print("Load Current User Addresses: \(self.appdata.arrCurrUserAddresses[self.appdata.arrCurrUserAddresses.count - 1].strAddressAlias)")
+                    }
+//                    self.appdata.address = self.appdata.arrCurrUserAddresses[self.appdata.arrCurrUserAddresses.count - 1]
+                    self.tblviewAddress.reloadData()
+                }
+                
+            case .failure(let error):
+                print("Get all addresses error")
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func fnAddNewAddress(strStreet: String, strCity: String, strState: String, strStateZip: String, strAlias: String) {
+        let parameters: Parameters = [
+            "streetAddress1": strStreet,
+            "cityName": strCity,
+            "zipCode": strStateZip,
+            "stateName": strState,
+            "aliasName": strAlias
+        ]
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request("https://api.projectmito.io/v1/address", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                
+                if let dictionary = response.result.value {
+                    print("JSON: \(dictionary)") // serialized json response
+                    DispatchQueue.main.async {
+                        print("Add New Address: \(self.appdata.arrCurrUserAddresses[self.appdata.arrCurrUserAddresses.count - 1].strAddressAlias)")
+//                        self.appdata.address = self.appdata.arrCurrUserAddresses[self.appdata.arrCurrUserAddresses.count - 1]
+                        self.performSegue(withIdentifier: "ChooseAddressToCheckout", sender: self)
+                    }
+                }
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    
     var appdata = AppData.shared
     
     @IBOutlet weak var imgRecipientProfile: RoundedImage!
@@ -127,7 +246,14 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
         appdata.strOrderMessage = textviewWriteMessage.text
     }
     
+    @IBAction func btnDoneTypingMessage(_ sender: Any) {
+        appdata.strOrderMessage = textviewWriteMessage.text
+        performSegue(withIdentifier: "TypeMessageToCheckout", sender: self)
+    }
+    
+    
     @IBOutlet weak var lblCreditCardNumber: UITextField!
+    @IBOutlet weak var lblChooseAddressHeading: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -138,9 +264,16 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
             searchBar.delegate = self
             appdata.fnLoadFriendsAndAllUsers(tableview: tblviewPeople)
         } else if tblviewAddress != nil {
+            print(appdata.arrCurrUserAddresses.count)
             tblviewAddress.delegate = self
             tblviewAddress.dataSource = self
             tblviewAddress.rowHeight = 106
+            fnLoadCurrUserAddresses()
+            if boolSender {
+//                lblChooseAddressHeading.text = "Select Billing Address"
+            } else {
+                lblChooseAddressHeading.text = "Select Shipping Address"
+            }
         } else if lblRecipient != nil {
             lblRecipient.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
             appdata.fnDisplaySimpleImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipientImage)
@@ -151,6 +284,7 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
                 lblCreditCardNumberCheckoutProcess.text = "\(stars)\(last4)"
             }
         } else if imgRecipientProfile != nil {
+            textviewWriteMessage.keyboardDismissMode = .onDrag
             appdata.fnDisplaySimpleImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipientProfile)
             strRecipientName.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
             textviewWriteMessage.text = "What's it for?"
