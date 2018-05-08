@@ -1,5 +1,4 @@
--- retreive all my friend's related feeds
-ALTER PROC uspcGetMyFriendsFeed
+ALTER PROC uspcGetMyOwnFeed
 @UserId INT
 AS
 BEGIN
@@ -8,18 +7,18 @@ BEGIN
 	INSERT @MyFriendIdList
 	EXEC uspGetUserFriendsIdList @UserId, 1
 	-- filter to only have SendFrom column that has value of 
-	-- user friendId and excluded own Id from SendTo
-	SELECT SenderId, RecipientId,OrderMessage, OrderDate FROM [ORDER] O
+	-- user friendId and my own Id from SendTo
+	SELECT OrderId, SenderId, RecipientId,OrderMessage, OrderDate FROM [ORDER] O
 	JOIN @MyFriendIdList MF ON O.SenderId = MF.FriendId
-	WHERE O.RecipientId <> @UserId
+	WHERE O.RecipientId = @UserId
 	--Combine the two SELECT into one
 	UNION
 	-- filter to only have SendTo column that has value of 
-	-- user friendId and excluded own Id from SendFrom
-	SELECT SenderId, RecipientId,OrderMessage, OrderDate FROM [ORDER] O2
+	-- user friendId and my own Id from SendFrom
+	SELECT OrderId, SenderId, RecipientId,OrderMessage, OrderDate FROM [ORDER] O2
 	JOIN @MyFriendIdList MF2 ON O2.RecipientId = MF2.FriendId
-	WHERE O2.SenderId <> @UserId
+	WHERE O2.SenderId = @UserId
 	ORDER BY OrderDate
 END
 
-EXEC dbo.uspcGetMyFriendsFeed 16
+EXEC dbo.uspcGetMyOwnFeed 7

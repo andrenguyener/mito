@@ -44,6 +44,7 @@ AS
 	--	BEGIN
 	--		SET @PhotoUrl = 'path/to/default/image'
 	--	END
+	SET @PhotoUrl = 'https://ui-avatars.com/api/?+name=' + @UserFname + '+' + @UserLname
 
 	BEGIN TRAN
 		INSERT INTO [USER] (UserFname, UserLname, UserEmail, PasswordHash, PhotoUrl, UserDOB, Username)

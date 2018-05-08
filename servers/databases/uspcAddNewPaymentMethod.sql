@@ -34,6 +34,11 @@ BEGIN
 
 	DECLARE @NewCardId INT
 	DECLARE @TodaysDate DATETIME = (SELECT GETDATE())
+	DECLARE @IsFirstCard INT = 1
+	IF EXISTS (SELECT COUNT(*) FROM USER_CREDIT_CARD WHERE UserId = @UserId)
+		BEGIN
+			SET @IsFirstCard = 0
+		END
 
 	BEGIN TRAN AddNewUserCard
 		BEGIN TRAN AddNewCard
@@ -44,7 +49,8 @@ BEGIN
 			ROLLBACK TRAN AddNewCard
 			ELSE COMMIT TRAN AddNewCard
 			
-			INSERT INTO USER_CREDIT_CARD(UserId, CreditCardId, IsDelete) VALUES(@UserId, @NewCardId, 0)
+			INSERT INTO USER_CREDIT_CARD(UserId, CreditCardId, IsDelete, IsDefault) 
+			VALUES(@UserId, @NewCardId, 0, @IsFirstCard)
 
 			IF @@ERROR <> 0
 			ROLLBACK TRAN AddNewUserCard
@@ -84,4 +90,4 @@ END
 GO
 
 --Example call
-EXEC dbo.uspcAddNewPaymentMethod 7, 'Visa', '1234465689', 12, 2018, 123
+EXEC dbo.uspcAddNewPaymentMethod 8, 'Visa', '1234489', 12, 2018, 123

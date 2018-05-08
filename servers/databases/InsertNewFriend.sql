@@ -53,20 +53,20 @@ AS
 	-- INSERT Notification to alert User2 that User1 would like to be friend 
 	-- Default notification for InsertFriend is based on 'Pending' Friend Type
 	BEGIN TRAN insertNotification
-			-- INSERT friendship between @Username1 and @Username2 in FRIEND table
-			BEGIN TRAN insertIntoFriend
-			INSERT INTO FRIEND (User1Id, User2Id, FriendTypeId, IsDeleted) VALUES (@User1Id, @User2Id, @FriendTypeId, 0)
-			--SET @FriendId = (SELECT SCOPE_IDENTITY())
-			IF @@ERROR <> 0
-				ROLLBACK TRAN insertIntoFriend
-			ELSE
-				COMMIT TRAN insertIntoFriend
-
-		EXEC uspInsertNotification @NotificationTypeId, @User1Id, @User2Id, @TodaysDate
+	-- INSERT friendship between @Username1 and @Username2 in FRIEND table
+	BEGIN TRAN insertIntoFriend
+	INSERT INTO FRIEND (User1Id, User2Id, FriendTypeId, IsDeleted) VALUES (@User1Id, @User2Id, @FriendTypeId, 0)
+	--SET @FriendId = (SELECT SCOPE_IDENTITY())
+	IF @@ERROR <> 0
+		ROLLBACK TRAN insertIntoFriend
+	ELSE
+		COMMIT TRAN insertIntoFriend
+		EXEC uspInsertNotification @NotificationTypeId, @User1Id, @User2Id, @TodaysDate, NULL
 		IF @@ERROR <> 0
 			ROLLBACK TRAN insertNotification
 		ELSE
 			COMMIT TRAN insertNotification
+GO
 	/*
 
 	-- INSERT friendship between @Username1 and @Username2 in FRIEND table

@@ -53,6 +53,7 @@ ALTER PROC uspcProcessCheckout
 @UserId INT,
 @SenderAddressId INT,
 @RecipientId INT,
+@CardId INT,
 @Message NVARCHAR(1000),
 @GiftOption BIT
 AS
@@ -63,7 +64,9 @@ DECLARE @CART TABLE
 AmazonASIN NVARCHAR(50) NOT NULL,
 Qty INT NOT NULL,
 AmazonItemPrice NUMERIC(12,2) NOT NULL,
-SumPrice NUMERIC(12,2))
+SumPrice NUMERIC(12,2),
+ProductImageUrl NVARCHAR(MAX),
+ProductName NVARCHAR(100))
 
 -- populate the temp table @CART with values from user's CART
 -- only select MOST RECENT (DATETIME) of distinct products in the cart
@@ -80,9 +83,11 @@ DECLARE @ProdID NVARCHAR(50)
 DECLARE @Qty INT
 DECLARE @OrderID INT
 DECLARE @ItemPrice NUMERIC(12,2)
+DECLARE @ImageUrl NVARCHAR(MAX)
+DECLARE @ProdName NVARCHAR(100)
 DECLARE @PendingStatusId INT 
 EXEC dbo.uspGetUserConfirmationTypeId 'Pending', @Type_Id = @PendingStatusId OUT 
-DECLARE @TodaysDate DATE = (SELECT GETDATE())
+DECLARE @TodaysDate DATETIME = (SELECT GETDATE())
 DECLARE @NotificationTypeId INT
 EXEC dbo.uspGetNotificationType 'Pending', 'Orders', @NotificationType_Id = @NotificationTypeId OUT
 -- SET XACT_ABORT ON will render the transaction uncommittable
@@ -93,7 +98,7 @@ BEGIN TRY
 BEGIN TRANSACTION InsertNotification
 BEGIN TRANSACTION G1
 EXEC dbo.uspCreatePurchaseOrder @UserId, @SenderAddressId, @RecipientId, @Message, 
-@TodaysDate, @GiftOption, @PendingStatusId, @SumCartPrice, @Order_Id = @OrderID OUT
+@TodaysDate, @GiftOption, @PendingStatusId, @SumCartPrice, @CardId, @Order_Id = @OrderID OUT
 
 IF @OrderID IS NULL
 	BEGIN
@@ -108,6 +113,8 @@ WHILE @Count > 0 --begin loop to process all rows from #CART; @Count is number o
         SET @ProdID = (SELECT TOP 1 AmazonASIN FROM @CART WHERE tempCartId = @ID)
         SET @Qty = (SELECT Qty FROM @CART WHERE tempCartId = @ID)
 		SET @ItemPrice = (SELECT AmazonItemPrice FROM @CART WHERE tempCartId = @ID)
+		SET @ImageUrl = (SELECT ProductImageUrl FROM @CART WHERE tempCartId = @ID)
+		SET @ProdName = (SELECT ProductName FROM @CART WHERE tempCartId = @ID)
     --'old-school'error-handling method
     -- sp_addmessage 50011, 11, 'OrderID cannot be NULL' was previously added to system
     IF @OrderID IS NULL
@@ -115,7 +122,7 @@ WHILE @Count > 0 --begin loop to process all rows from #CART; @Count is number o
 			RAISERROR (50011, 11, 1)
         END
     ELSE
-	INSERT INTO ORDER_PRODUCT(OrderId,AmazonItemId,Quantity, AmazonItemPrice) VALUES (@OrderID, @ProdID, @Qty, @ItemPrice)
+	INSERT INTO ORDER_PRODUCT(OrderId,AmazonItemId,Quantity, AmazonItemPrice, ProductImageUrl, ProductName) VALUES (@OrderID, @ProdID, @Qty, @ItemPrice, @ImageUrl, @ProdName)
         -- Clean-up the row just INSERTed into tblLINE_ITEM by DELETING it from #CART
         DELETE 
         FROM @CART 
@@ -156,7 +163,7 @@ BEGIN CATCH
         ROLLBACK TRANSACTION G1
     END
 END CATCH
-EXEC uspInsertNotification @NotificationTypeId, @UserId, @RecipientId, @TodaysDate
+EXEC uspInsertNotification @NotificationTypeId, @UserId, @RecipientId, @TodaysDate, @OrderId
 	IF @@ERROR <> 0 
 		ROLLBACK TRAN insertNotification
 	ELSE
@@ -166,8 +173,7 @@ EXEC uspInsertNotification @NotificationTypeId, @UserId, @RecipientId, @TodaysDa
 SELECT * FROM CART
 SELECT * FROM ORDER_PRODUCT
 SELECT * FROM [ORDER]
-EXEC dbo.uspcInsertIntoCart '1245','12.00',7,0
-EXEC dbo.uspcInsertIntoCart '10394','12.00',7,10
+EXEC dbo.uspcInsertIntoCart 7,'1245','Name','URL.com','12.00',10
 EXEC dbo.uspcGetUserCartItemList 7
-EXEC dbo.uspcProcessCheckout 7, 7, 34, 'Testing checkout cart', 0
+EXEC dbo.uspcProcessCheckout 7, 7, 34, 8,'Testing checkout cart', 0
 

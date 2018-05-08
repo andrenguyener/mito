@@ -9,15 +9,16 @@ ALTER PROC uspInsertNotification
 @NotificationTypeId INT,
 @SendFrom INT,
 @SendTo INT,
-@NotificationDate DATETIME
+@NotificationDate DATETIME,
+@Id INT
 AS
 	IF @NotificationDate IS NULL 
 		BEGIN
 		SET @NotificationDate = GETDATE()
 		END
 	BEGIN TRAN
-	INSERT INTO NOTIFICATION (NotificationTypeId, SendFrom, NotificationDate, SendTo)
-	VALUES (@NotificationTypeId, @SendFrom, @NotificationDate, @SendTo)
+	INSERT INTO NOTIFICATION (NotificationTypeId, SendFrom, NotificationDate, SendTo, RelevantId)
+	VALUES (@NotificationTypeId, @SendFrom, @NotificationDate, @SendTo, @Id)
 
 	IF @@ERROR <> 0 
 		ROLLBACK TRAN
