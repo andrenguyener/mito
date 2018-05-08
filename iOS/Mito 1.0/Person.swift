@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Person {
+class Person: Notification {
     var firstName: String = ""
     var lastName: String = ""
     var email: String = ""
@@ -16,9 +16,8 @@ class Person {
     var intUserID: Int
     var strUsername: String = ""
     var intNumFriends: Int
-    var strDate: String = ""
     
-    init(firstName: String, lastName: String, email: String, avatar: String, intUserID: Int, strUsername: String, intNumFriends: Int, strDate: String) {
+    init(firstName: String, lastName: String, email: String, avatar: String, intUserID: Int, strUsername: String, intNumFriends: Int, dateRequested: Date) {
         self.firstName = firstName
         self.lastName = lastName
         self.email = email
@@ -26,7 +25,18 @@ class Person {
         self.intUserID = intUserID
         self.strUsername = strUsername
         self.intNumFriends = intNumFriends
-        self.strDate = strDate
+        super.init(dateRequested: dateRequested)
+    }
+    
+    init(firstName: String, lastName: String, email: String, avatar: String, intUserID: Int, strUsername: String, intNumFriends: Int) {
+        self.firstName = firstName
+        self.lastName = lastName
+        self.email = email
+        self.avatar = avatar
+        self.intUserID = intUserID
+        self.strUsername = strUsername
+        self.intNumFriends = intNumFriends
+        super.init(dateRequested: Date.distantPast)
     }
     
     func description() -> String {

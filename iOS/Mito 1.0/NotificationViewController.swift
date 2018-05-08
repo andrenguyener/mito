@@ -35,7 +35,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             tblviewNotification.rowHeight = 100
 //            fnAddRefreshersNotificationsAndPackages()
             fnGetPendingPackages()
-            appdata.arrNotifications.sort(by: )
         } else if imgSenderProfile != nil {
             appdata.fnDisplaySimpleImage(strImageURL: appdata.arrCurrUserPackages[intOrderID].strPhotoUrl, img: imgSenderProfile)
             fnRetrieveIncomingOrderDetails(intOrderID: intOrderID)
@@ -132,14 +131,24 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     print(dictionary)
                     let arrPackages = dictionary as! NSArray
                     for objPackageTemp in arrPackages {
+                        print(objPackageTemp)
                         let elem = objPackageTemp as! NSDictionary
-                        let objPackage = Package(intGiftOption: elem["GiftOption"] as! Int, strOrderDate: elem["OrderDate"] as! String, intOrderID: elem["OrderId"] as! Int, strOrderMessage: elem["OrderMessage"] as! String, strPhotoUrl: elem["PhotoUrl"] as! String, intSenderID: elem["SenderId"] as! Int, strUserFName: elem["UserFname"] as! String, strUserLName: elem["UserLname"] as! String)
+                        let objPackage = Package(intGiftOption: elem["GiftOption"] as! Int, strOrderDate: elem["OrderDate"] as! String, intOrderID: elem["OrderId"] as! Int, strOrderMessage: elem["OrderMessage"] as! String, strPhotoUrl: elem["PhotoUrl"] as! String, intSenderID: elem["SenderId"] as! Int, strUserFName: elem["UserFname"] as! String, strUserLName: elem["UserLname"] as! String, dateRequested: self.fnStringToDate(strDate: elem["OrderDate"] as! String))
                         self.appdata.arrNotifications.append(objPackage)
 //                        self.appdata.arrCurrUserPackages.append(objPackage)
                     }
 //                    print("User has \(self.appdata.arrCurrUserPackages.count) packages")
                 }
                 DispatchQueue.main.async {
+                    print("Before Pending Packages Sort: \(self.appdata.arrNotifications.count)")
+                    for i in self.appdata.arrNotifications {
+                        print(i.dateRequested)
+                    }
+                    self.appdata.arrNotifications.sort(by: self.fnSortNotification)
+                    print("After Pending Packages Sort: \(self.appdata.arrNotifications.count)")
+                    for i in self.appdata.arrNotifications {
+                        print(i.dateRequested)
+                    }
                     self.tblviewNotification.reloadData()
 //                    self.refresherNotification.endRefreshing()
                 }
@@ -149,6 +158,12 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                 print(error)
             }
         }
+    }
+    
+    func fnStringToDate(strDate: String) -> Date {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        return formatter.date(from: strDate)!
     }
     
     func fnGetPendingFriendRequests() {
@@ -164,19 +179,28 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     let dict2 = dictionary as! NSArray
                     for obj in dict2 {
                         let object = obj as! NSDictionary
-                        print(object)
                         let p: Person = Person(firstName: (object["UserFname"] as? String)!,
                                                lastName: (object["UserLname"] as? String)!,
                                                email: (object["UserEmail"] as? String?)!!,
                                                avatar: (object["PhotoUrl"] as? String?)!!,
                                                intUserID: (object["UserId"] as? Int)!,
                                                strUsername: (object["Username"] as? String)!,
-                                               intNumFriends: (object["NumFriends"] as! Int))
+                                               intNumFriends: (object["NumFriends"] as! Int),
+                                               dateRequested: self.fnStringToDate(strDate: object["CreatedDate"] as! String))
                         self.appdata.arrNotifications.append(p)
                         self.appdata.arrPendingFriends.append(p)
                     }
                     print("Pending Friend Requests: \(self.appdata.arrPendingFriends.count)")
                     DispatchQueue.main.async {
+                        print("Before Pending Friend Requests Sort: \(self.appdata.arrNotifications.count)")
+                        for i in self.appdata.arrNotifications {
+                            print(i.dateRequested)
+                        }
+                        self.appdata.arrNotifications.sort(by: self.fnSortNotification)
+                        print("After Pending Friend Requests Sort: \(self.appdata.arrNotifications.count)")
+                        for i in self.appdata.arrNotifications {
+                            print(i.dateRequested)
+                        }
                         self.tblviewNotification.reloadData()
 //                        self.refresherNotification.endRefreshing()
                     }
@@ -309,19 +333,23 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         let dt = formatter.date(from: date)
         print(dt?.description)
         formatter.timeZone = TimeZone.current
-        print(TimeZone.current.description)
-        formatter.dateFormat = "h:mm a"
+        formatter.dateFormat = "MM-dd-yyyy HH:mm"
         print(formatter.string(from: dt!))
         
         return formatter.string(from: dt!)
     }
     
-    func fnSortMitoUsers(this: Person, that: Person) -> Bool {
-        return this.intNumFriends < that.intNumFriends
+    func fnConvertDateToString(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        return formatter.string(from: date)
     }
 
-    func fnSortNotification(this: Package, that: Person) {
-        return this.strDate 
+    func fnSortNotification(this: Notification, that: Notification) -> Bool {
+//        if this.dateRequested.compare(that.dateRequested) == .orderedSame {
+//            return true
+//        }
+        return this.dateRequested.compare(that.dateRequested) != .orderedAscending
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -346,6 +374,8 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             cell.btnDecline.addTarget(self, action: #selector(self.btnDenyPackage(_:)), for: .touchUpInside)
         } else {
             let objFriendRequest = objNotification as! Person
+            let strDate = fnConvertDateToString(date: objFriendRequest.dateRequested)
+            let dateLocal = UTCToLocal(date: strDate)
             let urlPersonImage = URL(string:"\(objFriendRequest.avatar)")
             let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
             if let data = try? Data(contentsOf: urlPersonImage!) {
@@ -354,7 +384,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                 cell.imgPerson.image = UIImage(data: data)
             }
             cell.strFirstNameLastName.text = "\(objFriendRequest.firstName) \(objFriendRequest.lastName) has sent you a friend request"
-            cell.strUsername.text = String(objFriendRequest.intNumFriends)
+            cell.strUsername.text = dateLocal
             cell.btnConfirm.tag = indexPath.row
             cell.btnConfirm.addTarget(self, action: #selector(self.btnAcceptFriendRequest(_:)), for: .touchUpInside)
             cell.btnDecline.tag = indexPath.row

@@ -106,7 +106,7 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
                     print(dictionary)
                     print("\(response): Successful")
                 }
-                self.appdata.personRecipient = Person(firstName: "FName", lastName: "LName", email: "", avatar: "dd", intUserID: 0, strUsername: "", intNumFriends: 0)
+                self.appdata.personRecipient = Person(firstName: "FName", lastName: "LName", email: "", avatar: "dd", intUserID: 0, strUsername: "", intNumFriends: 0, dateRequested: Date.distantPast)
                 DispatchQueue.main.async {
                     let alertController = UIAlertController(title: "Success!", message: "Your package has been confirmed!", preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
@@ -223,7 +223,6 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
                 if let dictionary = response.result.value {
                     print("JSON: \(dictionary)") // serialized json response
                     DispatchQueue.main.async {
-                        print("Add New Address: \(self.appdata.arrCurrUserAddresses[self.appdata.arrCurrUserAddresses.count - 1].strAddressAlias)")
 //                        self.appdata.address = self.appdata.arrCurrUserAddresses[self.appdata.arrCurrUserAddresses.count - 1]
                         self.performSegue(withIdentifier: "ChooseAddressToCheckout", sender: self)
                     }

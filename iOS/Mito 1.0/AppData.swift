@@ -14,7 +14,7 @@ class AppData: NSObject {
     open var intCurrentUserID: Int = 0
     open var intCurrIndex: Int = -1
     open var strCardNumber = ""
-    open var personRecipient: Person = Person(firstName: "FName", lastName: "LName", email: "", avatar: "dd", intUserID: 0, strUsername: "", intNumFriends: 0)
+    open var personRecipient: Person = Person(firstName: "FName", lastName: "LName", email: "", avatar: "dd", intUserID: 0, strUsername: "", intNumFriends: 0, dateRequested: Date.distantPast)
     open var address: Address = Address(intAddressID: 0, strAddressAlias: "Fake", strCityName: "", strStateName: "", strStreetAddress1: "", strStreetAddress2: "", strZipCode: "")
     open var strOrderMessage = "What's it for?"
     open let mainMitoColor = "41DD7C"
@@ -34,7 +34,7 @@ class AppData: NSObject {
     
     
     // AnyObject array
-    open var arrNotifications: [AnyObject] = []
+    open var arrNotifications: [Notification] = []
     
     open var arrSections = ["Friends", "Other people on Mito"]
     

@@ -35,6 +35,8 @@ class PeopleDetailsViewController: UIViewController {
     }
     
     func fnCheckFriendStatus() {
+        print("Section: \(mySection)")
+        print("Row: \(myIndex)")
         let intFriendID = appdata.arrCurrFriendsAndAllMitoUsers[mySection][myIndex].intUserID
         let parameters: Parameters = [
             "friendId": intFriendID
