@@ -16,8 +16,9 @@ class Person {
     var intUserID: Int
     var strUsername: String = ""
     var intNumFriends: Int
+    var strDate: String = ""
     
-    init(firstName: String, lastName: String, email: String, avatar: String, intUserID: Int, strUsername: String, intNumFriends: Int) {
+    init(firstName: String, lastName: String, email: String, avatar: String, intUserID: Int, strUsername: String, intNumFriends: Int, strDate: String) {
         self.firstName = firstName
         self.lastName = lastName
         self.email = email
@@ -25,6 +26,7 @@ class Person {
         self.intUserID = intUserID
         self.strUsername = strUsername
         self.intNumFriends = intNumFriends
+        self.strDate = strDate
     }
     
     func description() -> String {

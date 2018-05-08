@@ -17,8 +17,9 @@ class Package {
     var intSenderID: Int = 0
     var strUserFName: String = ""
     var strUserLName: String = ""
+    var strDate: String = ""
     
-    init(intGiftOption: Int, strOrderDate: String, intOrderID: Int, strOrderMessage: String, strPhotoUrl: String, intSenderID: Int, strUserFName: String, strUserLName: String) {
+    init(intGiftOption: Int, strOrderDate: String, intOrderID: Int, strOrderMessage: String, strPhotoUrl: String, intSenderID: Int, strUserFName: String, strUserLName: String, strDate: String) {
         self.intGiftOption = intGiftOption
         self.strOrderDate = strOrderDate
         self.intOrderID = intOrderID
@@ -27,5 +28,6 @@ class Package {
         self.intSenderID = intSenderID
         self.strUserFName = strUserFName
         self.strUserLName = strUserLName
+        self.strDate = strDate
     }
 }
