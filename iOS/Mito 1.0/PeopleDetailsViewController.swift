@@ -75,7 +75,7 @@ class PeopleDetailsViewController: UIViewController {
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
         
-        Alamofire.request("https://api.projectmito.io/v1/friend", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+        Alamofire.request("https://api.projectmito.io/v1/friend", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
             switch response.result {
             case .success:
                 if let dictionary = response.result.value {

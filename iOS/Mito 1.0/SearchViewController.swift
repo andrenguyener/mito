@@ -14,7 +14,7 @@ var myIndex = 0
 var mySection = 0
 var intSegmentedIndex = 0
 
-class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var navController: UINavigationItem!
     
@@ -148,8 +148,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             searchBar.resignFirstResponder()
             productPeopleTab.isEnabled = false
             fnLoadProductData()
-        } else {
-            // hide keyboard
         }
     }
     

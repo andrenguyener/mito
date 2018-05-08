@@ -332,11 +332,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                 print(error)
             }
         }
-        
-        
-        
-        
-        
     }
     
     func addAddress(parameterAddress: Parameters) {
@@ -347,7 +342,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         Alamofire.request("https://api.projectmito.io/v1/address", method: .post, parameters: parameterAddress, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
                 case .success:
-    
                     if let dictionary = response.result.value {
                         print("JSON: \(dictionary)") // serialized json response
                         DispatchQueue.main.async {
