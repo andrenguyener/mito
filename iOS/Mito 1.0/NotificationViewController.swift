@@ -29,29 +29,26 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         if tblviewNotification != nil {
             appdata.arrNotifications.removeAll()
             appdata.arrPendingFriends.removeAll()
+            appdata.arrCurrUserPackages.removeAll()
             self.fnGetPendingFriendRequests()
             tblviewNotification.delegate = self
             tblviewNotification.dataSource = self
             tblviewNotification.rowHeight = 100
             fnAddRefreshersNotificationsAndPackages()
             fnGetPendingPackages()
-        } else if imgSenderProfile != nil {
-            appdata.fnDisplaySimpleImage(strImageURL: appdata.arrCurrUserPackages[intOrderID].strPhotoUrl, img: imgSenderProfile)
+        } else if imgSenderProfile != nil { // Go to incoming package
+            if appdata.arrNotifications[intOrderID] as? Package != nil{
+                let package = appdata.arrNotifications[intOrderID] as! Package
+                fnRetrieveIncomingOrderDetails(intOrderID: package.intOrderID)
+                 appdata.fnDisplaySimpleImage(strImageURL: package.strPhotoUrl, img: imgSenderProfile)
+                strSenderName.text = "\(package.strUserFName) \(package.strUserLName)"
+                lblMessage.text = package.strOrderMessage
+            }
             fnRetrieveIncomingOrderDetails(intOrderID: intOrderID)
-            strSenderName.text = "\(appdata.arrCurrUserPackages[intOrderID].strUserFName) \(appdata.arrCurrUserPackages[intOrderID].strUserLName)"
-            lblMessage.text = appdata.arrCurrUserPackages[intOrderID].strOrderMessage
         } else {
             let objIncomingPackage = appdata.arrCurrUserPackages[intOrderID]
             strPackageSenderName.text = "\(objIncomingPackage.strUserFName) \(objIncomingPackage.strUserLName)"
-            let urlPersonImage = URL(string:"\(objIncomingPackage.strPhotoUrl)")
             appdata.fnDisplaySimpleImage(strImageURL: objIncomingPackage.strPhotoUrl, img: imgSender)
-//            let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
-//            if let data = try? Data(contentsOf: urlPersonImage!) {
-//                imgSender.image = UIImage(data: data)!
-//            } else if let data = try? Data(contentsOf: defaultURL!){
-//                imgSender.image = UIImage(data: data)
-//            }
-            print(appdata.arrCurrUserPackages[intOrderID].intOrderID)
             fnGetOrderDetails()
         }
     }
@@ -86,7 +83,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
 
-    
     @IBOutlet weak var imgSenderProfile: UIImageView!
     @IBOutlet weak var strSenderName: UILabel!
     @IBOutlet weak var lblMessage: UILabel!
@@ -98,10 +94,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         fnGetPendingFriendRequests()
         fnGetPendingPackages()
     }
-//
-//    @objc func fnRefreshPackages() {
-//        fnGetPendingPackages()
-//    }
     
     func fnGetOrderDetails() {
         let urlGetOrderDetails = URL(string: "https://api.projectmito.io/v1/order/products")
@@ -146,20 +138,10 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                         let elem = objPackageTemp as! NSDictionary
                         let objPackage = Package(intGiftOption: elem["GiftOption"] as! Int, strOrderDate: elem["OrderDate"] as! String, intOrderID: elem["OrderId"] as! Int, strOrderMessage: elem["OrderMessage"] as! String, strPhotoUrl: elem["PhotoUrl"] as! String, intSenderID: elem["SenderId"] as! Int, strUserFName: elem["UserFname"] as! String, strUserLName: elem["UserLname"] as! String, dateRequested: self.fnStringToDate(strDate: elem["OrderDate"] as! String))
                         self.appdata.arrNotifications.append(objPackage)
-//                        self.appdata.arrCurrUserPackages.append(objPackage)
                     }
-//                    print("User has \(self.appdata.arrCurrUserPackages.count) packages")
                 }
                 DispatchQueue.main.async {
-                    print("Before Pending Packages Sort: \(self.appdata.arrNotifications.count)")
-                    for i in self.appdata.arrNotifications {
-                        print(i.dateRequested)
-                    }
                     self.appdata.arrNotifications.sort(by: self.fnSortNotification)
-                    print("After Pending Packages Sort: \(self.appdata.arrNotifications.count)")
-                    for i in self.appdata.arrNotifications {
-                        print(i.dateRequested)
-                    }
                     self.tblviewNotification.reloadData()
                     self.refresherNotification.endRefreshing()
                 }
@@ -201,17 +183,8 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                         self.appdata.arrNotifications.append(p)
                         self.appdata.arrPendingFriends.append(p)
                     }
-                    print("Pending Friend Requests: \(self.appdata.arrPendingFriends.count)")
                     DispatchQueue.main.async {
-                        print("Before Pending Friend Requests Sort: \(self.appdata.arrNotifications.count)")
-                        for i in self.appdata.arrNotifications {
-                            print(i.dateRequested)
-                        }
                         self.appdata.arrNotifications.sort(by: self.fnSortNotification)
-                        print("After Pending Friend Requests Sort: \(self.appdata.arrNotifications.count)")
-                        for i in self.appdata.arrNotifications {
-                            print(i.dateRequested)
-                        }
                         self.tblviewNotification.reloadData()
                     }
                 }
@@ -234,8 +207,12 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         boolSender = false
         intOrderID = indexPath.row
-        print(indexPath.row)
-//            performSegue(withIdentifier: "NotificationToPackageDetails", sender: self)
+        if ((appdata.arrNotifications[indexPath.row] as? Package) != nil) {
+            appdata.currPackage = appdata.arrNotifications[indexPath.row] as! Package
+            performSegue(withIdentifier: "NotificationToPackageDetails", sender: self)
+        } else {
+            print("can't")
+        }
     }
     
     // Accept currently creates errors above
@@ -246,6 +223,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBAction func btnAcceptAndChooseReceivingAddress(_ sender: Any) {
         boolSender = false
+//        appdata.currPackage = appdata.arrNotifications[indexPath.row] as! Package
         performSegue(withIdentifier: "PackageToChooseReceivingAddress", sender: self)
     }
     
@@ -323,15 +301,17 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     
     @objc func btnAcceptPackage(_ button: UIButton) {
         boolSender = false
-        let package = appdata.arrNotifications[button.tag] as! Package
-        let intOrderID = package.intOrderID
-        performSegue(withIdentifier: "DirectAcceptPackage", sender: self)
+        if ((appdata.arrNotifications[button.tag] as? Package) != nil) {
+            appdata.currPackage = appdata.arrNotifications[button.tag] as! Package
+            performSegue(withIdentifier: "DirectAcceptPackage", sender: self)
+        }
+//        appdata.currPackage = appdata.arrNotifications[button.tag] as! Package
     }
     
     @objc func btnDenyPackage(_ button: UIButton) {
         boolSender = false
         let package = appdata.arrNotifications[button.tag] as! Package
-        fnAcceptOrDeclinePackage(response: "Denied", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[0].intAddressID)
+        fnAcceptOrDeclinePackage(response: "Denied", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: 0)
     }
     
     func UTCToLocal(date:String) -> String {

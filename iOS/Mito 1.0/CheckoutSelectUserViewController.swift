@@ -76,9 +76,8 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
             if boolSender {
                 performSegue(withIdentifier: "ChooseAddressToCheckout", sender: self)
             } else {
-                let package = appdata.arrCurrUserPackages[intOrderID]
                 appdata.address = appdata.arrCurrUserAddresses[indexPath.row]
-                fnAcceptOrDeclinePackage(response: "Accepted", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[indexPath.row].intAddressID)
+                fnAcceptOrDeclinePackage(response: "Accepted", senderId: appdata.currPackage.intSenderID, orderId: appdata.currPackage.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[indexPath.row].intAddressID)
             }
         } else if tblviewPeople != nil {
             appdata.personRecipient = appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
@@ -271,7 +270,7 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
             if boolSender {
 //                lblChooseAddressHeading.text = "Select Billing Address"
             } else {
-                lblChooseAddressHeading.text = "Select Shipping Address"
+//                lblChooseAddressHeading.text = "Select Shipping Address"
             }
         } else if lblRecipient != nil {
             lblRecipient.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
