@@ -33,7 +33,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             tblviewNotification.delegate = self
             tblviewNotification.dataSource = self
             tblviewNotification.rowHeight = 100
-//            fnAddRefreshersNotificationsAndPackages()
+            fnAddRefreshersNotificationsAndPackages()
             fnGetPendingPackages()
         } else if imgSenderProfile != nil {
             appdata.fnDisplaySimpleImage(strImageURL: appdata.arrCurrUserPackages[intOrderID].strPhotoUrl, img: imgSenderProfile)
@@ -54,6 +54,13 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             print(appdata.arrCurrUserPackages[intOrderID].intOrderID)
             fnGetOrderDetails()
         }
+    }
+    
+    func fnAddRefreshersNotificationsAndPackages() {
+        refresherNotification = UIRefreshControl()
+        refresherNotification.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refresherNotification.addTarget(self, action: #selector(NotificationViewController.fnRefreshNotifications), for: UIControlEvents.valueChanged)
+        tblviewNotification.addSubview(refresherNotification)
     }
     
     func fnRetrieveIncomingOrderDetails(intOrderID: Int) {
@@ -85,7 +92,11 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var lblMessage: UILabel!
 
     @objc func fnRefreshNotifications() {
+        appdata.arrNotifications.removeAll()
+        appdata.arrPendingFriends.removeAll()
+        appdata.arrCurrUserPackages.removeAll()
         fnGetPendingFriendRequests()
+        fnGetPendingPackages()
     }
 //
 //    @objc func fnRefreshPackages() {
@@ -150,7 +161,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                         print(i.dateRequested)
                     }
                     self.tblviewNotification.reloadData()
-//                    self.refresherNotification.endRefreshing()
+                    self.refresherNotification.endRefreshing()
                 }
                 
             case .failure(let error):
@@ -202,7 +213,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                             print(i.dateRequested)
                         }
                         self.tblviewNotification.reloadData()
-//                        self.refresherNotification.endRefreshing()
                     }
                 }
                 
