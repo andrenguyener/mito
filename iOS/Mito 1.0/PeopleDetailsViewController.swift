@@ -27,7 +27,7 @@ class PeopleDetailsViewController: UIViewController {
     
     func loadPersonData() {
         fnCheckFriendStatus()
-        let friend = appdata.arrCurrFriendsAndAllMitoUsers[mySection][myIndex]
+        let friend = appdata.personToView
         lblName.text = "\(friend.firstName) \(friend.lastName)"
         lblUsername.text = "@\(friend.strUsername)"
         btnNumFriends.setTitle("\(friend.intNumFriends) friends", for: .normal)
@@ -37,7 +37,7 @@ class PeopleDetailsViewController: UIViewController {
     func fnCheckFriendStatus() {
         print("Section: \(mySection)")
         print("Row: \(myIndex)")
-        let intFriendID = appdata.arrCurrFriendsAndAllMitoUsers[mySection][myIndex].intUserID
+        let intFriendID = appdata.personToView.intUserID
         let parameters: Parameters = [
             "friendId": intFriendID
         ]

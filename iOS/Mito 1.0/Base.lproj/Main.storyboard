@@ -172,6 +172,7 @@
                         <outlet property="tblviewNotification" destination="d63-uF-5nI" id="KQS-cD-HCb"/>
                         <segue destination="klr-lX-eU9" kind="show" identifier="NotificationToPackageDetails" id="8JP-z1-DgM"/>
                         <segue destination="y1B-fc-fA5" kind="show" identifier="DirectAcceptPackage" id="ruP-Sx-HS5"/>
+                        <segue destination="mKW-hw-jiX" kind="show" identifier="CheckFriendRequest" id="5va-cB-XlO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gdz-Oq-dMf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1534,7 +1535,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9pi-Wq-U6E">
-                                <rect key="frame" x="0.0" y="74" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="30" width="375" height="44"/>
                                 <items>
                                     <navigationItem title="Title" id="ntj-Mp-nvD">
                                         <barButtonItem key="leftBarButtonItem" id="8K4-fL-4dx">
@@ -1559,7 +1560,7 @@
                                 </items>
                             </navigationBar>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="iIt-YC-sQM" userLabel="Profile Information">
-                                <rect key="frame" x="83" y="148" width="209" height="241"/>
+                                <rect key="frame" x="83" y="104" width="209" height="241"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FirstName LastName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1g-f7-mfA">
                                         <rect key="frame" x="24" y="0.0" width="161" height="21"/>
@@ -2722,8 +2723,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ESz-AJ-FsE"/>
-        <segue reference="kcf-T7-nAo"/>
+        <segue reference="ruP-Sx-HS5"/>
         <segue reference="7Hd-YA-ayo"/>
+        <segue reference="5va-cB-XlO"/>
         <segue reference="IOv-WN-4XC"/>
         <segue reference="sAd-vQ-kz5"/>
     </inferredMetricsTieBreakers>

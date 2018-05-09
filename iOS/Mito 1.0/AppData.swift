@@ -20,6 +20,7 @@ class AppData: NSObject {
     open var strOrderMessage = "What's it for?"
     open let mainMitoColor = "41DD7C"
     open var strSearchQuery = ""
+    open var personToView: Person = Person(firstName: "FName", lastName: "LName", email: "", avatar: "dd", intUserID: 0, strUsername: "", intNumFriends: 0, dateRequested: Date.distantPast)
     
     open var arrFriends: [Person] = []
     open var arrCurrFriends: [Person] = []
@@ -107,7 +108,7 @@ class AppData: NSObject {
         self.arrFriends.removeAll()
         self.arrAllUsers.removeAll()
         self.fnLoadFriendData(tableview: tableview)
-        self.fnLoadAllUsers(tableview: tableview)
+        self.fnLoadOtherMitoUsers(tableview: tableview)
         
         self.arrCurrFriendsAndAllMitoUsers = self.arrFriendsAndAllMitoUsers
         self.arrCurrFriends = self.arrFriends
@@ -156,7 +157,7 @@ class AppData: NSObject {
         }
     }
     
-    open func fnLoadAllUsers(tableview: UITableView) {
+    open func fnLoadOtherMitoUsers(tableview: UITableView) {
         let urlAllUserCall = URL(string: "https://api.projectmito.io/v1/users/all")
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String

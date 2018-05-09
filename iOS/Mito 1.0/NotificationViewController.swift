@@ -172,14 +172,25 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     let dict2 = dictionary as! NSArray
                     for obj in dict2 {
                         let object = obj as! NSDictionary
-                        let p: Person = Person(firstName: (object["UserFname"] as? String)!,
-                                               lastName: (object["UserLname"] as? String)!,
-                                               email: (object["UserEmail"] as? String?)!!,
-                                               avatar: (object["PhotoUrl"] as? String?)!!,
-                                               intUserID: (object["UserId"] as? Int)!,
-                                               strUsername: (object["Username"] as? String)!,
-                                               intNumFriends: (object["NumFriends"] as! Int),
-                                               dateRequested: self.fnStringToDate(strDate: object["CreatedDate"] as! String))
+                        var p: Person = Person(firstName: "", lastName: "", email: "", avatar: "", intUserID: 1, strUsername: "", intNumFriends: 1)
+                        if object["CreatedDate"] != nil {
+                            p = Person(firstName: (object["UserFname"] as? String)!,
+                                       lastName: (object["UserLname"] as? String)!,
+                                       email: (object["UserEmail"] as? String?)!!,
+                                       avatar: (object["PhotoUrl"] as? String?)!!,
+                                       intUserID: (object["UserId"] as? Int)!,
+                                       strUsername: (object["Username"] as? String)!,
+                                       intNumFriends: (object["NumFriends"] as! Int),
+                                       dateRequested: self.fnStringToDate(strDate: object["CreatedDate"] as! String))
+                        } else {
+                            p = Person(firstName: (object["UserFname"] as? String)!,
+                                       lastName: (object["UserLname"] as? String)!,
+                                       email: (object["UserEmail"] as? String?)!!,
+                                       avatar: (object["PhotoUrl"] as? String?)!!,
+                                       intUserID: (object["UserId"] as? Int)!,
+                                       strUsername: (object["Username"] as? String)!,
+                                       intNumFriends: (object["NumFriends"] as! Int))
+                        }
                         self.appdata.arrNotifications.append(p)
                         self.appdata.arrPendingFriends.append(p)
                     }
@@ -211,7 +222,8 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             appdata.currPackage = appdata.arrNotifications[indexPath.row] as! Package
             performSegue(withIdentifier: "NotificationToPackageDetails", sender: self)
         } else {
-            print("can't")
+            appdata.personToView = appdata.arrNotifications[indexPath.row] as! Person
+            performSegue(withIdentifier: "CheckFriendRequest", sender: self)
         }
     }
     
@@ -256,6 +268,8 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @objc func btnAcceptFriendRequest(_ button: UIButton) {
+        print(button.tag)
+        print(appdata.arrNotifications[button.tag])
         let objFriend = appdata.arrNotifications[button.tag] as! Person
         let intUserID = objFriend.intUserID
         fnAcceptOrDeclineFriendRequest(strFriendType: "Friend", intUserID: intUserID)
@@ -304,8 +318,10 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         if ((appdata.arrNotifications[button.tag] as? Package) != nil) {
             appdata.currPackage = appdata.arrNotifications[button.tag] as! Package
             performSegue(withIdentifier: "DirectAcceptPackage", sender: self)
+        } else {
+            let person = appdata.arrNotifications[button.tag] as! Person
+            fnAcceptOrDeclineFriendRequest(strFriendType: "Friend", intUserID: person.intUserID)
         }
-//        appdata.currPackage = appdata.arrNotifications[button.tag] as! Package
     }
     
     @objc func btnDenyPackage(_ button: UIButton) {
