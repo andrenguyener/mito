@@ -544,7 +544,7 @@
                         <viewLayoutGuide key="safeArea" id="0nQ-Yc-UuX"/>
                     </view>
                     <connections>
-                        <segue destination="7Du-fU-wfA" kind="presentation" identifier="signOut" modalPresentationStyle="overFullScreen" id="zJm-g1-0h0"/>
+                        <segue destination="7Du-fU-wfA" kind="showDetail" identifier="signOut" id="zJm-g1-0h0"/>
                         <segue destination="5ev-RP-TnR" kind="show" identifier="settingsToMe" id="d1X-sC-VrZ"/>
                         <segue destination="MJ4-62-2S5" kind="show" identifier="SettingsToChangePassword" id="1wg-ls-dvc"/>
                     </connections>
