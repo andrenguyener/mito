@@ -14,7 +14,7 @@ class AddressStore {
         return new Promise((resolve) => {
             this.sql.acquire(function (err, connection) {
                 let procedureName = "uspcInsertUserAddress";
-                var request = Request(`${procedureName}`, (err, rowCount, rows) => {
+                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
                     if (err) {
                         console.log(err)
                     }
@@ -28,9 +28,9 @@ class AddressStore {
                 request.addParameter('zipCode', TYPES.VarChar, address.zipCode);
                 request.addParameter('stateName', TYPES.VarChar, address.stateName);
                 request.addParameter('aliasName', TYPES.VarChar, address.aliasName);
-                // request.addOutputParameter('Address_Id', addressId);
+                // request.addOutputParameter('Address_Id', TYPES.NVarChar, addressId);
 
-                // request.on('returnValue', function (parameterName, value, metadata) { 
+                // request.on('returnValue', function (parameterName, value, metadata) {
                 //     console.log(parameterName);
                 //     console.log(value);
                 //     console.log(metadata);
@@ -61,7 +61,7 @@ class AddressStore {
         return new Promise((resolve) => {
             this.sql.acquire(function (err, connection) {
                 let procedureName = "uspcGetUserAddressById";
-                var request = Request(`${procedureName}`, (err, rowCount, rows) => {
+                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
                     if (err) {
                         console.log(err)
                     }
@@ -103,7 +103,7 @@ class AddressStore {
         return new Promise((resolve) => {
             this.sql.acquire(function (err, connection) {
                 let procedureName = "uspcInsertUserAddress";
-                var request = Request(`${procedureName}`, (err, rowCount, rows) => {
+                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
                     if (err) {
                         console.log(err)
                     }

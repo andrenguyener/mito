@@ -19,7 +19,7 @@ class OrderStore {
         return new Promise((resolve) => {
             this.sql.acquire(function (err, connection) {
                 let procedureName = "uspcGetOrderDetails";
-                var request = Request(`${procedureName}`, (err, rowCount, rows) => {
+                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
                     if (err) {
                         console.log(err)
                     }

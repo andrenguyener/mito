@@ -14,7 +14,7 @@ class PaymentStore {
         return new Promise((resolve) => {
             this.sql.acquire(function (err, connection) {
                 let procedureName = "uspcGetAllPaymentCards";
-                var request = Request(`${procedureName}`, (err, rowCount, rows) => {
+                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
                     if (err) {
                         console.log(err)
                     }
@@ -54,7 +54,7 @@ class PaymentStore {
         return new Promise((resolve) => {
             this.sql.acquire(function (err, connection) {
                 let procedureName = "uspcDeletePaymentCard";
-                var request = Request(`${procedureName}`, (err, rowCount, rows) => {
+                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
                     if (err) {
                         console.log(err)
                     }
@@ -97,7 +97,7 @@ class PaymentStore {
         return new Promise((resolve) => {
             this.sql.acquire(function (err, connection) {
                 let procedureName = "uspcUpdateUserDefaultPaymentCard";
-                var request = Request(`${procedureName}`, (err, rowCount, rows) => {
+                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
                     if (err) {
                         console.log(err)
                     }
@@ -139,7 +139,7 @@ class PaymentStore {
         return new Promise((resolve) => {
             this.sql.acquire(function (err, connection) {
                 let procedureName = "uspcAddNewPaymentMethod";
-                var request = Request(`${procedureName}`, (err, rowCount, rows) => {
+                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
                     if (err) {
                         console.log(err)
                     }

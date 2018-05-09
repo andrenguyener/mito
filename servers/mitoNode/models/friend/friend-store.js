@@ -13,7 +13,7 @@ class FriendStore {
         return new Promise((resolve) => {
             this.sql.acquire(function (err, connection) {
                 let procedureName = "uspcRequestFriend";
-                var request = Request(`${procedureName}`, (err, rowCount, rows) => {
+                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
                     if (err) {
                         console.log(err);
                     }
@@ -48,7 +48,7 @@ class FriendStore {
         return new Promise((resolve) => {
             this.sql.acquire(function (err, connection) {
                 let procedureName = "uspcGetMutualFriendCount";
-                var request = Request(`${procedureName}`, (err, rowCount, rows) => {
+                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
                     if (err) {
                         console.log(err)
                     }
@@ -91,7 +91,7 @@ class FriendStore {
         return new Promise((resolve) => {
             this.sql.acquire(function (err, connection) {
                 let procedureName = "uspcGetUserFriendsById";
-                var request = Request(`${procedureName}`, (err, rowCount, rows) => {
+                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
                     if (err) {
                         console.log(err)
                     }
@@ -134,30 +134,48 @@ class FriendStore {
         return new Promise((resolve) => {
             this.sql.acquire(function (err, connection) {
                 let procedureName = "uspcGetUserFriendTypeByUserId";
-                var request = Request(`${procedureName}`, (err, rowCount, rows) => {
+                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
                     if (err) {
                         console.log(err)
                     }
                     connection.release();
                 });
-                request.addParameter('UserId1', TYPES.Int, id);
-                request.addParameter('UserId2', TYPES.Int, friendId);
-                let jsonArray = []
-                request.on('row', function (columns) {
-                    var rowObject = {};
-                    columns.forEach(function (column) {
-                        if (column.value === null) {
-                            console.log('NULL');
-                        } else {
-                            rowObject[column.metadata.colName] = column.value;
-                        }
-                    });
-                    jsonArray.push(rowObject)
+                var friendType;
+                request.addParameter('User1Id', TYPES.Int, id);
+                request.addParameter('User2Id', TYPES.Int, friendId);
+                request.addOutputParameter('FriendType', TYPES.NVarChar, friendType);
+                request.on('returnValue', function (parameterName, value, metadata) {
+                    console.log(parameterName);
+                    console.log(value);
+                    console.log(metadata);
+                    friendType = value;
+                    console.log(friendType);
+
                 });
+                // request.addOutputParameter('Address_Id', addressId);
+
+                // request.on('returnValue', function (parameterName, value, metadata) {
+                //     console.log(parameterName);
+                //     console.log(value);
+                //     console.log(metadata);
+                // });
+                // let jsonArray = []
+                // request.on('row', function (columns) {
+                //     var rowObject = {};
+                //     columns.forEach(function (column) {
+                //         if (column.value === null) {
+                //             console.log('NULL');
+                //         } else {
+                //             rowObject[column.metadata.colName] = column.value;
+                //         }
+                //     });
+                //     jsonArray.push(rowObject)
+                // });
 
                 request.on('doneProc', function (rowCount, more) {
-                    console.log(jsonArray);
-                    resolve(jsonArray);
+                    // console.log(jsonArray);
+                    // resolve(jsonArray);
+                    resolve(friendType)
                 });
 
                 connection.callProcedure(request)
@@ -181,7 +199,7 @@ class FriendStore {
         return new Promise((resolve) => {
             this.sql.acquire(function (err, connection) {
                 let procedureName = "uspcUpdateFriend";
-                var request = Request(`${procedureName}`, (err, rowCount, rows) => {
+                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
                     if (err) {
                         console.log(err)
                     }
