@@ -404,19 +404,34 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
     
     // add textfield as delegate of viewcontroller first
+    // increment tags to delegate which uitextfield will be active after pressing return
+    // Only shifts up if tag is > 3
+    // --> want to be able to change to "if uitextfield is height of keyboard" 
     // Start Editing The Text Field
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        moveTextField(textField, moveDistance: -200, up: true)
+        if textField.tag > 3 {
+            moveTextField(textField, moveDistance: -200, up: true)
+            print("Hey i entered")
+        }
     }
     
     // Finish Editing The Text Field
     func textFieldDidEndEditing(_ textField: UITextField) {
-        moveTextField(textField, moveDistance: -200, up: false)
+        if textField.tag > 3 {
+            moveTextField(textField, moveDistance: 200, up: true)
+            print("hey i ended")
+        }
     }
     
     // Hide the keyboard when the return key pressed
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        let nextTag = textField.tag + 1
+        if let nextResponder = textField.superview?.viewWithTag(nextTag) {
+            nextResponder.becomeFirstResponder()
+            print("next yo")
+        } else {
+            textField.resignFirstResponder()
+        }
         return true
     }
     
