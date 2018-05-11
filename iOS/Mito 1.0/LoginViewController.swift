@@ -176,9 +176,15 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                 
                 
             case .failure(let error):
-                let alert = self.appdata.fnDisplayAlert(title: "Whoops!", message: "Incorrect email or password")
-                self.present(alert, animated: true, completion: nil)
-                print(error)
+                let strSSLMessage = "An SSL error has occurred and a secure connection to the server cannot be made."
+                if error.localizedDescription == strSSLMessage {
+                    let alert = self.appdata.fnDisplayAlert(title: "Whoops!", message: "Servers are currently offline ☹️")
+                    self.present(alert, animated: true, completion: nil)
+                } else {
+                    let alert = self.appdata.fnDisplayAlert(title: "Whoops!", message: "Incorrect email or password")
+                    self.present(alert, animated: true, completion: nil)
+                }
+                print(error.localizedDescription)
             }
         }
 

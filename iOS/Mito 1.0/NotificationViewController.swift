@@ -239,12 +239,12 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         performSegue(withIdentifier: "PackageToChooseReceivingAddress", sender: self)
     }
     
-    func fnAcceptOrDeclinePackage(response: String, senderId: Int, orderId: Int, shippingAddressId: Int) {
+    func fnAcceptOrDeclinePackage(strPackageAction: String, senderId: Int, orderId: Int, shippingAddressId: Int) {
         let urlAcceptOrDeclinePackage = URL(string: "https://api.projectmito.io/v1/package/")
         let parameters: Parameters = [
             "senderId": senderId,
             "orderId": orderId,
-            "response": response,
+            "response": strPackageAction,
             "shippingAddressId": shippingAddressId
         ]
         let headers: HTTPHeaders = [
@@ -257,8 +257,10 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     print(dictionary)
                     print("\(response): Successful")
                 }
-                let alert = self.appdata.fnDisplayAlert(title: "Success!", message: "Packaged \(response)")
-                self.present(alert, animated: true, completion: nil)
+                if strPackageAction != "Denied" {
+                    let alert = self.appdata.fnDisplayAlert(title: "Success!", message: "Packaged \(response)")
+                    self.present(alert, animated: true, completion: nil)
+                }
                 DispatchQueue.main.async {
                     self.appdata.arrNotifications.removeAll()
                     self.fnGetPendingPackages()
@@ -318,7 +320,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     @objc func btnDenyPackage(_ button: UIButton) {
         boolSender = false
         let package = appdata.arrNotifications[button.tag] as! Package
-        fnAcceptOrDeclinePackage(response: "Denied", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[0].intAddressID)
+        fnAcceptOrDeclinePackage(strPackageAction: "Denied", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[0].intAddressID)
     }
     
     @objc func btnAccept(_ button: UIButton) {
@@ -341,7 +343,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             fnAcceptOrDeclineFriendRequest(strFriendType: "Unfriend", intUserID: objFriend.intUserID)
         } else {
             let package = appdata.arrNotifications[button.tag] as! Package
-            fnAcceptOrDeclinePackage(response: "Denied", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[0].intAddressID)
+            fnAcceptOrDeclinePackage(strPackageAction: "Denied", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[0].intAddressID)
         }
     }
     
