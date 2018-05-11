@@ -33,8 +33,9 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
 //        recognizer.startCamera()
     }
     @IBAction func btnFetchContacts(_ sender: Any) {
-        fnLoadMyActivity()
-        fnLoadFriendActivity()
+//        fnLoadMyActivity()
+//        fnLoadFriendActivity()
+        fnLoadNotifications()
 //        contactStore.requestAccess(for: .contacts) { (success,error) in
 //            if success {
 //                print("Authorization success")
@@ -78,6 +79,26 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
                 
             case .failure(let error):
                 print("Error loading friend activity")
+                print(error)
+            }
+        }
+    }
+    
+    func fnLoadNotifications() {
+        let urlLoadNotifications = URL(string: "https://api.projectmito.io/v1/notification")
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlLoadNotifications!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                print("Loaded Notifications")
+                if let dictionary = response.result.value {
+                    print(dictionary)
+                }
+                
+            case .failure(let error):
+                print("Error loading my notifications")
                 print(error)
             }
         }
