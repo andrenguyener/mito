@@ -33,12 +33,75 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
 //        recognizer.startCamera()
     }
     @IBAction func btnFetchContacts(_ sender: Any) {
-        contactStore.requestAccess(for: .contacts) { (success,error) in
-            if success {
-                print("Authorization success")
+//        fnLoadMyActivity()
+//        fnLoadFriendActivity()
+        fnLoadNotifications()
+//        contactStore.requestAccess(for: .contacts) { (success,error) in
+//            if success {
+//                print("Authorization success")
+//            }
+//        }
+//        fnFetchContacts()
+    }
+    
+    func fnLoadMyActivity() {
+        let urlLoadMyActivity = URL(string: "https://api.projectmito.io/v1/feed/")
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlLoadMyActivity!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                print("Loaded My Activity")
+                if let dictionary = response.result.value {
+                    print(dictionary)
+                }
+                
+            case .failure(let error):
+                print("Error loading my activity")
+                print(error)
             }
         }
-        fnFetchContacts()
+    }
+    
+    func fnLoadFriendActivity() {
+        let urlLoadFriendActivity = URL(string: "https://api.projectmito.io/v1/feed/friends")
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlLoadFriendActivity!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                print("Loaded Friend Activity")
+                if let dictionary = response.result.value {
+                    print(dictionary)
+                }
+                
+            case .failure(let error):
+                print("Error loading friend activity")
+                print(error)
+            }
+        }
+    }
+    
+    func fnLoadNotifications() {
+        let urlLoadNotifications = URL(string: "https://api.projectmito.io/v1/notification")
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlLoadNotifications!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                print("Loaded Notifications")
+                if let dictionary = response.result.value {
+                    print(dictionary)
+                }
+                
+            case .failure(let error):
+                print("Error loading my notifications")
+                print(error)
+            }
+        }
     }
     
     func fnFetchContacts() {
