@@ -327,6 +327,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             performSegue(withIdentifier: "productDetail", sender: self)
         } else {
             mySection = indexPath.section
+            if appdata.arrCurrFriendsAndAllMitoUsers[mySection].count == 0 {
+                mySection = 1
+            }
             appdata.personToView = appdata.arrCurrFriendsAndAllMitoUsers[mySection][myIndex]
             performSegue(withIdentifier: "searchToMitoProfile", sender: self)
         }

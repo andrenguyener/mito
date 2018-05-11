@@ -41,6 +41,44 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         print("Received data: \(data.count)")
     }
     
+    func fnLoadCurrUserAddresses() {
+        let urlGetMyAddresses = URL(string: "https://api.projectmito.io/v1/address/")
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlGetMyAddresses!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    self.appdata.arrCurrUserAddresses.removeAll()
+                    let arrAddresses = dictionary as! NSArray
+                    for elem in arrAddresses {
+                        let objAddress = elem as! NSDictionary
+                        print(objAddress)
+                        var strAddress2 = ""
+                        if objAddress["StreetAddress2"] != nil {
+                            strAddress2 = objAddress["StreetAddress2"] as! String
+                        }
+                        let objAddressObject = Address(intAddressID: objAddress["AddressId"] as! Int, strAddressAlias: objAddress["Alias"] as! String, strCityName: objAddress["CityName"] as! String, strStateName: objAddress["StateName"] as! String, strStreetAddress1: objAddress["StreetAddress"] as! String, strStreetAddress2: strAddress2, strZipCode: objAddress["ZipCode"] as! String)
+                        print("\(objAddress["Alias"] as! String) \(String(describing: objAddress["AddressId"]))")
+                        self.appdata.arrCurrUserAddresses.append(objAddressObject)
+                    }
+                    print("This user has \(self.appdata.arrCurrUserAddresses.count) addresses")
+                }
+                DispatchQueue.main.async {
+                    if (self.appdata.arrCurrUserAddresses.count > 0) {
+                        print("Load Current User Addresses: \(self.appdata.arrCurrUserAddresses[self.appdata.arrCurrUserAddresses.count - 1].strAddressAlias)")
+                    }
+                    //                    self.appdata.address = self.appdata.arrCurrUserAddresses[self.appdata.arrCurrUserAddresses.count - 1]
+//                    self.tblviewAddress.reloadData()
+                }
+                
+            case .failure(let error):
+                print("Get all addresses error")
+                print(error.localizedDescription)
+            }
+        }
+    }
 
     @IBOutlet weak var tableView: UITableView!
     var appdata = AppData.shared
@@ -51,6 +89,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.delegate = self
         tableView.rowHeight = 133
         
+        fnLoadCurrUserAddresses()
 //        greenTopView.backgroundColor = UIColor(rgb: 41DD7C)
         
         let userURL = "https://api.projectmito.io/v1/friend/\(appdata.intCurrentUserID)"

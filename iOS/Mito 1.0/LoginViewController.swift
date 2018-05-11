@@ -147,7 +147,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     // Opening Login Page
     @IBAction func btnLoginPressed(_ sender: Any) {
         let parameters: Parameters = [
-            "userEmail": username.text!,
+            "usercred": username.text!,
             "password": password.text!
         ]
         

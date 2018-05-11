@@ -259,6 +259,11 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                 }
                 let alert = self.appdata.fnDisplayAlert(title: "Success!", message: "Packaged \(response)")
                 self.present(alert, animated: true, completion: nil)
+                DispatchQueue.main.async {
+                    self.appdata.arrNotifications.removeAll()
+                    self.fnGetPendingPackages()
+                    self.fnGetPendingFriendRequests()
+                }
                 
             case .failure(let error):
                 print("Accept or decline package error")
@@ -327,7 +332,29 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     @objc func btnDenyPackage(_ button: UIButton) {
         boolSender = false
         let package = appdata.arrNotifications[button.tag] as! Package
-        fnAcceptOrDeclinePackage(response: "Denied", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: 0)
+        fnAcceptOrDeclinePackage(response: "Denied", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[0].intAddressID)
+    }
+    
+    @objc func btnAccept(_ button: UIButton) {
+        print("Row Number: \(button.tag)")
+        if appdata.arrNotifications[button.tag] as? Person != nil {
+            let objFriend = appdata.arrNotifications[button.tag] as! Person
+            intOrderID = objFriend.intUserID
+            fnAcceptOrDeclineFriendRequest(strFriendType: "Friend", intUserID: intOrderID)
+        } else {
+            appdata.currPackage = appdata.arrNotifications[button.tag] as! Package
+            performSegue(withIdentifier: "DirectAcceptPackage", sender: self)
+        }
+    }
+    
+    @objc func btnDeny(_ button: UIButton) {
+        if appdata.arrNotifications[button.tag] as? Person != nil {
+            let objFriend = appdata.arrNotifications[button.tag] as! Person
+            fnAcceptOrDeclineFriendRequest(strFriendType: "Friend", intUserID: objFriend.intUserID)
+        } else {
+            let package = appdata.arrNotifications[button.tag] as! Package
+            fnAcceptOrDeclinePackage(response: "Denied", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[0].intAddressID)
+        }
     }
     
     func UTCToLocal(date:String) -> String {
@@ -375,9 +402,9 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             cell.strFirstNameLastName.text = "\(objPackage.strUserFName) \(objPackage.strUserLName) has sent you a package request"
             cell.strUsername.text = strDate
             cell.btnConfirm.tag = indexPath.row
-            cell.btnConfirm.addTarget(self, action: #selector(self.btnAcceptPackage(_:)), for: .touchUpInside)
+            cell.btnConfirm.addTarget(self, action: #selector(self.btnAccept(_:)), for: .touchUpInside)
             cell.btnDecline.tag = indexPath.row
-            cell.btnDecline.addTarget(self, action: #selector(self.btnDenyPackage(_:)), for: .touchUpInside)
+            cell.btnDecline.addTarget(self, action: #selector(self.btnDeny(_:)), for: .touchUpInside)
         } else {
             let objFriendRequest = objNotification as! Person
             let strDate = fnConvertDateToString(date: objFriendRequest.dateRequested)
@@ -392,9 +419,9 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             cell.strFirstNameLastName.text = "\(objFriendRequest.firstName) \(objFriendRequest.lastName) has sent you a friend request"
             cell.strUsername.text = dateLocal
             cell.btnConfirm.tag = indexPath.row
-            cell.btnConfirm.addTarget(self, action: #selector(self.btnAcceptFriendRequest(_:)), for: .touchUpInside)
+            cell.btnConfirm.addTarget(self, action: #selector(self.btnAccept(_:)), for: .touchUpInside)
             cell.btnDecline.tag = indexPath.row
-            cell.btnDecline.addTarget(self, action: #selector(self.btnDeclineFriendRequest(_:)), for: .touchUpInside)
+            cell.btnDecline.addTarget(self, action: #selector(self.btnDeny(_:)), for: .touchUpInside)
         }
         return cell
     }
