@@ -1,15 +1,43 @@
 PODS:
   - Alamofire (4.7.0)
+  - GoogleMaps (2.7.0):
+    - GoogleMaps/Maps (= 2.7.0)
+  - GoogleMaps/Base (2.7.0)
+  - GoogleMaps/Maps (2.7.0):
+    - GoogleMaps/Base
+  - GooglePlacePicker (2.7.0):
+    - GoogleMaps (= 2.7.0)
+    - GooglePlaces (= 2.7.0)
+  - GooglePlaces (2.7.0):
+    - GoogleMaps/Base (= 2.7.0)
+  - PayCardsRecognizer (1.1.4)
   - Starscream (3.0.4)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
+  - GoogleMaps
+  - GooglePlacePicker
+  - GooglePlaces
+  - PayCardsRecognizer
   - Starscream (~> 3.0.2)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - GoogleMaps
+    - GooglePlacePicker
+    - GooglePlaces
+    - PayCardsRecognizer
+    - Starscream
 
 SPEC CHECKSUMS:
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
+  GoogleMaps: f79af95cb24d869457b1f961c93d3ce8b2f3b848
+  GooglePlacePicker: 59ea44db173c58486ad6123993e81feefcbce9c3
+  GooglePlaces: 3d06e6c99654545b4738ce49648745779c25f2ef
+  PayCardsRecognizer: b939eec21c6890d57c9f22cb8856517922b097a2
   Starscream: f5da93fe6984c77b694366bf7299b7dc63a76f26
 
-PODFILE CHECKSUM: e2850689d20e13644cf1df8e572d0612a2c206d5
+PODFILE CHECKSUM: 9ae792ad8c563b36e24f8f1f9b5703042c5f82f2
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0

@@ -41,35 +41,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         print("Received data: \(data.count)")
     }
     
-
-    @IBOutlet weak var tableView: UITableView!
-    var appdata = AppData.shared
-    var socket: WebSocket!
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.rowHeight = 133
-        
-//        greenTopView.backgroundColor = UIColor(rgb: 41DD7C)
-        
-        let userURL = "https://api.projectmito.io/v1/friend/\(appdata.intCurrentUserID)"
-        print("Authorization: \(String(describing: UserDefaults.standard.object(forKey: "Authorization")))")
-        let authToken = UserDefaults.standard.object(forKey: "Authorization") as! String
-        self.fnLoadCurrUserAddresses()
-
-//        var request = URLRequest(url: URL(string: "wss://api.projectmito.io/v1/ws?auth=\(String(describing: UserDefaults.standard.object(forKey: "Authorization")))")!)
-        var urlWebsocket = "wss://api.projectmito.io/v1/ws?auth=\(authToken)"
-        urlWebsocket = urlWebsocket.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
-        var request = URLRequest(url: URL(string: urlWebsocket)!)
-        print("Request: \(request)")
-        request.timeoutInterval = 5
-        socket = WebSocket(request: request)
-        
-        socket.delegate = self
-        socket.connect()
-    }
-    
     func fnLoadCurrUserAddresses() {
         let urlGetMyAddresses = URL(string: "https://api.projectmito.io/v1/address/")
         let headers: HTTPHeaders = [
@@ -84,18 +55,57 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                     for elem in arrAddresses {
                         let objAddress = elem as! NSDictionary
                         print(objAddress)
-                        let objAddressObject = Address(intAddressID: objAddress["AddressId"] as! Int, strAddressAlias: objAddress["Alias"] as! String, strCityName: objAddress["CityName"] as! String, strStateName: objAddress["StateName"] as! String, strStreetAddress1: objAddress["StreetAddress"] as! String, strStreetAddress2: objAddress["StreetAddress2"] as! String, strZipCode: objAddress["ZipCode"] as! String)
+                        var strAddress2 = ""
+                        if objAddress["StreetAddress2"] != nil {
+                            strAddress2 = objAddress["StreetAddress2"] as! String
+                        }
+                        let objAddressObject = Address(intAddressID: objAddress["AddressId"] as! Int, strAddressAlias: objAddress["Alias"] as! String, strCityName: objAddress["CityName"] as! String, strStateName: objAddress["StateName"] as! String, strStreetAddress1: objAddress["StreetAddress"] as! String, strStreetAddress2: strAddress2, strZipCode: objAddress["ZipCode"] as! String)
                         print("\(objAddress["Alias"] as! String) \(String(describing: objAddress["AddressId"]))")
                         self.appdata.arrCurrUserAddresses.append(objAddressObject)
                     }
                     print("This user has \(self.appdata.arrCurrUserAddresses.count) addresses")
                 }
+                DispatchQueue.main.async {
+                    if (self.appdata.arrCurrUserAddresses.count > 0) {
+                        print("Load Current User Addresses: \(self.appdata.arrCurrUserAddresses[self.appdata.arrCurrUserAddresses.count - 1].strAddressAlias)")
+                    }
+                    //                    self.appdata.address = self.appdata.arrCurrUserAddresses[self.appdata.arrCurrUserAddresses.count - 1]
+//                    self.tblviewAddress.reloadData()
+                }
                 
             case .failure(let error):
                 print("Get all addresses error")
-                print(error)
+                print(error.localizedDescription)
             }
         }
+    }
+
+    @IBOutlet weak var tableView: UITableView!
+    var appdata = AppData.shared
+    var socket: WebSocket!
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.rowHeight = 133
+        
+        fnLoadCurrUserAddresses()
+//        greenTopView.backgroundColor = UIColor(rgb: 41DD7C)
+        
+        let userURL = "https://api.projectmito.io/v1/friend/\(appdata.intCurrentUserID)"
+        print("Authorization: \(String(describing: UserDefaults.standard.object(forKey: "Authorization")))")
+        let authToken = UserDefaults.standard.object(forKey: "Authorization") as! String
+
+//        var request = URLRequest(url: URL(string: "wss://api.projectmito.io/v1/ws?auth=\(String(describing: UserDefaults.standard.object(forKey: "Authorization")))")!)
+        var urlWebsocket = "wss://api.projectmito.io/v1/ws?auth=\(authToken)"
+        urlWebsocket = urlWebsocket.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
+        var request = URLRequest(url: URL(string: urlWebsocket)!)
+        print("Request: \(request)")
+        request.timeoutInterval = 5
+        socket = WebSocket(request: request)
+        
+        socket.delegate = self
+        socket.connect()
     }
 
     override func didReceiveMemoryWarning() {

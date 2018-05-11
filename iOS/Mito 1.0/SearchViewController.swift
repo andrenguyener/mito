@@ -14,8 +14,9 @@ var myIndex = 0
 var mySection = 0
 var intSegmentedIndex = 0
 
-class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate {
     
+    @IBOutlet weak var navController: UINavigationItem!
     
     @IBOutlet weak var peopleTableView: UITableView!
     @IBOutlet weak var productTableView: UITableView!
@@ -28,7 +29,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var productContainer: UIView!
     @IBOutlet weak var peopleContainer: UIView!
     var strProductResultsPageNumber = 1
-    var strSearchQuery = ""
     var appdata = AppData.shared
     
     @IBOutlet weak var swirlSearchImg: UIImageView!
@@ -37,13 +37,15 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBAction func switchTab(_ sender: UISegmentedControl) {
         searchBar.text = ""
         if productPeopleTab.selectedSegmentIndex == 0 {
-            if peopleTableView == nil {
-                swirlSearchImg.isHidden = false
-            }
+            searchBar.placeholder = "Search for products"
+//            if peopleTableView == nil {
+//                swirlSearchImg.isHidden = false
+//            }
             UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
         } else {
+            searchBar.placeholder = "Find more friends"
             appdata.fnLoadFriendsAndAllUsers(tableview: peopleTableView)
-            swirlSearchImg.isHidden = true
+//            swirlSearchImg.isHidden = true
             UIView.transition(from: productView, to: peopleView, duration: 0, options: .showHideTransitionViews)
         }
         intSegmentedIndex = productPeopleTab.selectedSegmentIndex
@@ -61,14 +63,38 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         peopleTableView.keyboardDismissMode = .onDrag //UIScrollViewKeyboardDismissMode.interactive
         
-        if peopleTableView == nil {
-            swirlSearchImg.isHidden = false
-        }
+//        if peopleTableView == nil {
+//            swirlSearchImg.isHidden = false
+//        }
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
+        searchBar.text = appdata.strSearchQuery
         spinnerProductSearch.isHidden = true
         strProductResultsPageNumber = 1
-        fnLoadProductData()
+        print("viewDidLoad Search query: \(appdata.strSearchQuery)")
+        if UserDefaults.standard.object(forKey: "ProductSearchResultsJSON") != nil  && appdata.strSearchQuery != "" {
+            productTableView.isHidden = false
+            swirlSearchImg.isHidden = true
+            fnLoadProductData()
+//            self.fnCheckLocalStorageProductSearchResults(filename: "ProductSearchResultsJSON")
+        } else {
+//            swirlSearchImg.isHidden = false
+        }
+//        fnLoadProductData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Hide the navigation bar on the this view controller
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Show the navigation bar on other view controllers
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
     @IBAction func cartButtonClicked(_ sender: Any) {
@@ -97,13 +123,13 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func filterFriends(text: String) {
         appdata.arrCurrFriends = appdata.arrFriends.filter({ person -> Bool in
-            return person.firstName.lowercased().contains(text.lowercased())
+            return person.firstName.lowercased().contains(text.lowercased().trimmingCharacters(in: .whitespacesAndNewlines))
         })
     }
     
     func filterAllUsers(text: String) {
         appdata.arrCurrAllUsers = appdata.arrAllUsers.filter({ person -> Bool in
-            return person.firstName.lowercased().contains(text.lowercased())
+            return person.firstName.lowercased().contains(text.lowercased().trimmingCharacters(in: .whitespacesAndNewlines))
         })
     }
     
@@ -113,17 +139,15 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             spinnerProductSearch.isHidden = false
             spinnerProductSearch.startAnimating()
             if (searchBar.text!.count > 0) {
-                strSearchQuery = ""
-                strSearchQuery = searchBar.text!.replacingOccurrences(of: " ", with: "+")
+                appdata.strSearchQuery = ""
+                appdata.strSearchQuery = searchBar.text!.replacingOccurrences(of: " ", with: "+")
             } else {
-                strSearchQuery = "Amazon"
+                appdata.strSearchQuery = "Amazon"
                 searchBar.text = "Amazon"
             }
             searchBar.resignFirstResponder()
             productPeopleTab.isEnabled = false
             fnLoadProductData()
-        } else {
-            // hide keyboard
         }
     }
     
@@ -131,8 +155,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func fnLoadProductData() {
         let urlAmazonProductCall = URL(string: "https://api.projectmito.io/v1/amazonhashtest")
         appdata.arrProductSearchResults.removeAll()
+        print("fnLoadProductData Search query: \(appdata.strSearchQuery)")
         let parameters: Parameters = [
-            "keyword": strSearchQuery,
+            "keyword": appdata.strSearchQuery,
             "pageNumber": strProductResultsPageNumber
         ]
         let headers: HTTPHeaders = [
@@ -143,67 +168,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             case .success:
                 if let dictionary = response.result.value {
                     let myJson = dictionary as! NSDictionary
-                    let itemSearchResponse = myJson["ItemSearchResponse"] as! NSDictionary
-                    let objItems = self.fnAccessFirstDictionaryInArray(dictObj: itemSearchResponse, arrName: "Items")
-                    if objItems["Item"] == nil {
-                        print("Item doesn't show up")
-                    } else {
-                        let arrItem = objItems["Item"] as! NSArray
-                        for itemObj in arrItem {
-                            let item = itemObj as! NSDictionary
-                            let strASIN = self.fnAccesStringinObj(dictObj: item, strAttribute: "ASIN")
-                            var strImageURL = ""
-                            if item["LargeImage"] != nil {
-                                let objLargeImage = self.fnAccessFirstDictionaryInArray(dictObj: item, arrName: "LargeImage")
-                                strImageURL = self.fnAccesStringinObj(dictObj: objLargeImage, strAttribute: "URL")
-                            } else if item["ImageSets"] != nil {
-                                let objImageSets = self.fnAccessFirstDictionaryInArray(dictObj: item, arrName: "ImageSets")
-                                let objImageSet = self.fnAccessFirstDictionaryInArray(dictObj: objImageSets, arrName: "ImageSet")
-                                let objLargeImage = self.fnAccessFirstDictionaryInArray(dictObj: objImageSet, arrName: "LargeImage")
-                                strImageURL = self.fnAccesStringinObj(dictObj: objLargeImage, strAttribute: "URL")
-                            } else {
-                                strImageURL = "https://www.yankee-division.com/uploads/1/7/6/5/17659643/notavailable_2_orig.jpg?210b"
-                            }
-                            let objItemAttribute = self.fnAccessFirstDictionaryInArray(dictObj: item, arrName: "ItemAttributes")
-                            
-                            var itemFeature = ""
-                            if objItemAttribute["Feature"] != nil {
-                                itemFeature = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Feature")
-                            } else {
-                                itemFeature = "NA"
-                            }
-                            
-                            let title = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Title")
-                            
-                            var formattedPrice = ""
-                            if objItemAttribute["ListPrice"] != nil {
-                                let objListPrice = self.fnAccessFirstDictionaryInArray(dictObj: objItemAttribute, arrName: "ListPrice")
-                                formattedPrice = self.fnAccesStringinObj(dictObj: objListPrice, strAttribute: "FormattedPrice")
-                            } else {
-                                formattedPrice = "N/A"
-                            }
-                            var type = ""
-                            if objItemAttribute["Binding"] != nil {
-                                type = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Binding")
-                            } else {
-                                type = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "ProductGroup")
-                            }
-                            var publisher_brand = ""
-                            if type != "Amazon Video" {
-                                if objItemAttribute["Brand"] != nil {
-                                    publisher_brand = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Brand")
-                                } else if objItemAttribute["Publisher"] != nil {
-                                    publisher_brand = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Publisher")
-                                } else {
-                                    publisher_brand = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Binding")
-                                }
-                            } else {
-                                publisher_brand = "Brand"
-                            }
-                            let product: Product = Product(image: strImageURL, ASIN: strASIN, title: title, publisher: publisher_brand, price: formattedPrice, description: itemFeature)
-                            self.appdata.arrProductSearchResults.append(product)
-                            self.swirlSearchImg.isHidden = true
-                        }
+                    UserDefaults.standard.set(myJson, forKey: "ProductSearchResultsJSON")
+                    if UserDefaults.standard.object(forKey: "ProductSearchResultsJSON") != nil {
+                        print("ProductSearchResultsJSON is saved properly")
+                        let myJson = UserDefaults.standard.object(forKey: "ProductSearchResultsJSON") as! NSDictionary
+                        self.fnLoadLocalProductSearchResults(myJson: myJson)
                     }
                     DispatchQueue.main.async {
                         self.productTableView.reloadData()
@@ -218,25 +187,119 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
     }
+
+    func fnCheckLocalStorageProductSearchResults(filename: String) {
+        let myJson = UserDefaults.standard.object(forKey: "ProductSearchResultsJSON") as! NSDictionary
+        self.fnLoadLocalProductSearchResults(myJson: myJson)
+//        if Bundle.main.path(forResource: "\(filename)", ofType: "json") != nil {
+//            do {
+//                let myJson = UserDefaults.standard.object(forKey: "ProductSearchResultsJSON") as! NSDictionary
+//                self.fnLoadLocalProductSearchResults(myJson: myJson)
+//            } catch let error {
+//                print("parse error: \(error.localizedDescription)")
+//            }
+//        } else {
+//            print("Invalid filename/path.")
+//        }
+    }
+    
+    func fnLoadLocalProductSearchResults(myJson: NSDictionary) {
+        let itemSearchResponse = myJson["ItemSearchResponse"] as! NSDictionary
+        let objItems = self.fnAccessFirstDictionaryInArray(dictObj: itemSearchResponse, arrName: "Items")
+        if objItems["Item"] == nil {
+            print("Item doesn't show up")
+        } else {
+            let arrItem = objItems["Item"] as! NSArray
+            for itemObj in arrItem {
+                let item = itemObj as! NSDictionary
+                let strASIN = self.fnAccesStringinObj(dictObj: item, strAttribute: "ASIN")
+                var strImageURL = ""
+                if item["LargeImage"] != nil {
+                    let objLargeImage = self.fnAccessFirstDictionaryInArray(dictObj: item, arrName: "LargeImage")
+                    strImageURL = self.fnAccesStringinObj(dictObj: objLargeImage, strAttribute: "URL")
+                } else if item["ImageSets"] != nil {
+                    let objImageSets = self.fnAccessFirstDictionaryInArray(dictObj: item, arrName: "ImageSets")
+                    let objImageSet = self.fnAccessFirstDictionaryInArray(dictObj: objImageSets, arrName: "ImageSet")
+                    let objLargeImage = self.fnAccessFirstDictionaryInArray(dictObj: objImageSet, arrName: "LargeImage")
+                    strImageURL = self.fnAccesStringinObj(dictObj: objLargeImage, strAttribute: "URL")
+                } else {
+                    strImageURL = "https://www.yankee-division.com/uploads/1/7/6/5/17659643/notavailable_2_orig.jpg?210b"
+                }
+                let objItemAttribute = self.fnAccessFirstDictionaryInArray(dictObj: item, arrName: "ItemAttributes")
+                
+                var itemFeature = ""
+                if objItemAttribute["Feature"] != nil {
+                    itemFeature = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Feature")
+                } else {
+                    itemFeature = "NA"
+                }
+                
+                let title = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Title")
+                
+                var formattedPrice = ""
+                if objItemAttribute["ListPrice"] != nil {
+                    let objListPrice = self.fnAccessFirstDictionaryInArray(dictObj: objItemAttribute, arrName: "ListPrice")
+                    formattedPrice = self.fnAccesStringinObj(dictObj: objListPrice, strAttribute: "FormattedPrice")
+                } else {
+                    formattedPrice = "N/A"
+                }
+                var type = ""
+                if objItemAttribute["Binding"] != nil {
+                    type = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Binding")
+                } else {
+                    type = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "ProductGroup")
+                }
+                var publisher_brand = ""
+                if type != "Amazon Video" {
+                    if objItemAttribute["Brand"] != nil {
+                        publisher_brand = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Brand")
+                    } else if objItemAttribute["Publisher"] != nil {
+                        publisher_brand = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Publisher")
+                    } else {
+                        publisher_brand = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Binding")
+                    }
+                } else {
+                    publisher_brand = "Brand"
+                }
+                let product: Product = Product(image: strImageURL, ASIN: strASIN, title: title, publisher: publisher_brand, price: formattedPrice, description: itemFeature)
+                self.appdata.arrProductSearchResults.append(product)
+                //                self.swirlSearchImg.isHidden = true
+            }
+            DispatchQueue.main.async {
+                self.productTableView.isHidden = false
+                self.productTableView.reloadData()
+            }
+        }
+        //        DispatchQueue.main.async {
+        //            self.productTableView.reloadData()
+        //            self.productPeopleTab.isEnabled = true
+        //            self.spinnerProductSearch.stopAnimating()
+        //        }
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if productPeopleTab.selectedSegmentIndex == 1 {
-            if self.appdata.arrCurrFriendsAndAllMitoUsers[section].count >= 10 {
-                return 10
+            let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+            let intNumFriends = data["NumFriends"] as? Int
+            if intNumFriends == 0 {
+                return min(self.appdata.arrCurrAllUsers.count, 10)
             } else {
-                return self.appdata.arrCurrFriendsAndAllMitoUsers[section].count
+                return min(self.appdata.arrCurrFriendsAndAllMitoUsers[section].count, 10)
             }
         } else {
+            print("Product count: \(appdata.arrProductSearchResults.count)")
             return appdata.arrProductSearchResults.count
         }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if productPeopleTab.selectedSegmentIndex == 1 {
-            if self.appdata.arrSections.count == 2 {
-                return self.appdata.arrSections[section]
-            } else {
+            let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+            let intNumFriends = data["NumFriends"] as? Int
+            if intNumFriends == 0 {
                 return "Other people on Mito"
+            } else {
+                return self.appdata.arrSections[section]
             }
         } else {
             return "Products"
@@ -245,7 +308,13 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func numberOfSections(in tableView: UITableView) -> Int {
         if productPeopleTab.selectedSegmentIndex == 1 {
-            return self.appdata.arrCurrFriendsAndAllMitoUsers.count
+            let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+            let intNumFriends = data["NumFriends"] as? Int
+            if intNumFriends == 0 {
+                return 1
+            } else {
+                return self.appdata.arrCurrFriendsAndAllMitoUsers.count
+            }
         } else {
             return 1
         }
@@ -258,6 +327,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             performSegue(withIdentifier: "productDetail", sender: self)
         } else {
             mySection = indexPath.section
+            if appdata.arrCurrFriendsAndAllMitoUsers[mySection].count == 0 {
+                mySection = 1
+            }
+            appdata.personToView = appdata.arrCurrFriendsAndAllMitoUsers[mySection][myIndex]
             performSegue(withIdentifier: "searchToMitoProfile", sender: self)
         }
     }
@@ -267,6 +340,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Product
         if productPeopleTab.selectedSegmentIndex == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "productCell", for: indexPath) as! ProductTableViewCell
+            print("Row: \(indexPath.row)")
 //            if (indexPath.row == appdata.arrProductSearchResults.count - 1) {
 //                strProductResultsPageNumber += 1
 //                fnLoadProductData()
@@ -277,24 +351,36 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 cell.img.image = UIImage(data: data)!
             }
             cell.title.text = objProduct.title
+            print(objProduct.title)
             cell.publisher.text = objProduct.publisher
             cell.price.text = objProduct.price
             return cell
         } else { // People
             let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
-            let objPerson = self.appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
-            let urlPeopleImage = URL(string:"\(objPerson.avatar)")
-            let defaultURL = URL(string: appdata.strNoImageAvailable)
-            if let data = try? Data(contentsOf: urlPeopleImage!) {
-                cell.img.image = UIImage(data: data)!
-            } else if let data = try? Data(contentsOf: defaultURL!){
-                cell.img.image = UIImage(data: data)
+            let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+            let intNumFriends = data["NumFriends"] as? Int
+            if intNumFriends == 0 {
+                let objPerson = self.appdata.arrCurrAllUsers[indexPath.row]
+                return fnLoadPersonCell(cell: cell, objPerson: objPerson)
+            } else {
+                let objPerson = self.appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
+                return fnLoadPersonCell(cell: cell, objPerson: objPerson)
             }
-            cell.name.text = "\(objPerson.firstName) \(objPerson.lastName)"
-            cell.handle.text = "\(objPerson.email)"
-            cell.friendshipType.text = "\(objPerson.avatar)"
-            return cell
         }
+    }
+    
+    func fnLoadPersonCell(cell: TableViewCell, objPerson: Person) -> TableViewCell {
+        let urlPeopleImage = URL(string:"\(objPerson.avatar)")
+        let defaultURL = URL(string: appdata.strNoImageAvailable)
+        if let data = try? Data(contentsOf: urlPeopleImage!) {
+            cell.img.image = UIImage(data: data)!
+        } else if let data = try? Data(contentsOf: defaultURL!){
+            cell.img.image = UIImage(data: data)
+        }
+        cell.name.text = "\(objPerson.firstName) \(objPerson.lastName)"
+        cell.handle.text = "\(objPerson.email)"
+        cell.friendshipType.text = "\(objPerson.avatar)"
+        return cell
     }
     
     // Access first dictionary object in the dictionary

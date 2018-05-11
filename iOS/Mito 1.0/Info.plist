@@ -25,6 +25,12 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>We need your camera</string>
+	<key>NSContactsUsageDescription</key>
+	<string>We would like to get access to your contacts!</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location to set your address</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Your image is safe with me bro!</string>
 	<key>UIAppFonts</key>

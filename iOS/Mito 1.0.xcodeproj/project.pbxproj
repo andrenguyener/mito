@@ -79,9 +79,11 @@
 		DA42CC0A2064909900900C7D /* LineItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42CC092064909900900C7D /* LineItem.swift */; };
 		DA49F1DB2055EF9E0018ABA4 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA49F1DA2055EF9E0018ABA4 /* ProductViewController.swift */; };
 		DA5D683E2058A45F00E86BE8 /* ProductDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA5D683C2058A45F00E86BE8 /* ProductDetails.storyboard */; };
+		DA61587D20A200CD00285112 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA61587C20A200CD00285112 /* Notification.swift */; };
 		DA625E8B2088FEC30068F319 /* PackageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA625E8A2088FEC30068F319 /* PackageTableViewCell.swift */; };
 		DA6CB7F22064E9B700962814 /* Back.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6CB7F12064E9B700962814 /* Back.png */; };
 		DA6D6D12209E1B5300D74666 /* Mito Green Background.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6D6D11209E1B5000D74666 /* Mito Green Background.png */; };
+		DA92880C20A0B50E009EABD7 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA92880B20A0B50E009EABD7 /* PasswordViewController.swift */; };
 		DAA9075E209963C400F151E1 /* AddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA9075D209963C400F151E1 /* AddressTableViewCell.swift */; };
 		DAC178BC2088240F0039AA08 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC178BB2088240F0039AA08 /* Address.swift */; };
 		DAC178BE2088385A0039AA08 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC178BD2088385A0039AA08 /* Package.swift */; };
@@ -195,9 +197,11 @@
 		DA42CC092064909900900C7D /* LineItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineItem.swift; sourceTree = "<group>"; };
 		DA49F1DA2055EF9E0018ABA4 /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
 		DA5D683D2058A45F00E86BE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Mito 1.0/Base.lproj/ProductDetails.storyboard"; sourceTree = "<group>"; };
+		DA61587C20A200CD00285112 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		DA625E8A2088FEC30068F319 /* PackageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageTableViewCell.swift; sourceTree = "<group>"; };
 		DA6CB7F12064E9B700962814 /* Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Back.png; sourceTree = "<group>"; };
 		DA6D6D11209E1B5000D74666 /* Mito Green Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mito Green Background.png"; sourceTree = "<group>"; };
+		DA92880B20A0B50E009EABD7 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		DAA9075D209963C400F151E1 /* AddressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressTableViewCell.swift; sourceTree = "<group>"; };
 		DAC178BB2088240F0039AA08 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		DAC178BD2088385A0039AA08 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
@@ -349,10 +353,12 @@
 				B29AEC65203FC9C100110EF9 /* Main.storyboard */,
 				B2F849442043C33F00CBD83A /* MeViewController.swift */,
 				DACCDE2A2060617000CD59D9 /* Month.swift */,
+				DA61587C20A200CD00285112 /* Notification.swift */,
 				B2471991204672B1006CF6C2 /* NotificationTableViewCell.swift */,
 				B2471993204672DE006CF6C2 /* NotificationViewController.swift */,
 				DAC178BD2088385A0039AA08 /* Package.swift */,
 				DA625E8A2088FEC30068F319 /* PackageTableViewCell.swift */,
+				DA92880B20A0B50E009EABD7 /* PasswordViewController.swift */,
 				DAD995322042389B007A7687 /* Person.swift */,
 				B29AEC63203FC9C100110EF9 /* PeopleDetailsViewController.swift */,
 				B272DC2520439E2200EE2121 /* Product.swift */,
@@ -599,11 +605,13 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Mito 1.0/Pods-Mito 1.0-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${PODS_ROOT}/PayCardsRecognizer/Source/PayCardsRecognizer.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PayCardsRecognizer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -635,9 +643,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Mito 1.0/Pods-Mito 1.0-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlacePicker/Frameworks/GooglePlacePicker.framework/Resources/GooglePlacePicker.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlacePicker.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -656,6 +671,7 @@
 				B29AEC64203FC9C100110EF9 /* PeopleDetailsViewController.swift in Sources */,
 				DAD9A1A0204FD1C800E3AA5F /* ProductTableViewCell.swift in Sources */,
 				B28562DA2096E98000E8CC28 /* KeyboardDone.swift in Sources */,
+				DA92880C20A0B50E009EABD7 /* PasswordViewController.swift in Sources */,
 				B29AEC62203FC9C100110EF9 /* AppDelegate.swift in Sources */,
 				DAC178BE2088385A0039AA08 /* Package.swift in Sources */,
 				DACCDE29206057C500CD59D9 /* State.swift in Sources */,
@@ -681,6 +697,7 @@
 				DAA9075E209963C400F151E1 /* AddressTableViewCell.swift in Sources */,
 				B298CB012084607900EED243 /* RoundedButton.swift in Sources */,
 				DAD995312042386E007A7687 /* SearchViewController.swift in Sources */,
+				DA61587D20A200CD00285112 /* Notification.swift in Sources */,
 				DA49F1DB2055EF9E0018ABA4 /* ProductViewController.swift in Sources */,
 				B247197020454733006CF6C2 /* CartTableViewCell.swift in Sources */,
 				B298CB072084780B00EED243 /* RoundedWithBorder.swift in Sources */,
@@ -859,11 +876,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TG372K25N5;
+				DEVELOPMENT_TEAM = 6KH97C972X;
 				INFOPLIST_FILE = "Mito 1.0/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.washington.jjguo.mito;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.washington.bennys.mito;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -876,11 +893,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TG372K25N5;
+				DEVELOPMENT_TEAM = 6KH97C972X;
 				INFOPLIST_FILE = "Mito 1.0/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.washington.jjguo.mito;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.washington.bennys.mito;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -26,11 +26,43 @@ class PeopleDetailsViewController: UIViewController {
     }
     
     func loadPersonData() {
-        let friend = appdata.arrCurrFriendsAndAllMitoUsers[mySection][myIndex]
+        fnCheckFriendStatus()
+        let friend = appdata.personToView
         lblName.text = "\(friend.firstName) \(friend.lastName)"
         lblUsername.text = "@\(friend.strUsername)"
         btnNumFriends.setTitle("\(friend.intNumFriends) friends", for: .normal)
         appdata.fnDisplaySimpleImage(strImageURL: friend.avatar, img: img)
+    }
+    
+    func fnCheckFriendStatus() {
+        print("Section: \(mySection)")
+        print("Row: \(myIndex)")
+        let intFriendID = appdata.personToView.intUserID
+        let parameters: Parameters = [
+            "friendId": intFriendID
+        ]
+        
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        
+        Alamofire.request("https://api.projectmito.io/v1/friend/type", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    print(dictionary)
+                    if dictionary == "Friend" {
+                        self.addFriendbtn.setTitle("Friends", for: .normal)
+                        self.addFriendbtn.isEnabled = false
+                        self.addFriendbtn.backgroundColor = UIColor.gray
+                    }
+                }
+                
+            case .failure(let error):
+                print("Request: \(String(describing: response.request))")
+                print(error)
+            }
+        }
     }
 
     @IBAction func fnAddFriend(_ sender: Any) {

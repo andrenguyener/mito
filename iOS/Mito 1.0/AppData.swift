@@ -14,10 +14,13 @@ class AppData: NSObject {
     open var intCurrentUserID: Int = 0
     open var intCurrIndex: Int = -1
     open var strCardNumber = ""
-    open var personRecipient: Person = Person(firstName: "FName", lastName: "LName", email: "", avatar: "dd", intUserID: 0, strUsername: "", intNumFriends: 0)
+    open var personRecipient: Person = Person(firstName: "FName", lastName: "LName", email: "", avatar: "dd", intUserID: 0, strUsername: "", intNumFriends: 0, dateRequested: Date.distantPast)
     open var address: Address = Address(intAddressID: 0, strAddressAlias: "Fake", strCityName: "", strStateName: "", strStreetAddress1: "", strStreetAddress2: "", strZipCode: "")
+    open var currPackage: Package = Package(intGiftOption: 0, strOrderDate: "", intOrderID: 0, strOrderMessage: "", strPhotoUrl: "", intSenderID: 0, strUserFName: "", strUserLName: "")
     open var strOrderMessage = "What's it for?"
     open let mainMitoColor = "41DD7C"
+    open var strSearchQuery = ""
+    open var personToView: Person = Person(firstName: "FName", lastName: "LName", email: "", avatar: "dd", intUserID: 0, strUsername: "", intNumFriends: 0, dateRequested: Date.distantPast)
     
     open var arrFriends: [Person] = []
     open var arrCurrFriends: [Person] = []
@@ -30,6 +33,10 @@ class AppData: NSObject {
     open var arrCurrUserPackages: [Package] = []
     open var arrFriendsAndAllMitoUsers: [[Person]] = []
     open var arrCurrFriendsAndAllMitoUsers: [[Person]] = []
+    
+    
+    // AnyObject array
+    open var arrNotifications: [Notification] = []
     
     open var arrSections = ["Friends", "Other people on Mito"]
     
@@ -101,7 +108,7 @@ class AppData: NSObject {
         self.arrFriends.removeAll()
         self.arrAllUsers.removeAll()
         self.fnLoadFriendData(tableview: tableview)
-        self.fnLoadAllUsers(tableview: tableview)
+        self.fnLoadOtherMitoUsers(tableview: tableview)
         
         self.arrCurrFriendsAndAllMitoUsers = self.arrFriendsAndAllMitoUsers
         self.arrCurrFriends = self.arrFriends
@@ -150,8 +157,8 @@ class AppData: NSObject {
         }
     }
     
-    open func fnLoadAllUsers(tableview: UITableView) {
-        let urlAllUserCall = URL(string: "https://api.projectmito.io/v1/users/all")
+    open func fnLoadOtherMitoUsers(tableview: UITableView) {
+        let urlAllUserCall = URL(string: "https://api.projectmito.io/v1/friend/non")
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
@@ -164,12 +171,12 @@ class AppData: NSObject {
                     for objUser in objUsers {
                         let objPerson2 = objUser as! NSDictionary
                         let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
-                        if objPerson2["userId"] as! Int != data["userId"] as! Int {
-                            let objPerson = Person(firstName: objPerson2["userFname"] as! String, lastName: objPerson2["userLname"] as! String, email: objPerson2["userEmail"] as! String, avatar: objPerson2["photoURL"] as! String, intUserID: objPerson2["userId"] as! Int, strUsername: objPerson2["username"] as! String, intNumFriends: objPerson2["NumFriends"] as! Int)
-                            self.arrAllUsers.append(objPerson)
-                        }
+                        print(objPerson2)
+                        let objPerson = Person(firstName: objPerson2["UserFname"] as! String, lastName: objPerson2["UserLname"] as! String, email: objPerson2["UserEmail"] as! String, avatar: objPerson2["PhotoUrl"] as! String, intUserID: objPerson2["UserId"] as! Int, strUsername: objPerson2["Username"] as! String, intNumFriends: objPerson2["NumFriends"] as! Int)
+                        self.arrAllUsers.append(objPerson)
                     }
                     self.arrAllUsers.sort(by: self.fnSortMitoUsers)
+                    self.arrCurrAllUsers = self.arrAllUsers
                     self.arrFriendsAndAllMitoUsers.append(self.arrAllUsers)
                     self.arrCurrFriendsAndAllMitoUsers = self.arrFriendsAndAllMitoUsers
                 }
@@ -199,6 +206,14 @@ class AppData: NSObject {
         alertController.addAction(defaultAction)
         return alertController
     }
+    
+//    open func fnDisplayAlertSegue(strTitle: String, strMessage: String, strSegue: String) -> UIAlertController {
+//        let alertController = UIAlertController(title: strTitle, message: strMessage, preferredStyle: .alert)
+//        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+//            performSegue(withIdentifier: strSegue, sender: self)
+//        }))
+//        present(alertController, animated: true, completion: nil)
+//    }
     
     open func fnDisplaySimpleImage(strImageURL: String, img: UIImageView) {
         let urlImage = URL(string:"\(strImageURL)")

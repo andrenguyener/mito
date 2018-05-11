@@ -9,10 +9,180 @@
 import UIKit
 import Alamofire
 import CoreGraphics
+import GoogleMaps
+import GooglePlaces
+import GooglePlacePicker
+import PayCardsRecognizer
+import Contacts
 
-class MeViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class MeViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate, PayCardsRecognizerPlatformDelegate {
+    
+    // https://developer.apple.com/documentation/corelocation/choosing_the_authorization_level_for_location_services/requesting_always_authorization
     var appdata = AppData.shared
+    var contactStore = CNContactStore()
+    
+    @IBOutlet weak var lblName: UILabel!
+    @IBOutlet weak var lblAddress: UILabel!
+    
+    var placesClient: GMSPlacesClient!
+    let locationManager = CLLocationManager()
+    
+    var recognizer: PayCardsRecognizer!
+    
+    @IBAction func btnScanCreditCard(_ sender: Any) {
+//        recognizer.startCamera()
+    }
+    @IBAction func btnFetchContacts(_ sender: Any) {
+        contactStore.requestAccess(for: .contacts) { (success,error) in
+            if success {
+                print("Authorization success")
+            }
+        }
+        fnFetchContacts()
+    }
+    
+    func fnFetchContacts() {
+        let key = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey] as [CNKeyDescriptor]
+        let request = CNContactFetchRequest(keysToFetch: key)
+        var count = 0
+        try! contactStore.enumerateContacts(with: request) { (contact, stoppingPointer) in
+            let strFirstName = contact.givenName
+            let strLastName = contact.familyName
+            let strNumber = contact.phoneNumbers.first?.value.stringValue
+            if count <= 5 {
+                print("First Name: \(strFirstName)")
+                print("Last Name: \(strLastName)")
+                print("Number: \(strNumber)")
+            }
+            count += 1
+        }
+    }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        recognizer.startCamera()
+//    }
+    
+//    override func viewDidDisappear(_ animated: Bool) {
+//        super.viewDidDisappear(animated)
+//
+//        recognizer.stopCamera()
+//    }
+    
+    func payCardsRecognizer(_ payCardsRecognizer: PayCardsRecognizer, didRecognize result: PayCardsRecognizerResult) {
+//        result.recognizedNumber // Card number
+//        result.recognizedHolderName // Card holder
+//        result.recognizedExpireDateMonth // Expire month
+//        result.recognizedExpireDateYear // Expire year
+        print("Card Number: \(result.recognizedNumber)")
+        print("Holder name: \(result.recognizedHolderName)")
+        print("Expire Date Month: \(result.recognizedExpireDateMonth)")
+        print("Expire Date Year: \(result.recognizedExpireDateYear)")
+    }
+    
 
+    @IBAction func fnPickPlace(_ sender: Any) {
+        let center = CLLocationCoordinate2D(latitude: 37.788204, longitude: -122.411937)
+        let northEast = CLLocationCoordinate2D(latitude: center.latitude + 0.001, longitude: center.longitude + 0.001)
+        let southWest = CLLocationCoordinate2D(latitude: center.latitude - 0.001, longitude: center.longitude - 0.001)
+        let viewport = GMSCoordinateBounds(coordinate: northEast, coordinate: southWest)
+        let config = GMSPlacePickerConfig(viewport: viewport)
+        let placePicker = GMSPlacePicker(config: config)
+        
+        placePicker.pickPlace(callback: {(place, error) -> Void in
+            if let error = error {
+                print("Pick Place error: \(error.localizedDescription)")
+                return
+            }
+            
+            if let place = place {
+                self.lblName.text = place.name
+                self.lblAddress.text = place.formattedAddress?.components(separatedBy: ", ")
+                    .joined(separator: "\n")
+            } else {
+                self.lblName.text = "No place selected"
+                self.lblAddress.text = ""
+            }
+        })
+    }
+    
+    func fnEnableLocationServices() {
+//        locationManager.delegate = self
+//
+//        switch CLLocationManager.authorizationStatus() {
+//        case .notDetermined:
+//            // Request when-in-use authorization initially
+//            locationManager.requestWhenInUseAuthorization()
+//            break
+//
+//        case .restricted, .denied:
+//            // Disable location features
+//            disableMyLocationBasedFeatures()
+//            break
+//
+//        case .authorizedWhenInUse:
+//            // Enable basic location features
+//            enableMyWhenInUseFeatures()
+//            break
+//
+//        case .authorizedAlways:
+//            // Enable any of your app's location features
+//            enableMyAlwaysFeatures()
+//            break
+//        }
+    }
+    
+    func escalateLocationServiceAuthorization() {
+        // Escalate only when the authorization is set to when-in-use
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+            locationManager.requestAlwaysAuthorization()
+        }
+    }
+    
+    
+    @IBAction func fnGetCurrentLocation(_ sender: Any) {
+        escalateLocationServiceAuthorization()
+        locationManager.requestAlwaysAuthorization()
+        placesClient.currentPlace(callback: { (placeLikelihoodList, error) -> Void in
+            if let error = error {
+                print("Pick Place error: \(error.localizedDescription)")
+                return
+            }
+            
+            if let placeLikelihoodList = placeLikelihoodList {
+                for likelihood in placeLikelihoodList.likelihoods {
+                    let place = likelihood.place
+                    print("Current Place name \(place.name) at likelihood \(likelihood.likelihood)")
+                    print("Current Place address \(place.formattedAddress)")
+                    print("Current Place attributions \(place.attributions)")
+                    print("Current PlaceID \(place.placeID)")
+                }
+            }
+        })
+//
+//        placesClient.currentPlace(callback: { (placeLikelihoodList, error) -> Void in
+//            if let error = error {
+//                print("Pick Place error: \(error.localizedDescription)")
+//                return
+//            }
+//
+//            self.lblName.text = "No current place"
+//            self.lblAddress.text = ""
+//
+//            if let placeLikelihoodList = placeLikelihoodList {
+//                let place = placeLikelihoodList.likelihoods.first?.place
+//                if let place = place {
+//                    self.lblName.text = place.name
+//                    self.lblAddress.text = place.formattedAddress?.components(separatedBy: ", ")
+//                        .joined(separator: "\n")
+//                    print(self.lblAddress.text)
+//                }
+//            }
+//        })
+    }
+    
+    
     @IBOutlet weak var userID: UILabel!
     @IBOutlet weak var userEmail: UILabel!
     @IBOutlet weak var username: UILabel!
@@ -51,6 +221,9 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        placesClient = GMSPlacesClient.shared()
+//        recognizer = PayCardsRecognizer(delegate: self, resultMode: .sync, container: self.view, frameColor: .green)
+
         if UserDefaults.standard.object(forKey: "UserInfo") != nil {
             let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
             appdata.fnDisplaySimpleImage(strImageURL: data["photoURL"] as! String, img: imgProfilePic)
@@ -58,10 +231,11 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
             self.userEmail.text = data["userEmail"] as? String
             self.username.text = data["username"] as? String
             // Prevent showing Optional("")
-            self.userFname.text = "\(String(describing: data["userFname"] as? String)) \(String(describing: data["userLname"]))"
+            self.userFname.text = "\(data["userFname"]!) \(data["userLname"]!)"
             self.userLname.text = data["userLname"] as? String
             self.userDOB.text = data["userDOB"] as? String
             self.photoURL.text = data["photoURL"] as? String
+            locationManager.delegate = self
 //            print(data["userId"] as! String)
         }
     }
@@ -244,7 +418,7 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
                     let arrPackages = dictionary as! NSArray
                     for objPackageTemp in arrPackages {
                         let elem = objPackageTemp as! NSDictionary
-                        let objPackage = Package(intGiftOption: elem["GiftOption"] as! Int, strOrderDate: elem["OrderDate"] as! String, intOrderID: elem["OrderId"] as! Int, strOrderMessage: elem["OrderMessage"] as! String, strPhotoUrl: elem["PhotoUrl"] as! String, intSenderID: elem["SenderId"] as! Int, strUserFName: elem["UserFname"] as! String, strUserLName: elem["UserLname"] as! String)//
+                        let objPackage = Package(intGiftOption: elem["GiftOption"] as! Int, strOrderDate: elem["OrderDate"] as! String, intOrderID: elem["OrderId"] as! Int, strOrderMessage: elem["OrderMessage"] as! String, strPhotoUrl: elem["PhotoUrl"] as! String, intSenderID: elem["SenderId"] as! Int, strUserFName: elem["UserFname"] as! String, strUserLName: elem["UserLname"] as! String, dateRequested: elem["CreatedAt"] as! Date)
                         self.appdata.arrCurrUserPackages.append(objPackage)
                     }
                     print("User has \(self.appdata.arrCurrUserPackages.count) packages")
