@@ -28,6 +28,9 @@ class CartStore {
                         if (column.value === null) {
                             console.log('NULL');
                         } else {
+                            if (!isNaN(column.value) && column.metadata.colName != 'Quantity') {
+                                column.value = parseFloat(Math.round(column.value * 100) / 100).toFixed(2);
+                            }
                             rowObject[column.metadata.colName] = column.value;
                         }
                     });

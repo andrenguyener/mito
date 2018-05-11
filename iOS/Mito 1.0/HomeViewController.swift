@@ -10,37 +10,10 @@ import UIKit
 import Alamofire
 import Starscream
 
-class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, WebSocketDelegate {
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var greenTopView: UIView!
-    
-    func websocketDidConnect(socket: WebSocketClient) {
-        print("websocket is connected")
-    }
-    
-    func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
-        if let e = error as? WSError {
-            print("websocket is disconnected: \(e.message)")
-        } else if let e = error {
-            print("websocket is disconnected: \(e.localizedDescription)")
-        } else {
-            print("websocket disconnected")
-        }
-    }
-    
-    func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
-        
-//        print("Received text: \(text)")
-        let jsonData = text.data(using: .utf8)
-        let dictionary = try? JSONSerialization.jsonObject(with: jsonData!, options: .mutableLeaves)
-        print(dictionary as Any)
-        print("Notification")
-    }
-    
-    func websocketDidReceiveData(socket: WebSocketClient, data: Data) {
-        print("Received data: \(data.count)")
-    }
-    
+
     func fnLoadCurrUserAddresses() {
         let urlGetMyAddresses = URL(string: "https://api.projectmito.io/v1/address/")
         let headers: HTTPHeaders = [
@@ -82,7 +55,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     @IBOutlet weak var tableView: UITableView!
     var appdata = AppData.shared
-    var socket: WebSocket!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -102,10 +75,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         var request = URLRequest(url: URL(string: urlWebsocket)!)
         print("Request: \(request)")
         request.timeoutInterval = 5
-        socket = WebSocket(request: request)
-        
-        socket.delegate = self
-        socket.connect()
+        appdata.socket = WebSocket(request: request)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appdata.socket.delegate = appDelegate.self
+        appdata.socket.connect()
     }
 
     override func didReceiveMemoryWarning() {

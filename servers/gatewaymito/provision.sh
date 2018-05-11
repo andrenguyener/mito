@@ -13,6 +13,7 @@ docker run -d \
 -e SESSIONKEY=password \
 -e MITONODEADDR=mitonode:80 \
 -e MQADDR=rabbit:5672 \
+--restart unless-stopped \
 andrenguyener/gatewaymito
 
 
