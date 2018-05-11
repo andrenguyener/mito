@@ -193,7 +193,6 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
                     if (self.appdata.arrCurrUserAddresses.count > 0) {
                         print("Load Current User Addresses: \(self.appdata.arrCurrUserAddresses[self.appdata.arrCurrUserAddresses.count - 1].strAddressAlias)")
                     }
-//                    self.appdata.address = self.appdata.arrCurrUserAddresses[self.appdata.arrCurrUserAddresses.count - 1]
                     self.tblviewAddress.reloadData()
                 }
                 
@@ -203,6 +202,7 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
             }
         }
     }
+
     
     func fnAddNewAddress(strStreet: String, strCity: String, strState: String, strStateZip: String, strAlias: String) {
         let parameters: Parameters = [
