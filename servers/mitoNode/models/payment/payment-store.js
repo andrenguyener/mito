@@ -9,14 +9,6 @@ class PaymentStore {
         this.sql = sql;
     }
 
-    request(procedure) {
-        return new Request((`${procedure}`), function (err) {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
-
     //get all the users payment methods
     getPayments(id) {
         return new Promise((resolve) => {

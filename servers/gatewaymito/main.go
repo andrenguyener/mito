@@ -191,5 +191,11 @@ func main() {
 	mux.Handle("/v1/package/", NewServiceProxy(splitMitoNodeAddrs, ctx))
 	mux.Handle("/v1/payment", NewServiceProxy(splitMitoNodeAddrs, ctx))
 	mux.Handle("/v1/payment/", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/feed", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/feed/", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/notification", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/notification/", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/image", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/image/", NewServiceProxy(splitMitoNodeAddrs, ctx))
 	log.Fatal(http.ListenAndServeTLS(addr, tlscert, tlskey, corsHandler))
 }

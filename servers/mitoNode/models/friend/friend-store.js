@@ -8,16 +8,6 @@ class FriendStore {
         this.sql = sql;
     }
 
-    request(procedure, connection) {
-        return new Request((`${procedure}`), function (err) {
-            if (err) {
-                console.log(err);
-            }
-
-            connection.release();
-        });
-    }
-
     // Request a friend into SqlServer
     insert(userId, friendId) {
         return new Promise((resolve) => {
@@ -25,7 +15,7 @@ class FriendStore {
                 let procedureName = "uspcRequestFriend";
                 var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
                     if (err) {
-                        console.log(err)
+                        console.log(err);
                     }
                     connection.release();
                 });
@@ -66,6 +56,47 @@ class FriendStore {
                 });
                 request.addParameter('UserId1', TYPES.Int, id1);
                 request.addParameter('UserId2', TYPES.Int, id2);
+                let jsonArray = []
+                request.on('row', function (columns) {
+                    var rowObject = {};
+                    columns.forEach(function (column) {
+                        if (column.value === null) {
+                            console.log('NULL');
+                        } else {
+                            rowObject[column.metadata.colName] = column.value;
+                        }
+                    });
+                    jsonArray.push(rowObject)
+                });
+
+                request.on('doneProc', function (rowCount, more) {
+                    console.log(jsonArray);
+                    resolve(jsonArray);
+                });
+
+                connection.callProcedure(request)
+            });
+        })
+            .then((jsonArray) => {
+                return jsonArray
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
+    // Get all users that are not your friends
+    getNonFriends(userId) {
+        return new Promise((resolve) => {
+            this.sql.acquire(function (err, connection) {
+                let procedureName = "uspcGetAllNonFriendUsers";
+                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
+                    if (err) {
+                        console.log(err)
+                    }
+                    connection.release();
+                });
+                request.addParameter('UserId', TYPES.Int, userId);
                 let jsonArray = []
                 request.on('row', function (columns) {
                     var rowObject = {};
@@ -150,24 +181,42 @@ class FriendStore {
                     }
                     connection.release();
                 });
-                request.addParameter('UserId1', TYPES.Int, id);
-                request.addParameter('UserId2', TYPES.Int, friendId);
-                let jsonArray = []
-                request.on('row', function (columns) {
-                    var rowObject = {};
-                    columns.forEach(function (column) {
-                        if (column.value === null) {
-                            console.log('NULL');
-                        } else {
-                            rowObject[column.metadata.colName] = column.value;
-                        }
-                    });
-                    jsonArray.push(rowObject)
+                var friendType;
+                request.addParameter('User1Id', TYPES.Int, id);
+                request.addParameter('User2Id', TYPES.Int, friendId);
+                request.addOutputParameter('FriendType', TYPES.NVarChar, friendType);
+                request.on('returnValue', function (parameterName, value, metadata) {
+                    console.log(parameterName);
+                    console.log(value);
+                    console.log(metadata);
+                    friendType = value;
+                    console.log(friendType);
+
                 });
+                // request.addOutputParameter('Address_Id', addressId);
+
+                // request.on('returnValue', function (parameterName, value, metadata) {
+                //     console.log(parameterName);
+                //     console.log(value);
+                //     console.log(metadata);
+                // });
+                // let jsonArray = []
+                // request.on('row', function (columns) {
+                //     var rowObject = {};
+                //     columns.forEach(function (column) {
+                //         if (column.value === null) {
+                //             console.log('NULL');
+                //         } else {
+                //             rowObject[column.metadata.colName] = column.value;
+                //         }
+                //     });
+                //     jsonArray.push(rowObject)
+                // });
 
                 request.on('doneProc', function (rowCount, more) {
-                    console.log(jsonArray);
-                    resolve(jsonArray);
+                    // console.log(jsonArray);
+                    // resolve(jsonArray);
+                    resolve(friendType)
                 });
 
                 connection.callProcedure(request)

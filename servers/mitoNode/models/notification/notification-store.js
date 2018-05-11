@@ -2,31 +2,25 @@
 
 var Request = require('tedious').Request;
 var TYPES = require('tedious').TYPES;
-
-class OrderStore {
+class NotificationStore {
 
     constructor(sql) {
         this.sql = sql;
     }
 
-    // Make an order (not to zinc yet until there is an address) - Add order to Order page
-    insert() {
 
-    }
-
-    // Get information and products about order
-    get(orderId) {
+    // Get all notifications that will be sent to you (friend request, incoming packages)
+    get(userId) {
         return new Promise((resolve) => {
             this.sql.acquire(function (err, connection) {
-                let procedureName = "uspcGetOrderDetails";
+                let procedureName = "uspcGetMyNotification";
                 var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
                     if (err) {
                         console.log(err)
                     }
                     connection.release();
                 });
-
-                request.addParameter('OrderId', TYPES.Int, orderId);
+                request.addParameter('UserId', TYPES.Int, userId);
                 let jsonArray = []
                 request.on('row', function (columns) {
                     var rowObject = {};
@@ -39,6 +33,7 @@ class OrderStore {
                     });
                     jsonArray.push(rowObject)
                 });
+
                 request.on('doneProc', function (rowCount, more) {
                     console.log(jsonArray);
                     resolve(jsonArray);
@@ -55,32 +50,8 @@ class OrderStore {
             });
     }
 
-    // Get all complete orders
-    getComplete() {
-
-    }
-
-    // Get all pending orders
-    getPending() {
-
-    }
-
-    // Get all past transaction/order
-    getAll() {
-
-    }
-
-    // Update order (when a party provide an address)
-    update() {
 
 
-    }
-
-
-    delete() {
-
-
-    }
 }
 
-module.exports = OrderStore;
+module.exports = NotificationStore;

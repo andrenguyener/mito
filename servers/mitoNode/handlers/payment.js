@@ -3,7 +3,7 @@
 
 const express = require('express');
 
-const Address = require('./../models/address/address-class');
+const Payment = require('./../models/payment/payment-class');
 const sendToMQ = require('./message-queue');
 
 const PaymentHandler = (paymentStore) => {

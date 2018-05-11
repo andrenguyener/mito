@@ -16,21 +16,22 @@ var bcryptCost = 13
 
 //User represents a user account in the database
 type User struct {
-	UserId       int    `json:"userId"`
-	UserEmail    string `json:"userEmail"`
-	PasswordHash []byte `json:"-"` //stored, but not encoded to clients
-	Username     string `json:"username"`
-	UserFname    string `json:"userFname"`
-	UserLname    string `json:"userLname"`
-	UserDOB      string `json:"userDOB"`
-	PhotoUrl     string `json:"photoURL"`
-	NumFriends   int    `json:"NumFriends"`
-	IsDelete     bool   `json:"isDelete"`
+	UserId         int    `json:"userId"`
+	UserEmail      string `json:"userEmail"`
+	PasswordHash   []byte `json:"-"` //stored, but not encoded to clients
+	Username       string `json:"username"`
+	UserFname      string `json:"userFname"`
+	UserLname      string `json:"userLname"`
+	UserDOB        string `json:"userDOB"`
+	PhotoUrl       string `json:"photoURL"`
+	NumFriends     int    `json:"NumFriends"`
+	IsDelete       bool   `json:"isDelete"`
+	ProfileImageId int    `json:"profileImageId"`
 }
 
 //Credentials represents user sign-in credentials
 type Credentials struct {
-	Email    string `json:"userEmail"`
+	Usercred string `json:"usercred"`
 	Password string `json:"password"`
 }
 

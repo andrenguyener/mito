@@ -8,13 +8,6 @@ class CartStore {
         this.sql = sql;
     }
 
-    request(procedure) {
-        return new Request((`${procedure}`), function (err) {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
     // Get items in cart based on a given userId
     get(id) {
         return new Promise((resolve) => {
@@ -35,6 +28,9 @@ class CartStore {
                         if (column.value === null) {
                             console.log('NULL');
                         } else {
+                            if (!isNaN(column.value) && column.metadata.colName != 'Quantity') {
+                                column.value = parseFloat(Math.round(column.value * 100) / 100).toFixed(2);
+                            }
                             rowObject[column.metadata.colName] = column.value;
                         }
                     });

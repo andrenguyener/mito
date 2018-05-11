@@ -95,7 +95,7 @@ func (ss *SqlStore) GetByEmail(email string) (*User, error) {
 
 	defer rows.Close()
 	for rows.Next() {
-		if err := rows.Scan(&user.UserId, &user.UserFname, &user.UserLname, &user.UserEmail, &user.PasswordHash, &user.PhotoUrl, &user.UserDOB, &user.Username, &user.NumFriends, &user.IsDelete); err != nil {
+		if err := rows.Scan(&user.UserId, &user.UserFname, &user.UserLname, &user.UserEmail, &user.PasswordHash, &user.PhotoUrl, &user.UserDOB, &user.Username, &user.NumFriends, &user.IsDelete, &user.ProfileImageId); err != nil {
 			log.Fatalf("Error scanning row %v", err)
 		}
 
@@ -123,7 +123,7 @@ func (ss *SqlStore) GetByUserName(username string) (*User, error) {
 	defer rows.Close()
 	for rows.Next() {
 		if err := rows.Scan(&user.UserId, &user.UserFname, &user.UserLname, &user.UserEmail, &user.PhotoUrl, &user.UserDOB, &user.Username); err != nil {
-			log.Fatal(err)
+			log.Fatalf("Error scanning row %v", err)
 		}
 		// if err := json.Unmarshal([]byte(userString), user); err != nil {
 		// 	log.Fatal(err)
@@ -131,7 +131,7 @@ func (ss *SqlStore) GetByUserName(username string) (*User, error) {
 
 	}
 	if err := rows.Err(); err != nil {
-		log.Fatal(err)
+		log.Fatalf("Error in row %v", err)
 	}
 
 	return user, nil

@@ -3,7 +3,7 @@
 
 const express = require('express');
 
-const Address = require('./../models/address/address-class');
+const Package = require('./../models/package/package-class');
 const sendToMQ = require('./message-queue');
 
 const PackageHandler = (packageStore) => {
@@ -19,9 +19,22 @@ const PackageHandler = (packageStore) => {
 
     // Deals with anything we are receving, incoming packgages, updating packaging (yes/no), get pending
 
-    // Get all incoming package
-    router.get('/v1/package/incoming', (req, res) => {
+    // Get all sent packages
+    router.get('/v1/package', (req, res) => {
+        const userJSON = req.get('X-User');
+        const user = JSON.parse(userJSON);
+        var userId = user.userId;
+        packageStore
+            .getSentPackages(userId)
+            .then(packages => {
+                res.json(packages)
 
+            })
+            .catch(error => {
+                if (error != breakSignal) {
+                    console.log(error)
+                }
+            });
     });
 
     // Get pending/accepted/denied packages of user

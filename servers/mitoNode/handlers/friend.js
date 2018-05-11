@@ -27,25 +27,43 @@ const FriendHandler = (friendStore) => {
         const userJSON = req.get('X-User');
         const user = JSON.parse(userJSON);
         console.log(user);
-        friendStore
-            .getAll(user.userId, req.params.friendType)
-            .then(friend => {
-                console.log(friend);
-                res.json(friend);
-                const data = {
-                    type: 'friend-get',
-                    friend: friend,
-                    userIdOut: user.userId
-                };
-                console.log(data);
-                sendToMQ(req, data);
-            })
-            .catch(err => {
-                if (err !== breakSignal) {
-                    console.log(err);
-                }
-            });
+        if (req.params.friendType == 'non') {
+            friendStore
+                .getNonFriends(user.userId)
+                .then(friend => {
+                    res.json(friend);
+                })
+                .catch(err => {
+                    if (err !== breakSignal) {
+                        console.log(err);
+                    }
+                });
+        } else {
+            friendStore
+                .getAll(user.userId, req.params.friendType)
+                .then(friend => {
+                    console.log(friend);
+                    res.json(friend);
+                    const data = {
+                        type: 'friend-get',
+                        friend: friend,
+                        userIdOut: user.userId
+                    };
+                    console.log(data);
+                    sendToMQ(req, data);
+                })
+                .catch(err => {
+                    if (err !== breakSignal) {
+                        console.log(err);
+                    }
+                });
+        }
     });
+
+    // Get all users that are not your friends
+    // router.get('/v1/friend/non', (req, res) => {
+
+    // });
 
     // get the count of mutual friends
     router.get('/v1/friend/mutual/:friendUserId', (req, res) => {

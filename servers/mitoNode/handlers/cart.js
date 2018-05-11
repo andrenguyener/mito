@@ -3,7 +3,7 @@
 
 const express = require('express');
 
-const Order = require('./../models/order/order-class');
+const Cart = require('./../models/cart/cart-class');
 const sendToMQ = require('./rabbit-queue');
 
 const CartHandler = (cartStore) => {

@@ -9,9 +9,45 @@
 import UIKit
 import GooglePlaces
 import GoogleMaps
+import Starscream
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, WebSocketDelegate {
+    func websocketDidConnect(socket: WebSocketClient) {
+        print("websocket is connected")
+    }
+    
+    func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
+        if let e = error as? WSError {
+            print("websocket is disconnected: \(e.message)")
+        } else if let e = error {
+            print("websocket is disconnected: \(e.localizedDescription)")
+        } else {
+            print("websocket disconnected")
+        }
+    }
+    
+    func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
+        
+        //        print("Received text: \(text)")
+        let jsonData = text.data(using: .utf8)
+        let dictionary = try? JSONSerialization.jsonObject(with: jsonData!, options: .mutableLeaves) as! NSDictionary
+        let dictType = dictionary!["type"] as! String
+        switch dictType {
+        case "friend-get":
+            print("friend-get")
+        case "cart-get":
+            print("cart-get")
+        default:
+            print("default message")
+        }
+//        print(dictionary as Any)
+    }
+    
+    func websocketDidReceiveData(socket: WebSocketClient, data: Data) {
+        print("Received data: \(data.count)")
+    }
+    
 
     var window: UIWindow?
 

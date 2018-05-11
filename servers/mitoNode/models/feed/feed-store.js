@@ -9,22 +9,86 @@ class FeedStore {
         this.sql = sql;
     }
 
-    // request(procedure) {
-    //     return new Request(`${procedure}`), function (err) {
-    //         if (err) {
-    //             console.log(err);
-    //         }
-    //     }
-    // }
+    // Get all orders that users has sent and received between friends
+    get(id) {
+        return new Promise((resolve) => {
+            this.sql.acquire(function (err, connection) {
+                let procedureName = "uspcGetMyOwnFeed";
+                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
+                    if (err) {
+                        console.log(err)
+                    }
+                    connection.release();
+                });
 
-    // Add User order to feed
-    insert(feed) {
+                request.addParameter('UserId', TYPES.Int, id);
+                let jsonArray = []
+                request.on('row', function (columns) {
+                    var rowObject = {};
+                    columns.forEach(function (column) {
+                        if (column.value === null) {
+                            console.log('NULL');
+                        } else {
+                            rowObject[column.metadata.colName] = column.value;
+                        }
+                    });
+                    jsonArray.push(rowObject)
+                });
 
+                request.on('doneProc', function (rowCount, more) {
+                    resolve(jsonArray);
+                });
+
+                connection.callProcedure(request)
+            });
+        })
+            .then((jsonArray) => {
+                return jsonArray
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }
 
-    // Get all friends past orders (limited to only names and message)
-    getAll(id) {
+    // Get all orders that relevant friends has sent or received
+    getFriendsFeed(id) {
+        return new Promise((resolve) => {
+            this.sql.acquire(function (err, connection) {
+                let procedureName = "uspcGetMyFriendsFeed";
+                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
+                    if (err) {
+                        console.log(err)
+                    }
+                    connection.release();
+                });
 
+                request.addParameter('UserId', TYPES.Int, id);
+                let jsonArray = []
+                request.on('row', function (columns) {
+                    var rowObject = {};
+                    columns.forEach(function (column) {
+                        if (column.value === null) {
+                            console.log('NULL');
+                        } else {
+                            rowObject[column.metadata.colName] = column.value;
+                        }
+                    });
+                    jsonArray.push(rowObject)
+                });
+
+                request.on('doneProc', function (rowCount, more) {
+                    resolve(jsonArray);
+                });
+
+                connection.callProcedure(request)
+            });
+        })
+            .then((jsonArray) => {
+                return jsonArray
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }
 
 }

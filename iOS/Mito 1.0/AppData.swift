@@ -8,9 +8,11 @@
 
 import UIKit
 import Alamofire
+import Starscream
 
 class AppData: NSObject {
     static let shared = AppData()
+    open var socket: WebSocket!
     open var intCurrentUserID: Int = 0
     open var intCurrIndex: Int = -1
     open var strCardNumber = ""
