@@ -158,7 +158,7 @@ class AppData: NSObject {
     }
     
     open func fnLoadOtherMitoUsers(tableview: UITableView) {
-        let urlAllUserCall = URL(string: "https://api.projectmito.io/v1/users/all")
+        let urlAllUserCall = URL(string: "https://api.projectmito.io/v1/friend/non")
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
@@ -171,10 +171,9 @@ class AppData: NSObject {
                     for objUser in objUsers {
                         let objPerson2 = objUser as! NSDictionary
                         let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
-                        if objPerson2["userId"] as! Int != data["userId"] as! Int {
-                            let objPerson = Person(firstName: objPerson2["userFname"] as! String, lastName: objPerson2["userLname"] as! String, email: objPerson2["userEmail"] as! String, avatar: objPerson2["photoURL"] as! String, intUserID: objPerson2["userId"] as! Int, strUsername: objPerson2["username"] as! String, intNumFriends: objPerson2["NumFriends"] as! Int)
-                            self.arrAllUsers.append(objPerson)
-                        }
+                        print(objPerson2)
+                        let objPerson = Person(firstName: objPerson2["UserFname"] as! String, lastName: objPerson2["UserLname"] as! String, email: objPerson2["UserEmail"] as! String, avatar: objPerson2["PhotoUrl"] as! String, intUserID: objPerson2["UserId"] as! Int, strUsername: objPerson2["Username"] as! String, intNumFriends: objPerson2["NumFriends"] as! Int)
+                        self.arrAllUsers.append(objPerson)
                     }
                     self.arrAllUsers.sort(by: self.fnSortMitoUsers)
                     self.arrCurrAllUsers = self.arrAllUsers

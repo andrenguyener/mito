@@ -1519,7 +1519,7 @@
                     </view>
                     <connections>
                         <outlet property="lblNotifyYouMessage" destination="8VG-bt-wq1" id="aMp-A5-KCZ"/>
-                        <segue destination="5ev-RP-TnR" kind="show" identifier="checkoutComplete" id="Jjr-wW-Hse"/>
+                        <segue destination="5ev-RP-TnR" kind="showDetail" identifier="checkoutComplete" id="Jjr-wW-Hse"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fPR-Qk-3Ok" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1759,7 +1759,7 @@
                         <outlet property="imgSenderProfile" destination="lot-L2-wzT" id="rtd-gu-ANq"/>
                         <outlet property="lblMessage" destination="U74-Ig-Gfh" id="RsX-TA-Y0r"/>
                         <outlet property="strSenderName" destination="Uif-5A-U2x" id="xdl-0u-i6c"/>
-                        <segue destination="5ev-RP-TnR" kind="show" identifier="PackageDetailsBackToNotification" id="7Hd-YA-ayo"/>
+                        <segue destination="5ev-RP-TnR" kind="showDetail" identifier="PackageDetailsBackToNotification" id="7Hd-YA-ayo"/>
                         <segue destination="y1B-fc-fA5" kind="show" identifier="PackageToChooseReceivingAddress" id="kcf-T7-nAo"/>
                     </connections>
                 </viewController>
@@ -2282,7 +2282,7 @@
                     <connections>
                         <outlet property="tblviewAddress" destination="JiR-sN-ga8" id="z3Q-wZ-O61"/>
                         <segue destination="JEb-Gy-hD1" kind="show" identifier="ChooseAddressToCheckout" id="ESz-AJ-FsE"/>
-                        <segue destination="5ev-RP-TnR" kind="show" identifier="CompleteChooseReceivingAddress" id="2rk-ch-wix"/>
+                        <segue destination="5ev-RP-TnR" kind="showDetail" identifier="CompleteChooseReceivingAddress" id="2rk-ch-wix"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9OU-am-Tho" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2724,7 +2724,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="ESz-AJ-FsE"/>
         <segue reference="ruP-Sx-HS5"/>
-        <segue reference="7Hd-YA-ayo"/>
+        <segue reference="Jjr-wW-Hse"/>
         <segue reference="5va-cB-XlO"/>
         <segue reference="IOv-WN-4XC"/>
         <segue reference="sAd-vQ-kz5"/>

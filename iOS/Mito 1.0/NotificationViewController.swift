@@ -337,6 +337,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     
     @objc func btnAccept(_ button: UIButton) {
         print("Row Number: \(button.tag)")
+        boolSender = true
         if appdata.arrNotifications[button.tag] as? Person != nil {
             let objFriend = appdata.arrNotifications[button.tag] as! Person
             intOrderID = objFriend.intUserID
@@ -348,6 +349,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @objc func btnDeny(_ button: UIButton) {
+        boolSender = true
         if appdata.arrNotifications[button.tag] as? Person != nil {
             let objFriend = appdata.arrNotifications[button.tag] as! Person
             fnAcceptOrDeclineFriendRequest(strFriendType: "Friend", intUserID: objFriend.intUserID)

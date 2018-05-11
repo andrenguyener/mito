@@ -217,12 +217,12 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     var strUserDOB = ""
     
     @IBAction func btnNextPressed(_ sender: Any) {
-        let strFirstName = userFnameSU.text
-        let strLastName = self.strLastName.text
-        let strUserName = usernameSU.text
+        let strFirstName = userFnameSU.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let strLastName = self.strLastName.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let strUserName = usernameSU.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         let strPassword = passwordSU.text
         let strPasswordConfirmation = passwordConfSU.text
-        let strEmail = userEmailSU.text
+        let strEmail = userEmailSU.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         let strUserDOB = "\(strMonth)/\(strDay)/\(strYear)"
         
         let parameters: Parameters = [
