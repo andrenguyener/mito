@@ -423,6 +423,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     // Only shifts up if tag is > 3
     // --> want to be able to change to "if uitextfield is height of keyboard" 
     // Start Editing The Text Field
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print("Your textfield position : \(textField.frame)") // (x,y,width,height)
         //print("Your stack position : \(userpassstack.frame)")

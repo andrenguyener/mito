@@ -24,7 +24,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var productPeopleTab: UISegmentedControl!
     @IBOutlet weak var productView: UIView!
     @IBOutlet weak var peopleView: UIView!
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var searchBar: UISearchBar! // Product
+    
     @IBOutlet weak var spinnerProductSearch: UIActivityIndicatorView!
     
     @IBOutlet weak var productContainer: UIView!
@@ -137,20 +138,27 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // Pressed Enter (Only for product search at the moment)
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if productPeopleTab.selectedSegmentIndex == 0 {
-            spinnerProductSearch.isHidden = false
-            spinnerProductSearch.startAnimating()
-            if (searchBar.text!.count > 0) {
+            if (searchBar.text!.replacingOccurrences(of: " ", with: "").count > 0) { // tests for only spaces
+                spinnerProductSearch.isHidden = false
+                spinnerProductSearch.startAnimating()
+                
                 strSearchQuery = ""
                 strSearchQuery = searchBar.text!
+                productPeopleTab.isEnabled = false
+                fnLoadProductData(strCodedSearchQuery: searchBar.text!.replacingOccurrences(of: " ", with: "+"))
             } else {
-                strSearchQuery = "Amazon"
-                searchBar.text = "Amazon"
+                strSearchQuery = searchBar.text!.replacingOccurrences(of: " ", with: "")
+                searchBar.text! = ""
+                //strSearchQuery = "Amazon"
+                //searchBar.text = "Amazon"
             }
-            searchBar.resignFirstResponder()
-            productPeopleTab.isEnabled = false
-            fnLoadProductData(strCodedSearchQuery: searchBar.text!.replacingOccurrences(of: " ", with: "+"))
+            //productPeopleTab.isEnabled = false
+            
         }
+        searchBar.resignFirstResponder()
     }
+    
+    
     
     // Product Tab View
     func fnLoadProductData(strCodedSearchQuery: String) {
