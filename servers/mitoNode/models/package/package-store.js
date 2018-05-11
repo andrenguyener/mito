@@ -55,6 +55,46 @@ class PackageStore {
             });
     }
 
+    // Get all orders that user has sent to friends
+    getSentPackages(userId) {
+        return new Promise((resolve) => {
+            this.sql.acquire(function (err, connection) {
+                let procedureName = "uspcGetMySentPackages";
+                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
+                    if (err) {
+                        console.log(err)
+                    }
+                    connection.release();
+                });
+                request.addParameter('UserId', TYPES.Int, userId);
+                let jsonArray = []
+                request.on('row', function (columns) {
+                    var rowObject = {};
+                    columns.forEach(function (column) {
+                        if (column.value === null) {
+                            console.log('NULL');
+                        } else {
+                            rowObject[column.metadata.colName] = column.value;
+                        }
+                    });
+                    jsonArray.push(rowObject)
+                });
+
+                request.on('doneProc', function (rowCount, more) {
+                    resolve(jsonArray);
+                });
+
+                connection.callProcedure(request)
+            });
+        })
+            .then((jsonArray) => {
+                return jsonArray
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
 
     // Update Accept/Deny incoming package
     update(userId, senderId, orderId, response, shippingAddressId) {

@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"net/mail"
 	"sort"
 	"strconv"
 	"time"
@@ -445,39 +446,10 @@ func (ctx *Context) SessionsHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		// err != users.ErrUserNotFound && user != nil
-		if len(newSession.Email) != 0 {
+		_, err := mail.ParseAddress(newSession.Usercred)
+		if err != nil {
 			// Gets the user with the email from User Store.
-			user, err := ctx.UserStore.GetByEmail(newSession.Email)
-			if err != nil {
-				http.Error(w, "invalid credentials email", http.StatusUnauthorized)
-				return
-			}
-
-			// Authenticates the user with the provided password
-			err = user.Authenticate(newSession.Password)
-			if err != nil {
-				http.Error(w, "invalid credentials authenticate", http.StatusUnauthorized)
-				return
-			}
-
-			// Begin new session by getting the session state
-			sessionState := &SessionState{
-				Time: time.Now(),
-				User: user,
-			}
-
-			// Begins a new session with the context session signing key and the state
-			_, err = sessions.BeginSession(ctx.SessionKey, ctx.SessionStore, sessionState, w)
-			if err != nil {
-				http.Error(w, "Error beginning session: "+err.Error(), http.StatusInternalServerError)
-				return
-			}
-
-			respond(w, user)
-		} else {
-			// Gets the user with the email from User Store.
-			user, err := ctx.UserStore.GetByUserName(newSession.Username)
+			user, err := ctx.UserStore.GetByUserName(newSession.Usercred)
 			if err != nil {
 				http.Error(w, "invalid credentials username", http.StatusUnauthorized)
 				return
@@ -506,7 +478,38 @@ func (ctx *Context) SessionsHandler(w http.ResponseWriter, r *http.Request) {
 			}
 
 			respond(w, user)
+
+		} else {
+			// Gets the user with the email from User Store.
+			user, err := ctx.UserStore.GetByEmail(newSession.Usercred)
+			if err != nil {
+				http.Error(w, "invalid credentials email", http.StatusUnauthorized)
+				return
+			}
+
+			// Authenticates the user with the provided password
+			err = user.Authenticate(newSession.Password)
+			if err != nil {
+				http.Error(w, "invalid credentials authenticate", http.StatusUnauthorized)
+				return
+			}
+
+			// Begin new session by getting the session state
+			sessionState := &SessionState{
+				Time: time.Now(),
+				User: user,
+			}
+
+			// Begins a new session with the context session signing key and the state
+			_, err = sessions.BeginSession(ctx.SessionKey, ctx.SessionStore, sessionState, w)
+			if err != nil {
+				http.Error(w, "Error beginning session: "+err.Error(), http.StatusInternalServerError)
+				return
+			}
+
+			respond(w, user)
 		}
+		// err != users.ErrUserNotFound && user != nil
 
 	} else {
 		http.Error(w, "request method must be POST", http.StatusMethodNotAllowed)

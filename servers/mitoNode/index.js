@@ -64,6 +64,14 @@ const PaymentStore = require('./models/payment/payment-store');
 const Payment = require('./models/payment/payment-class');
 const PaymentHandler = require('./handlers/payment');
 
+const ImageStore = require('./models/image/image-store');
+const Image = require('./models/image/image-class');
+const ImageHandler = require('./handlers/image');
+
+const NotificationStore = require('./models/notification/notification-store');
+const Notification = require('./models/notification/notification-class');
+const NotificationHandler = require('./handlers/notification');
+
 const AmazonHashHandler = require('./handlers/amazon');
 
 
@@ -142,6 +150,8 @@ var TYPES = require('tedious').TYPES;
         let packageStore = new PackageStore(sql);
         let cartStore = new CartStore(sql);
         let paymentStore = new PaymentStore(sql);
+        let imageStore = new ImageStore(sql);
+        let notificationStore = new NotificationStore(sql);
 
         // API resource handlers.
         app.use(AddressHandler(addressStore));
@@ -151,6 +161,8 @@ var TYPES = require('tedious').TYPES;
         app.use(PackageHandler(packageStore));
         app.use(CartHandler(cartStore));
         app.use(PaymentHandler(paymentStore));
+        app.use(ImageHandler(imageStore));
+        app.use(NotificationHandler(notificationStore));
 
         app.use(AmazonHashHandler());
         app.listen(portNum, host, () => {
