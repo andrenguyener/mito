@@ -24,8 +24,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var productPeopleTab: UISegmentedControl!
     @IBOutlet weak var productView: UIView!
     @IBOutlet weak var peopleView: UIView!
-    @IBOutlet weak var searchBar: UISearchBar! // Product
-    
+    @IBOutlet weak var searchBar: UISearchBar! 
     @IBOutlet weak var spinnerProductSearch: UIActivityIndicatorView!
     
     @IBOutlet weak var productContainer: UIView!
