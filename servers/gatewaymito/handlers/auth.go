@@ -456,7 +456,7 @@ func (ctx *Context) SessionsHandler(w http.ResponseWriter, r *http.Request) {
 			}
 
 			user, err = ctx.UserStore.GetByEmail(user.UserEmail)
-
+			fmt.Println(user)
 			// Authenticates the user with the provided password
 			err = user.Authenticate(newSession.Password)
 			if err != nil {
@@ -499,7 +499,7 @@ func (ctx *Context) SessionsHandler(w http.ResponseWriter, r *http.Request) {
 				Time: time.Now(),
 				User: user,
 			}
-
+			fmt.Println(sessionState.User)
 			// Begins a new session with the context session signing key and the state
 			_, err = sessions.BeginSession(ctx.SessionKey, ctx.SessionStore, sessionState, w)
 			if err != nil {
