@@ -352,7 +352,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         boolSender = true
         if appdata.arrNotifications[button.tag] as? Person != nil {
             let objFriend = appdata.arrNotifications[button.tag] as! Person
-            fnAcceptOrDeclineFriendRequest(strFriendType: "Friend", intUserID: objFriend.intUserID)
+            fnAcceptOrDeclineFriendRequest(strFriendType: "Unfriend", intUserID: objFriend.intUserID)
         } else {
             let package = appdata.arrNotifications[button.tag] as! Package
             fnAcceptOrDeclinePackage(response: "Denied", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[0].intAddressID)

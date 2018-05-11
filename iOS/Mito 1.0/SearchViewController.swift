@@ -75,7 +75,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if UserDefaults.standard.object(forKey: "ProductSearchResultsJSON") != nil  && appdata.strSearchQuery != "" {
             productTableView.isHidden = false
             swirlSearchImg.isHidden = true
-            fnLoadProductData()
+            fnLoadProductData(strCodedSearchQuery: appdata.strSearchQuery.replacingOccurrences(of: " ", with: "+"))
 //            self.fnCheckLocalStorageProductSearchResults(filename: "ProductSearchResultsJSON")
         } else {
 //            swirlSearchImg.isHidden = false
@@ -140,24 +140,24 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             spinnerProductSearch.startAnimating()
             if (searchBar.text!.count > 0) {
                 appdata.strSearchQuery = ""
-                appdata.strSearchQuery = searchBar.text!.replacingOccurrences(of: " ", with: "+")
+                appdata.strSearchQuery = searchBar.text!
             } else {
                 appdata.strSearchQuery = "Amazon"
                 searchBar.text = "Amazon"
             }
             searchBar.resignFirstResponder()
             productPeopleTab.isEnabled = false
-            fnLoadProductData()
+            fnLoadProductData(strCodedSearchQuery: searchBar.text!.replacingOccurrences(of: " ", with: "+"))
         }
     }
     
     // Product Tab View
-    func fnLoadProductData() {
+    func fnLoadProductData(strCodedSearchQuery: String) {
         let urlAmazonProductCall = URL(string: "https://api.projectmito.io/v1/amazonhashtest")
         appdata.arrProductSearchResults.removeAll()
         print("fnLoadProductData Search query: \(appdata.strSearchQuery)")
         let parameters: Parameters = [
-            "keyword": appdata.strSearchQuery,
+            "keyword": strCodedSearchQuery,
             "pageNumber": strProductResultsPageNumber
         ]
         let headers: HTTPHeaders = [
@@ -371,12 +371,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func fnLoadPersonCell(cell: TableViewCell, objPerson: Person) -> TableViewCell {
         let urlPeopleImage = URL(string:"\(objPerson.avatar)")
-        let defaultURL = URL(string: appdata.strNoImageAvailable)
-        if let data = try? Data(contentsOf: urlPeopleImage!) {
-            cell.img.image = UIImage(data: data)!
-        } else if let data = try? Data(contentsOf: defaultURL!){
-            cell.img.image = UIImage(data: data)
-        }
+        cell.img.image = UIImage(data: try! Data(contentsOf: urlPeopleImage!))
         cell.name.text = "\(objPerson.firstName) \(objPerson.lastName)"
         cell.handle.text = "\(objPerson.email)"
         cell.friendshipType.text = "\(objPerson.avatar)"
