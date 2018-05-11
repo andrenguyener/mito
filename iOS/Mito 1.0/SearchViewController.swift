@@ -13,6 +13,7 @@ import Alamofire
 var myIndex = 0
 var mySection = 0
 var intSegmentedIndex = 0
+var strSearchQuery = ""
 
 class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate {
     
@@ -23,7 +24,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var productPeopleTab: UISegmentedControl!
     @IBOutlet weak var productView: UIView!
     @IBOutlet weak var peopleView: UIView!
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var searchBar: UISearchBar! 
     @IBOutlet weak var spinnerProductSearch: UIActivityIndicatorView!
     
     @IBOutlet weak var productContainer: UIView!
@@ -68,14 +69,14 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //        }
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
-        searchBar.text = appdata.strSearchQuery
+        searchBar.text = strSearchQuery
         spinnerProductSearch.isHidden = true
         strProductResultsPageNumber = 1
-        print("viewDidLoad Search query: \(appdata.strSearchQuery)")
-        if UserDefaults.standard.object(forKey: "ProductSearchResultsJSON") != nil  && appdata.strSearchQuery != "" {
+        print("viewDidLoad Search query: \(strSearchQuery)")
+        if UserDefaults.standard.object(forKey: "ProductSearchResultsJSON") != nil  && strSearchQuery != "" {
             productTableView.isHidden = false
             swirlSearchImg.isHidden = true
-            fnLoadProductData()
+            fnLoadProductData(strCodedSearchQuery: strSearchQuery.replacingOccurrences(of: " ", with: "+"))
 //            self.fnCheckLocalStorageProductSearchResults(filename: "ProductSearchResultsJSON")
         } else {
 //            swirlSearchImg.isHidden = false
@@ -136,28 +137,35 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // Pressed Enter (Only for product search at the moment)
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if productPeopleTab.selectedSegmentIndex == 0 {
-            spinnerProductSearch.isHidden = false
-            spinnerProductSearch.startAnimating()
-            if (searchBar.text!.count > 0) {
-                appdata.strSearchQuery = ""
-                appdata.strSearchQuery = searchBar.text!.replacingOccurrences(of: " ", with: "+")
+            if (searchBar.text!.replacingOccurrences(of: " ", with: "").count > 0) { // tests for only spaces
+                spinnerProductSearch.isHidden = false
+                spinnerProductSearch.startAnimating()
+                
+                strSearchQuery = ""
+                strSearchQuery = searchBar.text!
+                productPeopleTab.isEnabled = false
+                fnLoadProductData(strCodedSearchQuery: searchBar.text!.replacingOccurrences(of: " ", with: "+"))
             } else {
-                appdata.strSearchQuery = "Amazon"
-                searchBar.text = "Amazon"
+                strSearchQuery = searchBar.text!.replacingOccurrences(of: " ", with: "")
+                searchBar.text! = ""
+                //strSearchQuery = "Amazon"
+                //searchBar.text = "Amazon"
             }
-            searchBar.resignFirstResponder()
-            productPeopleTab.isEnabled = false
-            fnLoadProductData()
+            //productPeopleTab.isEnabled = false
+            
         }
+        searchBar.resignFirstResponder()
     }
     
+    
+    
     // Product Tab View
-    func fnLoadProductData() {
+    func fnLoadProductData(strCodedSearchQuery: String) {
         let urlAmazonProductCall = URL(string: "https://api.projectmito.io/v1/amazonhashtest")
         appdata.arrProductSearchResults.removeAll()
-        print("fnLoadProductData Search query: \(appdata.strSearchQuery)")
+        print("fnLoadProductData Search query: \(strSearchQuery)")
         let parameters: Parameters = [
-            "keyword": appdata.strSearchQuery,
+            "keyword": strCodedSearchQuery,
             "pageNumber": strProductResultsPageNumber
         ]
         let headers: HTTPHeaders = [
@@ -371,12 +379,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func fnLoadPersonCell(cell: TableViewCell, objPerson: Person) -> TableViewCell {
         let urlPeopleImage = URL(string:"\(objPerson.avatar)")
-        let defaultURL = URL(string: appdata.strNoImageAvailable)
-        if let data = try? Data(contentsOf: urlPeopleImage!) {
-            cell.img.image = UIImage(data: data)!
-        } else if let data = try? Data(contentsOf: defaultURL!){
-            cell.img.image = UIImage(data: data)
-        }
+        cell.img.image = UIImage(data: try! Data(contentsOf: urlPeopleImage!))
         cell.name.text = "\(objPerson.firstName) \(objPerson.lastName)"
         cell.handle.text = "\(objPerson.email)"
         cell.friendshipType.text = "\(objPerson.avatar)"

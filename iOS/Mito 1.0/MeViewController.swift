@@ -264,10 +264,34 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
             print(image)
             let cgImage = fnCropImage(image: image)
             imgProfilePic.image = UIImage(cgImage: cgImage)
+            let imageData: Data = UIImagePNGRepresentation(imgProfilePic.image!)!
+            fnUploadImage(imageData: imageData)
         } else {
             print("Error")
         }
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func fnUploadImage(imageData: Data) {
+        let urlUploadImage = URL(string: "https://api.projectmito.io/v1/image")
+        let parameters: Parameters = [
+            "imageData": imageData
+        ]
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlUploadImage!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    print(dictionary)
+                }
+                
+            case .failure(let error):
+                print("Accept or decline package error")
+                print(error)
+            }
+        }
     }
     
     func fnGetIncomingPackages2() {

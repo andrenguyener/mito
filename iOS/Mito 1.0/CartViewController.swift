@@ -191,13 +191,14 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
                     let arrCartItems = dictionary as! NSArray
                     for objCartItem in arrCartItems {
                         let dictCartItem = objCartItem as! NSDictionary
-                        let objectItem = Product(image: dictCartItem["ProductImageUrl"] as! String, ASIN: dictCartItem["AmazonItemId"] as! String, title: dictCartItem["ProductName"] as! String, publisher: "publisher", price: String(dictCartItem["AmazonItemPrice"] as! Double), description: "description")
+                        print(dictCartItem)
+                        let objectItem = Product(image: dictCartItem["ProductImageUrl"] as! String, ASIN: dictCartItem["AmazonItemId"] as! String, title: dictCartItem["ProductName"] as! String, publisher: "publisher", price: dictCartItem["AmazonItemPrice"] as! String, description: "description")
                         let intQuantity = dictCartItem["Quantity"] as! Int
                         let lineItem = LineItem(objProduct: objectItem, intQty: intQuantity)
                         self.appdata.arrCartLineItems.append(lineItem)
                     }
                     DispatchQueue.main.async {
-                        print("Number of items: \(self.intNumItems)")
+                        print("Number of items: \(self.appdata.arrCartLineItems.count)")
                         self.fnGetCartSubTotal()
                         self.fnSetCartLabels()
                         self.cartTableView.reloadData()
