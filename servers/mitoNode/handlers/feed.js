@@ -18,7 +18,7 @@ const FeedHandler = (feedStore) => {
     const router = express.Router();
 
     // Get all orders that another users has sent and received between friends
-    router.post('v1/feed', (req, res) => {
+    router.post('/v1/feed', (req, res) => {
         const userJSON = req.get('X-User');
         const user = JSON.parse(userJSON);
         var userId = user.userId;
@@ -36,7 +36,7 @@ const FeedHandler = (feedStore) => {
     });
 
     // Get all orders that users has sent and received between friends
-    router.get('v1/feed', (req, res) => {
+    router.get('/v1/feed', (req, res) => {
         const userJSON = req.get('X-User');
         const user = JSON.parse(userJSON);
         var userId = user.userId;
@@ -53,7 +53,7 @@ const FeedHandler = (feedStore) => {
     });
 
     // Get all orders that relevant friends has sent or received
-    router.get('v1/feed/friends', (req, res) => {
+    router.get('/v1/feed/friends', (req, res) => {
         const userJSON = req.get('X-User');
         const user = JSON.parse(userJSON);
         var userId = user.userId;
