@@ -125,6 +125,7 @@
                     <connections>
                         <outlet property="password" destination="i9J-yt-UsC" id="lFH-d3-WAZ"/>
                         <outlet property="username" destination="39o-Wv-VpO" id="W8a-Pa-Bg2"/>
+                        <outlet property="userpassstack" destination="jms-jt-aDl" id="S0P-T6-tE4"/>
                         <segue destination="vJa-9R-Sbw" kind="show" identifier="login" id="cTu-G9-fQe"/>
                         <segue destination="WyY-un-hcv" kind="show" identifier="signup" animates="NO" id="Tk8-BD-Yxk"/>
                     </connections>
@@ -756,7 +757,7 @@
         <image name="mitodesignblack.png" width="2000" height="1173"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="iia-I7-aut"/>
-        <segue reference="Fma-AT-nbz"/>
+        <segue reference="Tk8-BD-Yxk"/>
+        <segue reference="cTu-G9-fQe"/>
     </inferredMetricsTieBreakers>
 </document>
