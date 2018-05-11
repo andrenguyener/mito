@@ -9,20 +9,12 @@ class PackageStore {
         this.sql = sql;
     }
 
-    request(procedure) {
-        return new Request((`${procedure}`), function (err) {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
-
     //get all the users incoming packages
     getPackages(id, type) {
         return new Promise((resolve) => {
             this.sql.acquire(function (err, connection) {
                 let procedureName = "uspcGetMyPackages";
-                // var request = new Request(`${procedureName}`, function (err, rowCount, rows) {
+                // var request = Request(`${procedureName}`, function (err, rowCount, rows) {
                 //     if (err) {
                 //         console.log(err);
                 //     }
@@ -35,6 +27,46 @@ class PackageStore {
                 });
                 request.addParameter('UserId', TYPES.Int, id);
                 request.addParameter('Type', TYPES.NVarChar, type); //Pending, Accepted, Denied
+                let jsonArray = []
+                request.on('row', function (columns) {
+                    var rowObject = {};
+                    columns.forEach(function (column) {
+                        if (column.value === null) {
+                            console.log('NULL');
+                        } else {
+                            rowObject[column.metadata.colName] = column.value;
+                        }
+                    });
+                    jsonArray.push(rowObject)
+                });
+
+                request.on('doneProc', function (rowCount, more) {
+                    resolve(jsonArray);
+                });
+
+                connection.callProcedure(request)
+            });
+        })
+            .then((jsonArray) => {
+                return jsonArray
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
+    // Get all orders that user has sent to friends
+    getSentPackages(userId) {
+        return new Promise((resolve) => {
+            this.sql.acquire(function (err, connection) {
+                let procedureName = "uspcGetMySentPackages";
+                var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
+                    if (err) {
+                        console.log(err)
+                    }
+                    connection.release();
+                });
+                request.addParameter('UserId', TYPES.Int, userId);
                 let jsonArray = []
                 request.on('row', function (columns) {
                     var rowObject = {};

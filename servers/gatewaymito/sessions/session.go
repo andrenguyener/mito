@@ -45,7 +45,7 @@ func GetSessionID(r *http.Request, signingKey string) (SessionID, error) {
 	if !strings.HasPrefix(valAuth, schemeBearer) {
 		return InvalidSessionID, ErrInvalidScheme
 	}
-	trimSeshID := strings.Trim(valAuth, schemeBearer)
+	trimSeshID := strings.TrimPrefix(valAuth, schemeBearer)
 	SeshID, err := ValidateID(trimSeshID, signingKey)
 	if err != nil {
 		return InvalidSessionID, fmt.Errorf("Error validating ID %s trimmed sesh id= %s , signing key = %s", err, trimSeshID, signingKey)

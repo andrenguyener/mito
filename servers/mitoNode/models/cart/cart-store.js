@@ -8,13 +8,6 @@ class CartStore {
         this.sql = sql;
     }
 
-    request(procedure) {
-        return new Request((`${procedure}`), function (err) {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
     // Get items in cart based on a given userId
     get(id) {
         return new Promise((resolve) => {

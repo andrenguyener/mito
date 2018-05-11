@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"net/mail"
 	"sort"
 	"strconv"
 	"time"
@@ -16,7 +17,7 @@ type UserId struct {
 	UserId int `json:"userId"`
 }
 
-// UsersHandler allows new users to sign up (POST) or return all the users (GET)
+// UsersHandler allows new users to sign up (POST) or return all the users (GET) #signup
 func (ctx *Context) UsersHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "POST":
@@ -117,7 +118,7 @@ func (ctx *Context) UsersHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// Gets the user by its ID
+// Gets the user by its ID #getbyid
 func (ctx *Context) UsersIDHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "GET":
@@ -158,7 +159,7 @@ func (ctx *Context) UsersIDHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// UsersMeHandler allows users to get their current session state
+// UsersMeHandler allows users to get their current session state #getstate
 func (ctx *Context) UsersMeHandler(w http.ResponseWriter, r *http.Request) {
 
 	// get the session state
@@ -217,7 +218,7 @@ func (ctx *Context) UsersMeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// UsersPasswordHandler allows users to update their password
+// UsersPasswordHandler allows users to update their password #changepassword
 func (ctx *Context) UsersPasswordHandler(w http.ResponseWriter, r *http.Request) {
 
 	// get the session state
@@ -272,7 +273,7 @@ func (ctx *Context) UsersPasswordHandler(w http.ResponseWriter, r *http.Request)
 	}
 }
 
-// UsersPersonalHandler allows users to update their personal information
+// UsersPersonalHandler allows users to update their personal information #changepersonal
 func (ctx *Context) UsersPersonalHandler(w http.ResponseWriter, r *http.Request) {
 
 	// get the session state
@@ -349,7 +350,7 @@ func (ctx *Context) UsersPersonalHandler(w http.ResponseWriter, r *http.Request)
 	}
 }
 
-// UsersValidateHandler allows users to check if the inputted credentials are valid
+// UsersValidateHandler allows users to check if the inputted credentials are valid #validate
 func (ctx *Context) UsersValidateHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "POST":
@@ -398,7 +399,7 @@ func (ctx *Context) UsersValidateHandler(w http.ResponseWriter, r *http.Request)
 	}
 }
 
-// UsersAllHandler allows users to retrieve all the users
+// UsersAllHandler allows users to retrieve all the users #getall
 func (ctx *Context) UsersAllHandler(w http.ResponseWriter, r *http.Request) {
 
 	// get the session state
@@ -426,7 +427,7 @@ func (ctx *Context) UsersAllHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// SessionsHandler allows existing users to sign in
+// SessionsHandler allows existing users to sign in #signin
 func (ctx *Context) SessionsHandler(w http.ResponseWriter, r *http.Request) {
 	// The request must be POST
 	if r.Method == "POST" {
@@ -445,34 +446,70 @@ func (ctx *Context) SessionsHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		// Gets the user with the email from User Store.
-		user, err := ctx.UserStore.GetByEmail(newSession.Email)
+		_, err := mail.ParseAddress(newSession.Usercred)
 		if err != nil {
-			http.Error(w, "invalid credentials email", http.StatusUnauthorized)
-			return
-		}
+			// Gets the user with the email from User Store.
+			user, err := ctx.UserStore.GetByUserName(newSession.Usercred)
+			if err != nil {
+				http.Error(w, "invalid credentials username", http.StatusUnauthorized)
+				return
+			}
 
-		// Authenticates the user with the provided password
-		err = user.Authenticate(newSession.Password)
-		if err != nil {
-			http.Error(w, "invalid credentials authenticate", http.StatusUnauthorized)
-			return
-		}
+			user, err = ctx.UserStore.GetByEmail(user.UserEmail)
+			fmt.Println(user)
+			// Authenticates the user with the provided password
+			err = user.Authenticate(newSession.Password)
+			if err != nil {
+				http.Error(w, "invalid credentials authenticate", http.StatusUnauthorized)
+				return
+			}
 
-		// Begin new session by getting the session state
-		sessionState := &SessionState{
-			Time: time.Now(),
-			User: user,
-		}
+			// Begin new session by getting the session state
+			sessionState := &SessionState{
+				Time: time.Now(),
+				User: user,
+			}
 
-		// Begins a new session with the context session signing key and the state
-		_, err = sessions.BeginSession(ctx.SessionKey, ctx.SessionStore, sessionState, w)
-		if err != nil {
-			http.Error(w, "Error beginning session: "+err.Error(), http.StatusInternalServerError)
-			return
-		}
+			// Begins a new session with the context session signing key and the state
+			_, err = sessions.BeginSession(ctx.SessionKey, ctx.SessionStore, sessionState, w)
+			if err != nil {
+				http.Error(w, "Error beginning session: "+err.Error(), http.StatusInternalServerError)
+				return
+			}
 
-		respond(w, user)
+			respond(w, user)
+
+		} else {
+			// Gets the user with the email from User Store.
+			user, err := ctx.UserStore.GetByEmail(newSession.Usercred)
+			if err != nil {
+				http.Error(w, "invalid credentials email", http.StatusUnauthorized)
+				return
+			}
+
+			// Authenticates the user with the provided password
+			err = user.Authenticate(newSession.Password)
+			if err != nil {
+				http.Error(w, "invalid credentials authenticate", http.StatusUnauthorized)
+				return
+			}
+
+			// Begin new session by getting the session state
+			sessionState := &SessionState{
+				Time: time.Now(),
+				User: user,
+			}
+			fmt.Println(sessionState.User)
+			// Begins a new session with the context session signing key and the state
+			_, err = sessions.BeginSession(ctx.SessionKey, ctx.SessionStore, sessionState, w)
+			if err != nil {
+				http.Error(w, "Error beginning session: "+err.Error(), http.StatusInternalServerError)
+				return
+			}
+
+			respond(w, user)
+		}
+		// err != users.ErrUserNotFound && user != nil
 
 	} else {
 		http.Error(w, "request method must be POST", http.StatusMethodNotAllowed)
@@ -480,7 +517,7 @@ func (ctx *Context) SessionsHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// SessionsMineHandler allows authenticated users to sign out
+// SessionsMineHandler allows authenticated users to sign out #signout
 func (ctx *Context) SessionsMineHandler(w http.ResponseWriter, r *http.Request) {
 	// The request must be DELETE
 	if r.Method == "DELETE" {

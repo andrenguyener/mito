@@ -3,7 +3,7 @@
 
 const express = require('express');
 
-const Address = require('./../models/address/address-class');
+const Feed = require('./../models/feed/feed-class');
 const sendToMQ = require('./message-queue');
 
 const FeedHandler = (feedStore) => {
@@ -17,14 +17,56 @@ const FeedHandler = (feedStore) => {
 
     const router = express.Router();
 
-    // Get all friends past orders (limited to only names and message)
-    router.get('', (req, res) => {
-
+    // Get all orders that another users has sent and received between friends
+    router.post('v1/feed', (req, res) => {
+        const userJSON = req.get('X-User');
+        const user = JSON.parse(userJSON);
+        var userId = user.userId;
+        let friendId = req.body.friendId;
+        feedStore
+            .get(friendId)
+            .then(feed => {
+                res.json(feed)
+            })
+            .catch(error => {
+                if (error != breakSignal) {
+                    console.log(error)
+                }
+            })
     });
 
-    // Add User to feed
-    router.post('', (req, res) => {
+    // Get all orders that users has sent and received between friends
+    router.get('v1/feed', (req, res) => {
+        const userJSON = req.get('X-User');
+        const user = JSON.parse(userJSON);
+        var userId = user.userId;
+        feedStore
+            .get(userId)
+            .then(feed => {
+                res.json(feed)
+            })
+            .catch(error => {
+                if (error != breakSignal) {
+                    console.log(error)
+                }
+            })
+    });
 
+    // Get all orders that relevant friends has sent or received
+    router.get('v1/feed/friends', (req, res) => {
+        const userJSON = req.get('X-User');
+        const user = JSON.parse(userJSON);
+        var userId = user.userId;
+        feedStore
+            .getFriendsFeed(userId)
+            .then(feed => {
+                res.json(feed)
+            })
+            .catch(error => {
+                if (error != breakSignal) {
+                    console.log(error)
+                }
+            })
     });
 
 

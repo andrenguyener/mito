@@ -9,15 +9,6 @@ class AddressStore {
         this.sql = sql;
     }
 
-    request(procedure) {
-        return new Request((`${procedure}`), function (err) {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
-
-
     // insert() creates a new address in SqlServer.
     insert(address) {
         return new Promise((resolve) => {
@@ -37,9 +28,9 @@ class AddressStore {
                 request.addParameter('zipCode', TYPES.VarChar, address.zipCode);
                 request.addParameter('stateName', TYPES.VarChar, address.stateName);
                 request.addParameter('aliasName', TYPES.VarChar, address.aliasName);
-                // request.addOutputParameter('Address_Id', addressId);
+                // request.addOutputParameter('Address_Id', TYPES.NVarChar, addressId);
 
-                // request.on('returnValue', function (parameterName, value, metadata) { 
+                // request.on('returnValue', function (parameterName, value, metadata) {
                 //     console.log(parameterName);
                 //     console.log(value);
                 //     console.log(metadata);
