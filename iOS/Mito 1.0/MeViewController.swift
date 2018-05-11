@@ -418,7 +418,7 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
                     let arrPackages = dictionary as! NSArray
                     for objPackageTemp in arrPackages {
                         let elem = objPackageTemp as! NSDictionary
-                        let objPackage = Package(intGiftOption: elem["GiftOption"] as! Int, strOrderDate: elem["OrderDate"] as! String, intOrderID: elem["OrderId"] as! Int, strOrderMessage: elem["OrderMessage"] as! String, strPhotoUrl: elem["PhotoUrl"] as! String, intSenderID: elem["SenderId"] as! Int, strUserFName: elem["UserFname"] as! String, strUserLName: elem["UserLname"] as! String)//
+                        let objPackage = Package(intGiftOption: elem["GiftOption"] as! Int, strOrderDate: elem["OrderDate"] as! String, intOrderID: elem["OrderId"] as! Int, strOrderMessage: elem["OrderMessage"] as! String, strPhotoUrl: elem["PhotoUrl"] as! String, intSenderID: elem["SenderId"] as! Int, strUserFName: elem["UserFname"] as! String, strUserLName: elem["UserLname"] as! String, dateRequested: elem["CreatedAt"] as! Date)
                         self.appdata.arrCurrUserPackages.append(objPackage)
                     }
                     print("User has \(self.appdata.arrCurrUserPackages.count) packages")

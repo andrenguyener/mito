@@ -202,7 +202,7 @@
                         <outlet property="prodPrice" destination="AMD-hj-WHc" id="XGs-CK-e8b"/>
                         <outlet property="prodPub" destination="yoe-L6-xNv" id="fow-cP-Re0"/>
                         <outlet property="prodTitle" destination="H3a-LP-2zx" id="7bT-D4-IOA"/>
-                        <segue destination="k7p-V7-2cs" kind="show" identifier="backToTabController" id="TBj-ao-1ie"/>
+                        <segue destination="k7p-V7-2cs" kind="showDetail" identifier="backToTabController" id="TBj-ao-1ie"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M5p-h1-NZA" userLabel="First Responder" sceneMemberID="firstResponder"/>

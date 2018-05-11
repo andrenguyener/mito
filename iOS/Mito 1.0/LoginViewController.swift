@@ -147,7 +147,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     // Opening Login Page
     @IBAction func btnLoginPressed(_ sender: Any) {
         let parameters: Parameters = [
-            "userEmail": username.text!,
+            "usercred": username.text!,
             "password": password.text!
         ]
         
@@ -217,12 +217,12 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     var strUserDOB = ""
     
     @IBAction func btnNextPressed(_ sender: Any) {
-        let strFirstName = userFnameSU.text
-        let strLastName = self.strLastName.text
-        let strUserName = usernameSU.text
+        let strFirstName = userFnameSU.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let strLastName = self.strLastName.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let strUserName = usernameSU.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         let strPassword = passwordSU.text
         let strPasswordConfirmation = passwordConfSU.text
-        let strEmail = userEmailSU.text
+        let strEmail = userEmailSU.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         let strUserDOB = "\(strMonth)/\(strDay)/\(strYear)"
         
         let parameters: Parameters = [
@@ -401,22 +401,50 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             addressScrollView.keyboardDismissMode = .onDrag
         }
         self.hideKeyboard()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    
     }
     
+//    override func viewWillDisappear(_ animated: Bool) {
+//        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: self.view.window)
+//        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: self.view.window)
+//    }
+    
     // add textfield as delegate of viewcontroller first
+    // increment tags to delegate which uitextfield will be active after pressing return
+    // Only shifts up if tag is > 3
+    // --> want to be able to change to "if uitextfield is height of keyboard" 
     // Start Editing The Text Field
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        moveTextField(textField, moveDistance: -200, up: true)
+        print("Your textfield position : \(textField.frame)") // (x,y,width,height)
+        //print("Your stack position : \(userpassstack.frame)")
+        if textField.tag > 3 {
+            moveTextField(textField, moveDistance: -200, up: true)
+            print("Hey i entered")
+        }
     }
+    
+    @IBOutlet weak var userpassstack: UIStackView!
     
     // Finish Editing The Text Field
     func textFieldDidEndEditing(_ textField: UITextField) {
-        moveTextField(textField, moveDistance: -200, up: false)
+        if textField.tag > 3 {
+            moveTextField(textField, moveDistance: 200, up: true)
+            print("hey i ended")
+        }
     }
     
     // Hide the keyboard when the return key pressed
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        let nextTag = textField.tag + 1
+        if let nextResponder = textField.superview?.viewWithTag(nextTag) {
+            nextResponder.becomeFirstResponder()
+            print("next yo")
+        } else {
+            textField.resignFirstResponder()
+        }
         return true
     }
     
@@ -431,6 +459,11 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
         UIView.commitAnimations()
     }
+    
+    @objc func keyboardWillShow(sender: NSNotification) {
+       // let keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).CGRectValue()
+    }
+    
 }
 
 extension UIViewController {
