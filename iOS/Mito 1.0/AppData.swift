@@ -19,7 +19,6 @@ class AppData: NSObject {
     open var currPackage: Package = Package(intGiftOption: 0, strOrderDate: "", intOrderID: 0, strOrderMessage: "", strPhotoUrl: "", intSenderID: 0, strUserFName: "", strUserLName: "")
     open var strOrderMessage = "What's it for?"
     open let mainMitoColor = "41DD7C"
-    open var strSearchQuery = ""
     open var personToView: Person = Person(firstName: "FName", lastName: "LName", email: "", avatar: "dd", intUserID: 0, strUsername: "", intNumFriends: 0, dateRequested: Date.distantPast)
     
     open var arrFriends: [Person] = []
@@ -170,7 +169,6 @@ class AppData: NSObject {
                     let objUsers = dictionary as! NSArray
                     for objUser in objUsers {
                         let objPerson2 = objUser as! NSDictionary
-                        let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
                         print(objPerson2)
                         let objPerson = Person(firstName: objPerson2["UserFname"] as! String, lastName: objPerson2["UserLname"] as! String, email: objPerson2["UserEmail"] as! String, avatar: objPerson2["PhotoUrl"] as! String, intUserID: objPerson2["UserId"] as! Int, strUsername: objPerson2["Username"] as! String, intNumFriends: objPerson2["NumFriends"] as! Int)
                         self.arrAllUsers.append(objPerson)

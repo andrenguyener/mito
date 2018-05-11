@@ -300,7 +300,7 @@
                                 </variation>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Fs1-h8-PX9">
-                                <rect key="frame" x="20" y="368" width="335" height="240"/>
+                                <rect key="frame" x="20" y="548" width="335" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fsv-I5-Xyw">
                                         <rect key="frame" x="0.0" y="0.0" width="202" height="30"/>
@@ -334,6 +334,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2TV-N5-l9j">
                                         <rect key="frame" x="0.0" y="60" width="135" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Insert New Address"/>
                                         <connections>
                                             <action selector="fnInsertNewAddress:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="jyF-6c-1D5"/>
@@ -364,7 +365,8 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DpV-1F-jTa">
-                                        <rect key="frame" x="0.0" y="90" width="123" height="30"/>
+                                        <rect key="frame" x="0.0" y="60" width="123" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Change Password"/>
                                         <connections>
                                             <action selector="btnChangePassword:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="PBs-Ef-1ED"/>
@@ -372,25 +374,29 @@
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4B-wJ-w9k">
                                         <rect key="frame" x="0.0" y="120" width="42" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MVr-6R-m27">
-                                        <rect key="frame" x="0.0" y="150" width="42" height="30"/>
+                                        <rect key="frame" x="0.0" y="120" width="42" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7u-ZN-vbf">
-                                        <rect key="frame" x="0.0" y="180" width="94" height="30"/>
+                                        <rect key="frame" x="0.0" y="60" width="94" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Choose Place"/>
                                         <connections>
                                             <action selector="fnPickPlace:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="G4D-wE-oIF"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XLd-IW-sik">
-                                        <rect key="frame" x="0.0" y="210" width="144" height="30"/>
+                                        <rect key="frame" x="0.0" y="60" width="144" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Get Current Location"/>
                                         <connections>
                                             <action selector="fnGetCurrentLocation:" destination="Ela-Xp-3K3" eventType="touchUpInside" id="j68-TI-veI"/>
@@ -401,9 +407,15 @@
                                     <mask key="subviews">
                                         <exclude reference="Fsv-I5-Xyw"/>
                                         <exclude reference="gTl-jl-SVl"/>
+                                        <exclude reference="2TV-N5-l9j"/>
                                         <exclude reference="o0A-zd-r6F"/>
                                         <exclude reference="jeq-GC-wZz"/>
                                         <exclude reference="x9O-gk-cIg"/>
+                                        <exclude reference="DpV-1F-jTa"/>
+                                        <exclude reference="C4B-wJ-w9k"/>
+                                        <exclude reference="MVr-6R-m27"/>
+                                        <exclude reference="b7u-ZN-vbf"/>
+                                        <exclude reference="XLd-IW-sik"/>
                                     </mask>
                                 </variation>
                             </stackView>

@@ -13,6 +13,7 @@ import Alamofire
 var myIndex = 0
 var mySection = 0
 var intSegmentedIndex = 0
+var strSearchQuery = ""
 
 class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate {
     
@@ -68,14 +69,14 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //        }
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
-        searchBar.text = appdata.strSearchQuery
+        searchBar.text = strSearchQuery
         spinnerProductSearch.isHidden = true
         strProductResultsPageNumber = 1
-        print("viewDidLoad Search query: \(appdata.strSearchQuery)")
-        if UserDefaults.standard.object(forKey: "ProductSearchResultsJSON") != nil  && appdata.strSearchQuery != "" {
+        print("viewDidLoad Search query: \(strSearchQuery)")
+        if UserDefaults.standard.object(forKey: "ProductSearchResultsJSON") != nil  && strSearchQuery != "" {
             productTableView.isHidden = false
             swirlSearchImg.isHidden = true
-            fnLoadProductData(strCodedSearchQuery: appdata.strSearchQuery.replacingOccurrences(of: " ", with: "+"))
+            fnLoadProductData(strCodedSearchQuery: strSearchQuery.replacingOccurrences(of: " ", with: "+"))
 //            self.fnCheckLocalStorageProductSearchResults(filename: "ProductSearchResultsJSON")
         } else {
 //            swirlSearchImg.isHidden = false
@@ -139,10 +140,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             spinnerProductSearch.isHidden = false
             spinnerProductSearch.startAnimating()
             if (searchBar.text!.count > 0) {
-                appdata.strSearchQuery = ""
-                appdata.strSearchQuery = searchBar.text!
+                strSearchQuery = ""
+                strSearchQuery = searchBar.text!
             } else {
-                appdata.strSearchQuery = "Amazon"
+                strSearchQuery = "Amazon"
                 searchBar.text = "Amazon"
             }
             searchBar.resignFirstResponder()
@@ -155,7 +156,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func fnLoadProductData(strCodedSearchQuery: String) {
         let urlAmazonProductCall = URL(string: "https://api.projectmito.io/v1/amazonhashtest")
         appdata.arrProductSearchResults.removeAll()
-        print("fnLoadProductData Search query: \(appdata.strSearchQuery)")
+        print("fnLoadProductData Search query: \(strSearchQuery)")
         let parameters: Parameters = [
             "keyword": strCodedSearchQuery,
             "pageNumber": strProductResultsPageNumber

@@ -271,21 +271,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             }
         }
     }
-    
-    @objc func btnAcceptFriendRequest(_ button: UIButton) {
-        print(button.tag)
-        print(appdata.arrNotifications[button.tag])
-        let objFriend = appdata.arrNotifications[button.tag] as! Person
-        let intUserID = objFriend.intUserID
-        fnAcceptOrDeclineFriendRequest(strFriendType: "Friend", intUserID: intUserID)
-    }
-    
-    @objc func btnDeclineFriendRequest(_ button: UIButton) {
-        let objFriend = appdata.arrNotifications[button.tag] as! Person
-        let intUserID = objFriend.intUserID
-        fnAcceptOrDeclineFriendRequest(strFriendType: "Unfriend", intUserID: intUserID)
-    }
-    
+        
     func fnAcceptOrDeclineFriendRequest(strFriendType: String, intUserID: Int) {
         let parameters: Parameters = [
             "friendId": intUserID,
