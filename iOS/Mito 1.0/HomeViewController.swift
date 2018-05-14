@@ -79,6 +79,27 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appdata.socket.delegate = appDelegate.self
         appdata.socket.connect()
+        fnLoadFriendActivity()
+    }
+    
+    func fnLoadFriendActivity() {
+        let urlLoadFriendActivity = URL(string: "https://api.projectmito.io/v1/feed/friends")
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlLoadFriendActivity!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                print("Loaded Friend Activity")
+                if let dictionary = response.result.value {
+                    print(dictionary)
+                }
+                
+            case .failure(let error):
+                print("Error loading friend activity")
+                print(error)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {

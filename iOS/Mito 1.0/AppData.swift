@@ -35,6 +35,8 @@ class AppData: NSObject {
     open var arrFriendsAndAllMitoUsers: [[Person]] = []
     open var arrCurrFriendsAndAllMitoUsers: [[Person]] = []
     
+    open var arrFeedItems: [FeedItem] = []
+    
     
     // AnyObject array
     open var arrNotifications: [Notification] = []
@@ -53,15 +55,15 @@ class AppData: NSObject {
     
     open var arrCartLineItems: [LineItem] = []
     
-    open var arrFeedItems: [FeedItem] = [
-        FeedItem(avatar: "Sopheak.png", descr: "Ayyyy its finally time for us to ERD!!", time: "12m", whatHappened: "Sopheak Neak sent a gift to Andre Nguyen"),
-        FeedItem(avatar: "Andre2.png", descr: "WoW such talent! Hope this help improve your skills even more!", time: "50m", whatHappened: "Andre Nguyen sent a gift to Ammara Touch"),
-        FeedItem(avatar: "ammara.png", descr: "When life give you lemons, you make lemonade from the lemons, but remember to add water and sugar.", time: "1h", whatHappened: "Ammara Touch sent a gift to Benny Souriyadeth"),
-        FeedItem(avatar: "benny.png", descr: "hi", time: "3h", whatHappened: "Benny Souriyadeth sent a gift to Avina Vongpradith"),
-        FeedItem(avatar: "avina.png", descr: "Hey I appreciate you :)", time: "15h", whatHappened: "Avina Vongradith sent a gift to Sarah Phillips"),
-        FeedItem(avatar: "sarah.png", descr: "Heres something to help you get through all those nights of ERD's yo!", time: "1d", whatHappened: "Sarah Phillips sent a gift to JJ Guo"),
-        FeedItem(avatar: "jj.png", descr: "bro tonight is the night to ERD! Enjoy the gift.", time: "3d", whatHappened: "JJ Guo sent a gift to Sopheak Neak")
-    ]
+//    open var arrFeedItems: [FeedItem] = [
+//        FeedItem(avatar: "Sopheak.png", descr: "Ayyyy its finally time for us to ERD!!", time: "12m", whatHappened: "Sopheak Neak sent a gift to Andre Nguyen"),
+//        FeedItem(avatar: "Andre2.png", descr: "WoW such talent! Hope this help improve your skills even more!", time: "50m", whatHappened: "Andre Nguyen sent a gift to Ammara Touch"),
+//        FeedItem(avatar: "ammara.png", descr: "When life give you lemons, you make lemonade from the lemons, but remember to add water and sugar.", time: "1h", whatHappened: "Ammara Touch sent a gift to Benny Souriyadeth"),
+//        FeedItem(avatar: "benny.png", descr: "hi", time: "3h", whatHappened: "Benny Souriyadeth sent a gift to Avina Vongpradith"),
+//        FeedItem(avatar: "avina.png", descr: "Hey I appreciate you :)", time: "15h", whatHappened: "Avina Vongradith sent a gift to Sarah Phillips"),
+//        FeedItem(avatar: "sarah.png", descr: "Heres something to help you get through all those nights of ERD's yo!", time: "1d", whatHappened: "Sarah Phillips sent a gift to JJ Guo"),
+//        FeedItem(avatar: "jj.png", descr: "bro tonight is the night to ERD! Enjoy the gift.", time: "3d", whatHappened: "JJ Guo sent a gift to Sopheak Neak")
+//    ]
     
     open var tempAccountHolder : Parameters = (Dictionary<String, Any>)()
     
@@ -194,6 +196,33 @@ class AppData: NSObject {
                 print(error)
             }
         }
+    }
+    
+    func fnUTCToLocal(date:String) -> String {
+        print("UTC: \(date)")
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        
+        // Apply UTC
+        let dt = formatter.date(from: date)
+        
+        // Change to current
+        formatter.timeZone = TimeZone.current
+        formatter.dateFormat = "MMM d, h:mm a"
+        print("Local: \(formatter.string(from: dt!))")
+        
+        return formatter.string(from: dt!)
+    }
+    
+    func fnUTCToLocalDate(date: String) -> Date {
+        let strLocal = fnUTCToLocal(date: date)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        formatter.timeZone = TimeZone.current
+        let localDate: Date = formatter.date(from: strLocal)!
+        print("Local: \(localDate)")
+        return localDate
     }
     
     open func fnSortMitoUsers(this: Person, that: Person) -> Bool {

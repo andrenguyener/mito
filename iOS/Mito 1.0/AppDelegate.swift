@@ -58,6 +58,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WebSocketDelegate {
         self.window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "Open")
         GMSPlacesClient.provideAPIKey("AIzaSyBaLXoC_V215C_baCdiok-OSNSCJhJ1DvI")
         GMSServices.provideAPIKey("AIzaSyBaLXoC_V215C_baCdiok-OSNSCJhJ1DvI")
+        UINavigationBar.appearance().tintColor = UIColor(red:0.25, green:0.87, blue:0.49, alpha:1.0)
+        UINavigationBar.appearance().backgroundColor = UIColor.white
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white(), NSFontAttributeName: font]
         return true
     }
 

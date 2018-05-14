@@ -33,9 +33,17 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
 //        recognizer.startCamera()
     }
     @IBAction func btnFetchContacts(_ sender: Any) {
+        let dateDate = Date()
+        let diffFormatter = DateFormatter()
+        diffFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        diffFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let strUTCTime = diffFormatter.string(from: dateDate)
+        print("UTC: \(strUTCTime)")
+        let strLocalTime = fnUTCStrToLocalStr(date: strUTCTime)
+        print("Local: \(strLocalTime)")
 //        fnLoadMyActivity()
 //        fnLoadFriendActivity()
-        fnLoadNotifications()
+//        fnLoadNotifications()
 //        contactStore.requestAccess(for: .contacts) { (success,error) in
 //            if success {
 //                print("Authorization success")
@@ -43,6 +51,39 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
 //        }
 //        fnFetchContacts()
     }
+    
+    func fnUTCStrToLocalStr(date:String) -> String {
+        print("UTC: \(date)")
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        
+        // Apply UTC
+        let dt = formatter.date(from: date)
+        
+        // Change to current
+        formatter.timeZone = TimeZone.current
+        formatter.dateFormat = "MMM d, h:mm a"
+        
+        return formatter.string(from: dt!)
+    }
+    
+//    func fnHowLongAgo(date: Date) -> Date {
+//        print("UTC: \(date)")
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+//        formatter.timeZone = TimeZone(abbreviation: "UTC")
+//
+//        // Apply UTC
+//        let dt = formatter.string(from: date)
+//
+//        // Change to current
+//        formatter.timeZone = TimeZone.current
+//        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+//        print("Local: \(formatter.date(from: dt))")
+//
+//        return formatter.date(from: dt)!
+//    }
     
     func fnLoadMyActivity() {
         let urlLoadMyActivity = URL(string: "https://api.projectmito.io/v1/feed/")
@@ -408,12 +449,12 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
     func fnInsertNewAddress() {
         let urlInsertNewAddress = URL(string: "https://api.projectmito.io/v1/address/")
         let parameters: Parameters = [
-            "streetAddress1": "445 Mount Eden Road",
+            "streetAddress1": "286 Zerega Ave",
             "streetAddress2": "",
-            "cityName": "Philadelphia",
-            "stateName": "Pennsylvania",
-            "zipCode": 19019,
-            "aliasName": "Apartment"
+            "cityName": "Bronx",
+            "stateName": "NY",
+            "zipCode": 10473,
+            "aliasName": "Big Bro"
         ]
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
