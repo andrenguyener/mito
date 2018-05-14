@@ -13,7 +13,17 @@ import Starscream
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var greenTopView: UIView!
-
+    
+    @IBOutlet weak var segmentChooser: UISegmentedControl!
+    
+    @IBAction func switchTab(_ sender: UISegmentedControl) {
+        if segmentChooser.selectedSegmentIndex == 1 {
+            appdata.fnLoadMyActivity(tblview: tableView)
+        } else {
+            fnLoadFriendActivity()
+        }
+    }
+    
     func fnLoadCurrUserAddresses() {
         let urlGetMyAddresses = URL(string: "https://api.projectmito.io/v1/address/")
         let headers: HTTPHeaders = [
@@ -79,8 +89,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appdata.socket.delegate = appDelegate.self
         appdata.socket.connect()
-//        fnLoadFriendActivity()
-        appdata.fnLoadMyActivity()
+        fnLoadFriendActivity()
     }
     
     func fnLoadFriendActivity() {
@@ -108,7 +117,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                         let objFeed = FeedItem(strDate: strDate, photoSenderUrl: strPhotoUrl, strMessage: strMessage, strRecipientFName: strRecipientFName, strRecipientLName: strRecipientLName, strSenderFName: strSenderFName, strSenderLName: strSenderLName, intSenderId: intSenderId, intRecipientId: intRecipientId)
                         self.appdata.arrFriendsFeedItems.append(objFeed)
                     }
-                    
+                }
+                print("Total Friend Feed Items: \(self.appdata.arrFriendsFeedItems.count)")
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
                 }
                 
             case .failure(let error):
@@ -131,12 +143,21 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if segmentChooser.selectedSegmentIndex == 0 {
+            return appdata.arrFriendsFeedItems.count
+        }
         return appdata.arrMyFeedItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "homeCell", for: indexPath) as! HomeTableViewCell
-        let feedItemObj = appdata.arrMyFeedItems[indexPath.row]
+        var feedItemObj = FeedItem(strDate: "", photoSenderUrl: "", strMessage: "", strRecipientFName: "", strRecipientLName: "", strSenderFName: "", strSenderLName: "", intSenderId: 0, intRecipientId: 0)
+        print(indexPath.row)
+        if segmentChooser.selectedSegmentIndex == 0 {
+            feedItemObj = appdata.arrFriendsFeedItems[indexPath.row]
+        } else {
+            feedItemObj = appdata.arrMyFeedItems[indexPath.row]
+        }
         let urlProductImage = URL(string: "\(feedItemObj.photoSenderUrl)")
         if let data = try? Data(contentsOf: urlProductImage!) {
             cell.img.image = UIImage(data: data)!

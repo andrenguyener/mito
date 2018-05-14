@@ -58,7 +58,7 @@ class AppData: NSObject {
     
     open var tempAccountHolder : Parameters = (Dictionary<String, Any>)()
     
-    open func fnLoadMyActivity() {
+    open func fnLoadMyActivity(tblview: UITableView) {
         let urlLoadMyActivity = URL(string: "https://api.projectmito.io/v1/feed/")
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
@@ -84,6 +84,9 @@ class AppData: NSObject {
                         let objFeed = FeedItem(strDate: strDate, photoSenderUrl: strPhotoUrl, strMessage: strMessage, strRecipientFName: strRecipientFName, strRecipientLName: strRecipientLName, strSenderFName: strSenderFName, strSenderLName: strSenderLName, intSenderId: intSenderId, intRecipientId: intRecipientId)
                         self.arrMyFeedItems.append(objFeed)
                     }
+                }
+                DispatchQueue.main.async {
+                    tblview.reloadData()
                 }
                 
             case .failure(let error):
