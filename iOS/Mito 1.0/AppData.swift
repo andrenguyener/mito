@@ -35,7 +35,7 @@ class AppData: NSObject {
     open var arrFriendsAndAllMitoUsers: [[Person]] = []
     open var arrCurrFriendsAndAllMitoUsers: [[Person]] = []
     
-    open var arrFeedItems: [FeedItem] = []
+    open var arrFriendsFeedItems: [FeedItem] = []
     
     
     // AnyObject array
@@ -199,7 +199,6 @@ class AppData: NSObject {
     }
     
     func fnUTCToLocal(date:String) -> String {
-        print("UTC: \(date)")
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         formatter.timeZone = TimeZone(abbreviation: "UTC")
@@ -210,7 +209,6 @@ class AppData: NSObject {
         // Change to current
         formatter.timeZone = TimeZone.current
         formatter.dateFormat = "MMM d, h:mm a"
-        print("Local: \(formatter.string(from: dt!))")
         
         return formatter.string(from: dt!)
     }

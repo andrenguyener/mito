@@ -92,7 +92,22 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             case .success:
                 print("Loaded Friend Activity")
                 if let dictionary = response.result.value {
-                    print(dictionary)
+                    let arrFeedItems = dictionary as! NSArray
+                    for objFeedItem in arrFeedItems {
+                        let item = objFeedItem as! NSDictionary
+                        let strDate = item["OrderDate"] as! String
+                        let strMessage = item["OrderMessage"] as! String
+                        let strPhotoUrl = item["SenderPhotoUrl"] as! String
+                        let strRecipientFName = item["RecipientFirstName"] as! String
+                        let strRecipientLName = item["RecipientLastName"] as! String
+                        let strSenderFName = item["SenderFirstName"] as! String
+                        let strSenderLName = item["SenderLastName"] as! String
+                        let intRecipientId = item["RecipientId"] as! Int
+                        let intSenderId = item["SenderId"] as! Int
+                        let objFeed = FeedItem(strDate: strDate, photoSenderUrl: strPhotoUrl, strMessage: strMessage, strRecipientFName: strRecipientFName, strRecipientLName: strRecipientLName, strSenderFName: strSenderFName, strSenderLName: strSenderLName, intSenderId: intSenderId, intRecipientId: intRecipientId)
+                        self.appdata.arrFriendsFeedItems.append(objFeed)
+                    }
+                    
                 }
                 
             case .failure(let error):
@@ -115,16 +130,19 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return appdata.arrFeedItems.count
+        return appdata.arrFriendsFeedItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "homeCell", for: indexPath) as! HomeTableViewCell
-        let feedItemObj = appdata.arrFeedItems[indexPath.row]
-        cell.img.image = UIImage(named: "\(feedItemObj.avatar)")
-        cell.whatHappened.text = "\(feedItemObj.whatHappened)"
-        cell.time.text = "\(feedItemObj.time)"
-        cell.descr.text = "\(feedItemObj.descr)"
+        let feedItemObj = appdata.arrFriendsFeedItems[indexPath.row]
+        let urlProductImage = URL(string: "\(feedItemObj.photoSenderUrl)")
+        if let data = try? Data(contentsOf: urlProductImage!) {
+            cell.img.image = UIImage(data: data)!
+        }
+        cell.whatHappened.text = "\(feedItemObj.strSenderFName) \(feedItemObj.strSenderLName) sent \(feedItemObj.strRecipientFName) \(feedItemObj.strRecipientLName)"
+        cell.time.text = "\(appdata.fnUTCToLocal(date: feedItemObj.strDate))"
+        cell.descr.text = "\(feedItemObj.strMessage)"
         cell.whatHappened.numberOfLines = 2
         return cell
     }

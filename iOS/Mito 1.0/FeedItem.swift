@@ -9,15 +9,26 @@
 import Foundation
 
 class FeedItem {
-    var avatar: String = ""
-    var descr: String = ""
-    var time: String = ""
-    var whatHappened: String = ""
+    var strDate: String = ""
+    var photoSenderUrl: String = ""
+    var strMessage: String = ""
+    var strRecipientFName: String = ""
+    var strRecipientLName: String = ""
+    var strSenderFName: String = ""
+    var strSenderLName: String = ""
+    var intRecipientId: Int = 0
+    var intSenderId: Int = 0
     
-    init(avatar: String, descr: String, time: String, whatHappened: String) {
-        self.avatar = avatar
-        self.descr = descr
-        self.time = time
-        self.whatHappened = whatHappened
+    init(strDate: String, photoSenderUrl: String, strMessage: String, strRecipientFName: String, strRecipientLName: String, strSenderFName: String, strSenderLName: String, intSenderId : Int, intRecipientId : Int) {
+        self.strDate = strDate
+        self.photoSenderUrl = photoSenderUrl
+        self.strMessage = strMessage
+        self.strRecipientFName = strRecipientFName
+        self.strRecipientLName = strRecipientLName
+        self.strSenderFName = strSenderFName
+        self.strSenderLName = strSenderLName
+        self.intSenderId = intSenderId
+        self.intRecipientId = intRecipientId
     }
+
 }

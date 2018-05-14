@@ -33,16 +33,16 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
 //        recognizer.startCamera()
     }
     @IBAction func btnFetchContacts(_ sender: Any) {
-        let dateDate = Date()
-        let diffFormatter = DateFormatter()
-        diffFormatter.timeZone = TimeZone(abbreviation: "UTC")
-        diffFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        let strUTCTime = diffFormatter.string(from: dateDate)
-        print("UTC: \(strUTCTime)")
-        let strLocalTime = fnUTCStrToLocalStr(date: strUTCTime)
-        print("Local: \(strLocalTime)")
+//        let dateDate = Date()
+//        let diffFormatter = DateFormatter()
+//        diffFormatter.timeZone = TimeZone(abbreviation: "UTC")
+//        diffFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+//        let strUTCTime = diffFormatter.string(from: dateDate)
+//        print("UTC: \(strUTCTime)")
+//        let strLocalTime = fnUTCStrToLocalStr(date: strUTCTime)
+//        print("Local: \(strLocalTime)")
 //        fnLoadMyActivity()
-//        fnLoadFriendActivity()
+        fnLoadFriendActivity()
 //        fnLoadNotifications()
 //        contactStore.requestAccess(for: .contacts) { (success,error) in
 //            if success {
