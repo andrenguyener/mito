@@ -79,7 +79,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appdata.socket.delegate = appDelegate.self
         appdata.socket.connect()
-        fnLoadFriendActivity()
+//        fnLoadFriendActivity()
+        appdata.fnLoadMyActivity()
     }
     
     func fnLoadFriendActivity() {
@@ -130,17 +131,25 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return appdata.arrFriendsFeedItems.count
+        return appdata.arrMyFeedItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "homeCell", for: indexPath) as! HomeTableViewCell
-        let feedItemObj = appdata.arrFriendsFeedItems[indexPath.row]
+        let feedItemObj = appdata.arrMyFeedItems[indexPath.row]
         let urlProductImage = URL(string: "\(feedItemObj.photoSenderUrl)")
         if let data = try? Data(contentsOf: urlProductImage!) {
             cell.img.image = UIImage(data: data)!
         }
-        cell.whatHappened.text = "\(feedItemObj.strSenderFName) \(feedItemObj.strSenderLName) sent \(feedItemObj.strRecipientFName) \(feedItemObj.strRecipientLName)"
+        var strSender = "\(feedItemObj.strSenderFName) \(feedItemObj.strSenderLName)"
+        var strRecipient = "\(feedItemObj.strRecipientFName) \(feedItemObj.strRecipientLName)"
+        if feedItemObj.intSenderId == appdata.intCurrentUserID {
+            strSender = "You"
+        }
+        if feedItemObj.intRecipientId == appdata.intCurrentUserID {
+            strRecipient = "You"
+        }
+        cell.whatHappened.text = "\(strSender) sent \(strRecipient)"
         cell.time.text = "\(appdata.fnUTCToLocal(date: feedItemObj.strDate))"
         cell.descr.text = "\(feedItemObj.strMessage)"
         cell.whatHappened.numberOfLines = 2

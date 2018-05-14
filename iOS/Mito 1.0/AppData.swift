@@ -36,6 +36,7 @@ class AppData: NSObject {
     open var arrCurrFriendsAndAllMitoUsers: [[Person]] = []
     
     open var arrFriendsFeedItems: [FeedItem] = []
+    open var arrMyFeedItems: [FeedItem] = []
     
     
     // AnyObject array
@@ -55,17 +56,61 @@ class AppData: NSObject {
     
     open var arrCartLineItems: [LineItem] = []
     
-//    open var arrFeedItems: [FeedItem] = [
-//        FeedItem(avatar: "Sopheak.png", descr: "Ayyyy its finally time for us to ERD!!", time: "12m", whatHappened: "Sopheak Neak sent a gift to Andre Nguyen"),
-//        FeedItem(avatar: "Andre2.png", descr: "WoW such talent! Hope this help improve your skills even more!", time: "50m", whatHappened: "Andre Nguyen sent a gift to Ammara Touch"),
-//        FeedItem(avatar: "ammara.png", descr: "When life give you lemons, you make lemonade from the lemons, but remember to add water and sugar.", time: "1h", whatHappened: "Ammara Touch sent a gift to Benny Souriyadeth"),
-//        FeedItem(avatar: "benny.png", descr: "hi", time: "3h", whatHappened: "Benny Souriyadeth sent a gift to Avina Vongpradith"),
-//        FeedItem(avatar: "avina.png", descr: "Hey I appreciate you :)", time: "15h", whatHappened: "Avina Vongradith sent a gift to Sarah Phillips"),
-//        FeedItem(avatar: "sarah.png", descr: "Heres something to help you get through all those nights of ERD's yo!", time: "1d", whatHappened: "Sarah Phillips sent a gift to JJ Guo"),
-//        FeedItem(avatar: "jj.png", descr: "bro tonight is the night to ERD! Enjoy the gift.", time: "3d", whatHappened: "JJ Guo sent a gift to Sopheak Neak")
-//    ]
-    
     open var tempAccountHolder : Parameters = (Dictionary<String, Any>)()
+    
+    open func fnLoadMyActivity() {
+        let urlLoadMyActivity = URL(string: "https://api.projectmito.io/v1/feed/")
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlLoadMyActivity!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                print("Loaded My Activity")
+                if let dictionary = response.result.value {
+                    let arrFeedItems = dictionary as! NSArray
+                    //self.fnLoadActualFeedData(arrFeedItems: arrFeedItems, arr2: self.arrMyFeedItems)
+                    for objFeedItem in arrFeedItems {
+                        let item = objFeedItem as! NSDictionary
+                        let strDate = item["OrderDate"] as! String
+                        let strMessage = item["OrderMessage"] as! String
+                        let strPhotoUrl = item["SenderPhotoUrl"] as! String
+                        let strRecipientFName = item["RecipientFirstName"] as! String
+                        let strRecipientLName = item["RecipientLastName"] as! String
+                        let strSenderFName = item["SenderFirstName"] as! String
+                        let strSenderLName = item["SenderLastName"] as! String
+                        let intRecipientId = item["RecipientId"] as! Int
+                        let intSenderId = item["SenderId"] as! Int
+                        let objFeed = FeedItem(strDate: strDate, photoSenderUrl: strPhotoUrl, strMessage: strMessage, strRecipientFName: strRecipientFName, strRecipientLName: strRecipientLName, strSenderFName: strSenderFName, strSenderLName: strSenderLName, intSenderId: intSenderId, intRecipientId: intRecipientId)
+                        self.arrMyFeedItems.append(objFeed)
+                    }
+                }
+                
+            case .failure(let error):
+                print("Error loading my activity")
+                print(error)
+            }
+        }
+    }
+    
+    open func fnLoadActualFeedData(arrFeedItems: NSArray, arr2: [FeedItem]) {
+        var arr2: [FeedItem] = []
+        for objFeedItem in arrFeedItems {
+            let item = objFeedItem as! NSDictionary
+            let strDate = item["OrderDate"] as! String
+            let strMessage = item["OrderMessage"] as! String
+            let strPhotoUrl = item["SenderPhotoUrl"] as! String
+            let strRecipientFName = item["RecipientFirstName"] as! String
+            let strRecipientLName = item["RecipientLastName"] as! String
+            let strSenderFName = item["SenderFirstName"] as! String
+            let strSenderLName = item["SenderLastName"] as! String
+            let intRecipientId = item["RecipientId"] as! Int
+            let intSenderId = item["SenderId"] as! Int
+            let objFeed = FeedItem(strDate: strDate, photoSenderUrl: strPhotoUrl, strMessage: strMessage, strRecipientFName: strRecipientFName, strRecipientLName: strRecipientLName, strSenderFName: strSenderFName, strSenderLName: strSenderLName, intSenderId: intSenderId, intRecipientId: intRecipientId)
+            arr2.append(objFeed)
+        }
+        print(arrMyFeedItems.count)
+    }
     
     open func fnLoadStateData() {
         let urlStates = URL(string: "https://api.myjson.com/bins/penjf")
