@@ -51,13 +51,6 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
                 }
             }
         })
-//        let urlPeopleImage = URL(string:"\(objPerson.avatar)")
-//        let defaultURL = URL(string: "https://t3.ftcdn.net/jpg/00/64/67/80/240_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg")
-//        if let data = try? Data(contentsOf: urlPeopleImage!) {
-//            cell.img.image = UIImage(data: data)!
-//        } else if let data = try? Data(contentsOf: defaultURL!){
-//            cell.img.image = UIImage(data: data)
-//        }
         cell.name.text = "\(objPerson.firstName) \(objPerson.lastName)"
         cell.handle.text = "\(objPerson.email)"
         cell.friendshipType.text = "\(objPerson.avatar)"
@@ -121,6 +114,8 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
                         self.performSegue(withIdentifier: "CompleteChooseReceivingAddress", sender: self)
                     }))
                     self.present(alertController, animated: true, completion: nil)
+                    self.appdata.address = Address(intAddressID: 0, strAddressAlias: "", strCityName: "", strStateName: "", strStreetAddress1: "", strStreetAddress2: "", strZipCode: "")
+                    self.appdata.personRecipient = Person(firstName: "FName", lastName: "LName", email: "", avatar: "", intUserID: 0, strUsername: "", intNumFriends: 0)
                 }
                 
             case .failure(let error):
@@ -187,7 +182,6 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
                     let arrAddresses = dictionary as! NSArray
                     for elem in arrAddresses {
                         let objAddress = elem as! NSDictionary
-                        print(objAddress)
                         var strAddress2 = ""
                         if objAddress["StreetAddress2"] != nil {
                             strAddress2 = objAddress["StreetAddress2"] as! String
