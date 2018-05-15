@@ -1,5 +1,7 @@
 PODS:
   - Alamofire (4.7.0)
+  - AlamofireImage (3.3.1):
+    - Alamofire (~> 4.5)
   - GoogleMaps (2.7.0):
     - GoogleMaps/Maps (= 2.7.0)
   - GoogleMaps/Base (2.7.0)
@@ -16,6 +18,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
+  - AlamofireImage
   - GoogleMaps
   - GooglePlacePicker
   - GooglePlaces
@@ -26,6 +29,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
+    - AlamofireImage
     - GoogleMaps
     - GooglePlacePicker
     - GooglePlaces
@@ -35,6 +39,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
+  AlamofireImage: 3b35b586853abaf94ca1250f4e94cff3c21a4c0d
   GoogleMaps: f79af95cb24d869457b1f961c93d3ce8b2f3b848
   GooglePlacePicker: 59ea44db173c58486ad6123993e81feefcbce9c3
   GooglePlaces: 3d06e6c99654545b4738ce49648745779c25f2ef
@@ -42,6 +47,6 @@ SPEC CHECKSUMS:
   Starscream: f5da93fe6984c77b694366bf7299b7dc63a76f26
   SwiftDate: 7b56d42a221f582047287deb256b23fc5ed49a60
 
-PODFILE CHECKSUM: 035ae11f63b8402c87c0f5cd66a19534d79ceb24
+PODFILE CHECKSUM: cf2e863ba3f9dbef12a96c1fcf5f454be3b0e4b0
 
 COCOAPODS: 1.5.0

@@ -3,6 +3,7 @@ platform :ios, '9.0'
 
 target 'Mito 1.0' do
   pod 'Alamofire', '~> 4.7'
+  pod 'AlamofireImage'
   pod 'Starscream', '~> 3.0.2'
   pod 'GooglePlaces'
   pod 'GooglePlacePicker'
