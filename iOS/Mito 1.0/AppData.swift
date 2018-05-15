@@ -67,27 +67,36 @@ class AppData: NSObject {
             switch response.result {
             case .success:
                 print("Loaded My Activity")
-                if let dictionary = response.result.value {
-                    let arrFeedItems = dictionary as! NSArray
-                    //self.fnLoadActualFeedData(arrFeedItems: arrFeedItems, arr2: self.arrMyFeedItems)
-                    for objFeedItem in arrFeedItems {
-                        let item = objFeedItem as! NSDictionary
-                        let strDate = item["OrderDate"] as! String
-                        let strMessage = item["OrderMessage"] as! String
-                        let strPhotoUrl = item["SenderPhotoUrl"] as! String
-                        let strRecipientFName = item["RecipientFirstName"] as! String
-                        let strRecipientLName = item["RecipientLastName"] as! String
-                        let strSenderFName = item["SenderFirstName"] as! String
-                        let strSenderLName = item["SenderLastName"] as! String
-                        let intRecipientId = item["RecipientId"] as! Int
-                        let intSenderId = item["SenderId"] as! Int
-                        let objFeed = FeedItem(strDate: strDate, photoSenderUrl: strPhotoUrl, strMessage: strMessage, strRecipientFName: strRecipientFName, strRecipientLName: strRecipientLName, strSenderFName: strSenderFName, strSenderLName: strSenderLName, intSenderId: intSenderId, intRecipientId: intRecipientId)
-                        self.arrMyFeedItems.append(objFeed)
+                if let dictionary = response.data {
+                    let decoder = JSONDecoder()
+                    do {
+                        self.arrMyFeedItems = try decoder.decode([FeedItem].self, from: dictionary)
+                    } catch let jsonErr {
+                        print("Failed to decode: \(jsonErr)")
                     }
                     self.arrMyFeedItems.sort(by: self.fnSortFeedItems)
-                }
-                DispatchQueue.main.async {
-                    tblview.reloadData()
+//                if let dictionary = response.result.value {
+//                    let arrFeedItems = dictionary as! NSArray
+//                    //self.fnLoadActualFeedData(arrFeedItems: arrFeedItems, arr2: self.arrMyFeedItems)
+//                    for objFeedItem in arrFeedItems {
+//                        let item = objFeedItem as! NSDictionary
+//                        let strDate = item["OrderDate"] as! String
+//                        let strMessage = item["OrderMessage"] as! String
+//                        let strPhotoUrl = item["SenderPhotoUrl"] as! String
+//                        let strRecipientFName = item["RecipientFirstName"] as! String
+//                        let strRecipientLName = item["RecipientLastName"] as! String
+//                        let strSenderFName = item["SenderFirstName"] as! String
+//                        let strSenderLName = item["SenderLastName"] as! String
+//                        let intRecipientId = item["RecipientId"] as! Int
+//                        let intSenderId = item["SenderId"] as! Int
+//                        let objFeed = FeedItem(strDate: strDate, photoSenderUrl: strPhotoUrl, strMessage: strMessage, strRecipientFName: strRecipientFName, strRecipientLName: strRecipientLName, strSenderFName: strSenderFName, strSenderLName: strSenderLName, intRecipientId: intRecipientId, intSenderId: intSenderId)
+//                        self.arrMyFeedItems.append(objFeed)
+//                    }
+//                    self.arrMyFeedItems.sort(by: self.fnSortFeedItems)
+//                }
+                    DispatchQueue.main.async {
+                        tblview.reloadData()
+                    }
                 }
                 
             case .failure(let error):
@@ -110,7 +119,7 @@ class AppData: NSObject {
             let strSenderLName = item["SenderLastName"] as! String
             let intRecipientId = item["RecipientId"] as! Int
             let intSenderId = item["SenderId"] as! Int
-            let objFeed = FeedItem(strDate: strDate, photoSenderUrl: strPhotoUrl, strMessage: strMessage, strRecipientFName: strRecipientFName, strRecipientLName: strRecipientLName, strSenderFName: strSenderFName, strSenderLName: strSenderLName, intSenderId: intSenderId, intRecipientId: intRecipientId)
+            let objFeed = FeedItem(strDate: strDate, photoSenderUrl: strPhotoUrl, strMessage: strMessage, strRecipientFName: strRecipientFName, strRecipientLName: strRecipientLName, strSenderFName: strSenderFName, strSenderLName: strSenderLName, intRecipientId: intRecipientId, intSenderId: intSenderId)
             arr2.append(objFeed)
         }
         print(arrMyFeedItems.count)

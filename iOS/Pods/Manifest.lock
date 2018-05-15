@@ -15,6 +15,7 @@ PODS:
   - PayCardsRecognizer (1.1.4)
   - Starscream (3.0.4)
   - SwiftDate (4.5.1)
+  - SwiftyJSON (4.1.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
@@ -25,6 +26,7 @@ DEPENDENCIES:
   - PayCardsRecognizer
   - Starscream (~> 3.0.2)
   - SwiftDate
+  - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -36,6 +38,7 @@ SPEC REPOS:
     - PayCardsRecognizer
     - Starscream
     - SwiftDate
+    - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
@@ -46,7 +49,8 @@ SPEC CHECKSUMS:
   PayCardsRecognizer: b939eec21c6890d57c9f22cb8856517922b097a2
   Starscream: f5da93fe6984c77b694366bf7299b7dc63a76f26
   SwiftDate: 7b56d42a221f582047287deb256b23fc5ed49a60
+  SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: cf2e863ba3f9dbef12a96c1fcf5f454be3b0e4b0
+PODFILE CHECKSUM: 1fcfe5a49e42701c9d360801d1efcc4ff0e9d0ef
 
 COCOAPODS: 1.5.0

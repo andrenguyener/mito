@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import AlamofireImage
 import Starscream
+import SwiftyJSON
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -98,27 +99,33 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
-        Alamofire.request(urlLoadFriendActivity!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+        Alamofire.request(urlLoadFriendActivity!, method: .get, encoding: URLEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success:
                 print("Loaded Friend Activity")
-                if let dictionary = response.result.value {
-                    let arrFeedItems = dictionary as! NSArray
-                    for objFeedItem in arrFeedItems {
-                        let item = objFeedItem as! NSDictionary
-                        let strDate = item["OrderDate"] as! String
-                        print(strDate)
-                        let strMessage = item["OrderMessage"] as! String
-                        let strPhotoUrl = item["SenderPhotoUrl"] as! String
-                        let strRecipientFName = item["RecipientFirstName"] as! String
-                        let strRecipientLName = item["RecipientLastName"] as! String
-                        let strSenderFName = item["SenderFirstName"] as! String
-                        let strSenderLName = item["SenderLastName"] as! String
-                        let intRecipientId = item["RecipientId"] as! Int
-                        let intSenderId = item["SenderId"] as! Int
-                        let objFeed = FeedItem(strDate: strDate, photoSenderUrl: strPhotoUrl, strMessage: strMessage, strRecipientFName: strRecipientFName, strRecipientLName: strRecipientLName, strSenderFName: strSenderFName, strSenderLName: strSenderLName, intSenderId: intSenderId, intRecipientId: intRecipientId)
-                        self.appdata.arrFriendsFeedItems.append(objFeed)
+                if let dictionary = response.data {
+                    let decoder = JSONDecoder()
+                    do {
+                        self.appdata.arrFriendsFeedItems = try decoder.decode([FeedItem].self, from: dictionary)
+                    } catch let jsonErr {
+                        print("Failed to decode: \(jsonErr)")
                     }
+//                    let arrFeedItems = dictionary as! NSArray
+//                    for objFeedItem in arrFeedItems {
+//                        let item = objFeedItem as! NSDictionary
+//                        let strDate = item["OrderDate"].stringValue
+//                        print(strDate)
+//                        let strMessage = item["OrderMessage"] as! String
+//                        let strPhotoUrl = item["SenderPhotoUrl"] as! String
+//                        let strRecipientFName = item["RecipientFirstName"] as! String
+//                        let strRecipientLName = item["RecipientLastName"] as! String
+//                        let strSenderFName = item["SenderFirstName"] as! String
+//                        let strSenderLName = item["SenderLastName"] as! String
+//                        let intRecipientId = item["RecipientId"] as! Int
+//                        let intSenderId = item["SenderId"] as! Int
+//                        let objFeed = FeedItem(strDate: strDate, photoSenderUrl: strPhotoUrl, strMessage: strMessage, strRecipientFName: strRecipientFName, strRecipientLName: strRecipientLName, strSenderFName: strSenderFName, strSenderLName: strSenderLName, intSenderId: intSenderId, intRecipientId: intRecipientId)
+//                        self.appdata.arrFriendsFeedItems.append(objFeed)
+//                      }
                     self.appdata.arrFriendsFeedItems.sort(by: self.appdata.fnSortFeedItems)
                 }
                 print("Total Friend Feed Items: \(self.appdata.arrFriendsFeedItems.count)")
@@ -154,7 +161,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "homeCell", for: indexPath) as! HomeTableViewCell
-        var feedItemObj = FeedItem(strDate: "", photoSenderUrl: "", strMessage: "", strRecipientFName: "", strRecipientLName: "", strSenderFName: "", strSenderLName: "", intSenderId: 0, intRecipientId: 0)
+        var feedItemObj = FeedItem(strDate: "", photoSenderUrl: "", strMessage: "", strRecipientFName: "", strRecipientLName: "", strSenderFName: "", strSenderLName: "", intRecipientId: 0, intSenderId: 0)
         print(indexPath.row)
         if segmentChooser.selectedSegmentIndex == 0 {
             feedItemObj = appdata.arrFriendsFeedItems[indexPath.row]

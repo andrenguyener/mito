@@ -8,27 +8,26 @@
 
 import Foundation
 
-class FeedItem {
-    var strDate: String = ""
-    var photoSenderUrl: String = ""
-    var strMessage: String = ""
-    var strRecipientFName: String = ""
-    var strRecipientLName: String = ""
-    var strSenderFName: String = ""
-    var strSenderLName: String = ""
-    var intRecipientId: Int = 0
-    var intSenderId: Int = 0
+struct FeedItem: Decodable {
+    let strDate: String
+    let photoSenderUrl: String
+    let strMessage: String
+    let strRecipientFName: String
+    let strRecipientLName: String
+    let strSenderFName: String
+    let strSenderLName: String
+    let intRecipientId: Int
+    let intSenderId: Int
     
-    init(strDate: String, photoSenderUrl: String, strMessage: String, strRecipientFName: String, strRecipientLName: String, strSenderFName: String, strSenderLName: String, intSenderId : Int, intRecipientId : Int) {
-        self.strDate = strDate
-        self.photoSenderUrl = photoSenderUrl
-        self.strMessage = strMessage
-        self.strRecipientFName = strRecipientFName
-        self.strRecipientLName = strRecipientLName
-        self.strSenderFName = strSenderFName
-        self.strSenderLName = strSenderLName
-        self.intSenderId = intSenderId
-        self.intRecipientId = intRecipientId
+    private enum CodingKeys: String, CodingKey {
+        case strDate = "OrderDate"
+        case photoSenderUrl = "SenderPhotoUrl"
+        case strMessage = "OrderMessage"
+        case strRecipientFName = "RecipientFirstName"
+        case strRecipientLName = "RecipientLastName"
+        case strSenderFName = "SenderFirstName"
+        case strSenderLName = "SenderLastName"
+        case intRecipientId = "RecipientId"
+        case intSenderId = "SenderId"
     }
-
 }

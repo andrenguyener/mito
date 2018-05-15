@@ -10,4 +10,6 @@ target 'Mito 1.0' do
   pod 'GoogleMaps'
   pod 'PayCardsRecognizer'
   pod 'SwiftDate'
+  pod 'SwiftyJSON', '~> 4.0'
+#  pod 'Cloudinary', '~> 2.0'
 end
