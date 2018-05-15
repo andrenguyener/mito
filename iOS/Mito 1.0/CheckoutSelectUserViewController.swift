@@ -251,8 +251,7 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
         appdata.strOrderMessage = textviewWriteMessage.text
         performSegue(withIdentifier: "TypeMessageToCheckout", sender: self)
     }
-    
-    
+        
     @IBOutlet weak var lblCreditCardNumber: UITextField!
     @IBOutlet weak var lblChooseAddressHeading: UILabel!
     
