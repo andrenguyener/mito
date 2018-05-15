@@ -160,12 +160,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else {
             feedItemObj = appdata.arrMyFeedItems[indexPath.row]
         }
-//        let urlProductImage = URL(string: "\(feedItemObj.photoSenderUrl)")
-//        if let data = try? Data(contentsOf: urlProductImage!) {
-//            cell.img.image = UIImage(data: data)!
-//        }
-        let imageUrl = feedItemObj.photoSenderUrl
-        Alamofire.request(imageUrl).responseImage(completionHandler: { (response) in
+        Alamofire.request(feedItemObj.photoSenderUrl).responseImage(completionHandler: { (response) in
             print(response)
             if let image = response.result.value {
                 let circularImage = image.af_imageRoundedIntoCircle()

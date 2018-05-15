@@ -354,10 +354,19 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //                fnLoadProductData()
 //            }
             let objProduct = appdata.arrProductSearchResults[indexPath.row]
-            let urlProductImage = URL(string: "\(objProduct.image)")
-            if let data = try? Data(contentsOf: urlProductImage!) {
-                cell.img.image = UIImage(data: data)!
-            }
+//            let urlProductImage = URL(string: "\(objProduct.image)")
+//            if let data = try? Data(contentsOf: urlProductImage!) {
+//                cell.img.image = UIImage(data: data)!
+//            }
+            Alamofire.request(objProduct.image).responseImage(completionHandler: { (response) in
+                print(response)
+                if let image = response.result.value {
+                    let circularImage = image.af_imageRoundedIntoCircle()
+                    DispatchQueue.main.async {
+                        cell.img.image = circularImage
+                    }
+                }
+            })
             cell.title.text = objProduct.title
             print(objProduct.title)
             cell.publisher.text = objProduct.publisher
@@ -378,8 +387,17 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func fnLoadPersonCell(cell: TableViewCell, objPerson: Person) -> TableViewCell {
-        let urlPeopleImage = URL(string:"\(objPerson.avatar)")
-        cell.img.image = UIImage(data: try! Data(contentsOf: urlPeopleImage!))
+//        let urlPeopleImage = URL(string:"\(objPerson.avatar)")
+//        cell.img.image = UIImage(data: try! Data(contentsOf: urlPeopleImage!))
+        Alamofire.request(objPerson.avatar).responseImage(completionHandler: { (response) in
+            print(response)
+            if let image = response.result.value {
+                let circularImage = image.af_imageRoundedIntoCircle()
+                DispatchQueue.main.async {
+                    cell.img.image = circularImage
+                }
+            }
+        })
         cell.name.text = "\(objPerson.firstName) \(objPerson.lastName)"
         cell.handle.text = "@\(objPerson.strUsername)"
         return cell
