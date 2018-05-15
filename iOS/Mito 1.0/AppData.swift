@@ -247,28 +247,33 @@ class AppData: NSObject {
     }
     
     func fnUTCToLocal(date:String) -> String {
+        print("Original date String: \(date)")
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         formatter.timeZone = TimeZone(abbreviation: "UTC")
         
         // Apply UTC
         let dt = formatter.date(from: date)
+        print("Date version: \(dt?.description)")
         
         // Change to current
         formatter.timeZone = TimeZone.current
-        formatter.dateFormat = "MMM d, h:mm a"
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         
         return formatter.string(from: dt!)
     }
     
-    func fnUTCToLocalDate(date: String) -> Date {
+    func fnUTCToLocalDate(date: String, formatter: DateFormatter) -> Date {
         let strLocal = fnUTCToLocal(date: date)
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        formatter.timeZone = TimeZone.current
-        let localDate: Date = formatter.date(from: strLocal)!
-        print("Local: \(localDate)")
-        return localDate
+        let dateLocal = formatter.date(from: strLocal)
+//        print("String Local: \(strLocal)")
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+//        formatter.timeZone = TimeZone.current
+//        let localDate: Date = formatter.date(from: strLocal)!
+        print("Local: \(dateLocal)")
+        
+        return dateLocal!
     }
     
     open func fnSortMitoUsers(this: Person, that: Person) -> Bool {

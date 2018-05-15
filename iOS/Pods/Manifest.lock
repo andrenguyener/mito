@@ -12,6 +12,7 @@ PODS:
     - GoogleMaps/Base (= 2.7.0)
   - PayCardsRecognizer (1.1.4)
   - Starscream (3.0.4)
+  - SwiftDate (4.5.1)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
@@ -20,6 +21,7 @@ DEPENDENCIES:
   - GooglePlaces
   - PayCardsRecognizer
   - Starscream (~> 3.0.2)
+  - SwiftDate
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -29,6 +31,7 @@ SPEC REPOS:
     - GooglePlaces
     - PayCardsRecognizer
     - Starscream
+    - SwiftDate
 
 SPEC CHECKSUMS:
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
@@ -37,7 +40,8 @@ SPEC CHECKSUMS:
   GooglePlaces: 3d06e6c99654545b4738ce49648745779c25f2ef
   PayCardsRecognizer: b939eec21c6890d57c9f22cb8856517922b097a2
   Starscream: f5da93fe6984c77b694366bf7299b7dc63a76f26
+  SwiftDate: 7b56d42a221f582047287deb256b23fc5ed49a60
 
-PODFILE CHECKSUM: 9ae792ad8c563b36e24f8f1f9b5703042c5f82f2
+PODFILE CHECKSUM: 035ae11f63b8402c87c0f5cd66a19534d79ceb24
 
 COCOAPODS: 1.5.0

@@ -106,6 +106,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                     for objFeedItem in arrFeedItems {
                         let item = objFeedItem as! NSDictionary
                         let strDate = item["OrderDate"] as! String
+                        print(strDate)
                         let strMessage = item["OrderMessage"] as! String
                         let strPhotoUrl = item["SenderPhotoUrl"] as! String
                         let strRecipientFName = item["RecipientFirstName"] as! String

@@ -14,6 +14,7 @@ import GooglePlaces
 import GooglePlacePicker
 import PayCardsRecognizer
 import Contacts
+import SwiftDate
 
 class MeViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate, PayCardsRecognizerPlatformDelegate {
     
@@ -42,14 +43,30 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
 //        let strLocalTime = fnUTCStrToLocalStr(date: strUTCTime)
 //        print("Local: \(strLocalTime)")
 //        fnLoadMyActivity()
-        fnLoadFriendActivity()
+//        fnLoadFriendActivity()
 //        fnLoadNotifications()
+        fnUsePodTime(strDate: "2018-05-08T06:01:55.883Z")
 //        contactStore.requestAccess(for: .contacts) { (success,error) in
 //            if success {
 //                print("Authorization success")
 //            }
 //        }
 //        fnFetchContacts()
+    }
+    
+    // Get two dates. Get difference in dates. Then convert
+    func fnUsePodTime(strDate: String) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        let p_1 = strDate.date(format: .custom("MMM d, h:mm a"))
+        let date = DateInRegion()
+        print(p_1)
+        print(date)
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+//        formatter.timeZone = TimeZone(abbreviation: "UTC")
+//        let p_2 = date.date(formate: .custom("MMM d, h:mm a"))
     }
     
     func fnUTCStrToLocalStr(date:String) -> String {
@@ -357,7 +374,7 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
     }
     
     func fnCropImage(image: UIImage) -> CGImage {
-        let crop = CGRect(x: image.size.width / 2, y: image.size.height / 2, width: 200, height: 200)
+        let crop = CGRect(x: image.size.width / 2, y: image.size.height / 2, width: 20, height: 20)
         let imageRef2 = image.cgImage!.cropping(to: crop)
         return imageRef2!
         
@@ -368,7 +385,8 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
             print(image)
             let cgImage = fnCropImage(image: image)
             imgProfilePic.image = UIImage(cgImage: cgImage)
-            let imageData: Data = UIImagePNGRepresentation(imgProfilePic.image!)!
+            let imageData: Data = UIImageJPEGRepresentation(imgProfilePic.image!, 1)!
+            print(imageData)
             fnUploadImage(imageData: imageData)
         } else {
             print("Error")
@@ -384,18 +402,44 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
-        Alamofire.request(urlUploadImage!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                if let dictionary = response.result.value {
-                    print(dictionary)
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            for (key, value) in parameters {
+                let dataValue = value as! Data
+                multipartFormData.append(dataValue, withName: key)
+            }
+            multipartFormData.append(imageData, withName: "temp_file.jpeg")
+//            multipartFormData.append(imageData, withName: "image", fileName: "swift_file.jpeg", mimeType: "image/jpeg")
+        }, to: urlUploadImage!)
+        { (result) in
+            switch result {
+            case .success(let upload, _, _):
+                print("Successfully uploaded")
+                upload.uploadProgress(closure: { (Progress) in
+                    print("Upload Progress: \(Progress.fractionCompleted)")
+                })
+                
+                upload.responseJSON { response in
+                    //self.delegate?.showSuccessAlert()
+                    print(response.request)  // original URL request
+                    print(response.response) // URL response
+                    print(response.data)     // server data
+                    print(response.result)   // result of response serialization
+                    //                        self.showSuccesAlert()
+                    //self.removeImage("frame", fileExtension: "txt")
+                    if let JSON = response.result.value {
+                        print("JSON: \(JSON)")
+                    }
                 }
                 
-            case .failure(let error):
-                print("Accept or decline package error")
-                print(error)
+            case .failure(let encodingError):
+                //self.delegate?.showFailAlert()
+                print("Unsuccessfully uploaded")
+                print(encodingError)
             }
+            
         }
+        
+        ///
     }
     
     func fnGetIncomingPackages2() {
@@ -586,3 +630,4 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
         }
     }
 }
+

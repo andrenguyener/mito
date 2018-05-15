@@ -381,8 +381,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let urlPeopleImage = URL(string:"\(objPerson.avatar)")
         cell.img.image = UIImage(data: try! Data(contentsOf: urlPeopleImage!))
         cell.name.text = "\(objPerson.firstName) \(objPerson.lastName)"
-        cell.handle.text = "\(objPerson.email)"
-        cell.friendshipType.text = "\(objPerson.avatar)"
+        cell.handle.text = "@\(objPerson.strUsername)"
         return cell
     }
     
