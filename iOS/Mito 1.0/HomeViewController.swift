@@ -119,6 +119,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                         let objFeed = FeedItem(strDate: strDate, photoSenderUrl: strPhotoUrl, strMessage: strMessage, strRecipientFName: strRecipientFName, strRecipientLName: strRecipientLName, strSenderFName: strSenderFName, strSenderLName: strSenderLName, intSenderId: intSenderId, intRecipientId: intRecipientId)
                         self.appdata.arrFriendsFeedItems.append(objFeed)
                     }
+                    self.appdata.arrFriendsFeedItems.sort(by: self.appdata.fnSortFeedItems)
                 }
                 print("Total Friend Feed Items: \(self.appdata.arrFriendsFeedItems.count)")
                 DispatchQueue.main.async {

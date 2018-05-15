@@ -84,6 +84,7 @@ class AppData: NSObject {
                         let objFeed = FeedItem(strDate: strDate, photoSenderUrl: strPhotoUrl, strMessage: strMessage, strRecipientFName: strRecipientFName, strRecipientLName: strRecipientLName, strSenderFName: strSenderFName, strSenderLName: strSenderLName, intSenderId: intSenderId, intRecipientId: intRecipientId)
                         self.arrMyFeedItems.append(objFeed)
                     }
+                    self.arrMyFeedItems.sort(by: self.fnSortFeedItems)
                 }
                 DispatchQueue.main.async {
                     tblview.reloadData()
@@ -278,6 +279,10 @@ class AppData: NSObject {
     
     open func fnSortMitoUsers(this: Person, that: Person) -> Bool {
         return this.intNumFriends < that.intNumFriends
+    }
+    
+    open func fnSortFeedItems(this: FeedItem, that: FeedItem) -> Bool {
+        return this.strDate > that.strDate
     }
     
     open func fnDisplayAlert(title: String, message: String) -> UIAlertController {
