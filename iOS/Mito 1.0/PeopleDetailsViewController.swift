@@ -22,7 +22,6 @@ class PeopleDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        UINavigationBar.appearance().barTintColor = UIColor.green
         loadPersonData()
     }
     

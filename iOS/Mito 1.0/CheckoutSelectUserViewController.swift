@@ -42,13 +42,22 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
         let objPerson = self.appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
-        let urlPeopleImage = URL(string:"\(objPerson.avatar)")
-        let defaultURL = URL(string: "https://t3.ftcdn.net/jpg/00/64/67/80/240_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg")
-        if let data = try? Data(contentsOf: urlPeopleImage!) {
-            cell.img.image = UIImage(data: data)!
-        } else if let data = try? Data(contentsOf: defaultURL!){
-            cell.img.image = UIImage(data: data)
-        }
+        Alamofire.request(objPerson.avatar).responseImage(completionHandler: { (response) in
+            print(response)
+            if let image = response.result.value {
+                let circularImage = image.af_imageRoundedIntoCircle()
+                DispatchQueue.main.async {
+                    cell.img.image = circularImage
+                }
+            }
+        })
+//        let urlPeopleImage = URL(string:"\(objPerson.avatar)")
+//        let defaultURL = URL(string: "https://t3.ftcdn.net/jpg/00/64/67/80/240_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg")
+//        if let data = try? Data(contentsOf: urlPeopleImage!) {
+//            cell.img.image = UIImage(data: data)!
+//        } else if let data = try? Data(contentsOf: defaultURL!){
+//            cell.img.image = UIImage(data: data)
+//        }
         cell.name.text = "\(objPerson.firstName) \(objPerson.lastName)"
         cell.handle.text = "\(objPerson.email)"
         cell.friendshipType.text = "\(objPerson.avatar)"
