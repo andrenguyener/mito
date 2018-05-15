@@ -79,7 +79,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             fnLoadProductData(strCodedSearchQuery: strSearchQuery.replacingOccurrences(of: " ", with: "+"))
 //            self.fnCheckLocalStorageProductSearchResults(filename: "ProductSearchResultsJSON")
         } else {
-//            swirlSearchImg.isHidden = false
+            swirlSearchImg.isHidden = false
         }
 //        fnLoadProductData()
     }
@@ -140,7 +140,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             if (searchBar.text!.replacingOccurrences(of: " ", with: "").count > 0) { // tests for only spaces
                 spinnerProductSearch.isHidden = false
                 spinnerProductSearch.startAnimating()
-                
+                swirlSearchImg.isHidden = true
                 strSearchQuery = ""
                 strSearchQuery = searchBar.text!
                 productPeopleTab.isEnabled = false
@@ -156,8 +156,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         searchBar.resignFirstResponder()
     }
-    
-    
     
     // Product Tab View
     func fnLoadProductData(strCodedSearchQuery: String) {

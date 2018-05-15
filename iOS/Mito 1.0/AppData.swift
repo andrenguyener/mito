@@ -258,7 +258,7 @@ class AppData: NSObject {
         
         // Change to current
         formatter.timeZone = TimeZone.current
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        formatter.dateFormat = "MMM d, h:mm a"
         
         return formatter.string(from: dt!)
     }
@@ -296,12 +296,14 @@ class AppData: NSObject {
 //    }
     
     open func fnDisplaySimpleImage(strImageURL: String, img: UIImageView) {
-        let urlImage = URL(string:"\(strImageURL)")
-        let defaultURL = URL(string: "https://www.yankee-division.com/uploads/1/7/6/5/17659643/notavailable_2_orig.jpg?210b")
-        if let data = try? Data(contentsOf: urlImage!) {
-            img.image = UIImage(data: data)!
-        } else if let data = try? Data(contentsOf: defaultURL!){
-            img.image = UIImage(data: data)
-        }
+        Alamofire.request(strImageURL).responseImage(completionHandler: { (response) in
+            print(response)
+            if let image = response.result.value {
+                let circularImage = image.af_imageRoundedIntoCircle()
+                DispatchQueue.main.async {
+                    img.image = circularImage
+                }
+            }
+        })
     }
 }

@@ -317,29 +317,13 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
         performSegue(withIdentifier: "meToSettings", sender: self)
     }
     
-    @IBAction func loadCurrentUserAddresses(_ sender: Any) {
-        fnLoadCurrUserAddresses()
-    }
-    @IBAction func loadCurrentOrders(_ sender: Any) {
-        fnGetCurrentOrders()
-    }
     @IBAction func fnInsertNewAddress(_ sender: Any) {
         fnInsertNewAddress()
-    }
-    @IBAction func fnAcceptOrDeclinePackage(_ sender: Any) {
-        fnAcceptOrDeclinePackage()
-    }
-    @IBAction func fnGetPendingPackages(_ sender: Any) {
-        fnGetPendingPackages()
     }
     @IBAction func fnGetIncomingPackages(_ sender: Any) {
         fnGetIncomingPackages2()
     }
-    @IBAction func btnChangePassword(_ sender: Any) {
-        fnChangePassword()
-    }
-    
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         placesClient = GMSPlacesClient.shared()
@@ -465,31 +449,6 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
         }
     }
     
-    func fnAcceptOrDeclinePackage() {
-        let urlAcceptOrDeclinePackage = URL(string: "https://api.projectmito.io/v1/package/")
-        let parameters: Parameters = [
-            "senderId": 7,
-            "orderId": 19,
-            "response": "Accepted",
-            "shippingAddressId": 24
-        ]
-        let headers: HTTPHeaders = [
-            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
-        ]
-        Alamofire.request(urlAcceptOrDeclinePackage!, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                if let dictionary = response.result.value {
-                    print(dictionary)
-                }
-                
-            case .failure(let error):
-                print("Accept or decline package error")
-                print(error)
-            }
-        }
-    }
-    
     func fnInsertNewAddress() {
         let urlInsertNewAddress = URL(string: "https://api.projectmito.io/v1/address/")
         let parameters: Parameters = [
@@ -512,33 +471,6 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
                 
             case .failure(let error):
                 print("Insert new address error")
-                print(error)
-            }
-        }
-    }
-    
-    func fnLoadCurrUserAddresses() {
-        let urlGetMyAddresses = URL(string: "https://api.projectmito.io/v1/address/")
-        let headers: HTTPHeaders = [
-            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
-        ]
-        Alamofire.request(urlGetMyAddresses!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                if let dictionary = response.result.value {
-                    self.appdata.arrCurrUserAddresses.removeAll()
-                    let arrAddresses = dictionary as! NSArray
-                    for elem in arrAddresses {
-                        let objAddress = elem as! NSDictionary
-                        let objAddressObject = Address(intAddressID: objAddress["AddressId"] as! Int, strAddressAlias: objAddress["Alias"] as! String, strCityName: objAddress["CityName"] as! String, strStateName: objAddress["StateName"] as! String, strStreetAddress1: objAddress["StreetAddress"] as! String, strStreetAddress2: objAddress["StreetAddress2"] as! String, strZipCode: objAddress["ZipCode"] as! String)
-                        print("\(objAddress["Alias"] as! String) \(String(describing: objAddress["AddressId"]))")
-                        self.appdata.arrCurrUserAddresses.append(objAddressObject)
-                    }
-                    print("This user has \(self.appdata.arrCurrUserAddresses.count) addresses")
-                }
-                
-            case .failure(let error):
-                print("Get all addresses error")
                 print(error)
             }
         }
@@ -570,62 +502,6 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
             case .failure(let error):
                 print("Get current orders error")
                 print(error)
-            }
-        }
-    }
-    
-    func fnGetPendingPackages() {
-        let urlGetPendingPackages = URL(string: "https://api.projectmito.io/v1/package")
-        let parameters: Parameters = [
-            "type": "Pending"
-        ]
-        let headers: HTTPHeaders = [
-            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
-        ]
-        Alamofire.request(urlGetPendingPackages!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                if let dictionary = response.result.value {
-                    print(dictionary)
-                    let arrPackages = dictionary as! NSArray
-                    for objPackageTemp in arrPackages {
-                        let elem = objPackageTemp as! NSDictionary
-                        let objPackage = Package(intGiftOption: elem["GiftOption"] as! Int, strOrderDate: elem["OrderDate"] as! String, intOrderID: elem["OrderId"] as! Int, strOrderMessage: elem["OrderMessage"] as! String, strPhotoUrl: elem["PhotoUrl"] as! String, intSenderID: elem["SenderId"] as! Int, strUserFName: elem["UserFname"] as! String, strUserLName: elem["UserLname"] as! String, dateRequested: elem["CreatedAt"] as! Date)
-                        self.appdata.arrCurrUserPackages.append(objPackage)
-                    }
-                    print("User has \(self.appdata.arrCurrUserPackages.count) packages")
-                }
-                
-            case .failure(let error):
-                print("Get pending packages error")
-                print(error)
-            }
-        }
-    }
-    
-    func fnChangePassword() {
-        let urlChangePassword = URL(string: "https://api.projectmito.io/v1/users/password")
-        let parameters: Parameters = [
-            "password": "123456",
-            "passwordNew": "asdfgh",
-            "passwordNewConf": "asdfgh"
-        ]
-        let headers: HTTPHeaders = [
-            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
-        ]
-        Alamofire.request(urlChangePassword!, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
-            switch response.result {
-            case .success:
-                if let dictionary = response.result.value {
-                    print(dictionary)
-                }
-                
-            case .failure(let error):
-                print("Change password error")
-                print(error)
-                if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-                    print(data)
-                }
             }
         }
     }

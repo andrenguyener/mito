@@ -28,7 +28,9 @@ class PeopleDetailsViewController: UIViewController {
     func loadPersonData() {
         fnCheckFriendStatus()
         let friend = appdata.personToView
-        lblName.text = "\(friend.firstName) \(friend.lastName)"
+        let strName = "\(friend.firstName) \(friend.lastName)"
+        lblName.text = strName
+        self.navigationItem.title = strName
         lblUsername.text = "@\(friend.strUsername)"
         btnNumFriends.setTitle("\(friend.intNumFriends) friends", for: .normal)
         appdata.fnDisplaySimpleImage(strImageURL: friend.avatar, img: img)
@@ -104,7 +106,10 @@ class PeopleDetailsViewController: UIViewController {
         if segue.identifier == "segPeopleDetailsToSearchView" {
             let tabBarController = segue.destination as! UITabBarController
             tabBarController.selectedIndex = 1
-            
+        } else if segue.identifier == "searchToMitoProfile" {
+            let backItem = UIBarButtonItem()
+            backItem.title = "Search People"
+            navigationItem.backBarButtonItem = backItem
         }
     }
 }
