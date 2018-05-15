@@ -8,23 +8,26 @@
 
 import Foundation
 
-class Address {
-    var intAddressID: Int = 0
-    var strAddressAlias = ""
-    var strCityName = ""
-    var strStateName = ""
-    var strStreetAddress1 = ""
-    var strStreetAddress2 = ""
-    var strZipCode = ""
+struct Address: Decodable {
+    let intAddressID: Int?
+    let strAddressAlias: String?
+    let strCityName: String?
+    let strStateName: String?
+    let strStreetAddress1: String?
+    let strStreetAddress2: String?
+    let strZipCode: String?
     
-    init(intAddressID: Int, strAddressAlias: String, strCityName: String, strStateName: String, strStreetAddress1: String,
-         strStreetAddress2: String, strZipCode: String) {
-        self.intAddressID = intAddressID
-        self.strAddressAlias = strAddressAlias
-        self.strCityName = strCityName
-        self.strStateName = strStateName
-        self.strStreetAddress1 = strStreetAddress1
-        self.strStreetAddress2 = strStreetAddress2
-        self.strZipCode = strZipCode
+    
+//    let objAddressObject = Address(intAddressID: objAddress["AddressId"] as! Int, strAddressAlias: objAddress["Alias"] as! String, strCityName: objAddress["CityName"] as! String, strStateName: objAddress["StateName"] as! String, strStreetAddress1: objAddress["StreetAddress"] as! String, strStreetAddress2: strAddress2, strZipCode: objAddress["ZipCode"] as! String)
+//    print("\(objAddress["Alias"] as! String) \(String(describing: objAddress["AddressId"]))")
+    
+    private enum CodingKeys: String, CodingKey {
+        case intAddressID = "AddressId"
+        case strAddressAlias = "Alias"
+        case strCityName = "CityName"
+        case strStateName = "StateName"
+        case strStreetAddress1 = "StreetAddress"
+        case strStreetAddress2 = "StreetAddress2"
+        case strZipCode = "ZipCode"
     }
 }

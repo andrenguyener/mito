@@ -35,9 +35,9 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
         if tblviewAddress != nil {
             let cell = tableView.dequeueReusableCell(withIdentifier: "AddressTableViewCell", for: indexPath) as! AddressTableViewCell
             let objAddress = self.appdata.arrCurrUserAddresses[indexPath.row]
-            cell.strAddressNickname.text = objAddress.strAddressAlias
-            cell.strAddressStreet.text = "\(objAddress.strStreetAddress1) \(objAddress.strStreetAddress2)"
-            cell.strCityStateZIP.text = "\(objAddress.strCityName), \(objAddress.strStateName) \(objAddress.strZipCode)"
+            cell.strAddressNickname.text = objAddress.strAddressAlias!
+            cell.strAddressStreet.text = "\(objAddress.strStreetAddress1!) \(objAddress.strStreetAddress2 ?? "")"
+            cell.strCityStateZIP.text = "\(objAddress.strCityName!), \(objAddress.strStateName!) \(objAddress.strZipCode!)"
             return cell
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
@@ -79,7 +79,7 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
                 performSegue(withIdentifier: "ChooseAddressToCheckout", sender: self)
             } else {
                 appdata.address = appdata.arrCurrUserAddresses[indexPath.row]
-                fnAcceptOrDeclinePackage(response: "Accepted", senderId: appdata.currPackage.intSenderID, orderId: appdata.currPackage.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[indexPath.row].intAddressID)
+                fnAcceptOrDeclinePackage(response: "Accepted", senderId: appdata.currPackage.intSenderID, orderId: appdata.currPackage.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[indexPath.row].intAddressID!)
             }
         } else if tblviewPeople != nil {
             appdata.personRecipient = appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
@@ -177,20 +177,13 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
         Alamofire.request(urlGetMyAddresses!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success:
-                if let dictionary = response.result.value {
-                    self.appdata.arrCurrUserAddresses.removeAll()
-                    let arrAddresses = dictionary as! NSArray
-                    for elem in arrAddresses {
-                        let objAddress = elem as! NSDictionary
-                        var strAddress2 = ""
-                        if objAddress["StreetAddress2"] != nil {
-                            strAddress2 = objAddress["StreetAddress2"] as! String
-                        }
-                        let objAddressObject = Address(intAddressID: objAddress["AddressId"] as! Int, strAddressAlias: objAddress["Alias"] as! String, strCityName: objAddress["CityName"] as! String, strStateName: objAddress["StateName"] as! String, strStreetAddress1: objAddress["StreetAddress"] as! String, strStreetAddress2: strAddress2, strZipCode: objAddress["ZipCode"] as! String)
-                        print("\(objAddress["Alias"] as! String) \(String(describing: objAddress["AddressId"]))")
-                        self.appdata.arrCurrUserAddresses.append(objAddressObject)
+                if let dictionary = response.data {
+                    let decoder = JSONDecoder()
+                    do {
+                        self.appdata.arrCurrUserAddresses = try decoder.decode([Address].self, from: dictionary)
+                    } catch let jsonErr {
+                        print("Failed to decode: \(jsonErr)")
                     }
-                    print("This user has \(self.appdata.arrCurrUserAddresses.count) addresses")
                 }
                 DispatchQueue.main.async {
                     if (self.appdata.arrCurrUserAddresses.count > 0) {
@@ -205,7 +198,6 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
             }
         }
     }
-
     
     func fnAddNewAddress(strStreet: String, strCity: String, strState: String, strStateZip: String, strAlias: String) {
         let parameters: Parameters = [
@@ -251,7 +243,7 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
         appdata.strOrderMessage = textviewWriteMessage.text
         performSegue(withIdentifier: "TypeMessageToCheckout", sender: self)
     }
-        
+    
     @IBOutlet weak var lblCreditCardNumber: UITextField!
     @IBOutlet weak var lblChooseAddressHeading: UILabel!
     

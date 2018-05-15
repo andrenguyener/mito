@@ -320,7 +320,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     @objc func btnDenyPackage(_ button: UIButton) {
         boolSender = false
         let package = appdata.arrNotifications[button.tag] as! Package
-        fnAcceptOrDeclinePackage(strPackageAction: "Denied", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[0].intAddressID)
+        fnAcceptOrDeclinePackage(strPackageAction: "Denied", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[0].intAddressID!)
     }
     
     @objc func btnAccept(_ button: UIButton) {
@@ -343,7 +343,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             fnAcceptOrDeclineFriendRequest(strFriendType: "Unfriend", intUserID: objFriend.intUserID)
         } else {
             let package = appdata.arrNotifications[button.tag] as! Package
-            fnAcceptOrDeclinePackage(strPackageAction: "Denied", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[0].intAddressID)
+            fnAcceptOrDeclinePackage(strPackageAction: "Denied", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[0].intAddressID!)
         }
     }
     
