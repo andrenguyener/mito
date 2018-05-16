@@ -8,12 +8,24 @@
 
 import UIKit
 import Alamofire
+import AlamofireImage
 import Starscream
+import SwiftyJSON
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var greenTopView: UIView!
-
+    
+    @IBOutlet weak var segmentChooser: UISegmentedControl!
+    
+    @IBAction func switchTab(_ sender: UISegmentedControl) {
+        if segmentChooser.selectedSegmentIndex == 1 {
+            appdata.fnLoadMyActivity(tblview: tableView, intUserId: appdata.intCurrentUserID, arr: appdata.arrMyFeedItems)
+        } else {
+            appdata.fnLoadFriendActivity(tblview: tableView)
+        }
+    }
+    
     func fnLoadCurrUserAddresses() {
         let urlGetMyAddresses = URL(string: "https://api.projectmito.io/v1/address/")
         let headers: HTTPHeaders = [
@@ -22,28 +34,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         Alamofire.request(urlGetMyAddresses!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success:
-                if let dictionary = response.result.value {
-                    self.appdata.arrCurrUserAddresses.removeAll()
-                    let arrAddresses = dictionary as! NSArray
-                    for elem in arrAddresses {
-                        let objAddress = elem as! NSDictionary
-                        print(objAddress)
-                        var strAddress2 = ""
-                        if objAddress["StreetAddress2"] != nil {
-                            strAddress2 = objAddress["StreetAddress2"] as! String
-                        }
-                        let objAddressObject = Address(intAddressID: objAddress["AddressId"] as! Int, strAddressAlias: objAddress["Alias"] as! String, strCityName: objAddress["CityName"] as! String, strStateName: objAddress["StateName"] as! String, strStreetAddress1: objAddress["StreetAddress"] as! String, strStreetAddress2: strAddress2, strZipCode: objAddress["ZipCode"] as! String)
-                        print("\(objAddress["Alias"] as! String) \(String(describing: objAddress["AddressId"]))")
-                        self.appdata.arrCurrUserAddresses.append(objAddressObject)
+                if let dictionary = response.data {
+                    let decoder = JSONDecoder()
+                    do {
+                        self.appdata.arrCurrUserAddresses = try decoder.decode([Address].self, from: dictionary)
+                    } catch let jsonErr {
+                        print("Failed to decode: \(jsonErr)")
                     }
-                    print("This user has \(self.appdata.arrCurrUserAddresses.count) addresses")
-                }
-                DispatchQueue.main.async {
-                    if (self.appdata.arrCurrUserAddresses.count > 0) {
-                        print("Load Current User Addresses: \(self.appdata.arrCurrUserAddresses[self.appdata.arrCurrUserAddresses.count - 1].strAddressAlias)")
-                    }
-                    //                    self.appdata.address = self.appdata.arrCurrUserAddresses[self.appdata.arrCurrUserAddresses.count - 1]
-//                    self.tblviewAddress.reloadData()
                 }
                 
             case .failure(let error):
@@ -79,8 +76,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appdata.socket.delegate = appDelegate.self
         appdata.socket.connect()
+        appdata.fnLoadFriendActivity(tblview: tableView)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -94,16 +92,42 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return appdata.arrFeedItems.count
+        if segmentChooser.selectedSegmentIndex == 0 {
+            return appdata.arrFriendsFeedItems.count
+        }
+        return appdata.arrMyFeedItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "homeCell", for: indexPath) as! HomeTableViewCell
-        let feedItemObj = appdata.arrFeedItems[indexPath.row]
-        cell.img.image = UIImage(named: "\(feedItemObj.avatar)")
-        cell.whatHappened.text = "\(feedItemObj.whatHappened)"
-        cell.time.text = "\(feedItemObj.time)"
-        cell.descr.text = "\(feedItemObj.descr)"
+        var feedItemObj = FeedItem(strDate: "", photoSenderUrl: "", strMessage: "", strRecipientFName: "", strRecipientLName: "", strSenderFName: "", strSenderLName: "", intRecipientId: 0, intSenderId: 0)
+        print(indexPath.row)
+        if segmentChooser.selectedSegmentIndex == 0 {
+            feedItemObj = appdata.arrFriendsFeedItems[indexPath.row]
+        } else {
+            feedItemObj = appdata.arrMyFeedItems[indexPath.row]
+        }
+        Alamofire.request(feedItemObj.photoSenderUrl).responseImage(completionHandler: { (response) in
+//            print(response)
+            if let image = response.result.value {
+                let circularImage = image.af_imageRoundedIntoCircle()
+                print(circularImage)
+                DispatchQueue.main.async {
+                    cell.img.image = circularImage
+                }
+            }
+        })
+        var strSender = "\(feedItemObj.strSenderFName) \(feedItemObj.strSenderLName)"
+        var strRecipient = "\(feedItemObj.strRecipientFName) \(feedItemObj.strRecipientLName)"
+        if feedItemObj.intSenderId == appdata.intCurrentUserID {
+            strSender = "You"
+        }
+        if feedItemObj.intRecipientId == appdata.intCurrentUserID {
+            strRecipient = "You"
+        }
+        cell.whatHappened.text = "\(strSender) sent \(strRecipient)"
+        cell.time.text = "\(appdata.fnUTCToLocal(date: feedItemObj.strDate))"
+        cell.descr.text = "\(feedItemObj.strMessage)"
         cell.whatHappened.numberOfLines = 2
         return cell
     }

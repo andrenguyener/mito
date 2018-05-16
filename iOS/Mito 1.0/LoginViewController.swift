@@ -158,6 +158,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                 let authHeader = response.response?.allHeaderFields["Authorization"] as! String
                 if !authHeader.isEmpty {
                     if let dictionary = response.result.value {
+                        print(dictionary)
                         DispatchQueue.main.async {
                             self.performSegue(withIdentifier: "login", sender: self)
                             UserDefaults.standard.set(dictionary, forKey: "UserInfo")
@@ -386,7 +387,29 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     var activeTextField: UITextField!
     
+    override func viewDidAppear(_ animated: Bool) {
+        if let data = UserDefaults.standard.object(forKey: "UserInfo") {
+            let dict = data as! NSDictionary
+            if dict["userId"] != nil {
+                print(dict["userId"])
+                self.performSegue(withIdentifier: "login", sender: self)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
+//        if let data = UserDefaults.standard.object(forKey: "UserInfo") {
+//            let dict = data as! NSDictionary
+//            if dict["userId"] != nil {
+//                print(dict["userId"])
+//                self.performSegue(withIdentifier: "login", sender: self)
+//            }
+//        }
+//        let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+//        print("Current User ID: \(data["userId"] as! Int)".")
+//        if data["userId"] != nil {
+//            self.performSegue(withIdentifier: "login", sender: self)
+//        }
         if monthPicker != nil {
             monthPicker.isHidden = true
             monthPicker.delegate = self

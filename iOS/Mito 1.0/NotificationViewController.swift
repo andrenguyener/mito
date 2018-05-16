@@ -320,7 +320,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     @objc func btnDenyPackage(_ button: UIButton) {
         boolSender = false
         let package = appdata.arrNotifications[button.tag] as! Package
-        fnAcceptOrDeclinePackage(strPackageAction: "Denied", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[0].intAddressID)
+        fnAcceptOrDeclinePackage(strPackageAction: "Denied", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[0].intAddressID!)
     }
     
     @objc func btnAccept(_ button: UIButton) {
@@ -343,21 +343,23 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             fnAcceptOrDeclineFriendRequest(strFriendType: "Unfriend", intUserID: objFriend.intUserID)
         } else {
             let package = appdata.arrNotifications[button.tag] as! Package
-            fnAcceptOrDeclinePackage(strPackageAction: "Denied", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[0].intAddressID)
+            fnAcceptOrDeclinePackage(strPackageAction: "Denied", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[0].intAddressID!)
         }
     }
     
     func UTCToLocal(date:String) -> String {
+        print("UTC: \(date)")
         let formatter = DateFormatter()
-        // formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         formatter.timeZone = TimeZone(abbreviation: "UTC")
         
+        // Apply UTC
         let dt = formatter.date(from: date)
-        print(dt?.description)
+        
+        // Change to current
         formatter.timeZone = TimeZone.current
-        formatter.dateFormat = "MM-dd-yyyy HH:mm"
-        print(formatter.string(from: dt!))
+        formatter.dateFormat = "MMM d, h:mm a"
+        print("Local: \(formatter.string(from: dt!))")
         
         return formatter.string(from: dt!)
     }
@@ -366,6 +368,12 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         return formatter.string(from: date)
+    }
+    
+    func fnConvertStringToDate(date: String) -> Date {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        return formatter.date(from: date)!
     }
 
     func fnSortNotification(this: Notification, that: Notification) -> Bool {
@@ -389,7 +397,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             } else if let data = try? Data(contentsOf: defaultURL!){
                 cell.imgPerson.image = UIImage(data: data)
             }
-            cell.strFirstNameLastName.text = "\(objPackage.strUserFName) \(objPackage.strUserLName) has sent you a package request"
+            cell.strFirstNameLastName.text = "\(objPackage.strUserFName) has sent you a package request"
             cell.strUsername.text = strDate
             cell.btnConfirm.tag = indexPath.row
             cell.btnConfirm.addTarget(self, action: #selector(self.btnAccept(_:)), for: .touchUpInside)
@@ -406,7 +414,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             } else if let data = try? Data(contentsOf: defaultURL!){
                 cell.imgPerson.image = UIImage(data: data)
             }
-            cell.strFirstNameLastName.text = "\(objFriendRequest.firstName) \(objFriendRequest.lastName) has sent you a friend request"
+            cell.strFirstNameLastName.text = "\(objFriendRequest.strUsername) has sent you a friend request"
             cell.strUsername.text = dateLocal
             cell.btnConfirm.tag = indexPath.row
             cell.btnConfirm.addTarget(self, action: #selector(self.btnAccept(_:)), for: .touchUpInside)

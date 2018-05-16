@@ -14,6 +14,7 @@ import GooglePlaces
 import GooglePlacePicker
 import PayCardsRecognizer
 import Contacts
+import SwiftDate
 
 class MeViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate, PayCardsRecognizerPlatformDelegate {
     
@@ -33,12 +34,132 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
 //        recognizer.startCamera()
     }
     @IBAction func btnFetchContacts(_ sender: Any) {
-        contactStore.requestAccess(for: .contacts) { (success,error) in
-            if success {
-                print("Authorization success")
+//        let dateDate = Date()
+//        let diffFormatter = DateFormatter()
+//        diffFormatter.timeZone = TimeZone(abbreviation: "UTC")
+//        diffFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+//        let strUTCTime = diffFormatter.string(from: dateDate)
+//        print("UTC: \(strUTCTime)")
+//        let strLocalTime = fnUTCStrToLocalStr(date: strUTCTime)
+//        print("Local: \(strLocalTime)")
+//        fnLoadMyActivity()
+//        fnLoadFriendActivity()
+//        fnLoadNotifications()
+        fnUsePodTime(strDate: "2018-05-08T06:01:55.883Z")
+//        contactStore.requestAccess(for: .contacts) { (success,error) in
+//            if success {
+//                print("Authorization success")
+//            }
+//        }
+//        fnFetchContacts()
+    }
+    
+    // Get two dates. Get difference in dates. Then convert
+    func fnUsePodTime(strDate: String) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        let p_1 = strDate.date(format: .custom("MMM d, h:mm a"))
+        let date = DateInRegion()
+        print(p_1)
+        print(date)
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+//        formatter.timeZone = TimeZone(abbreviation: "UTC")
+//        let p_2 = date.date(formate: .custom("MMM d, h:mm a"))
+    }
+    
+    func fnUTCStrToLocalStr(date:String) -> String {
+        print("UTC: \(date)")
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        
+        // Apply UTC
+        let dt = formatter.date(from: date)
+        
+        // Change to current
+        formatter.timeZone = TimeZone.current
+        formatter.dateFormat = "MMM d, h:mm a"
+        
+        return formatter.string(from: dt!)
+    }
+    
+//    func fnHowLongAgo(date: Date) -> Date {
+//        print("UTC: \(date)")
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+//        formatter.timeZone = TimeZone(abbreviation: "UTC")
+//
+//        // Apply UTC
+//        let dt = formatter.string(from: date)
+//
+//        // Change to current
+//        formatter.timeZone = TimeZone.current
+//        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+//        print("Local: \(formatter.date(from: dt))")
+//
+//        return formatter.date(from: dt)!
+//    }
+    
+    func fnLoadMyActivity() {
+        let urlLoadMyActivity = URL(string: "https://api.projectmito.io/v1/feed/")
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlLoadMyActivity!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                print("Loaded My Activity")
+                if let dictionary = response.result.value {
+                    print(dictionary)
+                }
+                
+            case .failure(let error):
+                print("Error loading my activity")
+                print(error)
             }
         }
-        fnFetchContacts()
+    }
+    
+    func fnLoadFriendActivity() {
+        let urlLoadFriendActivity = URL(string: "https://api.projectmito.io/v1/feed/friends")
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlLoadFriendActivity!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                print("Loaded Friend Activity")
+                if let dictionary = response.result.value {
+                    print(dictionary)
+                }
+                
+            case .failure(let error):
+                print("Error loading friend activity")
+                print(error)
+            }
+        }
+    }
+    
+    func fnLoadNotifications() {
+        let urlLoadNotifications = URL(string: "https://api.projectmito.io/v1/notification")
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlLoadNotifications!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                print("Loaded Notifications")
+                if let dictionary = response.result.value {
+                    print(dictionary)
+                }
+                
+            case .failure(let error):
+                print("Error loading my notifications")
+                print(error)
+            }
+        }
     }
     
     func fnFetchContacts() {
@@ -196,29 +317,13 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
         performSegue(withIdentifier: "meToSettings", sender: self)
     }
     
-    @IBAction func loadCurrentUserAddresses(_ sender: Any) {
-        fnLoadCurrUserAddresses()
-    }
-    @IBAction func loadCurrentOrders(_ sender: Any) {
-        fnGetCurrentOrders()
-    }
     @IBAction func fnInsertNewAddress(_ sender: Any) {
         fnInsertNewAddress()
-    }
-    @IBAction func fnAcceptOrDeclinePackage(_ sender: Any) {
-        fnAcceptOrDeclinePackage()
-    }
-    @IBAction func fnGetPendingPackages(_ sender: Any) {
-        fnGetPendingPackages()
     }
     @IBAction func fnGetIncomingPackages(_ sender: Any) {
         fnGetIncomingPackages2()
     }
-    @IBAction func btnChangePassword(_ sender: Any) {
-        fnChangePassword()
-    }
-    
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         placesClient = GMSPlacesClient.shared()
@@ -226,7 +331,11 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
 
         if UserDefaults.standard.object(forKey: "UserInfo") != nil {
             let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
-            appdata.fnDisplaySimpleImage(strImageURL: data["photoURL"] as! String, img: imgProfilePic)
+            let photoString = data["profileImageString"] as! String
+            let decodedImage = Data(base64Encoded: photoString) //Data(base64Encoded: photoString, options: .ignoreUnknownCharacters)
+            let image = UIImage(data: decodedImage!)
+            imgProfilePic.image = image
+//            appdata.fnDisplaySimpleImage(strImageURL: data["photoURL"] as! String, img: imgProfilePic)
             self.userID.text = data["userId"] as? String
             self.userEmail.text = data["userEmail"] as? String
             self.username.text = data["username"] as? String
@@ -253,45 +362,90 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
     }
     
     func fnCropImage(image: UIImage) -> CGImage {
-        let crop = CGRect(x: image.size.width / 2, y: image.size.height / 2, width: 200, height: 200)
-        let imageRef2 = image.cgImage!.cropping(to: crop)
-        return imageRef2!
+        let size = CGSize(width: 50, height: 50)
+        let newImage = image.af_imageAspectScaled(toFill: size)
+//        let newImage = image.crop(size)
+//        let crop = CGRect(x: image.size.width / 2, y: image.size.height / 2, width: 100, height: 100)
+//        let imageRef2 = image.cgImage!.cropping(to: crop)
+        return newImage.cgImage!
         
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            print(image)
+            let croppedImage = image.highestQualityJPEGNSData
             let cgImage = fnCropImage(image: image)
             imgProfilePic.image = UIImage(cgImage: cgImage)
-            let imageData: Data = UIImagePNGRepresentation(imgProfilePic.image!)!
-            fnUploadImage(imageData: imageData)
+            let imageData: Data = UIImageJPEGRepresentation(imgProfilePic.image!, 1)!
+            let encodedData = imageData.base64EncodedString()
+            print("Data: \(encodedData)")
+            print(type(of: encodedData))
+            fnUploadImage(encodedData: encodedData)
         } else {
             print("Error")
         }
         self.dismiss(animated: true, completion: nil)
     }
     
-    func fnUploadImage(imageData: Data) {
+    func fnUploadImage(encodedData: String) {
         let urlUploadImage = URL(string: "https://api.projectmito.io/v1/image")
         let parameters: Parameters = [
-            "imageData": imageData
+            "imageData": encodedData
         ]
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
-        Alamofire.request(urlUploadImage!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+        Alamofire.request(urlUploadImage!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
             switch response.result {
             case .success:
                 if let dictionary = response.result.value {
                     print(dictionary)
+                    print("\(response): Successful")
                 }
                 
             case .failure(let error):
-                print("Accept or decline package error")
+                print("Upload image error")
                 print(error)
             }
         }
+//        Alamofire.upload(multipartFormData: { (multipartFormData) in
+//            for (key, value) in parameters {
+//                let dataValue = value as! Data
+//                multipartFormData.append(dataValue, withName: key)
+//            }
+//            multipartFormData.append(encodedData, withName: "temp_file.jpeg")
+////            multipartFormData.append(imageData, withName: "image", fileName: "swift_file.jpeg", mimeType: "image/jpeg")
+//        }, to: urlUploadImage!)
+//        { (result) in
+//            switch result {
+//            case .success(let upload, _, _):
+//                print("Successfully uploaded")
+//                upload.uploadProgress(closure: { (Progress) in
+//                    print("Upload Progress: \(Progress.fractionCompleted)")
+//                })
+//
+//                upload.responseJSON { response in
+//                    //self.delegate?.showSuccessAlert()
+//                    print(response.request)  // original URL request
+//                    print(response.response) // URL response
+//                    print(response.data)     // server data
+//                    print(response.result)   // result of response serialization
+//                    //                        self.showSuccesAlert()
+//                    //self.removeImage("frame", fileExtension: "txt")
+//                    if let JSON = response.result.value {
+//                        print("JSON: \(JSON)")
+//                    }
+//                }
+//
+//            case .failure(let encodingError):
+//                //self.delegate?.showFailAlert()
+//                print("Unsuccessfully uploaded")
+//                print(encodingError)
+//            }
+//
+//        }
+        
+        ///
     }
     
     func fnGetIncomingPackages2() {
@@ -317,40 +471,15 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
         }
     }
     
-    func fnAcceptOrDeclinePackage() {
-        let urlAcceptOrDeclinePackage = URL(string: "https://api.projectmito.io/v1/package/")
-        let parameters: Parameters = [
-            "senderId": 7,
-            "orderId": 19,
-            "response": "Accepted",
-            "shippingAddressId": 24
-        ]
-        let headers: HTTPHeaders = [
-            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
-        ]
-        Alamofire.request(urlAcceptOrDeclinePackage!, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                if let dictionary = response.result.value {
-                    print(dictionary)
-                }
-                
-            case .failure(let error):
-                print("Accept or decline package error")
-                print(error)
-            }
-        }
-    }
-    
     func fnInsertNewAddress() {
         let urlInsertNewAddress = URL(string: "https://api.projectmito.io/v1/address/")
         let parameters: Parameters = [
-            "streetAddress1": "445 Mount Eden Road",
+            "streetAddress1": "286 Zerega Ave",
             "streetAddress2": "",
-            "cityName": "Philadelphia",
-            "stateName": "Pennsylvania",
-            "zipCode": 19019,
-            "aliasName": "Apartment"
+            "cityName": "Bronx",
+            "stateName": "NY",
+            "zipCode": 10473,
+            "aliasName": "Big Bro"
         ]
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
@@ -364,33 +493,6 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
                 
             case .failure(let error):
                 print("Insert new address error")
-                print(error)
-            }
-        }
-    }
-    
-    func fnLoadCurrUserAddresses() {
-        let urlGetMyAddresses = URL(string: "https://api.projectmito.io/v1/address/")
-        let headers: HTTPHeaders = [
-            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
-        ]
-        Alamofire.request(urlGetMyAddresses!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                if let dictionary = response.result.value {
-                    self.appdata.arrCurrUserAddresses.removeAll()
-                    let arrAddresses = dictionary as! NSArray
-                    for elem in arrAddresses {
-                        let objAddress = elem as! NSDictionary
-                        let objAddressObject = Address(intAddressID: objAddress["AddressId"] as! Int, strAddressAlias: objAddress["Alias"] as! String, strCityName: objAddress["CityName"] as! String, strStateName: objAddress["StateName"] as! String, strStreetAddress1: objAddress["StreetAddress"] as! String, strStreetAddress2: objAddress["StreetAddress2"] as! String, strZipCode: objAddress["ZipCode"] as! String)
-                        print("\(objAddress["Alias"] as! String) \(String(describing: objAddress["AddressId"]))")
-                        self.appdata.arrCurrUserAddresses.append(objAddressObject)
-                    }
-                    print("This user has \(self.appdata.arrCurrUserAddresses.count) addresses")
-                }
-                
-            case .failure(let error):
-                print("Get all addresses error")
                 print(error)
             }
         }
@@ -425,60 +527,14 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
             }
         }
     }
-    
-    func fnGetPendingPackages() {
-        let urlGetPendingPackages = URL(string: "https://api.projectmito.io/v1/package")
-        let parameters: Parameters = [
-            "type": "Pending"
-        ]
-        let headers: HTTPHeaders = [
-            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
-        ]
-        Alamofire.request(urlGetPendingPackages!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                if let dictionary = response.result.value {
-                    print(dictionary)
-                    let arrPackages = dictionary as! NSArray
-                    for objPackageTemp in arrPackages {
-                        let elem = objPackageTemp as! NSDictionary
-                        let objPackage = Package(intGiftOption: elem["GiftOption"] as! Int, strOrderDate: elem["OrderDate"] as! String, intOrderID: elem["OrderId"] as! Int, strOrderMessage: elem["OrderMessage"] as! String, strPhotoUrl: elem["PhotoUrl"] as! String, intSenderID: elem["SenderId"] as! Int, strUserFName: elem["UserFname"] as! String, strUserLName: elem["UserLname"] as! String, dateRequested: elem["CreatedAt"] as! Date)
-                        self.appdata.arrCurrUserPackages.append(objPackage)
-                    }
-                    print("User has \(self.appdata.arrCurrUserPackages.count) packages")
-                }
-                
-            case .failure(let error):
-                print("Get pending packages error")
-                print(error)
-            }
-        }
-    }
-    
-    func fnChangePassword() {
-        let urlChangePassword = URL(string: "https://api.projectmito.io/v1/users/password")
-        let parameters: Parameters = [
-            "password": "123456",
-            "passwordNew": "asdfgh",
-            "passwordNewConf": "asdfgh"
-        ]
-        let headers: HTTPHeaders = [
-            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
-        ]
-        Alamofire.request(urlChangePassword!, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
-            switch response.result {
-            case .success:
-                if let dictionary = response.result.value {
-                    print(dictionary)
-                }
-                
-            case .failure(let error):
-                print("Change password error")
-                print(error)
-                if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-                    print(data)
-                }
-            }
-        }
-    }
 }
+
+extension UIImage
+{
+    var highestQualityJPEGNSData: NSData { return UIImageJPEGRepresentation(self, 1.0)! as NSData }
+    var highQualityJPEGNSData: NSData    { return UIImageJPEGRepresentation(self, 0.75)! as NSData}
+    var mediumQualityJPEGNSData: NSData  { return UIImageJPEGRepresentation(self, 0.5)! as NSData }
+    var lowQualityJPEGNSData: NSData     { return UIImageJPEGRepresentation(self, 0.25)! as NSData}
+    var lowestQualityJPEGNSData: NSData  { return UIImageJPEGRepresentation(self, 0.0)! as NSData }
+}
+

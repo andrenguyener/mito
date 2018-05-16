@@ -34,6 +34,9 @@ class AppData: NSObject {
     open var arrCurrUserPackages: [Package] = []
     open var arrFriendsAndAllMitoUsers: [[Person]] = []
     open var arrCurrFriendsAndAllMitoUsers: [[Person]] = []
+    open var arrMitoProfileFeedItems: [FeedItem] = []
+    open var arrFriendsFeedItems: [FeedItem] = []
+    open var arrMyFeedItems: [FeedItem] = []
     
     
     // AnyObject array
@@ -53,17 +56,101 @@ class AppData: NSObject {
     
     open var arrCartLineItems: [LineItem] = []
     
-    open var arrFeedItems: [FeedItem] = [
-        FeedItem(avatar: "Sopheak.png", descr: "Ayyyy its finally time for us to ERD!!", time: "12m", whatHappened: "Sopheak Neak sent a gift to Andre Nguyen"),
-        FeedItem(avatar: "Andre2.png", descr: "WoW such talent! Hope this help improve your skills even more!", time: "50m", whatHappened: "Andre Nguyen sent a gift to Ammara Touch"),
-        FeedItem(avatar: "ammara.png", descr: "When life give you lemons, you make lemonade from the lemons, but remember to add water and sugar.", time: "1h", whatHappened: "Ammara Touch sent a gift to Benny Souriyadeth"),
-        FeedItem(avatar: "benny.png", descr: "hi", time: "3h", whatHappened: "Benny Souriyadeth sent a gift to Avina Vongpradith"),
-        FeedItem(avatar: "avina.png", descr: "Hey I appreciate you :)", time: "15h", whatHappened: "Avina Vongradith sent a gift to Sarah Phillips"),
-        FeedItem(avatar: "sarah.png", descr: "Heres something to help you get through all those nights of ERD's yo!", time: "1d", whatHappened: "Sarah Phillips sent a gift to JJ Guo"),
-        FeedItem(avatar: "jj.png", descr: "bro tonight is the night to ERD! Enjoy the gift.", time: "3d", whatHappened: "JJ Guo sent a gift to Sopheak Neak")
-    ]
-    
     open var tempAccountHolder : Parameters = (Dictionary<String, Any>)()
+    
+    open func fnLoadMitoProfileFeed(tblview: UITableView, intUserId: Int) {
+        let urlLoadMyActivity = URL(string: "https://api.projectmito.io/v1/feed/")
+        let parameters: Parameters = [
+            "friendId": intUserId
+        ]
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlLoadMyActivity!, method: .get, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                print("Loaded My Activity")
+                if let dictionary = response.data {
+                    let decoder = JSONDecoder()
+                    do {
+                        self.arrMitoProfileFeedItems = try decoder.decode([FeedItem].self, from: dictionary)
+                    } catch let jsonErr {
+                        print("Failed to decode: \(jsonErr)")
+                    }
+                    self.arrMitoProfileFeedItems.sort(by: self.fnSortFeedItems)
+                    DispatchQueue.main.async {
+                        tblview.reloadData()
+                    }
+                }
+                
+            case .failure(let error):
+                print("Error loading my activity")
+                print(error)
+            }
+        }
+    }
+    
+    open func fnLoadMyActivity(tblview: UITableView, intUserId: Int, arr: [FeedItem]) {
+        let urlLoadMyActivity = URL(string: "https://api.projectmito.io/v1/feed/")
+        let parameters: Parameters = [
+            "friendId": intUserId
+        ]
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlLoadMyActivity!, method: .get, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                print("Loaded My Activity")
+                if let dictionary = response.data {
+                    let decoder = JSONDecoder()
+                    do {
+                        self.arrMyFeedItems = try decoder.decode([FeedItem].self, from: dictionary)
+                    } catch let jsonErr {
+                        print("Failed to decode: \(jsonErr)")
+                    }
+                    self.arrMyFeedItems.sort(by: self.fnSortFeedItems)
+                    DispatchQueue.main.async {
+                        tblview.reloadData()
+                    }
+                }
+                
+            case .failure(let error):
+                print("Error loading my activity")
+                print(error)
+            }
+        }
+    }
+    
+    func fnLoadFriendActivity(tblview: UITableView) {
+        let urlLoadFriendActivity = URL(string: "https://api.projectmito.io/v1/feed/friends")
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlLoadFriendActivity!, method: .get, encoding: URLEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                print("Loaded Friend Activity")
+                if let dictionary = response.data {
+                    let decoder = JSONDecoder()
+                    do {
+                        self.arrFriendsFeedItems = try decoder.decode([FeedItem].self, from: dictionary)
+                    } catch let jsonErr {
+                        print("Failed to decode: \(jsonErr)")
+                    }
+                    self.arrFriendsFeedItems.sort(by: self.fnSortFeedItems)
+                }
+                print("Total Friend Feed Items: \(self.arrFriendsFeedItems.count)")
+                DispatchQueue.main.async {
+                    tblview.reloadData()
+                }
+                
+            case .failure(let error):
+                print("Error loading friend activity")
+                print(error)
+            }
+        }
+    }
     
     open func fnLoadStateData() {
         let urlStates = URL(string: "https://api.myjson.com/bins/penjf")
@@ -130,10 +217,17 @@ class AppData: NSObject {
                     let dict2 = dictionary as! NSArray
                     for obj in dict2 {
                         let object = obj as! NSDictionary
+                        print(object)
+                        var strAvatar = ""
+                        if object["ProfileImage"] != nil {
+                            strAvatar = (object["ProfileImage"] as? String)!
+                        } else {
+                            strAvatar = (object["PhotoUrl"] as? String)!
+                        }
                         let p: Person = Person(firstName: (object["UserFname"] as? String)!,
                                                lastName: (object["UserLname"] as? String)!,
                                                email: (object["UserEmail"] as? String?)!!,
-                                               avatar: (object["PhotoUrl"] as? String?)!!,
+                                               avatar: strAvatar,
                                                intUserID: (object["UserId"] as? Int)!,
                                                strUsername: (object["Username"] as? String)!,
                                                intNumFriends: (object["NumFriends"] as? Int)!)
@@ -172,8 +266,20 @@ class AppData: NSObject {
                     for objUser in objUsers {
                         let objPerson2 = objUser as! NSDictionary
                         print(objPerson2)
-                        let objPerson = Person(firstName: objPerson2["UserFname"] as! String, lastName: objPerson2["UserLname"] as! String, email: objPerson2["UserEmail"] as! String, avatar: objPerson2["PhotoUrl"] as! String, intUserID: objPerson2["UserId"] as! Int, strUsername: objPerson2["Username"] as! String, intNumFriends: objPerson2["NumFriends"] as! Int)
-                        self.arrAllUsers.append(objPerson)
+                        var strAvatar = ""
+                        if objPerson2["ProfileImage"] != nil {
+                            strAvatar = (objPerson2["ProfileImage"] as? String)!
+                        } else {
+                            strAvatar = (objPerson2["PhotoUrl"] as? String)!
+                        }
+                        let p: Person = Person(firstName: (objPerson2["UserFname"] as? String)!,
+                                               lastName: (objPerson2["UserLname"] as? String)!,
+                                               email: (objPerson2["UserEmail"] as? String?)!!,
+                                               avatar: strAvatar,
+                                               intUserID: (objPerson2["UserId"] as? Int)!,
+                                               strUsername: (objPerson2["Username"] as? String)!,
+                                               intNumFriends: (objPerson2["NumFriends"] as? Int)!)
+                        self.arrAllUsers.append(p)
                     }
                     self.arrAllUsers.sort(by: self.fnSortMitoUsers)
                     self.arrCurrAllUsers = self.arrAllUsers
@@ -196,8 +302,42 @@ class AppData: NSObject {
         }
     }
     
+    func fnUTCToLocal(date:String) -> String {
+        print("Original date String: \(date)")
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        
+        // Apply UTC
+        let dt = formatter.date(from: date)
+        print("Date version: \(dt?.description)")
+        
+        // Change to current
+        formatter.timeZone = TimeZone.current
+        formatter.dateFormat = "MMM d, h:mm a"
+        
+        return formatter.string(from: dt!)
+    }
+    
+    func fnUTCToLocalDate(date: String, formatter: DateFormatter) -> Date {
+        let strLocal = fnUTCToLocal(date: date)
+        let dateLocal = formatter.date(from: strLocal)
+//        print("String Local: \(strLocal)")
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+//        formatter.timeZone = TimeZone.current
+//        let localDate: Date = formatter.date(from: strLocal)!
+        print("Local: \(dateLocal)")
+        
+        return dateLocal!
+    }
+    
     open func fnSortMitoUsers(this: Person, that: Person) -> Bool {
         return this.intNumFriends < that.intNumFriends
+    }
+    
+    open func fnSortFeedItems(this: FeedItem, that: FeedItem) -> Bool {
+        return this.strDate > that.strDate
     }
     
     open func fnDisplayAlert(title: String, message: String) -> UIAlertController {
@@ -216,12 +356,14 @@ class AppData: NSObject {
 //    }
     
     open func fnDisplaySimpleImage(strImageURL: String, img: UIImageView) {
-        let urlImage = URL(string:"\(strImageURL)")
-        let defaultURL = URL(string: "https://www.yankee-division.com/uploads/1/7/6/5/17659643/notavailable_2_orig.jpg?210b")
-        if let data = try? Data(contentsOf: urlImage!) {
-            img.image = UIImage(data: data)!
-        } else if let data = try? Data(contentsOf: defaultURL!){
-            img.image = UIImage(data: data)
-        }
+        Alamofire.request(strImageURL).responseImage(completionHandler: { (response) in
+            print(response)
+            if let image = response.result.value {
+                let circularImage = image.af_imageRoundedIntoCircle()
+                DispatchQueue.main.async {
+                    img.image = circularImage
+                }
+            }
+        })
     }
 }

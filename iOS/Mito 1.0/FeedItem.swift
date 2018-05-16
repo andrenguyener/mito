@@ -8,16 +8,26 @@
 
 import Foundation
 
-class FeedItem {
-    var avatar: String = ""
-    var descr: String = ""
-    var time: String = ""
-    var whatHappened: String = ""
+struct FeedItem: Decodable {
+    let strDate: String
+    let photoSenderUrl: String
+    let strMessage: String
+    let strRecipientFName: String
+    let strRecipientLName: String
+    let strSenderFName: String
+    let strSenderLName: String
+    let intRecipientId: Int
+    let intSenderId: Int
     
-    init(avatar: String, descr: String, time: String, whatHappened: String) {
-        self.avatar = avatar
-        self.descr = descr
-        self.time = time
-        self.whatHappened = whatHappened
+    private enum CodingKeys: String, CodingKey {
+        case strDate = "OrderDate"
+        case photoSenderUrl = "SenderPhotoUrl"
+        case strMessage = "OrderMessage"
+        case strRecipientFName = "RecipientFirstName"
+        case strRecipientLName = "RecipientLastName"
+        case strSenderFName = "SenderFirstName"
+        case strSenderLName = "SenderLastName"
+        case intRecipientId = "RecipientId"
+        case intSenderId = "SenderId"
     }
 }

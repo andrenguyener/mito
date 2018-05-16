@@ -39,14 +39,13 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         searchBar.text = ""
         if productPeopleTab.selectedSegmentIndex == 0 {
             searchBar.placeholder = "Search for products"
-//            if peopleTableView == nil {
-//                swirlSearchImg.isHidden = false
-//            }
+            swirlSearchImg.isHidden = strSearchQuery != ""
             UIView.transition(from: peopleView, to: productView, duration: 0, options: .showHideTransitionViews)
         } else {
+            swirlSearchImg.isHidden = true
             searchBar.placeholder = "Find more friends"
             appdata.fnLoadFriendsAndAllUsers(tableview: peopleTableView)
-//            swirlSearchImg.isHidden = true
+            swirlSearchImg.isHidden = true
             UIView.transition(from: productView, to: peopleView, duration: 0, options: .showHideTransitionViews)
         }
         intSegmentedIndex = productPeopleTab.selectedSegmentIndex
@@ -79,7 +78,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             fnLoadProductData(strCodedSearchQuery: strSearchQuery.replacingOccurrences(of: " ", with: "+"))
 //            self.fnCheckLocalStorageProductSearchResults(filename: "ProductSearchResultsJSON")
         } else {
-//            swirlSearchImg.isHidden = false
+            swirlSearchImg.isHidden = false
         }
 //        fnLoadProductData()
     }
@@ -140,7 +139,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             if (searchBar.text!.replacingOccurrences(of: " ", with: "").count > 0) { // tests for only spaces
                 spinnerProductSearch.isHidden = false
                 spinnerProductSearch.startAnimating()
-                
+                swirlSearchImg.isHidden = true
                 strSearchQuery = ""
                 strSearchQuery = searchBar.text!
                 productPeopleTab.isEnabled = false
@@ -156,8 +155,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         searchBar.resignFirstResponder()
     }
-    
-    
     
     // Product Tab View
     func fnLoadProductData(strCodedSearchQuery: String) {
@@ -180,6 +177,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     if UserDefaults.standard.object(forKey: "ProductSearchResultsJSON") != nil {
                         print("ProductSearchResultsJSON is saved properly")
                         let myJson = UserDefaults.standard.object(forKey: "ProductSearchResultsJSON") as! NSDictionary
+                        print(myJson)
                         self.fnLoadLocalProductSearchResults(myJson: myJson)
                     }
                     DispatchQueue.main.async {
@@ -239,7 +237,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 if objItemAttribute["Feature"] != nil {
                     itemFeature = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Feature")
                 } else {
-                    itemFeature = "NA"
+                    itemFeature = "N/A"
                 }
                 
                 let title = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Title")
@@ -290,8 +288,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
             let intNumFriends = data["NumFriends"] as? Int
             if intNumFriends == 0 {
+//                return self.appdata.arrCurrAllUsers.count
                 return min(self.appdata.arrCurrAllUsers.count, 10)
             } else {
+//                return self.appdata.arrCurrFriendsAndAllMitoUsers[section].count
                 return min(self.appdata.arrCurrFriendsAndAllMitoUsers[section].count, 10)
             }
         } else {
@@ -354,10 +354,18 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //                fnLoadProductData()
 //            }
             let objProduct = appdata.arrProductSearchResults[indexPath.row]
-            let urlProductImage = URL(string: "\(objProduct.image)")
-            if let data = try? Data(contentsOf: urlProductImage!) {
-                cell.img.image = UIImage(data: data)!
-            }
+//            let urlProductImage = URL(string: "\(objProduct.image)")
+//            if let data = try? Data(contentsOf: urlProductImage!) {
+//                cell.img.image = UIImage(data: data)!
+//            }
+            Alamofire.request(objProduct.image).responseImage(completionHandler: { (response) in
+                print(response)
+                if let image = response.result.value {
+                    DispatchQueue.main.async {
+                        cell.img.image = image
+                    }
+                }
+            })
             cell.title.text = objProduct.title
             print(objProduct.title)
             cell.publisher.text = objProduct.publisher
@@ -372,17 +380,34 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 return fnLoadPersonCell(cell: cell, objPerson: objPerson)
             } else {
                 let objPerson = self.appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
+//                print("First name: \(objPerson.firstName) \(objPerson.lastName)")
+//                print("Picture: \(objPerson.avatar)")
                 return fnLoadPersonCell(cell: cell, objPerson: objPerson)
             }
         }
     }
     
     func fnLoadPersonCell(cell: TableViewCell, objPerson: Person) -> TableViewCell {
-        let urlPeopleImage = URL(string:"\(objPerson.avatar)")
-        cell.img.image = UIImage(data: try! Data(contentsOf: urlPeopleImage!))
+//        let urlPeopleImage = URL(string:"\(objPerson.avatar)")
+//        cell.img.image = UIImage(data: try! Data(contentsOf: urlPeopleImage!))
+        if objPerson.avatar.count > 300 {
+            let photoString = objPerson.avatar
+            let decodedImage = Data(base64Encoded: photoString) //Data(base64Encoded: photoString, options: .ignoreUnknownCharacters)
+            let image = UIImage(data: decodedImage!)
+            cell.img.image = image
+        } else {
+            Alamofire.request(objPerson.avatar).responseImage(completionHandler: { (response) in
+                print(response)
+                if let image = response.result.value {
+                    let circularImage = image.af_imageRoundedIntoCircle()
+                    DispatchQueue.main.async {
+                        cell.img.image = circularImage
+                    }
+                }
+            })
+        }
         cell.name.text = "\(objPerson.firstName) \(objPerson.lastName)"
-        cell.handle.text = "\(objPerson.email)"
-        cell.friendshipType.text = "\(objPerson.avatar)"
+        cell.handle.text = "@\(objPerson.strUsername)"
         return cell
     }
     
