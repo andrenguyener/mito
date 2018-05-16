@@ -34,10 +34,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WebSocketDelegate {
         let dictionary = try? JSONSerialization.jsonObject(with: jsonData!, options: .mutableLeaves) as! NSDictionary
         let dictType = dictionary!["type"] as! String
         switch dictType {
-        case "friend-get":
-            print("friend-get")
-        case "cart-get":
-            print("cart-get")
+        case "friend-request":
+            print("friend-request")
+        case "friend-accept":
+            print("friend-accept")
+        case "package-accept":
+            print("package-accept")
+        case "package-denied":
+            print("package-denied")
         default:
             print("default message")
         }
