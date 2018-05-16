@@ -218,10 +218,16 @@ class AppData: NSObject {
                     for obj in dict2 {
                         let object = obj as! NSDictionary
                         print(object)
+                        var strAvatar = ""
+                        if object["ProfileImage"] != nil {
+                            strAvatar = (object["ProfileImage"] as? String)!
+                        } else {
+                            strAvatar = (object["PhotoUrl"] as? String)!
+                        }
                         let p: Person = Person(firstName: (object["UserFname"] as? String)!,
                                                lastName: (object["UserLname"] as? String)!,
                                                email: (object["UserEmail"] as? String?)!!,
-                                               avatar: (object["PhotoUrl"] as? String?)!!,
+                                               avatar: strAvatar,
                                                intUserID: (object["UserId"] as? Int)!,
                                                strUsername: (object["Username"] as? String)!,
                                                intNumFriends: (object["NumFriends"] as? Int)!)
@@ -260,8 +266,20 @@ class AppData: NSObject {
                     for objUser in objUsers {
                         let objPerson2 = objUser as! NSDictionary
                         print(objPerson2)
-                        let objPerson = Person(firstName: objPerson2["UserFname"] as! String, lastName: objPerson2["UserLname"] as! String, email: objPerson2["UserEmail"] as! String, avatar: objPerson2["PhotoUrl"] as! String, intUserID: objPerson2["UserId"] as! Int, strUsername: objPerson2["Username"] as! String, intNumFriends: objPerson2["NumFriends"] as! Int)
-                        self.arrAllUsers.append(objPerson)
+                        var strAvatar = ""
+                        if objPerson2["ProfileImage"] != nil {
+                            strAvatar = (objPerson2["ProfileImage"] as? String)!
+                        } else {
+                            strAvatar = (objPerson2["PhotoUrl"] as? String)!
+                        }
+                        let p: Person = Person(firstName: (objPerson2["UserFname"] as? String)!,
+                                               lastName: (objPerson2["UserLname"] as? String)!,
+                                               email: (objPerson2["UserEmail"] as? String?)!!,
+                                               avatar: strAvatar,
+                                               intUserID: (objPerson2["UserId"] as? Int)!,
+                                               strUsername: (objPerson2["Username"] as? String)!,
+                                               intNumFriends: (objPerson2["NumFriends"] as? Int)!)
+                        self.arrAllUsers.append(p)
                     }
                     self.arrAllUsers.sort(by: self.fnSortMitoUsers)
                     self.arrCurrAllUsers = self.arrAllUsers

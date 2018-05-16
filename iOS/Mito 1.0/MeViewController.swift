@@ -362,7 +362,7 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
     }
     
     func fnCropImage(image: UIImage) -> CGImage {
-        let size = CGSize(width: 100, height: 100)
+        let size = CGSize(width: 50, height: 50)
         let newImage = image.af_imageAspectScaled(toFill: size)
 //        let newImage = image.crop(size)
 //        let crop = CGRect(x: image.size.width / 2, y: image.size.height / 2, width: 100, height: 100)
@@ -373,6 +373,7 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            let croppedImage = image.highestQualityJPEGNSData
             let cgImage = fnCropImage(image: image)
             imgProfilePic.image = UIImage(cgImage: cgImage)
             let imageData: Data = UIImageJPEGRepresentation(imgProfilePic.image!, 1)!
@@ -528,20 +529,12 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
     }
 }
 
-//extension UIImage {
-//    enum JPEGQuality: CGFloat {
-//        case lowest  = 0
-//        case low     = 0.25
-//        case medium  = 0.5
-//        case high    = 0.75
-//        case highest = 1
-//    }
-//
-//    /// Returns the data for the specified image in JPEG format.
-//    /// If the image object’s underlying image data has been purged, calling this function forces that data to be reloaded into memory.
-//    /// - returns: A data object containing the JPEG data, or nil if there was a problem generating the data. This function may return nil if the image has no data or if the underlying CGImageRef contains data in an unsupported bitmap format.
-//    func jpeg(_ quality: JPEGQuality) -> Data? {
-//        return UIImageJPEGRepresentation(self, quality.rawValue)
-//    }
-//}
+extension UIImage
+{
+    var highestQualityJPEGNSData: NSData { return UIImageJPEGRepresentation(self, 1.0)! as NSData }
+    var highQualityJPEGNSData: NSData    { return UIImageJPEGRepresentation(self, 0.75)! as NSData}
+    var mediumQualityJPEGNSData: NSData  { return UIImageJPEGRepresentation(self, 0.5)! as NSData }
+    var lowQualityJPEGNSData: NSData     { return UIImageJPEGRepresentation(self, 0.25)! as NSData}
+    var lowestQualityJPEGNSData: NSData  { return UIImageJPEGRepresentation(self, 0.0)! as NSData }
+}
 

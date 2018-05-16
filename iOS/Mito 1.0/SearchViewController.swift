@@ -288,8 +288,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
             let intNumFriends = data["NumFriends"] as? Int
             if intNumFriends == 0 {
+//                return self.appdata.arrCurrAllUsers.count
                 return min(self.appdata.arrCurrAllUsers.count, 10)
             } else {
+//                return self.appdata.arrCurrFriendsAndAllMitoUsers[section].count
                 return min(self.appdata.arrCurrFriendsAndAllMitoUsers[section].count, 10)
             }
         } else {
@@ -379,6 +381,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 return fnLoadPersonCell(cell: cell, objPerson: objPerson)
             } else {
                 let objPerson = self.appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
+//                print("First name: \(objPerson.firstName) \(objPerson.lastName)")
+//                print("Picture: \(objPerson.avatar)")
                 return fnLoadPersonCell(cell: cell, objPerson: objPerson)
             }
         }
@@ -387,15 +391,22 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func fnLoadPersonCell(cell: TableViewCell, objPerson: Person) -> TableViewCell {
 //        let urlPeopleImage = URL(string:"\(objPerson.avatar)")
 //        cell.img.image = UIImage(data: try! Data(contentsOf: urlPeopleImage!))
-        Alamofire.request(objPerson.avatar).responseImage(completionHandler: { (response) in
-            print(response)
-            if let image = response.result.value {
-                let circularImage = image.af_imageRoundedIntoCircle()
-                DispatchQueue.main.async {
-                    cell.img.image = circularImage
+        if objPerson.avatar.count > 300 {
+            let photoString = objPerson.avatar
+            let decodedImage = Data(base64Encoded: photoString) //Data(base64Encoded: photoString, options: .ignoreUnknownCharacters)
+            let image = UIImage(data: decodedImage!)
+            cell.img.image = image
+        } else {
+            Alamofire.request(objPerson.avatar).responseImage(completionHandler: { (response) in
+                print(response)
+                if let image = response.result.value {
+                    let circularImage = image.af_imageRoundedIntoCircle()
+                    DispatchQueue.main.async {
+                        cell.img.image = circularImage
+                    }
                 }
-            }
-        })
+            })
+        }
         cell.name.text = "\(objPerson.firstName) \(objPerson.lastName)"
         cell.handle.text = "@\(objPerson.strUsername)"
         return cell
