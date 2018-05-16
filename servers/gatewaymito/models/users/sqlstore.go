@@ -2,6 +2,8 @@ package users
 
 import (
 	"database/sql"
+	"encoding/base64"
+	"encoding/hex"
 	"fmt"
 	"log"
 
@@ -40,7 +42,7 @@ func (ss *SqlStore) GetByID(id int) (*User, error) {
 
 	defer rows.Close()
 	for rows.Next() {
-		if err := rows.Scan(&user.UserId, &user.UserFname, &user.UserLname, &user.UserEmail, &user.PhotoUrl, &user.UserDOB, &user.Username, &user.NumFriends); err != nil {
+		if err := rows.Scan(&user.UserId, &user.UserFname, &user.UserLname, &user.UserEmail, &user.PhotoUrl, &user.UserDOB, &user.Username, &user.NumFriends, &user.ProfileImage); err != nil {
 			log.Fatal(err)
 		}
 		// if err := json.Unmarshal([]byte(userString), user); err != nil {
@@ -51,6 +53,7 @@ func (ss *SqlStore) GetByID(id int) (*User, error) {
 	if err := rows.Err(); err != nil {
 		log.Fatal(err)
 	}
+	user.ProfileImageString = hex.EncodeToString(user.ProfileImage)
 	return user, nil
 }
 
@@ -95,7 +98,7 @@ func (ss *SqlStore) GetByEmail(email string) (*User, error) {
 
 	defer rows.Close()
 	for rows.Next() {
-		if err := rows.Scan(&user.UserId, &user.UserFname, &user.UserLname, &user.UserEmail, &user.PasswordHash, &user.PhotoUrl, &user.UserDOB, &user.Username, &user.NumFriends, &user.IsDelete, &user.ProfileImageId); err != nil {
+		if err := rows.Scan(&user.UserId, &user.UserFname, &user.UserLname, &user.UserEmail, &user.PasswordHash, &user.PhotoUrl, &user.UserDOB, &user.Username, &user.NumFriends, &user.IsDelete, &user.ProfileImageId, &user.ProfileImage); err != nil {
 			log.Fatalf("Error scanning row %v", err)
 		}
 
@@ -103,7 +106,8 @@ func (ss *SqlStore) GetByEmail(email string) (*User, error) {
 	if err := rows.Err(); err != nil {
 		log.Fatalf("Error in row %v", err)
 	}
-
+	// user.ProfileImageString = hex.EncodeToString(user.ProfileImage)
+	user.ProfileImageString = base64.StdEncoding.EncodeToString(user.ProfileImage)
 	return user, nil
 }
 

@@ -34,6 +34,9 @@ class PackageStore {
                         if (column.value === null) {
                             console.log('NULL');
                         } else {
+                            if (column.metadata.colName == 'ProfileImage') {
+                                column.value = Buffer.from(column.value).toString('base64');
+                            }
                             rowObject[column.metadata.colName] = column.value;
                         }
                     });
@@ -74,6 +77,9 @@ class PackageStore {
                         if (column.value === null) {
                             console.log('NULL');
                         } else {
+                            if (column.metadata.colName == 'ProfileImage') {
+                                column.value = Buffer.from(column.value).toString('base64');
+                            }
                             rowObject[column.metadata.colName] = column.value;
                         }
                     });
@@ -95,7 +101,7 @@ class PackageStore {
             });
     }
 
-
+    //NOTI
     // Update Accept/Deny incoming package
     update(userId, senderId, orderId, response, shippingAddressId) {
         return new Promise((resolve) => {
@@ -120,6 +126,9 @@ class PackageStore {
                         if (column.value === null) {
                             console.log('NULL');
                         } else {
+                            if (column.metadata.colName == 'ProfileImage') {
+                                column.value = Buffer.from(column.value).toString('base64');
+                            }
                             rowObject[column.metadata.colName] = column.value;
                         }
                     });
@@ -161,6 +170,7 @@ class PackageStore {
                     parsedJsonArray["AmazonProducts"] = amazonProducts;
                     console.log(`Parsed JSON array = ${JSON.stringify(parsedJsonArray, null, 4)}`)
                     // console.log(jsonArray[0]);
+
                     return parsedJsonArray
                 } else { // user denied package
                     return "User denied package"
