@@ -237,7 +237,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 if objItemAttribute["Feature"] != nil {
                     itemFeature = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Feature")
                 } else {
-                    itemFeature = "NA"
+                    itemFeature = "N/A"
                 }
                 
                 let title = self.fnAccesStringinObj(dictObj: objItemAttribute, strAttribute: "Title")
@@ -361,9 +361,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             Alamofire.request(objProduct.image).responseImage(completionHandler: { (response) in
                 print(response)
                 if let image = response.result.value {
-                    let circularImage = image.af_imageRoundedIntoCircle()
                     DispatchQueue.main.async {
-                        cell.img.image = circularImage
+                        cell.img.image = image
                     }
                 }
             })

@@ -151,11 +151,11 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             let itemPrice = "$" + element.objProduct.price // change later
             formatter.numberStyle = .currency
             formatter.locale = Locale(identifier: "en_US")
-            var decAmazonPrice: Decimal = 0.00
+            var decAmazonPrice: Double = 0.00
             if let number = formatter.number(from: itemPrice) {
-                decAmazonPrice = number.decimalValue
-                let totalAmt = decAmazonPrice * (Decimal)(element.intQuantity)
-                self.priceSum += totalAmt
+                decAmazonPrice = number.doubleValue
+                let totalAmt: Double = decAmazonPrice * (Double)(element.intQuantity)
+                self.priceSum += Decimal(totalAmt)
             }
             print("Total Price: \(self.priceSum)")
         }
@@ -173,7 +173,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         // rounds 2 decimal places for priceSum
         let tempSum = Double(truncating: self.priceSum as NSNumber)
-        let temp2Sum = Double(round(100 * tempSum)/100)
+        let temp2Sum = Double(round(100 * tempSum)/100).roundTo2f()
         print("Number of items: \(self.intNumItems)")
         print("Total Price: \(temp2Sum)")
         self.cartPrice.text = "$\(temp2Sum)"
@@ -285,9 +285,9 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         let strPrice = "$" + cartObj.objProduct.price
         formatter.numberStyle = .currency
         if let number = formatter.number(from: strPrice) {
-            let dblPrice = number.decimalValue
             let intQty = (Double)(cartObj.intQuantity)
-            cell.lblPrice.text = "$\((String)(describing: dblPrice * (Decimal)(intQty)))"
+            let dblPrice = number.doubleValue * (Double)(intQty)
+            cell.lblPrice.text = "$ \(dblPrice.roundTo2f())"
         }
         cell.lblSellerName.text = String(cartObj.intQuantity) //cartObj.objProduct.publisher
         cell.btnDelete.tag = indexPath.row
@@ -306,5 +306,23 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     @objc func fnEditQuantity(_ button: UIButton) {
         pickerviewEditQuantity.isHidden = false
         intLineItemIndex = button.tag
+    }
+}
+
+extension Double
+{
+    func roundTo0f() -> NSString
+    {
+        return NSString(format: "%.0f", self)
+    }
+    
+    func roundTo1f() -> NSString
+    {
+        return NSString(format: "%.1f", self)
+    }
+    
+    func roundTo2f() -> NSString
+    {
+        return NSString(format: "%.2f", self)
     }
 }
