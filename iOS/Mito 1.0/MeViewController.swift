@@ -331,7 +331,11 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
 
         if UserDefaults.standard.object(forKey: "UserInfo") != nil {
             let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
-            appdata.fnDisplaySimpleImage(strImageURL: data["photoURL"] as! String, img: imgProfilePic)
+            let photoString = data["profileImageString"] as! String
+            let decodedImage = Data(base64Encoded: photoString) //Data(base64Encoded: photoString, options: .ignoreUnknownCharacters)
+            let image = UIImage(data: decodedImage!)
+            imgProfilePic.image = image
+//            appdata.fnDisplaySimpleImage(strImageURL: data["photoURL"] as! String, img: imgProfilePic)
             self.userID.text = data["userId"] as? String
             self.userEmail.text = data["userEmail"] as? String
             self.username.text = data["username"] as? String
@@ -358,15 +362,17 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
     }
     
     func fnCropImage(image: UIImage) -> CGImage {
-        let crop = CGRect(x: image.size.width / 2, y: image.size.height / 2, width: 20, height: 20)
-        let imageRef2 = image.cgImage!.cropping(to: crop)
-        return imageRef2!
+        let size = CGSize(width: 100, height: 100)
+        let newImage = image.af_imageAspectScaled(toFill: size)
+//        let newImage = image.crop(size)
+//        let crop = CGRect(x: image.size.width / 2, y: image.size.height / 2, width: 100, height: 100)
+//        let imageRef2 = image.cgImage!.cropping(to: crop)
+        return newImage.cgImage!
         
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            print(image)
             let cgImage = fnCropImage(image: image)
             imgProfilePic.image = UIImage(cgImage: cgImage)
             let imageData: Data = UIImageJPEGRepresentation(imgProfilePic.image!, 1)!
@@ -521,4 +527,21 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
         }
     }
 }
+
+//extension UIImage {
+//    enum JPEGQuality: CGFloat {
+//        case lowest  = 0
+//        case low     = 0.25
+//        case medium  = 0.5
+//        case high    = 0.75
+//        case highest = 1
+//    }
+//
+//    /// Returns the data for the specified image in JPEG format.
+//    /// If the image object’s underlying image data has been purged, calling this function forces that data to be reloaded into memory.
+//    /// - returns: A data object containing the JPEG data, or nil if there was a problem generating the data. This function may return nil if the image has no data or if the underlying CGImageRef contains data in an unsupported bitmap format.
+//    func jpeg(_ quality: JPEGQuality) -> Data? {
+//        return UIImageJPEGRepresentation(self, quality.rawValue)
+//    }
+//}
 

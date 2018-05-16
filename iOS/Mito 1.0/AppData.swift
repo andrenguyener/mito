@@ -217,6 +217,7 @@ class AppData: NSObject {
                     let dict2 = dictionary as! NSArray
                     for obj in dict2 {
                         let object = obj as! NSDictionary
+                        print(object)
                         let p: Person = Person(firstName: (object["UserFname"] as? String)!,
                                                lastName: (object["UserLname"] as? String)!,
                                                email: (object["UserEmail"] as? String?)!!,
