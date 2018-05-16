@@ -89,10 +89,9 @@ const PackageHandler = (packageStore) => {
                     sendToMQ(req, data);
                     axios({
                         method: 'post',
-                        url: '/user/12345',
+                        url: 'https://api.zinc.io/v1/orders',
                         auth: {
                             username: 'janedoe',
-                            password: 's00pers3cret'
                         },
                         data: {
                             firstName: 'Fred',
@@ -100,7 +99,7 @@ const PackageHandler = (packageStore) => {
                         }
                     })
                         .then(function (response) {
-
+                            console.log(response)
                         })
                         .catch(function (error) {
 

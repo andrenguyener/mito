@@ -34,7 +34,7 @@ func GetCurrentUser(r *http.Request, ctx *handlers.Context) *users.User {
 }
 
 // Directs the request to the correct microservice, attaches the user as a Header
-func NewServiceProxy(addrs []string, ctx *handlers.Context, type string) *httputil.ReverseProxy {
+func NewServiceProxy(addrs []string, ctx *handlers.Context) *httputil.ReverseProxy {
 	nextIndex := 0
 	mx := sync.Mutex{}
 	return &httputil.ReverseProxy{
@@ -45,7 +45,7 @@ func NewServiceProxy(addrs []string, ctx *handlers.Context, type string) *httput
 				log.Printf("error marshaling user: %v", err)
 			}
 			r.Header.Set("X-User", string(userJSON))
-			
+
 			r.Header.Set("Content-Type", "application/json")
 			mx.Lock()
 			r.URL.Host = addrs[nextIndex%len(addrs)]
@@ -174,32 +174,29 @@ func main() {
 	mux.Handle("/v1/ws", ctx.NewWebSocketsHandler(notifier))
 	fmt.Printf("server is listening at https://%s\n", addr)
 
-	json := "json"
-	image := "image"
-
-	mux.Handle("/v1/address", NewServiceProxy(splitMitoNodeAddrs, ctx, json))
-	mux.Handle("/v1/address/", NewServiceProxy(splitMitoNodeAddrs, ctx, json))
-	mux.Handle("/v1/friend", NewServiceProxy(splitMitoNodeAddrs, ctx, json))
-	mux.Handle("/v1/friend/", NewServiceProxy(splitMitoNodeAddrs, ctx, json))
-	mux.Handle("/v1/amazonhash", NewServiceProxy(splitMitoNodeAddrs, ctx, json))
-	mux.Handle("/v1/amazonhash/", NewServiceProxy(splitMitoNodeAddrs, ctx, json))
-	mux.Handle("/v1/amazonhashtest", NewServiceProxy(splitMitoNodeAddrs, ctx, json))
-	mux.Handle("/v1/amazonhashtest/", NewServiceProxy(splitMitoNodeAddrs, ctx, json))
-	mux.Handle("/v1/amazonsearch", NewServiceProxy(splitMitoNodeAddrs, ctx, json))
-	mux.Handle("/v1/amazonsearch/", NewServiceProxy(splitMitoNodeAddrs, ctx, json))
-	mux.Handle("/v1/cart", NewServiceProxy(splitMitoNodeAddrs, ctx, json))
-	mux.Handle("/v1/cart/", NewServiceProxy(splitMitoNodeAddrs, ctx, json))
-	mux.Handle("/v1/order", NewServiceProxy(splitMitoNodeAddrs, ctx, json))
-	mux.Handle("/v1/order/", NewServiceProxy(splitMitoNodeAddrs, ctx, json))
-	mux.Handle("/v1/package", NewServiceProxy(splitMitoNodeAddrs, ctx, json))
-	mux.Handle("/v1/package/", NewServiceProxy(splitMitoNodeAddrs, ctx, json))
-	mux.Handle("/v1/payment", NewServiceProxy(splitMitoNodeAddrs, ctx, json))
-	mux.Handle("/v1/payment/", NewServiceProxy(splitMitoNodeAddrs, ctx, json))
-	mux.Handle("/v1/feed", NewServiceProxy(splitMitoNodeAddrs, ctx, json))
-	mux.Handle("/v1/feed/", NewServiceProxy(splitMitoNodeAddrs, ctx, json))
-	mux.Handle("/v1/notification", NewServiceProxy(splitMitoNodeAddrs, ctx, json))
-	mux.Handle("/v1/notification/", NewServiceProxy(splitMitoNodeAddrs, ctx, json))
-	mux.Handle("/v1/image", NewServiceProxy(splitMitoNodeAddrs, ctx, json))
-	mux.Handle("/v1/image/", NewServiceProxy(splitMitoNodeAddrs, ctx, image))
-	log.Fatal(http.ListenAndServeTLS(addr, tlscert, tlskey, corsHandler, image))
+	mux.Handle("/v1/address", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/address/", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/friend", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/friend/", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/amazonhash", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/amazonhash/", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/amazonhashtest", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/amazonhashtest/", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/amazonsearch", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/amazonsearch/", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/cart", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/cart/", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/order", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/order/", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/package", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/package/", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/payment", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/payment/", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/feed", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/feed/", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/notification", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/notification/", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/image", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/image/", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	log.Fatal(http.ListenAndServeTLS(addr, tlscert, tlskey, corsHandler))
 }
