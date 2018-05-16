@@ -17,10 +17,6 @@ struct Address: Decodable {
     let strStreetAddress2: String?
     let strZipCode: String?
     
-    
-//    let objAddressObject = Address(intAddressID: objAddress["AddressId"] as! Int, strAddressAlias: objAddress["Alias"] as! String, strCityName: objAddress["CityName"] as! String, strStateName: objAddress["StateName"] as! String, strStreetAddress1: objAddress["StreetAddress"] as! String, strStreetAddress2: strAddress2, strZipCode: objAddress["ZipCode"] as! String)
-//    print("\(objAddress["Alias"] as! String) \(String(describing: objAddress["AddressId"]))")
-    
     private enum CodingKeys: String, CodingKey {
         case intAddressID = "AddressId"
         case strAddressAlias = "Alias"

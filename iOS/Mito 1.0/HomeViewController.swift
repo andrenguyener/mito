@@ -20,7 +20,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func switchTab(_ sender: UISegmentedControl) {
         if segmentChooser.selectedSegmentIndex == 1 {
-            appdata.fnLoadMyActivity(tblview: tableView, intUserId: appdata.intCurrentUserID,    arr: appdata.arrMyFeedItems)
+            appdata.fnLoadMyActivity(tblview: tableView, intUserId: appdata.intCurrentUserID, arr: appdata.arrMyFeedItems)
         } else {
             appdata.fnLoadFriendActivity(tblview: tableView)
         }
@@ -108,9 +108,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             feedItemObj = appdata.arrMyFeedItems[indexPath.row]
         }
         Alamofire.request(feedItemObj.photoSenderUrl).responseImage(completionHandler: { (response) in
-            print(response)
+//            print(response)
             if let image = response.result.value {
                 let circularImage = image.af_imageRoundedIntoCircle()
+                print(circularImage)
                 DispatchQueue.main.async {
                     cell.img.image = circularImage
                 }

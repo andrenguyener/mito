@@ -370,58 +370,73 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
             let cgImage = fnCropImage(image: image)
             imgProfilePic.image = UIImage(cgImage: cgImage)
             let imageData: Data = UIImageJPEGRepresentation(imgProfilePic.image!, 1)!
-            print(imageData)
-            fnUploadImage(imageData: imageData)
+            let encodedData = imageData.base64EncodedString()
+            print("Data: \(encodedData)")
+            print(type(of: encodedData))
+            fnUploadImage(encodedData: encodedData)
         } else {
             print("Error")
         }
         self.dismiss(animated: true, completion: nil)
     }
     
-    func fnUploadImage(imageData: Data) {
+    func fnUploadImage(encodedData: String) {
         let urlUploadImage = URL(string: "https://api.projectmito.io/v1/image")
         let parameters: Parameters = [
-            "imageData": imageData
+            "imageData": encodedData
         ]
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
-        Alamofire.upload(multipartFormData: { (multipartFormData) in
-            for (key, value) in parameters {
-                let dataValue = value as! Data
-                multipartFormData.append(dataValue, withName: key)
-            }
-            multipartFormData.append(imageData, withName: "temp_file.jpeg")
-//            multipartFormData.append(imageData, withName: "image", fileName: "swift_file.jpeg", mimeType: "image/jpeg")
-        }, to: urlUploadImage!)
-        { (result) in
-            switch result {
-            case .success(let upload, _, _):
-                print("Successfully uploaded")
-                upload.uploadProgress(closure: { (Progress) in
-                    print("Upload Progress: \(Progress.fractionCompleted)")
-                })
-                
-                upload.responseJSON { response in
-                    //self.delegate?.showSuccessAlert()
-                    print(response.request)  // original URL request
-                    print(response.response) // URL response
-                    print(response.data)     // server data
-                    print(response.result)   // result of response serialization
-                    //                        self.showSuccesAlert()
-                    //self.removeImage("frame", fileExtension: "txt")
-                    if let JSON = response.result.value {
-                        print("JSON: \(JSON)")
-                    }
+        Alamofire.request(urlUploadImage!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    print(dictionary)
+                    print("\(response): Successful")
                 }
                 
-            case .failure(let encodingError):
-                //self.delegate?.showFailAlert()
-                print("Unsuccessfully uploaded")
-                print(encodingError)
+            case .failure(let error):
+                print("Upload image error")
+                print(error)
             }
-            
         }
+//        Alamofire.upload(multipartFormData: { (multipartFormData) in
+//            for (key, value) in parameters {
+//                let dataValue = value as! Data
+//                multipartFormData.append(dataValue, withName: key)
+//            }
+//            multipartFormData.append(encodedData, withName: "temp_file.jpeg")
+////            multipartFormData.append(imageData, withName: "image", fileName: "swift_file.jpeg", mimeType: "image/jpeg")
+//        }, to: urlUploadImage!)
+//        { (result) in
+//            switch result {
+//            case .success(let upload, _, _):
+//                print("Successfully uploaded")
+//                upload.uploadProgress(closure: { (Progress) in
+//                    print("Upload Progress: \(Progress.fractionCompleted)")
+//                })
+//
+//                upload.responseJSON { response in
+//                    //self.delegate?.showSuccessAlert()
+//                    print(response.request)  // original URL request
+//                    print(response.response) // URL response
+//                    print(response.data)     // server data
+//                    print(response.result)   // result of response serialization
+//                    //                        self.showSuccesAlert()
+//                    //self.removeImage("frame", fileExtension: "txt")
+//                    if let JSON = response.result.value {
+//                        print("JSON: \(JSON)")
+//                    }
+//                }
+//
+//            case .failure(let encodingError):
+//                //self.delegate?.showFailAlert()
+//                print("Unsuccessfully uploaded")
+//                print(encodingError)
+//            }
+//
+//        }
         
         ///
     }

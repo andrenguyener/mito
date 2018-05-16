@@ -177,6 +177,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     if UserDefaults.standard.object(forKey: "ProductSearchResultsJSON") != nil {
                         print("ProductSearchResultsJSON is saved properly")
                         let myJson = UserDefaults.standard.object(forKey: "ProductSearchResultsJSON") as! NSDictionary
+                        print(myJson)
                         self.fnLoadLocalProductSearchResults(myJson: myJson)
                     }
                     DispatchQueue.main.async {
