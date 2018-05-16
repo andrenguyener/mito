@@ -38,8 +38,9 @@ const ImageHandler = (imageStore) => {
         const userJSON = req.get('X-User');
         const user = JSON.parse(userJSON);
         let imageData = req.body.imageData;
+        let buff = new Buffer(imageData, 'base64');
         imageStore
-            .insert(user.userId, imageData)
+            .insert(user.userId, buff)
             .then((message) => {
                 res.send(message);
             })

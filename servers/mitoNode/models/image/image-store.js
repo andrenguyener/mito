@@ -28,6 +28,9 @@ class ImageStore {
                         if (column.value === null) {
                             console.log('NULL');
                         } else {
+                            if (column.metadata.colName == 'ProfileImage') {
+                                column.value = window.btoa(column.value);
+                            }
                             rowObject[column.metadata.colName] = column.value;
                         }
                     });
@@ -61,7 +64,7 @@ class ImageStore {
                     }
                     connection.release();
                 });
-                request.addParameter('User1Id', TYPES.Int, userId);
+                request.addParameter('UserId', TYPES.Int, userId);
                 request.addParameter('ImageData', TYPES.VarBinary, imageData);
 
                 request.on('doneProc', function (rowCount, more) {

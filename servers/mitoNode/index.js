@@ -5,8 +5,28 @@
 const express = require("express");
 const morgan = require("morgan");
 const app = express();
+// var Curl = require('node-libcurl').Curl;
+// var curl = new Curl();
+
+// curl.setOpt('URL', 'www.google.com');
+// curl.setOpt('FOLLOWLOCATION', true);
+
+// curl.on('end', function (statusCode, body, headers) {
+
+//     console.info(statusCode);
+//     console.info('---');
+//     console.info(body.length);
+//     console.info('---');
+//     console.info(this.getInfo('TOTAL_TIME'));
+
+//     this.close();
+// });
+
+// curl.on('error', curl.close.bind(curl));
+// curl.perform();
 var Connection = require('tedious').Connection;
 var ConnectionPool = require('tedious-connection-pool');
+
 // var CONFIG = require('./config.json');
 
 // config for your database
