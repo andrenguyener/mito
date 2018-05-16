@@ -20,9 +20,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func switchTab(_ sender: UISegmentedControl) {
         if segmentChooser.selectedSegmentIndex == 1 {
-            appdata.fnLoadMyActivity(tblview: tableView)
+            appdata.fnLoadMyActivity(tblview: tableView, intUserId: appdata.intCurrentUserID,    arr: appdata.arrMyFeedItems)
         } else {
-            fnLoadFriendActivity()
+            appdata.fnLoadFriendActivity(tblview: tableView)
         }
     }
     
@@ -76,55 +76,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appdata.socket.delegate = appDelegate.self
         appdata.socket.connect()
-        fnLoadFriendActivity()
+        appdata.fnLoadFriendActivity(tblview: tableView)
     }
     
-    func fnLoadFriendActivity() {
-        let urlLoadFriendActivity = URL(string: "https://api.projectmito.io/v1/feed/friends")
-        let headers: HTTPHeaders = [
-            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
-        ]
-        Alamofire.request(urlLoadFriendActivity!, method: .get, encoding: URLEncoding.default, headers: headers).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                print("Loaded Friend Activity")
-                if let dictionary = response.data {
-                    let decoder = JSONDecoder()
-                    do {
-                        self.appdata.arrFriendsFeedItems = try decoder.decode([FeedItem].self, from: dictionary)
-                    } catch let jsonErr {
-                        print("Failed to decode: \(jsonErr)")
-                    }
-//                    let arrFeedItems = dictionary as! NSArray
-//                    for objFeedItem in arrFeedItems {
-//                        let item = objFeedItem as! NSDictionary
-//                        let strDate = item["OrderDate"].stringValue
-//                        print(strDate)
-//                        let strMessage = item["OrderMessage"] as! String
-//                        let strPhotoUrl = item["SenderPhotoUrl"] as! String
-//                        let strRecipientFName = item["RecipientFirstName"] as! String
-//                        let strRecipientLName = item["RecipientLastName"] as! String
-//                        let strSenderFName = item["SenderFirstName"] as! String
-//                        let strSenderLName = item["SenderLastName"] as! String
-//                        let intRecipientId = item["RecipientId"] as! Int
-//                        let intSenderId = item["SenderId"] as! Int
-//                        let objFeed = FeedItem(strDate: strDate, photoSenderUrl: strPhotoUrl, strMessage: strMessage, strRecipientFName: strRecipientFName, strRecipientLName: strRecipientLName, strSenderFName: strSenderFName, strSenderLName: strSenderLName, intSenderId: intSenderId, intRecipientId: intRecipientId)
-//                        self.appdata.arrFriendsFeedItems.append(objFeed)
-//                      }
-                    self.appdata.arrFriendsFeedItems.sort(by: self.appdata.fnSortFeedItems)
-                }
-                print("Total Friend Feed Items: \(self.appdata.arrFriendsFeedItems.count)")
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-                
-            case .failure(let error):
-                print("Error loading friend activity")
-                print(error)
-            }
-        }
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

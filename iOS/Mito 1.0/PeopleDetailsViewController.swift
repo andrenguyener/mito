@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import UIKit
 
-class PeopleDetailsViewController: UIViewController {
+class PeopleDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var appdata = AppData.shared
     
@@ -19,15 +19,22 @@ class PeopleDetailsViewController: UIViewController {
     @IBOutlet weak var img: UIImageView!
     @IBOutlet weak var btnNumFriends: UIButton!
     @IBOutlet weak var addFriendbtn: UIButton!
+    @IBOutlet weak var tblviewFeed: UITableView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadPersonData()
+        tblviewFeed.delegate = self
+        tblviewFeed.dataSource = self
+        tblviewFeed.register(HomeTableViewCell.self, forCellReuseIdentifier: "homeCell")
     }
     
     func loadPersonData() {
         fnCheckFriendStatus()
         let friend = appdata.personToView
+        appdata.fnLoadMitoProfileFeed(tblview: tblviewFeed, intUserId: friend.intUserID)
+//        appdata.fnLoadMyActivity(tblview: tblviewFeed, intUserId: friend.intUserID, arr: appdata.arrMitoProfileFeedItems)
         let strName = "\(friend.firstName) \(friend.lastName)"
         lblName.text = strName
         self.navigationItem.title = strName
@@ -112,5 +119,44 @@ class PeopleDetailsViewController: UIViewController {
             navigationItem.backBarButtonItem = backItem
         }
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(appdata.arrMitoProfileFeedItems.count)
+        return appdata.arrMitoProfileFeedItems.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: "homeCell", for: indexPath) as! HomeTableViewCell
+        if cell == nil{
+            tblviewFeed.register(UINib.init(nibName: "homeCell", bundle: nil), forCellReuseIdentifier: "homeCell")
+            let arrNib:Array = Bundle.main.loadNibNamed("homeCell",owner: self, options: nil)!
+            cell = (arrNib.first as? HomeTableViewCell)!
+        }
+
+        let feedItemObj = appdata.arrMitoProfileFeedItems[indexPath.row]
+        Alamofire.request(feedItemObj.photoSenderUrl).responseImage(completionHandler: { (response) in
+            print(response)
+            if let image = response.result.value {
+                let circularImage = image.af_imageRoundedIntoCircle()
+                DispatchQueue.main.async {
+                    cell.img.image = circularImage
+                }
+            }
+        })
+        var strSender = "\(feedItemObj.strSenderFName) \(feedItemObj.strSenderLName)"
+        var strRecipient = "\(feedItemObj.strRecipientFName) \(feedItemObj.strRecipientLName)"
+        if feedItemObj.intSenderId == appdata.intCurrentUserID {
+            strSender = "You"
+        }
+        if feedItemObj.intRecipientId == appdata.intCurrentUserID {
+            strRecipient = "You"
+        }
+        cell.whatHappened.text = "\(strSender) sent \(strRecipient)"
+        cell.time.text = "\(appdata.fnUTCToLocal(date: feedItemObj.strDate))"
+        cell.descr.text = "\(feedItemObj.strMessage)"
+        cell.whatHappened.numberOfLines = 2
+        return cell
+    }
+    
 }
 

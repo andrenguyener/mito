@@ -34,7 +34,7 @@ class AppData: NSObject {
     open var arrCurrUserPackages: [Package] = []
     open var arrFriendsAndAllMitoUsers: [[Person]] = []
     open var arrCurrFriendsAndAllMitoUsers: [[Person]] = []
-    
+    open var arrMitoProfileFeedItems: [FeedItem] = []
     open var arrFriendsFeedItems: [FeedItem] = []
     open var arrMyFeedItems: [FeedItem] = []
     
@@ -58,42 +58,26 @@ class AppData: NSObject {
     
     open var tempAccountHolder : Parameters = (Dictionary<String, Any>)()
     
-    open func fnLoadMyActivity(tblview: UITableView) {
+    open func fnLoadMitoProfileFeed(tblview: UITableView, intUserId: Int) {
         let urlLoadMyActivity = URL(string: "https://api.projectmito.io/v1/feed/")
+        let parameters: Parameters = [
+            "friendId": intUserId
+        ]
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
-        Alamofire.request(urlLoadMyActivity!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+        Alamofire.request(urlLoadMyActivity!, method: .get, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success:
                 print("Loaded My Activity")
                 if let dictionary = response.data {
                     let decoder = JSONDecoder()
                     do {
-                        self.arrMyFeedItems = try decoder.decode([FeedItem].self, from: dictionary)
+                        self.arrMitoProfileFeedItems = try decoder.decode([FeedItem].self, from: dictionary)
                     } catch let jsonErr {
                         print("Failed to decode: \(jsonErr)")
                     }
-                    self.arrMyFeedItems.sort(by: self.fnSortFeedItems)
-//                if let dictionary = response.result.value {
-//                    let arrFeedItems = dictionary as! NSArray
-//                    //self.fnLoadActualFeedData(arrFeedItems: arrFeedItems, arr2: self.arrMyFeedItems)
-//                    for objFeedItem in arrFeedItems {
-//                        let item = objFeedItem as! NSDictionary
-//                        let strDate = item["OrderDate"] as! String
-//                        let strMessage = item["OrderMessage"] as! String
-//                        let strPhotoUrl = item["SenderPhotoUrl"] as! String
-//                        let strRecipientFName = item["RecipientFirstName"] as! String
-//                        let strRecipientLName = item["RecipientLastName"] as! String
-//                        let strSenderFName = item["SenderFirstName"] as! String
-//                        let strSenderLName = item["SenderLastName"] as! String
-//                        let intRecipientId = item["RecipientId"] as! Int
-//                        let intSenderId = item["SenderId"] as! Int
-//                        let objFeed = FeedItem(strDate: strDate, photoSenderUrl: strPhotoUrl, strMessage: strMessage, strRecipientFName: strRecipientFName, strRecipientLName: strRecipientLName, strSenderFName: strSenderFName, strSenderLName: strSenderLName, intRecipientId: intRecipientId, intSenderId: intSenderId)
-//                        self.arrMyFeedItems.append(objFeed)
-//                    }
-//                    self.arrMyFeedItems.sort(by: self.fnSortFeedItems)
-//                }
+                    self.arrMitoProfileFeedItems.sort(by: self.fnSortFeedItems)
                     DispatchQueue.main.async {
                         tblview.reloadData()
                     }
@@ -106,23 +90,66 @@ class AppData: NSObject {
         }
     }
     
-    open func fnLoadActualFeedData(arrFeedItems: NSArray, arr2: [FeedItem]) {
-        var arr2: [FeedItem] = []
-        for objFeedItem in arrFeedItems {
-            let item = objFeedItem as! NSDictionary
-            let strDate = item["OrderDate"] as! String
-            let strMessage = item["OrderMessage"] as! String
-            let strPhotoUrl = item["SenderPhotoUrl"] as! String
-            let strRecipientFName = item["RecipientFirstName"] as! String
-            let strRecipientLName = item["RecipientLastName"] as! String
-            let strSenderFName = item["SenderFirstName"] as! String
-            let strSenderLName = item["SenderLastName"] as! String
-            let intRecipientId = item["RecipientId"] as! Int
-            let intSenderId = item["SenderId"] as! Int
-            let objFeed = FeedItem(strDate: strDate, photoSenderUrl: strPhotoUrl, strMessage: strMessage, strRecipientFName: strRecipientFName, strRecipientLName: strRecipientLName, strSenderFName: strSenderFName, strSenderLName: strSenderLName, intRecipientId: intRecipientId, intSenderId: intSenderId)
-            arr2.append(objFeed)
+    open func fnLoadMyActivity(tblview: UITableView, intUserId: Int, arr: [FeedItem]) {
+        let urlLoadMyActivity = URL(string: "https://api.projectmito.io/v1/feed/")
+        let parameters: Parameters = [
+            "friendId": intUserId
+        ]
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlLoadMyActivity!, method: .get, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                print("Loaded My Activity")
+                if let dictionary = response.data {
+                    let decoder = JSONDecoder()
+                    do {
+                        self.arrMyFeedItems = try decoder.decode([FeedItem].self, from: dictionary)
+                    } catch let jsonErr {
+                        print("Failed to decode: \(jsonErr)")
+                    }
+                    self.arrMyFeedItems.sort(by: self.fnSortFeedItems)
+                    DispatchQueue.main.async {
+                        tblview.reloadData()
+                    }
+                }
+                
+            case .failure(let error):
+                print("Error loading my activity")
+                print(error)
+            }
         }
-        print(arrMyFeedItems.count)
+    }
+    
+    func fnLoadFriendActivity(tblview: UITableView) {
+        let urlLoadFriendActivity = URL(string: "https://api.projectmito.io/v1/feed/friends")
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlLoadFriendActivity!, method: .get, encoding: URLEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                print("Loaded Friend Activity")
+                if let dictionary = response.data {
+                    let decoder = JSONDecoder()
+                    do {
+                        self.arrFriendsFeedItems = try decoder.decode([FeedItem].self, from: dictionary)
+                    } catch let jsonErr {
+                        print("Failed to decode: \(jsonErr)")
+                    }
+                    self.arrFriendsFeedItems.sort(by: self.fnSortFeedItems)
+                }
+                print("Total Friend Feed Items: \(self.arrFriendsFeedItems.count)")
+                DispatchQueue.main.async {
+                    tblview.reloadData()
+                }
+                
+            case .failure(let error):
+                print("Error loading friend activity")
+                print(error)
+            }
+        }
     }
     
     open func fnLoadStateData() {
