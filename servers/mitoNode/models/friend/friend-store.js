@@ -251,7 +251,12 @@ class FriendStore {
                 request.addParameter('friendTypeToUpdate', TYPES.NVarChar, friendType);
                 request.addParameter('friendTypeRequestResponse', TYPES.NVarChar, notificationType);
                 request.on('doneProc', function (rowCount, more) {
-                    resolve("Action Completed");
+                    if (friendType == "friend") {
+                        resolve("Accept");
+                    } else {
+                        resolve("Action Completed");
+                    }
+
                 });
 
                 connection.callProcedure(request)

@@ -2,7 +2,6 @@
 
 var Request = require('tedious').Request;
 var TYPES = require('tedious').TYPES;
-var Curl = require('node-libcurl').Curl;
 
 class PackageStore {
 
@@ -162,6 +161,7 @@ class PackageStore {
                     parsedJsonArray["AmazonProducts"] = amazonProducts;
                     console.log(`Parsed JSON array = ${JSON.stringify(parsedJsonArray, null, 4)}`)
                     // console.log(jsonArray[0]);
+
                     return parsedJsonArray
                 } else { // user denied package
                     return "User denied package"

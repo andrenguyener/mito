@@ -89,7 +89,7 @@ const FriendHandler = (friendStore) => {
                 }
             });
     });
-
+    //NOTI
     // Add a new friend
     router.post('/v1/friend', (req, res) => {
         const userJSON = req.get('X-User');
@@ -100,6 +100,13 @@ const FriendHandler = (friendStore) => {
             .insert(user.userId, friendId)
             .then((message) => {
                 res.send(message);
+                const data = {
+                    type: 'friend-request',
+                    friend: user,
+                    userIdOut: friendId
+                };
+                console.log(data);
+                sendToMQ(req, data);
             })
             .catch(err => {
                 if (err !== breakSignal) {
@@ -129,7 +136,7 @@ const FriendHandler = (friendStore) => {
     router.patch('', (req, res) => {
 
     });
-
+    //NOTI
     // Update friend request (accept/decline)
     router.patch('/v1/friend/request', (req, res) => {
         // @User1Id INT,
@@ -145,6 +152,16 @@ const FriendHandler = (friendStore) => {
             .updateFriendRequest(user.userId, friendId, friendType, notificationType)
             .then((message) => {
                 res.send(message);
+                if (message == "Accept") {
+                    const data = {
+                        type: 'friend-accept',
+                        friend: user,
+                        userIdOut: user.userId
+                    };
+                    console.log(data);
+                    sendToMQ(req, data);
+                }
+
             })
             .catch(err => {
                 if (err !== breakSignal) {
