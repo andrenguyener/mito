@@ -34,6 +34,9 @@ class OrderStore {
                         if (column.value === null) {
                             console.log('NULL');
                         } else {
+                            if (column.metadata.colName == 'ProfileImage') {
+                                column.value = Buffer.from(column.value).toString('base64');
+                            }
                             rowObject[column.metadata.colName] = column.value;
                         }
                     });

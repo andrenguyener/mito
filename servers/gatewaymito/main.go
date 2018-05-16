@@ -45,6 +45,7 @@ func NewServiceProxy(addrs []string, ctx *handlers.Context) *httputil.ReversePro
 				log.Printf("error marshaling user: %v", err)
 			}
 			r.Header.Set("X-User", string(userJSON))
+
 			r.Header.Set("Content-Type", "application/json")
 			mx.Lock()
 			r.URL.Host = addrs[nextIndex%len(addrs)]

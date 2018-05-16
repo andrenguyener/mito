@@ -1,8 +1,7 @@
-// @ts-check
-'use strict';
+
 
 const express = require('express');
-
+const axios = require('axios');
 const Package = require('./../models/package/package-class');
 const sendToMQ = require('./message-queue');
 
@@ -74,12 +73,41 @@ const PackageHandler = (packageStore) => {
             .update(userId, senderId, orderId, response, shippingAddressId)
             .then(packages => {
                 res.json(packages)
-                // const data = {
-                //     type: 'cart-get',
-                //     cart: cart,
-                //     userIdOut: userId
-                // };
-                // sendToMQ(req, data);
+                if (packages == "User denied package") {
+                    const data = {
+                        type: 'package-denied',
+                        package: packages,
+                        userIdOut: senderId
+                    };
+                    sendToMQ(req, data);
+                } else {
+                    const data = {
+                        type: 'package-accept',
+                        package: packages,
+                        userIdOut: senderId
+                    };
+                    sendToMQ(req, data);
+                    axios({
+                        method: 'post',
+                        url: 'https://api.zinc.io/v1/orders',
+                        auth: {
+                            username: 'janedoe',
+                        },
+                        data: {
+                            firstName: 'Fred',
+                            lastName: 'Flintstone'
+                        }
+                    })
+                        .then(function (response) {
+                            console.log(response)
+                        })
+                        .catch(function (error) {
+
+                        });
+                }
+
+
+
             })
             .catch(error => {
                 if (error != breakSignal) {
