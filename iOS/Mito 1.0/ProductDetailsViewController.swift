@@ -20,7 +20,7 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
         pickerviewQuantity.isHidden = true
         pickerviewQuantity.delegate = self
         pickerviewQuantity.dataSource = self
-        appdata.fnDisplaySimpleImage(strImageURL: appdata.arrProductSearchResults[appdata.intCurrIndex].image, img: prodImage)
+        appdata.fnDisplaySimpleImage(strImageURL: appdata.arrProductSearchResults[appdata.intCurrIndex].image, img: prodImage, boolCircle: false)
         prodTitle.text = appdata.arrProductSearchResults[appdata.intCurrIndex].title
         prodPub.text = appdata.arrProductSearchResults[appdata.intCurrIndex].publisher
         prodPrice.text = appdata.arrProductSearchResults[appdata.intCurrIndex].price

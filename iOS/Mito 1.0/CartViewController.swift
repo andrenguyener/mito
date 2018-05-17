@@ -135,7 +135,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             let stars = String(repeating:"*", count:12)
             let last4 = String(appdata.strCardNumber.suffix(4))
             lblCreditCardNumber.text = "\(stars)\(last4)"
-            appdata.fnDisplaySimpleImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipient)
+            appdata.fnDisplaySimpleImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipient, boolCircle: true)
         } else if lblNotifyYouMessage != nil {
             lblNotifyYouMessage.text = "We will notify you when \(appdata.personRecipient.firstName) accepts!"
         }

@@ -355,13 +355,15 @@ class AppData: NSObject {
 //        present(alertController, animated: true, completion: nil)
 //    }
     
-    open func fnDisplaySimpleImage(strImageURL: String, img: UIImageView) {
+    open func fnDisplaySimpleImage(strImageURL: String, img: UIImageView, boolCircle: Bool) {
         Alamofire.request(strImageURL).responseImage(completionHandler: { (response) in
             print(response)
-            if let image = response.result.value {
-                let circularImage = image.af_imageRoundedIntoCircle()
+            if var image = response.result.value {
+                if boolCircle {
+                    image = image.af_imageRoundedIntoCircle()
+                }
                 DispatchQueue.main.async {
-                    img.image = circularImage
+                    img.image = image
                 }
             }
         })
