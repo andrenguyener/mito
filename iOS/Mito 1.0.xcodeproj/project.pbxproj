@@ -71,6 +71,7 @@
 		B2F8494F2043D71000CBD83A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F8494E2043D71000CBD83A /* LoginViewController.swift */; };
 		B2FFA72E20782BE20046CDA2 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FFA72D20782BE20046CDA2 /* WelcomeViewController.swift */; };
 		BF623C7A17D127F65C5BFF46 /* Pods_Mito_1_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B658EBC5F86F98DCB37842 /* Pods_Mito_1_0.framework */; };
+		DA23437820AE4A9D003E4D6A /* ChooseFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA23437720AE4A9D003E4D6A /* ChooseFriendViewController.swift */; };
 		DA27C218204353FF00CCFD60 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA27C217204353FF00CCFD60 /* HomeViewController.swift */; };
 		DA27C21A2043550A00CCFD60 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA27C2192043550A00CCFD60 /* HomeTableViewCell.swift */; };
 		DA27C21C204356B400CCFD60 /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA27C21B204356B400CCFD60 /* FeedItem.swift */; };
@@ -189,6 +190,7 @@
 		B2F849462043CAA900CBD83A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B2F8494E2043D71000CBD83A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B2FFA72D20782BE20046CDA2 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		DA23437720AE4A9D003E4D6A /* ChooseFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseFriendViewController.swift; sourceTree = "<group>"; };
 		DA27C217204353FF00CCFD60 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		DA27C2192043550A00CCFD60 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		DA27C21B204356B400CCFD60 /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 				B247196F20454733006CF6C2 /* CartTableViewCell.swift */,
 				B247196D20453917006CF6C2 /* CartViewController.swift */,
 				B277629420883DE40071C672 /* CheckoutSelectUserViewController.swift */,
+				DA23437720AE4A9D003E4D6A /* ChooseFriendViewController.swift */,
 				DA27C21B204356B400CCFD60 /* FeedItem.swift */,
 				DA27C2192043550A00CCFD60 /* HomeTableViewCell.swift */,
 				DA27C217204353FF00CCFD60 /* HomeViewController.swift */,
@@ -702,6 +705,7 @@
 				DA27C21A2043550A00CCFD60 /* HomeTableViewCell.swift in Sources */,
 				DAA9075E209963C400F151E1 /* AddressTableViewCell.swift in Sources */,
 				B298CB012084607900EED243 /* RoundedButton.swift in Sources */,
+				DA23437820AE4A9D003E4D6A /* ChooseFriendViewController.swift in Sources */,
 				DAD995312042386E007A7687 /* SearchViewController.swift in Sources */,
 				DA61587D20A200CD00285112 /* Notification.swift in Sources */,
 				DA49F1DB2055EF9E0018ABA4 /* ProductViewController.swift in Sources */,

@@ -1759,7 +1759,7 @@
         <!--ChooseFriend-->
         <scene sceneID="uuf-FR-odA">
             <objects>
-                <viewController title="ChooseFriend" id="CbO-zi-xvJ" customClass="CheckoutSelectUserViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="ChooseFriend" id="CbO-zi-xvJ" customClass="ChooseFriendViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HLk-av-DSY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1904,8 +1904,8 @@
                         <viewLayoutGuide key="safeArea" id="1DC-eY-OHd"/>
                     </view>
                     <connections>
-                        <outlet property="searchBar" destination="wV5-Y5-yaa" id="s1o-et-6Ce"/>
-                        <outlet property="tblviewPeople" destination="9Vz-xb-RaA" id="cNz-KC-Jpi"/>
+                        <outlet property="searchBar" destination="wV5-Y5-yaa" id="Lr5-eq-ask"/>
+                        <outlet property="tblviewPeople" destination="9Vz-xb-RaA" id="wXG-9X-Vb5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Vu-Ol-Pgb" userLabel="First Responder" sceneMemberID="firstResponder"/>
