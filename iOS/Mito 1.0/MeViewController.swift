@@ -170,11 +170,6 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
             let strFirstName = contact.givenName
             let strLastName = contact.familyName
             let strNumber = contact.phoneNumbers.first?.value.stringValue
-            if count <= 5 {
-                print("First Name: \(strFirstName)")
-                print("Last Name: \(strLastName)")
-                print("Number: \(strNumber)")
-            }
             count += 1
         }
     }
