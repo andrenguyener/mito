@@ -22,7 +22,6 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
     var appdata = AppData.shared
     var contactStore = CNContactStore()
     
-    @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblAddress: UILabel!
     
     var placesClient: GMSPlacesClient!
@@ -298,15 +297,8 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
 //        })
     }
     
-    
-    @IBOutlet weak var userID: UILabel!
-    @IBOutlet weak var userEmail: UILabel!
-    @IBOutlet weak var username: UILabel!
-    @IBOutlet weak var userFname: UILabel!
-    @IBOutlet weak var userLname: UILabel!
-    @IBOutlet weak var userDOB: UILabel!
-    @IBOutlet weak var photoURL: UILabel!
     @IBOutlet weak var imgProfilePic: UIImageView!
+    @IBOutlet weak var lblName: UILabel!
     
     @IBAction func meToSettings(_ sender: Any) {
         performSegue(withIdentifier: "meToSettings", sender: self)
@@ -335,14 +327,7 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
             imgProfilePic.image = image?.af_imageRoundedIntoCircle()
 //            appdata.fnDisplaySimpleImage(strImageURL: data["photoURL"] as! String, img: imgProfilePic)
             print(data)
-            self.userID.text = data["userId"] as? String
-            self.userEmail.text = data["userEmail"] as? String
-            self.username.text = data["username"] as? String
-            // Prevent showing Optional("")
-            self.userFname.text = "\(data["userFname"]!) \(data["userLname"]!)"
-            self.userLname.text = data["userLname"] as? String
-            self.userDOB.text = data["userDOB"] as? String
-            self.photoURL.text = data["photoURL"] as? String
+            lblName.text = "\(data["userFname"]!) \(data["userLname"]!)"
             locationManager.delegate = self
 //            print(data["userId"] as! String)
         }

@@ -158,17 +158,18 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                 let authHeader = response.response?.allHeaderFields["Authorization"] as! String
                 if !authHeader.isEmpty {
                     if let dictionary = response.result.value {
-                        print(dictionary)
+//                        print(dictionary)
+                        UserDefaults.standard.set(dictionary, forKey: "UserInfo")
+                        UserDefaults.standard.set(authHeader, forKey: "Authorization")
+                        if UserDefaults.standard.object(forKey: "UserInfo") != nil {
+                            let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+                            print(data)
+                            self.appdata.intCurrentUserID = (data["userId"] as? Int)!
+                            print("UserInfo: \(data)")
+                            print("UserID: \(String(describing: data["userId"]))")
+                        }
                         DispatchQueue.main.async {
                             self.performSegue(withIdentifier: "login", sender: self)
-                            UserDefaults.standard.set(dictionary, forKey: "UserInfo")
-                            UserDefaults.standard.set(authHeader, forKey: "Authorization")
-                            if UserDefaults.standard.object(forKey: "UserInfo") != nil {
-                                let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
-                                self.appdata.intCurrentUserID = (data["userId"] as? Int)!
-                                print("UserInfo: \(String(describing: data["UserInfo"]))")
-                                print("UserID: \(String(describing: data["userId"]))")
-                            }
 //                            let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
                             
                         }

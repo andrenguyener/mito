@@ -305,14 +305,14 @@ class AppData: NSObject {
     }
     
     func fnUTCToLocal(date:String) -> String {
-        print("Original date String: \(date)")
+//        print("Original date String: \(date)")
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         formatter.timeZone = TimeZone(abbreviation: "UTC")
         
         // Apply UTC
         let dt = formatter.date(from: date)
-        print("Date version: \(dt?.description)")
+//        print("Date version: \(dt?.description)")
         
         // Change to current
         formatter.timeZone = TimeZone.current
@@ -329,7 +329,7 @@ class AppData: NSObject {
 //        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
 //        formatter.timeZone = TimeZone.current
 //        let localDate: Date = formatter.date(from: strLocal)!
-        print("Local: \(dateLocal)")
+//        print("Local: \(dateLocal)")
         
         return dateLocal!
     }

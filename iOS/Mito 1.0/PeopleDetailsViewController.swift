@@ -127,34 +127,34 @@ class PeopleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "homeCell", for: indexPath) as! HomeTableViewCell
-        if cell == nil{
-            tblviewFeed.register(UINib.init(nibName: "homeCell", bundle: nil), forCellReuseIdentifier: "homeCell")
-            let arrNib:Array = Bundle.main.loadNibNamed("homeCell",owner: self, options: nil)!
-            cell = (arrNib.first as? HomeTableViewCell)!
-        }
-
-        let feedItemObj = appdata.arrMitoProfileFeedItems[indexPath.row]
-        Alamofire.request(feedItemObj.photoSenderUrl).responseImage(completionHandler: { (response) in
-            print(response)
-            if let image = response.result.value {
-                let circularImage = image.af_imageRoundedIntoCircle()
-                DispatchQueue.main.async {
-                    cell.img.image = circularImage
-                }
-            }
-        })
-        var strSender = "\(feedItemObj.strSenderFName) \(feedItemObj.strSenderLName)"
-        var strRecipient = "\(feedItemObj.strRecipientFName) \(feedItemObj.strRecipientLName)"
-        if feedItemObj.intSenderId == appdata.intCurrentUserID {
-            strSender = "You"
-        }
-        if feedItemObj.intRecipientId == appdata.intCurrentUserID {
-            strRecipient = "You"
-        }
-        cell.whatHappened.text = "\(strSender) sent \(strRecipient)"
-        cell.time.text = "\(appdata.fnUTCToLocal(date: feedItemObj.strDate))"
-        cell.descr.text = "\(feedItemObj.strMessage)"
-        cell.whatHappened.numberOfLines = 2
+//        if cell == nil{
+//            tblviewFeed.register(UINib.init(nibName: "homeCell", bundle: nil), forCellReuseIdentifier: "homeCell")
+//            let arrNib:Array = Bundle.main.loadNibNamed("homeCell",owner: self, options: nil)!
+//            cell = (arrNib.first as? HomeTableViewCell)!
+//        }
+//
+//        let feedItemObj = appdata.arrMitoProfileFeedItems[indexPath.row]
+//        Alamofire.request(feedItemObj.photoSenderUrl).responseImage(completionHandler: { (response) in
+//            print(response)
+//            if let image = response.result.value {
+//                let circularImage = image.af_imageRoundedIntoCircle()
+//                DispatchQueue.main.async {
+//                    cell.img.image = circularImage
+//                }
+//            }
+//        })
+//        var strSender = "\(feedItemObj.strSenderFName) \(feedItemObj.strSenderLName)"
+//        var strRecipient = "\(feedItemObj.strRecipientFName) \(feedItemObj.strRecipientLName)"
+//        if feedItemObj.intSenderId == appdata.intCurrentUserID {
+//            strSender = "You"
+//        }
+//        if feedItemObj.intRecipientId == appdata.intCurrentUserID {
+//            strRecipient = "You"
+//        }
+//        cell.whatHappened.text = "\(strSender) sent \(strRecipient)"
+//        cell.time.text = "\(appdata.fnUTCToLocal(date: feedItemObj.strDate))"
+//        cell.descr.text = "\(feedItemObj.strMessage)"
+//        cell.whatHappened.numberOfLines = 2
         return cell
     }
     
