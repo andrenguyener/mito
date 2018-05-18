@@ -40,7 +40,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             if appdata.arrNotifications[intOrderID] as? Package != nil{
                 let package = appdata.arrNotifications[intOrderID] as! Package
                 fnRetrieveIncomingOrderDetails(intOrderID: package.intOrderID)
-                 appdata.fnDisplaySimpleImage(strImageURL: package.strPhotoUrl, img: imgSenderProfile, boolCircle: true)
+                 appdata.fnDisplaySimpleImage(strImageURL: package.strPhotoUrl, img: imgSenderProfile)
                 strSenderName.text = "\(package.strUserFName) \(package.strUserLName)"
                 lblMessage.text = package.strOrderMessage
             }
@@ -48,7 +48,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         } else {
             let objIncomingPackage = appdata.arrCurrUserPackages[intOrderID]
             strPackageSenderName.text = "\(objIncomingPackage.strUserFName) \(objIncomingPackage.strUserLName)"
-            appdata.fnDisplaySimpleImage(strImageURL: objIncomingPackage.strPhotoUrl, img: imgSender, boolCircle: true)
+            appdata.fnDisplaySimpleImage(strImageURL: objIncomingPackage.strPhotoUrl, img: imgSender)
             fnGetOrderDetails()
         }
     }

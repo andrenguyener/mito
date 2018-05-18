@@ -71,11 +71,6 @@
 		B2F8494F2043D71000CBD83A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F8494E2043D71000CBD83A /* LoginViewController.swift */; };
 		B2FFA72E20782BE20046CDA2 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FFA72D20782BE20046CDA2 /* WelcomeViewController.swift */; };
 		BF623C7A17D127F65C5BFF46 /* Pods_Mito_1_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B658EBC5F86F98DCB37842 /* Pods_Mito_1_0.framework */; };
-		DA23437820AE4A9D003E4D6A /* ChooseFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA23437720AE4A9D003E4D6A /* ChooseFriendViewController.swift */; };
-		DA23437A20AE4E62003E4D6A /* WriteMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA23437920AE4E62003E4D6A /* WriteMessageViewController.swift */; };
-		DA23437C20AE5200003E4D6A /* ChoosePaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA23437B20AE5200003E4D6A /* ChoosePaymentViewController.swift */; };
-		DA23437E20AE53BE003E4D6A /* ChooseAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA23437D20AE53BE003E4D6A /* ChooseAddressViewController.swift */; };
-		DA23438020AE56A0003E4D6A /* ReviewOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA23437F20AE569F003E4D6A /* ReviewOrderViewController.swift */; };
 		DA27C218204353FF00CCFD60 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA27C217204353FF00CCFD60 /* HomeViewController.swift */; };
 		DA27C21A2043550A00CCFD60 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA27C2192043550A00CCFD60 /* HomeTableViewCell.swift */; };
 		DA27C21C204356B400CCFD60 /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA27C21B204356B400CCFD60 /* FeedItem.swift */; };
@@ -194,11 +189,6 @@
 		B2F849462043CAA900CBD83A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B2F8494E2043D71000CBD83A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B2FFA72D20782BE20046CDA2 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
-		DA23437720AE4A9D003E4D6A /* ChooseFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseFriendViewController.swift; sourceTree = "<group>"; };
-		DA23437920AE4E62003E4D6A /* WriteMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteMessageViewController.swift; sourceTree = "<group>"; };
-		DA23437B20AE5200003E4D6A /* ChoosePaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosePaymentViewController.swift; sourceTree = "<group>"; };
-		DA23437D20AE53BE003E4D6A /* ChooseAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseAddressViewController.swift; sourceTree = "<group>"; };
-		DA23437F20AE569F003E4D6A /* ReviewOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewOrderViewController.swift; sourceTree = "<group>"; };
 		DA27C217204353FF00CCFD60 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		DA27C2192043550A00CCFD60 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		DA27C21B204356B400CCFD60 /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
@@ -397,11 +387,6 @@
 				B2548FF92055EA96000123D0 /* jj.png */,
 				B2548FF72055EA96000123D0 /* sarah.png */,
 				B244B3982069BF7D00B01BBA /* Title.png */,
-				DA23437720AE4A9D003E4D6A /* ChooseFriendViewController.swift */,
-				DA23437920AE4E62003E4D6A /* WriteMessageViewController.swift */,
-				DA23437B20AE5200003E4D6A /* ChoosePaymentViewController.swift */,
-				DA23437D20AE53BE003E4D6A /* ChooseAddressViewController.swift */,
-				DA23437F20AE569F003E4D6A /* ReviewOrderViewController.swift */,
 			);
 			path = "Mito 1.0";
 			sourceTree = "<group>";
@@ -696,10 +681,8 @@
 				B29AEC62203FC9C100110EF9 /* AppDelegate.swift in Sources */,
 				DAC178BE2088385A0039AA08 /* Package.swift in Sources */,
 				DACCDE29206057C500CD59D9 /* State.swift in Sources */,
-				DA23437A20AE4E62003E4D6A /* WriteMessageViewController.swift in Sources */,
 				DAC178BC2088240F0039AA08 /* Address.swift in Sources */,
 				DA27C21E204371CE00CCFD60 /* ProductDetailsViewController.swift in Sources */,
-				DA23437E20AE53BE003E4D6A /* ChooseAddressViewController.swift in Sources */,
 				B298CB052084722500EED243 /* RoundedImage.swift in Sources */,
 				B272DC2E2043BBE400EE2121 /* AppData.swift in Sources */,
 				DAD9953720423EE9007A7687 /* TableViewCell.swift in Sources */,
@@ -714,19 +697,16 @@
 				B277629520883DE40071C672 /* CheckoutSelectUserViewController.swift in Sources */,
 				DA27C218204353FF00CCFD60 /* HomeViewController.swift in Sources */,
 				B2F849472043CAA900CBD83A /* SettingsViewController.swift in Sources */,
-				DA23437C20AE5200003E4D6A /* ChoosePaymentViewController.swift in Sources */,
 				DA42CC0A2064909900900C7D /* LineItem.swift in Sources */,
 				B2471994204672DE006CF6C2 /* NotificationViewController.swift in Sources */,
 				DA27C21A2043550A00CCFD60 /* HomeTableViewCell.swift in Sources */,
 				DAA9075E209963C400F151E1 /* AddressTableViewCell.swift in Sources */,
 				B298CB012084607900EED243 /* RoundedButton.swift in Sources */,
-				DA23437820AE4A9D003E4D6A /* ChooseFriendViewController.swift in Sources */,
 				DAD995312042386E007A7687 /* SearchViewController.swift in Sources */,
 				DA61587D20A200CD00285112 /* Notification.swift in Sources */,
 				DA49F1DB2055EF9E0018ABA4 /* ProductViewController.swift in Sources */,
 				B247197020454733006CF6C2 /* CartTableViewCell.swift in Sources */,
 				B298CB072084780B00EED243 /* RoundedWithBorder.swift in Sources */,
-				DA23438020AE56A0003E4D6A /* ReviewOrderViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
