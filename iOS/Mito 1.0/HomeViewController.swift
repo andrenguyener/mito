@@ -58,6 +58,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = 133
+//        let nib = UINib(nibName: "HomeTableViewCell", bundle: nil)
+//        tableView.register(nib, forCellReuseIdentifier: "homeCell")
         
         fnLoadCurrUserAddresses()
 //        greenTopView.backgroundColor = UIColor(rgb: 41DD7C)
@@ -85,6 +87,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidAppear(_ animated: Bool) {
         tableView.reloadData()
+        if tableView != nil {
+            self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -98,7 +103,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         return appdata.arrMyFeedItems.count
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 106
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = Bundle.main.loadNibNamed("HomeTableViewCell", owner: self, options: nil)?.first as! HomeTableViewCell
         let cell = tableView.dequeueReusableCell(withIdentifier: "homeCell", for: indexPath) as! HomeTableViewCell
         var feedItemObj = FeedItem(strDate: "", photoSenderUrl: "", strMessage: "", strRecipientFName: "", strRecipientLName: "", strSenderFName: "", strSenderLName: "", intRecipientId: 0, intSenderId: 0)
         print(indexPath.row)

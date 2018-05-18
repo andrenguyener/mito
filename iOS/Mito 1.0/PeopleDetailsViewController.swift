@@ -27,12 +27,17 @@ class PeopleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
         loadPersonData()
         tblviewFeed.delegate = self
         tblviewFeed.dataSource = self
-        tblviewFeed.register(HomeTableViewCell.self, forCellReuseIdentifier: "homeCell")
+//        let nib = UINib(nibName: "HomeTableViewCell", bundle: nil)
+//        tblviewFeed.register(nib, forCellReuseIdentifier: "homeCell")
+//        self.tblviewFeed.registerNib(nib, forCellWithReuseIdentifier: "homeCell")
+//        tblviewFeed.register(HomeTableViewCell.self, forCellReuseIdentifier: "homeCell")
     }
     
     func loadPersonData() {
         fnCheckFriendStatus()
         let friend = appdata.personToView
+        print("\(friend.firstName) \(friend.lastName)")
+        print(friend.intUserID)
         appdata.fnLoadMitoProfileFeed(tblview: tblviewFeed, intUserId: friend.intUserID)
 //        appdata.fnLoadMyActivity(tblview: tblviewFeed, intUserId: friend.intUserID, arr: appdata.arrMitoProfileFeedItems)
         let strName = "\(friend.firstName) \(friend.lastName)"
@@ -126,12 +131,9 @@ class PeopleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "homeCell", for: indexPath) as! HomeTableViewCell
-        if cell == nil{
-            tblviewFeed.register(UINib.init(nibName: "homeCell", bundle: nil), forCellReuseIdentifier: "homeCell")
-            let arrNib:Array = Bundle.main.loadNibNamed("homeCell",owner: self, options: nil)!
-            cell = (arrNib.first as? HomeTableViewCell)!
-        }
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "homeCell", for: indexPath) as! HomeTableViewCell
+        let cell = Bundle.main.loadNibNamed("HomeTableViewCell", owner: self, options: nil)?.first as! HomeTableViewCell
+//        cell.whatHappened.text = "hi"
 
         let feedItemObj = appdata.arrMitoProfileFeedItems[indexPath.row]
         Alamofire.request(feedItemObj.photoSenderUrl).responseImage(completionHandler: { (response) in

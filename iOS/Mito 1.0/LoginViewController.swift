@@ -158,17 +158,18 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                 let authHeader = response.response?.allHeaderFields["Authorization"] as! String
                 if !authHeader.isEmpty {
                     if let dictionary = response.result.value {
-                        print(dictionary)
+//                        print(dictionary)
+                        UserDefaults.standard.set(dictionary, forKey: "UserInfo")
+                        UserDefaults.standard.set(authHeader, forKey: "Authorization")
+                        if UserDefaults.standard.object(forKey: "UserInfo") != nil {
+                            let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+                            print(data)
+                            self.appdata.intCurrentUserID = (data["userId"] as? Int)!
+                            print("UserInfo: \(data)")
+                            print("UserID: \(String(describing: data["userId"]))")
+                        }
                         DispatchQueue.main.async {
                             self.performSegue(withIdentifier: "login", sender: self)
-                            UserDefaults.standard.set(dictionary, forKey: "UserInfo")
-                            UserDefaults.standard.set(authHeader, forKey: "Authorization")
-                            if UserDefaults.standard.object(forKey: "UserInfo") != nil {
-                                let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
-                                self.appdata.intCurrentUserID = (data["userId"] as? Int)!
-                                print("UserInfo: \(String(describing: data["UserInfo"]))")
-                                print("UserID: \(String(describing: data["userId"]))")
-                            }
 //                            let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
                             
                         }
@@ -454,6 +455,11 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             moveTextField(textField, moveDistance: -200, up: true)
             print("Hey i entered")
         }
+//        else if textField.tag > 0 && password != nil {
+//            moveTextField(textField, moveDistance: -50, up: true)
+//            print("Entering password")
+//            textField.returnKeyType = UIReturnKeyType.done
+//        }
     }
     
     @IBOutlet weak var userpassstack: UIStackView!
@@ -464,6 +470,10 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             moveTextField(textField, moveDistance: 200, up: true)
             print("hey i ended")
         }
+//        else if textField.tag > 0 && password != nil {
+//            moveTextField(textField, moveDistance: 50, up: true)
+//            print("Finished entering password")
+//        }
     }
     
     // Hide the keyboard when the return key pressed
