@@ -13,13 +13,17 @@ import Starscream
 class AppData: NSObject {
     static let shared = AppData()
     open var socket: WebSocket!
+    open var intNumItems = 0
+    open var priceSum : Decimal = 0.00
     open var intCurrentUserID: Int = 0
     open var intCurrIndex: Int = -1
-    open var strCardNumber = ""
+    
     open var personRecipient: Person = Person(firstName: "FName", lastName: "LName", email: "", avatar: "dd", intUserID: 0, strUsername: "", intNumFriends: 0, dateRequested: Date.distantPast)
-    open var address: Address = Address(intAddressID: 0, strAddressAlias: "Fake", strCityName: "", strStateName: "", strStreetAddress1: "", strStreetAddress2: "", strZipCode: "")
-    open var currPackage: Package = Package(intGiftOption: 0, strOrderDate: "", intOrderID: 0, strOrderMessage: "", strPhotoUrl: "", intSenderID: 0, strUserFName: "", strUserLName: "")
     open var strOrderMessage = "What's it for?"
+    open var strCardNumber = ""
+    open var address: Address = Address(intAddressID: 0, strAddressAlias: "Fake", strCityName: "", strStateName: "", strStreetAddress1: "", strStreetAddress2: "", strZipCode: "")
+    
+    open var currPackage: Package = Package(intGiftOption: 0, strOrderDate: "", intOrderID: 0, strOrderMessage: "", strPhotoUrl: "", intSenderID: 0, strUserFName: "", strUserLName: "")
     open let mainMitoColor = "41DD7C"
     open var personToView: Person = Person(firstName: "FName", lastName: "LName", email: "", avatar: "dd", intUserID: 0, strUsername: "", intNumFriends: 0, dateRequested: Date.distantPast)
     
@@ -217,7 +221,6 @@ class AppData: NSObject {
                     let dict2 = dictionary as! NSArray
                     for obj in dict2 {
                         let object = obj as! NSDictionary
-                        print(object)
                         var strAvatar = ""
                         if object["ProfileImage"] != nil {
                             strAvatar = (object["ProfileImage"] as? String)!
@@ -265,7 +268,6 @@ class AppData: NSObject {
                     let objUsers = dictionary as! NSArray
                     for objUser in objUsers {
                         let objPerson2 = objUser as! NSDictionary
-                        print(objPerson2)
                         var strAvatar = ""
                         if objPerson2["ProfileImage"] != nil {
                             strAvatar = (objPerson2["ProfileImage"] as? String)!
