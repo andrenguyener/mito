@@ -1333,12 +1333,11 @@
                         <outlet property="shippingCheckout" destination="3oX-Ar-Ngk" id="F49-k9-50p"/>
                         <outlet property="taxCheckout" destination="YJ4-uI-3c3" id="c2q-7i-lgT"/>
                         <segue destination="qdc-jL-mfw" kind="show" identifier="checkoutFinish" animates="NO" id="VTw-HY-3To"/>
-                        <segue destination="JEb-Gy-hD1" kind="show" identifier="orderSummaryToEditCheckout" id="JK1-YT-Yc6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ibG-SQ-XDJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5659" y="412"/>
+            <point key="canvasLocation" x="6996" y="-532"/>
         </scene>
         <!--CheckOutComplete-->
         <scene sceneID="wfo-qB-gu0">
@@ -1417,7 +1416,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fPR-Qk-3Ok" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7538" y="88"/>
+            <point key="canvasLocation" x="7722" y="-532"/>
         </scene>
         <!--Account Detail-->
         <scene sceneID="u9n-hr-Fxu">
@@ -2113,8 +2112,8 @@
                     </view>
                     <connections>
                         <outlet property="tblviewAddress" destination="JiR-sN-ga8" id="Jd9-vX-td6"/>
-                        <segue destination="JEb-Gy-hD1" kind="show" identifier="ChooseAddressToCheckout" id="ESz-AJ-FsE"/>
                         <segue destination="5ev-RP-TnR" kind="showDetail" identifier="CompleteChooseReceivingAddress" id="2rk-ch-wix"/>
+                        <segue destination="XCS-Ex-cdl" kind="show" identifier="segChooseBillingAddressToReviewOrder" id="UyS-cL-2ww"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9OU-am-Tho" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2130,7 +2129,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="0x7-4H-RRO" userLabel="Main Stack View">
-                                <rect key="frame" x="20" y="40" width="374" height="571"/>
+                                <rect key="frame" x="20" y="40" width="374" height="620"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Wsp-0n-pJG" userLabel="Sender Information Stack">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="159.66666666666666"/>
@@ -2182,7 +2181,7 @@
                                         </constraints>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mku-7H-dNn">
-                                        <rect key="frame" x="0.0" y="190.66666666666666" width="200" height="30"/>
+                                        <rect key="frame" x="0.0" y="215.33333333333334" width="200" height="30"/>
                                         <color key="backgroundColor" red="0.25490196078431371" green="0.8666666666666667" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="KOM-zu-mQa"/>
@@ -2192,7 +2191,7 @@
                                         <state key="normal" title="Send Personal Message"/>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="akm-pB-H9N" userLabel="Payment Method Stack">
-                                        <rect key="frame" x="0.0" y="251.66666666666669" width="374" height="159.66666666666669"/>
+                                        <rect key="frame" x="0.0" y="300.66666666666669" width="374" height="159.66666666666669"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment Method" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="a6g-WJ-bxo">
                                                 <rect key="frame" x="0.0" y="0.0" width="151.66666666666666" height="51.333333333333336"/>
@@ -2225,7 +2224,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="QLD-yf-dG7" userLabel="Select Address Stack">
-                                        <rect key="frame" x="0.0" y="411.33333333333331" width="374" height="159.66666666666669"/>
+                                        <rect key="frame" x="0.0" y="460.33333333333331" width="374" height="159.66666666666669"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="LiH-DW-3V4">
                                                 <rect key="frame" x="0.0" y="0.0" width="133.33333333333334" height="51.333333333333336"/>
@@ -2234,7 +2233,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r96-W3-QY1">
-                                                <rect key="frame" x="0.0" y="51.333333333333364" width="62.666666666666664" height="78.333333333333314"/>
+                                                <rect key="frame" x="0.0" y="51.333333333333307" width="62.666666666666664" height="78.333333333333314"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -2269,7 +2268,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sc9-ja-jfC" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
-                                <rect key="frame" x="20" y="631" width="374" height="46"/>
+                                <rect key="frame" x="20" y="680" width="374" height="46"/>
                                 <color key="backgroundColor" red="0.25490196079999999" green="0.86666666670000003" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="dRP-wm-K0x"/>
@@ -2300,13 +2299,11 @@
                         <outlet property="lblAddressNickname" destination="r96-W3-QY1" id="6fU-A3-kGZ"/>
                         <outlet property="lblCreditCardNumberCheckoutProcess" destination="SuT-AB-KwU" id="NLW-ZU-ZGf"/>
                         <outlet property="lblRecipient" destination="K4o-T2-a5F" id="KS5-DW-zaG"/>
-                        <segue destination="UPq-qC-84m" kind="show" identifier="editCheckoutToCart" id="wfB-se-wui"/>
-                        <segue destination="XCS-Ex-cdl" kind="show" identifier="editCheckoutToOrderSummary" id="Jxy-V8-rOh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="btm-76-Wiy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4871.1999999999998" y="249.62518740629687"/>
+            <point key="canvasLocation" x="6000" y="464"/>
         </scene>
         <!--Send a Message-->
         <scene sceneID="IIU-ar-ycY">
@@ -2456,9 +2453,8 @@
         <image name="swirlsearch" width="2257" height="5634"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ESz-AJ-FsE"/>
         <segue reference="vzN-2U-4mX"/>
-        <segue reference="2rk-ch-wix"/>
+        <segue reference="Jjr-wW-Hse"/>
         <segue reference="39f-jC-Icg"/>
         <segue reference="IOv-WN-4XC"/>
         <segue reference="sAd-vQ-kz5"/>

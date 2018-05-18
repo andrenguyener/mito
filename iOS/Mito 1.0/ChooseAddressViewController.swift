@@ -75,6 +75,17 @@ class ChooseAddressViewController: UIViewController, UITableViewDataSource, UITa
         cell.strCityStateZIP.text = "\(objAddress.strCityName!), \(objAddress.strStateName!) \(objAddress.strZipCode!)"
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        appdata.address = appdata.arrCurrUserAddresses[indexPath.row]
+        print(boolSender)
+        if boolSender {
+            performSegue(withIdentifier: "segChooseBillingAddressToReviewOrder", sender: self)
+        } else {
+            appdata.address = appdata.arrCurrUserAddresses[indexPath.row]
+//            fnAcceptOrDeclinePackage(response: "Accepted", senderId: appdata.currPackage.intSenderID, orderId: appdata.currPackage.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[indexPath.row].intAddressID!)
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
