@@ -29,15 +29,9 @@ class WriteMessageViewController: UIViewController, UITextViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func textViewDidChange(_ textView: UITextView) {
-        if textviewWriteMessage != nil {
-            if textviewWriteMessage.text.count == 0 {
-                textviewWriteMessage.text = "What's it for?"
-                textviewWriteMessage.textColor = UIColor.gray
-            } else if textviewWriteMessage.text.count > 0 {
-                textviewWriteMessage.textColor = UIColor.black
-            }
-        }
+    @IBAction func btnConfirmMessage(_ sender: Any) {
+        performSegue(withIdentifier: "segWriteMessageToSelectPaymentMethod", sender: self)
     }
+    
     
 }

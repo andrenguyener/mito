@@ -1338,7 +1338,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ibG-SQ-XDJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5648" y="-891"/>
+            <point key="canvasLocation" x="5659" y="412"/>
         </scene>
         <!--CheckOutComplete-->
         <scene sceneID="wfo-qB-gu0">
@@ -1417,7 +1417,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fPR-Qk-3Ok" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5410" y="-532"/>
+            <point key="canvasLocation" x="7538" y="88"/>
         </scene>
         <!--Account Detail-->
         <scene sceneID="u9n-hr-Fxu">
@@ -1913,7 +1913,7 @@
         <!--Payment Method-->
         <scene sceneID="bjH-vb-tVn">
             <objects>
-                <viewController title="Payment Method" id="6OD-c0-snC" customClass="CheckoutSelectUserViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Payment Method" id="6OD-c0-snC" customClass="ChoosePaymentViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VO7-c8-b7q">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1929,7 +1929,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="btnPaymentMethodToEditCheckout:" destination="6OD-c0-snC" eventType="touchUpInside" id="DsZ-P1-Dbg"/>
+                                    <action selector="btnPaymentMethodToEditCheckout:" destination="6OD-c0-snC" eventType="touchUpInside" id="dee-Vn-5NV"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="xQe-gy-8Y2">
@@ -2007,23 +2007,23 @@
                     </view>
                     <connections>
                         <outlet property="lblCreditCardNumber" destination="F7X-6b-dXg" id="6oz-7D-gs2"/>
-                        <segue destination="JEb-Gy-hD1" kind="show" identifier="paymentMethodToEditCheckout" id="IT4-Vz-Cza"/>
+                        <segue destination="y1B-fc-fA5" kind="show" identifier="segAddNewPaymentToChooseAddress" id="vzN-2U-4mX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rMI-3L-PLu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4807.1999999999998" y="1142.8785607196403"/>
+            <point key="canvasLocation" x="5481" y="-532"/>
         </scene>
         <!--Choose Address-->
         <scene sceneID="Xxo-qr-Mob">
             <objects>
-                <viewController title="Choose Address" id="y1B-fc-fA5" customClass="CheckoutSelectUserViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Choose Address" id="y1B-fc-fA5" customClass="ChooseAddressViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oAx-US-ddD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="CTI-wc-TOS">
-                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                                <rect key="frame" x="0.0" y="20" width="414" height="667"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uyG-0t-QTT">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
@@ -2033,7 +2033,7 @@
                                         </connections>
                                     </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JiR-sN-ga8">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="667"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddressTableViewCell" rowHeight="145" id="kwd-yB-Q0C" customClass="AddressTableViewCell" customModule="Mito_1_0" customModuleProvider="target">
@@ -2112,29 +2112,14 @@
                         <viewLayoutGuide key="safeArea" id="Zws-sV-Rq5"/>
                     </view>
                     <connections>
-                        <outlet property="tblviewAddress" destination="JiR-sN-ga8" id="z3Q-wZ-O61"/>
+                        <outlet property="tblviewAddress" destination="JiR-sN-ga8" id="Jd9-vX-td6"/>
                         <segue destination="JEb-Gy-hD1" kind="show" identifier="ChooseAddressToCheckout" id="ESz-AJ-FsE"/>
                         <segue destination="5ev-RP-TnR" kind="showDetail" identifier="CompleteChooseReceivingAddress" id="2rk-ch-wix"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9OU-am-Tho" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5720.8000000000002" y="1200.4497751124438"/>
-        </scene>
-        <!--SelectAddress-->
-        <scene sceneID="JMb-w9-ivA">
-            <objects>
-                <viewController title="SelectAddress" id="kJv-Da-nRz" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="BP6-28-hLF">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="1p9-bY-zQL"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7uD-fq-bKN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="6474" y="1200"/>
+            <point key="canvasLocation" x="6255" y="-532"/>
         </scene>
         <!--Checkout-->
         <scene sceneID="zv4-1b-Ig8">
@@ -2316,9 +2301,7 @@
                         <outlet property="lblCreditCardNumberCheckoutProcess" destination="SuT-AB-KwU" id="NLW-ZU-ZGf"/>
                         <outlet property="lblRecipient" destination="K4o-T2-a5F" id="KS5-DW-zaG"/>
                         <segue destination="UPq-qC-84m" kind="show" identifier="editCheckoutToCart" id="wfB-se-wui"/>
-                        <segue destination="6OD-c0-snC" kind="show" identifier="editCheckoutToPaymentMethod" id="J5h-7K-9Ku"/>
                         <segue destination="XCS-Ex-cdl" kind="show" identifier="editCheckoutToOrderSummary" id="Jxy-V8-rOh"/>
-                        <segue destination="y1B-fc-fA5" kind="show" identifier="editCheckoutToChooseAddress" id="eNC-Nf-pOF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="btm-76-Wiy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2384,7 +2367,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="JEb-Gy-hD1" kind="show" id="n5u-Su-hpZ"/>
+                                    <action selector="btnConfirmMessage:" destination="jmz-bN-xaL" eventType="touchUpInside" id="YaR-GN-dnz"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -2411,6 +2394,7 @@
                         <outlet property="imgRecipientProfile" destination="c3m-hZ-dPi" id="esB-eN-V7h"/>
                         <outlet property="strRecipientName" destination="RwI-DH-i6M" id="dBi-7r-AAf"/>
                         <outlet property="textviewWriteMessage" destination="eD1-jf-ACa" id="pex-mm-AhF"/>
+                        <segue destination="6OD-c0-snC" kind="show" identifier="segWriteMessageToSelectPaymentMethod" id="G0C-Hd-PoN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lwd-Ua-9eb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2472,9 +2456,9 @@
         <image name="swirlsearch" width="2257" height="5634"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="n5u-Su-hpZ"/>
-        <segue reference="ruP-Sx-HS5"/>
-        <segue reference="4Df-8F-JjS"/>
+        <segue reference="ESz-AJ-FsE"/>
+        <segue reference="vzN-2U-4mX"/>
+        <segue reference="2rk-ch-wix"/>
         <segue reference="39f-jC-Icg"/>
         <segue reference="IOv-WN-4XC"/>
         <segue reference="sAd-vQ-kz5"/>
