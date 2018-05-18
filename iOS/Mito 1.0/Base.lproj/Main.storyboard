@@ -1148,7 +1148,7 @@
         <!--Checkout-->
         <scene sceneID="E4g-Zh-aLs">
             <objects>
-                <viewController title="Checkout" id="XCS-Ex-cdl" customClass="CartViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Checkout" id="XCS-Ex-cdl" customClass="ReviewOrderViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="V2Y-u9-3vc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1325,13 +1325,13 @@
                         <viewLayoutGuide key="safeArea" id="HLu-Bz-A79"/>
                     </view>
                     <connections>
-                        <outlet property="imgRecipient" destination="WAf-qk-0tx" id="T52-Cu-Dbm"/>
-                        <outlet property="itemCountCheckout" destination="crF-tz-OmM" id="qYY-aa-st8"/>
-                        <outlet property="itemTotalCheckout" destination="0SZ-Mx-91r" id="Rhi-4k-df2"/>
-                        <outlet property="lblCreditCardNumber" destination="vJb-kT-uyc" id="Vkk-AN-Ya7"/>
-                        <outlet property="recipientName" destination="Ojb-Ib-qjv" id="1JT-q2-IcF"/>
-                        <outlet property="shippingCheckout" destination="3oX-Ar-Ngk" id="F49-k9-50p"/>
-                        <outlet property="taxCheckout" destination="YJ4-uI-3c3" id="c2q-7i-lgT"/>
+                        <outlet property="imgRecipient" destination="WAf-qk-0tx" id="9BS-4I-A7j"/>
+                        <outlet property="itemCountCheckout" destination="crF-tz-OmM" id="Rxc-wx-nMs"/>
+                        <outlet property="itemTotalCheckout" destination="0SZ-Mx-91r" id="BWi-pM-NIt"/>
+                        <outlet property="lblCreditCardNumber" destination="vJb-kT-uyc" id="wI9-XX-hyn"/>
+                        <outlet property="recipientName" destination="Ojb-Ib-qjv" id="gRo-af-8l1"/>
+                        <outlet property="shippingCheckout" destination="3oX-Ar-Ngk" id="nF8-lt-f6A"/>
+                        <outlet property="taxCheckout" destination="YJ4-uI-3c3" id="XPt-n9-03F"/>
                         <segue destination="qdc-jL-mfw" kind="show" identifier="checkoutFinish" animates="NO" id="VTw-HY-3To"/>
                     </connections>
                 </viewController>

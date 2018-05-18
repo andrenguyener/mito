@@ -13,6 +13,8 @@ import Starscream
 class AppData: NSObject {
     static let shared = AppData()
     open var socket: WebSocket!
+    open var intNumItems = 0
+    open var priceSum : Decimal = 0.00
     open var intCurrentUserID: Int = 0
     open var intCurrIndex: Int = -1
     open var strCardNumber = ""

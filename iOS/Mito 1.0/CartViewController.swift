@@ -309,20 +309,16 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 }
 
-extension Double
-{
-    func roundTo0f() -> NSString
-    {
+extension Double {
+    func roundTo0f() -> NSString {
         return NSString(format: "%.0f", self)
     }
     
-    func roundTo1f() -> NSString
-    {
+    func roundTo1f() -> NSString {
         return NSString(format: "%.1f", self)
     }
     
-    func roundTo2f() -> NSString
-    {
+    func roundTo2f() -> NSString {
         return NSString(format: "%.2f", self)
     }
 }
