@@ -63,17 +63,20 @@ class AppData: NSObject {
     open var tempAccountHolder : Parameters = (Dictionary<String, Any>)()
     
     open func fnLoadMitoProfileFeed(tblview: UITableView, intUserId: Int) {
-        let urlLoadMyActivity = URL(string: "https://api.projectmito.io/v1/feed/")
+        let urlLoadProfileActivity = URL(string: "https://api.projectmito.io/v1/feed/")
         let parameters: Parameters = [
             "friendId": intUserId
         ]
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
-        Alamofire.request(urlLoadMyActivity!, method: .get, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+        Alamofire.request(urlLoadProfileActivity!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success:
                 print("Loaded My Activity")
+                if let dictionary = response.value {
+                    print(dictionary)
+                }
                 if let dictionary = response.data {
                     let decoder = JSONDecoder()
                     do {
@@ -283,7 +286,7 @@ class AppData: NSObject {
                                                intNumFriends: (objPerson2["NumFriends"] as? Int)!)
                         self.arrAllUsers.append(p)
                     }
-                    self.arrAllUsers.sort(by: self.fnSortMitoUsers)
+//                    self.arrAllUsers.sort(by: self.fnSortMitoUsers)
                     self.arrCurrAllUsers = self.arrAllUsers
                     self.arrFriendsAndAllMitoUsers.append(self.arrAllUsers)
                     self.arrCurrFriendsAndAllMitoUsers = self.arrFriendsAndAllMitoUsers

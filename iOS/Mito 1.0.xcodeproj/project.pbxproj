@@ -88,6 +88,7 @@
 		DA625E8B2088FEC30068F319 /* PackageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA625E8A2088FEC30068F319 /* PackageTableViewCell.swift */; };
 		DA6CB7F22064E9B700962814 /* Back.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6CB7F12064E9B700962814 /* Back.png */; };
 		DA6D6D12209E1B5300D74666 /* Mito Green Background.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6D6D11209E1B5000D74666 /* Mito Green Background.png */; };
+		DA80594020AF2F1F004B33B8 /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA80593F20AF2F1F004B33B8 /* HomeTableViewCell.xib */; };
 		DA92880C20A0B50E009EABD7 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA92880B20A0B50E009EABD7 /* PasswordViewController.swift */; };
 		DAA9075E209963C400F151E1 /* AddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA9075D209963C400F151E1 /* AddressTableViewCell.swift */; };
 		DAC178BC2088240F0039AA08 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC178BB2088240F0039AA08 /* Address.swift */; };
@@ -211,6 +212,7 @@
 		DA625E8A2088FEC30068F319 /* PackageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageTableViewCell.swift; sourceTree = "<group>"; };
 		DA6CB7F12064E9B700962814 /* Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Back.png; sourceTree = "<group>"; };
 		DA6D6D11209E1B5000D74666 /* Mito Green Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mito Green Background.png"; sourceTree = "<group>"; };
+		DA80593F20AF2F1F004B33B8 /* HomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTableViewCell.xib; sourceTree = "<group>"; };
 		DA92880B20A0B50E009EABD7 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		DAA9075D209963C400F151E1 /* AddressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressTableViewCell.swift; sourceTree = "<group>"; };
 		DAC178BB2088240F0039AA08 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 				DA23437B20AE5200003E4D6A /* ChoosePaymentViewController.swift */,
 				DA23437D20AE53BE003E4D6A /* ChooseAddressViewController.swift */,
 				DA23437F20AE569F003E4D6A /* ReviewOrderViewController.swift */,
+				DA80593F20AF2F1F004B33B8 /* HomeTableViewCell.xib */,
 			);
 			path = "Mito 1.0";
 			sourceTree = "<group>";
@@ -561,6 +564,7 @@
 				B2619146206C5E5E004597F0 /* Roboto-Thin.ttf in Resources */,
 				B272D9092077646A00E53276 /* mitowhiteonly.png in Resources */,
 				B247197420454C4E006CF6C2 /* GiftWhite.png in Resources */,
+				DA80594020AF2F1F004B33B8 /* HomeTableViewCell.xib in Resources */,
 				B29AEC67203FC9C100110EF9 /* Main.storyboard in Resources */,
 				B2548FFF2055EA97000123D0 /* ammara.png in Resources */,
 				B2619145206C5E5E004597F0 /* Roboto-Regular.ttf in Resources */,

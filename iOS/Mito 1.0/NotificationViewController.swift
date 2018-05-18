@@ -26,6 +26,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         if tblviewNotification != nil {
             appdata.arrNotifications.removeAll()
             appdata.arrPendingFriends.removeAll()

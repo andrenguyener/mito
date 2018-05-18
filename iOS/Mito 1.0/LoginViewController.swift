@@ -455,11 +455,12 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         if textField.tag > 3 {
             moveTextField(textField, moveDistance: -200, up: true)
             print("Hey i entered")
-        } else if textField.tag > 0 && password != nil {
-            moveTextField(textField, moveDistance: -50, up: true)
-            print("Entering password")
-            textField.returnKeyType = UIReturnKeyType.done
         }
+//        else if textField.tag > 0 && password != nil {
+//            moveTextField(textField, moveDistance: -50, up: true)
+//            print("Entering password")
+//            textField.returnKeyType = UIReturnKeyType.done
+//        }
     }
     
     @IBOutlet weak var userpassstack: UIStackView!
@@ -469,10 +470,11 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         if textField.tag > 3 {
             moveTextField(textField, moveDistance: 200, up: true)
             print("hey i ended")
-        } else if textField.tag > 0 && password != nil {
-            moveTextField(textField, moveDistance: 50, up: true)
-            print("Finished entering password")
         }
+//        else if textField.tag > 0 && password != nil {
+//            moveTextField(textField, moveDistance: 50, up: true)
+//            print("Finished entering password")
+//        }
     }
     
     // Hide the keyboard when the return key pressed

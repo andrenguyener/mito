@@ -21,7 +21,7 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Notification-->
+        <!--Notification View Controller-->
         <scene sceneID="ZTa-dd-20k">
             <objects>
                 <viewController id="zTg-1Y-lm9" customClass="NotificationViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
@@ -164,9 +164,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zyl-dg-pJg"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Notification" image="Notification Icon" id="y7E-EB-PS0">
-                        <color key="badgeColor" red="0.25490196079999999" green="0.86666666670000003" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </tabBarItem>
+                    <navigationItem key="navigationItem" id="d6B-pf-dhU"/>
                     <connections>
                         <outlet property="notificationView" destination="r68-ot-V1i" id="d3m-AE-e30"/>
                         <outlet property="tblviewNotification" destination="d63-uF-5nI" id="KQS-cD-HCb"/>
@@ -177,7 +175,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gdz-Oq-dMf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2053.6231884057975" y="1459.2391304347827"/>
+            <point key="canvasLocation" x="2960.8695652173915" y="1459.2391304347827"/>
         </scene>
         <!--Me View Controller-->
         <scene sceneID="1RP-aC-Yg0">
@@ -375,10 +373,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="aau-YT-r95">
-                                <rect key="frame" x="20" y="84" width="374" height="583"/>
+                                <rect key="frame" x="20" y="40" width="374" height="676"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AOn-Si-y3v">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="108.66666666666667"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="127.33333333333333"/>
                                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                         <state key="normal" title="Edit Profile">
@@ -386,7 +384,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gac-qa-YXU">
-                                        <rect key="frame" x="0.0" y="118.66666666666666" width="374" height="108.66666666666666"/>
+                                        <rect key="frame" x="0.0" y="137.33333333333334" width="374" height="127.00000000000003"/>
                                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                         <state key="normal" title="Cards">
@@ -394,7 +392,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CUf-EX-Siv">
-                                        <rect key="frame" x="0.0" y="237.33333333333334" width="374" height="108.33333333333334"/>
+                                        <rect key="frame" x="0.0" y="274.33333333333331" width="374" height="127.33333333333331"/>
                                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                         <state key="normal" title="Blocked User">
@@ -402,7 +400,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J0G-p0-DVc">
-                                        <rect key="frame" x="0.0" y="355.66666666666669" width="374" height="108.66666666666669"/>
+                                        <rect key="frame" x="0.0" y="411.66666666666669" width="374" height="127.00000000000006"/>
                                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                         <state key="normal" title="Change Password">
@@ -413,7 +411,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gcj-Wh-e2k">
-                                        <rect key="frame" x="0.0" y="474.33333333333343" width="374" height="108.66666666666669"/>
+                                        <rect key="frame" x="0.0" y="548.66666666666663" width="374" height="127.33333333333337"/>
                                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                         <state key="normal" title="Sign Out">
@@ -445,7 +443,7 @@
             </objects>
             <point key="canvasLocation" x="3108" y="2192.6536731634183"/>
         </scene>
-        <!--Home-->
+        <!--Home View Controller-->
         <scene sceneID="ZzX-kK-snC">
             <objects>
                 <viewController id="k7B-N4-R6E" customClass="HomeViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
@@ -457,14 +455,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="104"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mitowhiteonly.png" translatesAutoresizingMaskIntoConstraints="NO" id="0Bi-17-Cej">
-                                        <rect key="frame" x="161.66666666666666" y="25" width="92" height="48"/>
+                                        <rect key="frame" x="161.66666666666666" y="69" width="92" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="55f-RB-fnG"/>
                                             <constraint firstAttribute="width" constant="92" id="KmR-AG-rJ8"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mYM-uR-Wdp" userLabel="Cart">
-                                        <rect key="frame" x="372" y="38" width="22" height="23"/>
+                                        <rect key="frame" x="372" y="82" width="22" height="23"/>
                                         <state key="normal" image="Cart Solid White Icon.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -549,7 +547,6 @@
                                                         <constraint firstItem="D3J-hb-G36" firstAttribute="top" secondItem="7nF-J0-ZcK" secondAttribute="bottom" constant="2" id="YXj-yp-GGx"/>
                                                         <constraint firstItem="7nF-J0-ZcK" firstAttribute="top" secondItem="cFm-F6-QBR" secondAttribute="top" constant="10" id="fKP-rK-3E2"/>
                                                         <constraint firstItem="qSr-Cw-viT" firstAttribute="top" secondItem="D3J-hb-G36" secondAttribute="bottom" constant="5.9999999999999858" id="kg0-cn-cHA"/>
-                                                        <constraint firstItem="SnI-Ck-2Qr" firstAttribute="leading" secondItem="cFm-F6-QBR" secondAttribute="leading" constant="20" id="lJF-Od-0xM"/>
                                                         <constraint firstItem="SnI-Ck-2Qr" firstAttribute="top" secondItem="cFm-F6-QBR" secondAttribute="top" constant="10" id="rAR-2x-lko"/>
                                                         <constraint firstAttribute="trailing" secondItem="qSr-Cw-viT" secondAttribute="trailing" constant="15" id="s78-sZ-pkK"/>
                                                         <constraint firstItem="D3J-hb-G36" firstAttribute="width" secondItem="7nF-J0-ZcK" secondAttribute="width" id="wpj-mT-1FH"/>
@@ -619,9 +616,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Home" image="Home.png" id="FO9-5A-WxX">
-                        <color key="badgeColor" red="0.25490196079999999" green="0.86666666670000003" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </tabBarItem>
+                    <navigationItem key="navigationItem" id="PGD-Ry-gz4"/>
                     <connections>
                         <outlet property="greenTopView" destination="dns-wn-RGZ" id="czd-TE-MCz"/>
                         <outlet property="segmentChooser" destination="8Yq-SS-qUE" id="YyB-xF-DhV"/>
@@ -631,7 +626,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T2P-hg-MfA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2057" y="-532"/>
+            <point key="canvasLocation" x="2963.768115942029" y="-532.33695652173913"/>
         </scene>
         <!--Search-->
         <scene sceneID="Mzq-YK-eiC">
@@ -913,23 +908,23 @@
             <objects>
                 <viewController title="Cart" id="UPq-qC-84m" customClass="CartViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vGd-ry-6ZR">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cart has 0 items: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="svl-x9-EzE">
-                                <rect key="frame" x="20" y="40" width="132.66666666666666" height="20"/>
+                                <rect key="frame" x="20" y="84" width="132.66666666666666" height="20"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1n-JT-FAF">
-                                <rect key="frame" x="351" y="40" width="43" height="20"/>
+                                <rect key="frame" x="351" y="84" width="43" height="20"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Yt-AX-8vw">
-                                <rect key="frame" x="20" y="102" width="374" height="518"/>
+                                <rect key="frame" x="20" y="146" width="374" height="474"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cartCell" rowHeight="180" id="ExR-FD-V61" customClass="CartTableViewCell" customModule="Mito_1_0" customModuleProvider="target">
@@ -1049,7 +1044,7 @@
                                 </connections>
                             </button>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y8N-PG-Y96">
-                                <rect key="frame" x="47" y="260" width="320" height="216"/>
+                                <rect key="frame" x="47" y="235.66666666666663" width="320" height="216"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </pickerView>
                         </subviews>
@@ -1084,18 +1079,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4qR-31-kjr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3178" y="-531"/>
+            <point key="canvasLocation" x="4084.057971014493" y="-531.52173913043487"/>
         </scene>
         <!--Checkout-->
         <scene sceneID="E4g-Zh-aLs">
             <objects>
                 <viewController title="Checkout" id="XCS-Ex-cdl" customClass="ReviewOrderViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="V2Y-u9-3vc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="951"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OWL-6v-9AW">
-                                <rect key="frame" x="0.0" y="20" width="414" height="931"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="887"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="66I-pD-se0">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="676"/>
@@ -1113,17 +1108,17 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="5Z4-5j-SVa" userLabel="ImageLabelStackView">
-                                                                <rect key="frame" x="0.0" y="34.333333333333336" width="394" height="115.66666666666666"/>
+                                                                <rect key="frame" x="0.0" y="34.333333333333321" width="394" height="115.66666666666669"/>
                                                                 <subviews>
                                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WAf-qk-0tx" customClass="RoundedImage" customModule="Mito_1_0" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.3333333333333286" width="115" height="115"/>
+                                                                        <rect key="frame" x="0.0" y="0.33333333333334281" width="115" height="115"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="115" id="jDG-wX-kal"/>
                                                                             <constraint firstAttribute="height" constant="115" id="upT-Qd-xfW"/>
                                                                         </constraints>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ojb-Ib-qjv">
-                                                                        <rect key="frame" x="135" y="47.999999999999993" width="259" height="20.000000000000007"/>
+                                                                        <rect key="frame" x="135" y="48.000000000000014" width="259" height="20"/>
                                                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -1147,7 +1142,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Here is where the message would be" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jdm-49-Yz3">
-                                                                <rect key="frame" x="0.0" y="30.333333333333343" width="326" height="23.666666666666671"/>
+                                                                <rect key="frame" x="0.0" y="30.333333333333314" width="326" height="23.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -1228,7 +1223,7 @@
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shipping:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hvk-NM-ujQ">
-                                                                                <rect key="frame" x="0.0" y="42.666666666666686" width="220" height="32.333333333333343"/>
+                                                                                <rect key="frame" x="0.0" y="42.666666666666629" width="220" height="32.333333333333343"/>
                                                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
@@ -1257,7 +1252,7 @@
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3oX-Ar-Ngk">
-                                                                                <rect key="frame" x="0.0" y="42.666666666666686" width="134" height="32.333333333333343"/>
+                                                                                <rect key="frame" x="0.0" y="42.666666666666629" width="134" height="32.333333333333343"/>
                                                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
@@ -1361,14 +1356,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ibG-SQ-XDJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6995.652173913044" y="-532.33695652173913"/>
+            <point key="canvasLocation" x="7902.898550724638" y="-532.33695652173913"/>
         </scene>
         <!--CheckOutComplete-->
         <scene sceneID="wfo-qB-gu0">
             <objects>
                 <viewController title="CheckOutComplete" id="qdc-jL-mfw" customClass="CartViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Gmz-6A-1TC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4vK-kL-Od9">
@@ -1389,7 +1384,7 @@
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="XyB-E9-nYh">
-                                        <rect key="frame" x="28" y="48" width="358" height="563"/>
+                                        <rect key="frame" x="28" y="92" width="358" height="519"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GiftWhite.png" translatesAutoresizingMaskIntoConstraints="NO" id="PhN-RU-rAy">
                                                 <rect key="frame" x="71.666666666666686" y="0.0" width="215" height="232"/>
@@ -1398,13 +1393,13 @@
                                                 </constraints>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="You’re so nice!.png" translatesAutoresizingMaskIntoConstraints="NO" id="C6s-Wf-UQ7">
-                                                <rect key="frame" x="45.666666666666686" y="371.66666666666669" width="267" height="32"/>
+                                                <rect key="frame" x="45.666666666666686" y="349.66666666666669" width="267" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="32" id="uME-LJ-cnt"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We will notify you when Sopheak accepts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8VG-bt-wq1">
-                                                <rect key="frame" x="24" y="543" width="310" height="20"/>
+                                                <rect key="frame" x="24" y="499" width="310" height="20"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -1440,7 +1435,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fPR-Qk-3Ok" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7722" y="-532"/>
+            <point key="canvasLocation" x="8628.9855072463779" y="-532.33695652173913"/>
         </scene>
         <!--Account Detail-->
         <scene sceneID="u9n-hr-Fxu">
@@ -1450,8 +1445,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="iIt-YC-sQM" userLabel="Profile Information">
-                                <rect key="frame" x="30" y="40" width="354" height="241"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="iIt-YC-sQM" userLabel="Profile Information">
+                                <rect key="frame" x="30" y="40" width="354" height="314.66666666666669"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FirstName LastName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1g-f7-mfA">
                                         <rect key="frame" x="24" y="0.0" width="306" height="21"/>
@@ -1463,7 +1458,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fZd-x7-rdQ">
-                                        <rect key="frame" x="123.66666666666666" y="31" width="107" height="21"/>
+                                        <rect key="frame" x="123.66666666666666" y="41" width="107" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="b0o-Vf-LqP"/>
                                         </constraints>
@@ -1472,14 +1467,14 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2VX-4k-3cu" customClass="RoundedImage" customModule="Mito_1_0" customModuleProvider="target">
-                                        <rect key="frame" x="107.66666666666666" y="62" width="139" height="139"/>
+                                        <rect key="frame" x="107.66666666666666" y="82" width="139" height="139"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="139" id="NKy-Xb-lFb"/>
                                             <constraint firstAttribute="height" constant="139" id="yOA-l0-9U7"/>
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ZQA-vy-bnN">
-                                        <rect key="frame" x="95" y="211" width="164" height="30"/>
+                                        <rect key="frame" x="95" y="241" width="164" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="szw-Dz-dqC" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="72" height="30"/>
@@ -1503,20 +1498,26 @@
                                             </button>
                                         </subviews>
                                     </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CAy-x4-clw">
+                                        <rect key="frame" x="155.33333333333334" y="291" width="43.333333333333343" height="23.666666666666686"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="k1g-f7-mfA" firstAttribute="leading" secondItem="iIt-YC-sQM" secondAttribute="leading" constant="24" id="Hry-2K-guu"/>
                                 </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eV1-zt-RHT">
-                                <rect key="frame" x="0.0" y="289" width="414" height="398"/>
+                                <rect key="frame" x="0.0" y="374.66666666666674" width="414" height="312.33333333333326"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="JOH-V7-ktB" customClass="HomeTableViewCell" customModule="Mito_1_0" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="homeCell" rowHeight="106" id="JOH-V7-ktB" customClass="HomeTableViewCell" customModule="Mito_1_0" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="106"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JOH-V7-ktB" id="Irb-hs-oIb">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="105.66666666666667"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1530,7 +1531,7 @@
                             <constraint firstItem="eV1-zt-RHT" firstAttribute="bottom" secondItem="yfj-t1-xhc" secondAttribute="bottom" id="Axz-GL-sHG"/>
                             <constraint firstItem="eV1-zt-RHT" firstAttribute="leading" secondItem="yfj-t1-xhc" secondAttribute="leading" id="BGj-x4-W1c"/>
                             <constraint firstItem="iIt-YC-sQM" firstAttribute="leading" secondItem="Hy4-EJ-BfW" secondAttribute="leadingMargin" constant="10" id="LlB-0R-t6e"/>
-                            <constraint firstItem="eV1-zt-RHT" firstAttribute="top" secondItem="iIt-YC-sQM" secondAttribute="bottom" constant="8" symbolic="YES" id="OV7-oB-lMi"/>
+                            <constraint firstItem="eV1-zt-RHT" firstAttribute="top" secondItem="iIt-YC-sQM" secondAttribute="bottom" constant="20" id="OV7-oB-lMi"/>
                             <constraint firstItem="eV1-zt-RHT" firstAttribute="trailing" secondItem="yfj-t1-xhc" secondAttribute="trailing" id="U3x-fY-bOK"/>
                             <constraint firstItem="iIt-YC-sQM" firstAttribute="top" secondItem="yfj-t1-xhc" secondAttribute="top" constant="20" id="rOn-S6-wdQ"/>
                         </constraints>
@@ -1548,7 +1549,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="55a-NT-Bh9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3879.1999999999998" y="550.97451274362822"/>
+            <point key="canvasLocation" x="3878.2608695652175" y="550.27173913043487"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="gFb-Q6-MNY">
@@ -1561,9 +1562,9 @@
                         <color key="selectedImageTintColor" red="0.25490196078431371" green="0.8666666666666667" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="k7B-N4-R6E" kind="relationship" relationship="viewControllers" id="Txd-3r-D3I"/>
+                        <segue destination="2yt-HT-7kb" kind="relationship" relationship="viewControllers" id="Txd-3r-D3I"/>
                         <segue destination="P24-cj-Wm6" kind="relationship" relationship="viewControllers" id="Xta-FM-2bW"/>
-                        <segue destination="zTg-1Y-lm9" kind="relationship" relationship="viewControllers" id="sLv-ep-LaA"/>
+                        <segue destination="hig-ud-FA0" kind="relationship" relationship="viewControllers" id="sLv-ep-LaA"/>
                         <segue destination="V5H-sy-eFC" kind="relationship" relationship="viewControllers" id="Wmj-pu-416"/>
                     </connections>
                 </tabBarController>
@@ -1584,7 +1585,7 @@
             <objects>
                 <viewController title="Package Details" id="klr-lX-eU9" customClass="NotificationViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cfc-TJ-VM5">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wrg-Ie-2E7">
@@ -1611,20 +1612,20 @@
                                 <state key="normal" title="Deny"/>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lot-L2-wzT">
-                                <rect key="frame" x="129.66666666666666" y="60" width="154.99999999999997" height="155"/>
+                                <rect key="frame" x="129.66666666666666" y="104" width="154.99999999999997" height="155"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="155" id="cGL-wf-axL"/>
                                     <constraint firstAttribute="width" constant="155" id="x2a-HP-gig"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FName LName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uif-5A-U2x">
-                                <rect key="frame" x="150.66666666666666" y="235" width="112.99999999999997" height="21"/>
+                                <rect key="frame" x="150.66666666666666" y="279" width="112.99999999999997" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello Friend" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U74-Ig-Gfh">
-                                <rect key="frame" x="20" y="358" width="374" height="20.333333333333314"/>
+                                <rect key="frame" x="20" y="333.33333333333331" width="374" height="20.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1659,7 +1660,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y09-FO-Wo6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2876" y="1458.6206896551726"/>
+            <point key="canvasLocation" x="3782.608695652174" y="1458.4239130434785"/>
         </scene>
         <!--Password-->
         <scene sceneID="yEY-mi-hYw">
@@ -1670,7 +1671,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="32G-Ja-7Y6">
-                                <rect key="frame" x="20" y="84" width="374" height="150"/>
+                                <rect key="frame" x="20" y="40" width="374" height="150"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="6Jq-Rb-pFS">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="46.666666666666664"/>
@@ -1690,7 +1691,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="d8l-l7-Rko">
-                                        <rect key="frame" x="0.0" y="51.666666666666657" width="374" height="46.666666666666657"/>
+                                        <rect key="frame" x="0.0" y="51.666666666666671" width="374" height="46.666666666666671"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qmt-8X-NSx">
                                                 <rect key="frame" x="0.0" y="0.0" width="187" height="46.666666666666664"/>
@@ -1767,7 +1768,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cfk-S1-5UR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3999" y="1972"/>
+            <point key="canvasLocation" x="4259" y="2192"/>
         </scene>
         <!--Open-->
         <scene sceneID="rSU-oA-XHZ">
@@ -1775,14 +1776,14 @@
                 <viewControllerPlaceholder storyboardName="Login" referencedIdentifier="Open" id="7Du-fU-wfA" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="anr-at-uAk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4067" y="2470"/>
+            <point key="canvasLocation" x="3107" y="2690"/>
         </scene>
         <!--ChooseFriend-->
         <scene sceneID="uuf-FR-odA">
             <objects>
                 <viewController title="ChooseFriend" id="CbO-zi-xvJ" customClass="ChooseFriendViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HLk-av-DSY">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uQ1-db-bKp" userLabel="Green Top Nav">
@@ -1929,14 +1930,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Vu-Ol-Pgb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3961" y="-532"/>
+            <point key="canvasLocation" x="4868.115942028986" y="-532.33695652173913"/>
         </scene>
         <!--Payment Method-->
         <scene sceneID="bjH-vb-tVn">
             <objects>
                 <viewController title="Payment Method" id="6OD-c0-snC" customClass="ChoosePaymentViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VO7-c8-b7q">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WuK-tU-QSi">
@@ -1954,10 +1955,10 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="xQe-gy-8Y2">
-                                <rect key="frame" x="20" y="40" width="374" height="571"/>
+                                <rect key="frame" x="20" y="84" width="374" height="527"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name on card" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CgL-wm-Z46">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="98.333333333333329"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="89.333333333333329"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -1966,7 +1967,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Card number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F7X-6b-dXg">
-                                        <rect key="frame" x="0.0" y="118.33333333333334" width="374" height="98"/>
+                                        <rect key="frame" x="0.0" y="109.33333333333334" width="374" height="89.333333333333343"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -1975,7 +1976,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Month" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8G1-tm-P0i">
-                                        <rect key="frame" x="0.0" y="236.33333333333334" width="374" height="98.333333333333343"/>
+                                        <rect key="frame" x="0.0" y="218.66666666666666" width="374" height="89.666666666666657"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -1987,7 +1988,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Year" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vXn-bu-MP0">
-                                        <rect key="frame" x="0.0" y="354.66666666666669" width="374" height="98"/>
+                                        <rect key="frame" x="0.0" y="328.33333333333331" width="374" height="89.333333333333314"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -1999,7 +2000,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="CSV" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GTj-6B-0UB">
-                                        <rect key="frame" x="0.0" y="472.66666666666657" width="374" height="98.333333333333314"/>
+                                        <rect key="frame" x="0.0" y="437.66666666666663" width="374" height="89.333333333333371"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -2033,18 +2034,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rMI-3L-PLu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5481" y="-532"/>
+            <point key="canvasLocation" x="6386.9565217391309" y="-532.33695652173913"/>
         </scene>
         <!--Choose Address-->
         <scene sceneID="Xxo-qr-Mob">
             <objects>
                 <viewController title="Choose Address" id="y1B-fc-fA5" customClass="ChooseAddressViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oAx-US-ddD">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="CTI-wc-TOS">
-                                <rect key="frame" x="0.0" y="20" width="414" height="667"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="623"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uyG-0t-QTT">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
@@ -2054,7 +2055,7 @@
                                         </connections>
                                     </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JiR-sN-ga8">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="667"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="623"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddressTableViewCell" rowHeight="145" id="kwd-yB-Q0C" customClass="AddressTableViewCell" customModule="Mito_1_0" customModuleProvider="target">
@@ -2140,7 +2141,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9OU-am-Tho" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6255" y="-532"/>
+            <point key="canvasLocation" x="7160.8695652173919" y="-532.33695652173913"/>
         </scene>
         <!--Checkout-->
         <scene sceneID="zv4-1b-Ig8">
@@ -2325,18 +2326,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="btm-76-Wiy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6000" y="464"/>
+            <point key="canvasLocation" x="6523.188405797102" y="907.33695652173924"/>
         </scene>
         <!--Send a Message-->
         <scene sceneID="IIU-ar-ycY">
             <objects>
                 <viewController title="Send a Message" id="jmz-bN-xaL" customClass="WriteMessageViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AHA-pg-VVB">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="6VS-KB-dQD" userLabel="ImageLabelStackView">
-                                <rect key="frame" x="16" y="72" width="250" height="115"/>
+                                <rect key="frame" x="16" y="116" width="250" height="115"/>
                                 <subviews>
                                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="c3m-hZ-dPi" customClass="RoundedImage" customModule="Mito_1_0" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
@@ -2363,13 +2364,13 @@
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send a message with your package to:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BaV-tc-Qkv">
-                                <rect key="frame" x="42" y="40" width="329" height="20"/>
+                                <rect key="frame" x="42" y="84" width="329" height="20"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" text="What's it for?" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="eD1-jf-ACa">
-                                <rect key="frame" x="16" y="195" width="382" height="428"/>
+                                <rect key="frame" x="16" y="239" width="382" height="384"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
                                 <color key="textColor" red="0.78497099879999999" green="0.78906852009999995" blue="0.80279028419999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
@@ -2418,7 +2419,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lwd-Ua-9eb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4710" y="-532"/>
+            <point key="canvasLocation" x="5615.9420289855079" y="-532.33695652173913"/>
         </scene>
         <!--Settings-->
         <scene sceneID="prg-Xp-YEd">
@@ -2461,6 +2462,48 @@
             </objects>
             <point key="canvasLocation" x="2056.8000000000002" y="550.97451274362822"/>
         </scene>
+        <!--Home-->
+        <scene sceneID="gCK-ZC-lgz">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2yt-HT-7kb" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" image="Home.png" id="FO9-5A-WxX">
+                        <color key="badgeColor" red="0.25490196079999999" green="0.86666666670000003" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fdW-Me-lhq">
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="k7B-N4-R6E" kind="relationship" relationship="rootViewController" id="krL-SI-GGS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Vh-pa-hUR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2056.521739130435" y="-532.33695652173913"/>
+        </scene>
+        <!--Notification-->
+        <scene sceneID="SPr-mp-Qlb">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hig-ud-FA0" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Notification" image="Notification Icon" id="y7E-EB-PS0">
+                        <color key="badgeColor" red="0.25490196079999999" green="0.86666666670000003" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="uxo-NP-mTf">
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="zTg-1Y-lm9" kind="relationship" relationship="rootViewController" id="iJ6-lw-Xw4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oZT-59-W39" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2053.6231884057975" y="1459.2391304347827"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Cart Solid White Icon.png" width="22" height="23"/>
@@ -2475,10 +2518,10 @@
         <image name="swirlsearch" width="2257" height="5634"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vzN-2U-4mX"/>
+        <segue reference="ruP-Sx-HS5"/>
         <segue reference="kS1-pK-LOk"/>
         <segue reference="39f-jC-Icg"/>
         <segue reference="cI7-Td-TzM"/>
-        <segue reference="sAd-vQ-kz5"/>
+        <segue reference="GdB-Tr-zhu"/>
     </inferredMetricsTieBreakers>
 </document>
