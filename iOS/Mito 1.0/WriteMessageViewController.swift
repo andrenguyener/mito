@@ -30,6 +30,7 @@ class WriteMessageViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func btnConfirmMessage(_ sender: Any) {
+        appdata.strOrderMessage = textviewWriteMessage.text
         performSegue(withIdentifier: "segWriteMessageToSelectPaymentMethod", sender: self)
     }
     

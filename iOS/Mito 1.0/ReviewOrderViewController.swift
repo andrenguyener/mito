@@ -18,12 +18,17 @@ class ReviewOrderViewController: UIViewController {
     @IBOutlet weak var imgRecipient: UIImageView!
     @IBOutlet weak var recipientName: UILabel!
     @IBOutlet weak var lblCreditCardNumber: UILabel!
+    
+    @IBOutlet weak var btnTest: UIButton!
+    
     var appdata = AppData.shared
     
     let formatter = NumberFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        btnTest.titleLabel?.lineBreakMode = .byWordWrapping
+//        btnTest.setTitle("JJ Guo\n3801 Brooklyn Ave NE", for: .normal)
         fnGetCartSubTotal()
         itemCountCheckout.text = String(appdata.intNumItems)
         shippingCheckout.text = "FREE"

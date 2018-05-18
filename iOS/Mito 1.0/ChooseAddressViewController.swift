@@ -83,7 +83,43 @@ class ChooseAddressViewController: UIViewController, UITableViewDataSource, UITa
             performSegue(withIdentifier: "segChooseBillingAddressToReviewOrder", sender: self)
         } else {
             appdata.address = appdata.arrCurrUserAddresses[indexPath.row]
-//            fnAcceptOrDeclinePackage(response: "Accepted", senderId: appdata.currPackage.intSenderID, orderId: appdata.currPackage.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[indexPath.row].intAddressID!)
+            fnAcceptOrDeclinePackage(response: "Accepted", senderId: appdata.currPackage.intSenderID, orderId: appdata.currPackage.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[indexPath.row].intAddressID!)
+        }
+    }
+    
+    func fnAcceptOrDeclinePackage(response: String, senderId: Int, orderId: Int, shippingAddressId: Int) {
+        let urlAcceptOrDeclinePackage = URL(string: "https://api.projectmito.io/v1/package/")
+        let parameters: Parameters = [
+            "senderId": senderId,
+            "orderId": orderId,
+            "response": response,
+            "shippingAddressId": shippingAddressId
+        ]
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlAcceptOrDeclinePackage!, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    print(dictionary)
+                    print("\(response): Successful")
+                }
+                self.appdata.personRecipient = Person(firstName: "FName", lastName: "LName", email: "", avatar: "dd", intUserID: 0, strUsername: "", intNumFriends: 0, dateRequested: Date.distantPast)
+                DispatchQueue.main.async {
+                    let alertController = UIAlertController(title: "Success!", message: "Your package has been confirmed!", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                        self.performSegue(withIdentifier: "CompleteChooseReceivingAddress", sender: self)
+                    }))
+                    self.present(alertController, animated: true, completion: nil)
+                    self.appdata.address = Address(intAddressID: 0, strAddressAlias: "", strCityName: "", strStateName: "", strStreetAddress1: "", strStreetAddress2: "", strZipCode: "")
+                    self.appdata.personRecipient = Person(firstName: "FName", lastName: "LName", email: "", avatar: "", intUserID: 0, strUsername: "", intNumFriends: 0)
+                }
+                
+            case .failure(let error):
+                print("Accept or decline package error")
+                print(error)
+            }
         }
     }
 

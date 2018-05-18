@@ -75,7 +75,6 @@ class ChooseFriendViewController: UIViewController, UITableViewDelegate, UITable
         let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
         let objPerson = self.appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
         Alamofire.request(objPerson.avatar).responseImage(completionHandler: { (response) in
-            print(response)
             if let image = response.result.value {
                 let circularImage = image.af_imageRoundedIntoCircle()
                 DispatchQueue.main.async {
