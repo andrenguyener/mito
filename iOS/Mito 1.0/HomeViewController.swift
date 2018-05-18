@@ -111,14 +111,17 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 //        let cell = Bundle.main.loadNibNamed("HomeTableViewCell", owner: self, options: nil)?.first as! HomeTableViewCell
         let cell = tableView.dequeueReusableCell(withIdentifier: "homeCell", for: indexPath) as! HomeTableViewCell
         var feedItemObj = FeedItem(strDate: "", photoSenderUrl: "", strMessage: "", strRecipientFName: "", strRecipientLName: "", strSenderFName: "", strSenderLName: "", intRecipientId: 0, intSenderId: 0)
+        print(indexPath.row)
         if segmentChooser.selectedSegmentIndex == 0 {
             feedItemObj = appdata.arrFriendsFeedItems[indexPath.row]
         } else {
             feedItemObj = appdata.arrMyFeedItems[indexPath.row]
         }
         Alamofire.request(feedItemObj.photoSenderUrl).responseImage(completionHandler: { (response) in
+//            print(response)
             if let image = response.result.value {
                 let circularImage = image.af_imageRoundedIntoCircle()
+                print(circularImage)
                 DispatchQueue.main.async {
                     cell.img.image = circularImage
                 }

@@ -135,7 +135,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             let stars = String(repeating:"*", count:12)
             let last4 = String(appdata.strCardNumber.suffix(4))
             lblCreditCardNumber.text = "\(stars)\(last4)"
-            appdata.fnDisplaySimpleImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipient, boolCircle: true)
+            appdata.fnDisplaySimpleImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipient)
         } else if lblNotifyYouMessage != nil {
             lblNotifyYouMessage.text = "We will notify you when \(appdata.personRecipient.firstName) accepts!"
         }
@@ -214,7 +214,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func btnGoToEditCheckout(_ sender: Any) {
         boolSender = true
-        performSegue(withIdentifier: "segCartToChooseRecipient", sender: self)
+        performSegue(withIdentifier: "cartoEditCheckout", sender: self)
     }
     
     @IBOutlet weak var lblNotifyYouMessage: UILabel!
@@ -309,16 +309,20 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 }
 
-extension Double {
-    func roundTo0f() -> NSString {
+extension Double
+{
+    func roundTo0f() -> NSString
+    {
         return NSString(format: "%.0f", self)
     }
     
-    func roundTo1f() -> NSString {
+    func roundTo1f() -> NSString
+    {
         return NSString(format: "%.1f", self)
     }
     
-    func roundTo2f() -> NSString {
+    func roundTo2f() -> NSString
+    {
         return NSString(format: "%.2f", self)
     }
 }

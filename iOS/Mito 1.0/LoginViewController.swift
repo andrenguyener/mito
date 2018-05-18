@@ -451,7 +451,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print("Your textfield position : \(textField.frame)") // (x,y,width,height)
         //print("Your stack position : \(userpassstack.frame)")
-        textField.returnKeyType = UIReturnKeyType.next
         if textField.tag > 3 {
             moveTextField(textField, moveDistance: -200, up: true)
             print("Hey i entered")
