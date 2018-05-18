@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class ReviewOrderViewController: UIViewController {
 
@@ -71,6 +72,38 @@ class ReviewOrderViewController: UIViewController {
         }
     }
 
+    @IBAction func finishCheckout(_ sender: Any) {
+        self.fnFinishCheckout()
+        performSegue(withIdentifier: "checkoutFinish", sender: self)
+    }
+    
+    func fnFinishCheckout() {
+        let urlCheckoutMitoCart = URL(string: "https://api.projectmito.io/v1/cart/process")
+        let parameters: Parameters = [
+            "cardId": 1,
+            "senderAddressId": appdata.address.intAddressID,
+            "recipientId": appdata.personRecipient.intUserID,
+            "message": appdata.strOrderMessage,
+            "giftOption": 0
+        ]
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlCheckoutMitoCart!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    print(dictionary)
+                    // Any code for storing locally
+                }
+                
+            case .failure(let error):
+                print("Checkout could not be processed")
+                print(error)
+            }
+        }
+        
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
