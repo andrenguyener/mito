@@ -56,7 +56,7 @@ class ChooseFriendViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         appdata.personRecipient = appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
-//        self.performSegue(withIdentifier: "choosePersonToEditCheckout", sender: self)
+        self.performSegue(withIdentifier: "segChooseFriendToWriteMessage", sender: self)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -1338,7 +1338,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ibG-SQ-XDJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4704.8000000000002" y="-531.18440779610194"/>
+            <point key="canvasLocation" x="5648" y="-891"/>
         </scene>
         <!--CheckOutComplete-->
         <scene sceneID="wfo-qB-gu0">
@@ -1784,9 +1784,6 @@
                                         <state key="normal" title="Cancel">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
-                                        <connections>
-                                            <segue destination="JEb-Gy-hD1" kind="show" identifier="choosePersonToEditCheckout" id="hDw-O4-bHp"/>
-                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Recipient" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r5L-8o-pcS">
                                         <rect key="frame" x="133" y="32.666666666666664" width="149.66666666666663" height="25"/>
@@ -1906,6 +1903,7 @@
                     <connections>
                         <outlet property="searchBar" destination="wV5-Y5-yaa" id="Lr5-eq-ask"/>
                         <outlet property="tblviewPeople" destination="9Vz-xb-RaA" id="wXG-9X-Vb5"/>
+                        <segue destination="jmz-bN-xaL" kind="show" identifier="segChooseFriendToWriteMessage" id="E9w-it-1S2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Vu-Ol-Pgb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2207,9 +2205,6 @@
                                         </constraints>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Send Personal Message"/>
-                                        <connections>
-                                            <segue destination="jmz-bN-xaL" kind="show" id="obm-id-KyH"/>
-                                        </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="akm-pB-H9N" userLabel="Payment Method Stack">
                                         <rect key="frame" x="0.0" y="251.66666666666669" width="374" height="159.66666666666669"/>
@@ -2323,7 +2318,6 @@
                         <segue destination="UPq-qC-84m" kind="show" identifier="editCheckoutToCart" id="wfB-se-wui"/>
                         <segue destination="6OD-c0-snC" kind="show" identifier="editCheckoutToPaymentMethod" id="J5h-7K-9Ku"/>
                         <segue destination="XCS-Ex-cdl" kind="show" identifier="editCheckoutToOrderSummary" id="Jxy-V8-rOh"/>
-                        <segue destination="CbO-zi-xvJ" kind="show" identifier="editCheckoutToChooseFriend" id="apQ-v5-gRK"/>
                         <segue destination="y1B-fc-fA5" kind="show" identifier="editCheckoutToChooseAddress" id="eNC-Nf-pOF"/>
                     </connections>
                 </viewController>
@@ -2334,7 +2328,7 @@
         <!--Send a Message-->
         <scene sceneID="IIU-ar-ycY">
             <objects>
-                <viewController title="Send a Message" id="jmz-bN-xaL" customClass="CheckoutSelectUserViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Send a Message" id="jmz-bN-xaL" customClass="WriteMessageViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AHA-pg-VVB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2390,7 +2384,6 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="btnConfirmMessage:" destination="jmz-bN-xaL" eventType="touchUpInside" id="nyF-LG-20i"/>
                                     <segue destination="JEb-Gy-hD1" kind="show" id="n5u-Su-hpZ"/>
                                 </connections>
                             </button>
@@ -2415,14 +2408,14 @@
                         <viewLayoutGuide key="safeArea" id="ZUi-71-dRE"/>
                     </view>
                     <connections>
-                        <outlet property="imgRecipientProfile" destination="c3m-hZ-dPi" id="Wo3-zZ-yOs"/>
-                        <outlet property="strRecipientName" destination="RwI-DH-i6M" id="gxI-sF-rFk"/>
-                        <outlet property="textviewWriteMessage" destination="eD1-jf-ACa" id="uhQ-e2-k4A"/>
+                        <outlet property="imgRecipientProfile" destination="c3m-hZ-dPi" id="esB-eN-V7h"/>
+                        <outlet property="strRecipientName" destination="RwI-DH-i6M" id="dBi-7r-AAf"/>
+                        <outlet property="textviewWriteMessage" destination="eD1-jf-ACa" id="pex-mm-AhF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lwd-Ua-9eb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3962" y="-1180"/>
+            <point key="canvasLocation" x="4710" y="-532"/>
         </scene>
         <!--Settings-->
         <scene sceneID="prg-Xp-YEd">
@@ -2479,9 +2472,8 @@
         <image name="swirlsearch" width="2257" height="5634"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hDw-O4-bHp"/>
+        <segue reference="n5u-Su-hpZ"/>
         <segue reference="ruP-Sx-HS5"/>
-        <segue reference="2w6-3A-Bb1"/>
         <segue reference="4Df-8F-JjS"/>
         <segue reference="39f-jC-Icg"/>
         <segue reference="IOv-WN-4XC"/>
