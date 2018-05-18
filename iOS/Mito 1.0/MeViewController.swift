@@ -170,11 +170,6 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
             let strFirstName = contact.givenName
             let strLastName = contact.familyName
             let strNumber = contact.phoneNumbers.first?.value.stringValue
-            if count <= 5 {
-                print("First Name: \(strFirstName)")
-                print("Last Name: \(strLastName)")
-                print("Number: \(strNumber)")
-            }
             count += 1
         }
     }
@@ -327,6 +322,9 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
     override func viewDidLoad() {
         super.viewDidLoad()
         placesClient = GMSPlacesClient.shared()
+        imgProfilePic.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.fnImportImage))
+        imgProfilePic.addGestureRecognizer(tapGesture)
 //        recognizer = PayCardsRecognizer(delegate: self, resultMode: .sync, container: self.view, frameColor: .green)
 
         if UserDefaults.standard.object(forKey: "UserInfo") != nil {
@@ -334,8 +332,9 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
             let photoString = data["profileImageString"] as! String
             let decodedImage = Data(base64Encoded: photoString) //Data(base64Encoded: photoString, options: .ignoreUnknownCharacters)
             let image = UIImage(data: decodedImage!)
-            imgProfilePic.image = image
+            imgProfilePic.image = image?.af_imageRoundedIntoCircle()
 //            appdata.fnDisplaySimpleImage(strImageURL: data["photoURL"] as! String, img: imgProfilePic)
+            print(data)
             self.userID.text = data["userId"] as? String
             self.userEmail.text = data["userEmail"] as? String
             self.username.text = data["username"] as? String
@@ -353,7 +352,7 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
         fnImportImage()
     }
     
-    func fnImportImage() {
+    @objc func fnImportImage() {
         let image = UIImagePickerController()
         image.delegate = self
         image.sourceType = UIImagePickerControllerSourceType.photoLibrary

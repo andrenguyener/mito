@@ -450,9 +450,14 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print("Your textfield position : \(textField.frame)") // (x,y,width,height)
         //print("Your stack position : \(userpassstack.frame)")
+        textField.returnKeyType = UIReturnKeyType.next
         if textField.tag > 3 {
             moveTextField(textField, moveDistance: -200, up: true)
             print("Hey i entered")
+        } else if textField.tag > 0 && password != nil {
+            moveTextField(textField, moveDistance: -50, up: true)
+            print("Entering password")
+            textField.returnKeyType = UIReturnKeyType.done
         }
     }
     
@@ -463,6 +468,9 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         if textField.tag > 3 {
             moveTextField(textField, moveDistance: 200, up: true)
             print("hey i ended")
+        } else if textField.tag > 0 && password != nil {
+            moveTextField(textField, moveDistance: 50, up: true)
+            print("Finished entering password")
         }
     }
     

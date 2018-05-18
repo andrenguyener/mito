@@ -40,7 +40,7 @@ class PeopleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
         self.navigationItem.title = strName
         lblUsername.text = "@\(friend.strUsername)"
         btnNumFriends.setTitle("\(friend.intNumFriends) friends", for: .normal)
-        appdata.fnDisplaySimpleImage(strImageURL: friend.avatar, img: img)
+        appdata.fnDisplaySimpleImage(strImageURL: friend.avatar, img: img, boolCircle: true)
     }
     
     func fnCheckFriendStatus() {
