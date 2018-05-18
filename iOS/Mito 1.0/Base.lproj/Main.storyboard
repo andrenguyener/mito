@@ -1611,42 +1611,49 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Deny"/>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lot-L2-wzT">
-                                <rect key="frame" x="129.66666666666666" y="104" width="154.99999999999997" height="155"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="FyN-8h-Brb">
+                                <rect key="frame" x="20" y="103.99999999999999" width="374" height="235.66666666666663"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lot-L2-wzT">
+                                        <rect key="frame" x="109.66666666666666" y="0.0" width="154.99999999999997" height="155"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="155" id="cGL-wf-axL"/>
+                                            <constraint firstAttribute="width" constant="155" id="x2a-HP-gig"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FName LName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uif-5A-U2x">
+                                        <rect key="frame" x="10" y="175" width="354" height="20.333333333333343"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello Friend" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U74-Ig-Gfh">
+                                        <rect key="frame" x="10" y="215.33333333333331" width="354" height="20.333333333333343"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="155" id="cGL-wf-axL"/>
-                                    <constraint firstAttribute="width" constant="155" id="x2a-HP-gig"/>
+                                    <constraint firstItem="Uif-5A-U2x" firstAttribute="leading" secondItem="FyN-8h-Brb" secondAttribute="leading" constant="10" id="2Qs-2F-A6p"/>
+                                    <constraint firstAttribute="trailing" secondItem="Uif-5A-U2x" secondAttribute="trailing" constant="10" id="Xvy-ho-V46"/>
+                                    <constraint firstAttribute="trailing" secondItem="U74-Ig-Gfh" secondAttribute="trailing" constant="10" id="Z4S-S3-ZyB"/>
+                                    <constraint firstItem="U74-Ig-Gfh" firstAttribute="leading" secondItem="FyN-8h-Brb" secondAttribute="leading" constant="10" id="z8r-AZ-9eN"/>
                                 </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FName LName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uif-5A-U2x">
-                                <rect key="frame" x="150.66666666666666" y="279" width="112.99999999999997" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello Friend" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U74-Ig-Gfh">
-                                <rect key="frame" x="20" y="333.33333333333331" width="374" height="20.333333333333314"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="U74-Ig-Gfh" firstAttribute="leading" secondItem="4Z8-cM-CfV" secondAttribute="leading" constant="20" id="2QQ-Z3-6r0"/>
                             <constraint firstItem="4eM-pX-URR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cfc-TJ-VM5" secondAttribute="leading" constant="20" symbolic="YES" id="3O4-G1-Nee"/>
-                            <constraint firstItem="Uif-5A-U2x" firstAttribute="top" secondItem="lot-L2-wzT" secondAttribute="bottom" constant="20" id="5ry-29-muk"/>
                             <constraint firstItem="Wrg-Ie-2E7" firstAttribute="baseline" secondItem="4eM-pX-URR" secondAttribute="baseline" id="B54-St-jHn"/>
-                            <constraint firstItem="lot-L2-wzT" firstAttribute="top" secondItem="4Z8-cM-CfV" secondAttribute="top" constant="40" id="ExD-MN-0pA"/>
+                            <constraint firstItem="FyN-8h-Brb" firstAttribute="top" secondItem="4Z8-cM-CfV" secondAttribute="top" constant="40" id="D0l-Rm-3rC"/>
                             <constraint firstItem="4Z8-cM-CfV" firstAttribute="trailing" secondItem="4eM-pX-URR" secondAttribute="trailing" constant="73" id="GcO-5Z-jhq"/>
-                            <constraint firstItem="Uif-5A-U2x" firstAttribute="centerX" secondItem="cfc-TJ-VM5" secondAttribute="centerX" id="HV3-Wv-Vwz"/>
+                            <constraint firstItem="4Z8-cM-CfV" firstAttribute="trailing" secondItem="FyN-8h-Brb" secondAttribute="trailing" constant="20" id="KhU-Og-pko"/>
                             <constraint firstItem="Wrg-Ie-2E7" firstAttribute="leading" secondItem="cfc-TJ-VM5" secondAttribute="leading" constant="66" id="Px2-Ap-qsq"/>
+                            <constraint firstItem="FyN-8h-Brb" firstAttribute="leading" secondItem="4Z8-cM-CfV" secondAttribute="leading" constant="20" id="c55-zj-Hv4"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Wrg-Ie-2E7" secondAttribute="trailing" constant="20" symbolic="YES" id="ejX-hL-7g4"/>
-                            <constraint firstItem="U74-Ig-Gfh" firstAttribute="trailing" secondItem="4Z8-cM-CfV" secondAttribute="trailing" constant="-20" id="h56-X8-xrh"/>
-                            <constraint firstItem="lot-L2-wzT" firstAttribute="centerX" secondItem="cfc-TJ-VM5" secondAttribute="centerX" id="hbQ-z7-R3Z"/>
                             <constraint firstItem="4Z8-cM-CfV" firstAttribute="bottom" secondItem="Wrg-Ie-2E7" secondAttribute="bottom" constant="29" id="jo3-wz-uDP"/>
-                            <constraint firstItem="lot-L2-wzT" firstAttribute="centerX" secondItem="cfc-TJ-VM5" secondAttribute="centerX" id="sQB-c4-w67"/>
-                            <constraint firstItem="U74-Ig-Gfh" firstAttribute="centerY" secondItem="cfc-TJ-VM5" secondAttribute="centerY" id="tkD-iW-TdL"/>
+                            <constraint firstItem="FyN-8h-Brb" firstAttribute="centerX" secondItem="cfc-TJ-VM5" secondAttribute="centerX" id="ofF-E3-Hm0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4Z8-cM-CfV"/>
                     </view>
@@ -2518,8 +2525,8 @@
         <image name="swirlsearch" width="2257" height="5634"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ruP-Sx-HS5"/>
-        <segue reference="kS1-pK-LOk"/>
+        <segue reference="kcf-T7-nAo"/>
+        <segue reference="7Hd-YA-ayo"/>
         <segue reference="39f-jC-Icg"/>
         <segue reference="cI7-Td-TzM"/>
         <segue reference="GdB-Tr-zhu"/>
