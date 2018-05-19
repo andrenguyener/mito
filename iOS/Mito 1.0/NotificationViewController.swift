@@ -12,29 +12,25 @@ import Alamofire
 var intOrderID = 1
 
 class NotificationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    var appdata = AppData.shared
 
     @IBOutlet weak var notificationView: UIView!
     @IBOutlet weak var tblviewNotification: UITableView!
+    var appdata = AppData.shared
     
     var refresherNotification: UIRefreshControl!
-    
-    var urlAcceptFriendRequest = URL(string: "https://api.projectmito.io/v1/friend/request")
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        if tblviewNotification != nil {
-            appdata.arrNotifications.removeAll()
-            appdata.arrPendingFriends.removeAll()
-            appdata.arrCurrUserPackages.removeAll()
-            self.fnGetPendingFriendRequests()
-            tblviewNotification.delegate = self
-            tblviewNotification.dataSource = self
-            tblviewNotification.rowHeight = 100
-            fnAddRefreshersNotificationsAndPackages()
-            fnGetPendingPackages()
-        }
+        appdata.arrNotifications.removeAll()
+        appdata.arrPendingFriends.removeAll()
+        appdata.arrCurrUserPackages.removeAll()
+        tblviewNotification.delegate = self
+        tblviewNotification.dataSource = self
+        tblviewNotification.rowHeight = 100
+        self.fnAddRefreshersNotificationsAndPackages()
+        self.fnGetPendingFriendRequests()
+        self.fnGetPendingPackages()
     }
     
     func fnAddRefreshersNotificationsAndPackages() {
@@ -44,29 +40,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         tblviewNotification.addSubview(refresherNotification)
     }
     
-    func fnRetrieveIncomingOrderDetails(intOrderID: Int) {
-        let urlRetrieveIncomingOrderDetails = URL(string: "https://api.projectmito.io/v1/order/products")
-        let parameters: Parameters = [
-            "orderId": intOrderID
-        ]
-        let headers: HTTPHeaders = [
-            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
-        ]
-        Alamofire.request(urlRetrieveIncomingOrderDetails!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                if let dictionary = response.result.value {
-                    print(dictionary)
-                    print("\(response): Successful")
-                }
-                
-            case .failure(let error):
-                print("Can't get order details")
-                print(error)
-            }
-        }
-    }
-
     @objc func fnRefreshNotifications() {
         appdata.arrNotifications.removeAll()
         appdata.arrPendingFriends.removeAll()
@@ -145,12 +118,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
-    func fnStringToDate(strDate: String) -> Date {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        return formatter.date(from: strDate)!
-    }
-    
     func fnGetPendingFriendRequests() {
         let urlGetPendingFriendRequests = URL(string: "https://api.projectmito.io/v1/friend/0")
         appdata.arrPendingFriends.removeAll()
@@ -199,6 +166,12 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
+    func fnStringToDate(strDate: String) -> Date {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        return formatter.date(from: strDate)!
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -219,9 +192,8 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
-    // Accept currently creates errors above
-        
     func fnAcceptOrDeclineFriendRequest(strFriendType: String, intUserID: Int) {
+        let urlAcceptFriendRequest = URL(string: "https://api.projectmito.io/v1/friend/request")
         let parameters: Parameters = [
             "friendId": intUserID,
             "friendType": strFriendType,

@@ -27,6 +27,8 @@ class ChooseAddressViewController: UIViewController, UITableViewDataSource, UITa
         } else {
              self.navigationItem.title = "Select Shipping Address"
         }
+        let nibAddNewAddress = UINib(nibName: "AddAddressTableViewCell", bundle: nil)
+        tblviewAddress.register(nibAddNewAddress, forCellReuseIdentifier: "AddNewAddressCell")
     }
     
     func fnAcceptOrDeclinePackage(strPackageAction: String, senderId: Int, orderId: Int, shippingAddressId: Int) {
@@ -91,10 +93,23 @@ class ChooseAddressViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.appdata.arrCurrUserAddresses.count
+        return self.appdata.arrCurrUserAddresses.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == self.appdata.arrCurrUserAddresses.count {
+            print(indexPath.row)
+            var cell:AddAddressTableViewCell! = tblviewAddress.dequeueReusableCell(withIdentifier: "AddNewAddressCell", for:indexPath)as! AddAddressTableViewCell
+            // This function actually loads the xib
+            if cell == nil{
+                let cellnib = [Bundle.main.loadNibNamed("AddNewAddressCell", owner:self, options: nil)]
+                cell = cellnib.first! as! AddAddressTableViewCell
+            }
+//            let cell = Bundle.main.loadNibNamed("AddNewAddressCell", owner: self, options: nil)?.first as! AddAddressTableViewCell
+//            cell.lblAddNewAddress.text = "Add new address"
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "AddNewAddressCell") as! AddAddressTableViewCell
+            return cell
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "AddressTableViewCell", for: indexPath) as! AddressTableViewCell
         let objAddress = self.appdata.arrCurrUserAddresses[indexPath.row]
         cell.strAddressNickname.text = objAddress.strAddressAlias!
