@@ -29,6 +29,36 @@ class ChooseAddressViewController: UIViewController, UITableViewDataSource, UITa
         }
     }
     
+    func fnAcceptOrDeclinePackage(strPackageAction: String, senderId: Int, orderId: Int, shippingAddressId: Int) {
+        let urlAcceptOrDeclinePackage = URL(string: "https://api.projectmito.io/v1/package/")
+        let parameters: Parameters = [
+            "senderId": senderId,
+            "orderId": orderId,
+            "response": strPackageAction,
+            "shippingAddressId": shippingAddressId
+        ]
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlAcceptOrDeclinePackage!, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    print(dictionary)
+                    print("\(response): Successful")
+                }
+                if strPackageAction != "Denied" {
+                    let alert = self.appdata.fnDisplayAlert(title: "Success!", message: "Packaged \(response)")
+                    self.present(alert, animated: true, completion: nil)
+                }
+                
+            case .failure(let error):
+                print("Accept or decline package error")
+                print(error)
+            }
+        }
+    }
+    
     func fnLoadCurrUserAddresses() {
         let urlGetMyAddresses = URL(string: "https://api.projectmito.io/v1/address/")
         let headers: HTTPHeaders = [
@@ -46,9 +76,6 @@ class ChooseAddressViewController: UIViewController, UITableViewDataSource, UITa
                     }
                 }
                 DispatchQueue.main.async {
-                    if (self.appdata.arrCurrUserAddresses.count > 0) {
-                        print("Load Current User Addresses: \(self.appdata.arrCurrUserAddresses[self.appdata.arrCurrUserAddresses.count - 1].strAddressAlias)")
-                    }
                     self.tblviewAddress.reloadData()
                 }
                 

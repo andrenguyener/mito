@@ -35,21 +35,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             fnAddRefreshersNotificationsAndPackages()
             fnGetPendingPackages()
         }
-//        else if imgSenderProfile != nil { // Go to incoming package
-//            if appdata.arrNotifications[intOrderID] as? Package != nil{
-//                let package = appdata.arrNotifications[intOrderID] as! Package
-//                fnRetrieveIncomingOrderDetails(intOrderID: package.intOrderID)
-//                appdata.fnDisplayImage(strImageURL: package.strPhotoUrl, img: imgSenderProfile, boolCircle: true)
-//                strSenderName.text = "\(package.strUserFName) \(package.strUserLName)"
-//                lblMessage.text = package.strOrderMessage
-//            }
-//            fnRetrieveIncomingOrderDetails(intOrderID: intOrderID)
-//        } else {
-//            let objIncomingPackage = appdata.arrCurrUserPackages[intOrderID]
-//            strPackageSenderName.text = "\(objIncomingPackage.strUserFName) \(objIncomingPackage.strUserLName)"
-//            appdata.fnDisplayImage(strImageURL: objIncomingPackage.strPhotoUrl, img: imgSender, boolCircle: true)
-//            fnGetOrderDetails()
-//        }
     }
     
     func fnAddRefreshersNotificationsAndPackages() {
@@ -89,7 +74,42 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         fnGetPendingFriendRequests()
         fnGetPendingPackages()
     }
-        
+    
+    func fnAcceptOrDeclinePackage(strPackageAction: String, senderId: Int, orderId: Int, shippingAddressId: Int) {
+        let urlAcceptOrDeclinePackage = URL(string: "https://api.projectmito.io/v1/package/")
+        let parameters: Parameters = [
+            "senderId": senderId,
+            "orderId": orderId,
+            "response": strPackageAction,
+            "shippingAddressId": shippingAddressId
+        ]
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlAcceptOrDeclinePackage!, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    print(dictionary)
+                    print("\(response): Successful")
+                }
+                if strPackageAction != "Denied" {
+                    let alert = self.appdata.fnDisplayAlert(title: "Success!", message: "Packaged \(response)")
+                    self.present(alert, animated: true, completion: nil)
+                }
+                DispatchQueue.main.async {
+                    self.appdata.arrNotifications.removeAll()
+                    self.fnGetPendingPackages()
+                    self.fnGetPendingFriendRequests()
+                }
+                
+            case .failure(let error):
+                print("Accept or decline package error")
+                print(error)
+            }
+        }
+    }
+    
     func fnGetPendingPackages() {
         self.appdata.arrCurrUserPackages.removeAll()
         let urlGetPendingPackages = URL(string: "https://api.projectmito.io/v1/package")
@@ -200,41 +220,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     // Accept currently creates errors above
-
-    func fnAcceptOrDeclinePackage(strPackageAction: String, senderId: Int, orderId: Int, shippingAddressId: Int) {
-        let urlAcceptOrDeclinePackage = URL(string: "https://api.projectmito.io/v1/package/")
-        let parameters: Parameters = [
-            "senderId": senderId,
-            "orderId": orderId,
-            "response": strPackageAction,
-            "shippingAddressId": shippingAddressId
-        ]
-        let headers: HTTPHeaders = [
-            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
-        ]
-        Alamofire.request(urlAcceptOrDeclinePackage!, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                if let dictionary = response.result.value {
-                    print(dictionary)
-                    print("\(response): Successful")
-                }
-                if strPackageAction != "Denied" {
-                    let alert = self.appdata.fnDisplayAlert(title: "Success!", message: "Packaged \(response)")
-                    self.present(alert, animated: true, completion: nil)
-                }
-                DispatchQueue.main.async {
-                    self.appdata.arrNotifications.removeAll()
-                    self.fnGetPendingPackages()
-                    self.fnGetPendingFriendRequests()
-                }
-                
-            case .failure(let error):
-                print("Accept or decline package error")
-                print(error)
-            }
-        }
-    }
         
     func fnAcceptOrDeclineFriendRequest(strFriendType: String, intUserID: Int) {
         let parameters: Parameters = [
