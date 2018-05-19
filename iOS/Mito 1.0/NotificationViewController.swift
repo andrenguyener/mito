@@ -95,7 +95,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         fnGetPendingFriendRequests()
         fnGetPendingPackages()
     }
-    
+        
     func fnGetOrderDetails() {
         let urlGetOrderDetails = URL(string: "https://api.projectmito.io/v1/order/products")
         let parameters: Parameters = [
@@ -229,17 +229,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     // Accept currently creates errors above
-    
-    @IBAction func btnPackageDetailsBackToNotification(_ sender: Any) {
-        performSegue(withIdentifier: "PackageDetailsBackToNotification", sender: self)
-    }
-    
-    @IBAction func btnAcceptAndChooseReceivingAddress(_ sender: Any) {
-        boolSender = false
-//        appdata.currPackage = appdata.arrNotifications[indexPath.row] as! Package
-        performSegue(withIdentifier: "PackageToChooseReceivingAddress", sender: self)
-    }
-    
+
     func fnAcceptOrDeclinePackage(strPackageAction: String, senderId: Int, orderId: Int, shippingAddressId: Int) {
         let urlAcceptOrDeclinePackage = URL(string: "https://api.projectmito.io/v1/package/")
         let parameters: Parameters = [
@@ -307,31 +297,14 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
-    @objc func btnAcceptPackage(_ button: UIButton) {
-        boolSender = false
-        if ((appdata.arrNotifications[button.tag] as? Package) != nil) {
-            appdata.currPackage = appdata.arrNotifications[button.tag] as! Package
-            performSegue(withIdentifier: "DirectAcceptPackage", sender: self)
-        } else {
-            let person = appdata.arrNotifications[button.tag] as! Person
-            fnAcceptOrDeclineFriendRequest(strFriendType: "Friend", intUserID: person.intUserID)
-        }
-    }
-    
-    @objc func btnDenyPackage(_ button: UIButton) {
-        boolSender = false
-        let package = appdata.arrNotifications[button.tag] as! Package
-        fnAcceptOrDeclinePackage(strPackageAction: "Denied", senderId: package.intSenderID, orderId: package.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[0].intAddressID!)
-    }
-    
     @objc func btnAccept(_ button: UIButton) {
-        print("Row Number: \(button.tag)")
         boolSender = true
         if appdata.arrNotifications[button.tag] as? Person != nil {
             let objFriend = appdata.arrNotifications[button.tag] as! Person
             intOrderID = objFriend.intUserID
             fnAcceptOrDeclineFriendRequest(strFriendType: "Friend", intUserID: intOrderID)
         } else {
+            boolSender = !boolSender
             appdata.currPackage = appdata.arrNotifications[button.tag] as! Package
             performSegue(withIdentifier: "DirectAcceptPackage", sender: self)
         }

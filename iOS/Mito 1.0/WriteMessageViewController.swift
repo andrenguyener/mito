@@ -29,6 +29,22 @@ class WriteMessageViewController: UIViewController, UITextViewDelegate {
             textView.resignFirstResponder()
         }
     }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == "What's it for?" {
+            textView.text = ""
+        } else {
+            textView.becomeFirstResponder()
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text == "" {
+            textView.text = "What's it for?"
+        } else {
+            textView.resignFirstResponder()
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

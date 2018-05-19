@@ -44,13 +44,61 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
 //        fnLoadMyActivity()
 //        fnLoadFriendActivity()
 //        fnLoadNotifications()
-        fnUsePodTime(strDate: "2018-05-08T06:01:55.883Z")
+//        fnSearchAmazon(strQuery: "harden")
+//        fnSearchByASIN(strASIN: "B079NPZ8WG")
+//        fnUsePodTime(strDate: "2018-05-08T06:01:55.883Z")
 //        contactStore.requestAccess(for: .contacts) { (success,error) in
 //            if success {
 //                print("Authorization success")
 //            }
 //        }
 //        fnFetchContacts()
+    }
+    
+    func fnSearchByASIN(strASIN: String) {
+        let strRetailer = "amazon"
+        let urlLoadMyActivity = URL(string: "https://api.zinc.io/v1/products/\(strASIN)?retailer=\(strRetailer)")
+        var headers : HTTPHeaders = [:]
+        let strKey = "856B36C27DFE8647F2892571"
+        if let authorizationHeader = Request.authorizationHeader(user: strKey, password: "") {
+            headers[authorizationHeader.key] = authorizationHeader.value
+        }
+        Alamofire.request(urlLoadMyActivity!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                print("Loaded My Activity")
+                if let dictionary = response.result.value {
+                    print(dictionary)
+                }
+                
+            case .failure(let error):
+                print("Error loading my activity")
+                print(error)
+            }
+        }
+    }
+    
+    func fnSearchAmazon(strQuery: String) {
+        let strKey = "856B36C27DFE8647F2892571"
+        let strRetailer = "amazon"
+        let urlLoadMyActivity = URL(string: "https://api.zinc.io/v1/search?query=\(strQuery)&page=1&retailer=\(strRetailer)")
+        var headers : HTTPHeaders = [:]
+        if let authorizationHeader = Request.authorizationHeader(user: strKey, password: "") {
+            headers[authorizationHeader.key] = authorizationHeader.value
+        }
+        Alamofire.request(urlLoadMyActivity!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    print("Loaded Harden Results")
+                    print(dictionary)
+                }
+                
+            case .failure(let error):
+                print("Error loading my activity")
+                print(error)
+            }
+        }
     }
     
     // Get two dates. Get difference in dates. Then convert

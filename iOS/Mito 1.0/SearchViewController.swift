@@ -348,16 +348,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Product
         if productPeopleTab.selectedSegmentIndex == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "productCell", for: indexPath) as! ProductTableViewCell
-            print("Row: \(indexPath.row)")
 //            if (indexPath.row == appdata.arrProductSearchResults.count - 1) {
 //                strProductResultsPageNumber += 1
 //                fnLoadProductData()
 //            }
             let objProduct = appdata.arrProductSearchResults[indexPath.row]
-//            let urlProductImage = URL(string: "\(objProduct.image)")
-//            if let data = try? Data(contentsOf: urlProductImage!) {
-//                cell.img.image = UIImage(data: data)!
-//            }
             Alamofire.request(objProduct.image).responseImage(completionHandler: { (response) in
                 print(response)
                 if let image = response.result.value {
@@ -380,8 +375,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 return fnLoadPersonCell(cell: cell, objPerson: objPerson)
             } else {
                 let objPerson = self.appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
-//                print("First name: \(objPerson.firstName) \(objPerson.lastName)")
-//                print("Picture: \(objPerson.avatar)")
                 return fnLoadPersonCell(cell: cell, objPerson: objPerson)
             }
         }
