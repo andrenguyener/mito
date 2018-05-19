@@ -29,6 +29,11 @@ class PackageDetailsViewController: UIViewController {
         }
     }
     
+    @IBAction func btnAcceptAndChooseReceivingAddress(_ sender: Any) {
+        boolSender = false
+        performSegue(withIdentifier: "segPackageDetailsToChooseShippingAddress", sender: self)
+    }
+    
     func fnRetrieveIncomingOrderDetails(intOrderID: Int) {
         let urlRetrieveIncomingOrderDetails = URL(string: "https://api.projectmito.io/v1/order/products")
         let parameters: Parameters = [

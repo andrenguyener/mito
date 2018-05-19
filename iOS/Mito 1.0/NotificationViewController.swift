@@ -17,9 +17,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var notificationView: UIView!
     @IBOutlet weak var tblviewNotification: UITableView!
     
-//    @IBOutlet weak var imgSender: UIImageView!
-//    @IBOutlet weak var strPackageSenderName: UILabel!
-    
     var refresherNotification: UIRefreshControl!
     
     var urlAcceptFriendRequest = URL(string: "https://api.projectmito.io/v1/friend/request")
@@ -85,10 +82,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
 
-//    @IBOutlet weak var imgSenderProfile: UIImageView!
-//    @IBOutlet weak var strSenderName: UILabel!
-//    @IBOutlet weak var lblMessage: UILabel!
-
     @objc func fnRefreshNotifications() {
         appdata.arrNotifications.removeAll()
         appdata.arrPendingFriends.removeAll()
@@ -96,30 +89,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         fnGetPendingFriendRequests()
         fnGetPendingPackages()
     }
-    
-//    func fnGetOrderDetails() {
-//        let urlGetOrderDetails = URL(string: "https://api.projectmito.io/v1/order/products")
-//        let parameters: Parameters = [
-//            "orderId": appdata.arrCurrUserPackages[intOrderID].intOrderID
-//        ]
-//        let headers: HTTPHeaders = [
-//            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
-//        ]
-//        Alamofire.request(urlGetOrderDetails!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
-//            switch response.result {
-//            case .success:
-//                if let dictionary = response.result.value {
-//                    print("Successfully pulled down")
-//                    print(dictionary)
-//                }
-//                
-//            case .failure(let error):
-//                print("Get order details error")
-//                print(error)
-//            }
-//        }
-//    }
-    
+        
     func fnGetPendingPackages() {
         self.appdata.arrCurrUserPackages.removeAll()
         let urlGetPendingPackages = URL(string: "https://api.projectmito.io/v1/package")
