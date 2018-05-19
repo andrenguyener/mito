@@ -23,9 +23,9 @@ class ChooseAddressViewController: UIViewController, UITableViewDataSource, UITa
         tblviewAddress.rowHeight = 106
         fnLoadCurrUserAddresses()
         if boolSender {
-            // lblChooseAddressHeading.text = "Select Billing Address"
+             self.navigationItem.title = "Select Billing Address"
         } else {
-            // lblChooseAddressHeading.text = "Select Shipping Address"
+             self.navigationItem.title = "Select Shipping Address"
         }
     }
     

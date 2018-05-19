@@ -54,7 +54,7 @@ class ReviewOrderViewController: UIViewController {
         let stars = String(repeating:"*", count:12)
         let last4 = String(appdata.strCardNumber.suffix(4))
         lblCreditCardNumber.text = "\(stars)\(last4)"
-        appdata.fnDisplaySimpleImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipient, boolCircle: true)
+        appdata.fnDisplayImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipient, boolCircle: true)
     }
     
     func fnGetCartSubTotal() {

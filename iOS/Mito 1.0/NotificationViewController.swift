@@ -17,8 +17,8 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var notificationView: UIView!
     @IBOutlet weak var tblviewNotification: UITableView!
     
-    @IBOutlet weak var imgSender: UIImageView!
-    @IBOutlet weak var strPackageSenderName: UILabel!
+//    @IBOutlet weak var imgSender: UIImageView!
+//    @IBOutlet weak var strPackageSenderName: UILabel!
     
     var refresherNotification: UIRefreshControl!
     
@@ -37,21 +37,22 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             tblviewNotification.rowHeight = 100
             fnAddRefreshersNotificationsAndPackages()
             fnGetPendingPackages()
-        } else if imgSenderProfile != nil { // Go to incoming package
-            if appdata.arrNotifications[intOrderID] as? Package != nil{
-                let package = appdata.arrNotifications[intOrderID] as! Package
-                fnRetrieveIncomingOrderDetails(intOrderID: package.intOrderID)
-                 appdata.fnDisplaySimpleImage(strImageURL: package.strPhotoUrl, img: imgSenderProfile, boolCircle: true)
-                strSenderName.text = "\(package.strUserFName) \(package.strUserLName)"
-                lblMessage.text = package.strOrderMessage
-            }
-            fnRetrieveIncomingOrderDetails(intOrderID: intOrderID)
-        } else {
-            let objIncomingPackage = appdata.arrCurrUserPackages[intOrderID]
-            strPackageSenderName.text = "\(objIncomingPackage.strUserFName) \(objIncomingPackage.strUserLName)"
-            appdata.fnDisplaySimpleImage(strImageURL: objIncomingPackage.strPhotoUrl, img: imgSender, boolCircle: true)
-            fnGetOrderDetails()
         }
+//        else if imgSenderProfile != nil { // Go to incoming package
+//            if appdata.arrNotifications[intOrderID] as? Package != nil{
+//                let package = appdata.arrNotifications[intOrderID] as! Package
+//                fnRetrieveIncomingOrderDetails(intOrderID: package.intOrderID)
+//                appdata.fnDisplayImage(strImageURL: package.strPhotoUrl, img: imgSenderProfile, boolCircle: true)
+//                strSenderName.text = "\(package.strUserFName) \(package.strUserLName)"
+//                lblMessage.text = package.strOrderMessage
+//            }
+//            fnRetrieveIncomingOrderDetails(intOrderID: intOrderID)
+//        } else {
+//            let objIncomingPackage = appdata.arrCurrUserPackages[intOrderID]
+//            strPackageSenderName.text = "\(objIncomingPackage.strUserFName) \(objIncomingPackage.strUserLName)"
+//            appdata.fnDisplayImage(strImageURL: objIncomingPackage.strPhotoUrl, img: imgSender, boolCircle: true)
+//            fnGetOrderDetails()
+//        }
     }
     
     func fnAddRefreshersNotificationsAndPackages() {
@@ -84,9 +85,9 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
 
-    @IBOutlet weak var imgSenderProfile: UIImageView!
-    @IBOutlet weak var strSenderName: UILabel!
-    @IBOutlet weak var lblMessage: UILabel!
+//    @IBOutlet weak var imgSenderProfile: UIImageView!
+//    @IBOutlet weak var strSenderName: UILabel!
+//    @IBOutlet weak var lblMessage: UILabel!
 
     @objc func fnRefreshNotifications() {
         appdata.arrNotifications.removeAll()
@@ -95,29 +96,29 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         fnGetPendingFriendRequests()
         fnGetPendingPackages()
     }
-        
-    func fnGetOrderDetails() {
-        let urlGetOrderDetails = URL(string: "https://api.projectmito.io/v1/order/products")
-        let parameters: Parameters = [
-            "orderId": appdata.arrCurrUserPackages[intOrderID].intOrderID
-        ]
-        let headers: HTTPHeaders = [
-            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
-        ]
-        Alamofire.request(urlGetOrderDetails!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                if let dictionary = response.result.value {
-                    print("Successfully pulled down")
-                    print(dictionary)
-                }
-                
-            case .failure(let error):
-                print("Get order details error")
-                print(error)
-            }
-        }
-    }
+    
+//    func fnGetOrderDetails() {
+//        let urlGetOrderDetails = URL(string: "https://api.projectmito.io/v1/order/products")
+//        let parameters: Parameters = [
+//            "orderId": appdata.arrCurrUserPackages[intOrderID].intOrderID
+//        ]
+//        let headers: HTTPHeaders = [
+//            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+//        ]
+//        Alamofire.request(urlGetOrderDetails!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+//            switch response.result {
+//            case .success:
+//                if let dictionary = response.result.value {
+//                    print("Successfully pulled down")
+//                    print(dictionary)
+//                }
+//                
+//            case .failure(let error):
+//                print("Get order details error")
+//                print(error)
+//            }
+//        }
+//    }
     
     func fnGetPendingPackages() {
         self.appdata.arrCurrUserPackages.removeAll()
@@ -351,26 +352,16 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     }
 
     func fnSortNotification(this: Notification, that: Notification) -> Bool {
-//        if this.dateRequested.compare(that.dateRequested) == .orderedSame {
-//            return true
-//        }
         return this.dateRequested.compare(that.dateRequested) != .orderedAscending
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Friend Requests
         let cell = tblviewNotification.dequeueReusableCell(withIdentifier: "cellNotification", for: indexPath) as! NotificationTableViewCell
-        print(indexPath.row)
         let objNotification = appdata.arrNotifications[indexPath.row]
         if let objPackage = objNotification as? Package {
             let strDate = UTCToLocal(date: objPackage.strOrderDate)
-            let urlPersonImage = URL(string:"\(objPackage.strPhotoUrl)")
-            let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
-            if let data = try? Data(contentsOf: urlPersonImage!) {
-                cell.imgPerson.image = UIImage(data: data)!
-            } else if let data = try? Data(contentsOf: defaultURL!){
-                cell.imgPerson.image = UIImage(data: data)
-            }
+            appdata.fnDisplayImage(strImageURL: objPackage.strPhotoUrl, img: cell.imgPerson, boolCircle: true)
             cell.strFirstNameLastName.text = "\(objPackage.strUserFName) has sent you a package request"
             cell.strUsername.text = strDate
             cell.btnConfirm.tag = indexPath.row
@@ -381,13 +372,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             let objFriendRequest = objNotification as! Person
             let strDate = fnConvertDateToString(date: objFriendRequest.dateRequested)
             let dateLocal = UTCToLocal(date: strDate)
-            let urlPersonImage = URL(string:"\(objFriendRequest.avatar)")
-            let defaultURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t31.0-8/17621927_1373277742718305_6317412440813490485_o.jpg?oh=4689a54bc23bc4969eacad74b6126fea&oe=5B460897")
-            if let data = try? Data(contentsOf: urlPersonImage!) {
-                cell.imgPerson.image = UIImage(data: data)!
-            } else if let data = try? Data(contentsOf: defaultURL!){
-                cell.imgPerson.image = UIImage(data: data)
-            }
+            appdata.fnDisplayImage(strImageURL: objFriendRequest.avatar, img: cell.imgPerson, boolCircle: true)
             cell.strFirstNameLastName.text = "\(objFriendRequest.strUsername) has sent you a friend request"
             cell.strUsername.text = dateLocal
             cell.btnConfirm.tag = indexPath.row

@@ -268,7 +268,7 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
             }
         } else if lblRecipient != nil {
             lblRecipient.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
-            appdata.fnDisplaySimpleImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipientImage, boolCircle: true)
+            appdata.fnDisplayImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipientImage, boolCircle: true)
             lblAddressNickname.text = appdata.address.strAddressAlias
             if appdata.strCardNumber.count > 0 {
                 let stars = String(repeating:"*", count:12)
@@ -277,7 +277,7 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
             }
         } else if imgRecipientProfile != nil {
             textviewWriteMessage.keyboardDismissMode = .onDrag
-            appdata.fnDisplaySimpleImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipientProfile, boolCircle: true)
+            appdata.fnDisplayImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipientProfile, boolCircle: true)
             strRecipientName.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
             textviewWriteMessage.text = "What's it for?"
         }

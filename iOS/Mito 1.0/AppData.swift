@@ -360,7 +360,7 @@ class AppData: NSObject {
 //        present(alertController, animated: true, completion: nil)
 //    }
     
-    open func fnDisplaySimpleImage(strImageURL: String, img: UIImageView, boolCircle: Bool) {
+    open func fnDisplayImage(strImageURL: String, img: UIImageView, boolCircle: Bool) {
         Alamofire.request(strImageURL).responseImage(completionHandler: { (response) in
             print(response)
             if var image = response.result.value {

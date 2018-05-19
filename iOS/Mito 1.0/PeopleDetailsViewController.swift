@@ -45,7 +45,8 @@ class PeopleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
         self.navigationItem.title = strName
         lblUsername.text = "@\(friend.strUsername)"
         btnNumFriends.setTitle("\(friend.intNumFriends) friends", for: .normal)
-        appdata.fnDisplaySimpleImage(strImageURL: friend.avatar, img: img, boolCircle: true)
+        print(friend.avatar)
+        appdata.fnDisplayImage(strImageURL: friend.avatar, img: img, boolCircle: true)
     }
     
     func fnCheckFriendStatus() {
@@ -133,8 +134,6 @@ class PeopleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //        let cell = tableView.dequeueReusableCell(withIdentifier: "homeCell", for: indexPath) as! HomeTableViewCell
         let cell = Bundle.main.loadNibNamed("HomeTableViewCell", owner: self, options: nil)?.first as! HomeTableViewCell
-//        cell.whatHappened.text = "hi"
-
         let feedItemObj = appdata.arrMitoProfileFeedItems[indexPath.row]
         Alamofire.request(feedItemObj.photoSenderUrl).responseImage(completionHandler: { (response) in
             print(response)

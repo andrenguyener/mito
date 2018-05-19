@@ -172,6 +172,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             switch response.result {
             case .success:
                 if let dictionary = response.result.value {
+                    print("Loaded search results successfully")
                     let myJson = dictionary as! NSDictionary
                     UserDefaults.standard.set(myJson, forKey: "ProductSearchResultsJSON")
                     if UserDefaults.standard.object(forKey: "ProductSearchResultsJSON") != nil {
@@ -347,37 +348,47 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Product
         if productPeopleTab.selectedSegmentIndex == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "productCell", for: indexPath) as! ProductTableViewCell
-//            if (indexPath.row == appdata.arrProductSearchResults.count - 1) {
-//                strProductResultsPageNumber += 1
-//                fnLoadProductData()
-//            }
-            let objProduct = appdata.arrProductSearchResults[indexPath.row]
-            Alamofire.request(objProduct.image).responseImage(completionHandler: { (response) in
-                print(response)
-                if let image = response.result.value {
-                    DispatchQueue.main.async {
-                        cell.img.image = image
+            print("Chose products")
+            if indexPath.row < appdata.arrProductSearchResults.count {
+                print("Product indexPath.row: \(indexPath.row)")
+                let cell = tableView.dequeueReusableCell(withIdentifier: "productCell", for: indexPath) as! ProductTableViewCell
+                //            if (indexPath.row == appdata.arrProductSearchResults.count - 1) {
+                //                strProductResultsPageNumber += 1
+                //                fnLoadProductData()
+                //            }
+                let objProduct = appdata.arrProductSearchResults[indexPath.row]
+                Alamofire.request(objProduct.image).responseImage(completionHandler: { (response) in
+                    if let image = response.result.value {
+                        DispatchQueue.main.async {
+                            cell.img.image = image
+                        }
                     }
-                }
-            })
-            cell.title.text = objProduct.title
-            print(objProduct.title)
-            cell.publisher.text = objProduct.publisher
-            cell.price.text = objProduct.price
-            return cell
+                })
+                cell.title.text = objProduct.title
+                print(objProduct.title)
+                cell.publisher.text = objProduct.publisher
+                cell.price.text = objProduct.price
+                return cell
+            }
         } else { // People
-            let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
-            let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
-            let intNumFriends = data["NumFriends"] as? Int
-            if intNumFriends == 0 {
-                let objPerson = self.appdata.arrCurrAllUsers[indexPath.row]
-                return fnLoadPersonCell(cell: cell, objPerson: objPerson)
-            } else {
-                let objPerson = self.appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
-                return fnLoadPersonCell(cell: cell, objPerson: objPerson)
+            print("Chose people")
+            if indexPath.row < appdata.arrCurrFriendsAndAllMitoUsers.count {
+                print("People indexPath.row: \(indexPath.row)")
+                let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
+                let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+                let intNumFriends = data["NumFriends"] as? Int
+                if intNumFriends == 0 {
+                    let objPerson = self.appdata.arrCurrAllUsers[indexPath.row]
+                    return fnLoadPersonCell(cell: cell, objPerson: objPerson)
+                } else {
+                    let objPerson = self.appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
+                    return fnLoadPersonCell(cell: cell, objPerson: objPerson)
+                }
             }
         }
+        print("Got down here for some reason")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
+        return cell
     }
     
     func fnLoadPersonCell(cell: TableViewCell, objPerson: Person) -> TableViewCell {

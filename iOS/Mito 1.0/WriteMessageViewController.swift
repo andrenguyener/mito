@@ -19,7 +19,7 @@ class WriteMessageViewController: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
         textviewWriteMessage.delegate = self
         textviewWriteMessage.keyboardDismissMode = .onDrag
-        appdata.fnDisplaySimpleImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipientProfile, boolCircle: true)
+        appdata.fnDisplayImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipientProfile, boolCircle: true)
         strRecipientName.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
         textviewWriteMessage.text = "What's it for?"
     }
