@@ -83,6 +83,8 @@
 		DA27C2202043736400CCFD60 /* Sopheak.png in Resources */ = {isa = PBXBuildFile; fileRef = DA27C21F2043736400CCFD60 /* Sopheak.png */; };
 		DA28344720B0EB970084571D /* AddAddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28344520B0EB970084571D /* AddAddressTableViewCell.swift */; };
 		DA28344820B0EB970084571D /* AddAddressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA28344620B0EB970084571D /* AddAddressTableViewCell.xib */; };
+		DA28344B20B10AE90084571D /* PaymentInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28344920B10AE90084571D /* PaymentInfoTableViewCell.swift */; };
+		DA28344C20B10AE90084571D /* PaymentInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA28344A20B10AE90084571D /* PaymentInfoTableViewCell.xib */; };
 		DA42CC0A2064909900900C7D /* LineItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42CC092064909900900C7D /* LineItem.swift */; };
 		DA49F1DB2055EF9E0018ABA4 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA49F1DA2055EF9E0018ABA4 /* ProductViewController.swift */; };
 		DA5D683E2058A45F00E86BE8 /* ProductDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA5D683C2058A45F00E86BE8 /* ProductDetails.storyboard */; };
@@ -210,6 +212,8 @@
 		DA27C21F2043736400CCFD60 /* Sopheak.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sopheak.png; sourceTree = "<group>"; };
 		DA28344520B0EB970084571D /* AddAddressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressTableViewCell.swift; sourceTree = "<group>"; };
 		DA28344620B0EB970084571D /* AddAddressTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddAddressTableViewCell.xib; sourceTree = "<group>"; };
+		DA28344920B10AE90084571D /* PaymentInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInfoTableViewCell.swift; sourceTree = "<group>"; };
+		DA28344A20B10AE90084571D /* PaymentInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentInfoTableViewCell.xib; sourceTree = "<group>"; };
 		DA42CC092064909900900C7D /* LineItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineItem.swift; sourceTree = "<group>"; };
 		DA49F1DA2055EF9E0018ABA4 /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
 		DA5D683D2058A45F00E86BE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Mito 1.0/Base.lproj/ProductDetails.storyboard"; sourceTree = "<group>"; };
@@ -414,6 +418,8 @@
 				DA80593F20AF2F1F004B33B8 /* HomeTableViewCell.xib */,
 				DA28344520B0EB970084571D /* AddAddressTableViewCell.swift */,
 				DA28344620B0EB970084571D /* AddAddressTableViewCell.xib */,
+				DA28344920B10AE90084571D /* PaymentInfoTableViewCell.swift */,
+				DA28344A20B10AE90084571D /* PaymentInfoTableViewCell.xib */,
 			);
 			path = "Mito 1.0";
 			sourceTree = "<group>";
@@ -597,6 +603,7 @@
 				B247197F2046245E006CF6C2 /* Sign Out SG.png in Resources */,
 				B247198E204626ED006CF6C2 /* Search.png in Resources */,
 				B261913D206C5E5E004597F0 /* Roboto-BlackItalic.ttf in Resources */,
+				DA28344C20B10AE90084571D /* PaymentInfoTableViewCell.xib in Resources */,
 				B272D9052077646A00E53276 /* mitodesignblacksvg.svg in Resources */,
 				DAD9953520423A4B007A7687 /* Andre.png in Resources */,
 				B24719842046245E006CF6C2 /* Blocked User SG.png in Resources */,
@@ -731,6 +738,7 @@
 				DA27C218204353FF00CCFD60 /* HomeViewController.swift in Sources */,
 				B2F849472043CAA900CBD83A /* SettingsViewController.swift in Sources */,
 				DA23437C20AE5200003E4D6A /* ChoosePaymentViewController.swift in Sources */,
+				DA28344B20B10AE90084571D /* PaymentInfoTableViewCell.swift in Sources */,
 				DA42CC0A2064909900900C7D /* LineItem.swift in Sources */,
 				B2471994204672DE006CF6C2 /* NotificationViewController.swift in Sources */,
 				DA27C21A2043550A00CCFD60 /* HomeTableViewCell.swift in Sources */,

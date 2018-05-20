@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class ReviewOrderViewController: UIViewController {
+class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var itemCountCheckout: UILabel!
     @IBOutlet weak var shippingCheckout: UILabel!
@@ -18,6 +18,7 @@ class ReviewOrderViewController: UIViewController {
     @IBOutlet weak var imgRecipient: UIImageView!
     @IBOutlet weak var recipientName: UILabel!
     @IBOutlet weak var lblCreditCardNumber: UILabel!
+    @IBOutlet weak var tblviewPaymentInfo: UITableView!
     
     @IBOutlet weak var btnTest: UIButton!
     
@@ -25,10 +26,17 @@ class ReviewOrderViewController: UIViewController {
     
     let formatter = NumberFormatter()
     
+    override func viewDidLayoutSubviews() {
+        tblviewPaymentInfo.frame.size = tblviewPaymentInfo.contentSize
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        btnTest.titleLabel?.lineBreakMode = .byWordWrapping
-//        btnTest.setTitle("JJ Guo\n3801 Brooklyn Ave NE", for: .normal)
+        tblviewPaymentInfo.delegate = self
+        tblviewPaymentInfo.dataSource = self
+        let nibAddNewAddress = UINib(nibName: "PaymentInfoTableViewCell", bundle: nil)
+        tblviewPaymentInfo.register(nibAddNewAddress, forCellReuseIdentifier: "PaymentInfoCell")
+        tblviewPaymentInfo.isScrollEnabled = false
         fnGetCartSubTotal()
         itemCountCheckout.text = String(appdata.intNumItems)
         shippingCheckout.text = "FREE"
@@ -109,10 +117,45 @@ class ReviewOrderViewController: UIViewController {
         }
         
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        if tableView == tblviewPaymentInfo {
+            return 2
+//        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if tableView == tblviewPaymentInfo {
+            var cell:PaymentInfoTableViewCell! = tblviewPaymentInfo.dequeueReusableCell(withIdentifier: "PaymentInfoCell", for:indexPath)as! PaymentInfoTableViewCell
+            // This function actually loads the xib
+            cell.lblTitle.text = appdata.arrPaymentInfoTitles[indexPath.row]
+            let last4 = String(appdata.strCardNumber.suffix(4))
+            if indexPath.row == 0 {
+                cell.lblSubtitle.text = "Visa ending in \(last4)"
+            } else {
+                cell.lblSubtitle.text = "Same as shipping address"
+            }
+            if cell == nil {
+                let cellnib = Bundle.main.loadNibNamed("PaymentInfoCell", owner:self, options: nil)?.first as! PaymentInfoTableViewCell
+                cell = cellnib
+                cell.lblTitle.text = appdata.arrPaymentInfoTitles[indexPath.row]
+                let last4 = String(appdata.strCardNumber.suffix(4))
+                if indexPath.row == 0 {
+                    cell.lblSubtitle.text = "Visa ending in \(last4)"
+                } else {
+                    cell.lblSubtitle.text = "Same as shipping address"
+                }
+            }
+            return cell
+        }
+        var cell:PaymentInfoTableViewCell! = tblviewPaymentInfo.dequeueReusableCell(withIdentifier: "PaymentInfoCell", for:indexPath)as! PaymentInfoTableViewCell
+        // This function actually loads the xib
+        if cell == nil{
+            let cellnib = Bundle.main.loadNibNamed("PaymentInfoCell", owner:self, options: nil)?.first as! PaymentInfoTableViewCell
+            cell = cellnib
+        }
+        cell.lblTitle.text = "Title"
+        cell.lblSubtitle.text = "Subtitle"
+        return cell
+    }
 }

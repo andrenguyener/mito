@@ -42,6 +42,8 @@ class AppData: NSObject {
     open var arrFriendsFeedItems: [FeedItem] = []
     open var arrMyFeedItems: [FeedItem] = []
     
+    open var arrPaymentInfoTitles: [String] = ["Payment method", "Billing address"]
+    
     
     // AnyObject array
     open var arrNotifications: [Notification] = []

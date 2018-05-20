@@ -98,16 +98,13 @@ class ChooseAddressViewController: UIViewController, UITableViewDataSource, UITa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == self.appdata.arrCurrUserAddresses.count {
-            print(indexPath.row)
             var cell:AddAddressTableViewCell! = tblviewAddress.dequeueReusableCell(withIdentifier: "AddNewAddressCell", for:indexPath)as! AddAddressTableViewCell
             // This function actually loads the xib
             if cell == nil{
-                let cellnib = [Bundle.main.loadNibNamed("AddNewAddressCell", owner:self, options: nil)]
-                cell = cellnib.first! as! AddAddressTableViewCell
+                let cellnib = Bundle.main.loadNibNamed("AddNewAddressCell", owner:self, options: nil)?.first as! AddAddressTableViewCell
+                cell = cellnib
             }
-//            let cell = Bundle.main.loadNibNamed("AddNewAddressCell", owner: self, options: nil)?.first as! AddAddressTableViewCell
-//            cell.lblAddNewAddress.text = "Add new address"
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "AddNewAddressCell") as! AddAddressTableViewCell
+            cell.lblAddNewAddress.text = "Testing this"
             return cell
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "AddressTableViewCell", for: indexPath) as! AddressTableViewCell
@@ -119,13 +116,17 @@ class ChooseAddressViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        appdata.address = appdata.arrCurrUserAddresses[indexPath.row]
-        print(boolSender)
-        if boolSender {
-            performSegue(withIdentifier: "segChooseBillingAddressToReviewOrder", sender: self)
+        if indexPath.row == appdata.arrCurrUserAddresses.count {
+            print("Chose Add New Address Option")
         } else {
             appdata.address = appdata.arrCurrUserAddresses[indexPath.row]
-            fnAcceptOrDeclinePackage(response: "Accepted", senderId: appdata.currPackage.intSenderID, orderId: appdata.currPackage.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[indexPath.row].intAddressID!)
+            print(boolSender)
+            if boolSender {
+                performSegue(withIdentifier: "segChooseBillingAddressToReviewOrder", sender: self)
+            } else {
+                appdata.address = appdata.arrCurrUserAddresses[indexPath.row]
+                fnAcceptOrDeclinePackage(response: "Accepted", senderId: appdata.currPackage.intSenderID, orderId: appdata.currPackage.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[indexPath.row].intAddressID!)
+            }
         }
     }
     
