@@ -19,6 +19,7 @@ class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var recipientName: UILabel!
     @IBOutlet weak var lblCreditCardNumber: UILabel!
     @IBOutlet weak var tblviewPaymentInfo: UITableView!
+    @IBOutlet weak var tblviewOrderSummary: UITableView!
     
     @IBOutlet weak var btnTest: UIButton!
     
@@ -28,6 +29,7 @@ class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidLayoutSubviews() {
         tblviewPaymentInfo.frame.size = tblviewPaymentInfo.contentSize
+        tblviewOrderSummary.frame.size = tblviewOrderSummary.contentSize
     }
     
     override func viewDidLoad() {
@@ -37,6 +39,13 @@ class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableV
         let nibAddNewAddress = UINib(nibName: "PaymentInfoTableViewCell", bundle: nil)
         tblviewPaymentInfo.register(nibAddNewAddress, forCellReuseIdentifier: "PaymentInfoCell")
         tblviewPaymentInfo.isScrollEnabled = false
+        
+        tblviewOrderSummary.delegate = self
+        tblviewOrderSummary.dataSource = self
+        let nib2AddNewAddress = UINib(nibName: "OrderSummaryTableViewCell", bundle: nil)
+        tblviewOrderSummary.register(nib2AddNewAddress, forCellReuseIdentifier: "OrderSummaryCell")
+        tblviewOrderSummary.isScrollEnabled = false
+        
         fnGetCartSubTotal()
         itemCountCheckout.text = String(appdata.intNumItems)
         shippingCheckout.text = "FREE"
@@ -147,15 +156,13 @@ class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableV
                 }
             }
             return cell
+        } else {
+            var cell: OrderSummaryTableViewCell = tblviewOrderSummary.dequeueReusableCell(withIdentifier: "OrderSummaryCell", for: indexPath) as! OrderSummaryTableViewCell
+            cell.lblFinalTotal.text = "$135.34"
+            cell.lblNumItems.text = "Items (4)"
+            cell.lblTax.text = "$5.49"
+            cell.lblSubtotal.text = "125.45"
+            return cell
         }
-        var cell:PaymentInfoTableViewCell! = tblviewPaymentInfo.dequeueReusableCell(withIdentifier: "PaymentInfoCell", for:indexPath)as! PaymentInfoTableViewCell
-        // This function actually loads the xib
-        if cell == nil{
-            let cellnib = Bundle.main.loadNibNamed("PaymentInfoCell", owner:self, options: nil)?.first as! PaymentInfoTableViewCell
-            cell = cellnib
-        }
-        cell.lblTitle.text = "Title"
-        cell.lblSubtitle.text = "Subtitle"
-        return cell
     }
 }

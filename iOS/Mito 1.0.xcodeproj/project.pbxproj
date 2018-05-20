@@ -87,6 +87,8 @@
 		DA28344C20B10AE90084571D /* PaymentInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA28344A20B10AE90084571D /* PaymentInfoTableViewCell.xib */; };
 		DA42CC0A2064909900900C7D /* LineItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42CC092064909900900C7D /* LineItem.swift */; };
 		DA49F1DB2055EF9E0018ABA4 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA49F1DA2055EF9E0018ABA4 /* ProductViewController.swift */; };
+		DA5D339320B203C100085F95 /* OrderSummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5D339120B203C100085F95 /* OrderSummaryTableViewCell.swift */; };
+		DA5D339420B203C100085F95 /* OrderSummaryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA5D339220B203C100085F95 /* OrderSummaryTableViewCell.xib */; };
 		DA5D683E2058A45F00E86BE8 /* ProductDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA5D683C2058A45F00E86BE8 /* ProductDetails.storyboard */; };
 		DA61587D20A200CD00285112 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA61587C20A200CD00285112 /* Notification.swift */; };
 		DA625E8B2088FEC30068F319 /* PackageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA625E8A2088FEC30068F319 /* PackageTableViewCell.swift */; };
@@ -216,6 +218,8 @@
 		DA28344A20B10AE90084571D /* PaymentInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentInfoTableViewCell.xib; sourceTree = "<group>"; };
 		DA42CC092064909900900C7D /* LineItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineItem.swift; sourceTree = "<group>"; };
 		DA49F1DA2055EF9E0018ABA4 /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
+		DA5D339120B203C100085F95 /* OrderSummaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderSummaryTableViewCell.swift; sourceTree = "<group>"; };
+		DA5D339220B203C100085F95 /* OrderSummaryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderSummaryTableViewCell.xib; sourceTree = "<group>"; };
 		DA5D683D2058A45F00E86BE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Mito 1.0/Base.lproj/ProductDetails.storyboard"; sourceTree = "<group>"; };
 		DA61587C20A200CD00285112 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		DA625E8A2088FEC30068F319 /* PackageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageTableViewCell.swift; sourceTree = "<group>"; };
@@ -412,6 +416,8 @@
 				DA23437720AE4A9D003E4D6A /* ChooseFriendViewController.swift */,
 				DA69F65E20B0DE9C0071F9F2 /* PackageDetailsViewController.swift */,
 				DA23437920AE4E62003E4D6A /* WriteMessageViewController.swift */,
+				DA5D339120B203C100085F95 /* OrderSummaryTableViewCell.swift */,
+				DA5D339220B203C100085F95 /* OrderSummaryTableViewCell.xib */,
 				DA23437B20AE5200003E4D6A /* ChoosePaymentViewController.swift */,
 				DA23437D20AE53BE003E4D6A /* ChooseAddressViewController.swift */,
 				DA23437F20AE569F003E4D6A /* ReviewOrderViewController.swift */,
@@ -575,6 +581,7 @@
 				B24719862046245E006CF6C2 /* Lock SG.png in Resources */,
 				B25490092058AE92000123D0 /* Login.storyboard in Resources */,
 				B24719822046245E006CF6C2 /* Card SG.png in Resources */,
+				DA5D339420B203C100085F95 /* OrderSummaryTableViewCell.xib in Resources */,
 				B261913C206C5E5E004597F0 /* Roboto-Black.ttf in Resources */,
 				B2619146206C5E5E004597F0 /* Roboto-Thin.ttf in Resources */,
 				B272D9092077646A00E53276 /* mitowhiteonly.png in Resources */,
@@ -719,6 +726,7 @@
 				DACCDE29206057C500CD59D9 /* State.swift in Sources */,
 				DA23437A20AE4E62003E4D6A /* WriteMessageViewController.swift in Sources */,
 				DAC178BC2088240F0039AA08 /* Address.swift in Sources */,
+				DA5D339320B203C100085F95 /* OrderSummaryTableViewCell.swift in Sources */,
 				DA27C21E204371CE00CCFD60 /* ProductDetailsViewController.swift in Sources */,
 				DA23437E20AE53BE003E4D6A /* ChooseAddressViewController.swift in Sources */,
 				B298CB052084722500EED243 /* RoundedImage.swift in Sources */,

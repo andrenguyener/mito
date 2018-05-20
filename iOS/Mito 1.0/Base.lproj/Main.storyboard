@@ -1147,8 +1147,8 @@
                                                             </label>
                                                         </subviews>
                                                     </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="tT6-tx-DL3" userLabel="Payment Info">
-                                                        <rect key="frame" x="0.0" y="231.5" width="374" height="345"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="tT6-tx-DL3" userLabel="Payment Info">
+                                                        <rect key="frame" x="0.0" y="231.5" width="374" height="325"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i7J-ka-rsd">
                                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="23.5"/>
@@ -1173,11 +1173,11 @@
                                                                     </label>
                                                                 </subviews>
                                                             </stackView>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ixv-gO-vhP">
-                                                                <rect key="frame" x="0.0" y="33.5" width="374" height="311.5"/>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ixv-gO-vhP">
+                                                                <rect key="frame" x="0.0" y="33.5" width="374" height="291.5"/>
                                                                 <subviews>
-                                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qBh-Fy-G89">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="311.5"/>
+                                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qBh-Fy-G89">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="291.5"/>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <prototypes>
                                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PaymentInfoCell" id="fpj-YB-4y0" customClass="PaymentInfoTableViewCell" customModule="Mito_1_0" customModuleProvider="target">
@@ -1222,12 +1222,34 @@
                                                             </mask>
                                                         </variation>
                                                     </stackView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order Summary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="vRM-DE-oGq">
-                                                        <rect key="frame" x="0.0" y="596.5" width="374" height="23.5"/>
-                                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="hco-pU-voT" userLabel="Order Summary">
+                                                        <rect key="frame" x="0.0" y="576.5" width="374" height="43.5"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Order Summary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="vRM-DE-oGq">
+                                                                <rect key="frame" x="0.0" y="0.0" width="139.5" height="23.5"/>
+                                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yPg-V2-0s2">
+                                                                <rect key="frame" x="0.0" y="23.5" width="374" height="20"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <prototypes>
+                                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="jJD-p3-LzW">
+                                                                        <rect key="frame" x="0.0" y="28" width="374" height="44"/>
+                                                                        <autoresizingMask key="autoresizingMask"/>
+                                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jJD-p3-LzW" id="GjG-r8-G5h">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                                                            <autoresizingMask key="autoresizingMask"/>
+                                                                        </tableViewCellContentView>
+                                                                    </tableViewCell>
+                                                                </prototypes>
+                                                            </tableView>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="yPg-V2-0s2" secondAttribute="trailing" id="fhB-yy-xax"/>
+                                                        </constraints>
+                                                    </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mpd-qO-3kD" userLabel="Order Summary View">
                                                         <rect key="frame" x="0.0" y="430" width="374" height="180"/>
                                                         <subviews>
@@ -1321,12 +1343,14 @@
                                                     </button>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="vRM-DE-oGq" firstAttribute="width" secondItem="eXo-ha-miu" secondAttribute="width" id="0uT-tr-XTx"/>
                                                     <constraint firstItem="Mpd-qO-3kD" firstAttribute="width" secondItem="eXo-ha-miu" secondAttribute="width" id="898-XN-dGc"/>
                                                     <constraint firstItem="tT6-tx-DL3" firstAttribute="width" secondItem="eXo-ha-miu" secondAttribute="width" id="EXh-QK-CND"/>
+                                                    <constraint firstItem="3hM-Pw-Xol" firstAttribute="width" secondItem="eXo-ha-miu" secondAttribute="width" id="Gec-Ch-h0V"/>
                                                     <constraint firstAttribute="trailing" secondItem="eXo-ha-miu" secondAttribute="trailing" constant="20" id="Lj4-w5-yb9"/>
+                                                    <constraint firstItem="tT6-tx-DL3" firstAttribute="width" secondItem="eXo-ha-miu" secondAttribute="width" id="S7j-4F-a8F"/>
                                                     <constraint firstItem="fwy-On-ZXO" firstAttribute="width" secondItem="eXo-ha-miu" secondAttribute="width" id="hhD-rm-VSW"/>
                                                     <constraint firstItem="eXo-ha-miu" firstAttribute="top" secondItem="km4-bS-xBE" secondAttribute="top" id="o1h-cb-G62"/>
+                                                    <constraint firstItem="hco-pU-voT" firstAttribute="width" secondItem="eXo-ha-miu" secondAttribute="width" id="oZl-TP-oRU"/>
                                                     <constraint firstItem="3hM-Pw-Xol" firstAttribute="width" secondItem="eXo-ha-miu" secondAttribute="width" id="w1V-Jk-Dad"/>
                                                 </constraints>
                                                 <variation key="default">
@@ -1373,6 +1397,7 @@
                         <outlet property="recipientName" destination="Ojb-Ib-qjv" id="gRo-af-8l1"/>
                         <outlet property="shippingCheckout" destination="3oX-Ar-Ngk" id="nF8-lt-f6A"/>
                         <outlet property="taxCheckout" destination="YJ4-uI-3c3" id="XPt-n9-03F"/>
+                        <outlet property="tblviewOrderSummary" destination="yPg-V2-0s2" id="2cD-Mb-n9h"/>
                         <outlet property="tblviewPaymentInfo" destination="qBh-Fy-G89" id="fQ3-oM-NSs"/>
                         <segue destination="qdc-jL-mfw" kind="show" identifier="checkoutFinish" animates="NO" id="VTw-HY-3To"/>
                     </connections>
@@ -2548,7 +2573,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="pBU-pi-a1H"/>
-        <segue reference="2rk-ch-wix"/>
+        <segue reference="kS1-pK-LOk"/>
         <segue reference="39f-jC-Icg"/>
         <segue reference="IOv-WN-4XC"/>
         <segue reference="GdB-Tr-zhu"/>
