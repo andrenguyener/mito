@@ -25,8 +25,9 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
         prodPub.text = appdata.arrProductSearchResults[appdata.intCurrIndex].publisher
         prodPrice.text = appdata.arrProductSearchResults[appdata.intCurrIndex].price
         prodDetail.text = appdata.arrProductSearchResults[appdata.intCurrIndex].description
-        //img.image = UIImage(named: "Andre2.png")
-        // Do any additional setup after loading the view.
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.fnChooseQuantity))
+        lblQuantity.addGestureRecognizer(tapGesture)
     }
 
     
@@ -47,6 +48,16 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     @IBOutlet weak var btnAddToCart: UIButton!
     
     @IBOutlet weak var confirmPicker: UIStackView!
+    
+    @objc func fnChooseQuantity() {
+        if pickerviewQuantity.isHidden {
+            pickerviewQuantity.isHidden = false
+            confirmPicker.isHidden = false
+            btnQuantity.isHidden = true
+            lblQuantity.isHidden = true
+            btnAddToCart.isHidden = true
+        }
+    }
     
     @IBAction func btnQuantityPressed(_ sender: Any) {
         if pickerviewQuantity.isHidden {
@@ -83,7 +94,6 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     }
-    
     
     @IBAction func btnAddToCartPressed(_ sender: Any) {
         let objCurrentProduct = appdata.arrProductSearchResults[appdata.intCurrIndex]
