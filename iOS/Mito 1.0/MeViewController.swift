@@ -409,6 +409,7 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
             let cgImage = fnCropImage(image: image)
             imgProfilePic.image = UIImage(cgImage: cgImage)
             let imageData: Data = UIImageJPEGRepresentation(imgProfilePic.image!, 1)!
+//            let imageData: Data = UIImageJPEGRepresentation(resizeImage(imgProfilePic.image), 0)
             let encodedData = imageData.base64EncodedString()
             print("Data: \(encodedData)")
             print(type(of: encodedData))

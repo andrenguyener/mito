@@ -186,17 +186,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="CC6-PU-fKO">
-                                <rect key="frame" x="20" y="84" width="373" height="229.5"/>
+                                <rect key="frame" x="20" y="84" width="335" height="206"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lyj-rC-s4x">
-                                        <rect key="frame" x="86.5" y="0.0" width="200" height="196"/>
+                                        <rect key="frame" x="67.5" y="0.0" width="200" height="196"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="Yu7-St-PXF"/>
                                             <constraint firstAttribute="height" constant="200" id="e6f-Ga-Uxu"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FName LName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UMC-GB-AVF">
-                                        <rect key="frame" x="0.0" y="206" width="373" height="23.5"/>
+                                        <rect key="frame" x="0.0" y="206" width="335" height="0.0"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -209,7 +209,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xYb-A4-VIe">
-                                <rect key="frame" x="20" y="333.5" width="373" height="90"/>
+                                <rect key="frame" x="20" y="310" width="335" height="90"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2np-NQ-dZH">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="90"/>
@@ -222,7 +222,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CRb-oy-G8s">
-                                        <rect key="frame" x="0.0" y="0.0" width="373" height="90"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="90"/>
                                         <color key="backgroundColor" red="0.2901960784" green="0.85882352939999995" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="90" id="qEP-5e-pzv"/>
@@ -242,7 +242,7 @@
                                 </variation>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Fs1-h8-PX9">
-                                <rect key="frame" x="20" y="548" width="373" height="60"/>
+                                <rect key="frame" x="20" y="548" width="335" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fsv-I5-Xyw">
                                         <rect key="frame" x="0.0" y="0.0" width="202" height="30"/>
