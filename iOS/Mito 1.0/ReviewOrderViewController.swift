@@ -20,8 +20,7 @@ class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var lblCreditCardNumber: UILabel!
     @IBOutlet weak var tblviewPaymentInfo: UITableView!
     @IBOutlet weak var tblviewOrderSummary: UITableView!
-    
-    @IBOutlet weak var btnTest: UIButton!
+    @IBOutlet weak var lblMessage: UILabel!
     
     var appdata = AppData.shared
     
@@ -45,6 +44,8 @@ class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableV
         let nib2AddNewAddress = UINib(nibName: "OrderSummaryTableViewCell", bundle: nil)
         tblviewOrderSummary.register(nib2AddNewAddress, forCellReuseIdentifier: "OrderSummaryCell")
         tblviewOrderSummary.isScrollEnabled = false
+        
+        lblMessage.text = appdata.strOrderMessage
         
         fnGetCartSubTotal()
         itemCountCheckout.text = String(appdata.intNumItems)
@@ -128,9 +129,11 @@ class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if tableView == tblviewPaymentInfo {
+        if tableView == tblviewPaymentInfo {
             return 2
-//        }
+        } else {
+            return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -144,24 +147,33 @@ class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableV
             } else {
                 cell.lblSubtitle.text = "Same as shipping address"
             }
-            if cell == nil {
-                let cellnib = Bundle.main.loadNibNamed("PaymentInfoCell", owner:self, options: nil)?.first as! PaymentInfoTableViewCell
-                cell = cellnib
-                cell.lblTitle.text = appdata.arrPaymentInfoTitles[indexPath.row]
-                let last4 = String(appdata.strCardNumber.suffix(4))
-                if indexPath.row == 0 {
-                    cell.lblSubtitle.text = "Visa ending in \(last4)"
-                } else {
-                    cell.lblSubtitle.text = "Same as shipping address"
-                }
-            }
+//            if cell == nil {
+//                let cellnib = Bundle.main.loadNibNamed("PaymentInfoCell", owner:self, options: nil)?.first as! PaymentInfoTableViewCell
+//                cell = cellnib
+//                cell.lblTitle.text = appdata.arrPaymentInfoTitles[indexPath.row]
+//                let last4 = String(appdata.strCardNumber.suffix(4))
+//                if indexPath.row == 0 {
+//                    cell.lblSubtitle.text = "Visa ending in \(last4)"
+//                } else {
+//                    cell.lblSubtitle.text = "Same as shipping address"
+//                }
+//            }
             return cell
         } else {
             var cell: OrderSummaryTableViewCell = tblviewOrderSummary.dequeueReusableCell(withIdentifier: "OrderSummaryCell", for: indexPath) as! OrderSummaryTableViewCell
-            cell.lblFinalTotal.text = "$135.34"
-            cell.lblNumItems.text = "Items (4)"
-            cell.lblTax.text = "$5.49"
-            cell.lblSubtotal.text = "125.45"
+            cell.lblNumItems.text = "Items (\(String(appdata.intNumItems))"
+            let tax: Decimal = appdata.priceSum * 0.12
+            
+            // rounds double with 2 digits precision
+            let tempTax = Double(truncating: tax as NSNumber)
+            let temp2 = Double(round(100 * tempTax)/100)
+            
+            let tempTotal = Double(truncating: (appdata.priceSum + tax) as NSNumber)
+            let temp2Total = Double(round(100 * tempTotal)/100)
+            
+            cell.lblTax.text = "$\(String(describing: temp2))"
+            cell.lblSubtotal.text = "$\(String(describing: appdata.priceSum))"
+            cell.lblFinalTotal.text = "$\(String(describing: temp2Total))"
             return cell
         }
     }
