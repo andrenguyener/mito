@@ -27,10 +27,9 @@ class PeopleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
         loadPersonData()
         tblviewFeed.delegate = self
         tblviewFeed.dataSource = self
-//        let nib = UINib(nibName: "HomeTableViewCell", bundle: nil)
-//        tblviewFeed.register(nib, forCellReuseIdentifier: "homeCell")
-//        self.tblviewFeed.registerNib(nib, forCellWithReuseIdentifier: "homeCell")
-//        tblviewFeed.register(HomeTableViewCell.self, forCellReuseIdentifier: "homeCell")
+        tblviewFeed.rowHeight = 106
+        let nibAddNewAddress = UINib(nibName: "FeedCopyTableViewCell", bundle: nil)
+        tblviewFeed.register(nibAddNewAddress, forCellReuseIdentifier: "FeedCopyCell")
     }
     
     func loadPersonData() {
@@ -132,18 +131,18 @@ class PeopleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "homeCell", for: indexPath) as! HomeTableViewCell
-        let cell = Bundle.main.loadNibNamed("HomeTableViewCell", owner: self, options: nil)?.first as! HomeTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCopyCell", for: indexPath) as! FeedCopyTableViewCell
+//        let cell = Bundle.main.loadNibNamed("HomeTableViewCell", owner: self, options: nil)?.first as! HomeTableViewCell
         let feedItemObj = appdata.arrMitoProfileFeedItems[indexPath.row]
-        Alamofire.request(feedItemObj.photoSenderUrl).responseImage(completionHandler: { (response) in
-            print(response)
-            if let image = response.result.value {
-                let circularImage = image.af_imageRoundedIntoCircle()
-                DispatchQueue.main.async {
-                    cell.img.image = circularImage
-                }
-            }
-        })
+//        Alamofire.request(feedItemObj.photoSenderUrl).responseImage(completionHandler: { (response) in
+//            print(response)
+//            if let image = response.result.value {
+//                let circularImage = image.af_imageRoundedIntoCircle()
+//                DispatchQueue.main.async {
+//                    cell.img.image = circularImage
+//                }
+//            }
+//        })
         var strSender = "\(feedItemObj.strSenderFName) \(feedItemObj.strSenderLName)"
         var strRecipient = "\(feedItemObj.strRecipientFName) \(feedItemObj.strRecipientLName)"
         if feedItemObj.intSenderId == appdata.intCurrentUserID {
@@ -152,10 +151,11 @@ class PeopleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
         if feedItemObj.intRecipientId == appdata.intCurrentUserID {
             strRecipient = "You"
         }
-        cell.whatHappened.text = "\(strSender) sent \(strRecipient)"
-        cell.time.text = "\(appdata.fnUTCToLocal(date: feedItemObj.strDate))"
-        cell.descr.text = "\(feedItemObj.strMessage)"
-        cell.whatHappened.numberOfLines = 2
+        appdata.fnDisplayImage(strImageURL: feedItemObj.photoSenderUrl, img: cell.imgProfile, boolCircle: true)
+        cell.strWho.text = "\(strSender) sent \(strRecipient)"
+        cell.strDate.text = "\(appdata.fnUTCToLocal(date: feedItemObj.strDate))"
+        cell.strDescr.text = "\(feedItemObj.strMessage)"
+        cell.strDescr.numberOfLines = 2
         return cell
     }
     

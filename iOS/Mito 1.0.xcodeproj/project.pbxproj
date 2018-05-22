@@ -92,6 +92,8 @@
 		DA5D683E2058A45F00E86BE8 /* ProductDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA5D683C2058A45F00E86BE8 /* ProductDetails.storyboard */; };
 		DA61587D20A200CD00285112 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA61587C20A200CD00285112 /* Notification.swift */; };
 		DA625E8B2088FEC30068F319 /* PackageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA625E8A2088FEC30068F319 /* PackageTableViewCell.swift */; };
+		DA64056420B3F400008DEEDC /* FeedCopyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA64056220B3F400008DEEDC /* FeedCopyTableViewCell.swift */; };
+		DA64056520B3F400008DEEDC /* FeedCopyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA64056320B3F400008DEEDC /* FeedCopyTableViewCell.xib */; };
 		DA69F65F20B0DE9C0071F9F2 /* PackageDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA69F65E20B0DE9C0071F9F2 /* PackageDetailsViewController.swift */; };
 		DA6CB7F22064E9B700962814 /* Back.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6CB7F12064E9B700962814 /* Back.png */; };
 		DA6D6D12209E1B5300D74666 /* Mito Green Background.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6D6D11209E1B5000D74666 /* Mito Green Background.png */; };
@@ -223,6 +225,8 @@
 		DA5D683D2058A45F00E86BE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Mito 1.0/Base.lproj/ProductDetails.storyboard"; sourceTree = "<group>"; };
 		DA61587C20A200CD00285112 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		DA625E8A2088FEC30068F319 /* PackageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageTableViewCell.swift; sourceTree = "<group>"; };
+		DA64056220B3F400008DEEDC /* FeedCopyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCopyTableViewCell.swift; sourceTree = "<group>"; };
+		DA64056320B3F400008DEEDC /* FeedCopyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedCopyTableViewCell.xib; sourceTree = "<group>"; };
 		DA69F65E20B0DE9C0071F9F2 /* PackageDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageDetailsViewController.swift; sourceTree = "<group>"; };
 		DA6CB7F12064E9B700962814 /* Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Back.png; sourceTree = "<group>"; };
 		DA6D6D11209E1B5000D74666 /* Mito Green Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mito Green Background.png"; sourceTree = "<group>"; };
@@ -424,6 +428,8 @@
 				DA80593F20AF2F1F004B33B8 /* HomeTableViewCell.xib */,
 				DA28344520B0EB970084571D /* AddAddressTableViewCell.swift */,
 				DA28344620B0EB970084571D /* AddAddressTableViewCell.xib */,
+				DA64056220B3F400008DEEDC /* FeedCopyTableViewCell.swift */,
+				DA64056320B3F400008DEEDC /* FeedCopyTableViewCell.xib */,
 				DA28344920B10AE90084571D /* PaymentInfoTableViewCell.swift */,
 				DA28344A20B10AE90084571D /* PaymentInfoTableViewCell.xib */,
 			);
@@ -569,6 +575,7 @@
 			files = (
 				B29AEC6C203FC9C100110EF9 /* LaunchScreen.storyboard in Resources */,
 				B272D9062077646A00E53276 /* mitowhitesvg.svg in Resources */,
+				DA64056520B3F400008DEEDC /* FeedCopyTableViewCell.xib in Resources */,
 				B2619140206C5E5E004597F0 /* Roboto-Italic.ttf in Resources */,
 				B247198D204626ED006CF6C2 /* Cart Solid White Icon.png in Resources */,
 				DA6CB7F22064E9B700962814 /* Back.png in Resources */,
@@ -740,6 +747,7 @@
 				DA625E8B2088FEC30068F319 /* PackageTableViewCell.swift in Sources */,
 				B272DC2620439E2200EE2121 /* Product.swift in Sources */,
 				DA27C21C204356B400CCFD60 /* FeedItem.swift in Sources */,
+				DA64056420B3F400008DEEDC /* FeedCopyTableViewCell.swift in Sources */,
 				DA69F65F20B0DE9C0071F9F2 /* PackageDetailsViewController.swift in Sources */,
 				DACCDE2B2060617000CD59D9 /* Month.swift in Sources */,
 				B277629520883DE40071C672 /* CheckoutSelectUserViewController.swift in Sources */,
