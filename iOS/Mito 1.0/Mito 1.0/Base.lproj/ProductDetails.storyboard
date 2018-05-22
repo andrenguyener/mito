@@ -90,7 +90,7 @@
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <state key="normal" title="Quantity: "/>
+                                                                <state key="normal" title="Quantity: 1"/>
                                                                 <connections>
                                                                     <action selector="btnQty:" destination="bBe-HJ-G2Q" eventType="touchUpInside" id="PT8-YY-nGk"/>
                                                                     <action selector="btnQuantityPressed:" destination="iOa-rf-R6J" eventType="touchUpInside" id="z1t-8B-CBQ"/>

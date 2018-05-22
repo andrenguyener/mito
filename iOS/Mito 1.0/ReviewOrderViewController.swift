@@ -136,6 +136,10 @@ class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Order Summary"
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == tblviewPaymentInfo {
             var cell:PaymentInfoTableViewCell! = tblviewPaymentInfo.dequeueReusableCell(withIdentifier: "PaymentInfoCell", for:indexPath)as! PaymentInfoTableViewCell

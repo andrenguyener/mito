@@ -84,7 +84,6 @@ class ChooseFriendViewController: UIViewController, UITableViewDelegate, UITable
         })
         cell.name.text = "\(objPerson.firstName) \(objPerson.lastName)"
         cell.handle.text = "\(objPerson.email)"
-        cell.friendshipType.text = "\(objPerson.avatar)"
         return cell
     }
 
