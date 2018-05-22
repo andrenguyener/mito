@@ -58,8 +58,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = 133
-//        let nib = UINib(nibName: "HomeTableViewCell", bundle: nil)
-//        tableView.register(nib, forCellReuseIdentifier: "homeCell")
+        let nib = UINib(nibName: "FeedCopyTableViewCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "FeedCopyCell")
         
         fnLoadCurrUserAddresses()
 //        greenTopView.backgroundColor = UIColor(rgb: 41DD7C)
@@ -113,14 +113,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //        let cell = Bundle.main.loadNibNamed("HomeTableViewCell", owner: self, options: nil)?.first as! HomeTableViewCell
-        let cell = tableView.dequeueReusableCell(withIdentifier: "homeCell", for: indexPath) as! HomeTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCopyCell", for: indexPath) as! FeedCopyTableViewCell
         var feedItemObj = FeedItem(strDate: "", photoSenderUrl: "", strMessage: "", strRecipientFName: "", strRecipientLName: "", strSenderFName: "", strSenderLName: "", intRecipientId: 0, intSenderId: 0)
         if segmentChooser.selectedSegmentIndex == 0 {
             feedItemObj = appdata.arrFriendsFeedItems[indexPath.row]
         } else {
             feedItemObj = appdata.arrMyFeedItems[indexPath.row]
         }
-        appdata.fnDisplayImage(strImageURL: feedItemObj.photoSenderUrl, img: cell.img, boolCircle: true)
+        appdata.fnDisplayImage(strImageURL: feedItemObj.photoSenderUrl, img: cell.imgProfile, boolCircle: true)
         var strSender = "\(feedItemObj.strSenderFName) \(feedItemObj.strSenderLName)"
         var strRecipient = "\(feedItemObj.strRecipientFName) \(feedItemObj.strRecipientLName)"
         if feedItemObj.intSenderId == appdata.intCurrentUserID {
@@ -129,10 +129,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         if feedItemObj.intRecipientId == appdata.intCurrentUserID {
             strRecipient = "You"
         }
-        cell.whatHappened.text = "\(strSender) sent \(strRecipient)"
-        cell.time.text = "\(appdata.fnUTCToLocal(date: feedItemObj.strDate))"
-        cell.descr.text = "\(feedItemObj.strMessage)"
-        cell.whatHappened.numberOfLines = 2
+        cell.strWho.text = "\(strSender) sent \(strRecipient)"
+        cell.strDate.text = "\(appdata.fnUTCToLocal(date: feedItemObj.strDate))"
+        cell.strDescr.text = "\(feedItemObj.strMessage)"
+        cell.strDescr.numberOfLines = 2
         return cell
     }
 
