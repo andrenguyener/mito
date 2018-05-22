@@ -155,13 +155,13 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Ivm-bR-xpO" userLabel="Picker Stack">
-                                <rect key="frame" x="27" y="504" width="320" height="246"/>
+                                <rect key="frame" x="27" y="750" width="320" height="0.0"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="Ko7-eU-qR3">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
+                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="Ko7-eU-qR3">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vv9-Ls-mBV">
-                                                <rect key="frame" x="0.0" y="0.0" width="110" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="110" height="0.0"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Cancel"/>
                                                 <connections>
@@ -169,7 +169,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uzr-Te-UnF">
-                                                <rect key="frame" x="210" y="0.0" width="110" height="30"/>
+                                                <rect key="frame" x="210" y="0.0" width="110" height="0.0"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Done"/>
                                                 <connections>
@@ -179,8 +179,8 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </stackView>
-                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hhQ-PI-9uG">
-                                        <rect key="frame" x="0.0" y="30" width="320" height="216"/>
+                                    <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hhQ-PI-9uG">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
                                         <color key="backgroundColor" red="0.83444553610000005" green="0.838506639" blue="0.85902613400000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </pickerView>
                                 </subviews>
@@ -214,7 +214,7 @@
                     <connections>
                         <outlet property="btnAddToCart" destination="vrN-o3-owS" id="APR-78-7wU"/>
                         <outlet property="btnQuantity" destination="3Ek-bs-E18" id="CCB-RW-PhA"/>
-                        <outlet property="confirmPicker" destination="Ko7-eU-qR3" id="h1x-Vt-KIV"/>
+                        <outlet property="confirmPicker" destination="Ko7-eU-qR3" id="8De-UR-2MU"/>
                         <outlet property="lblQuantity" destination="5jK-jt-lJx" id="Nba-8p-AN9"/>
                         <outlet property="pickerviewQuantity" destination="hhQ-PI-9uG" id="j0g-d5-P35"/>
                         <outlet property="prodDetail" destination="pTd-Il-3Ti" id="9xp-Mx-A3k"/>

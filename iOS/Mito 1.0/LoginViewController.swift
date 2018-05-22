@@ -72,12 +72,14 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var btnNext: UIButton!
     @IBOutlet weak var confirmPicker: UIStackView!
     @IBOutlet weak var confirmStatePicker: UIStackView!
+    @IBOutlet weak var viewCancelDone: UIView!
     
     var appdata = AppData.shared
     
     @IBAction func btnBirthdayPressed(_ sender: Any) {
         if monthPicker.isHidden == true {
             monthPicker.isHidden = false
+            viewCancelDone.isHidden = false
             confirmPicker.isHidden = false
             btnNext.isHidden = true
         }
@@ -88,6 +90,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     @IBAction func btnSelectBirthdayDone(_ sender: Any) {
         monthPicker.isHidden = true
+        viewCancelDone.isHidden = true
         confirmPicker.isHidden = true
         btnNext.isHidden = false
         strMonth = String(appdata.arrMonths[monthPicker.selectedRow(inComponent: 0)].intNum)
@@ -96,6 +99,14 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         strUserDOB = "\(strMonth)/\(strDay)/\(strYear)"
         btnMonth.setTitle(strUserDOB, for: .normal)
     }
+    
+    @IBAction func btnCancelBirthday(_ sender: Any) {
+        monthPicker.isHidden = true
+        viewCancelDone.isHidden = true
+        confirmPicker.isHidden = true
+        btnNext.isHidden = false
+    }
+    
     
     @IBAction func btnSelectStateDone(_ sender: Any) {
         pickerviewStateAA.isHidden = true
@@ -504,7 +515,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @objc func keyboardWillShow(sender: NSNotification) {
        // let keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).CGRectValue()
     }
-    
 }
 
 extension UIViewController {
