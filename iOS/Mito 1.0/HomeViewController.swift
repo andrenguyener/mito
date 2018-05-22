@@ -120,14 +120,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else {
             feedItemObj = appdata.arrMyFeedItems[indexPath.row]
         }
-        Alamofire.request(feedItemObj.photoSenderUrl).responseImage(completionHandler: { (response) in
-            if let image = response.result.value {
-                let circularImage = image.af_imageRoundedIntoCircle()
-                DispatchQueue.main.async {
-                    cell.img.image = circularImage
-                }
-            }
-        })
+        appdata.fnDisplayImage(strImageURL: feedItemObj.photoSenderUrl, img: cell.img, boolCircle: true)
         var strSender = "\(feedItemObj.strSenderFName) \(feedItemObj.strSenderLName)"
         var strRecipient = "\(feedItemObj.strRecipientFName) \(feedItemObj.strRecipientLName)"
         if feedItemObj.intSenderId == appdata.intCurrentUserID {

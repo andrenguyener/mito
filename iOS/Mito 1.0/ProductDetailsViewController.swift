@@ -80,6 +80,15 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
         btnAddToCart.isHidden = false
     }
     
+    @IBAction func btnCancel(_ sender: Any) {
+        pickerviewQuantity.isHidden = true
+        confirmPicker.isHidden = true
+        btnQuantity.isHidden = false
+        lblQuantity.isHidden = false
+        btnAddToCart.isHidden = false
+    }
+    
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }

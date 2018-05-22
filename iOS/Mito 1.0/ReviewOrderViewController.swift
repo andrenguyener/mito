@@ -61,11 +61,15 @@ class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableV
         
         taxCheckout.text = "$\(String(describing: temp2))"
         itemTotalCheckout.text = "$\(String(describing: temp2Total))"
-        let imageURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t1.0-9/11822351_10203532431350051_1470782087578284319_n.jpg?oh=5d29573c2435a8b6f293e8dfc75d5215&oe=5B003A10")
-        if let data = try? Data(contentsOf: imageURL!) {
-            imgRecipient.image = UIImage(data: data)
-            imgRecipient.contentMode = .scaleAspectFit
-        }
+        let photoString =  appdata.personRecipient.avatar
+        let decodedImage = Data(base64Encoded: photoString) //Data(base64Encoded: photoString, options: .ignoreUnknownCharacters)
+        let image = UIImage(data: decodedImage!)
+        imgRecipient.image = image
+//        let imageURL = URL(string: "https://scontent.fsea1-1.fna.fbcdn.net/v/t1.0-9/11822351_10203532431350051_1470782087578284319_n.jpg?oh=5d29573c2435a8b6f293e8dfc75d5215&oe=5B003A10")
+//        if let data = try? Data(contentsOf: imageURL!) {
+//            imgRecipient.image = UIImage(data: data)
+//            imgRecipient.contentMode = .scaleAspectFit
+//        }
         recipientName.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
         
         // hide first 8 numbers of card information

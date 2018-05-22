@@ -44,7 +44,6 @@ class AppData: NSObject {
     
     open var arrPaymentInfoTitles: [String] = ["Payment method", "Billing address"]
     
-    
     // AnyObject array
     open var arrNotifications: [Notification] = []
     
@@ -363,16 +362,22 @@ class AppData: NSObject {
 //    }
     
     open func fnDisplayImage(strImageURL: String, img: UIImageView, boolCircle: Bool) {
-        Alamofire.request(strImageURL).responseImage(completionHandler: { (response) in
-            print(response)
-            if var image = response.result.value {
-                if boolCircle {
-                    image = image.af_imageRoundedIntoCircle()
+        if strImageURL.contains("https://") {
+            Alamofire.request(strImageURL).responseImage(completionHandler: { (response) in
+                print(response)
+                if var image = response.result.value {
+                    if boolCircle {
+                        image = image.af_imageRoundedIntoCircle()
+                    }
+                    DispatchQueue.main.async {
+                        img.image = image
+                    }
                 }
-                DispatchQueue.main.async {
-                    img.image = image
-                }
-            }
-        })
+            })
+        } else {
+            let decodedImage = Data(base64Encoded: strImageURL)
+            let image = UIImage(data: decodedImage!)
+            img.image = image
+        }
     }
 }

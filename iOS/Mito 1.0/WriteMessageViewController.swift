@@ -22,10 +22,14 @@ class WriteMessageViewController: UIViewController, UITextViewDelegate {
         appdata.fnDisplayImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipientProfile, boolCircle: true)
         strRecipientName.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
         textviewWriteMessage.text = "What's it for?"
+        let photoString = appdata.personRecipient.avatar
+        let decodedImage = Data(base64Encoded: photoString)
+        let image = UIImage(data: decodedImage!)
+        imgRecipientProfile.image = image
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        if(textView.text.contains("\n")) {
+        if textView.text.contains("\n") {
             textView.resignFirstResponder()
         }
     }
@@ -33,6 +37,10 @@ class WriteMessageViewController: UIViewController, UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == "What's it for?" {
             textView.text = ""
+            textView.textColor = UIColor.black
+        } else if textView.text == "" {
+            textView.text = "What's it for?"
+            textView.textColor = UIColor.gray
         } else {
             textView.becomeFirstResponder()
         }
@@ -41,6 +49,7 @@ class WriteMessageViewController: UIViewController, UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text == "" {
             textView.text = "What's it for?"
+            textView.textColor = UIColor.gray
         } else {
             textView.resignFirstResponder()
         }

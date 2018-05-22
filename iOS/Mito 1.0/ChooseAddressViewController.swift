@@ -128,6 +128,7 @@ class ChooseAddressViewController: UIViewController, UITableViewDataSource, UITa
                 fnAcceptOrDeclinePackage(response: "Accepted", senderId: appdata.currPackage.intSenderID, orderId: appdata.currPackage.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[indexPath.row].intAddressID!)
             }
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func fnAcceptOrDeclinePackage(response: String, senderId: Int, orderId: Int, shippingAddressId: Int) {

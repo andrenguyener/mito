@@ -56,7 +56,9 @@ class ChooseFriendViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         appdata.personRecipient = appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
+        tableView.deselectRow(at: indexPath, animated: true)
         self.performSegue(withIdentifier: "segChooseFriendToWriteMessage", sender: self)
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -74,16 +76,21 @@ class ChooseFriendViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
         let objPerson = self.appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
-        Alamofire.request(objPerson.avatar).responseImage(completionHandler: { (response) in
-            if let image = response.result.value {
-                let circularImage = image.af_imageRoundedIntoCircle()
-                DispatchQueue.main.async {
-                    cell.img.image = circularImage
-                }
-            }
-        })
+        let photoString = objPerson.avatar
+        let decodedImage = Data(base64Encoded: photoString) //Data(base64Encoded: photoString, options: .ignoreUnknownCharacters)
+        let image = UIImage(data: decodedImage!)
+        cell.img.image = image
+//        Alamofire.request(objPerson.avatar).responseImage(completionHandler: { (response) in
+//            if let image = response.result.value {
+//                print(response.result.value)
+//                let circularImage = image.af_imageRoundedIntoCircle()
+//                DispatchQueue.main.async {
+//                    cell.img.image = image
+//                }
+//            }
+//        })
         cell.name.text = "\(objPerson.firstName) \(objPerson.lastName)"
-        cell.handle.text = "\(objPerson.email)"
+        cell.handle.text = "@\(objPerson.strUsername)"
         return cell
     }
 
