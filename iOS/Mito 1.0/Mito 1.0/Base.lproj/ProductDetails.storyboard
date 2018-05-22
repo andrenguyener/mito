@@ -27,7 +27,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6L6-5b-gmN">
-                                <rect key="frame" x="0.0" y="20" width="375" height="671"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="669"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1yK-pd-ga6" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="730"/>
@@ -44,7 +44,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Publisher" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yoe-L6-xNv">
                                                 <rect key="frame" x="20" y="50" width="335" height="13"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="335" id="tiJ-Sq-AhJ"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="335" id="tiJ-Sq-AhJ"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="11"/>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -147,7 +147,7 @@
                                 </constraints>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vrN-o3-owS" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
-                                <rect key="frame" x="20" y="696" width="335" height="36"/>
+                                <rect key="frame" x="20" y="694" width="335" height="36"/>
                                 <color key="backgroundColor" red="0.25490196079999999" green="0.86666666670000003" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                 <state key="normal" title="Add to Cart">
@@ -204,7 +204,7 @@
                             <constraint firstItem="6L6-5b-gmN" firstAttribute="trailing" secondItem="BCW-qz-l9J" secondAttribute="trailing" id="Lrs-FF-BFN"/>
                             <constraint firstItem="6L6-5b-gmN" firstAttribute="leading" secondItem="BCW-qz-l9J" secondAttribute="leading" id="Nq7-XY-Xr0"/>
                             <constraint firstItem="vrN-o3-owS" firstAttribute="leading" secondItem="BCW-qz-l9J" secondAttribute="leading" constant="20" id="Vkl-tM-eYy"/>
-                            <constraint firstItem="vrN-o3-owS" firstAttribute="bottom" secondItem="BCW-qz-l9J" secondAttribute="bottom" constant="-18" id="WON-q2-XhP"/>
+                            <constraint firstItem="vrN-o3-owS" firstAttribute="bottom" secondItem="BCW-qz-l9J" secondAttribute="bottom" constant="-20" id="WON-q2-XhP"/>
                             <constraint firstItem="6L6-5b-gmN" firstAttribute="top" secondItem="BCW-qz-l9J" secondAttribute="top" id="aTG-Pn-lye"/>
                             <constraint firstItem="vrN-o3-owS" firstAttribute="trailing" secondItem="BCW-qz-l9J" secondAttribute="trailing" constant="-20" id="dqt-t2-HD7"/>
                             <constraint firstItem="vrN-o3-owS" firstAttribute="top" secondItem="6L6-5b-gmN" secondAttribute="bottom" constant="5" id="fgf-h4-1Sc"/>
