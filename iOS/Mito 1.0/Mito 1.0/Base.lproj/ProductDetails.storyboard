@@ -35,7 +35,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H3a-LP-2zx">
                                                 <rect key="frame" x="20" y="20" width="335" height="20"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="335" id="SgO-wa-mMZ"/>
+                                                    <constraint firstAttribute="width" constant="335" id="SgO-wa-mMZ"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                 <nil key="textColor"/>
@@ -44,7 +44,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Publisher" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yoe-L6-xNv">
                                                 <rect key="frame" x="20" y="50" width="335" height="13"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="335" id="tiJ-Sq-AhJ"/>
+                                                    <constraint firstAttribute="width" constant="335" id="tiJ-Sq-AhJ"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="11"/>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -113,15 +113,18 @@
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="GI8-0O-WGK" secondAttribute="trailing" id="7Bc-Ix-LpT"/>
                                                     <constraint firstAttribute="trailing" secondItem="AMD-hj-WHc" secondAttribute="trailing" id="7je-V3-dt7"/>
+                                                    <constraint firstItem="AMD-hj-WHc" firstAttribute="leading" secondItem="vUt-xN-Ool" secondAttribute="leading" id="Mne-nD-iqb"/>
                                                     <constraint firstAttribute="trailing" secondItem="pTd-Il-3Ti" secondAttribute="trailing" id="P1u-iP-Zya"/>
                                                     <constraint firstAttribute="trailing" secondItem="DPq-Fd-8Bo" secondAttribute="trailing" id="WMq-70-HZ5"/>
+                                                    <constraint firstItem="GI8-0O-WGK" firstAttribute="leading" secondItem="vUt-xN-Ool" secondAttribute="leading" id="ZBg-fR-a01"/>
+                                                    <constraint firstItem="DPq-Fd-8Bo" firstAttribute="leading" secondItem="vUt-xN-Ool" secondAttribute="leading" id="e90-d8-m7K"/>
+                                                    <constraint firstItem="pTd-Il-3Ti" firstAttribute="leading" secondItem="vUt-xN-Ool" secondAttribute="leading" id="rEQ-85-pdL"/>
                                                 </constraints>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="H3a-LP-2zx" secondAttribute="trailing" constant="20" id="22f-Mb-ztM"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yoe-L6-xNv" secondAttribute="trailing" id="6It-Ab-xPd"/>
                                             <constraint firstAttribute="trailing" secondItem="vUt-xN-Ool" secondAttribute="trailing" constant="20" id="8eq-49-qSY"/>
                                             <constraint firstItem="GTz-CR-asI" firstAttribute="centerX" secondItem="1yK-pd-ga6" secondAttribute="centerX" id="9xN-Ql-Be7"/>
                                             <constraint firstItem="vUt-xN-Ool" firstAttribute="top" secondItem="GTz-CR-asI" secondAttribute="bottom" constant="20" id="IpF-K9-YoQ"/>
@@ -137,10 +140,10 @@
                                     </view>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="1yK-pd-ga6" secondAttribute="trailing" id="ES5-HP-kMp"/>
                                     <constraint firstAttribute="bottom" secondItem="1yK-pd-ga6" secondAttribute="bottom" id="Zko-vx-JjE"/>
                                     <constraint firstItem="1yK-pd-ga6" firstAttribute="top" secondItem="6L6-5b-gmN" secondAttribute="top" id="dci-A1-8uC"/>
                                     <constraint firstItem="1yK-pd-ga6" firstAttribute="leading" secondItem="6L6-5b-gmN" secondAttribute="leading" id="gS6-nD-rvH"/>
-                                    <constraint firstAttribute="trailing" secondItem="1yK-pd-ga6" secondAttribute="trailing" id="irP-Tz-9sH"/>
                                 </constraints>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vrN-o3-owS" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
