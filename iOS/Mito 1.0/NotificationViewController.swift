@@ -21,7 +21,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
         appdata.arrNotifications.removeAll()
         appdata.arrPendingFriends.removeAll()
         appdata.arrCurrUserPackages.removeAll()
@@ -31,6 +30,13 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         self.fnAddRefreshersNotificationsAndPackages()
         self.fnGetPendingFriendRequests()
         self.fnGetPendingPackages()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Hide the navigation bar on the this view controller
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     func fnAddRefreshersNotificationsAndPackages() {
@@ -190,6 +196,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             appdata.personToView = appdata.arrNotifications[indexPath.row] as! Person
             performSegue(withIdentifier: "CheckFriendRequest", sender: self)
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func fnAcceptOrDeclineFriendRequest(strFriendType: String, intUserID: Int) {

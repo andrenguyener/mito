@@ -342,6 +342,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             appdata.personToView = appdata.arrCurrFriendsAndAllMitoUsers[mySection][myIndex]
             performSegue(withIdentifier: "searchToMitoProfile", sender: self)
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // People tab will always show arrCurrFriendsAndAllMitoUsers

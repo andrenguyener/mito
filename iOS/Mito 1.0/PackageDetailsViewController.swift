@@ -19,6 +19,7 @@ class PackageDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print(intOrderID)
+        self.navigationController?.isNavigationBarHidden = false
         if appdata.arrNotifications[intOrderID] as? Package != nil {
             let package = appdata.arrNotifications[intOrderID] as! Package
             fnRetrieveIncomingOrderDetails(intOrderID: package.intOrderID)

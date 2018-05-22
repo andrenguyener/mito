@@ -103,6 +103,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         return appdata.arrMyFeedItems.count
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 106
     }
