@@ -31,7 +31,7 @@ class CartStore {
                             if (!isNaN(column.value) && column.metadata.colName != 'Quantity') {
                                 column.value = parseFloat(Math.round(column.value * 100) / 100).toFixed(2);
                             }
-                            if (column.metadata.colName == 'ProfileImage') {
+                            if (column.metadata.colName == 'ProfileImage' || column.metadata.colName == 'SenderProfileImage') {
                                 column.value = Buffer.from(column.value).toString('base64');
                             }
                             rowObject[column.metadata.colName] = column.value;

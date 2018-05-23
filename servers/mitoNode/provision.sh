@@ -44,3 +44,5 @@ docker run \
 --network $APP_NETWORK \
 --restart unless-stopped \
 andrenguyener/$MESSAGING_CONTAINER
+
+
