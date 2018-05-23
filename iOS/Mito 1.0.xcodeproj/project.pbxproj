@@ -69,7 +69,7 @@
 		B2F849452043C33F00CBD83A /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F849442043C33F00CBD83A /* MeViewController.swift */; };
 		B2F849472043CAA900CBD83A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F849462043CAA900CBD83A /* SettingsViewController.swift */; };
 		B2F8494F2043D71000CBD83A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F8494E2043D71000CBD83A /* LoginViewController.swift */; };
-		B2FF02E120B54A0500B2D4AD /* Checkout.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2FF02E020B54A0500B2D4AD /* Checkout.storyboard */; };
+		B2FF02E320B5552500B2D4AD /* Checkout.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2FF02E220B5552500B2D4AD /* Checkout.storyboard */; };
 		B2FFA72E20782BE20046CDA2 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FFA72D20782BE20046CDA2 /* WelcomeViewController.swift */; };
 		BF623C7A17D127F65C5BFF46 /* Pods_Mito_1_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B658EBC5F86F98DCB37842 /* Pods_Mito_1_0.framework */; };
 		DA23437820AE4A9D003E4D6A /* ChooseFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA23437720AE4A9D003E4D6A /* ChooseFriendViewController.swift */; };
@@ -204,7 +204,7 @@
 		B2F849442043C33F00CBD83A /* MeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		B2F849462043CAA900CBD83A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B2F8494E2043D71000CBD83A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		B2FF02E020B54A0500B2D4AD /* Checkout.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Checkout.storyboard; sourceTree = "<group>"; };
+		B2FF02E220B5552500B2D4AD /* Checkout.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Checkout.storyboard; sourceTree = "<group>"; };
 		B2FFA72D20782BE20046CDA2 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		DA23437720AE4A9D003E4D6A /* ChooseFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseFriendViewController.swift; sourceTree = "<group>"; };
 		DA23437920AE4E62003E4D6A /* WriteMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteMessageViewController.swift; sourceTree = "<group>"; };
@@ -368,7 +368,7 @@
 				B29AEC68203FC9C100110EF9 /* Assets.xcassets */,
 				B272DC272043BA8700EE2121 /* Icon */,
 				B272D8FE2077646A00E53276 /* Mito Text Design */,
-				B2FF02E020B54A0500B2D4AD /* Checkout.storyboard */,
+				B2FF02E220B5552500B2D4AD /* Checkout.storyboard */,
 				B25490082058AE92000123D0 /* Login.storyboard */,
 				B29AEC65203FC9C100110EF9 /* Main.storyboard */,
 				DA5D683C2058A45F00E86BE8 /* ProductDetails.storyboard */,
@@ -611,7 +611,7 @@
 				DA6D6D12209E1B5300D74666 /* Mito Green Background.png in Resources */,
 				B2619147206C5E5E004597F0 /* Roboto-ThinItalic.ttf in Resources */,
 				B24719802046245E006CF6C2 /* Get Help SG.png in Resources */,
-				B2FF02E120B54A0500B2D4AD /* Checkout.storyboard in Resources */,
+				B2FF02E320B5552500B2D4AD /* Checkout.storyboard in Resources */,
 				B24719882046245E006CF6C2 /* Profile SG.png in Resources */,
 				B2619141206C5E5E004597F0 /* Roboto-Light.ttf in Resources */,
 				B2619143206C5E5E004597F0 /* Roboto-Medium.ttf in Resources */,
