@@ -41,6 +41,7 @@ class AppData: NSObject {
     open var arrMitoProfileFeedItems: [FeedItem] = []
     open var arrFriendsFeedItems: [FeedItem] = []
     open var arrMyFeedItems: [FeedItem] = []
+    open var arrPaymentMethods: [PaymentMethod] = []
     
     open var arrPaymentInfoTitles: [String] = ["Payment method", "Billing address"]
     
@@ -255,6 +256,37 @@ class AppData: NSObject {
                 
             case .failure(let error):
                 print("Get all friends error")
+                print(error)
+            }
+        }
+    }
+    
+    open func fnViewPaymentMethods(tblview: UITableView) {
+        let urlInsertNewAddress = URL(string: "https://api.projectmito.io/v1/payment/")
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlInsertNewAddress!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.data {
+                    let decoder = JSONDecoder()
+                    do {
+                        self.arrPaymentMethods = try decoder.decode([PaymentMethod].self, from: dictionary)
+                    } catch let jsonErr {
+                        print("Failed to decode: \(jsonErr)")
+                    }
+                }
+                DispatchQueue.main.async {
+                    tblview.reloadData()
+                }
+//                if let dictionary = response.result.value {
+//                    print("Successfully got payment methods")
+//                    print(dictionary)
+//                }
+                
+            case .failure(let error):
+                print("Retrieve payment methods error")
                 print(error)
             }
         }

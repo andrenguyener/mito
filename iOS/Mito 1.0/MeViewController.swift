@@ -53,6 +53,87 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
 //            }
 //        }
 //        fnFetchContacts()
+//        fnAddPaymentMethod()
+        fnSetDefaultPaymentMethod()
+    }
+    
+    @IBAction func btnViewPaymentMethods(_ sender: Any) {
+        performSegue(withIdentifier: "segViewPaymentMethods", sender: self)
+    }
+    
+    func fnViewPaymentMethods() {
+        let urlInsertNewAddress = URL(string: "https://api.projectmito.io/v1/payment/")
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlInsertNewAddress!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    print("Successfully got payment methods")
+                    print(dictionary)
+                }
+                
+            case .failure(let error):
+                print("Retrieve payment methods error")
+                print(error)
+            }
+        }
+    }
+    
+    
+    func fnAddPaymentMethod() {
+        let urlInsertNewAddress = URL(string: "https://api.projectmito.io/v1/payment/")
+        let parameters: Parameters = [
+            "cardTypeName": "VISA",
+            "cardNumber": 1234123412341234,
+            "expMonth": 12,
+            "expYear": 2022,
+            "cardCVV": 104
+        ]
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlInsertNewAddress!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    print("Successfully added")
+                    print(dictionary)
+                }
+                
+            case .failure(let error):
+                print("Insert new payment method error")
+                print(error)
+            }
+        }
+    }
+    
+    func fnSetDefaultPaymentMethod() {
+        let urlInsertNewAddress = URL(string: "https://api.projectmito.io/v1/payment/")
+        let parameters: Parameters = [
+            "existingCardId": 8
+        ]
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlInsertNewAddress!, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    print("Successfully set default")
+                    print(dictionary)
+                }
+                
+            case .failure(let error):
+                print("Insert new payment method error")
+                print(error)
+            }
+        }
+    }
+    
+    func fnSetDefaultAddress() {
+        
     }
     
     func fnSearchByASIN(strASIN: String) {

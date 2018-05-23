@@ -86,6 +86,8 @@
 		DA28344820B0EB970084571D /* AddAddressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA28344620B0EB970084571D /* AddAddressTableViewCell.xib */; };
 		DA28344B20B10AE90084571D /* PaymentInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA28344920B10AE90084571D /* PaymentInfoTableViewCell.swift */; };
 		DA28344C20B10AE90084571D /* PaymentInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA28344A20B10AE90084571D /* PaymentInfoTableViewCell.xib */; };
+		DA341FF920B5CF1A00E05B51 /* PaymentMethodsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA341FF820B5CF1A00E05B51 /* PaymentMethodsViewController.swift */; };
+		DA341FFB20B5D07C00E05B51 /* PaymentMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA341FFA20B5D07C00E05B51 /* PaymentMethod.swift */; };
 		DA42CC0A2064909900900C7D /* LineItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42CC092064909900900C7D /* LineItem.swift */; };
 		DA49F1DB2055EF9E0018ABA4 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA49F1DA2055EF9E0018ABA4 /* ProductViewController.swift */; };
 		DA5D339320B203C100085F95 /* OrderSummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5D339120B203C100085F95 /* OrderSummaryTableViewCell.swift */; };
@@ -220,6 +222,8 @@
 		DA28344620B0EB970084571D /* AddAddressTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddAddressTableViewCell.xib; sourceTree = "<group>"; };
 		DA28344920B10AE90084571D /* PaymentInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInfoTableViewCell.swift; sourceTree = "<group>"; };
 		DA28344A20B10AE90084571D /* PaymentInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentInfoTableViewCell.xib; sourceTree = "<group>"; };
+		DA341FF820B5CF1A00E05B51 /* PaymentMethodsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodsViewController.swift; sourceTree = "<group>"; };
+		DA341FFA20B5D07C00E05B51 /* PaymentMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethod.swift; sourceTree = "<group>"; };
 		DA42CC092064909900900C7D /* LineItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineItem.swift; sourceTree = "<group>"; };
 		DA49F1DA2055EF9E0018ABA4 /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
 		DA5D339120B203C100085F95 /* OrderSummaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderSummaryTableViewCell.swift; sourceTree = "<group>"; };
@@ -421,6 +425,8 @@
 				B2548FF72055EA96000123D0 /* sarah.png */,
 				B244B3982069BF7D00B01BBA /* Title.png */,
 				DA23437720AE4A9D003E4D6A /* ChooseFriendViewController.swift */,
+				DA341FFA20B5D07C00E05B51 /* PaymentMethod.swift */,
+				DA341FF820B5CF1A00E05B51 /* PaymentMethodsViewController.swift */,
 				DA69F65E20B0DE9C0071F9F2 /* PackageDetailsViewController.swift */,
 				DA23437920AE4E62003E4D6A /* WriteMessageViewController.swift */,
 				DA5D339120B203C100085F95 /* OrderSummaryTableViewCell.swift */,
@@ -726,6 +732,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA341FF920B5CF1A00E05B51 /* PaymentMethodsViewController.swift in Sources */,
 				B2F8494F2043D71000CBD83A /* LoginViewController.swift in Sources */,
 				DAD995332042389B007A7687 /* Person.swift in Sources */,
 				B29AEC64203FC9C100110EF9 /* PeopleDetailsViewController.swift in Sources */,
@@ -749,6 +756,7 @@
 				B2F849452043C33F00CBD83A /* MeViewController.swift in Sources */,
 				DA28344720B0EB970084571D /* AddAddressTableViewCell.swift in Sources */,
 				DA625E8B2088FEC30068F319 /* PackageTableViewCell.swift in Sources */,
+				DA341FFB20B5D07C00E05B51 /* PaymentMethod.swift in Sources */,
 				B272DC2620439E2200EE2121 /* Product.swift in Sources */,
 				DA27C21C204356B400CCFD60 /* FeedItem.swift in Sources */,
 				DA64056420B3F400008DEEDC /* FeedCopyTableViewCell.swift in Sources */,
