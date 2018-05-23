@@ -15,6 +15,7 @@ class AddNewPaymentMethodViewController: UIViewController {
     @IBOutlet weak var txtFldCardNumber: UITextField!
     @IBOutlet weak var txtFldExp: UITextField!
     @IBOutlet weak var txtFldCVV: UITextField!
+    var appdata = AppData.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +51,7 @@ class AddNewPaymentMethodViewController: UIViewController {
     }
     
     func fnFormatCardNumber() -> Int {
-        return Int(String((txtFldCardNumber.text?.prefix(15))!))!
+        return Int(String((txtFldCardNumber.text?.prefix(16))!))!
     }
     
     func fnFormatCVV() -> Int {
@@ -61,9 +62,9 @@ class AddNewPaymentMethodViewController: UIViewController {
         let urlInsertNewAddress = URL(string: "https://api.projectmito.io/v1/payment/")
         let parameters: Parameters = [
             "cardTypeName": strCardName,
-            "cardNumber": intCardNumber,
+            "cardNumber": String(intCardNumber),
             "expMonth": intExpMonth,
-            "expYear": intExpYear,
+            "expYear": 2000 + intExpYear,
             "cardCVV": intCardCVV
         ]
         let headers: HTTPHeaders = [
@@ -72,9 +73,14 @@ class AddNewPaymentMethodViewController: UIViewController {
         Alamofire.request(urlInsertNewAddress!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success:
-                if let dictionary = response.result.value {
+                if response.result.value != nil {
                     print("Successfully added")
-                    print(dictionary)
+                    self.appdata.strCardNumber = String(intCardNumber)
+//                    self.performSegue(withIdentifier: "segAddCreditCard", sender: self)
+//                    print(dictionary)
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "segBackToPaymentMethods", sender: self)
+                    }
                 }
                 
             case .failure(let error):
