@@ -69,6 +69,7 @@
 		B2F849452043C33F00CBD83A /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F849442043C33F00CBD83A /* MeViewController.swift */; };
 		B2F849472043CAA900CBD83A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F849462043CAA900CBD83A /* SettingsViewController.swift */; };
 		B2F8494F2043D71000CBD83A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F8494E2043D71000CBD83A /* LoginViewController.swift */; };
+		B2FF02E120B54A0500B2D4AD /* Checkout.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2FF02E020B54A0500B2D4AD /* Checkout.storyboard */; };
 		B2FFA72E20782BE20046CDA2 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FFA72D20782BE20046CDA2 /* WelcomeViewController.swift */; };
 		BF623C7A17D127F65C5BFF46 /* Pods_Mito_1_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B658EBC5F86F98DCB37842 /* Pods_Mito_1_0.framework */; };
 		DA23437820AE4A9D003E4D6A /* ChooseFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA23437720AE4A9D003E4D6A /* ChooseFriendViewController.swift */; };
@@ -203,6 +204,7 @@
 		B2F849442043C33F00CBD83A /* MeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		B2F849462043CAA900CBD83A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B2F8494E2043D71000CBD83A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		B2FF02E020B54A0500B2D4AD /* Checkout.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Checkout.storyboard; sourceTree = "<group>"; };
 		B2FFA72D20782BE20046CDA2 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		DA23437720AE4A9D003E4D6A /* ChooseFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseFriendViewController.swift; sourceTree = "<group>"; };
 		DA23437920AE4E62003E4D6A /* WriteMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteMessageViewController.swift; sourceTree = "<group>"; };
@@ -366,6 +368,11 @@
 				B29AEC68203FC9C100110EF9 /* Assets.xcassets */,
 				B272DC272043BA8700EE2121 /* Icon */,
 				B272D8FE2077646A00E53276 /* Mito Text Design */,
+				B2FF02E020B54A0500B2D4AD /* Checkout.storyboard */,
+				B25490082058AE92000123D0 /* Login.storyboard */,
+				B29AEC65203FC9C100110EF9 /* Main.storyboard */,
+				DA5D683C2058A45F00E86BE8 /* ProductDetails.storyboard */,
+				B29AEC6A203FC9C100110EF9 /* LaunchScreen.storyboard */,
 				DAC178BB2088240F0039AA08 /* Address.swift */,
 				DAA9075D209963C400F151E1 /* AddressTableViewCell.swift */,
 				B272DC2D2043BBE400EE2121 /* AppData.swift */,
@@ -378,9 +385,7 @@
 				DA27C217204353FF00CCFD60 /* HomeViewController.swift */,
 				B28562D92096E98000E8CC28 /* KeyboardDone.swift */,
 				DA42CC092064909900900C7D /* LineItem.swift */,
-				B25490082058AE92000123D0 /* Login.storyboard */,
 				B2F8494E2043D71000CBD83A /* LoginViewController.swift */,
-				B29AEC65203FC9C100110EF9 /* Main.storyboard */,
 				B2F849442043C33F00CBD83A /* MeViewController.swift */,
 				DACCDE2A2060617000CD59D9 /* Month.swift */,
 				DA61587C20A200CD00285112 /* Notification.swift */,
@@ -393,7 +398,6 @@
 				B29AEC63203FC9C100110EF9 /* PeopleDetailsViewController.swift */,
 				B272DC2520439E2200EE2121 /* Product.swift */,
 				DA27C21D204371CE00CCFD60 /* ProductDetailsViewController.swift */,
-				DA5D683C2058A45F00E86BE8 /* ProductDetails.storyboard */,
 				DAD9A19F204FD1C800E3AA5F /* ProductTableViewCell.swift */,
 				DA49F1DA2055EF9E0018ABA4 /* ProductViewController.swift */,
 				B298CB002084607900EED243 /* RoundedButton.swift */,
@@ -404,7 +408,6 @@
 				DACCDE28206057C500CD59D9 /* State.swift */,
 				DAD9953620423EE9007A7687 /* TableViewCell.swift */,
 				B2FFA72D20782BE20046CDA2 /* WelcomeViewController.swift */,
-				B29AEC6A203FC9C100110EF9 /* LaunchScreen.storyboard */,
 				B29AEC6D203FC9C100110EF9 /* Info.plist */,
 				DA6D6D11209E1B5000D74666 /* Mito Green Background.png */,
 				DAD9953420423A4B007A7687 /* Andre.png */,
@@ -608,6 +611,7 @@
 				DA6D6D12209E1B5300D74666 /* Mito Green Background.png in Resources */,
 				B2619147206C5E5E004597F0 /* Roboto-ThinItalic.ttf in Resources */,
 				B24719802046245E006CF6C2 /* Get Help SG.png in Resources */,
+				B2FF02E120B54A0500B2D4AD /* Checkout.storyboard in Resources */,
 				B24719882046245E006CF6C2 /* Profile SG.png in Resources */,
 				B2619141206C5E5E004597F0 /* Roboto-Light.ttf in Resources */,
 				B2619143206C5E5E004597F0 /* Roboto-Medium.ttf in Resources */,
@@ -942,11 +946,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TG372K25N5;
+				DEVELOPMENT_TEAM = 6KH97C972X;
 				INFOPLIST_FILE = "Mito 1.0/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.washington.jjguo123.mito;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.washington.bennys.mito;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -959,11 +963,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TG372K25N5;
+				DEVELOPMENT_TEAM = 6KH97C972X;
 				INFOPLIST_FILE = "Mito 1.0/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.washington.jjguo123.mito;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.washington.bennys.mito;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
