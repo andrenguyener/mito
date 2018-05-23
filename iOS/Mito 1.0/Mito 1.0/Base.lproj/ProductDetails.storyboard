@@ -134,7 +134,9 @@
                                             <constraint firstItem="GTz-CR-asI" firstAttribute="top" secondItem="yoe-L6-xNv" secondAttribute="bottom" constant="20" id="XnA-gz-iLW"/>
                                             <constraint firstItem="vUt-xN-Ool" firstAttribute="leading" secondItem="1yK-pd-ga6" secondAttribute="leading" constant="20" id="Ydw-Y5-lxw"/>
                                             <constraint firstItem="yoe-L6-xNv" firstAttribute="centerX" secondItem="1yK-pd-ga6" secondAttribute="centerX" id="bpr-Nd-2U9"/>
+                                            <constraint firstItem="vUt-xN-Ool" firstAttribute="centerX" secondItem="1yK-pd-ga6" secondAttribute="centerX" id="fn2-8T-1QP"/>
                                             <constraint firstAttribute="height" constant="730" id="sJi-cP-MIu"/>
+                                            <constraint firstItem="yoe-L6-xNv" firstAttribute="width" secondItem="H3a-LP-2zx" secondAttribute="width" id="tKw-LW-m0p"/>
                                             <constraint firstItem="H3a-LP-2zx" firstAttribute="top" secondItem="1yK-pd-ga6" secondAttribute="top" constant="20" id="wHS-vD-RW6"/>
                                         </constraints>
                                     </view>
@@ -144,6 +146,8 @@
                                     <constraint firstAttribute="bottom" secondItem="1yK-pd-ga6" secondAttribute="bottom" id="Zko-vx-JjE"/>
                                     <constraint firstItem="1yK-pd-ga6" firstAttribute="top" secondItem="6L6-5b-gmN" secondAttribute="top" id="dci-A1-8uC"/>
                                     <constraint firstItem="1yK-pd-ga6" firstAttribute="leading" secondItem="6L6-5b-gmN" secondAttribute="leading" id="gS6-nD-rvH"/>
+                                    <constraint firstItem="1yK-pd-ga6" firstAttribute="width" secondItem="6L6-5b-gmN" secondAttribute="width" id="hkm-xK-br5"/>
+                                    <constraint firstItem="1yK-pd-ga6" firstAttribute="centerX" secondItem="6L6-5b-gmN" secondAttribute="centerX" id="zWQ-VS-kVf"/>
                                 </constraints>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vrN-o3-owS" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
@@ -203,11 +207,13 @@
                         <constraints>
                             <constraint firstItem="6L6-5b-gmN" firstAttribute="trailing" secondItem="BCW-qz-l9J" secondAttribute="trailing" id="Lrs-FF-BFN"/>
                             <constraint firstItem="6L6-5b-gmN" firstAttribute="leading" secondItem="BCW-qz-l9J" secondAttribute="leading" id="Nq7-XY-Xr0"/>
-                            <constraint firstItem="vrN-o3-owS" firstAttribute="leading" secondItem="BCW-qz-l9J" secondAttribute="leading" constant="20" id="Vkl-tM-eYy"/>
+                            <constraint firstItem="vrN-o3-owS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="BCW-qz-l9J" secondAttribute="leading" id="Vkl-tM-eYy"/>
                             <constraint firstItem="vrN-o3-owS" firstAttribute="bottom" secondItem="BCW-qz-l9J" secondAttribute="bottom" constant="-20" id="WON-q2-XhP"/>
                             <constraint firstItem="6L6-5b-gmN" firstAttribute="top" secondItem="BCW-qz-l9J" secondAttribute="top" id="aTG-Pn-lye"/>
                             <constraint firstItem="vrN-o3-owS" firstAttribute="trailing" secondItem="BCW-qz-l9J" secondAttribute="trailing" constant="-20" id="dqt-t2-HD7"/>
                             <constraint firstItem="vrN-o3-owS" firstAttribute="top" secondItem="6L6-5b-gmN" secondAttribute="bottom" constant="5" id="fgf-h4-1Sc"/>
+                            <constraint firstItem="vrN-o3-owS" firstAttribute="centerX" secondItem="oYD-z9-NlW" secondAttribute="centerX" id="ipE-sp-Mzh"/>
+                            <constraint firstItem="6L6-5b-gmN" firstAttribute="centerX" secondItem="oYD-z9-NlW" secondAttribute="centerX" id="kKs-Yu-Ww5"/>
                             <constraint firstItem="Ivm-bR-xpO" firstAttribute="centerX" secondItem="oYD-z9-NlW" secondAttribute="centerX" id="qCs-5R-hJC"/>
                             <constraint firstItem="Ivm-bR-xpO" firstAttribute="bottom" secondItem="BCW-qz-l9J" secondAttribute="bottom" id="uU2-1C-OSf"/>
                         </constraints>
