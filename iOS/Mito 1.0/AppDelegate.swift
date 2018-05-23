@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WebSocketDelegate {
         let dictType = dictionary!["type"] as! String
         switch dictType {
         case "friend-request":
-            print("friend-request")
+            print("friend-request") // write function for what you want to do when friend-request comes in
         case "friend-accept":
             print("friend-accept")
         case "package-accept":

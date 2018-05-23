@@ -20,6 +20,7 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
         pickerviewQuantity.isHidden = true
         pickerviewQuantity.delegate = self
         pickerviewQuantity.dataSource = self
+        self.navigationItem.title = "Product"
         appdata.fnDisplayImage(strImageURL: appdata.arrProductSearchResults[appdata.intCurrIndex].image, img: prodImage, boolCircle: false)
         prodTitle.text = appdata.arrProductSearchResults[appdata.intCurrIndex].title
         prodPub.text = appdata.arrProductSearchResults[appdata.intCurrIndex].publisher
