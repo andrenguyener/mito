@@ -6,12 +6,13 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Roboto-Regular.ttf">
-            <string>Roboto-Regular</string>
+        <array key="Roboto-Bold.ttf">
+            <string>Roboto-Bold</string>
         </array>
     </customFonts>
     <objects>
@@ -24,14 +25,21 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add a New Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pVu-hi-lAl">
-                        <rect key="frame" x="16" y="12" width="149" height="20"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a New Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pVu-hi-lAl">
+                        <rect key="frame" x="26" y="12" width="268" height="20"/>
+                        <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="pVu-hi-lAl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="1" id="Jei-ac-8Yd"/>
+                    <constraint firstItem="pVu-hi-lAl" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="QfW-8L-2yK"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="pVu-hi-lAl" secondAttribute="bottom" constant="1" id="RQL-bJ-6at"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="pVu-hi-lAl" secondAttribute="trailing" constant="10" id="dih-dN-ced"/>
+                    <constraint firstItem="pVu-hi-lAl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="l4c-MT-g8C"/>
+                    <constraint firstItem="pVu-hi-lAl" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ohd-eS-tAD"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>

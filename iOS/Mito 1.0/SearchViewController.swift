@@ -359,7 +359,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             //                fnLoadProductData()
             //            }
             let objProduct = appdata.arrProductSearchResults[indexPath.row]
-            print(objProduct.ASIN)
             appdata.fnDisplayImage(strImageURL: objProduct.image, img: cell.img, boolCircle: false)
             cell.title.text = objProduct.title
             cell.publisher.text = objProduct.publisher
