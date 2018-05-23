@@ -61,26 +61,6 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
         performSegue(withIdentifier: "segViewPaymentMethods", sender: self)
     }
     
-    func fnViewPaymentMethods() {
-        let urlInsertNewAddress = URL(string: "https://api.projectmito.io/v1/payment/")
-        let headers: HTTPHeaders = [
-            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
-        ]
-        Alamofire.request(urlInsertNewAddress!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                if let dictionary = response.result.value {
-                    print("Successfully got payment methods")
-                    print(dictionary)
-                }
-                
-            case .failure(let error):
-                print("Retrieve payment methods error")
-                print(error)
-            }
-        }
-    }
-    
     
     func fnAddPaymentMethod() {
         let urlInsertNewAddress = URL(string: "https://api.projectmito.io/v1/payment/")
@@ -643,8 +623,7 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
     }
 }
 
-extension UIImage
-{
+extension UIImage {
     var highestQualityJPEGNSData: NSData { return UIImageJPEGRepresentation(self, 1.0)! as NSData }
     var highQualityJPEGNSData: NSData    { return UIImageJPEGRepresentation(self, 0.75)! as NSData}
     var mediumQualityJPEGNSData: NSData  { return UIImageJPEGRepresentation(self, 0.5)! as NSData }

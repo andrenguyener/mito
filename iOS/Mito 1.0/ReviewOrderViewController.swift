@@ -65,9 +65,11 @@ class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableV
         recipientName.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
         
         // hide first 8 numbers of card information
-        let stars = String(repeating:"*", count:12)
         let last4 = String(appdata.strCardNumber.suffix(4))
-        lblCreditCardNumber.text = "\(stars)\(last4)"
+        lblCreditCardNumber.text = "Credit ****\(last4)"
+//        let stars = String(repeating:"*", count:12)
+//        let last4 = String(appdata.strCardNumber.suffix(4))
+//        lblCreditCardNumber.text = "\(stars)\(last4)"
         appdata.fnDisplayImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipient, boolCircle: true)
     }
     

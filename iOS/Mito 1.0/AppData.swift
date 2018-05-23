@@ -280,10 +280,10 @@ class AppData: NSObject {
                 DispatchQueue.main.async {
                     tblview.reloadData()
                 }
-//                if let dictionary = response.result.value {
-//                    print("Successfully got payment methods")
-//                    print(dictionary)
-//                }
+                if let dictionary = response.result.value {
+                    print("Successfully got payment methods")
+                    print(dictionary)
+                }
                 
             case .failure(let error):
                 print("Retrieve payment methods error")

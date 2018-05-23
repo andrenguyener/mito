@@ -57,7 +57,7 @@
                                         <rect key="frame" x="0.0" y="60" width="334.5" height="40"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES" textContentType="password"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                         </userDefinedRuntimeAttributes>
@@ -799,7 +799,7 @@
         <image name="mitodesignblack.png" width="2000" height="1173"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="iia-I7-aut"/>
-        <segue reference="Fma-AT-nbz"/>
+        <segue reference="Tk8-BD-Yxk"/>
+        <segue reference="cTu-G9-fQe"/>
     </inferredMetricsTieBreakers>
 </document>
