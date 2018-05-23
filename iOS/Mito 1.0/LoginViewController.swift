@@ -169,7 +169,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                 let authHeader = response.response?.allHeaderFields["Authorization"] as! String
                 if !authHeader.isEmpty {
                     if let dictionary = response.result.value {
-//                        print(dictionary)
                         UserDefaults.standard.set(dictionary, forKey: "UserInfo")
                         UserDefaults.standard.set(authHeader, forKey: "Authorization")
                         if UserDefaults.standard.object(forKey: "UserInfo") != nil {
@@ -181,8 +180,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                         }
                         DispatchQueue.main.async {
                             self.performSegue(withIdentifier: "login", sender: self)
-//                            let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
-                            
                         }
                     }
                 }

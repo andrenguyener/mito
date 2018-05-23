@@ -54,39 +54,11 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
 //        }
 //        fnFetchContacts()
 //        fnAddPaymentMethod()
-        fnSetDefaultPaymentMethod()
+//        fnSetDefaultPaymentMethod()
     }
     
     @IBAction func btnViewPaymentMethods(_ sender: Any) {
         performSegue(withIdentifier: "segViewPaymentMethods", sender: self)
-    }
-    
-    
-    func fnAddPaymentMethod() {
-        let urlInsertNewAddress = URL(string: "https://api.projectmito.io/v1/payment/")
-        let parameters: Parameters = [
-            "cardTypeName": "VISA",
-            "cardNumber": 1234123412341234,
-            "expMonth": 12,
-            "expYear": 2022,
-            "cardCVV": 104
-        ]
-        let headers: HTTPHeaders = [
-            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
-        ]
-        Alamofire.request(urlInsertNewAddress!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                if let dictionary = response.result.value {
-                    print("Successfully added")
-                    print(dictionary)
-                }
-                
-            case .failure(let error):
-                print("Insert new payment method error")
-                print(error)
-            }
-        }
     }
     
     func fnSetDefaultPaymentMethod() {
@@ -110,10 +82,6 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
                 print(error)
             }
         }
-    }
-    
-    func fnSetDefaultAddress() {
-        
     }
     
     func fnSearchByASIN(strASIN: String) {
@@ -169,7 +137,7 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
         formatter.timeZone = TimeZone(abbreviation: "UTC")
         let p_1 = strDate.date(format: .custom("MMM d, h:mm a"))
         let date = DateInRegion()
-        print(p_1)
+//        print(p_1)
         print(date)
 //        let formatter = DateFormatter()
 //        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
@@ -275,9 +243,9 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
         let request = CNContactFetchRequest(keysToFetch: key)
         var count = 0
         try! contactStore.enumerateContacts(with: request) { (contact, stoppingPointer) in
-            let strFirstName = contact.givenName
-            let strLastName = contact.familyName
-            let strNumber = contact.phoneNumbers.first?.value.stringValue
+//            let strFirstName = contact.givenName
+//            let strLastName = contact.familyName
+//            let strNumber = contact.phoneNumbers.first?.value.stringValue
             count += 1
         }
     }
@@ -299,10 +267,10 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
 //        result.recognizedHolderName // Card holder
 //        result.recognizedExpireDateMonth // Expire month
 //        result.recognizedExpireDateYear // Expire year
-        print("Card Number: \(result.recognizedNumber)")
-        print("Holder name: \(result.recognizedHolderName)")
-        print("Expire Date Month: \(result.recognizedExpireDateMonth)")
-        print("Expire Date Year: \(result.recognizedExpireDateYear)")
+//        print("Card Number: \(result.recognizedNumber)")
+//        print("Holder name: \(result.recognizedHolderName)")
+//        print("Expire Date Month: \(result.recognizedExpireDateMonth)")
+//        print("Expire Date Year: \(result.recognizedExpireDateYear)")
     }
     
 
@@ -378,8 +346,8 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
                 for likelihood in placeLikelihoodList.likelihoods {
                     let place = likelihood.place
                     print("Current Place name \(place.name) at likelihood \(likelihood.likelihood)")
-                    print("Current Place address \(place.formattedAddress)")
-                    print("Current Place attributions \(place.attributions)")
+                    print("Current Place address \(place.formattedAddress!)")
+                    print("Current Place attributions \(place.attributions!)")
                     print("Current PlaceID \(place.placeID)")
                 }
             }
@@ -550,7 +518,7 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
         ]
-        Alamofire.request(urlGetIncomingPackage!, method: .post, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+        Alamofire.request(urlGetIncomingPackage!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success:
                 if let dictionary = response.result.value {

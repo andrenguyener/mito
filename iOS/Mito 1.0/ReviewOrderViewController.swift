@@ -102,7 +102,7 @@ class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableV
         let urlCheckoutMitoCart = URL(string: "https://api.projectmito.io/v1/cart/process")
         let parameters: Parameters = [
             "cardId": 1,
-            "senderAddressId": appdata.address.intAddressID,
+            "senderAddressId": appdata.address.intAddressID!,
             "recipientId": appdata.personRecipient.intUserID,
             "message": appdata.strOrderMessage,
             "giftOption": 0
@@ -144,7 +144,7 @@ class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == tblviewPaymentInfo {
-            var cell:PaymentInfoTableViewCell! = tblviewPaymentInfo.dequeueReusableCell(withIdentifier: "PaymentInfoCell", for:indexPath)as! PaymentInfoTableViewCell
+            let cell:PaymentInfoTableViewCell! = tblviewPaymentInfo.dequeueReusableCell(withIdentifier: "PaymentInfoCell", for:indexPath)as! PaymentInfoTableViewCell
             // This function actually loads the xib
             cell.lblTitle.text = appdata.arrPaymentInfoTitles[indexPath.row]
             let last4 = String(appdata.strCardNumber.suffix(4))
@@ -153,20 +153,9 @@ class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableV
             } else {
                 cell.lblSubtitle.text = "Same as shipping address"
             }
-//            if cell == nil {
-//                let cellnib = Bundle.main.loadNibNamed("PaymentInfoCell", owner:self, options: nil)?.first as! PaymentInfoTableViewCell
-//                cell = cellnib
-//                cell.lblTitle.text = appdata.arrPaymentInfoTitles[indexPath.row]
-//                let last4 = String(appdata.strCardNumber.suffix(4))
-//                if indexPath.row == 0 {
-//                    cell.lblSubtitle.text = "Visa ending in \(last4)"
-//                } else {
-//                    cell.lblSubtitle.text = "Same as shipping address"
-//                }
-//            }
             return cell
         } else {
-            var cell: OrderSummaryTableViewCell = tblviewOrderSummary.dequeueReusableCell(withIdentifier: "OrderSummaryCell", for: indexPath) as! OrderSummaryTableViewCell
+            let cell: OrderSummaryTableViewCell = tblviewOrderSummary.dequeueReusableCell(withIdentifier: "OrderSummaryCell", for: indexPath) as! OrderSummaryTableViewCell
             cell.lblNumItems.text = "Items (\(String(appdata.intNumItems))"
             let tax: Decimal = appdata.priceSum * 0.12
             

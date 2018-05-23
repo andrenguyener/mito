@@ -20,7 +20,6 @@ class ChooseAddressViewController: UIViewController, UITableViewDataSource, UITa
         print(appdata.arrCurrUserAddresses.count)
         tblviewAddress.delegate = self
         tblviewAddress.dataSource = self
-        tblviewAddress.rowHeight = 106
         fnLoadCurrUserAddresses()
         if boolSender {
              self.navigationItem.title = "Billing Address"
