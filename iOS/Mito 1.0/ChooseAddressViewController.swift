@@ -23,9 +23,9 @@ class ChooseAddressViewController: UIViewController, UITableViewDataSource, UITa
         tblviewAddress.rowHeight = 106
         fnLoadCurrUserAddresses()
         if boolSender {
-             self.navigationItem.title = "Select Billing Address"
+             self.navigationItem.title = "Billing Address"
         } else {
-             self.navigationItem.title = "Select Shipping Address"
+             self.navigationItem.title = "Shipping Address"
         }
         let nibAddNewAddress = UINib(nibName: "AddAddressTableViewCell", bundle: nil)
         tblviewAddress.register(nibAddNewAddress, forCellReuseIdentifier: "AddNewAddressCell")

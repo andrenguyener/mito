@@ -23,6 +23,7 @@ class ChooseFriendViewController: UIViewController, UITableViewDelegate, UITable
         tblviewPeople.rowHeight = 106
         searchBar.delegate = self
         appdata.fnLoadFriendsAndAllUsers(tableview: tblviewPeople)
+        self.navigationItem.title = "Choose Friend"
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -76,19 +77,7 @@ class ChooseFriendViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
         let objPerson = self.appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
-        let photoString = objPerson.avatar
-        let decodedImage = Data(base64Encoded: photoString) //Data(base64Encoded: photoString, options: .ignoreUnknownCharacters)
-        let image = UIImage(data: decodedImage!)
-        cell.img.image = image
-//        Alamofire.request(objPerson.avatar).responseImage(completionHandler: { (response) in
-//            if let image = response.result.value {
-//                print(response.result.value)
-//                let circularImage = image.af_imageRoundedIntoCircle()
-//                DispatchQueue.main.async {
-//                    cell.img.image = image
-//                }
-//            }
-//        })
+        appdata.fnDisplayImage(strImageURL: objPerson.avatar, img: cell.img, boolCircle: true)
         cell.name.text = "\(objPerson.firstName) \(objPerson.lastName)"
         cell.handle.text = "@\(objPerson.strUsername)"
         return cell

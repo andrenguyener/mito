@@ -19,13 +19,11 @@ class WriteMessageViewController: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
         textviewWriteMessage.delegate = self
         textviewWriteMessage.keyboardDismissMode = .onDrag
+        self.navigationItem.title = "Message"
         appdata.fnDisplayImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipientProfile, boolCircle: true)
         strRecipientName.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
         textviewWriteMessage.text = "What's it for?"
-        let photoString = appdata.personRecipient.avatar
-        let decodedImage = Data(base64Encoded: photoString)
-        let image = UIImage(data: decodedImage!)
-        imgRecipientProfile.image = image
+        appdata.fnDisplayImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipientProfile, boolCircle: true)
     }
     
     func textViewDidChange(_ textView: UITextView) {

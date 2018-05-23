@@ -20,6 +20,7 @@ class PackageDetailsViewController: UIViewController {
         super.viewDidLoad()
         print(intOrderID)
         self.navigationController?.isNavigationBarHidden = false
+        self.navigationItem.title = "Choose Friend"
         if appdata.arrNotifications[intOrderID] as? Package != nil {
             let package = appdata.arrNotifications[intOrderID] as! Package
             fnRetrieveIncomingOrderDetails(intOrderID: package.intOrderID)

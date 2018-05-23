@@ -15,8 +15,7 @@ class ChoosePaymentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.navigationItem.title = "Payment"
     }
     
     @IBAction func btnPaymentMethodToEditCheckout(_ sender: Any) {

@@ -108,6 +108,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             cartTableView.delegate = self
             cartTableView.dataSource = self
             cartTableView.rowHeight = 106
+            self.navigationController?.isNavigationBarHidden = false
             fnLoadMitoCart()
         } else if itemCountCheckout != nil {
             fnGetCartSubTotal()

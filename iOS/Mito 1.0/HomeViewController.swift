@@ -18,6 +18,34 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet weak var segmentChooser: UISegmentedControl!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.rowHeight = 133
+        let nib = UINib(nibName: "FeedCopyTableViewCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "FeedCopyCell")
+        
+        fnLoadCurrUserAddresses()
+        //        greenTopView.backgroundColor = UIColor(rgb: 41DD7C)
+        
+        let userURL = "https://api.projectmito.io/v1/friend/\(appdata.intCurrentUserID)"
+        print("Authorization: \(String(describing: UserDefaults.standard.object(forKey: "Authorization")))")
+        let authToken = UserDefaults.standard.object(forKey: "Authorization") as! String
+        
+        //        var request = URLRequest(url: URL(string: "wss://api.projectmito.io/v1/ws?auth=\(String(describing: UserDefaults.standard.object(forKey: "Authorization")))")!)
+        var urlWebsocket = "wss://api.projectmito.io/v1/ws?auth=\(authToken)"
+        urlWebsocket = urlWebsocket.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
+        var request = URLRequest(url: URL(string: urlWebsocket)!)
+        print("Request: \(request)")
+        request.timeoutInterval = 5
+        appdata.socket = WebSocket(request: request)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appdata.socket.delegate = appDelegate.self
+        appdata.socket.connect()
+        appdata.fnLoadFriendActivity(tblview: tableView)
+    }
+    
     @IBAction func switchTab(_ sender: UISegmentedControl) {
         if segmentChooser.selectedSegmentIndex == 1 {
             appdata.fnLoadMyActivity(tblview: tableView, intUserId: appdata.intCurrentUserID, arr: appdata.arrMyFeedItems)
@@ -53,34 +81,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var tableView: UITableView!
     var appdata = AppData.shared
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.rowHeight = 133
-        let nib = UINib(nibName: "FeedCopyTableViewCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: "FeedCopyCell")
-        
-        fnLoadCurrUserAddresses()
-//        greenTopView.backgroundColor = UIColor(rgb: 41DD7C)
-        
-        let userURL = "https://api.projectmito.io/v1/friend/\(appdata.intCurrentUserID)"
-        print("Authorization: \(String(describing: UserDefaults.standard.object(forKey: "Authorization")))")
-        let authToken = UserDefaults.standard.object(forKey: "Authorization") as! String
-
-//        var request = URLRequest(url: URL(string: "wss://api.projectmito.io/v1/ws?auth=\(String(describing: UserDefaults.standard.object(forKey: "Authorization")))")!)
-        var urlWebsocket = "wss://api.projectmito.io/v1/ws?auth=\(authToken)"
-        urlWebsocket = urlWebsocket.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
-        var request = URLRequest(url: URL(string: urlWebsocket)!)
-        print("Request: \(request)")
-        request.timeoutInterval = 5
-        appdata.socket = WebSocket(request: request)
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appdata.socket.delegate = appDelegate.self
-        appdata.socket.connect()
-        appdata.fnLoadFriendActivity(tblview: tableView)
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -112,15 +112,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = Bundle.main.loadNibNamed("HomeTableViewCell", owner: self, options: nil)?.first as! HomeTableViewCell
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCopyCell", for: indexPath) as! FeedCopyTableViewCell
-        var feedItemObj = FeedItem(strDate: "", photoSenderUrl: "", strMessage: "", strRecipientFName: "", strRecipientLName: "", strSenderFName: "", strSenderLName: "", intRecipientId: 0, intSenderId: 0)
+        var feedItemObj = FeedItem(strDate: "", photoSenderUrl: "", strMessage: "", strRecipientFName: "", strRecipientLName: "", strSenderFName: "", strSenderLName: "", intRecipientId: 0, intSenderId: 0, strPhotoBytes: "")
         if segmentChooser.selectedSegmentIndex == 0 {
             feedItemObj = appdata.arrFriendsFeedItems[indexPath.row]
         } else {
             feedItemObj = appdata.arrMyFeedItems[indexPath.row]
         }
-        appdata.fnDisplayImage(strImageURL: feedItemObj.photoSenderUrl, img: cell.imgProfile, boolCircle: true)
+        if feedItemObj.strPhotoBytes != nil {
+            appdata.fnDisplayImage(strImageURL: feedItemObj.strPhotoBytes!, img: cell.imgProfile, boolCircle: true)
+        } else {
+            appdata.fnDisplayImage(strImageURL: feedItemObj.photoSenderUrl, img: cell.imgProfile, boolCircle: true)
+        }
         var strSender = "\(feedItemObj.strSenderFName) \(feedItemObj.strSenderLName)"
         var strRecipient = "\(feedItemObj.strRecipientFName) \(feedItemObj.strRecipientLName)"
         if feedItemObj.intSenderId == appdata.intCurrentUserID {

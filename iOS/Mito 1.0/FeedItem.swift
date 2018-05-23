@@ -18,7 +18,7 @@ struct FeedItem: Decodable {
     let strSenderLName: String
     let intRecipientId: Int
     let intSenderId: Int
-//    let strPhotoBytes: String?
+    let strPhotoBytes: String?
     
     private enum CodingKeys: String, CodingKey {
         case strDate = "OrderDate"
@@ -30,6 +30,6 @@ struct FeedItem: Decodable {
         case strSenderLName = "SenderLastName"
         case intRecipientId = "RecipientId"
         case intSenderId = "SenderId"
-//        case strPhotoBytes = "SenderProfileImage"
+        case strPhotoBytes = "SenderProfileImage"
     }
 }

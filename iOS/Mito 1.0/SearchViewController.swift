@@ -61,6 +61,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         productTableView.dataSource = self
         productTableView.rowHeight = 106
         
+        self.navigationItem.backBarButtonItem?.title = "Poop"
+        
         peopleTableView.keyboardDismissMode = .onDrag //UIScrollViewKeyboardDismissMode.interactive
         
 //        if peopleTableView == nil {
@@ -358,13 +360,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             //            }
             let objProduct = appdata.arrProductSearchResults[indexPath.row]
             appdata.fnDisplayImage(strImageURL: objProduct.image, img: cell.img, boolCircle: false)
-//            Alamofire.request(objProduct.image).responseImage(completionHandler: { (response) in
-//                if let image = response.result.value {
-//                    DispatchQueue.main.async {
-//                        cell.img.image = image
-//                    }
-//                }
-//            })
             cell.title.text = objProduct.title
             cell.publisher.text = objProduct.publisher
             cell.price.text = objProduct.price
@@ -388,7 +383,14 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func fnLoadPersonCell(cell: TableViewCell, objPerson: Person) -> TableViewCell {
 //        let urlPeopleImage = URL(string:"\(objPerson.avatar)")
 //        cell.img.image = UIImage(data: try! Data(contentsOf: urlPeopleImage!))
+//        print(objPerson.firstName + " " + objPerson.lastName)
+//        print(objPerson.avatar)
         appdata.fnDisplayImage(strImageURL: objPerson.avatar, img: cell.img, boolCircle: true)
+//        if objPerson.avatar == strImageDefault {
+//            appdata.fnDisplayImage(strImageURL: objPerson.avatar, img: cell.img, boolCircle: true)
+//        } else {
+//            appdata.fnDisplayImage(strImageURL: objPerson.avatar, img: cell.img, boolCircle: true)
+//        }
 //        if objPerson.avatar.count > 300 {
 //            let photoString = objPerson.avatar
 //            let decodedImage = Data(base64Encoded: photoString) //Data(base64Encoded: photoString, options: .ignoreUnknownCharacters)
