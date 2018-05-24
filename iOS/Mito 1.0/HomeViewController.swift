@@ -44,6 +44,71 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         appdata.socket.delegate = appDelegate.self
         appdata.socket.connect()
         appdata.fnLoadFriendActivity(tblview: tableView)
+        fnSearchByASIN(strASIN: "B079N9RLYT")
+    }
+    
+    func fnSearchByASIN(strASIN: String) {
+        let urlGetMyAddresses = URL(string: "https://api.projectmito.io/v1/amazonproductvariety/")
+        let parameters: Parameters = [
+            "parentASIN": strASIN
+        ]
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlGetMyAddresses!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dict = response.data {
+                    dict
+                }
+                
+                if let dictionary = response.value {
+                    print(dictionary)
+                    let objDict = dictionary as! NSDictionary
+                    print(objDict.allKeys)
+                    let objItemLookupResponse = objDict["ItemLookupResponse"] as! NSDictionary
+                    let arrAboveItems = objItemLookupResponse["Items"] as! NSArray
+                    let objItems = arrAboveItems[0] as! NSDictionary
+                    print(objItems.allKeys)
+                    let arrFakeItem = objItems["Item"] as! NSArray
+                    let objFakeItem = arrFakeItem[0] as! NSDictionary
+                    let arrVariations = objFakeItem["Variations"] as! NSArray
+                    let objVariation = arrVariations[0] as! NSDictionary
+                    let arrItems = objVariation["Item"] as! NSArray
+                    let firstItem = arrItems[0] as! NSDictionary
+                    let arrImageSets = firstItem["ImageSets"] as! NSArray
+                    let objImageSets = arrImageSets[0] as! NSDictionary
+                    print(objImageSets)
+                    let dataExample: Data = NSKeyedArchiver.archivedData(withRootObject: objImageSets)
+                    let decoder = JSONDecoder()
+                    do {
+                        self.appdata.arrItems = try decoder.decode([ImageSet].self, from: dataExample)
+                    } catch let jsonErr {
+                        print("Failed to decode: \(jsonErr)")
+                    }
+                    print(self.appdata.arrItems.count)
+//                    print(self.appdata.arrItems)
+//                    for item in arrItems {
+//
+//                    }
+//                    print(arrItems.count)
+//
+//                    let dict = dictionary as! Dictionary<String, AnyObject>
+//                    print(dict.prettyPrint())
+                }
+//                if let dictionary = response.data {
+//                    let decoder = JSONDecoder()
+//                    do {
+//                        self.appdata.arrCurrUserAddresses = try decoder.decode([Address].self, from: dictionary)
+//                    } catch let jsonErr {
+//                        print("Failed to decode: \(jsonErr)")
+//                    }
+//                }
+            case .failure(let error):
+                print("Get products error")
+                print(error.localizedDescription)
+            }
+        }
     }
     
     @IBAction func switchTab(_ sender: UISegmentedControl) {
@@ -143,5 +208,16 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         performSegue(withIdentifier: "homeToCart", sender: self)
     }
     
-    
+}
+
+extension Dictionary where Key == String, Value == AnyObject {
+    func prettyPrint() -> String{
+        var string: String = ""
+        if let data = try? JSONSerialization.data(withJSONObject: self, options: .prettyPrinted){
+            if let nstr = NSString(data: data, encoding: String.Encoding.utf8.rawValue){
+                string = nstr as String
+            }
+        }
+        return string
+    }
 }

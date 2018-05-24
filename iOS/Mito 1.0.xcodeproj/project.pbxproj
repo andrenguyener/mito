@@ -113,6 +113,7 @@
 		DAD9953520423A4B007A7687 /* Andre.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD9953420423A4B007A7687 /* Andre.png */; };
 		DAD9953720423EE9007A7687 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD9953620423EE9007A7687 /* TableViewCell.swift */; };
 		DAD9A1A0204FD1C800E3AA5F /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD9A19F204FD1C800E3AA5F /* ProductTableViewCell.swift */; };
+		DAF7BB4820B68A09007BE237 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF7BB4720B68A09007BE237 /* Item.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -250,6 +251,7 @@
 		DAD9953420423A4B007A7687 /* Andre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Andre.png; sourceTree = "<group>"; };
 		DAD9953620423EE9007A7687 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		DAD9A19F204FD1C800E3AA5F /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
+		DAF7BB4720B68A09007BE237 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		E6908C73F6FF5F893922619E /* Pods-Mito 1.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mito 1.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Mito 1.0/Pods-Mito 1.0.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -426,6 +428,7 @@
 				B2548FF92055EA96000123D0 /* jj.png */,
 				B2548FF72055EA96000123D0 /* sarah.png */,
 				B244B3982069BF7D00B01BBA /* Title.png */,
+				DAF7BB4720B68A09007BE237 /* Item.swift */,
 				DA23437720AE4A9D003E4D6A /* ChooseFriendViewController.swift */,
 				DA341FFC20B5EB8600E05B51 /* AddNewPaymentMethodViewController.swift */,
 				DA341FFA20B5D07C00E05B51 /* PaymentMethod.swift */,
@@ -774,6 +777,7 @@
 				DA42CC0A2064909900900C7D /* LineItem.swift in Sources */,
 				B2471994204672DE006CF6C2 /* NotificationViewController.swift in Sources */,
 				DA27C21A2043550A00CCFD60 /* HomeTableViewCell.swift in Sources */,
+				DAF7BB4820B68A09007BE237 /* Item.swift in Sources */,
 				DAA9075E209963C400F151E1 /* AddressTableViewCell.swift in Sources */,
 				B298CB012084607900EED243 /* RoundedButton.swift in Sources */,
 				DA23437820AE4A9D003E4D6A /* ChooseFriendViewController.swift in Sources */,

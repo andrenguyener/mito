@@ -398,6 +398,7 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
 
         if UserDefaults.standard.object(forKey: "UserInfo") != nil {
             let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+            print(data)
             let photoString = data["profileImageString"] as! String
             let decodedImage = Data(base64Encoded: photoString) //Data(base64Encoded: photoString, options: .ignoreUnknownCharacters)
             let image = UIImage(data: decodedImage!)

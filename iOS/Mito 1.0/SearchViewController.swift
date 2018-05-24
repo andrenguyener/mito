@@ -172,15 +172,19 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         ]
         Alamofire.request(urlAmazonProductCall!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
-            case .success:
+            case .success(let JSON):
+//                print(JSON)
                 if let dictionary = response.result.value {
+                    print("JSON OBject")
+//                    print(dictionary)
                     print("Loaded search results successfully")
                     let myJson = dictionary as! NSDictionary
+//                    print(myJson)
                     UserDefaults.standard.set(myJson, forKey: "ProductSearchResultsJSON")
                     if UserDefaults.standard.object(forKey: "ProductSearchResultsJSON") != nil {
                         print("ProductSearchResultsJSON is saved properly")
                         let myJson = UserDefaults.standard.object(forKey: "ProductSearchResultsJSON") as! NSDictionary
-                        print(myJson)
+//                        print(myJson)
                         self.fnLoadLocalProductSearchResults(myJson: myJson)
                     }
                     DispatchQueue.main.async {
@@ -214,6 +218,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func fnLoadLocalProductSearchResults(myJson: NSDictionary) {
         let itemSearchResponse = myJson["ItemSearchResponse"] as! NSDictionary
+//        print(myJson["ItemSearchResponse"] as! NSDictionary)
         let objItems = self.fnAccessFirstDictionaryInArray(dictObj: itemSearchResponse, arrName: "Items")
         if objItems["Item"] == nil {
             print("Item doesn't show up")
@@ -221,6 +226,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let arrItem = objItems["Item"] as! NSArray
             for itemObj in arrItem {
                 let item = itemObj as! NSDictionary
+                if item["ParentASIN"] != nil {
+                    print("ParentASIN: \(item["ParentASIN"])")
+                }
+
                 let strASIN = self.fnAccesStringinObj(dictObj: item, strAttribute: "ASIN")
                 var strImageURL = ""
                 if item["LargeImage"] != nil {
