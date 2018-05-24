@@ -37,6 +37,7 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
         viewProductImages.register(nibAddNewAddress, forCellWithReuseIdentifier: "ProductImageCell")
         viewProductImages.delegate = self
         viewProductImages.dataSource = self
+        self.automaticallyAdjustsScrollViewInsets = false;
         
 //        var swipeRight = UISwipeGestureRecognizer(target: self, action: "swiped:") // put : at the end of method name
 //        swipeRight.direction = UISwipeGestureRecognizerDirection.right
@@ -208,10 +209,13 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
                         intIndex += 1
                         boolNewIndex = true
                     }
-                    self.dispatchGroup.leave()
-                    self.dispatchGroup.notify(queue: .main, execute: {
+//                    self.dispatchGroup.leave()
+//                    self.dispatchGroup.notify(queue: .main, execute: {
+//                        self.viewProductImages.reloadData()
+//                    })
+                    DispatchQueue.main.async {
                         self.viewProductImages.reloadData()
-                    })
+                    }
 //                    DispatchGroup.notify(dispatchGroup, DispatchQueue.main, {
 //                        self.viewProductImages.reloadData()
 //                    })
