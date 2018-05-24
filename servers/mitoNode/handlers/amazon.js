@@ -114,7 +114,7 @@ function invokeParentRequest(parentASIN) {
     // keyword = keyword.replace(/ /g,"+");
 
     // var unsignedUrl = `http://webservices.amazon.com/onca/xml?Service=AWSECommerceService&Operation=ItemSearch&SubscriptionId=AKIAJSRYKM2YU35LEDSQ&AssociateTag=mitoteam-20&SearchIndex=All&Keywords=${keyword}&ResponseGroup=Images,ItemAttributes,Offers,Reviews`
-    var unsignedUrl = `http://webservices.amazon.com/onca/xml?Service=AWSECommerceService&Operation=ItemLookup&SubscriptionId=AKIAJSRYKM2YU35LEDSQ&AssociateTag=mitoteam-20&ItemId=${parentASIN}&IdType=ASIN&ResponseGroup=Images,ItemAttributes,Offers,VariationMatrix,VariationOffers`;
+    var unsignedUrl = `http://webservices.amazon.com/onca/xml?Service=AWSECommerceService&Operation=ItemLookup&SubscriptionId=AKIAJSRYKM2YU35LEDSQ&AssociateTag=mitoteam-20&ItemId=${parentASIN}&IdType=ASIN&ResponseGroup=Images,ItemAttributes,OfferListings,Offers,Similarities,VariationImages,VariationMatrix,VariationOffers`;
     // switch (type) {
     //     case "keyword":
     //         unsignedUrl = `http://webservices.amazon.com/onca/xml?Service=AWSECommerceService&Operation=ItemSearch&SubscriptionId=AKIAJSRYKM2YU35LEDSQ&AssociateTag=mitoteam-20&SearchIndex=All&Keywords=${keyword}&ResponseGroup=Images,ItemAttributes,Offers,Reviews`
