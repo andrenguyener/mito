@@ -381,7 +381,7 @@ const AmazonHashHandler = () => {
             .then(function (response) {
                 var xml = response.data
                 parseString(xml, function (err, result) {
-                    console.log(result);
+                    console.log(result.ItemLookupResponse);
                     res.json(result);
                 });
 
