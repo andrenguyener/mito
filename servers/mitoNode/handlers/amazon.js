@@ -100,6 +100,94 @@ function invokeRequest(type, keyword, pageNumber) {
     // signedURLArea.value = signedUrl;
 }
 
+function invokeParentRequest(parentASIN) {
+
+    // if (getAccessKeyId() == "AWS Access Key ID") {
+    //     alert("Please provide an AWS Access Key ID");
+    //     return;
+    // }
+
+    // if (getSecretAccessKey() == "AWS Secret Access Key") {
+    //     alert("Please provide an AWS Secret Access Key");
+    //     return;
+    // }
+    // keyword = keyword.replace(/ /g,"+");
+
+    // var unsignedUrl = `http://webservices.amazon.com/onca/xml?Service=AWSECommerceService&Operation=ItemSearch&SubscriptionId=AKIAJSRYKM2YU35LEDSQ&AssociateTag=mitoteam-20&SearchIndex=All&Keywords=${keyword}&ResponseGroup=Images,ItemAttributes,Offers,Reviews`
+    var unsignedUrl = `http://webservices.amazon.com/onca/xml?Service=AWSECommerceService&Operation=ItemLookup&SubscriptionId=AKIAJSRYKM2YU35LEDSQ&AssociateTag=mitoteam-20&ItemId=${parentASIN}&IdType=ASIN&ResponseGroup=Images,ItemAttributes,Offers,VariationMatrix,VariationOffers`;
+    // switch (type) {
+    //     case "keyword":
+    //         unsignedUrl = `http://webservices.amazon.com/onca/xml?Service=AWSECommerceService&Operation=ItemSearch&SubscriptionId=AKIAJSRYKM2YU35LEDSQ&AssociateTag=mitoteam-20&SearchIndex=All&Keywords=${keyword}&ResponseGroup=Images,ItemAttributes,Offers,Reviews`
+
+    //         break;
+    //     case "page":
+    //         unsignedUrl = `http://webservices.amazon.com/onca/xml?Service=AWSECommerceService&Operation=ItemSearch&SubscriptionId=AKIAJSRYKM2YU35LEDSQ&AssociateTag=mitoteam-20&SearchIndex=All&Keywords=${keyword}&ItemPage=${pageNumber}&ResponseGroup=Images,ItemAttributes,Offers,Reviews`
+
+    //         break;
+    //     default:
+    //         unsignedURL = `http://webservices.amazon.com/onca/xml?Service=AWSECommerceService&Operation=ItemSearch&SubscriptionId=AKIAJSRYKM2YU35LEDSQ&AssociateTag=mitoteam-20&SearchIndex=All&Keywords=${keyword}&ResponseGroup=Images,ItemAttributes,Offers,Reviews`
+    // }
+    // // var unsignedUrl = document.getElementById("UnsignedURL").value;
+    if (unsignedUrl == "") {
+        alert("Please provide a URL");
+        return;
+    }
+
+    var lines = unsignedUrl.split("\n");
+    unsignedUrl = "";
+    for (var i in lines) { unsignedUrl += lines[i]; }
+
+    // find host and query portions
+    var urlregex = new RegExp("^http:\\/\\/(.*)\\/onca\\/xml\\?(.*)$");
+    var matches = urlregex.exec(unsignedUrl);
+
+    if (matches == null) {
+        alert("Could not find PA-API end-point in the URL. Please ensure the URL looks like the example provided.");
+        return;
+    }
+
+    var host = matches[1].toLowerCase();
+    var query = matches[2];
+
+    // split the query into its constituent parts
+    var pairs = query.split("&");
+
+    // remove signature if already there
+    // remove access key id if already present 
+    //  and replace with the one user provided above
+    // add timestamp if not already present
+    pairs = cleanupRequest(pairs);
+
+    // show it
+    // document.getElementById("NameValuePairs").value = pairs.join("\n");
+
+    // encode the name and value in each pair
+    pairs = encodeNameValuePairs(pairs);
+
+    // sort them and put them back together to get the canonical query string
+    pairs.sort();
+    // document.getElementById("OrderedPairs").value = pairs.join("\n");
+
+    var canonicalQuery = pairs.join("&");
+    var stringToSign = "GET\n" + host + "\n/onca/xml\n" + canonicalQuery;
+
+    // calculate the signature
+
+    var secret = secretKeyAmazon;
+    var signature = sign(secret, stringToSign);
+
+    // assemble the signed url
+    var signedUrl = "http://" + host + "/onca/xml?" + canonicalQuery + "&Signature=" + signature;
+    // console.log(signedUrl);
+    return signedUrl;
+    // update the UI
+    // var stringToSignArea = document.getElementById("StringToSign");
+    // stringToSignArea.value = stringToSign;
+
+    // var signedURLArea = document.getElementById("SignedURL");
+    // signedURLArea.value = signedUrl;
+}
+
 function encodeNameValuePairs(pairs) {
     for (var i = 0; i < pairs.length; i++) {
         var name = "";
@@ -272,6 +360,23 @@ const AmazonHashHandler = () => {
         let urlString = invokeRequest(type, keyword, pageNumber);
         console.log(`pagenumber: ${pageNumber} keyword: ${keyword}`)
         console.log(urlString);
+        axios.get(urlString)
+            .then(function (response) {
+                var xml = response.data
+                parseString(xml, function (err, result) {
+                    console.log(result);
+                    res.json(result);
+                });
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    });
+
+    router.post('/v1/amazonproductvariety', (req, res) => {
+        let asin = req.body.parentASIN;
+        let urlString = invokeParentRequest(asin);
         axios.get(urlString)
             .then(function (response) {
                 var xml = response.data
