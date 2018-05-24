@@ -107,6 +107,7 @@ class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableV
         self.fnFinishCheckout()
         performSegue(withIdentifier: "checkoutFinish", sender: self)
     }
+
     
     func fnFinishCheckout() {
         let urlCheckoutMitoCart = URL(string: "https://api.projectmito.io/v1/cart/process")
