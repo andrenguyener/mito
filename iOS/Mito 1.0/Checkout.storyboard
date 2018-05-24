@@ -96,7 +96,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P1u-Qa-bqF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6386" y="329"/>
+            <point key="canvasLocation" x="5910" y="470"/>
         </scene>
         <!--Checkout-->
         <scene sceneID="E4g-Zh-aLs">
@@ -512,7 +512,7 @@
         <!--Order Summary-->
         <scene sceneID="wad-Mc-dx9">
             <objects>
-                <viewController title="Order Summary" id="vAt-Y6-w6U" sceneMemberID="viewController">
+                <viewController title="Order Summary" id="vAt-Y6-w6U" customClass="ReviewOrderViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Oc8-SY-TH1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -535,7 +535,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="JEU-gP-jjI" userLabel="Image_name">
                                                         <rect key="frame" x="0.0" y="25.5" width="355" height="125"/>
                                                         <subviews>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8hf-uR-UA9">
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8hf-uR-UA9" customClass="RoundedImage" customModule="Mito_1_0" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="125" height="125"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="125" id="hIb-Ze-QPE"/>
@@ -588,7 +588,7 @@
                                                     <constraint firstAttribute="height" constant="128" id="M0E-nl-eI5"/>
                                                 </constraints>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="5L1-io-DAN">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationWidth="10" reuseIdentifier="PaymentInfoCell" id="5L1-io-DAN" customClass="PaymentInfoTableViewCell" customModule="Mito_1_0" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="28" width="355" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5L1-io-DAN" id="tc1-M3-ngE">
@@ -602,7 +602,7 @@
                                                 <rect key="frame" x="10" y="355" width="355" height="226"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="ShW-mj-UMx">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationWidth="10" reuseIdentifier="OrderSummaryCell" id="ShW-mj-UMx">
                                                         <rect key="frame" x="0.0" y="28" width="355" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ShW-mj-UMx" id="zNQ-FF-SnQ">
@@ -663,10 +663,17 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ecz-Qd-yGt"/>
                     </view>
+                    <connections>
+                        <outlet property="o_imgRecipient" destination="8hf-uR-UA9" id="2rh-mn-zkP"/>
+                        <outlet property="o_lblMessage" destination="wBL-fs-O8e" id="Vnl-jk-IEa"/>
+                        <outlet property="o_recipientName" destination="pvU-rq-9mI" id="8gB-PE-FBh"/>
+                        <outlet property="o_tblviewOrderSummary" destination="7GW-bc-0mU" id="dRU-ro-kYb"/>
+                        <outlet property="o_tblviewPaymentInfo" destination="FtS-QK-BUu" id="yB4-ec-s5K"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4uv-M5-cjJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8652" y="274"/>
+            <point key="canvasLocation" x="7921" y="-1309"/>
         </scene>
         <!--ChooseFriend-->
         <scene sceneID="uuf-FR-odA">
@@ -1024,7 +1031,7 @@
                     <connections>
                         <outlet property="tblviewAddress" destination="JiR-sN-ga8" id="Jd9-vX-td6"/>
                         <segue destination="U5T-7J-IFD" kind="showDetail" identifier="CompleteChooseReceivingAddress" id="2rk-ch-wix"/>
-                        <segue destination="XCS-Ex-cdl" kind="show" identifier="segChooseBillingAddressToReviewOrder" id="UyS-cL-2ww"/>
+                        <segue destination="vAt-Y6-w6U" kind="show" identifier="segChooseBillingAddressToReviewOrder" id="MjP-Xg-3Ou"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9OU-am-Tho" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1120,7 +1127,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="UITabBarController-5ev-RP-TnR" storyboardName="Main" referencedIdentifier="UITabBarController-5ev-RP-TnR" id="U5T-7J-IFD" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y69-ne-XDV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="461" y="867"/>
+            <point key="canvasLocation" x="7920" y="470"/>
         </scene>
         <!--Order Summary-->
         <scene sceneID="Ib4-Bc-J2p">
@@ -1186,7 +1193,7 @@
         <image name="You’re so nice!.png" width="267" height="33"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Jjr-wW-Hse"/>
+        <segue reference="2rk-ch-wix"/>
         <segue reference="D79-aK-l5e"/>
         <segue reference="Qfg-Id-CWz"/>
     </inferredMetricsTieBreakers>
