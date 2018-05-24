@@ -1098,11 +1098,11 @@
             <objects>
                 <viewController title="Account Detail" id="mKW-hw-jiX" customClass="PeopleDetailsViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hy4-EJ-BfW">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="iIt-YC-sQM" userLabel="Profile Information">
-                                <rect key="frame" x="26" y="40" width="323" height="274.5"/>
+                                <rect key="frame" x="26" y="74" width="323" height="274.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FirstName LastName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1g-f7-mfA">
                                         <rect key="frame" x="24" y="0.0" width="275" height="21"/>
@@ -1130,11 +1130,14 @@
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ZQA-vy-bnN">
-                                        <rect key="frame" x="79.5" y="211" width="164" height="30"/>
+                                        <rect key="frame" x="66.5" y="211" width="190" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="szw-Dz-dqC" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="72" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="85" height="30"/>
                                                 <color key="backgroundColor" red="0.25490196078431371" green="0.8666666666666667" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="85" id="AxT-PN-Ln7"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Add Friend">
@@ -1145,7 +1148,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rwi-hr-9PZ" customClass="RoundedWithBorder" customModule="Mito_1_0" customModuleProvider="target">
-                                                <rect key="frame" x="92" y="0.0" width="72" height="30"/>
+                                                <rect key="frame" x="105" y="0.0" width="85" height="30"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                                 <color key="tintColor" red="0.25490196078431371" green="0.8666666666666667" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="0 Friends">
@@ -1166,7 +1169,7 @@
                                 </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eV1-zt-RHT">
-                                <rect key="frame" x="0.0" y="319.5" width="375" height="237.5"/>
+                                <rect key="frame" x="0.0" y="353.5" width="375" height="203.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="homeCell" rowHeight="106" id="JOH-V7-ktB" customClass="HomeTableViewCell" customModule="Mito_1_0" customModuleProvider="target">
@@ -1202,7 +1205,7 @@
                             <constraint firstItem="eV1-zt-RHT" firstAttribute="trailing" secondItem="yfj-t1-xhc" secondAttribute="trailing" id="U3x-fY-bOK"/>
                             <constraint firstItem="Zl8-Uj-hDH" firstAttribute="trailing" secondItem="yfj-t1-xhc" secondAttribute="trailing" constant="-10" id="YKt-A1-lNa"/>
                             <constraint firstItem="Zl8-Uj-hDH" firstAttribute="leading" secondItem="yfj-t1-xhc" secondAttribute="leading" constant="10" id="jK0-6c-i0h"/>
-                            <constraint firstItem="iIt-YC-sQM" firstAttribute="top" secondItem="yfj-t1-xhc" secondAttribute="top" constant="20" id="rOn-S6-wdQ"/>
+                            <constraint firstItem="iIt-YC-sQM" firstAttribute="top" secondItem="yfj-t1-xhc" secondAttribute="top" constant="10" id="rOn-S6-wdQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yfj-t1-xhc"/>
                     </view>
@@ -1766,7 +1769,7 @@
                 <viewControllerPlaceholder storyboardName="Checkout" referencedIdentifier="UIViewController-CbO-zi-xvJ" id="J5E-gk-jdR" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tZx-Y6-HKT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4866" y="-154"/>
+            <point key="canvasLocation" x="4217" y="-155"/>
         </scene>
         <!--Search People-->
         <scene sceneID="MWu-N9-DXP">
@@ -1782,7 +1785,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="fUi-7Q-GTU">
                                         <rect key="frame" x="10" y="30" width="355" height="50"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Tg6-QB-6iz">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Tg6-QB-6iz" customClass="RoundedImage" customModule="Mito_1_0" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="VOa-Dn-yDX"/>
@@ -1838,7 +1841,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="105.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Benny Souriyadeth" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P2z-1j-COg">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P2z-1j-COg">
                                                             <rect key="frame" x="124" y="12" width="226" height="24"/>
                                                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                                             <nil key="textColor"/>
@@ -1953,7 +1956,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="WK2-8u-3L9">
                                         <rect key="frame" x="10" y="30" width="355" height="50"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lnr-Wb-d36">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lnr-Wb-d36" customClass="RoundedImage" customModule="Mito_1_0" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="gbB-0f-szr"/>
@@ -2214,7 +2217,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="ruP-Sx-HS5"/>
         <segue reference="kS1-pK-LOk"/>
-        <segue reference="39f-jC-Icg"/>
+        <segue reference="5va-cB-XlO"/>
         <segue reference="cI7-Td-TzM"/>
         <segue reference="sAd-vQ-kz5"/>
     </inferredMetricsTieBreakers>
