@@ -382,14 +382,13 @@ const AmazonHashHandler = () => {
             .then(function (response) {
                 var xml = response.data
                 parseString(xml, function (err, result) {
-                    console.log(result.ItemLookupResponse);
+                    console.log(result);
                     let variationArray = result.ItemLookupResponse.Items[0].Item[0].Variations[0].Item;
-                    console.log("variation array: ", variationArray)
                     let productsObject = _.groupBy(variationArray, (o) => {
-                        return o.Color;
+                        return o.ItemAttributes[0].Color;
                     })
                     console.log("products: ", productsObject);
-                    res.json(result);
+                    res.json(productsObject);
                 });
 
             })
