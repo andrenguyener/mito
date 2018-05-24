@@ -2184,6 +2184,7 @@
                     <connections>
                         <outlet property="productTableView" destination="qfx-4Y-f3S" id="573-Uj-QqF"/>
                         <outlet property="searchBar" destination="t70-Qz-J7F" id="18q-WQ-cQ3"/>
+                        <outlet property="spinnerProductSearch" destination="Fl4-nx-3no" id="6mn-s8-i7V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L38-b9-TK8" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -42,7 +42,7 @@ class AppData: NSObject {
     open var arrFriendsFeedItems: [FeedItem] = []
     open var arrMyFeedItems: [FeedItem] = []
     open var arrPaymentMethods: [PaymentMethod] = []
-    open var arrItems: [ImageSet] = []
+    open var arrVariations: [String: [Item]] = [:]
     
     open var arrPaymentInfoTitles: [String] = ["Payment method", "Billing address"]
     

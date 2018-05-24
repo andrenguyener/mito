@@ -18,7 +18,7 @@ class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchBar.placeholder = "Search for products"
+        searchBar.placeholder = "Find more friends"
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
         searchBar.text = strSearchQuery

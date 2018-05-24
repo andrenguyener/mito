@@ -8,22 +8,25 @@
 
 import Foundation
 
-struct urlImage: Decodable {
-    let ImageSet: [ImageSet]
+struct Image {
+    let images: [String]
 }
 
-struct MediumImage: Decodable {
-    let URL: [String]
+struct Item {
+    let strTitle: String
+    let strASIN: String
+    let strSize: String
+    let arrImages: [String] // Image
 }
 
-struct ImageSet: Decodable {
-    let MediumImage: [MediumImage]
-}
-
-struct ImageSets: Decodable {
-    let ImageSets: [ImageSet]
-}
-
-struct Item: Decodable {
-    let Items: [ImageSets]
-}
+//struct urlImage: Decodable {
+//    let ImageSet: [ImageSet]
+//}
+//
+//struct MediumImage: Decodable {
+//    let URL: [String]
+//}
+//
+//struct ImageSet: Decodable {
+//    let MediumImage: [MediumImage]
+//}

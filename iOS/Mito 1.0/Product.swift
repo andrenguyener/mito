@@ -8,13 +8,14 @@
 
 import Foundation
 
-class Product {
+struct Product {
     var image: String = ""
     var ASIN: String = ""
     var title: String = ""
     var publisher: String = ""
     var price: String = ""
     var description: String = ""
+    var strParentASIN: String = ""
     
     init(image: String, ASIN: String, title: String, publisher: String, price: String, description: String) {
         self.image = image
