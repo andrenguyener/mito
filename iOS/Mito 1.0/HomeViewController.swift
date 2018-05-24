@@ -57,36 +57,32 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         ]
         Alamofire.request(urlGetMyAddresses!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
-            case .success:
-                if let dict = response.data {
-                    dict
-                }
-                
+            case .success:                
                 if let dictionary = response.value {
                     print(dictionary)
                     let objDict = dictionary as! NSDictionary
                     print(objDict.allKeys)
-                    let objItemLookupResponse = objDict["ItemLookupResponse"] as! NSDictionary
-                    let arrAboveItems = objItemLookupResponse["Items"] as! NSArray
-                    let objItems = arrAboveItems[0] as! NSDictionary
-                    print(objItems.allKeys)
-                    let arrFakeItem = objItems["Item"] as! NSArray
-                    let objFakeItem = arrFakeItem[0] as! NSDictionary
-                    let arrVariations = objFakeItem["Variations"] as! NSArray
-                    let objVariation = arrVariations[0] as! NSDictionary
-                    let arrItems = objVariation["Item"] as! NSArray
-                    let firstItem = arrItems[0] as! NSDictionary
-                    let arrImageSets = firstItem["ImageSets"] as! NSArray
-                    let objImageSets = arrImageSets[0] as! NSDictionary
-                    print(objImageSets)
-                    let dataExample: Data = NSKeyedArchiver.archivedData(withRootObject: objImageSets)
-                    let decoder = JSONDecoder()
-                    do {
-                        self.appdata.arrItems = try decoder.decode([ImageSet].self, from: dataExample)
-                    } catch let jsonErr {
-                        print("Failed to decode: \(jsonErr)")
-                    }
-                    print(self.appdata.arrItems.count)
+//                    let objItemLookupResponse = objDict["ItemLookupResponse"] as! NSDictionary
+//                    let arrAboveItems = objItemLookupResponse["Items"] as! NSArray
+//                    let objItems = arrAboveItems[0] as! NSDictionary
+//                    print(objItems.allKeys)
+//                    let arrFakeItem = objItems["Item"] as! NSArray
+//                    let objFakeItem = arrFakeItem[0] as! NSDictionary
+//                    let arrVariations = objFakeItem["Variations"] as! NSArray
+//                    let objVariation = arrVariations[0] as! NSDictionary
+//                    let arrItems = objVariation["Item"] as! NSArray
+//                    let firstItem = arrItems[0] as! NSDictionary
+//                    let arrImageSets = firstItem["ImageSets"] as! NSArray
+//                    let objImageSets = arrImageSets[0] as! NSDictionary
+//                    print(objImageSets)
+//                    let dataExample: Data = NSKeyedArchiver.archivedData(withRootObject: objImageSets)
+//                    let decoder = JSONDecoder()
+//                    do {
+//                        self.appdata.arrItems = try decoder.decode([ImageSet].self, from: dataExample)
+//                    } catch let jsonErr {
+//                        print("Failed to decode: \(jsonErr)")
+//                    }
+//                    print(self.appdata.arrItems.count)
 //                    print(self.appdata.arrItems)
 //                    for item in arrItems {
 //
