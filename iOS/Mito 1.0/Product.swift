@@ -17,6 +17,16 @@ struct Product {
     var description: String = ""
     var strParentASIN: String = ""
     
+    init(image: String, ASIN: String, title: String, publisher: String, price: String, description: String, strParentASIN: String) {
+        self.image = image
+        self.ASIN = ASIN
+        self.title = title
+        self.publisher = publisher
+        self.price = price
+        self.description = description
+        self.strParentASIN = strParentASIN
+    }
+    
     init(image: String, ASIN: String, title: String, publisher: String, price: String, description: String) {
         self.image = image
         self.ASIN = ASIN

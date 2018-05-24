@@ -17,6 +17,7 @@ struct Item {
     let strASIN: String
     let strSize: String
     let arrImages: [String] // Image
+    let strColor: String
 }
 
 //struct urlImage: Decodable {

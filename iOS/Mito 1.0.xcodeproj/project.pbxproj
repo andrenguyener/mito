@@ -103,6 +103,8 @@
 		DA6D6D12209E1B5300D74666 /* Mito Green Background.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6D6D11209E1B5000D74666 /* Mito Green Background.png */; };
 		DA80594020AF2F1F004B33B8 /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA80593F20AF2F1F004B33B8 /* HomeTableViewCell.xib */; };
 		DA92880C20A0B50E009EABD7 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA92880B20A0B50E009EABD7 /* PasswordViewController.swift */; };
+		DAA453E720B6D15F000C43AA /* ProductImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA453E520B6D15F000C43AA /* ProductImageCollectionViewCell.swift */; };
+		DAA453E820B6D15F000C43AA /* ProductImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAA453E620B6D15F000C43AA /* ProductImageCollectionViewCell.xib */; };
 		DAA9075E209963C400F151E1 /* AddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA9075D209963C400F151E1 /* AddressTableViewCell.swift */; };
 		DAC178BC2088240F0039AA08 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC178BB2088240F0039AA08 /* Address.swift */; };
 		DAC178BE2088385A0039AA08 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC178BD2088385A0039AA08 /* Package.swift */; };
@@ -243,6 +245,8 @@
 		DA6D6D11209E1B5000D74666 /* Mito Green Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mito Green Background.png"; sourceTree = "<group>"; };
 		DA80593F20AF2F1F004B33B8 /* HomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTableViewCell.xib; sourceTree = "<group>"; };
 		DA92880B20A0B50E009EABD7 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
+		DAA453E520B6D15F000C43AA /* ProductImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		DAA453E620B6D15F000C43AA /* ProductImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		DAA9075D209963C400F151E1 /* AddressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressTableViewCell.swift; sourceTree = "<group>"; };
 		DAC178BB2088240F0039AA08 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		DAC178BD2088385A0039AA08 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
@@ -453,6 +457,8 @@
 				DA28344A20B10AE90084571D /* PaymentInfoTableViewCell.xib */,
 				DAF7BB4B20B6A592007BE237 /* SearchProductsViewController.swift */,
 				DAF7BB4D20B6A649007BE237 /* SearchFriendsViewController.swift */,
+				DAA453E520B6D15F000C43AA /* ProductImageCollectionViewCell.swift */,
+				DAA453E620B6D15F000C43AA /* ProductImageCollectionViewCell.xib */,
 			);
 			path = "Mito 1.0";
 			sourceTree = "<group>";
@@ -600,6 +606,7 @@
 				B2619140206C5E5E004597F0 /* Roboto-Italic.ttf in Resources */,
 				B247198D204626ED006CF6C2 /* Cart Solid White Icon.png in Resources */,
 				DA6CB7F22064E9B700962814 /* Back.png in Resources */,
+				DAA453E820B6D15F000C43AA /* ProductImageCollectionViewCell.xib in Resources */,
 				B2548FFD2055EA97000123D0 /* benny.png in Resources */,
 				B24719832046245E006CF6C2 /* Notification Icon SG.png in Resources */,
 				DA5D683E2058A45F00E86BE8 /* ProductDetails.storyboard in Resources */,
@@ -762,6 +769,7 @@
 				DA5D339320B203C100085F95 /* OrderSummaryTableViewCell.swift in Sources */,
 				DA27C21E204371CE00CCFD60 /* ProductDetailsViewController.swift in Sources */,
 				DA23437E20AE53BE003E4D6A /* ChooseAddressViewController.swift in Sources */,
+				DAA453E720B6D15F000C43AA /* ProductImageCollectionViewCell.swift in Sources */,
 				B298CB052084722500EED243 /* RoundedImage.swift in Sources */,
 				B272DC2E2043BBE400EE2121 /* AppData.swift in Sources */,
 				DAD9953720423EE9007A7687 /* TableViewCell.swift in Sources */,

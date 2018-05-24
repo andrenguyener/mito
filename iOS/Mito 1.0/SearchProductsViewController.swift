@@ -112,8 +112,9 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
             let arrItem = objItems["Item"] as! NSArray
             for itemObj in arrItem {
                 let item = itemObj as! NSDictionary
+                var strParentASIN = ""
                 if item["ParentASIN"] != nil {
-                    print("ParentASIN: \(item["ParentASIN"])")
+                    strParentASIN = self.fnAccesStringinObj(dictObj: item, strAttribute: "ParentASIN")
                 }
                 
                 let strASIN = self.fnAccesStringinObj(dictObj: item, strAttribute: "ASIN")
@@ -165,7 +166,7 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
                 } else {
                     publisher_brand = "Brand"
                 }
-                let product: Product = Product(image: strImageURL, ASIN: strASIN, title: title, publisher: publisher_brand, price: formattedPrice, description: itemFeature)
+                let product: Product = Product(image: strImageURL, ASIN: strASIN, title: title, publisher: publisher_brand, price: formattedPrice, description: itemFeature, strParentASIN: strParentASIN)
                 self.appdata.arrProductSearchResults.append(product)
                 //                self.swirlSearchImg.isHidden = true
             }

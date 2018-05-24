@@ -44,62 +44,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         appdata.socket.delegate = appDelegate.self
         appdata.socket.connect()
         appdata.fnLoadFriendActivity(tblview: tableView)
-        fnSearchByASIN(strASIN: "B079N9RLYT")
-    }
-    
-    func fnSearchByASIN(strASIN: String) {
-        let urlGetMyAddresses = URL(string: "https://api.projectmito.io/v1/amazonproductvariety/")
-        let parameters: Parameters = [
-            "parentASIN": strASIN
-        ]
-        let headers: HTTPHeaders = [
-            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
-        ]
-        Alamofire.request(urlGetMyAddresses!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                if let dictionary = response.value {
-                    let objColors = dictionary as! NSDictionary
-                    let objColorsKeys = objColors.allKeys as NSArray
-                    for color in objColorsKeys {
-                        let strColor = color as! String
-                        let arrSizes = objColors[strColor] as! NSArray
-                        print("Color: \(strColor)")
-                        self.appdata.arrVariations[strColor] = []
-                        for size in arrSizes {
-                            let objSize = size as! NSDictionary
-                            let arrASIN = objSize["ASIN"] as! NSArray
-                            let strASIN = "\(arrASIN[0])"
-                            
-                            let arrImageSets = objSize["ImageSets"] as! NSArray
-                            let objImageSets = arrImageSets[0] as! NSDictionary
-                            let arrImageSet = objImageSets["ImageSet"] as! NSArray
-                            var arrImages: [String] = []
-                            for image in arrImageSet {
-                                let objImage = image as! NSDictionary
-                                let arrMedImage = objImage["MediumImage"] as! NSArray
-                                let objMedImage = arrMedImage[0] as! NSDictionary
-                                let arrURL = objMedImage["URL"] as! NSArray
-                                let strURL = arrURL[0] as! String
-                                arrImages.append(strURL)
-                            }
-                            let arrAttributes = objSize["ItemAttributes"] as! NSArray
-                            let objAttributes = arrAttributes[0] as! NSDictionary
-                            let arrTitle = objAttributes["Title"] as! NSArray
-                            let strTitle = arrTitle[0] as! String
-                            let arrSize = objAttributes["Size"] as! NSArray
-                            let strSize = arrSize[0] as! String
-                            
-                            let item: Item = Item(strTitle: strTitle, strASIN: strASIN, strSize: strSize, arrImages: arrImages)
-                            self.appdata.arrVariations[strColor]?.append(item)
-                        }
-                    }
-                }
-            case .failure(let error):
-                print("Get products error")
-                print(error.localizedDescription)
-            }
-        }
     }
     
     @IBAction func switchTab(_ sender: UISegmentedControl) {

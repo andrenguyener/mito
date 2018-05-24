@@ -279,8 +279,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 } else {
                     publisher_brand = "Brand"
                 }
-                let product: Product = Product(image: strImageURL, ASIN: strASIN, title: title, publisher: publisher_brand, price: formattedPrice, description: itemFeature)
-                self.appdata.arrProductSearchResults.append(product)
+//                let product: Product = Product(image: strImageURL, ASIN: strASIN, title: title, publisher: publisher_brand, price: formattedPrice, description: itemFeature)
+//                self.appdata.arrProductSearchResults.append(product)
                 //                self.swirlSearchImg.isHidden = true
             }
             DispatchQueue.main.async {
