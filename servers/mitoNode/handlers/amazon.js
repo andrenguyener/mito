@@ -2,6 +2,7 @@
 
 const express = require('express');
 const axios = require('axios');
+var _ = require('lodash');
 // var parser = require('xml2json');
 var parseString = require('xml2js').parseString;
 const Address = require('./../models/amazon/amazon');
@@ -382,6 +383,12 @@ const AmazonHashHandler = () => {
                 var xml = response.data
                 parseString(xml, function (err, result) {
                     console.log(result.ItemLookupResponse);
+                    let variationArray = result.ItemLookupResponse.Items[0].Item[0].Variations[0].Item;
+                    console.log("variation array: ", variationArray)
+                    let productsObject = _.groupBy(variationArray, (o) => {
+                        return o.Color;
+                    })
+                    console.log("products: ", productsObject);
                     res.json(result);
                 });
 
