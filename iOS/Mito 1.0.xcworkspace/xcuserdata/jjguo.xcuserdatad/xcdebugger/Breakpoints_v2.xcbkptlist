@@ -55,22 +55,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Mito 1.0/ProductDetailsViewController.swift"
-            timestampString = "548857836.079824"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
-            landmarkName = "fnSearchByASIN(strASIN:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Mito 1.0/CartViewController.swift"
             timestampString = "548806192.032285"
             startingColumnNumber = "9223372036854775807"
@@ -142,38 +126,6 @@
             startingLineNumber = "108"
             endingLineNumber = "108"
             landmarkName = "searchBar(_:textDidChange:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Mito 1.0/ProductDetailsViewController.swift"
-            timestampString = "548857836.081067"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
-            landmarkName = "fnSearchByASIN(strASIN:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Mito 1.0/ProductDetailsViewController.swift"
-            timestampString = "548857836.08214"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "182"
-            endingLineNumber = "182"
-            landmarkName = "fnSearchByASIN(strASIN:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -423,22 +375,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Mito 1.0/ProductDetailsViewController.swift"
-            timestampString = "548857836.083685"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
-            landmarkName = "fnSearchByASIN(strASIN:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Mito 1.0/CartViewController.swift"
             timestampString = "548806192.033283"
             startingColumnNumber = "9223372036854775807"
@@ -607,70 +543,6 @@
                   offsetFromSymbolStart = "48">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Mito 1.0/ProductDetailsViewController.swift"
-            timestampString = "548857836.0851001"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
-            landmarkName = "fnSearchByASIN(strASIN:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Swift.String&gt;) -&gt; () in Mito_1_0.ProductDetailsViewController.btnAddToCartPressed(Any) -&gt; ()"
-                  moduleName = "Mito 1.0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jjguo/code/mito/iOS/Mito%201.0/ProductDetailsViewController.swift"
-                  timestampString = "547152609.307507"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "108"
-                  endingLineNumber = "108"
-                  offsetFromSymbolStart = "87">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Swift.String&gt;) -&gt; () in Mito_1_0.ProductDetailsViewController.btnAddToCartPressed(Any) -&gt; ()"
-                  moduleName = "Mito 1.0"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jjguo/code/mito/iOS/Mito%201.0/ProductDetailsViewController.swift"
-                  timestampString = "547152609.3117959"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "108"
-                  endingLineNumber = "108"
-                  offsetFromSymbolStart = "120">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Mito 1.0/ProductDetailsViewController.swift"
-            timestampString = "548857836.085984"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "233"
-            endingLineNumber = "233"
-            landmarkName = "fnSearchByASIN(strASIN:)"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -984,7 +856,7 @@
                   moduleName = "Mito 1.0"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/jjguo/code/mito/iOS/Mito%201.0/LoginViewController.swift"
-                  timestampString = "548857836.504544"
+                  timestampString = "548882501.334649"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "169"
@@ -999,7 +871,7 @@
                   moduleName = "Mito 1.0"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/jjguo/code/mito/iOS/Mito%201.0/LoginViewController.swift"
-                  timestampString = "548857836.506817"
+                  timestampString = "548882501.3369451"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "169"
@@ -1048,7 +920,7 @@
                   moduleName = "Mito 1.0"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/jjguo/code/mito/iOS/Mito%201.0/LoginViewController.swift"
-                  timestampString = "548857836.5185519"
+                  timestampString = "548882501.3479789"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "165"
@@ -1063,7 +935,7 @@
                   moduleName = "Mito 1.0"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/jjguo/code/mito/iOS/Mito%201.0/LoginViewController.swift"
-                  timestampString = "548857836.520553"
+                  timestampString = "548882501.349967"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "166"
@@ -1086,22 +958,6 @@
             startingLineNumber = "401"
             endingLineNumber = "401"
             landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Mito 1.0/ProductDetailsViewController.swift"
-            timestampString = "548857836.087659"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
-            landmarkName = "fnSearchByASIN(strASIN:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

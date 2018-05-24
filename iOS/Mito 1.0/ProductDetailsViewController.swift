@@ -293,8 +293,8 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print("arrVariations count: \(appdata.arrVariations.count)")
-        return 0
-//        return appdata.arrVariations.count
+//        return 0
+        return appdata.arrVariations.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
