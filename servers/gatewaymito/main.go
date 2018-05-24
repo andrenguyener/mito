@@ -182,6 +182,8 @@ func main() {
 	mux.Handle("/v1/amazonhash/", NewServiceProxy(splitMitoNodeAddrs, ctx))
 	mux.Handle("/v1/amazonhashtest", NewServiceProxy(splitMitoNodeAddrs, ctx))
 	mux.Handle("/v1/amazonhashtest/", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/amazonproductvariety", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/amazonproductvariety/", NewServiceProxy(splitMitoNodeAddrs, ctx))
 	mux.Handle("/v1/amazonsearch", NewServiceProxy(splitMitoNodeAddrs, ctx))
 	mux.Handle("/v1/amazonsearch/", NewServiceProxy(splitMitoNodeAddrs, ctx))
 	mux.Handle("/v1/cart", NewServiceProxy(splitMitoNodeAddrs, ctx))
