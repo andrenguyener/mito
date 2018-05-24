@@ -34,7 +34,9 @@ const OrderHandler = (orderStore) => {
             })
     });
 
-    router.get('', (req, res) => {
+    // ZINC get an order 
+    // attach the the requestid
+    router.post('', (req, res) => {
 
 
     });
