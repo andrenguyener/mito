@@ -20,11 +20,13 @@ class PeopleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var btnNumFriends: UIButton!
     @IBOutlet weak var addFriendbtn: UIButton!
     @IBOutlet weak var tblviewFeed: UITableView!
+    @IBOutlet weak var btnShopForFriend: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadPersonData()
+        btnShopForFriend.setTitle("Shop for \(appdata.personToView.firstName)", for: .normal)
         tblviewFeed.delegate = self
         tblviewFeed.dataSource = self
         tblviewFeed.rowHeight = 106

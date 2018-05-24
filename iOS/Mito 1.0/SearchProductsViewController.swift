@@ -20,6 +20,7 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        self.navigationController?.setNavigationBarHidden(true, animated: animated)
         searchBar.text = ""
         searchBar.placeholder = "Search for products"
         productTableView.delegate = self
@@ -31,6 +32,10 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         spinnerProductSearch.isHidden = true
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
     override func didReceiveMemoryWarning() {
@@ -179,6 +184,13 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("Product count: \(appdata.arrProductSearchResults.count)")
         return appdata.arrProductSearchResults.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        myIndex = indexPath.row
+        appdata.intCurrIndex = myIndex
+        performSegue(withIdentifier: "segSeeProductDetails", sender: self)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

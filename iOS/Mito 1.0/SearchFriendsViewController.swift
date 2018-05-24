@@ -30,6 +30,10 @@ class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         peopleTableView.keyboardDismissMode = .onDrag
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -106,7 +110,7 @@ class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITabl
             mySection = 1
         }
         appdata.personToView = appdata.arrCurrFriendsAndAllMitoUsers[mySection][myIndex]
-        performSegue(withIdentifier: "searchToMitoProfile", sender: self)
+        performSegue(withIdentifier: "segSeeMitoProfile", sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
