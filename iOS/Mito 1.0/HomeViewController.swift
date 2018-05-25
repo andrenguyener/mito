@@ -47,12 +47,15 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         appdata.socket.delegate = appDelegate.self
         appdata.socket.connect()
         fnAddRefreshersNotificationsAndPackages()
-        appdata.fnLoadFriendActivity(tblview: tableView, refresherNotification: refresherNotification, view: noFeedView)
-//        if (appdata.arrMyFeedItems.count == 0) {
-//            noFeedView.isHidden = false
-//        } else {
-//            noFeedView.isHidden = true
-//        }
+        DispatchQueue.main.async {
+            self.appdata.fnLoadFriendActivity(tblview: self.tableView, refresherNotification: self.refresherNotification, view: self.noFeedView)
+            if (self.appdata.arrMyFeedItems.count == 0) {
+                self.noFeedView.isHidden = false
+            } else {
+                self.noFeedView.isHidden = true
+            }
+        }
+
     }
     
     func fnAddRefreshersNotificationsAndPackages() {
