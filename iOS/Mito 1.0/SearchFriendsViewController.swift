@@ -14,6 +14,7 @@ class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITabl
 //    @IBOutlet weak var peopleView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
 //    @IBOutlet weak var swirlSearchImg: UIImageView!
+    @IBOutlet weak var imgCurrentRecipient: UIImageView!
     var appdata = AppData.shared
     
     override func viewDidLoad() {
@@ -28,7 +29,9 @@ class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         peopleTableView.dataSource = self
         peopleTableView.rowHeight = 106
         peopleTableView.keyboardDismissMode = .onDrag
-        // Do any additional setup after loading the view.
+        if appdata.personRecipient != nil {
+            appdata.fnDisplayImage(strImageURL: appdata.personRecipient.avatar, img: imgCurrentRecipient, boolCircle: true)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

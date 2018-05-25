@@ -34,6 +34,11 @@ class PeopleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
         tblviewFeed.register(nibAddNewAddress, forCellReuseIdentifier: "FeedCopyCell")
     }
     
+    @IBAction func btnShopNowForFriend(_ sender: Any) {
+        appdata.personRecipient = appdata.personToView
+        performSegue(withIdentifier: "segShopNowForFriend", sender: self)
+    }
+    
     func loadPersonData() {
         fnCheckFriendStatus()
         let friend = appdata.personToView

@@ -408,7 +408,7 @@ class AppData: NSObject {
                     }
                 }
             })
-        } else {
+        } else if strImageURL != "dd" {
             let decodedImage = Data(base64Encoded: strImageURL)
             var image = UIImage(data: decodedImage!)
             image = image?.af_imageRoundedIntoCircle()

@@ -15,6 +15,8 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var spinnerProductSearch: UIActivityIndicatorView!
     
+    @IBOutlet weak var imgCurrentRecipient: UIImageView!
+    
     var appdata = AppData.shared
     var strProductResultsPageNumber = 1
     
@@ -30,7 +32,9 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         searchBar.returnKeyType = UIReturnKeyType.done
         searchBar.text = strSearchQuery
         spinnerProductSearch.isHidden = true
-
+        if appdata.personRecipient != nil {
+            appdata.fnDisplayImage(strImageURL: appdata.personRecipient.avatar, img: imgCurrentRecipient, boolCircle: true)
+        }
         // Do any additional setup after loading the view.
     }
     

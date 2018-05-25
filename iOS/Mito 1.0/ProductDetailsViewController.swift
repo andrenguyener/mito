@@ -30,6 +30,7 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
         pickerviewQuantity.delegate = self
         pickerviewQuantity.dataSource = self
         self.navigationItem.title = "Product"
+        self.navigationController?.isNavigationBarHidden = false
         appdata.fnDisplayImage(strImageURL: objProduct.image, img: prodImage, boolCircle: false)
         prodTitle.text = objProduct.title
         prodPub.text = objProduct.publisher
@@ -310,6 +311,13 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
             let objProduct = appdata.arrVariations[indexPath.row][0].arrImages
             let primaryImage = objProduct[objProduct.count - 1]
             appdata.fnDisplayImage(strImageURL: primaryImage, img: cell.imgProduct, boolCircle: false)
+//            if indexPath.row == intImageIndex {
+//                cell.imgProduct.layer.borderColor = UIColor.red.cgColor
+//                cell.imgProduct.layer.borderWidth = 1
+//            } else {
+//                cell.imgProduct.layer.borderColor = UIColor.white.cgColor
+//                cell.imgProduct.layer.borderWidth = 0
+//            }
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SizeCell", for: indexPath) as! SizeCollectionViewCell
@@ -322,7 +330,18 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        let item = collectionView[indexPath.row]
         intImageIndex = indexPath.row
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductImageCell", for: indexPath) as! ProductImageCollectionViewCell
+        cell.imgProduct.layer.borderColor = UIColor.red.cgColor
+        cell.imgProduct.layer.borderWidth = 1
+//        if indexPath.row == intImageIndex {
+//            cell.imgProduct.layer.borderColor = UIColor.red.cgColor
+//            cell.imgProduct.layer.borderWidth = 1
+//        } else {
+//            cell.imgProduct.layer.borderColor = UIColor.white.cgColor
+//            cell.imgProduct.layer.borderWidth = 0
+//        }
         viewProductSizes.reloadData()
     }
     

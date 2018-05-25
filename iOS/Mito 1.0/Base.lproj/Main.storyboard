@@ -1195,6 +1195,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="btnShopNowForFriend:" destination="mKW-hw-jiX" eventType="touchUpInside" id="NR4-So-SWF"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1223,6 +1226,7 @@
                         <outlet property="lblUsername" destination="fZd-x7-rdQ" id="TFf-5A-aga"/>
                         <outlet property="tblviewFeed" destination="eV1-zt-RHT" id="cVb-1y-PGL"/>
                         <segue destination="5ev-RP-TnR" kind="show" identifier="segPeopleDetailsToSearchView" id="kS1-pK-LOk"/>
+                        <segue destination="cz1-uG-LnH" kind="show" identifier="segShopNowForFriend" id="Vto-2H-CEr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="55a-NT-Bh9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1795,6 +1799,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="VOa-Dn-yDX"/>
+                                                    <constraint firstAttribute="width" secondItem="Tg6-QB-6iz" secondAttribute="height" multiplier="1:1" id="b2k-Vz-h7y"/>
                                                 </constraints>
                                             </imageView>
                                             <searchBar contentMode="redraw" placeholder="Search People" backgroundImage="Mito Green Background.png" translatesAutoresizingMaskIntoConstraints="NO" id="sdi-qb-JYD">
@@ -1934,9 +1939,11 @@
                     <navigationItem key="navigationItem" id="C2W-bh-gJB"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="imgCurrentRecipient" destination="Tg6-QB-6iz" id="5Ow-6h-GO8"/>
                         <outlet property="peopleTableView" destination="B6w-LN-EUf" id="Z9K-qX-l5K"/>
                         <outlet property="searchBar" destination="sdi-qb-JYD" id="2RM-lG-vKj"/>
                         <segue destination="mKW-hw-jiX" kind="show" identifier="segSeeMitoProfile" id="SkB-8n-kJk"/>
+                        <segue destination="cz1-uG-LnH" kind="show" identifier="segChooseFriendNowShop" id="eyY-AF-kxf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F76-Y0-eKS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1961,6 +1968,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="gbB-0f-szr"/>
+                                                    <constraint firstAttribute="width" secondItem="lnr-Wb-d36" secondAttribute="height" multiplier="1:1" id="j21-xI-BRe"/>
                                                 </constraints>
                                             </imageView>
                                             <searchBar contentMode="redraw" placeholder="Search Products" backgroundImage="Mito Green Background.png" translatesAutoresizingMaskIntoConstraints="NO" id="t70-Qz-J7F">
@@ -2187,6 +2195,7 @@
                     <navigationItem key="navigationItem" id="0G6-7s-OlP"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="imgCurrentRecipient" destination="lnr-Wb-d36" id="NJp-za-hVG"/>
                         <outlet property="productTableView" destination="qfx-4Y-f3S" id="573-Uj-QqF"/>
                         <outlet property="searchBar" destination="t70-Qz-J7F" id="18q-WQ-cQ3"/>
                         <outlet property="spinnerProductSearch" destination="Fl4-nx-3no" id="6mn-s8-i7V"/>
@@ -2247,6 +2256,7 @@
         <image name="swirlsearch" width="2257" height="5634"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="eyY-AF-kxf"/>
         <segue reference="ruP-Sx-HS5"/>
         <segue reference="Oq9-F1-cCO"/>
         <segue reference="kS1-pK-LOk"/>
