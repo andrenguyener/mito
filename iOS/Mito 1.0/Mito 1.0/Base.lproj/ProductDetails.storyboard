@@ -60,16 +60,16 @@
                                                 </constraints>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vUt-xN-Ool" userLabel="Product_Info View">
-                                                <rect key="frame" x="20" y="303" width="335" height="127"/>
+                                                <rect key="frame" x="20" y="303" width="335" height="131.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AMD-hj-WHc">
-                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="25"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="29.5"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="25"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DPq-Fd-8Bo">
-                                                        <rect key="frame" x="0.0" y="35" width="335" height="20"/>
+                                                        <rect key="frame" x="0.0" y="39.5" width="335" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="gNC-dO-eom"/>
                                                         </constraints>
@@ -78,7 +78,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.65000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="pTd-Il-3Ti">
-                                                        <rect key="frame" x="0.0" y="65" width="335" height="16"/>
+                                                        <rect key="frame" x="0.0" y="69.5" width="335" height="16"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="16" id="hRq-2L-HWa"/>
                                                         </constraints>
@@ -87,7 +87,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="GI8-0O-WGK" userLabel="Quantity Stack View">
-                                                        <rect key="frame" x="0.0" y="91" width="335" height="36"/>
+                                                        <rect key="frame" x="0.0" y="95.5" width="335" height="36"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ek-bs-E18" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="36"/>
@@ -129,12 +129,10 @@
                                                     <constraint firstItem="pTd-Il-3Ti" firstAttribute="leading" secondItem="vUt-xN-Ool" secondAttribute="leading" id="rEQ-85-pdL"/>
                                                 </constraints>
                                             </stackView>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="e28-n0-hdu">
-                                                <rect key="frame" x="0.0" y="480" width="375" height="150"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="150" id="ad1-3V-t99"/>
-                                                </constraints>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceHorizontal="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="e28-n0-hdu">
+                                                <rect key="frame" x="0.0" y="442" width="375" height="150"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ym5-NU-5n9">
                                                     <size key="itemSize" width="124" height="129"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -152,18 +150,36 @@
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceHorizontal="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fL9-fj-c9K">
+                                                <rect key="frame" x="0.0" y="583" width="375" height="55"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="KFZ-8o-CFx">
+                                                    <size key="itemSize" width="126" height="50"/>
+                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                </collectionViewFlowLayout>
+                                                <cells>
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SizeCell" id="3rg-bL-biT" customClass="SizeCollectionViewCell" customModule="Mito_1_0" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="2.5" width="126" height="50"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                            <rect key="frame" x="0.0" y="0.0" width="126" height="50"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </view>
+                                                    </collectionViewCell>
+                                                </cells>
+                                            </collectionView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="H3a-LP-2zx" secondAttribute="trailing" constant="20" id="22f-Mb-ztM"/>
                                             <constraint firstAttribute="trailing" secondItem="vUt-xN-Ool" secondAttribute="trailing" constant="20" id="8eq-49-qSY"/>
-                                            <constraint firstItem="e28-n0-hdu" firstAttribute="leading" secondItem="1yK-pd-ga6" secondAttribute="leading" id="9Cx-wF-2xl"/>
                                             <constraint firstItem="GTz-CR-asI" firstAttribute="centerX" secondItem="1yK-pd-ga6" secondAttribute="centerX" id="9xN-Ql-Be7"/>
-                                            <constraint firstAttribute="bottom" secondItem="e28-n0-hdu" secondAttribute="bottom" constant="100" id="HLl-0k-c5O"/>
                                             <constraint firstItem="vUt-xN-Ool" firstAttribute="top" secondItem="GTz-CR-asI" secondAttribute="bottom" constant="20" id="IpF-K9-YoQ"/>
                                             <constraint firstItem="H3a-LP-2zx" firstAttribute="centerX" secondItem="1yK-pd-ga6" secondAttribute="centerX" id="Juo-Xm-j8I"/>
                                             <constraint firstItem="yoe-L6-xNv" firstAttribute="top" secondItem="H3a-LP-2zx" secondAttribute="bottom" constant="10" id="LFh-6s-Dyd"/>
-                                            <constraint firstItem="e28-n0-hdu" firstAttribute="centerX" secondItem="1yK-pd-ga6" secondAttribute="centerX" id="O3C-3i-YTk"/>
                                             <constraint firstItem="yoe-L6-xNv" firstAttribute="leading" secondItem="1yK-pd-ga6" secondAttribute="leading" constant="20" id="TWQ-LF-kzc"/>
                                             <constraint firstItem="GTz-CR-asI" firstAttribute="top" secondItem="yoe-L6-xNv" secondAttribute="bottom" constant="20" id="XnA-gz-iLW"/>
                                             <constraint firstItem="vUt-xN-Ool" firstAttribute="leading" secondItem="1yK-pd-ga6" secondAttribute="leading" constant="20" id="Ydw-Y5-lxw"/>
@@ -172,7 +188,6 @@
                                             <constraint firstAttribute="height" constant="730" id="sJi-cP-MIu"/>
                                             <constraint firstItem="yoe-L6-xNv" firstAttribute="width" secondItem="H3a-LP-2zx" secondAttribute="width" id="tKw-LW-m0p"/>
                                             <constraint firstItem="H3a-LP-2zx" firstAttribute="top" secondItem="1yK-pd-ga6" secondAttribute="top" constant="20" id="wHS-vD-RW6"/>
-                                            <constraint firstItem="e28-n0-hdu" firstAttribute="top" secondItem="vUt-xN-Ool" secondAttribute="bottom" constant="50" id="zyk-B8-Mh8"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -267,6 +282,7 @@
                         <outlet property="prodPub" destination="yoe-L6-xNv" id="fow-cP-Re0"/>
                         <outlet property="prodTitle" destination="H3a-LP-2zx" id="7bT-D4-IOA"/>
                         <outlet property="viewProductImages" destination="e28-n0-hdu" id="5gK-pe-Yg6"/>
+                        <outlet property="viewProductSizes" destination="fL9-fj-c9K" id="fz2-wR-nbV"/>
                         <segue destination="k7p-V7-2cs" kind="showDetail" identifier="backToTabController" id="TBj-ao-1ie"/>
                     </connections>
                 </viewController>

@@ -12,16 +12,18 @@ import Alamofire
 class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak var viewProductImages: UICollectionView!
+    @IBOutlet weak var viewProductSizes: UICollectionView!
     
     var appdata = AppData.shared
     var urlAddToMitoCart = URL(string: "https://api.projectmito.io/v1/cart")
     let formatter = NumberFormatter()
-    let intImageIndex = 0
+    var intImageIndex = 0
     let dispatchGroup = DispatchGroup()
 //    let intMaxImages = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        appdata.arrVariations.removeAll()
         let objProduct = appdata.arrProductSearchResults[appdata.intCurrIndex]
         fnSearchByASIN(strASIN: objProduct.strParentASIN)
         pickerviewQuantity.isHidden = true
@@ -33,10 +35,16 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
         prodPub.text = objProduct.publisher
         prodPrice.text = objProduct.price
         prodDetail.text = objProduct.description
+        
         let nibAddNewAddress = UINib(nibName: "ProductImageCollectionViewCell", bundle: nil)
         viewProductImages.register(nibAddNewAddress, forCellWithReuseIdentifier: "ProductImageCell")
         viewProductImages.delegate = self
         viewProductImages.dataSource = self
+        
+        let nib = UINib(nibName: "SizeCollectionViewCell", bundle: nil)
+        viewProductSizes.register(nib, forCellWithReuseIdentifier: "SizeCell")
+        viewProductSizes.delegate = self
+        viewProductSizes.dataSource = self
         self.automaticallyAdjustsScrollViewInsets = false;
         
 //        var swipeRight = UISwipeGestureRecognizer(target: self, action: "swiped:") // put : at the end of method name
@@ -154,7 +162,7 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     func fnSearchByASIN(strASIN: String) {
-        dispatchGroup.enter()
+//        dispatchGroup.enter()
         let urlGetMyAddresses = URL(string: "https://api.projectmito.io/v1/amazonproductvariety/")
         let parameters: Parameters = [
             "parentASIN": strASIN
@@ -168,6 +176,7 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
                 if let dictionary = response.value {
                     let objColors = dictionary as! NSDictionary
                     let objColorsKeys = objColors.allKeys as NSArray
+                    print(objColorsKeys)
                     var intIndex = 0
                     var boolNewIndex = true
                     for color in objColorsKeys {
@@ -175,60 +184,48 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
                         let arrSizes = objColors[strColor] as! NSArray
                         for size in arrSizes {
                             let objSize = size as! NSDictionary
+                            let dictSize = objSize as! Dictionary<String, AnyObject>
+                            print(dictSize.prettyPrint())
                             let arrASIN = objSize["ASIN"] as! NSArray
                             let strASIN = "\(arrASIN[0])"
                             
-                            let arrImageSets = objSize["ImageSets"] as! NSArray
-                            let objImageSets = arrImageSets[0] as! NSDictionary
-                            let arrImageSet = objImageSets["ImageSet"] as! NSArray
-                            var arrImages: [String] = []
-                            for image in arrImageSet {
-                                let objImage = image as! NSDictionary
-                                let arrMedImage = objImage["MediumImage"] as! NSArray
-                                let objMedImage = arrMedImage[0] as! NSDictionary
-                                let arrURL = objMedImage["URL"] as! NSArray
-                                let strURL = arrURL[0] as! String
-                                arrImages.append(strURL)
-                            }
-                            let arrAttributes = objSize["ItemAttributes"] as! NSArray
-                            let objAttributes = arrAttributes[0] as! NSDictionary
-                            let arrTitle = objAttributes["Title"] as! NSArray
-                            let strTitle = arrTitle[0] as! String
-                            let arrSize = objAttributes["Size"] as! NSArray
-                            let strSize = arrSize[0] as! String
-                            
-                            let item: Item = Item(strTitle: strTitle, strASIN: strASIN, strSize: strSize, arrImages: arrImages, strColor: strColor)
-                            if boolNewIndex {
-                                print("New Index: \(intIndex)")
-                                self.appdata.arrVariations.insert([item], at: intIndex)
-                                boolNewIndex = false
-                            } else {
-                                self.appdata.arrVariations[intIndex].append(item)
+                            if objSize["ImageSets"] != nil {
+                                let arrImageSets = objSize["ImageSets"] as! NSArray
+                                let objImageSets = arrImageSets[0] as! NSDictionary
+                                let arrImageSet = objImageSets["ImageSet"] as! NSArray
+                                var arrImages: [String] = []
+                                for image in arrImageSet {
+                                    let objImage = image as! NSDictionary
+                                    let arrMedImage = objImage["MediumImage"] as! NSArray
+                                    let objMedImage = arrMedImage[0] as! NSDictionary
+                                    let arrURL = objMedImage["URL"] as! NSArray
+                                    let strURL = arrURL[0] as! String
+                                    arrImages.append(strURL)
+                                }
+                                let arrAttributes = objSize["ItemAttributes"] as! NSArray
+                                let objAttributes = arrAttributes[0] as! NSDictionary
+                                let arrTitle = objAttributes["Title"] as! NSArray
+                                let strTitle = arrTitle[0] as! String
+                                let arrSize = objAttributes["Size"] as! NSArray
+                                let strSize = arrSize[0] as! String
+                                
+                                let item: Item = Item(strTitle: strTitle, strASIN: strASIN, strSize: strSize, arrImages: arrImages, strColor: strColor)
+                                if boolNewIndex {
+                                    print("New Index: \(intIndex)")
+                                    self.appdata.arrVariations.insert([item], at: intIndex)
+                                    boolNewIndex = false
+                                } else {
+                                    self.appdata.arrVariations[intIndex].append(item)
+                                }
                             }
                         }
                         intIndex += 1
                         boolNewIndex = true
                     }
-//                    self.dispatchGroup.leave()
-//                    self.dispatchGroup.notify(queue: .main, execute: {
-//                        self.viewProductImages.reloadData()
-//                    })
                     DispatchQueue.main.async {
                         self.viewProductImages.reloadData()
+                        self.viewProductSizes.reloadData()
                     }
-//                    DispatchGroup.notify(dispatchGroup, DispatchQueue.main, {
-//                        self.viewProductImages.reloadData()
-//                    })
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 15.0) {
-//                        self.viewProductImages.reloadData()
-//                    }
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: nil) {
-//                        self.viewProductImages.reloadData()
-//                    }
-//                    DispatchQueue.main.async {
-//                        print(self.appdata.arrVariations.count)
-//                        self.viewProductImages.reloadData()
-//                    }
                 }
             case .failure(let error):
                 print("Get products error")
@@ -247,9 +244,6 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return appdata.arrQuantity[row]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     }
     
     @IBAction func btnAddToCartPressed(_ sender: Any) {
@@ -296,19 +290,40 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("arrVariations count: \(appdata.arrVariations.count)")
-//        return 0
-        return appdata.arrVariations.count
+        if collectionView == viewProductImages {
+            return appdata.arrVariations.count
+        } else {
+            if appdata.arrVariations.count > 0 {
+                print("Number of sizes: \(appdata.arrVariations[intImageIndex].count)")
+                return appdata.arrVariations[intImageIndex].count
+            } else {
+                return 0
+            }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductImageCell", for: indexPath) as! ProductImageCollectionViewCell
-        print("IndexPath.row: \(indexPath.row)")
-        print("First Index arrVariations length: \(appdata.arrVariations[indexPath.row].count)")
-        let objProduct = appdata.arrVariations[indexPath.row][0].arrImages
-        let primaryImage = objProduct[objProduct.count - 1]
-        appdata.fnDisplayImage(strImageURL: primaryImage, img: cell.imgProduct, boolCircle: false)
-        return cell
+        if collectionView == viewProductImages {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductImageCell", for: indexPath) as! ProductImageCollectionViewCell
+            print("IndexPath.row: \(indexPath.row)")
+            print("First Index arrVariations length: \(appdata.arrVariations[indexPath.row].count)")
+            let objProduct = appdata.arrVariations[indexPath.row][0].arrImages
+            let primaryImage = objProduct[objProduct.count - 1]
+            appdata.fnDisplayImage(strImageURL: primaryImage, img: cell.imgProduct, boolCircle: false)
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SizeCell", for: indexPath) as! SizeCollectionViewCell
+            let arrModelsForOneColor = appdata.arrVariations[0]
+            let strSize = arrModelsForOneColor[indexPath.row].strSize
+            cell.lblSize.text = strSize
+            return cell
+
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        intImageIndex = indexPath.row
+        viewProductSizes.reloadData()
     }
     
     @IBAction func backSearch(_ sender: Any) {
