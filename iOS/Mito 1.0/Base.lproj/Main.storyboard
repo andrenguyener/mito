@@ -1263,9 +1263,9 @@
                     </tabBar>
                     <connections>
                         <segue destination="2yt-HT-7kb" kind="relationship" relationship="viewControllers" id="Txd-3r-D3I"/>
-                        <segue destination="hig-ud-FA0" kind="relationship" relationship="viewControllers" id="sLv-ep-LaA"/>
                         <segue destination="fpK-Bm-vHw" kind="relationship" relationship="viewControllers" id="Olk-mr-NuX"/>
                         <segue destination="yQ4-Ak-NnH" kind="relationship" relationship="viewControllers" id="lTb-QZ-kC3"/>
+                        <segue destination="hig-ud-FA0" kind="relationship" relationship="viewControllers" id="sLv-ep-LaA"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uyj-9O-ouf" userLabel="First Responder" sceneMemberID="firstResponder"/>
