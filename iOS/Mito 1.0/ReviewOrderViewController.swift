@@ -112,10 +112,10 @@ class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableV
     func fnFinishCheckout() {
         let urlCheckoutMitoCart = URL(string: "https://api.projectmito.io/v1/cart/process")
         let parameters: Parameters = [
-            "cardId": 1,
-            "senderAddressId": appdata.address.intAddressID!,
+            "cardId": appdata.arrPaymentMethods[0].intCardID,
+            "senderAddressId": appdata.arrCurrUserAddresses[0].intAddressID,
             "recipientId": appdata.personRecipient.intUserID,
-            "message": appdata.strOrderMessage,
+            "message": o_lblMessage.text,
             "giftOption": 0
         ]
         let headers: HTTPHeaders = [
