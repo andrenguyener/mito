@@ -150,7 +150,11 @@ class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Order Summary"
+        if tableView == o_tblviewPaymentInfo {
+            return "Payment Information"
+        } else {
+            return "Order Summary"
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -167,7 +171,7 @@ class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableV
             return cell
         } else {
             let cell: OrderSummaryTableViewCell = o_tblviewOrderSummary.dequeueReusableCell(withIdentifier: "OrderSummaryCell", for: indexPath) as! OrderSummaryTableViewCell
-            cell.lblNumItems.text = "Items (\(String(appdata.intNumItems))"
+            cell.lblNumItems.text = "Items (\(String(appdata.intNumItems)))"
             let tax: Decimal = appdata.priceSum * 0.12
             
             // rounds double with 2 digits precision
