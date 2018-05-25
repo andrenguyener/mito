@@ -470,24 +470,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BPT-Ix-K0p">
-                                <rect key="frame" x="0.0" y="130" width="375" height="488"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Feed is Available Add Friends Now" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0gk-sd-FlG">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="488"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="0gk-sd-FlG" secondAttribute="trailing" id="J8b-jW-IkS"/>
-                                    <constraint firstAttribute="bottom" secondItem="0gk-sd-FlG" secondAttribute="bottom" id="O7D-6o-BSv"/>
-                                    <constraint firstItem="0gk-sd-FlG" firstAttribute="top" secondItem="BPT-Ix-K0p" secondAttribute="top" id="S9Q-sJ-6PC"/>
-                                    <constraint firstItem="0gk-sd-FlG" firstAttribute="leading" secondItem="BPT-Ix-K0p" secondAttribute="leading" id="a0n-KW-o9b"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dns-wn-RGZ" userLabel="Green Top Nav">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
                                 <subviews>
@@ -630,6 +612,24 @@
                                     </mask>
                                 </variation>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BPT-Ix-K0p">
+                                <rect key="frame" x="0.0" y="130" width="375" height="488"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Feed is Available Add Friends Now" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0gk-sd-FlG">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="488"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="0gk-sd-FlG" secondAttribute="trailing" id="J8b-jW-IkS"/>
+                                    <constraint firstAttribute="bottom" secondItem="0gk-sd-FlG" secondAttribute="bottom" id="O7D-6o-BSv"/>
+                                    <constraint firstItem="0gk-sd-FlG" firstAttribute="top" secondItem="BPT-Ix-K0p" secondAttribute="top" id="S9Q-sJ-6PC"/>
+                                    <constraint firstItem="0gk-sd-FlG" firstAttribute="leading" secondItem="BPT-Ix-K0p" secondAttribute="leading" id="a0n-KW-o9b"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>

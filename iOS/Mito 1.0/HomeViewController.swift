@@ -46,6 +46,16 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         appdata.socket.connect()
         appdata.fnLoadFriendActivity(tblview: tableView)
 //        fnSearchByASIN(strASIN: "B079N9RLYT")
+        if (appdata.arrMyFeedItems.count == 0) {
+            noFeedView.isHidden = false
+        } else {
+            noFeedView.isHidden = true
+        }
+        if (appdata.arrFriendsFeedItems.count == 0) {
+            noFeedView.isHidden = false
+        } else {
+            noFeedView.isHidden = true
+        }
     }
     
     // Preloading
@@ -133,7 +143,17 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func switchTab(_ sender: UISegmentedControl) {
         if segmentChooser.selectedSegmentIndex == 1 {
             appdata.fnLoadMyActivity(tblview: tableView, intUserId: appdata.intCurrentUserID, arr: appdata.arrMyFeedItems)
+            if (appdata.arrMyFeedItems.count == 0) {
+                noFeedView.isHidden = false
+            } else {
+                noFeedView.isHidden = true
+            }
         } else {
+            if (appdata.arrFriendsFeedItems.count == 0) {
+                noFeedView.isHidden = false
+            } else {
+                noFeedView.isHidden = true
+            }
             appdata.fnLoadFriendActivity(tblview: tableView)
         }
     }
@@ -184,11 +204,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         if segmentChooser.selectedSegmentIndex == 0 {
             return appdata.arrFriendsFeedItems.count
         }
-        if (appdata.arrMyFeedItems.count == 0) {
-            tableView.backgroundView = noFeedView
-        } else {
-            tableView.backgroundView = nil
-        }
+
         return appdata.arrMyFeedItems.count
     }
     
