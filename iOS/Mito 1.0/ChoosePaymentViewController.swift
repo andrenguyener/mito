@@ -46,7 +46,7 @@ class ChoosePaymentViewController: UIViewController, UITableViewDataSource, UITa
         } else {
             let objPayment = appdata.arrPaymentMethods[indexPath.row]
             appdata.strCardNumber = objPayment.strCardNumber
-            performSegue(withIdentifier: "segCardToOrderSummary", sender: self)
+            performSegue(withIdentifier: "segCard", sender: self)
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }

@@ -949,6 +949,7 @@
                         <segue destination="y1B-fc-fA5" kind="show" identifier="segAddNewPaymentToChooseAddress" id="vzN-2U-4mX"/>
                         <segue destination="Jn1-pF-IbP" kind="show" identifier="segAddNewPaymentMethod" id="kc2-z2-Goh"/>
                         <segue destination="XCS-Ex-cdl" kind="show" identifier="segPaymentToOrderSummary" id="NGO-3W-NJp"/>
+                        <segue destination="vAt-Y6-w6U" kind="show" identifier="segCard" id="aSk-fn-k2E"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rMI-3L-PLu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1220,6 +1221,7 @@
         <segue reference="2rk-ch-wix"/>
         <segue reference="vzN-2U-4mX"/>
         <segue reference="Qfg-Id-CWz"/>
+        <segue reference="aSk-fn-k2E"/>
         <segue reference="XMj-eO-hpz"/>
     </inferredMetricsTieBreakers>
 </document>
