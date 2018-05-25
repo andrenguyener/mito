@@ -144,7 +144,7 @@ class PaymentStore {
 
 
     //inserts a payment method for a user
-    insert(id, cardTypeName, cardNumber, expMonth, expYear, cardCVV) {
+    insert(id, cardTypeName, cardNumber, expMonth, expYear, cardCVV, firstName, lastName) {
         return new Promise((resolve) => {
             this.sql.acquire(function (err, connection) {
                 let procedureName = "uspcAddNewPaymentMethod";
@@ -160,6 +160,8 @@ class PaymentStore {
                 request.addParameter('ExpMonth', TYPES.TinyInt, expMonth);
                 request.addParameter('ExpYear', TYPES.SmallInt, expYear);
                 request.addParameter('CardCVV', TYPES.SmallInt, cardCVV);
+                request.addParameter('FirstName', TYPES.NVarChar, firstName);
+                request.addParameter('LastName', TYPES.NVarChar, lastName);
                 let jsonArray = []
                 request.on('row', function (columns) {
                     var rowObject = {};
@@ -193,3 +195,10 @@ class PaymentStore {
 }
 
 module.exports = PaymentStore;
+
+
+
+
+
+
+

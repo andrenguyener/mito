@@ -46,8 +46,10 @@ const PaymentHandler = (paymentStore) => {
         let expMonth = req.body.expMonth;
         let expYear = req.body.expYear;
         let cardCVV = req.body.cardCVV;
+        let firstName = req.body.firstName;
+        let lastName = req.body.lastName;
         paymentStore
-            .insert(userId, cardTypeName, cardNumber, expMonth, expYear, cardCVV)
+            .insert(userId, cardTypeName, cardNumber, expMonth, expYear, cardCVV, firstName, lastName)
             .then(payment => {
                 res.json(payment)
             })
