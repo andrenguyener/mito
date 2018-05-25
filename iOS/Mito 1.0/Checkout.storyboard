@@ -948,6 +948,7 @@
                         <outlet property="tblviewPaymentOptions" destination="Pvx-zZ-g9m" id="htE-Yj-VI6"/>
                         <segue destination="y1B-fc-fA5" kind="show" identifier="segAddNewPaymentToChooseAddress" id="vzN-2U-4mX"/>
                         <segue destination="Jn1-pF-IbP" kind="show" identifier="segAddNewPaymentMethod" id="kc2-z2-Goh"/>
+                        <segue destination="XCS-Ex-cdl" kind="show" identifier="segPaymentToOrderSummary" id="NGO-3W-NJp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rMI-3L-PLu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1216,9 +1217,9 @@
         <image name="You’re so nice!.png" width="267" height="33"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Jjr-wW-Hse"/>
-        <segue reference="D79-aK-l5e"/>
-        <segue reference="Qfg-Id-CWz"/>
+        <segue reference="2rk-ch-wix"/>
+        <segue reference="vzN-2U-4mX"/>
+        <segue reference="G0C-Hd-PoN"/>
         <segue reference="XMj-eO-hpz"/>
     </inferredMetricsTieBreakers>
 </document>

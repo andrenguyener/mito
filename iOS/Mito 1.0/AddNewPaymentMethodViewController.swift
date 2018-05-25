@@ -30,12 +30,15 @@ class AddNewPaymentMethodViewController: UIViewController {
     }
     
     @IBAction func btnSavePayment(_ sender: Any) {
+        let strName: [String] = (txtFldName.text?.components(separatedBy: " "))!
+        let strFName = strName[0]
+        let strLName = strName[1]
         let strCardName = fnDetermineCardType()
         let intCardNumber = fnFormatCardNumber()
         let intCardCVV = fnFormatCVV()
         let intExpMonth = Int(String((txtFldExp.text?.prefix(2))!))
         let intExpYear = Int(String((txtFldExp.text?.suffix(2))!))
-        fnAddPaymentMethod(strCardName: strCardName, intCardNumber: intCardNumber, intExpMonth: intExpMonth!, intExpYear: intExpYear!, intCardCVV: intCardCVV)
+        fnAddPaymentMethod(strFName: strFName, strLName: strLName, strCardName: strCardName, intCardNumber: intCardNumber, intExpMonth: intExpMonth!, intExpYear: intExpYear!, intCardCVV: intCardCVV)
     }
     
     func fnDetermineCardType() -> String {
@@ -59,9 +62,11 @@ class AddNewPaymentMethodViewController: UIViewController {
         return Int(String((txtFldCVV.text?.prefix(3))!))!
     }
     
-    func fnAddPaymentMethod(strCardName: String, intCardNumber: Int, intExpMonth: Int, intExpYear: Int, intCardCVV: Int) {
+    func fnAddPaymentMethod(strFName: String, strLName: String, strCardName: String, intCardNumber: Int, intExpMonth: Int, intExpYear: Int, intCardCVV: Int) {
         let urlInsertNewAddress = URL(string: "https://api.projectmito.io/v1/payment/")
         let parameters: Parameters = [
+            "firstName": strFName,
+            "lastName": strLName,
             "cardTypeName": strCardName,
             "cardNumber": String(intCardNumber),
             "expMonth": intExpMonth,

@@ -8,6 +8,9 @@
 
 import UIKit
 import Alamofire
+import GoogleMaps
+import GooglePlaces
+import GooglePlacePicker
 
 class ChooseAddressViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
    
@@ -28,6 +31,87 @@ class ChooseAddressViewController: UIViewController, UITableViewDataSource, UITa
         }
         let nibAddNewAddress = UINib(nibName: "AddAddressTableViewCell", bundle: nil)
         tblviewAddress.register(nibAddNewAddress, forCellReuseIdentifier: "AddNewAddressCell")
+    }
+    
+    func fnGoogleChooseAddress() {
+        let center = CLLocationCoordinate2D(latitude: 37.788204, longitude: -122.411937)
+        let northEast = CLLocationCoordinate2D(latitude: center.latitude + 0.001, longitude: center.longitude + 0.001)
+        let southWest = CLLocationCoordinate2D(latitude: center.latitude - 0.001, longitude: center.longitude - 0.001)
+        let viewport = GMSCoordinateBounds(coordinate: northEast, coordinate: southWest)
+        let config = GMSPlacePickerConfig(viewport: viewport)
+        let placePicker = GMSPlacePicker(config: config)
+        
+        placePicker.pickPlace(callback: {(place, error) -> Void in
+            if let error = error {
+                print("Pick Place error: \(error.localizedDescription)")
+                return
+            }
+            
+            if let place = place {
+                let strNickname = place.name
+                let arrInformation = place.formattedAddress?.components(separatedBy: ", ")
+                    .joined(separator: "\n")
+                let arr: [String] = (arrInformation?.components(separatedBy: "\n"))!
+                print(arr)
+                let arrStateZIP = arr[2].components(separatedBy: " ")
+                
+                let strStreet = arr[0]
+                let strCity = arr[1]
+                let strState = arrStateZIP[0]
+                let intZIP = Int(arrStateZIP[1])!
+                
+                //1. Create the alert controller.
+                let alert = UIAlertController(title: "Nickname", message: "Enter a nickname (Optional)", preferredStyle: .alert)
+                
+                //2. Add the text field. You can configure it however you need.
+                alert.addTextField { (textField) in
+                    textField.text = strNickname
+                }
+                
+                // 3. Grab the value from the text field, and print it when the user clicks OK.
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+                    let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
+                    let strAlias = textField?.text!
+//                    print("Text field: \(textField?.text)")
+                    self.fnInsertNewAddress(strAddress: strStreet, strCity: strCity, strState: strState, intZIP: intZIP, strAlias: strAlias!)
+                }))
+                
+                // 4. Present the alert.
+                self.present(alert, animated: true, completion: nil)
+                
+            } else {
+//                self.lblName.text = "No place selected"
+//                self.lblAddress.text = ""
+            }
+        })
+    }
+    
+    func fnInsertNewAddress(strAddress: String, strCity: String, strState: String, intZIP: Int, strAlias: String) {
+        let urlInsertNewAddress = URL(string: "https://api.projectmito.io/v1/address/")
+        let parameters: Parameters = [
+            "streetAddress1": strAddress,
+            "streetAddress2": "",
+            "cityName": strCity,
+            "stateName": strState,
+            "zipCode": intZIP,
+            "aliasName": strAlias
+        ]
+        let headers: HTTPHeaders = [
+            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+        ]
+        Alamofire.request(urlInsertNewAddress!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.result.value {
+                    print(dictionary)
+                    self.fnLoadCurrUserAddresses()
+                }
+                
+            case .failure(let error):
+                print("Insert new address error")
+                print(error)
+            }
+        }
     }
     
     func fnAcceptOrDeclinePackage(strPackageAction: String, senderId: Int, orderId: Int, shippingAddressId: Int) {
@@ -103,7 +187,7 @@ class ChooseAddressViewController: UIViewController, UITableViewDataSource, UITa
                 let cellnib = Bundle.main.loadNibNamed("AddNewAddressCell", owner:self, options: nil)?.first as! AddAddressTableViewCell
                 cell = cellnib
             }
-            cell.lblAddNewAddress.text = "Testing this"
+//            cell.lblAddNewAddress.text = "Testing this"
             return cell
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "AddressTableViewCell", for: indexPath) as! AddressTableViewCell
@@ -116,7 +200,7 @@ class ChooseAddressViewController: UIViewController, UITableViewDataSource, UITa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == appdata.arrCurrUserAddresses.count {
-            print("Chose Add New Address Option")
+            fnGoogleChooseAddress()
         } else {
             appdata.address = appdata.arrCurrUserAddresses[indexPath.row]
             print(boolSender)

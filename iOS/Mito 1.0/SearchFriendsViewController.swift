@@ -18,25 +18,28 @@ class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchBar.placeholder = "Find more friends"
+        searchBar.placeholder = "Search for a friend"
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
         searchBar.text = strSearchQuery
-//        swirlSearchImg.isHidden = strSearchQuery != ""
-        appdata.fnLoadFriendsAndAllUsers(tableview: peopleTableView)
+//        appdata.fnLoadFriendsAndAllUsers(tableview: peopleTableView)
         peopleTableView.delegate = self
         peopleTableView.dataSource = self
         peopleTableView.rowHeight = 106
         peopleTableView.keyboardDismissMode = .onDrag
         let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
-        let photoString = data["profileImageString"] as! String
-        appdata.fnDisplayImage(strImageURL: photoString, img: imgCurrentRecipient, boolCircle: true)
+        var strPhotoUrl = data["profileImageString"] as! String
+        if strPhotoUrl.count < 100 {
+            strPhotoUrl = data["photoURL"] as! String
+        }
+        appdata.fnDisplayImage(strImageURL: strPhotoUrl, img: imgCurrentRecipient, boolCircle: true)
         imgCurrentRecipient.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.fnGoToSettings))
         imgCurrentRecipient.addGestureRecognizer(tapGesture)
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        appdata.fnLoadFriendsAndAllUsers(tableview: peopleTableView)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
@@ -44,6 +47,11 @@ class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         print("Tapped")
         performSegue(withIdentifier: "segSearchFriendToMeView", sender: self)
     }
+    
+    @IBAction func btnCartPressed(_ sender: Any) {
+        performSegue(withIdentifier: "segSearchFriendToCart", sender: self)
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

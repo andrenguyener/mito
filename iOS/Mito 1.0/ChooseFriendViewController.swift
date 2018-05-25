@@ -24,6 +24,7 @@ class ChooseFriendViewController: UIViewController, UITableViewDelegate, UITable
         searchBar.delegate = self
         appdata.fnLoadFriendsAndAllUsers(tableview: tblviewPeople)
         self.navigationItem.title = "Choose Friend"
+        searchBar.placeholder = "Search for a friend"
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

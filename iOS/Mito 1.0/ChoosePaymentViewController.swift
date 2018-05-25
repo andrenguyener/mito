@@ -26,6 +26,10 @@ class ChoosePaymentViewController: UIViewController, UITableViewDataSource, UITa
         appdata.fnViewPaymentMethods(tblview: tblviewPaymentOptions)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        appdata.fnViewPaymentMethods(tblview: tblviewPaymentOptions)
+    }
+    
     @IBAction func btnPaymentMethodToEditCheckout(_ sender: Any) {
         appdata.strCardNumber = lblCreditCardNumber.text!
         performSegue(withIdentifier: "segAddNewPaymentToChooseAddress", sender: self)
@@ -42,9 +46,9 @@ class ChoosePaymentViewController: UIViewController, UITableViewDataSource, UITa
         } else {
             let objPayment = appdata.arrPaymentMethods[indexPath.row]
             appdata.strCardNumber = objPayment.strCardNumber
-            performSegue(withIdentifier: "segAddNewPaymentToChooseAddress", sender: self)
-            tableView.deselectRow(at: indexPath, animated: true)
+            performSegue(withIdentifier: "segPaymentToOrderSummary", sender: self)
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

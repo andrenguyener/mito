@@ -392,19 +392,20 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
         super.viewDidLoad()
         placesClient = GMSPlacesClient.shared()
         imgProfilePic.isUserInteractionEnabled = true
+        self.navigationController?.isNavigationBarHidden = false
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.fnImportImage))
+        self.navigationItem.title = "Me"
         imgProfilePic.addGestureRecognizer(tapGesture)
 //        recognizer = PayCardsRecognizer(delegate: self, resultMode: .sync, container: self.view, frameColor: .green)
 
         if UserDefaults.standard.object(forKey: "UserInfo") != nil {
             let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
             print(data)
-            let photoString = data["profileImageString"] as! String
-            let decodedImage = Data(base64Encoded: photoString) //Data(base64Encoded: photoString, options: .ignoreUnknownCharacters)
-            let image = UIImage(data: decodedImage!)
-            imgProfilePic.image = image?.af_imageRoundedIntoCircle()
-//            appdata.fnDisplaySimpleImage(strImageURL: data["photoURL"] as! String, img: imgProfilePic)
-            print(data)
+            var strPhotoUrl = data["profileImageString"] as! String
+            if strPhotoUrl.count < 100 {
+                strPhotoUrl = data["photoURL"] as! String
+            }
+            appdata.fnDisplayImage(strImageURL: strPhotoUrl, img: imgProfilePic, boolCircle: true)
             lblName.text = "\(data["userFname"]!) \(data["userLname"]!)"
             locationManager.delegate = self
 //            print(data["userId"] as! String)

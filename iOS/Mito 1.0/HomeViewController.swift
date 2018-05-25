@@ -19,6 +19,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var noFeedView: UIView!
     @IBOutlet weak var segmentChooser: UISegmentedControl!
     
+    var refresherNotification: UIRefreshControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -44,18 +46,31 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appdata.socket.delegate = appDelegate.self
         appdata.socket.connect()
-        appdata.fnLoadFriendActivity(tblview: tableView)
-//        fnSearchByASIN(strASIN: "B079N9RLYT")
-        if (appdata.arrMyFeedItems.count == 0) {
-            noFeedView.isHidden = false
-        } else {
-            noFeedView.isHidden = true
-        }
-        if (appdata.arrFriendsFeedItems.count == 0) {
-            noFeedView.isHidden = false
-        } else {
-            noFeedView.isHidden = true
-        }
+        fnAddRefreshersNotificationsAndPackages()
+        appdata.fnLoadFriendActivity(tblview: tableView, refresherNotification: refresherNotification, view: noFeedView)
+//        if (appdata.arrMyFeedItems.count == 0) {
+//            noFeedView.isHidden = false
+//        } else {
+//            noFeedView.isHidden = true
+//        }
+    }
+    
+    func fnAddRefreshersNotificationsAndPackages() {
+        refresherNotification = UIRefreshControl()
+        refresherNotification.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refresherNotification.addTarget(self, action: #selector(HomeViewController.fnRefreshNotifications), for: UIControlEvents.valueChanged)
+        tableView.addSubview(refresherNotification)
+    }
+    
+    @objc func fnRefreshNotifications() {
+        appdata.arrMyFeedItems.removeAll()
+        appdata.arrFriendsFeedItems.removeAll()
+        appdata.fnLoadMyActivity(tblview: tableView, intUserId: appdata.intCurrentUserID, arr: appdata.arrMyFeedItems, refresherNotification: refresherNotification, view: noFeedView)
+        appdata.fnLoadFriendActivity(tblview: tableView, refresherNotification: refresherNotification, view: noFeedView)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     // Preloading
@@ -142,19 +157,19 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func switchTab(_ sender: UISegmentedControl) {
         if segmentChooser.selectedSegmentIndex == 1 {
-            appdata.fnLoadMyActivity(tblview: tableView, intUserId: appdata.intCurrentUserID, arr: appdata.arrMyFeedItems)
-            if (appdata.arrMyFeedItems.count == 0) {
-                noFeedView.isHidden = false
-            } else {
-                noFeedView.isHidden = true
-            }
+            appdata.fnLoadMyActivity(tblview: tableView, intUserId: appdata.intCurrentUserID, arr: appdata.arrMyFeedItems, refresherNotification: refresherNotification, view: noFeedView)
+//            if (appdata.arrMyFeedItems.count == 0) {
+//                noFeedView.isHidden = false
+//            } else {
+//                noFeedView.isHidden = true
+//            }
         } else {
-            if (appdata.arrFriendsFeedItems.count == 0) {
-                noFeedView.isHidden = false
-            } else {
-                noFeedView.isHidden = true
-            }
-            appdata.fnLoadFriendActivity(tblview: tableView)
+//            if (appdata.arrFriendsFeedItems.count == 0) {
+//                noFeedView.isHidden = false
+//            } else {
+//                noFeedView.isHidden = true
+//            }
+            appdata.fnLoadFriendActivity(tblview: tableView, refresherNotification: refresherNotification, view: noFeedView)
         }
     }
     
@@ -187,13 +202,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        tableView.reloadData()
-        if tableView != nil {
-            self.navigationController?.setNavigationBarHidden(true, animated: animated)
-        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

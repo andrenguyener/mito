@@ -188,35 +188,35 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
                             let arrASIN = objSize["ASIN"] as! NSArray
                             let strASIN = "\(arrASIN[0])"
                             
-                            if objSize["ImageSets"] != nil {
-                                let arrImageSets = objSize["ImageSets"] as! NSArray
-                                let objImageSets = arrImageSets[0] as! NSDictionary
-                                let arrImageSet = objImageSets["ImageSet"] as! NSArray
-                                var arrImages: [String] = []
-                                for image in arrImageSet {
-                                    let objImage = image as! NSDictionary
-                                    let arrMedImage = objImage["MediumImage"] as! NSArray
-                                    let objMedImage = arrMedImage[0] as! NSDictionary
-                                    let arrURL = objMedImage["URL"] as! NSArray
-                                    let strURL = arrURL[0] as! String
-                                    arrImages.append(strURL)
-                                }
-                                let arrAttributes = objSize["ItemAttributes"] as! NSArray
-                                let objAttributes = arrAttributes[0] as! NSDictionary
-                                let arrTitle = objAttributes["Title"] as! NSArray
-                                let strTitle = arrTitle[0] as! String
-                                let arrSize = objAttributes["Size"] as! NSArray
-                                let strSize = arrSize[0] as! String
-                                
-                                let item: Item = Item(strTitle: strTitle, strASIN: strASIN, strSize: strSize, arrImages: arrImages, strColor: strColor)
-                                if boolNewIndex {
-                                    print("New Index: \(intIndex)")
-                                    self.appdata.arrVariations.insert([item], at: intIndex)
-                                    boolNewIndex = false
-                                } else {
-                                    self.appdata.arrVariations[intIndex].append(item)
-                                }
-                            }
+//                            if objSize["ImageSets"] != nil {
+//                                let arrImageSets = objSize["ImageSets"] as! NSArray
+//                                let objImageSets = arrImageSets[0] as! NSDictionary
+//                                let arrImageSet = objImageSets["ImageSet"] as! NSArray
+//                                var arrImages: [String] = []
+//                                for image in arrImageSet {
+//                                    let objImage = image as! NSDictionary
+//                                    let arrMedImage = objImage["MediumImage"] as! NSArray
+//                                    let objMedImage = arrMedImage[0] as! NSDictionary
+//                                    let arrURL = objMedImage["URL"] as! NSArray
+//                                    let strURL = arrURL[0] as! String
+//                                    arrImages.append(strURL)
+//                                }
+//                                let arrAttributes = objSize["ItemAttributes"] as! NSArray
+//                                let objAttributes = arrAttributes[0] as! NSDictionary
+//                                let arrTitle = objAttributes["Title"] as! NSArray
+//                                let strTitle = arrTitle[0] as! String
+//                                let arrSize = objAttributes["Size"] as! NSArray
+//                                let strSize = arrSize[0] as! String
+//                                
+//                                let item: Item = Item(strTitle: strTitle, strASIN: strASIN, strSize: strSize, arrImages: arrImages, strColor: strColor)
+//                                if boolNewIndex {
+//                                    print("New Index: \(intIndex)")
+//                                    self.appdata.arrVariations.insert([item], at: intIndex)
+//                                    boolNewIndex = false
+//                                } else {
+//                                    self.appdata.arrVariations[intIndex].append(item)
+//                                }
+//                            }
                         }
                         intIndex += 1
                         boolNewIndex = true
@@ -356,7 +356,7 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "backToTabController" {
             let tabBarController = segue.destination as! UITabBarController
-            tabBarController.selectedIndex = 1
+            tabBarController.selectedIndex = 2
         }
     }
     

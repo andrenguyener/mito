@@ -100,7 +100,7 @@ class AppData: NSObject {
         }
     }
     
-    open func fnLoadMyActivity(tblview: UITableView, intUserId: Int, arr: [FeedItem]) {
+    open func fnLoadMyActivity(tblview: UITableView, intUserId: Int, arr: [FeedItem], refresherNotification: UIRefreshControl, view: UIView) {
         let urlLoadMyActivity = URL(string: "https://api.projectmito.io/v1/feed/")
         let parameters: Parameters = [
             "friendId": intUserId
@@ -123,8 +123,15 @@ class AppData: NSObject {
                         print("Failed to decode: \(jsonErr)")
                     }
                     self.arrMyFeedItems.sort(by: self.fnSortFeedItems)
+                    if (self.arrMyFeedItems.count == 0) {
+                        view.isHidden = false
+                    } else {
+                        view.isHidden = true
+                    }
+
                     DispatchQueue.main.async {
                         tblview.reloadData()
+                        refresherNotification.endRefreshing()
                     }
                 }
                 
@@ -135,7 +142,7 @@ class AppData: NSObject {
         }
     }
     
-    func fnLoadFriendActivity(tblview: UITableView) {
+    func fnLoadFriendActivity(tblview: UITableView, refresherNotification: UIRefreshControl, view: UIView) {
         let urlLoadFriendActivity = URL(string: "https://api.projectmito.io/v1/feed/friends")
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
@@ -154,8 +161,17 @@ class AppData: NSObject {
                     self.arrFriendsFeedItems.sort(by: self.fnSortFeedItems)
                 }
                 print("Total Friend Feed Items: \(self.arrFriendsFeedItems.count)")
+                if (self.arrFriendsFeedItems.count == 0) {
+                    view.isHidden = false
+                    tblview.isHidden = true
+                } else {
+                    view.isHidden = true
+                    tblview.isHidden = false
+                }
+
                 DispatchQueue.main.async {
                     tblview.reloadData()
+                    refresherNotification.endRefreshing()
                 }
                 
             case .failure(let error):

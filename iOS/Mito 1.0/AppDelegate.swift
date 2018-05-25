@@ -13,6 +13,9 @@ import Starscream
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, WebSocketDelegate {
+    
+    var appdata = AppData.shared
+    
     func websocketDidConnect(socket: WebSocketClient) {
         print("websocket is connected")
     }

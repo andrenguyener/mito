@@ -22,6 +22,7 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = true
 //        self.navigationController?.setNavigationBarHidden(true, animated: animated)
         searchBar.text = ""
         searchBar.placeholder = "Search for products"
@@ -33,9 +34,19 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         searchBar.text = strSearchQuery
         spinnerProductSearch.isHidden = true
         let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
-        let photoString = data["profileImageString"] as! String
-        appdata.fnDisplayImage(strImageURL: photoString, img: imgCurrentRecipient, boolCircle: true)
+        var strPhotoUrl = data["profileImageString"] as! String
+        if strPhotoUrl.count < 100 {
+            strPhotoUrl = data["photoURL"] as! String
+        }
+        appdata.fnDisplayImage(strImageURL: strPhotoUrl, img: imgCurrentRecipient, boolCircle: true)
+        imgCurrentRecipient.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.fnGoToSettings))
+        imgCurrentRecipient.addGestureRecognizer(tapGesture)
         // Do any additional setup after loading the view.
+    }
+    
+    @objc func fnGoToSettings() {
+        performSegue(withIdentifier: "segProductsToSettings", sender: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,6 +57,11 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func btnCartPressed(_ sender: Any) {
+        performSegue(withIdentifier: "segSearchProductToCart", sender: self)
+    }
+    
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if (searchBar.text!.replacingOccurrences(of: " ", with: "").count > 0) { // tests for only spaces
