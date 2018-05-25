@@ -76,6 +76,8 @@
 		B2A89CD920B7E1F3002FAE42 /* 69 friend.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A89CCF20B7E1F3002FAE42 /* 69 friend.png */; };
 		B2A89CDA20B7E1F3002FAE42 /* 69 search.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A89CD020B7E1F3002FAE42 /* 69 search.png */; };
 		B2A89CDB20B7E1F3002FAE42 /* 46 shopping cart.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A89CD120B7E1F3002FAE42 /* 46 shopping cart.png */; };
+		B2A89CDE20B8AAFD002FAE42 /* 46 shopping cart 2.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A89CDC20B8AAFA002FAE42 /* 46 shopping cart 2.png */; };
+		B2A89CDF20B8AAFD002FAE42 /* 69 shopping cart 2.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A89CDD20B8AAFC002FAE42 /* 69 shopping cart 2.png */; };
 		B2F849452043C33F00CBD83A /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F849442043C33F00CBD83A /* MeViewController.swift */; };
 		B2F849472043CAA900CBD83A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F849462043CAA900CBD83A /* SettingsViewController.swift */; };
 		B2F8494F2043D71000CBD83A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F8494E2043D71000CBD83A /* LoginViewController.swift */; };
@@ -231,6 +233,8 @@
 		B2A89CCF20B7E1F3002FAE42 /* 69 friend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "69 friend.png"; sourceTree = "<group>"; };
 		B2A89CD020B7E1F3002FAE42 /* 69 search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "69 search.png"; sourceTree = "<group>"; };
 		B2A89CD120B7E1F3002FAE42 /* 46 shopping cart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "46 shopping cart.png"; sourceTree = "<group>"; };
+		B2A89CDC20B8AAFA002FAE42 /* 46 shopping cart 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "46 shopping cart 2.png"; sourceTree = "<group>"; };
+		B2A89CDD20B8AAFC002FAE42 /* 69 shopping cart 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "69 shopping cart 2.png"; sourceTree = "<group>"; };
 		B2F849442043C33F00CBD83A /* MeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		B2F849462043CAA900CBD83A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B2F8494E2043D71000CBD83A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -521,6 +525,8 @@
 				B2A89CCF20B7E1F3002FAE42 /* 69 friend.png */,
 				B2A89CD020B7E1F3002FAE42 /* 69 search.png */,
 				B2A89CD120B7E1F3002FAE42 /* 46 shopping cart.png */,
+				B2A89CDC20B8AAFA002FAE42 /* 46 shopping cart 2.png */,
+				B2A89CDD20B8AAFC002FAE42 /* 69 shopping cart 2.png */,
 			);
 			path = "tab icon set";
 			sourceTree = "<group>";
@@ -669,6 +675,7 @@
 				B2A89CD520B7E1F3002FAE42 /* 46 friend.png in Resources */,
 				B247197420454C4E006CF6C2 /* GiftWhite.png in Resources */,
 				DA80594020AF2F1F004B33B8 /* HomeTableViewCell.xib in Resources */,
+				B2A89CDF20B8AAFD002FAE42 /* 69 shopping cart 2.png in Resources */,
 				B2A89CD220B7E1F3002FAE42 /* 69 bell.png in Resources */,
 				B29AEC67203FC9C100110EF9 /* Main.storyboard in Resources */,
 				B2548FFF2055EA97000123D0 /* ammara.png in Resources */,
@@ -703,6 +710,7 @@
 				B2619142206C5E5E004597F0 /* Roboto-LightItalic.ttf in Resources */,
 				B2A89CD620B7E1F3002FAE42 /* 46 search.png in Resources */,
 				DA28344820B0EB970084571D /* AddAddressTableViewCell.xib in Resources */,
+				B2A89CDE20B8AAFD002FAE42 /* 46 shopping cart 2.png in Resources */,
 				B2A89CD920B7E1F3002FAE42 /* 69 friend.png in Resources */,
 				B2A89CDA20B7E1F3002FAE42 /* 69 search.png in Resources */,
 				B2619144206C5E5E004597F0 /* Roboto-MediumItalic.ttf in Resources */,

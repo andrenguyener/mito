@@ -479,8 +479,11 @@
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mYM-uR-Wdp" userLabel="Cart">
-                                        <rect key="frame" x="333" y="87" width="22" height="23"/>
-                                        <state key="normal" image="Cart Solid White Icon.png">
+                                        <rect key="frame" x="307" y="74" width="48" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="mYM-uR-Wdp" secondAttribute="height" multiplier="1:1" id="e75-zo-McQ"/>
+                                        </constraints>
+                                        <state key="normal" image="46 shopping cart 2">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
@@ -510,6 +513,8 @@
                                     <constraint firstItem="8Yq-SS-qUE" firstAttribute="bottom" secondItem="dns-wn-RGZ" secondAttribute="bottomMargin" id="Dtk-SD-2qq"/>
                                     <constraint firstAttribute="trailing" secondItem="8Yq-SS-qUE" secondAttribute="trailing" constant="10" id="GFf-8b-BsI"/>
                                     <constraint firstItem="0Bi-17-Cej" firstAttribute="centerX" secondItem="dns-wn-RGZ" secondAttribute="centerX" id="TxN-5Y-MuV"/>
+                                    <constraint firstItem="mYM-uR-Wdp" firstAttribute="top" secondItem="0Bi-17-Cej" secondAttribute="top" id="YOW-7k-TP4"/>
+                                    <constraint firstItem="mYM-uR-Wdp" firstAttribute="bottom" secondItem="0Bi-17-Cej" secondAttribute="bottom" id="atr-8m-voO"/>
                                     <constraint firstAttribute="height" constant="130" id="gIl-br-JXh"/>
                                     <constraint firstItem="mYM-uR-Wdp" firstAttribute="centerY" secondItem="0Bi-17-Cej" secondAttribute="centerY" id="vJU-Ve-5sQ"/>
                                 </constraints>
@@ -1119,7 +1124,7 @@
             <objects>
                 <viewController title="Account Detail" id="mKW-hw-jiX" customClass="PeopleDetailsViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hy4-EJ-BfW">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="iIt-YC-sQM" userLabel="Profile Information">
@@ -1833,7 +1838,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="50" id="BBk-zw-fQj"/>
                                                 </constraints>
-                                                <state key="normal" image="Cart Solid White Icon.png"/>
+                                                <state key="normal" image="46 shopping cart 2"/>
                                                 <connections>
                                                     <action selector="btnCartPressed:" destination="AbY-68-ce9" eventType="touchUpInside" id="hXg-Mo-cAE"/>
                                                 </connections>
@@ -2007,7 +2012,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="50" id="MWj-qC-7bY"/>
                                                 </constraints>
-                                                <state key="normal" image="Cart Solid White Icon.png"/>
+                                                <state key="normal" image="46 shopping cart 2"/>
                                                 <connections>
                                                     <action selector="btnCartPressed:" destination="cz1-uG-LnH" eventType="touchUpInside" id="zxv-oN-wZf"/>
                                                 </connections>
@@ -2275,6 +2280,7 @@
         <image name="46 friend" width="23" height="22"/>
         <image name="46 home" width="23" height="22"/>
         <image name="46 search" width="23" height="23"/>
+        <image name="46 shopping cart 2" width="21" height="23"/>
         <image name="Cart Solid White Icon.png" width="22" height="23"/>
         <image name="Mito Green Background.png" width="786" height="198"/>
         <image name="Settings SG" width="25" height="25"/>
@@ -2287,8 +2293,8 @@
         <segue reference="ruP-Sx-HS5"/>
         <segue reference="Oq9-F1-cCO"/>
         <segue reference="4Df-8F-JjS"/>
-        <segue reference="5va-cB-XlO"/>
-        <segue reference="cI7-Td-TzM"/>
+        <segue reference="SkB-8n-kJk"/>
+        <segue reference="c4b-bb-2tq"/>
         <segue reference="sAd-vQ-kz5"/>
         <segue reference="dFb-Zm-TKF"/>
     </inferredMetricsTieBreakers>

@@ -60,7 +60,7 @@
                                                 </constraints>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vUt-xN-Ool" userLabel="Product_Info View">
-                                                <rect key="frame" x="20" y="303" width="335" height="131.5"/>
+                                                <rect key="frame" x="20" y="303" width="335" height="131"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AMD-hj-WHc">
                                                         <rect key="frame" x="0.0" y="0.0" width="335" height="29.5"/>
@@ -77,17 +77,17 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.65000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="pTd-Il-3Ti">
-                                                        <rect key="frame" x="0.0" y="69.5" width="335" height="16"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pTd-Il-3Ti">
+                                                        <rect key="frame" x="0.0" y="69.5" width="335" height="15.5"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="16" id="hRq-2L-HWa"/>
+                                                            <constraint firstAttribute="width" constant="335" id="Vee-hH-onz"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="13"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="GI8-0O-WGK" userLabel="Quantity Stack View">
-                                                        <rect key="frame" x="0.0" y="95.5" width="335" height="36"/>
+                                                        <rect key="frame" x="0.0" y="95" width="335" height="36"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ek-bs-E18" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="36"/>
