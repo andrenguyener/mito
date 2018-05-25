@@ -651,6 +651,7 @@
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="AO7-NZ-k9u"/>
+                                <exclude reference="BPT-Ix-K0p"/>
                             </mask>
                         </variation>
                     </view>
@@ -1119,7 +1120,7 @@
             <objects>
                 <viewController title="Account Detail" id="mKW-hw-jiX" customClass="PeopleDetailsViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hy4-EJ-BfW">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="iIt-YC-sQM" userLabel="Profile Information">
@@ -2287,8 +2288,8 @@
         <segue reference="ruP-Sx-HS5"/>
         <segue reference="Oq9-F1-cCO"/>
         <segue reference="4Df-8F-JjS"/>
-        <segue reference="SkB-8n-kJk"/>
-        <segue reference="QCD-74-QFQ"/>
+        <segue reference="5va-cB-XlO"/>
+        <segue reference="cI7-Td-TzM"/>
         <segue reference="sAd-vQ-kz5"/>
         <segue reference="dFb-Zm-TKF"/>
     </inferredMetricsTieBreakers>

@@ -22,7 +22,6 @@ class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
         searchBar.text = strSearchQuery
-//        swirlSearchImg.isHidden = strSearchQuery != ""
         appdata.fnLoadFriendsAndAllUsers(tableview: peopleTableView)
         peopleTableView.delegate = self
         peopleTableView.dataSource = self
@@ -33,7 +32,6 @@ class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         if strPhotoUrl.count < 100 {
             strPhotoUrl = data["photoURL"] as! String
         }
-//        let photoString = data["profileImageString"] as! String
         appdata.fnDisplayImage(strImageURL: strPhotoUrl, img: imgCurrentRecipient, boolCircle: true)
         imgCurrentRecipient.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.fnGoToSettings))
