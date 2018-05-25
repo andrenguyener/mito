@@ -610,7 +610,7 @@
                                     </mask>
                                 </variation>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BPT-Ix-K0p">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BPT-Ix-K0p">
                                 <rect key="frame" x="0.0" y="130" width="375" height="488"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Feed is Available Add Friends Now" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0gk-sd-FlG">
@@ -651,7 +651,6 @@
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="AO7-NZ-k9u"/>
-                                <exclude reference="BPT-Ix-K0p"/>
                             </mask>
                         </variation>
                     </view>

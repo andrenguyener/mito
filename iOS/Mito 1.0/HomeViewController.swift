@@ -47,13 +47,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         appdata.socket.delegate = appDelegate.self
         appdata.socket.connect()
         fnAddRefreshersNotificationsAndPackages()
-        appdata.fnLoadFriendActivity(tblview: tableView, refresherNotification: refresherNotification)
+        appdata.fnLoadFriendActivity(tblview: tableView, refresherNotification: refresherNotification, view: noFeedView)
 //        if (appdata.arrMyFeedItems.count == 0) {
-//            noFeedView.isHidden = false
-//        } else {
-//            noFeedView.isHidden = true
-//        }
-//        if (appdata.arrFriendsFeedItems.count == 0) {
 //            noFeedView.isHidden = false
 //        } else {
 //            noFeedView.isHidden = true
@@ -70,8 +65,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @objc func fnRefreshNotifications() {
         appdata.arrMyFeedItems.removeAll()
         appdata.arrFriendsFeedItems.removeAll()
-        appdata.fnLoadMyActivity(tblview: tableView, intUserId: appdata.intCurrentUserID, arr: appdata.arrMyFeedItems, refresherNotification: refresherNotification)
-        appdata.fnLoadFriendActivity(tblview: tableView, refresherNotification: refresherNotification)
+        appdata.fnLoadMyActivity(tblview: tableView, intUserId: appdata.intCurrentUserID, arr: appdata.arrMyFeedItems, refresherNotification: refresherNotification, view: noFeedView)
+        appdata.fnLoadFriendActivity(tblview: tableView, refresherNotification: refresherNotification, view: noFeedView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -162,7 +157,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func switchTab(_ sender: UISegmentedControl) {
         if segmentChooser.selectedSegmentIndex == 1 {
-            appdata.fnLoadMyActivity(tblview: tableView, intUserId: appdata.intCurrentUserID, arr: appdata.arrMyFeedItems, refresherNotification: refresherNotification)
+            appdata.fnLoadMyActivity(tblview: tableView, intUserId: appdata.intCurrentUserID, arr: appdata.arrMyFeedItems, refresherNotification: refresherNotification, view: noFeedView)
 //            if (appdata.arrMyFeedItems.count == 0) {
 //                noFeedView.isHidden = false
 //            } else {
@@ -174,7 +169,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 //            } else {
 //                noFeedView.isHidden = true
 //            }
-            appdata.fnLoadFriendActivity(tblview: tableView, refresherNotification: refresherNotification)
+            appdata.fnLoadFriendActivity(tblview: tableView, refresherNotification: refresherNotification, view: noFeedView)
         }
     }
     

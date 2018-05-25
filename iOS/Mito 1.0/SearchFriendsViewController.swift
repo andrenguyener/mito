@@ -22,7 +22,7 @@ class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
         searchBar.text = strSearchQuery
-        appdata.fnLoadFriendsAndAllUsers(tableview: peopleTableView)
+//        appdata.fnLoadFriendsAndAllUsers(tableview: peopleTableView)
         peopleTableView.delegate = self
         peopleTableView.dataSource = self
         peopleTableView.rowHeight = 106
@@ -39,6 +39,7 @@ class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        appdata.fnLoadFriendsAndAllUsers(tableview: peopleTableView)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
