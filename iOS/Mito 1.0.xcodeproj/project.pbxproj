@@ -66,6 +66,16 @@
 		B29AEC6C203FC9C100110EF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B29AEC6A203FC9C100110EF9 /* LaunchScreen.storyboard */; };
 		B29AEC77203FC9C200110EF9 /* Mito_1_0Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29AEC76203FC9C200110EF9 /* Mito_1_0Tests.swift */; };
 		B29AEC82203FC9C200110EF9 /* Mito_1_0UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29AEC81203FC9C200110EF9 /* Mito_1_0UITests.swift */; };
+		B2A89CD220B7E1F3002FAE42 /* 69 bell.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A89CC820B7E1F3002FAE42 /* 69 bell.png */; };
+		B2A89CD320B7E1F3002FAE42 /* 46 home.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A89CC920B7E1F3002FAE42 /* 46 home.png */; };
+		B2A89CD420B7E1F3002FAE42 /* 46 bell.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A89CCA20B7E1F3002FAE42 /* 46 bell.png */; };
+		B2A89CD520B7E1F3002FAE42 /* 46 friend.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A89CCB20B7E1F3002FAE42 /* 46 friend.png */; };
+		B2A89CD620B7E1F3002FAE42 /* 46 search.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A89CCC20B7E1F3002FAE42 /* 46 search.png */; };
+		B2A89CD720B7E1F3002FAE42 /* 69 home.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A89CCD20B7E1F3002FAE42 /* 69 home.png */; };
+		B2A89CD820B7E1F3002FAE42 /* 69 shopping cart.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A89CCE20B7E1F3002FAE42 /* 69 shopping cart.png */; };
+		B2A89CD920B7E1F3002FAE42 /* 69 friend.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A89CCF20B7E1F3002FAE42 /* 69 friend.png */; };
+		B2A89CDA20B7E1F3002FAE42 /* 69 search.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A89CD020B7E1F3002FAE42 /* 69 search.png */; };
+		B2A89CDB20B7E1F3002FAE42 /* 46 shopping cart.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A89CD120B7E1F3002FAE42 /* 46 shopping cart.png */; };
 		B2F849452043C33F00CBD83A /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F849442043C33F00CBD83A /* MeViewController.swift */; };
 		B2F849472043CAA900CBD83A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F849462043CAA900CBD83A /* SettingsViewController.swift */; };
 		B2F8494F2043D71000CBD83A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F8494E2043D71000CBD83A /* LoginViewController.swift */; };
@@ -211,6 +221,16 @@
 		B29AEC7D203FC9C200110EF9 /* Mito 1.0UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mito 1.0UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B29AEC81203FC9C200110EF9 /* Mito_1_0UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mito_1_0UITests.swift; sourceTree = "<group>"; };
 		B29AEC83203FC9C200110EF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B2A89CC820B7E1F3002FAE42 /* 69 bell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "69 bell.png"; sourceTree = "<group>"; };
+		B2A89CC920B7E1F3002FAE42 /* 46 home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "46 home.png"; sourceTree = "<group>"; };
+		B2A89CCA20B7E1F3002FAE42 /* 46 bell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "46 bell.png"; sourceTree = "<group>"; };
+		B2A89CCB20B7E1F3002FAE42 /* 46 friend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "46 friend.png"; sourceTree = "<group>"; };
+		B2A89CCC20B7E1F3002FAE42 /* 46 search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "46 search.png"; sourceTree = "<group>"; };
+		B2A89CCD20B7E1F3002FAE42 /* 69 home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "69 home.png"; sourceTree = "<group>"; };
+		B2A89CCE20B7E1F3002FAE42 /* 69 shopping cart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "69 shopping cart.png"; sourceTree = "<group>"; };
+		B2A89CCF20B7E1F3002FAE42 /* 69 friend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "69 friend.png"; sourceTree = "<group>"; };
+		B2A89CD020B7E1F3002FAE42 /* 69 search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "69 search.png"; sourceTree = "<group>"; };
+		B2A89CD120B7E1F3002FAE42 /* 46 shopping cart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "46 shopping cart.png"; sourceTree = "<group>"; };
 		B2F849442043C33F00CBD83A /* MeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		B2F849462043CAA900CBD83A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B2F8494E2043D71000CBD83A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -386,6 +406,7 @@
 			children = (
 				B261912F206C5E4F004597F0 /* Fonts */,
 				B29AEC68203FC9C100110EF9 /* Assets.xcassets */,
+				B2A89CC720B7E1F3002FAE42 /* tab icon set */,
 				B272DC272043BA8700EE2121 /* Icon */,
 				B272D8FE2077646A00E53276 /* Mito Text Design */,
 				B2FF02E220B5552500B2D4AD /* Checkout.storyboard */,
@@ -485,6 +506,23 @@
 				B29AEC83203FC9C200110EF9 /* Info.plist */,
 			);
 			path = "Mito 1.0UITests";
+			sourceTree = "<group>";
+		};
+		B2A89CC720B7E1F3002FAE42 /* tab icon set */ = {
+			isa = PBXGroup;
+			children = (
+				B2A89CC820B7E1F3002FAE42 /* 69 bell.png */,
+				B2A89CC920B7E1F3002FAE42 /* 46 home.png */,
+				B2A89CCA20B7E1F3002FAE42 /* 46 bell.png */,
+				B2A89CCB20B7E1F3002FAE42 /* 46 friend.png */,
+				B2A89CCC20B7E1F3002FAE42 /* 46 search.png */,
+				B2A89CCD20B7E1F3002FAE42 /* 69 home.png */,
+				B2A89CCE20B7E1F3002FAE42 /* 69 shopping cart.png */,
+				B2A89CCF20B7E1F3002FAE42 /* 69 friend.png */,
+				B2A89CD020B7E1F3002FAE42 /* 69 search.png */,
+				B2A89CD120B7E1F3002FAE42 /* 46 shopping cart.png */,
+			);
+			path = "tab icon set";
 			sourceTree = "<group>";
 		};
 		C2BBC53CCCF26C319C3EE2F1 /* Pods */ = {
@@ -614,11 +652,13 @@
 				DA6CB7F22064E9B700962814 /* Back.png in Resources */,
 				DAA453E820B6D15F000C43AA /* ProductImageCollectionViewCell.xib in Resources */,
 				B2548FFD2055EA97000123D0 /* benny.png in Resources */,
+				B2A89CD820B7E1F3002FAE42 /* 69 shopping cart.png in Resources */,
 				B24719832046245E006CF6C2 /* Notification Icon SG.png in Resources */,
 				DA5D683E2058A45F00E86BE8 /* ProductDetails.storyboard in Resources */,
 				B261913E206C5E5E004597F0 /* Roboto-Bold.ttf in Resources */,
 				DA27C2202043736400CCFD60 /* Sopheak.png in Resources */,
 				B29AEC69203FC9C100110EF9 /* Assets.xcassets in Resources */,
+				B2A89CDB20B7E1F3002FAE42 /* 46 shopping cart.png in Resources */,
 				B24719862046245E006CF6C2 /* Lock SG.png in Resources */,
 				B25490092058AE92000123D0 /* Login.storyboard in Resources */,
 				B24719822046245E006CF6C2 /* Card SG.png in Resources */,
@@ -626,8 +666,10 @@
 				B261913C206C5E5E004597F0 /* Roboto-Black.ttf in Resources */,
 				B2619146206C5E5E004597F0 /* Roboto-Thin.ttf in Resources */,
 				B272D9092077646A00E53276 /* mitowhiteonly.png in Resources */,
+				B2A89CD520B7E1F3002FAE42 /* 46 friend.png in Resources */,
 				B247197420454C4E006CF6C2 /* GiftWhite.png in Resources */,
 				DA80594020AF2F1F004B33B8 /* HomeTableViewCell.xib in Resources */,
+				B2A89CD220B7E1F3002FAE42 /* 69 bell.png in Resources */,
 				B29AEC67203FC9C100110EF9 /* Main.storyboard in Resources */,
 				B2548FFF2055EA97000123D0 /* ammara.png in Resources */,
 				B2619145206C5E5E004597F0 /* Roboto-Regular.ttf in Resources */,
@@ -644,6 +686,7 @@
 				B24719802046245E006CF6C2 /* Get Help SG.png in Resources */,
 				B2FF02E320B5552500B2D4AD /* Checkout.storyboard in Resources */,
 				B24719882046245E006CF6C2 /* Profile SG.png in Resources */,
+				B2A89CD420B7E1F3002FAE42 /* 46 bell.png in Resources */,
 				B2619141206C5E5E004597F0 /* Roboto-Light.ttf in Resources */,
 				B2619143206C5E5E004597F0 /* Roboto-Medium.ttf in Resources */,
 				B2624CF2204F714D006B7DE6 /* Andre2.png in Resources */,
@@ -655,12 +698,17 @@
 				DA28344C20B10AE90084571D /* PaymentInfoTableViewCell.xib in Resources */,
 				B272D9052077646A00E53276 /* mitodesignblacksvg.svg in Resources */,
 				DAD9953520423A4B007A7687 /* Andre.png in Resources */,
+				B2A89CD720B7E1F3002FAE42 /* 69 home.png in Resources */,
 				B24719842046245E006CF6C2 /* Blocked User SG.png in Resources */,
 				B2619142206C5E5E004597F0 /* Roboto-LightItalic.ttf in Resources */,
+				B2A89CD620B7E1F3002FAE42 /* 46 search.png in Resources */,
 				DA28344820B0EB970084571D /* AddAddressTableViewCell.xib in Resources */,
+				B2A89CD920B7E1F3002FAE42 /* 69 friend.png in Resources */,
+				B2A89CDA20B7E1F3002FAE42 /* 69 search.png in Resources */,
 				B2619144206C5E5E004597F0 /* Roboto-MediumItalic.ttf in Resources */,
 				DA88691F20B787F6002F7A08 /* SizeCollectionViewCell.xib in Resources */,
 				B244B3992069BF7E00B01BBA /* Title.png in Resources */,
+				B2A89CD320B7E1F3002FAE42 /* 46 home.png in Resources */,
 				B261913F206C5E5E004597F0 /* Roboto-BoldItalic.ttf in Resources */,
 				B25490002055EA97000123D0 /* avina.png in Resources */,
 			);
@@ -986,11 +1034,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6YML4TDR38;
+				DEVELOPMENT_TEAM = 6KH97C972X;
 				INFOPLIST_FILE = "Mito 1.0/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.washington.andre97.mito;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.washington.bennys.mito;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1003,11 +1051,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6YML4TDR38;
+				DEVELOPMENT_TEAM = 6KH97C972X;
 				INFOPLIST_FILE = "Mito 1.0/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.washington.andre97.mito;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.washington.bennys.mito;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
