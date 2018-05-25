@@ -29,8 +29,12 @@ class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         peopleTableView.rowHeight = 106
         peopleTableView.keyboardDismissMode = .onDrag
         let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
-        let photoString = data["profileImageString"] as! String
-        appdata.fnDisplayImage(strImageURL: photoString, img: imgCurrentRecipient, boolCircle: true)
+        var strPhotoUrl = data["profileImageString"] as! String
+        if strPhotoUrl.count < 100 {
+            strPhotoUrl = data["photoURL"] as! String
+        }
+//        let photoString = data["profileImageString"] as! String
+        appdata.fnDisplayImage(strImageURL: strPhotoUrl, img: imgCurrentRecipient, boolCircle: true)
         imgCurrentRecipient.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.fnGoToSettings))
         imgCurrentRecipient.addGestureRecognizer(tapGesture)

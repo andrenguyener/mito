@@ -356,7 +356,7 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "backToTabController" {
             let tabBarController = segue.destination as! UITabBarController
-            tabBarController.selectedIndex = 1
+            tabBarController.selectedIndex = 2
         }
     }
     

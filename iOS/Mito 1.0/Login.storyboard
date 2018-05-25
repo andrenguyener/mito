@@ -663,6 +663,7 @@
                                                     </textField>
                                                     <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eql-j2-IXw">
                                                         <rect key="frame" x="0.0" y="266" width="320" height="0.0"/>
+                                                        <color key="backgroundColor" red="0.83529411760000005" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </pickerView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ZIP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Smx-Cl-CJn">
                                                         <rect key="frame" x="0.0" y="268" width="335" height="20"/>

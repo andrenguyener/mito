@@ -35,7 +35,6 @@ struct Product {
         self.price = price
         self.description = description
     }
-    
     init(image: String, ASIN: String, title: String) {
         self.image = image
         self.ASIN = ASIN

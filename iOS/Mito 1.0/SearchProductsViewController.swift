@@ -34,9 +34,19 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         searchBar.text = strSearchQuery
         spinnerProductSearch.isHidden = true
         let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
-        let photoString = data["profileImageString"] as! String
-        appdata.fnDisplayImage(strImageURL: photoString, img: imgCurrentRecipient, boolCircle: true)
+        var strPhotoUrl = data["profileImageString"] as! String
+        if strPhotoUrl.count < 100 {
+            strPhotoUrl = data["photoURL"] as! String
+        }
+        appdata.fnDisplayImage(strImageURL: strPhotoUrl, img: imgCurrentRecipient, boolCircle: true)
+        imgCurrentRecipient.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.fnGoToSettings))
+        imgCurrentRecipient.addGestureRecognizer(tapGesture)
         // Do any additional setup after loading the view.
+    }
+    
+    @objc func fnGoToSettings() {
+        performSegue(withIdentifier: "segProductsToSettings", sender: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {

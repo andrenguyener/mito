@@ -113,7 +113,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         confirmStatePicker.isHidden = true
         let objStateSelected = appdata.arrStates[pickerviewStateAA.selectedRow(inComponent: 0)]
         strState = objStateSelected.value
-        btnChooseState.setTitle(objStateSelected.abbrev, for: .normal)
+        btnChooseState.setTitle(objStateSelected.value, for: .normal)
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

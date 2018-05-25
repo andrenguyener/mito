@@ -180,7 +180,7 @@
         <!--Me View Controller-->
         <scene sceneID="1RP-aC-Yg0">
             <objects>
-                <viewController id="Ela-Xp-3K3" customClass="MeViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="Ela-Xp-3K3" customClass="MeViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6yQ-Yc-SmM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -196,7 +196,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FName LName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UMC-GB-AVF">
-                                        <rect key="frame" x="101" y="110" width="133.5" height="23.5"/>
+                                        <rect key="frame" x="100.5" y="110" width="134.5" height="23.5"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -949,7 +949,7 @@
             <objects>
                 <viewController title="Cart" id="UPq-qC-84m" customClass="CartViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vGd-ry-6ZR">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cart has 0 items: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="svl-x9-EzE">
@@ -1079,7 +1079,7 @@
                                 </connections>
                             </button>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y8N-PG-Y96">
-                                <rect key="frame" x="27.5" y="201" width="320" height="216"/>
+                                <rect key="frame" x="27.5" y="225.5" width="320" height="216"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </pickerView>
                         </subviews>
@@ -2227,6 +2227,7 @@
                         <outlet property="spinnerProductSearch" destination="Fl4-nx-3no" id="6mn-s8-i7V"/>
                         <segue destination="BHS-cQ-fVw" kind="show" identifier="segSeeProductDetails" id="Oq9-F1-cCO"/>
                         <segue destination="UPq-qC-84m" kind="show" identifier="segSearchProductToCart" id="c4b-bb-2tq"/>
+                        <segue destination="Ela-Xp-3K3" kind="show" identifier="segProductsToSettings" id="dFb-Zm-TKF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L38-b9-TK8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2289,8 +2290,8 @@
         <segue reference="Oq9-F1-cCO"/>
         <segue reference="kS1-pK-LOk"/>
         <segue reference="SkB-8n-kJk"/>
-        <segue reference="cI7-Td-TzM"/>
+        <segue reference="c4b-bb-2tq"/>
         <segue reference="sAd-vQ-kz5"/>
-        <segue reference="E34-0n-scb"/>
+        <segue reference="dFb-Zm-TKF"/>
     </inferredMetricsTieBreakers>
 </document>

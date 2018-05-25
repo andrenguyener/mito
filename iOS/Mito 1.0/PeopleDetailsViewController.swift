@@ -136,6 +136,9 @@ class PeopleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
             let backItem = UIBarButtonItem()
             backItem.title = "Search People"
             navigationItem.backBarButtonItem = backItem
+        } else if segue.identifier == "segShopNowForFriend" {
+            let tabBarController = segue.destination as! UITabBarController
+            tabBarController.selectedIndex = 2
         }
     }
     
