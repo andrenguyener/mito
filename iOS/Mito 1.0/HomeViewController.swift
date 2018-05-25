@@ -16,6 +16,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet weak var greenTopView: UIView!
     
+    @IBOutlet weak var noFeedView: UIView!
     @IBOutlet weak var segmentChooser: UISegmentedControl!
     
     override func viewDidLoad() {
@@ -181,8 +182,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if segmentChooser.selectedSegmentIndex == 0 {
-            tableView.backgroundView = nil
             return appdata.arrFriendsFeedItems.count
+        }
+        if (appdata.arrMyFeedItems.count == 0) {
+            tableView.backgroundView = noFeedView
         } else {
             tableView.backgroundView = nil
         }

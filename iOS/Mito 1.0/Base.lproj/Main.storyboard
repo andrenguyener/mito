@@ -470,10 +470,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BPT-Ix-K0p">
-                                <rect key="frame" x="67" y="245" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BPT-Ix-K0p">
+                                <rect key="frame" x="0.0" y="130" width="375" height="488"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Feed is Available Add Friends Now" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0gk-sd-FlG">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="488"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="0gk-sd-FlG" secondAttribute="trailing" id="J8b-jW-IkS"/>
+                                    <constraint firstAttribute="bottom" secondItem="0gk-sd-FlG" secondAttribute="bottom" id="O7D-6o-BSv"/>
+                                    <constraint firstItem="0gk-sd-FlG" firstAttribute="top" secondItem="BPT-Ix-K0p" secondAttribute="top" id="S9Q-sJ-6PC"/>
+                                    <constraint firstItem="0gk-sd-FlG" firstAttribute="leading" secondItem="BPT-Ix-K0p" secondAttribute="leading" id="a0n-KW-o9b"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dns-wn-RGZ" userLabel="Green Top Nav">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
@@ -620,6 +633,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="BPT-Ix-K0p" firstAttribute="top" secondItem="dns-wn-RGZ" secondAttribute="bottom" id="26j-QN-nab"/>
                             <constraint firstItem="h41-Vk-dRh" firstAttribute="bottom" secondItem="SDK-lz-2ZY" secondAttribute="bottom" id="3cR-3A-meE"/>
                             <constraint firstItem="dns-wn-RGZ" firstAttribute="top" secondItem="jDo-cr-7fi" secondAttribute="top" id="60e-NY-Td9"/>
                             <constraint firstItem="SDK-lz-2ZY" firstAttribute="trailing" secondItem="h41-Vk-dRh" secondAttribute="trailing" id="F4o-jT-Y4K"/>
@@ -627,9 +641,12 @@
                             <constraint firstItem="AO7-NZ-k9u" firstAttribute="leading" secondItem="SDK-lz-2ZY" secondAttribute="leading" constant="10" id="QIa-e5-VpJ"/>
                             <constraint firstItem="SDK-lz-2ZY" firstAttribute="trailing" secondItem="AO7-NZ-k9u" secondAttribute="trailing" constant="10" id="RVg-lh-ujH"/>
                             <constraint firstItem="0Bi-17-Cej" firstAttribute="top" secondItem="SDK-lz-2ZY" secondAttribute="top" constant="10" id="S5p-Op-jvv"/>
+                            <constraint firstItem="SDK-lz-2ZY" firstAttribute="bottom" secondItem="BPT-Ix-K0p" secondAttribute="bottom" id="UrJ-E8-q4d"/>
                             <constraint firstItem="h41-Vk-dRh" firstAttribute="top" secondItem="dns-wn-RGZ" secondAttribute="bottom" id="WWa-ub-QWt"/>
+                            <constraint firstItem="SDK-lz-2ZY" firstAttribute="trailing" secondItem="BPT-Ix-K0p" secondAttribute="trailing" id="aq7-XU-lMu"/>
                             <constraint firstItem="h41-Vk-dRh" firstAttribute="leading" secondItem="dns-wn-RGZ" secondAttribute="leading" id="dOj-I7-hym"/>
                             <constraint firstItem="h41-Vk-dRh" firstAttribute="leading" secondItem="SDK-lz-2ZY" secondAttribute="leading" id="lO4-it-7Xp"/>
+                            <constraint firstItem="BPT-Ix-K0p" firstAttribute="leading" secondItem="SDK-lz-2ZY" secondAttribute="leading" id="nlk-Py-ttz"/>
                             <constraint firstItem="AO7-NZ-k9u" firstAttribute="top" secondItem="SDK-lz-2ZY" secondAttribute="top" constant="8" id="st5-oo-Zm2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="SDK-lz-2ZY"/>
@@ -642,6 +659,7 @@
                     <navigationItem key="navigationItem" id="PGD-Ry-gz4"/>
                     <connections>
                         <outlet property="greenTopView" destination="dns-wn-RGZ" id="czd-TE-MCz"/>
+                        <outlet property="noFeedView" destination="BPT-Ix-K0p" id="omR-l8-SXq"/>
                         <outlet property="segmentChooser" destination="8Yq-SS-qUE" id="YyB-xF-DhV"/>
                         <outlet property="tableView" destination="zry-fA-7Ss" id="KjW-cH-gPd"/>
                         <segue destination="UPq-qC-84m" kind="show" identifier="homeToCart" id="cI7-Td-TzM"/>
