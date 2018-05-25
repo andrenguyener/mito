@@ -405,13 +405,7 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
             if strPhotoUrl.count < 100 {
                 strPhotoUrl = data["photoURL"] as! String
             }
-//            let photoString = data["profileImageString"] as! String
-//            let decodedImage = Data(base64Encoded: strPhotoUrl) //Data(base64Encoded: photoString, options: .ignoreUnknownCharacters)
-//            let image = UIImage(data: decodedImage!)
             appdata.fnDisplayImage(strImageURL: strPhotoUrl, img: imgProfilePic, boolCircle: true)
-//            imgProfilePic.image = image?.af_imageRoundedIntoCircle()
-//            appdata.fnDisplaySimpleImage(strImageURL: data["photoURL"] as! String, img: imgProfilePic)
-            print(data)
             lblName.text = "\(data["userFname"]!) \(data["userLname"]!)"
             locationManager.delegate = self
 //            print(data["userId"] as! String)

@@ -26,6 +26,10 @@ class ChoosePaymentViewController: UIViewController, UITableViewDataSource, UITa
         appdata.fnViewPaymentMethods(tblview: tblviewPaymentOptions)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        appdata.fnViewPaymentMethods(tblview: tblviewPaymentOptions)
+    }
+    
     @IBAction func btnPaymentMethodToEditCheckout(_ sender: Any) {
         appdata.strCardNumber = lblCreditCardNumber.text!
         performSegue(withIdentifier: "segAddNewPaymentToChooseAddress", sender: self)
