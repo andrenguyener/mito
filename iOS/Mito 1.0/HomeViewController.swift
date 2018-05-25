@@ -181,7 +181,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if segmentChooser.selectedSegmentIndex == 0 {
+            tableView.backgroundView = nil
             return appdata.arrFriendsFeedItems.count
+        } else {
+            tableView.backgroundView = nil
         }
         return appdata.arrMyFeedItems.count
     }
