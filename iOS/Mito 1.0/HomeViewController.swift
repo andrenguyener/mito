@@ -45,7 +45,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         appdata.socket.delegate = appDelegate.self
         appdata.socket.connect()
         appdata.fnLoadFriendActivity(tblview: tableView)
-//        fnSearchByASIN(strASIN: "B079N9RLYT")
 //        if (appdata.arrMyFeedItems.count == 0) {
 //            noFeedView.isHidden = false
 //        } else {

@@ -166,7 +166,7 @@ class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableV
             if indexPath.row == 0 {
                 cell.lblSubtitle.text = "Visa ending in \(last4)"
             } else {
-                cell.lblSubtitle.text = "Same as shipping address"
+                cell.lblSubtitle.text = "4044 Howe Rd Seattle, WA 98105"
             }
             return cell
         } else {
