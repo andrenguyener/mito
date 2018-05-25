@@ -28,7 +28,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="gon-wu-V0E">
                                 <rect key="frame" x="20" y="213.5" width="335" height="240"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name on card" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="viu-6B-jMr">
+                                    <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name on card" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="viu-6B-jMr">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="XA8-2Q-kog"/>
@@ -36,6 +36,9 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Jn1-pF-IbP" id="G4J-aM-FYo"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Card number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fSK-cS-anL">
                                         <rect key="frame" x="0.0" y="60" width="335" height="60"/>
@@ -67,21 +70,39 @@
                                     <constraint firstItem="viu-6B-jMr" firstAttribute="leading" secondItem="gon-wu-V0E" secondAttribute="leading" id="yU0-6l-pjz"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pMO-br-P7i">
-                                <rect key="frame" x="139" y="617" width="97" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Save Payment"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pMO-br-P7i">
+                                <rect key="frame" x="20" y="601" width="335" height="46"/>
+                                <color key="backgroundColor" red="0.25490196079999999" green="0.86666666670000003" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="BqS-3S-VmT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
+                                <state key="normal" title="Save Payment">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="btnSavePayment:" destination="Jn1-pF-IbP" eventType="touchUpInside" id="ZGf-gN-vHa"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Card Information" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCk-0v-5d9">
+                                <rect key="frame" x="20" y="170" width="335" height="23.5"/>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="gon-wu-V0E" firstAttribute="centerY" secondItem="rQ3-Dg-Abt" secondAttribute="centerY" id="73p-FE-nLm"/>
                             <constraint firstItem="gon-wu-V0E" firstAttribute="leading" secondItem="mg5-Py-IL1" secondAttribute="leading" constant="20" id="C7G-jW-nCK"/>
+                            <constraint firstItem="mg5-Py-IL1" firstAttribute="trailing" secondItem="pMO-br-P7i" secondAttribute="trailing" constant="20" id="DlI-F5-S0x"/>
+                            <constraint firstItem="yCk-0v-5d9" firstAttribute="leading" secondItem="mg5-Py-IL1" secondAttribute="leading" constant="20" id="H5K-0J-ByG"/>
+                            <constraint firstItem="gon-wu-V0E" firstAttribute="top" secondItem="yCk-0v-5d9" secondAttribute="bottom" constant="20" id="KCV-QJ-FsB"/>
                             <constraint firstItem="gon-wu-V0E" firstAttribute="centerX" secondItem="rQ3-Dg-Abt" secondAttribute="centerX" id="P4p-UR-QpG"/>
+                            <constraint firstItem="mg5-Py-IL1" firstAttribute="bottom" secondItem="pMO-br-P7i" secondAttribute="bottom" constant="20" id="YLC-F7-0Ql"/>
+                            <constraint firstItem="mg5-Py-IL1" firstAttribute="trailing" secondItem="yCk-0v-5d9" secondAttribute="trailing" constant="20" id="tML-i7-kbF"/>
                             <constraint firstItem="mg5-Py-IL1" firstAttribute="trailing" secondItem="gon-wu-V0E" secondAttribute="trailing" constant="20" id="wXd-Ig-IYT"/>
+                            <constraint firstItem="pMO-br-P7i" firstAttribute="leading" secondItem="mg5-Py-IL1" secondAttribute="leading" constant="20" id="xol-FA-qAG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="mg5-Py-IL1"/>
                     </view>
