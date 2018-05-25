@@ -31,7 +31,7 @@ func (ctx *Context) UsersHandler(w http.ResponseWriter, r *http.Request) {
 		newUser := &users.NewUser{}
 
 		err := decoder.Decode(newUser)
-		fmt.Println(newUser)
+		// fmt.Println(newUser)
 		if err != nil {
 			http.Error(w, "Error decoding JSON: "+err.Error(), http.StatusBadRequest)
 			return
@@ -364,7 +364,7 @@ func (ctx *Context) UsersValidateHandler(w http.ResponseWriter, r *http.Request)
 		newUser := &users.NewUser{}
 
 		err := decoder.Decode(newUser)
-		fmt.Println(newUser)
+		// fmt.Println(newUser)
 		if err != nil {
 			http.Error(w, "Error decoding JSON: "+err.Error(), http.StatusBadRequest)
 			return
@@ -456,7 +456,7 @@ func (ctx *Context) SessionsHandler(w http.ResponseWriter, r *http.Request) {
 			}
 
 			user, err = ctx.UserStore.GetByEmail(user.UserEmail)
-			fmt.Println(user)
+			// fmt.Println(user)
 			// Authenticates the user with the provided password
 			err = user.Authenticate(newSession.Password)
 			if err != nil {
@@ -499,7 +499,7 @@ func (ctx *Context) SessionsHandler(w http.ResponseWriter, r *http.Request) {
 				Time: time.Now(),
 				User: user,
 			}
-			fmt.Println(sessionState.User)
+			// fmt.Println(sessionState.User)
 			// Begins a new session with the context session signing key and the state
 			_, err = sessions.BeginSession(ctx.SessionKey, ctx.SessionStore, sessionState, w)
 			if err != nil {

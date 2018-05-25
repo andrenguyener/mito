@@ -42,8 +42,7 @@ var config = {
 
 var poolConfig = {
     min: 1,
-    max: 20,
-    log: true
+    max: 20
 };
 
 var connectionConfig = {
