@@ -11,7 +11,6 @@ import UIKit
 class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     @IBOutlet weak var peopleTableView: UITableView!
-//    @IBOutlet weak var peopleView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
 //    @IBOutlet weak var swirlSearchImg: UIImageView!
     @IBOutlet weak var imgCurrentRecipient: UIImageView!
@@ -29,13 +28,21 @@ class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         peopleTableView.dataSource = self
         peopleTableView.rowHeight = 106
         peopleTableView.keyboardDismissMode = .onDrag
-        if appdata.personRecipient != nil {
-            appdata.fnDisplayImage(strImageURL: appdata.personRecipient.avatar, img: imgCurrentRecipient, boolCircle: true)
-        }
+        let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+        let photoString = data["profileImageString"] as! String
+        appdata.fnDisplayImage(strImageURL: photoString, img: imgCurrentRecipient, boolCircle: true)
+        imgCurrentRecipient.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.fnGoToSettings))
+        imgCurrentRecipient.addGestureRecognizer(tapGesture)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    @objc func fnGoToSettings() {
+        print("Tapped")
+        performSegue(withIdentifier: "segSearchFriendToMeView", sender: self)
     }
 
     override func didReceiveMemoryWarning() {

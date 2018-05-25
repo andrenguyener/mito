@@ -1962,6 +1962,7 @@
                         <outlet property="searchBar" destination="sdi-qb-JYD" id="2RM-lG-vKj"/>
                         <segue destination="mKW-hw-jiX" kind="show" identifier="segSeeMitoProfile" id="SkB-8n-kJk"/>
                         <segue destination="cz1-uG-LnH" kind="show" identifier="segChooseFriendNowShop" id="eyY-AF-kxf"/>
+                        <segue destination="Ela-Xp-3K3" kind="show" identifier="segSearchFriendToMeView" id="E34-0n-scb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F76-Y0-eKS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2281,5 +2282,6 @@
         <segue reference="SkB-8n-kJk"/>
         <segue reference="cI7-Td-TzM"/>
         <segue reference="sAd-vQ-kz5"/>
+        <segue reference="E34-0n-scb"/>
     </inferredMetricsTieBreakers>
 </document>

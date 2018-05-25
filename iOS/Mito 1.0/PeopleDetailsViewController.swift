@@ -22,11 +22,11 @@ class PeopleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var tblviewFeed: UITableView!
     @IBOutlet weak var btnShopForFriend: UIButton!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadPersonData()
         btnShopForFriend.setTitle("Shop for \(appdata.personToView.firstName)", for: .normal)
+        self.navigationController?.isNavigationBarHidden = false
         tblviewFeed.delegate = self
         tblviewFeed.dataSource = self
         tblviewFeed.rowHeight = 106
@@ -37,6 +37,7 @@ class PeopleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
     @IBAction func btnShopNowForFriend(_ sender: Any) {
         appdata.personRecipient = appdata.personToView
         performSegue(withIdentifier: "segShopNowForFriend", sender: self)
+        self.tabBarController?.selectedIndex = 4
     }
     
     func loadPersonData() {
@@ -50,8 +51,11 @@ class PeopleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
         lblName.text = strName
         self.navigationItem.title = strName
         lblUsername.text = "@\(friend.strUsername)"
-        btnNumFriends.setTitle("\(friend.intNumFriends) friends", for: .normal)
-        print(friend.avatar)
+        var strNumFriends = "friends"
+        if friend.intNumFriends == 1 {
+            strNumFriends = "friend"
+        }
+        btnNumFriends.setTitle("\(friend.intNumFriends) \(strNumFriends)", for: .normal)
         appdata.fnDisplayImage(strImageURL: friend.avatar, img: img, boolCircle: true)
     }
     
@@ -74,8 +78,11 @@ class PeopleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
                     print(dictionary)
                     if dictionary == "Friend" {
                         self.addFriendbtn.setTitle("Friends", for: .normal)
+                        self.btnShopForFriend.isHidden = false
                         self.addFriendbtn.isEnabled = false
                         self.addFriendbtn.backgroundColor = UIColor.gray
+                    } else {
+                        self.btnShopForFriend.isHidden = true
                     }
                 }
                 

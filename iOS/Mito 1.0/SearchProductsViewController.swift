@@ -32,9 +32,9 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         searchBar.returnKeyType = UIReturnKeyType.done
         searchBar.text = strSearchQuery
         spinnerProductSearch.isHidden = true
-        if appdata.personRecipient != nil {
-            appdata.fnDisplayImage(strImageURL: appdata.personRecipient.avatar, img: imgCurrentRecipient, boolCircle: true)
-        }
+        let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+        let photoString = data["profileImageString"] as! String
+        appdata.fnDisplayImage(strImageURL: photoString, img: imgCurrentRecipient, boolCircle: true)
         // Do any additional setup after loading the view.
     }
     

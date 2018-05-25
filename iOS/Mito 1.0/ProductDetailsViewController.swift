@@ -18,8 +18,6 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     var urlAddToMitoCart = URL(string: "https://api.projectmito.io/v1/cart")
     let formatter = NumberFormatter()
     var intImageIndex = 0
-    let dispatchGroup = DispatchGroup()
-//    let intMaxImages = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
