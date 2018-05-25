@@ -46,16 +46,20 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         appdata.socket.connect()
         appdata.fnLoadFriendActivity(tblview: tableView)
 //        fnSearchByASIN(strASIN: "B079N9RLYT")
-        if (appdata.arrMyFeedItems.count == 0) {
-            noFeedView.isHidden = false
-        } else {
-            noFeedView.isHidden = true
-        }
-        if (appdata.arrFriendsFeedItems.count == 0) {
-            noFeedView.isHidden = false
-        } else {
-            noFeedView.isHidden = true
-        }
+//        if (appdata.arrMyFeedItems.count == 0) {
+//            noFeedView.isHidden = false
+//        } else {
+//            noFeedView.isHidden = true
+//        }
+//        if (appdata.arrFriendsFeedItems.count == 0) {
+//            noFeedView.isHidden = false
+//        } else {
+//            noFeedView.isHidden = true
+//        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     // Preloading
@@ -187,13 +191,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        tableView.reloadData()
-        if tableView != nil {
-            self.navigationController?.setNavigationBarHidden(true, animated: animated)
-        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

@@ -1125,7 +1125,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="iIt-YC-sQM" userLabel="Profile Information">
-                                <rect key="frame" x="26" y="30" width="323" height="274.5"/>
+                                <rect key="frame" x="26" y="74" width="323" height="274.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FirstName LastName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1g-f7-mfA">
                                         <rect key="frame" x="24" y="0.0" width="275" height="21"/>
@@ -1192,7 +1192,7 @@
                                 </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eV1-zt-RHT">
-                                <rect key="frame" x="0.0" y="309.5" width="375" height="247.5"/>
+                                <rect key="frame" x="0.0" y="353.5" width="375" height="203.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="homeCell" rowHeight="106" id="JOH-V7-ktB" customClass="HomeTableViewCell" customModule="Mito_1_0" customModuleProvider="target">
@@ -1836,6 +1836,9 @@
                                                     <constraint firstAttribute="width" constant="50" id="BBk-zw-fQj"/>
                                                 </constraints>
                                                 <state key="normal" image="Cart Solid White Icon.png"/>
+                                                <connections>
+                                                    <action selector="btnCartPressed:" destination="AbY-68-ce9" eventType="touchUpInside" id="hXg-Mo-cAE"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -1963,11 +1966,12 @@
                         <segue destination="mKW-hw-jiX" kind="show" identifier="segSeeMitoProfile" id="SkB-8n-kJk"/>
                         <segue destination="cz1-uG-LnH" kind="show" identifier="segChooseFriendNowShop" id="eyY-AF-kxf"/>
                         <segue destination="Ela-Xp-3K3" kind="show" identifier="segSearchFriendToMeView" id="E34-0n-scb"/>
+                        <segue destination="UPq-qC-84m" kind="show" identifier="segSearchFriendToCart" id="QCD-74-QFQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F76-Y0-eKS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2996" y="583.3583208395803"/>
+            <point key="canvasLocation" x="2942" y="583"/>
         </scene>
         <!--Search Product-->
         <scene sceneID="CB4-At-nYX">
@@ -2006,6 +2010,9 @@
                                                     <constraint firstAttribute="width" constant="50" id="MWj-qC-7bY"/>
                                                 </constraints>
                                                 <state key="normal" image="Cart Solid White Icon.png"/>
+                                                <connections>
+                                                    <action selector="btnCartPressed:" destination="cz1-uG-LnH" eventType="touchUpInside" id="zxv-oN-wZf"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -2219,6 +2226,7 @@
                         <outlet property="searchBar" destination="t70-Qz-J7F" id="18q-WQ-cQ3"/>
                         <outlet property="spinnerProductSearch" destination="Fl4-nx-3no" id="6mn-s8-i7V"/>
                         <segue destination="BHS-cQ-fVw" kind="show" identifier="segSeeProductDetails" id="Oq9-F1-cCO"/>
+                        <segue destination="UPq-qC-84m" kind="show" identifier="segSearchProductToCart" id="c4b-bb-2tq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L38-b9-TK8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2228,11 +2236,10 @@
         <!--Search-->
         <scene sceneID="5Qd-Cr-hB1">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yQ4-Ak-NnH" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="yQ4-Ak-NnH" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Search" image="46 search" id="inw-pp-0AS"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rRn-YG-qDt">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -2281,8 +2288,8 @@
         <segue reference="ruP-Sx-HS5"/>
         <segue reference="Oq9-F1-cCO"/>
         <segue reference="kS1-pK-LOk"/>
-        <segue reference="39f-jC-Icg"/>
-        <segue reference="IOv-WN-4XC"/>
+        <segue reference="SkB-8n-kJk"/>
+        <segue reference="c4b-bb-2tq"/>
         <segue reference="sAd-vQ-kz5"/>
         <segue reference="E34-0n-scb"/>
     </inferredMetricsTieBreakers>

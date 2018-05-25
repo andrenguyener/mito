@@ -22,6 +22,7 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = true
 //        self.navigationController?.setNavigationBarHidden(true, animated: animated)
         searchBar.text = ""
         searchBar.placeholder = "Search for products"
@@ -46,6 +47,11 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func btnCartPressed(_ sender: Any) {
+        performSegue(withIdentifier: "segSearchProductToCart", sender: self)
+    }
+    
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if (searchBar.text!.replacingOccurrences(of: " ", with: "").count > 0) { // tests for only spaces

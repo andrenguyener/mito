@@ -392,6 +392,7 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
         super.viewDidLoad()
         placesClient = GMSPlacesClient.shared()
         imgProfilePic.isUserInteractionEnabled = true
+        self.navigationController?.isNavigationBarHidden = false
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.fnImportImage))
         imgProfilePic.addGestureRecognizer(tapGesture)
 //        recognizer = PayCardsRecognizer(delegate: self, resultMode: .sync, container: self.view, frameColor: .green)

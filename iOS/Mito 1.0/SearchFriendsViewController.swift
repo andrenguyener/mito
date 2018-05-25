@@ -44,6 +44,11 @@ class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         print("Tapped")
         performSegue(withIdentifier: "segSearchFriendToMeView", sender: self)
     }
+    
+    @IBAction func btnCartPressed(_ sender: Any) {
+        performSegue(withIdentifier: "segSearchFriendToCart", sender: self)
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
