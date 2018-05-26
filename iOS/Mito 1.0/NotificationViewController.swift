@@ -15,6 +15,8 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
 
     @IBOutlet weak var notificationView: UIView!
     @IBOutlet weak var tblviewNotification: UITableView!
+    @IBOutlet weak var imgProfile: UIImageView!
+    
     var appdata = AppData.shared
     
     var refresherNotification: UIRefreshControl!
@@ -30,6 +32,12 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         self.fnAddRefreshersNotificationsAndPackages()
         self.fnGetPendingFriendRequests()
         self.fnGetPendingPackages()
+        let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+        var strPhotoUrl = data["profileImageString"] as! String
+        if strPhotoUrl.count < 100 {
+            strPhotoUrl = data["photoURL"] as! String
+        }
+        appdata.fnDisplayImage(strImageURL: strPhotoUrl, img: imgProfile, boolCircle: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
