@@ -196,7 +196,15 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
             case .failure(let error):
                 print("Get Amazon Product error")
-                print(error)
+                print(error.localizedDescription)
+                let strSSLMessage = "An SSL error has occurred and a secure connection to the server cannot be made."
+                if error.localizedDescription == strSSLMessage {
+                    let alert = self.appdata.fnDisplayAlert(title: "Whoops!", message: "Servers are currently offline ☹️")
+                    self.present(alert, animated: true, completion: nil)
+                } else {
+                    let alert = self.appdata.fnDisplayAlert(title: "Whoops!", message: "Incorrect email or password")
+                    self.present(alert, animated: true, completion: nil)
+                }
             }
         }
     }
