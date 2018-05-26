@@ -117,7 +117,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P1u-Qa-bqF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5910" y="470"/>
+            <point key="canvasLocation" x="6386" y="249"/>
         </scene>
         <!--Checkout-->
         <scene sceneID="E4g-Zh-aLs">
@@ -441,12 +441,11 @@
                         <outlet property="taxCheckout" destination="YJ4-uI-3c3" id="XPt-n9-03F"/>
                         <outlet property="tblviewOrderSummary" destination="yPg-V2-0s2" id="2cD-Mb-n9h"/>
                         <outlet property="tblviewPaymentInfo" destination="qBh-Fy-G89" id="fQ3-oM-NSs"/>
-                        <segue destination="qdc-jL-mfw" kind="show" identifier="checkoutFinish" animates="NO" id="VTw-HY-3To"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ibG-SQ-XDJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8722" y="397"/>
+            <point key="canvasLocation" x="10479" y="-132"/>
         </scene>
         <!--CheckOutComplete-->
         <scene sceneID="wfo-qB-gu0">
@@ -846,7 +845,6 @@
                         <outlet property="tblviewPaymentOptions" destination="Pvx-zZ-g9m" id="htE-Yj-VI6"/>
                         <segue destination="y1B-fc-fA5" kind="show" identifier="segAddNewPaymentToChooseAddress" id="vzN-2U-4mX"/>
                         <segue destination="Jn1-pF-IbP" kind="show" identifier="segAddNewPaymentMethod" id="kc2-z2-Goh"/>
-                        <segue destination="XCS-Ex-cdl" kind="show" identifier="segPaymentToOrderSummary" id="NGO-3W-NJp"/>
                         <segue destination="vAt-Y6-w6U" kind="show" identifier="segCard" id="aSk-fn-k2E"/>
                     </connections>
                 </viewController>
@@ -1112,7 +1110,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uAb-uD-7mu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9599" y="380"/>
+            <point key="canvasLocation" x="9783" y="-93"/>
         </scene>
     </scenes>
     <resources>
@@ -1121,11 +1119,9 @@
         <image name="You’re so nice!.png" width="267" height="33"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="kc2-z2-Goh"/>
         <segue reference="2rk-ch-wix"/>
-        <segue reference="vzN-2U-4mX"/>
+        <segue reference="D79-aK-l5e"/>
         <segue reference="Qfg-Id-CWz"/>
         <segue reference="MjP-Xg-3Ou"/>
-        <segue reference="XMj-eO-hpz"/>
     </inferredMetricsTieBreakers>
 </document>
