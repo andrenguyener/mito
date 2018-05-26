@@ -40,6 +40,14 @@ class ChoosePaymentViewController: UIViewController, UITableViewDataSource, UITa
         // Dispose of any resources that can be recreated.
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row != appdata.arrPaymentMethods.count {
+            return 90
+        } else {
+            return 60
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == appdata.arrPaymentMethods.count {
             performSegue(withIdentifier: "segAddNewPaymentMethod", sender: self)
