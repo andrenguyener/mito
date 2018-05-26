@@ -1857,18 +1857,16 @@
                                             </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="sdi-qb-JYD" secondAttribute="bottom" id="6jA-PT-eDY"/>
-                                            <constraint firstItem="1Yu-8j-FQ4" firstAttribute="leading" secondItem="sdi-qb-JYD" secondAttribute="trailing" id="cY9-Sq-aBO"/>
+                                            <constraint firstItem="sdi-qb-JYD" firstAttribute="leading" secondItem="Tg6-QB-6iz" secondAttribute="trailing" id="Oit-Bw-KB5"/>
                                             <constraint firstAttribute="bottom" secondItem="1Yu-8j-FQ4" secondAttribute="bottom" id="j5U-5F-RHh"/>
                                             <constraint firstItem="1Yu-8j-FQ4" firstAttribute="top" secondItem="fUi-7Q-GTU" secondAttribute="top" id="kS8-l3-UDb"/>
-                                            <constraint firstItem="sdi-qb-JYD" firstAttribute="leading" secondItem="Tg6-QB-6iz" secondAttribute="trailing" id="qRJ-1l-X5G"/>
-                                            <constraint firstItem="sdi-qb-JYD" firstAttribute="top" secondItem="fUi-7Q-GTU" secondAttribute="top" id="vfR-6t-EcT"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.25490196079999999" green="0.86666666670000003" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="fUi-7Q-GTU" secondAttribute="bottom" constant="10" id="j5Z-Ge-Zyp"/>
+                                    <constraint firstItem="fUi-7Q-GTU" firstAttribute="centerX" secondItem="hCV-fj-2Xw" secondAttribute="centerX" id="jdZ-A4-8zU"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8T3-3d-lKr" userLabel="People View">
@@ -1999,7 +1997,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WK2-8u-3L9" userLabel="Header Stack">
-                                        <rect key="frame" x="15" y="30" width="345" height="50"/>
+                                        <rect key="frame" x="15" y="35" width="345" height="50"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lnr-Wb-d36" customClass="RoundedImage" customModule="Mito_1_0" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -2034,7 +2032,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.25490196079999999" green="0.86666666670000003" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="WK2-8u-3L9" firstAttribute="top" secondItem="er1-mp-JhR" secondAttribute="top" constant="30" id="Eo4-3N-oLm"/>
+                                    <constraint firstItem="WK2-8u-3L9" firstAttribute="top" secondItem="er1-mp-JhR" secondAttribute="top" constant="35" id="Eo4-3N-oLm"/>
                                     <constraint firstItem="WK2-8u-3L9" firstAttribute="leading" secondItem="er1-mp-JhR" secondAttribute="leading" constant="15" id="HwQ-kY-ukd"/>
                                     <constraint firstItem="WK2-8u-3L9" firstAttribute="centerX" secondItem="er1-mp-JhR" secondAttribute="centerX" id="gZ0-JQ-e5a"/>
                                 </constraints>
@@ -2216,8 +2214,8 @@
         <segue reference="Oq9-F1-cCO"/>
         <segue reference="4Df-8F-JjS"/>
         <segue reference="SkB-8n-kJk"/>
-        <segue reference="c4b-bb-2tq"/>
+        <segue reference="QCD-74-QFQ"/>
         <segue reference="sAd-vQ-kz5"/>
-        <segue reference="dFb-Zm-TKF"/>
+        <segue reference="E34-0n-scb"/>
     </inferredMetricsTieBreakers>
 </document>
