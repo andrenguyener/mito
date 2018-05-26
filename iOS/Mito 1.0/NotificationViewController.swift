@@ -304,7 +304,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         if let objPackage = objNotification as? Package {
             let strDate = UTCToLocal(date: objPackage.strOrderDate)
             appdata.fnDisplayImage(strImageURL: objPackage.strPhotoUrl, img: cell.imgPerson, boolCircle: true)
-            cell.strFirstNameLastName.text = "\(objPackage.strUserFName) has sent you a package request"
+            cell.strFirstNameLastName.text = "@\(objPackage.strUserFName) has sent you a package request"
             cell.strUsername.text = strDate
             cell.btnConfirm.tag = indexPath.row
             cell.btnConfirm.addTarget(self, action: #selector(self.btnAccept(_:)), for: .touchUpInside)
@@ -315,7 +315,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             let strDate = fnConvertDateToString(date: objFriendRequest.dateRequested)
             let dateLocal = UTCToLocal(date: strDate)
             appdata.fnDisplayImage(strImageURL: objFriendRequest.avatar, img: cell.imgPerson, boolCircle: true)
-            cell.strFirstNameLastName.text = "\(objFriendRequest.strUsername) has sent you a friend request"
+            cell.strFirstNameLastName.text = "@\(objFriendRequest.strUsername) has sent you a friend request"
             cell.strUsername.text = dateLocal
             cell.btnConfirm.tag = indexPath.row
             cell.btnConfirm.addTarget(self, action: #selector(self.btnAccept(_:)), for: .touchUpInside)
