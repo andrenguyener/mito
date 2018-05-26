@@ -25,7 +25,7 @@ class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         appdata.fnLoadFriendsAndAllUsers(tableview: peopleTableView)
         peopleTableView.delegate = self
         peopleTableView.dataSource = self
-        peopleTableView.rowHeight = 106
+        peopleTableView.rowHeight = 76
         peopleTableView.keyboardDismissMode = .onDrag
         let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
         var strPhotoUrl = data["profileImageString"] as! String
