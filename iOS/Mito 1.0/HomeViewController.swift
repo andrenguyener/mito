@@ -18,6 +18,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet weak var noFeedView: UIView!
     @IBOutlet weak var segmentChooser: UISegmentedControl!
+    @IBOutlet weak var imgProfile: UIImageView!
     
     var refresherNotification: UIRefreshControl!
     
@@ -28,6 +29,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.rowHeight = 133
         let nib = UINib(nibName: "FeedCopyTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "FeedCopyCell")
+        let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
+        var strPhotoUrl = data["profileImageString"] as! String
+        if strPhotoUrl.count < 100 {
+            strPhotoUrl = data["photoURL"] as! String
+        }
+        appdata.fnDisplayImage(strImageURL: strPhotoUrl, img: imgProfile, boolCircle: true)
         
         fnLoadCurrUserAddresses()
         //        greenTopView.backgroundColor = UIColor(rgb: 41DD7C)

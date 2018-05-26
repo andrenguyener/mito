@@ -25,7 +25,7 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         self.navigationController?.isNavigationBarHidden = true
 //        self.navigationController?.setNavigationBarHidden(true, animated: animated)
         searchBar.text = ""
-        searchBar.placeholder = "Search for products"
+        searchBar.placeholder = "Search products"
         productTableView.delegate = self
         productTableView.dataSource = self
         productTableView.rowHeight = 106
@@ -93,8 +93,7 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         ]
         Alamofire.request(urlAmazonProductCall!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
-            case .success(let JSON):
-                //                print(JSON)
+            case .success:
                 if let dictionary = response.result.value {
                     print("JSON OBject")
                     //                    print(dictionary)
