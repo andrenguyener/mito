@@ -96,6 +96,8 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
             switch response.result {
             case .success:
                 if let dictionary = response.result.value {
+                    let dict = dictionary as! Dictionary<String, AnyObject>
+                    print(dict.prettyPrint())
                     print("JSON OBject")
                     //                    print(dictionary)
                     print("Loaded search results successfully")
@@ -234,12 +236,12 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         return cell
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == appdata.arrProductSearchResults.count - 1 {
-            intPageNumber += 1
-            fnLoadProductData(strCodedSearchQuery: strProductQuery, intProductResultsPageNumber: intPageNumber)
-        }
-    }
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        if indexPath.row == appdata.arrProductSearchResults.count - 1 {
+//            intPageNumber += 1
+//            fnLoadProductData(strCodedSearchQuery: strProductQuery, intProductResultsPageNumber: intPageNumber)
+//        }
+//    }
     
     // Access first dictionary object in the dictionary
     func fnAccessFirstDictionaryInArray(dictObj: NSDictionary, arrName: String) -> NSDictionary {

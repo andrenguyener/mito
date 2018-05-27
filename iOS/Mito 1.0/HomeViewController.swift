@@ -35,6 +35,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             strPhotoUrl = data["photoURL"] as! String
         }
         appdata.fnDisplayImage(strImageURL: strPhotoUrl, img: imgProfile, boolCircle: true)
+        imgProfile.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.fnGoToSettings))
+        imgProfile.addGestureRecognizer(tapGesture)
         
         fnLoadCurrUserAddresses()
         //        greenTopView.backgroundColor = UIColor(rgb: 41DD7C)
@@ -65,18 +68,25 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     }
     
+    @objc func fnGoToSettings() {
+        performSegue(withIdentifier: "segHomeToMe", sender: self)
+    }
+    
     func fnAddRefreshersNotificationsAndPackages() {
         refresherNotification = UIRefreshControl()
-        refresherNotification.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refresherNotification.addTarget(self, action: #selector(HomeViewController.fnRefreshNotifications), for: UIControlEvents.valueChanged)
         tableView.addSubview(refresherNotification)
     }
     
     @objc func fnRefreshNotifications() {
-        appdata.arrMyFeedItems.removeAll()
-        appdata.arrFriendsFeedItems.removeAll()
-        appdata.fnLoadMyActivity(tblview: tableView, intUserId: appdata.intCurrentUserID, arr: appdata.arrMyFeedItems, refresherNotification: refresherNotification, view: noFeedView)
-        appdata.fnLoadFriendActivity(tblview: tableView, refresherNotification: refresherNotification, view: noFeedView)
+        if segmentChooser.selectedSegmentIndex == 0 {
+            appdata.arrFriendsFeedItems.removeAll()
+            print("First Refresh array size: \(appdata.arrFriendsFeedItems.count)")
+            appdata.fnLoadFriendActivity(tblview: tableView, refresherNotification: refresherNotification, view: noFeedView)
+        } else {
+            appdata.arrMyFeedItems.removeAll()
+            appdata.fnLoadMyActivity(tblview: tableView, intUserId: appdata.intCurrentUserID, arr: appdata.arrMyFeedItems, refresherNotification: refresherNotification, view: noFeedView)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -238,6 +248,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCopyCell", for: indexPath) as! FeedCopyTableViewCell
         var feedItemObj = FeedItem(strDate: "", photoSenderUrl: "", strMessage: "", strRecipientFName: "", strRecipientLName: "", strSenderFName: "", strSenderLName: "", intRecipientId: 0, intSenderId: 0, strPhotoBytes: "")
         if segmentChooser.selectedSegmentIndex == 0 {
+            print(indexPath.row)
+            print("Array size: \(appdata.arrFriendsFeedItems.count)")
             feedItemObj = appdata.arrFriendsFeedItems[indexPath.row]
         } else {
             feedItemObj = appdata.arrMyFeedItems[indexPath.row]
@@ -265,6 +277,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func cart(_ sender: Any) {
         performSegue(withIdentifier: "homeToCart", sender: self)
     }
+    
+    
     
 }
 

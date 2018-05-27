@@ -107,7 +107,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         btnNext.isHidden = false
     }
     
-    
     @IBAction func btnSelectStateDone(_ sender: Any) {
         pickerviewStateAA.isHidden = true
         confirmStatePicker.isHidden = true

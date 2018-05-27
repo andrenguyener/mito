@@ -324,8 +324,13 @@ class AppData: NSObject {
                     let objUsers = dictionary as! NSArray
                     for objUser in objUsers {
                         let objPerson2 = objUser as! NSDictionary
+                        let samantha = objPerson2["UserFname"] as! String
+                        if samantha == "Samantha" {
+                            print(objPerson2)
+                        }
+//                        print(objPerson2)
                         var strAvatar = objPerson2["ProfileImage"] as! String
-                        if strAvatar == self.strImageDefault {
+                        if strAvatar == self.strImageDefault || strAvatar == "AAP4AHUXf+Y=" {
                             strAvatar = objPerson2["PhotoUrl"] as! String
                         }
                         let p: Person = Person(firstName: (objPerson2["UserFname"] as? String)!,

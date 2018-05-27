@@ -61,6 +61,7 @@
                                                 <state key="normal" image="46 shopping cart 2"/>
                                                 <connections>
                                                     <action selector="btnCartPressed:" destination="cz1-uG-LnH" eventType="touchUpInside" id="oJC-bo-nMG"/>
+                                                    <action selector="fnBtnCartPressed:" destination="zTg-1Y-lm9" eventType="touchUpInside" id="UMV-EG-qCd"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -74,6 +75,34 @@
                                     <constraint firstAttribute="bottom" secondItem="dJJ-cP-Txr" secondAttribute="bottom" constant="10" id="Ax4-4g-Ala"/>
                                     <constraint firstItem="dJJ-cP-Txr" firstAttribute="leading" secondItem="MfP-sC-TgG" secondAttribute="leading" constant="15" id="vqW-D8-M9n"/>
                                     <constraint firstItem="dJJ-cP-Txr" firstAttribute="centerX" secondItem="MfP-sC-TgG" secondAttribute="centerX" id="xqJ-qg-gGe"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A3E-0o-JGq">
+                                <rect key="frame" x="0.0" y="89" width="375" height="529"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="CeN-zG-dK7">
+                                        <rect key="frame" x="15" y="233" width="345" height="63"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lWG-5k-56K">
+                                                <rect key="frame" x="0.0" y="0.0" width="345" height="29.5"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="25"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ImY-dc-Pc1">
+                                                <rect key="frame" x="0.0" y="39.5" width="345" height="23.5"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="CeN-zG-dK7" firstAttribute="leading" secondItem="A3E-0o-JGq" secondAttribute="leading" constant="15" id="DFX-wZ-zPg"/>
+                                    <constraint firstItem="CeN-zG-dK7" firstAttribute="centerY" secondItem="A3E-0o-JGq" secondAttribute="centerY" id="HVt-VK-47s"/>
+                                    <constraint firstItem="CeN-zG-dK7" firstAttribute="centerX" secondItem="A3E-0o-JGq" secondAttribute="centerX" id="d6x-Xz-Dm0"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r68-ot-V1i" userLabel="Notification">
@@ -183,6 +212,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="r68-ot-V1i" firstAttribute="bottom" secondItem="zyl-dg-pJg" secondAttribute="bottom" id="19i-J8-gqE"/>
+                            <constraint firstItem="A3E-0o-JGq" firstAttribute="leading" secondItem="zyl-dg-pJg" secondAttribute="leading" id="3n8-sx-BcA"/>
+                            <constraint firstItem="A3E-0o-JGq" firstAttribute="top" secondItem="zyl-dg-pJg" secondAttribute="top" constant="69" id="4j0-lE-rUL"/>
+                            <constraint firstItem="A3E-0o-JGq" firstAttribute="bottom" secondItem="zyl-dg-pJg" secondAttribute="bottom" id="JNo-QL-AKI"/>
+                            <constraint firstItem="A3E-0o-JGq" firstAttribute="trailing" secondItem="zyl-dg-pJg" secondAttribute="trailing" id="JhA-4W-S4Y"/>
                             <constraint firstItem="dJJ-cP-Txr" firstAttribute="top" secondItem="zyl-dg-pJg" secondAttribute="top" constant="10" id="MQu-1z-dgh"/>
                             <constraint firstItem="MfP-sC-TgG" firstAttribute="top" secondItem="3YQ-Zj-vYT" secondAttribute="top" id="RMK-Dw-R08"/>
                             <constraint firstItem="MfP-sC-TgG" firstAttribute="trailing" secondItem="zyl-dg-pJg" secondAttribute="trailing" id="fA6-hq-qhl"/>
@@ -193,15 +226,26 @@
                             <constraint firstItem="r68-ot-V1i" firstAttribute="trailing" secondItem="zyl-dg-pJg" secondAttribute="trailing" id="xYJ-0k-orG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zyl-dg-pJg"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="r68-ot-V1i"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="d6B-pf-dhU"/>
                     <connections>
                         <outlet property="imgProfile" destination="ab6-gH-aFD" id="Ufr-Pc-xiS"/>
+                        <outlet property="lblSubtitle" destination="ImY-dc-Pc1" id="I9E-BL-dnv"/>
+                        <outlet property="lblTitle" destination="lWG-5k-56K" id="lWN-Gi-0ev"/>
                         <outlet property="notificationView" destination="r68-ot-V1i" id="d3m-AE-e30"/>
                         <outlet property="tblviewNotification" destination="d63-uF-5nI" id="KQS-cD-HCb"/>
+                        <outlet property="viewEmptyDataSet" destination="A3E-0o-JGq" id="MaT-qg-tJQ"/>
+                        <outlet property="viewGreenNav" destination="MfP-sC-TgG" id="uHi-KB-uqg"/>
                         <segue destination="klr-lX-eU9" kind="show" identifier="NotificationToPackageDetails" id="8JP-z1-DgM"/>
                         <segue destination="kY2-9W-ZvR" kind="show" identifier="DirectAcceptPackage" id="ruP-Sx-HS5"/>
                         <segue destination="mKW-hw-jiX" kind="show" identifier="CheckFriendRequest" id="5va-cB-XlO"/>
+                        <segue destination="Ela-Xp-3K3" kind="show" identifier="segNotificationToMe" id="YO1-kI-SDA"/>
+                        <segue destination="UPq-qC-84m" kind="show" identifier="segNotificationToCart" id="4aV-H5-zth"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gdz-Oq-dMf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -410,7 +454,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E8s-FG-YQa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2580" y="2958"/>
+            <point key="canvasLocation" x="2596" y="2956"/>
         </scene>
         <!--Settings-->
         <scene sceneID="2C3-4u-ABc">
@@ -421,10 +465,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="aau-YT-r95">
-                                <rect key="frame" x="20" y="40" width="335" height="607"/>
+                                <rect key="frame" x="20" y="40" width="335" height="558"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AOn-Si-y3v">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="113.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="103.5"/>
                                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                         <state key="normal" title="Edit Profile">
@@ -432,7 +476,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gac-qa-YXU">
-                                        <rect key="frame" x="0.0" y="123.5" width="335" height="113.5"/>
+                                        <rect key="frame" x="0.0" y="113.5" width="335" height="103.5"/>
                                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                         <state key="normal" title="Cards">
@@ -440,7 +484,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CUf-EX-Siv">
-                                        <rect key="frame" x="0.0" y="247" width="335" height="113"/>
+                                        <rect key="frame" x="0.0" y="227" width="335" height="104"/>
                                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                         <state key="normal" title="Blocked User">
@@ -448,7 +492,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J0G-p0-DVc">
-                                        <rect key="frame" x="0.0" y="370" width="335" height="113.5"/>
+                                        <rect key="frame" x="0.0" y="341" width="335" height="103.5"/>
                                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                         <state key="normal" title="Change Password">
@@ -459,7 +503,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gcj-Wh-e2k">
-                                        <rect key="frame" x="0.0" y="493.5" width="335" height="113.5"/>
+                                        <rect key="frame" x="0.0" y="454.5" width="335" height="103.5"/>
                                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                         <state key="normal" title="Sign Out">
@@ -711,6 +755,7 @@
                         <outlet property="segmentChooser" destination="8Yq-SS-qUE" id="YyB-xF-DhV"/>
                         <outlet property="tableView" destination="zry-fA-7Ss" id="KjW-cH-gPd"/>
                         <segue destination="UPq-qC-84m" kind="show" identifier="homeToCart" id="cI7-Td-TzM"/>
+                        <segue destination="Ela-Xp-3K3" kind="show" identifier="segHomeToMe" id="QLb-Rf-ueb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T2P-hg-MfA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1000,6 +1045,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y8N-PG-Y96">
+                                <rect key="frame" x="27" y="225" width="320" height="216"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </pickerView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C5t-Vc-rde">
                                 <rect key="frame" x="15" y="50" width="345" height="23.5"/>
                                 <subviews>
@@ -1031,10 +1080,6 @@
                                     <action selector="btnGoToEditCheckout:" destination="UPq-qC-84m" eventType="touchUpInside" id="YIg-iZ-svk"/>
                                 </connections>
                             </button>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y8N-PG-Y96">
-                                <rect key="frame" x="27.5" y="225.5" width="320" height="216"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </pickerView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Yt-AX-8vw">
                                 <rect key="frame" x="15" y="94" width="345" height="507"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1160,7 +1205,7 @@
             <objects>
                 <viewController title="Account Detail" id="mKW-hw-jiX" customClass="PeopleDetailsViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hy4-EJ-BfW">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="iIt-YC-sQM" userLabel="Profile Information">
@@ -2228,13 +2273,13 @@
         <image name="swirlsearch" width="2257" height="5634"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="eyY-AF-kxf"/>
+        <segue reference="Vto-2H-CEr"/>
         <segue reference="ruP-Sx-HS5"/>
         <segue reference="Oq9-F1-cCO"/>
-        <segue reference="4Df-8F-JjS"/>
-        <segue reference="SkB-8n-kJk"/>
-        <segue reference="QCD-74-QFQ"/>
-        <segue reference="GdB-Tr-zhu"/>
-        <segue reference="E34-0n-scb"/>
+        <segue reference="kS1-pK-LOk"/>
+        <segue reference="5va-cB-XlO"/>
+        <segue reference="4aV-H5-zth"/>
+        <segue reference="sAd-vQ-kz5"/>
+        <segue reference="YO1-kI-SDA"/>
     </inferredMetricsTieBreakers>
 </document>

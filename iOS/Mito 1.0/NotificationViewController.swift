@@ -16,6 +16,10 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var notificationView: UIView!
     @IBOutlet weak var tblviewNotification: UITableView!
     @IBOutlet weak var imgProfile: UIImageView!
+    @IBOutlet weak var viewEmptyDataSet: UIView!
+    @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak var lblSubtitle: UILabel!
+    @IBOutlet weak var viewGreenNav: UIView!
     
     var appdata = AppData.shared
     
@@ -38,6 +42,31 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             strPhotoUrl = data["photoURL"] as! String
         }
         appdata.fnDisplayImage(strImageURL: strPhotoUrl, img: imgProfile, boolCircle: true)
+        imgProfile.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.fnGoToSettings))
+        imgProfile.addGestureRecognizer(tapGesture)
+//        viewEmptyDataSet.lblTitle.text
+//        self.viewEmptyDataSet = Bundle.main.loadNibNamed("EmptyDataSetView", owner: self, options: nil)?.first as? EmptyDataSetView
+        lblTitle.text = "No Notifications"
+        lblSubtitle.text = "You can find things that require your attention here."
+//        viewEmptyDataSet.topAnchor.constraint(equalTo: viewGreenNav.topAnchor, constant: 1.0).isActive = true
+        
+//        viewEmptyDataSet.lblTitle.centerXAnchor.constraint(equalTo: self.viewEmptyDataSet.centerXAnchor).isActive = true
+//        viewEmptyDataSet.lblSubtitle.centerYAnchor.constraint(equalTo: self.viewEmptyDataSet.centerYAnchor).isActive = true
+        lblSubtitle.numberOfLines = 2
+//        let leftConstraint = NSLayoutConstraint(item: <#T##Any#>, attribute: <#T##NSLayoutAttribute#>, relatedBy: <#T##NSLayoutRelation#>, toItem: <#T##Any?#>, attribute: <#T##NSLayoutAttribute#>, multiplier: <#T##CGFloat#>, constant: <#T##CGFloat#>)
+//        headerView?.addConstraint(<#T##constraint: NSLayoutConstraint##NSLayoutConstraint#>)
+//        viewEmptyDataSet.lblTitle.text = "No Notifications"
+//        viewEmptyDataSet.lblSubtitle.text = "You can find things that require your attention here."
+//        self.view.addSubview(viewEmptyDataSet!)
+//        let nibAddNewAddress = UINib(nibName: "EmptyDataSetView", bundle: nil)
+    }
+    
+    @objc func fnGoToSettings() {
+        performSegue(withIdentifier: "segNotificationToMe", sender: self)
+    }
+    @IBAction func fnBtnCartPressed(_ sender: Any) {
+        performSegue(withIdentifier: "segNotificationToCart", sender: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
