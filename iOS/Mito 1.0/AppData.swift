@@ -247,7 +247,7 @@ class AppData: NSObject {
                     for obj in dict2 {
                         let object = obj as! NSDictionary
                         var strAvatar = object["ProfileImage"] as! String
-                        if strAvatar == self.strImageDefault {
+                        if strAvatar == self.strImageDefault || strAvatar == "AAP4AHUXf+Y="{
                             strAvatar = object["PhotoUrl"] as! String
                         }
                         let p: Person = Person(firstName: (object["UserFname"] as? String)!,
