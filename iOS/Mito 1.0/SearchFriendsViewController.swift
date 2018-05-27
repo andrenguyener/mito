@@ -15,13 +15,14 @@ class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITabl
 //    @IBOutlet weak var swirlSearchImg: UIImageView!
     @IBOutlet weak var imgCurrentRecipient: UIImageView!
     var appdata = AppData.shared
+//    var strFriendQuery = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.placeholder = "Search for a friend"
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
-        searchBar.text = strSearchQuery
+        searchBar.text = ""
         appdata.fnLoadFriendsAndAllUsers(tableview: peopleTableView)
         peopleTableView.delegate = self
         peopleTableView.dataSource = self

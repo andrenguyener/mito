@@ -18,7 +18,8 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
     @IBOutlet weak var imgCurrentRecipient: UIImageView!
     
     var appdata = AppData.shared
-    var strProductResultsPageNumber = 1
+    var intPageNumber = 1
+    var strProductQuery = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +32,7 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         productTableView.rowHeight = 106
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
-        searchBar.text = strSearchQuery
+        searchBar.text = strProductQuery
         spinnerProductSearch.isHidden = true
         let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
         var strPhotoUrl = data["profileImageString"] as! String
@@ -61,32 +62,32 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
     @IBAction func btnCartPressed(_ sender: Any) {
         performSegue(withIdentifier: "segSearchProductToCart", sender: self)
     }
-    
-    
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if (searchBar.text!.replacingOccurrences(of: " ", with: "").count > 0) { // tests for only spaces
+            intPageNumber = 1
             spinnerProductSearch.isHidden = false
             spinnerProductSearch.startAnimating()
 //            swirlSearchImg.isHidden = true
-            strSearchQuery = ""
-            strSearchQuery = searchBar.text!
-            fnLoadProductData(strCodedSearchQuery: searchBar.text!.replacingOccurrences(of: " ", with: "+"))
+            strProductQuery = ""
+            strProductQuery = searchBar.text!
+            fnLoadProductData(strCodedSearchQuery: searchBar.text!.replacingOccurrences(of: " ", with: "+"), intProductResultsPageNumber: intPageNumber)
         } else {
-            strSearchQuery = searchBar.text!.replacingOccurrences(of: " ", with: "")
+            strProductQuery = searchBar.text!.replacingOccurrences(of: " ", with: "")
             searchBar.text! = ""
-            strSearchQuery = "Amazon"
+            strProductQuery = "Amazon"
             searchBar.text = "Amazon"
         }
         searchBar.resignFirstResponder()
     }
     
-    func fnLoadProductData(strCodedSearchQuery: String) {
+    func fnLoadProductData(strCodedSearchQuery: String, intProductResultsPageNumber: Int) {
         let urlAmazonProductCall = URL(string: "https://api.projectmito.io/v1/amazonhashtest")
         appdata.arrProductSearchResults.removeAll()
-        print("fnLoadProductData Search query: \(strSearchQuery)")
+        print("fnLoadProductData Search query: \(strProductQuery)")
         let parameters: Parameters = [
             "keyword": strCodedSearchQuery,
-            "pageNumber": strProductResultsPageNumber
+            "pageNumber": intProductResultsPageNumber
         ]
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
@@ -116,7 +117,15 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
                 
             case .failure(let error):
                 print("Get Amazon Product error")
-                print(error)
+                print(error.localizedDescription)
+                if error.localizedDescription == "The request timed out." {
+                    let alert = self.appdata.fnDisplayAlert(title: "Error", message: "Amazon services are down blame Jeff Bezos")
+                    self.present(alert, animated: true, completion: nil)
+                }
+                DispatchQueue.main.async {
+                    self.spinnerProductSearch.stopAnimating()
+                    self.spinnerProductSearch.isHidden = true
+                }
             }
         }
     }
@@ -217,16 +226,19 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         print("Chose products")
         print("Product indexPath.row: \(indexPath.row)")
         let cell = tableView.dequeueReusableCell(withIdentifier: "productCell", for: indexPath) as! ProductTableViewCell
-        //            if (indexPath.row == appdata.arrProductSearchResults.count - 1) {
-        //                strProductResultsPageNumber += 1
-        //                fnLoadProductData()
-        //            }
         let objProduct = appdata.arrProductSearchResults[indexPath.row]
         appdata.fnDisplayImage(strImageURL: objProduct.image, img: cell.img, boolCircle: false)
         cell.title.text = objProduct.title
         cell.publisher.text = objProduct.publisher
         cell.price.text = objProduct.price
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == appdata.arrProductSearchResults.count - 1 {
+            intPageNumber += 1
+            fnLoadProductData(strCodedSearchQuery: strProductQuery, intProductResultsPageNumber: intPageNumber)
+        }
     }
     
     // Access first dictionary object in the dictionary
