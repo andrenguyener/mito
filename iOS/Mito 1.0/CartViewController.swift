@@ -107,7 +107,9 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             pickerviewEditQuantity.isHidden = true
             cartTableView.delegate = self
             cartTableView.dataSource = self
-            cartTableView.rowHeight = 106
+            //cartTableView.rowHeight = 106
+            cartTableView.estimatedRowHeight = 165
+            cartTableView.rowHeight = UITableViewAutomaticDimension
             self.navigationController?.isNavigationBarHidden = false
             fnLoadMitoCart()
         } else if itemCountCheckout != nil {
