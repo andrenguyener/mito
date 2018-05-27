@@ -47,6 +47,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         imgProfile.addGestureRecognizer(tapGesture)
 //        viewEmptyDataSet.lblTitle.text
 //        self.viewEmptyDataSet = Bundle.main.loadNibNamed("EmptyDataSetView", owner: self, options: nil)?.first as? EmptyDataSetView
+        viewEmptyDataSet.isHidden = true
         lblTitle.text = "No Notifications"
         lblSubtitle.text = "You can find things that require your attention here."
 //        viewEmptyDataSet.topAnchor.constraint(equalTo: viewGreenNav.topAnchor, constant: 1.0).isActive = true

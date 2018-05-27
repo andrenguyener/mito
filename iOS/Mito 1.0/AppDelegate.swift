@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WebSocketDelegate {
             var topWindow: UIWindow? = UIWindow(frame: UIScreen.main.bounds)
             topWindow?.rootViewController = UIViewController()
             topWindow?.windowLevel = UIWindowLevelAlert + 1
-            let alert = UIAlertController(title: "Mito", message: "\(strFname) \(strLname) has sent you a friend ", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Mito", message: "\(strFname) \(strLname) has sent you a friend request.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Confirm"), style: .cancel, handler: { (_ action: UIAlertAction) -> Void in
                 topWindow?.isHidden = true
                 topWindow = nil
@@ -54,10 +54,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WebSocketDelegate {
             topWindow?.rootViewController?.present(alert, animated: true, completion: nil)
             print("friend-request") // write function for what you want to do when friend-request comes in
         case "friend-accept":
+            let friend = dictionary!["friend"] as! NSDictionary
+            let strFname = friend["userFname"] as! String
+            let strLname = friend["userLname"] as! String
             var topWindow: UIWindow? = UIWindow(frame: UIScreen.main.bounds)
             topWindow?.rootViewController = UIViewController()
             topWindow?.windowLevel = UIWindowLevelAlert + 1
-            let alert = UIAlertController(title: "Mito", message: "Friend Accept", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Mito", message: "\(strFname) \(strLname) has accepted your friend request.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Confirm"), style: .cancel, handler: { (_ action: UIAlertAction) -> Void in
                 topWindow?.isHidden = true
                 topWindow = nil
