@@ -104,10 +104,12 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         if cartTableView != nil {
             pickerviewEditQuantity.dataSource = self
             pickerviewEditQuantity.delegate = self
-            pickerviewEditQuantity.isHidden = true
+            pickerviewEditQuantity.isHidden = false
             cartTableView.delegate = self
             cartTableView.dataSource = self
-            cartTableView.rowHeight = 106
+            //cartTableView.rowHeight = 106
+            cartTableView.estimatedRowHeight = 165
+            cartTableView.rowHeight = UITableViewAutomaticDimension
             self.navigationController?.isNavigationBarHidden = false
             fnLoadMitoCart()
         } else if itemCountCheckout != nil {
@@ -274,6 +276,10 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        cartTableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     @objc func fnRemoveItem(_ button: UIButton) {
         let intLineItemIndex = button.tag
         fnUpdateLineItemQuantity(intCartItemIndex: intLineItemIndex, intNewQuantity: 0)
@@ -281,6 +287,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @objc func fnEditQuantity(_ button: UIButton) {
+        print("Row number: \(button.tag)")
         pickerviewEditQuantity.isHidden = false
         intLineItemIndex = button.tag
     }

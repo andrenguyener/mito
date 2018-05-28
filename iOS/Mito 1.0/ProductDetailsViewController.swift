@@ -44,7 +44,7 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
         viewProductSizes.register(nib, forCellWithReuseIdentifier: "SizeCell")
         viewProductSizes.delegate = self
         viewProductSizes.dataSource = self
-        self.automaticallyAdjustsScrollViewInsets = false;
+//        self.automaticallyAdjustsScrollViewInsets = false;
         
 //        var swipeRight = UISwipeGestureRecognizer(target: self, action: "swiped:") // put : at the end of method name
 //        swipeRight.direction = UISwipeGestureRecognizerDirection.right

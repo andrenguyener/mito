@@ -157,7 +157,7 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
                     strState = (strStateZip as NSString).substring(to: 2)
                     strZip = (strStateZip as NSString).substring(from: 3)
                 }
-                let strCountry = arrAddress![(arrAddress?.count)! - 1]
+//                let strCountry = arrAddress![(arrAddress?.count)! - 1]
                 let strAlias = place.name
                 self.fnAddNewAddress(strStreet: strStreet, strCity: strCity, strState: strState, strStateZip: strZip, strAlias: strAlias)
                 DispatchQueue.main.async {
@@ -186,9 +186,6 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
                     }
                 }
                 DispatchQueue.main.async {
-                    if (self.appdata.arrCurrUserAddresses.count > 0) {
-                        print("Load Current User Addresses: \(self.appdata.arrCurrUserAddresses[self.appdata.arrCurrUserAddresses.count - 1].strAddressAlias)")
-                    }
                     self.tblviewAddress.reloadData()
                 }
                 

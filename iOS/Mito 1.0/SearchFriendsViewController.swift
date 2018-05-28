@@ -15,17 +15,20 @@ class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITabl
 //    @IBOutlet weak var swirlSearchImg: UIImageView!
     @IBOutlet weak var imgCurrentRecipient: UIImageView!
     var appdata = AppData.shared
+//    var strFriendQuery = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.placeholder = "Search for a friend"
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
-        searchBar.text = strSearchQuery
-//        appdata.fnLoadFriendsAndAllUsers(tableview: peopleTableView)
+        searchBar.text = ""
+        appdata.fnLoadFriendsAndAllUsers(tableview: peopleTableView)
         peopleTableView.delegate = self
         peopleTableView.dataSource = self
-        peopleTableView.rowHeight = 106
+        peopleTableView.rowHeight = 97.5
+        //peopleTableView.estimatedRowHeight = 96
+        //peopleTableView.rowHeight = UITableViewAutomaticDimension
         peopleTableView.keyboardDismissMode = .onDrag
         let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
         var strPhotoUrl = data["profileImageString"] as! String
@@ -39,7 +42,7 @@ class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        appdata.fnLoadFriendsAndAllUsers(tableview: peopleTableView)
+//        appdata.fnLoadFriendsAndAllUsers(tableview: peopleTableView)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     

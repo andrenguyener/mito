@@ -18,7 +18,7 @@ class ProductViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let talkView = segue.destination as! SearchViewController
+//        let talkView = segue.destination as! SearchViewController
 //        talkView.strSearchQuery = searchText
     }
     
