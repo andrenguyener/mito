@@ -12,6 +12,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Roboto-Medium.ttf">
+            <string>Roboto-Medium</string>
+        </array>
         <array key="Roboto-Regular.ttf">
             <string>Roboto-Regular</string>
         </array>
@@ -538,7 +541,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="581"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="81w-Hr-5bo" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="593"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="587.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="2e6-lg-sFd" userLabel="Sender Info">
                                                 <rect key="frame" x="20" y="10" width="335" height="168.5"/>
@@ -578,16 +581,16 @@
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="CiJ-B0-TcD" userLabel="Message">
-                                                <rect key="frame" x="20" y="198.5" width="335" height="51.5"/>
+                                                <rect key="frame" x="20" y="198.5" width="335" height="51"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cgn-UR-BR7">
                                                         <rect key="frame" x="0.0" y="0.0" width="81.5" height="23.5"/>
-                                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
+                                                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="20"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Here is where the message would be" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wBL-fs-O8e">
-                                                        <rect key="frame" x="0.0" y="33.5" width="335" height="18"/>
+                                                        <rect key="frame" x="0.0" y="33.5" width="335" height="17.5"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -599,7 +602,7 @@
                                                 </constraints>
                                             </stackView>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="2" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FtS-QK-BUu" userLabel="Payment tblView">
-                                                <rect key="frame" x="20" y="270" width="335" height="160"/>
+                                                <rect key="frame" x="20" y="264.5" width="335" height="160"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="160" id="M0E-nl-eI5"/>
@@ -616,7 +619,7 @@
                                                 </prototypes>
                                             </tableView>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7GW-bc-0mU" userLabel="Order Summary tblView">
-                                                <rect key="frame" x="20" y="440" width="335" height="148"/>
+                                                <rect key="frame" x="20" y="434.5" width="335" height="148"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="148" id="hcM-hJ-kp4"/>
@@ -641,7 +644,7 @@
                                             <constraint firstItem="2e6-lg-sFd" firstAttribute="top" secondItem="81w-Hr-5bo" secondAttribute="top" constant="10" id="ZkK-eu-EB0"/>
                                             <constraint firstItem="FtS-QK-BUu" firstAttribute="leading" secondItem="81w-Hr-5bo" secondAttribute="leading" constant="20" id="chN-nb-Hu1"/>
                                             <constraint firstItem="CiJ-B0-TcD" firstAttribute="top" secondItem="2e6-lg-sFd" secondAttribute="bottom" constant="20" id="ee3-hX-eYV"/>
-                                            <constraint firstItem="FtS-QK-BUu" firstAttribute="top" secondItem="CiJ-B0-TcD" secondAttribute="bottom" constant="20" id="gID-Ja-XL6"/>
+                                            <constraint firstItem="FtS-QK-BUu" firstAttribute="top" secondItem="CiJ-B0-TcD" secondAttribute="bottom" constant="15" id="gID-Ja-XL6"/>
                                             <constraint firstItem="2e6-lg-sFd" firstAttribute="leading" secondItem="81w-Hr-5bo" secondAttribute="leading" constant="20" id="hxY-Qp-ZPR"/>
                                             <constraint firstAttribute="trailing" secondItem="7GW-bc-0mU" secondAttribute="trailing" constant="20" id="iBd-Do-GpP"/>
                                             <constraint firstItem="7GW-bc-0mU" firstAttribute="leading" secondItem="81w-Hr-5bo" secondAttribute="leading" constant="20" id="kfX-FL-sI3"/>
@@ -1000,7 +1003,7 @@
                                 </constraints>
                             </stackView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" text="What's it for?" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="eD1-jf-ACa">
-                                <rect key="frame" x="16" y="195" width="343" height="406"/>
+                                <rect key="frame" x="16" y="217" width="343" height="384"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
                                 <color key="textColor" red="0.83444553610000005" green="0.838506639" blue="0.85902613400000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
@@ -1028,8 +1031,7 @@
                             <constraint firstItem="6VS-KB-dQD" firstAttribute="leading" secondItem="ZUi-71-dRE" secondAttribute="leading" constant="16" id="Gl8-FX-YAW"/>
                             <constraint firstItem="eD1-jf-ACa" firstAttribute="leading" secondItem="ZUi-71-dRE" secondAttribute="leading" constant="16" id="Hlz-yB-zvu"/>
                             <constraint firstItem="QTO-0p-Ycj" firstAttribute="trailing" secondItem="ZUi-71-dRE" secondAttribute="trailing" constant="-20" id="HzM-06-Qf4"/>
-                            <constraint firstItem="eD1-jf-ACa" firstAttribute="top" secondItem="6VS-KB-dQD" secondAttribute="bottom" constant="8" id="NhR-yM-Hdz"/>
-                            <constraint firstItem="eD1-jf-ACa" firstAttribute="top" secondItem="6VS-KB-dQD" secondAttribute="bottom" constant="8" id="Plx-oy-rYJ"/>
+                            <constraint firstItem="eD1-jf-ACa" firstAttribute="top" secondItem="6VS-KB-dQD" secondAttribute="bottom" constant="30" id="NhR-yM-Hdz"/>
                             <constraint firstItem="ZUi-71-dRE" firstAttribute="trailing" secondItem="eD1-jf-ACa" secondAttribute="trailing" constant="16" id="YUF-1I-KsW"/>
                             <constraint firstItem="QTO-0p-Ycj" firstAttribute="leading" secondItem="ZUi-71-dRE" secondAttribute="leading" constant="20" id="jB2-5C-See"/>
                             <constraint firstItem="6VS-KB-dQD" firstAttribute="top" secondItem="ZUi-71-dRE" secondAttribute="top" constant="52" id="zqB-vY-UKD"/>
@@ -1121,7 +1123,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="2rk-ch-wix"/>
         <segue reference="D79-aK-l5e"/>
-        <segue reference="Qfg-Id-CWz"/>
+        <segue reference="G0C-Hd-PoN"/>
         <segue reference="MjP-Xg-3Ou"/>
     </inferredMetricsTieBreakers>
 </document>
