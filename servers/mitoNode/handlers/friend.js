@@ -46,7 +46,7 @@ const FriendHandler = (friendStore) => {
                     res.json(friend);
                     const data = {
                         type: 'friend-get',
-                        friend: friend,
+                        data: friend,
                         userIdOut: user.userId
                     };
                     console.log(data);
@@ -77,7 +77,7 @@ const FriendHandler = (friendStore) => {
                 res.json(friend);
                 const data = {
                     type: 'friend-get',
-                    friend: friend,
+                    data: friend,
                     userIdOut: user.userId
                 };
                 console.log(data);
@@ -102,7 +102,7 @@ const FriendHandler = (friendStore) => {
                 res.send(message);
                 const data = {
                     type: 'friend-request',
-                    friend: user,
+                    data: user,
                     userIdOut: friendId
                 };
                 console.log(data);
@@ -155,8 +155,8 @@ const FriendHandler = (friendStore) => {
                 if (message == "Accept") {
                     const data = {
                         type: 'friend-accept',
-                        friend: user,
-                        userIdOut: user.userId
+                        data: user,
+                        userIdOut: friendId
                     };
                     console.log(data);
                     sendToMQ(req, data);

@@ -261,7 +261,7 @@ class FriendStore {
                 request.addParameter('friendTypeToUpdate', TYPES.NVarChar, friendType);
                 request.addParameter('friendTypeRequestResponse', TYPES.NVarChar, notificationType);
                 request.on('doneProc', function (rowCount, more) {
-                    if (friendType == "friend") {
+                    if (friendType.toLowerCase() == "friend") {
                         resolve("Accept");
                     } else {
                         resolve("Action Completed");

@@ -83,7 +83,7 @@ const PackageHandler = (packageStore) => {
                 } else {
                     const data = {
                         type: 'package-accept',
-                        package: packages,
+                        data: packages,
                         userIdOut: senderId
                     };
                     sendToMQ(req, data);

@@ -56,7 +56,6 @@ func NewServiceProxy(addrs []string, ctx *handlers.Context) *httputil.ReversePro
 	}
 }
 
-const summaryPath = "/v1/summary"
 
 // Replace with your own connection parameters
 var server = "projectmito.database.windows.net"
