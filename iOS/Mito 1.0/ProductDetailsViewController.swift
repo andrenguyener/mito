@@ -64,51 +64,6 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
         lblQuantity.addGestureRecognizer(tapGesture)
     }
     
-//    func swiped(gesture: UIGestureRecognizer) {
-//        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-//            switch swipeGesture.direction {
-//            case UISwipeGestureRecognizerDirection.Right :
-//                println("User swiped right")
-//                intImageIndex--
-//                if imageIndex < 0 {
-//
-//                    imageIndex = maxImages
-//
-//                }
-//
-//                image.image = UIImage(named: imageList[imageIndex])
-//
-//            case UISwipeGestureRecognizerDirection.Left:
-//                println("User swiped Left")
-//
-//                // increase index first
-//
-//                imageIndex++
-//
-//                // check if index is in range
-//
-//                if imageIndex > maxImages {
-//
-//                    imageIndex = 0
-//
-//                }
-//
-//                image.image = UIImage(named: imageList[imageIndex])
-//
-//
-//
-//
-//            default:
-//                break //stops the code/codes nothing.
-//
-//
-//            }
-//
-//        }
-//
-//
-//    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -169,8 +124,8 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     func fnLoadProductDetails(strItemId: String){
         var str: NSString = NSString(string: "https://api.ebay.com/buy/browse/v1/item/\(strItemId)")
         str = str.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)! as NSString
-        let goodStr = str as? String
-        let urlLoadProductDetails = URL(string: goodStr!)
+        let goodStr = str as String
+        let urlLoadProductDetails = URL(string: goodStr)
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(UserDefaults.standard.object(forKey: "strEbayToken") as! String)"
         ]

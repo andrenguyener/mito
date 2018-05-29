@@ -605,10 +605,13 @@
                                     <constraint firstItem="ICP-RC-yQi" firstAttribute="leading" secondItem="dns-wn-RGZ" secondAttribute="leading" constant="15" id="m3q-1x-07S"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h41-Vk-dRh" userLabel="Content View">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="uHP-Hk-Xjh">
+                                <rect key="frame" x="177" y="299" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h41-Vk-dRh" userLabel="Content View">
                                 <rect key="frame" x="0.0" y="123" width="375" height="495"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zry-fA-7Ss">
+                                    <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zry-fA-7Ss">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="495"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
@@ -718,6 +721,11 @@
                                     <constraint firstItem="0gk-sd-FlG" firstAttribute="top" secondItem="BPT-Ix-K0p" secondAttribute="top" id="S9Q-sJ-6PC"/>
                                     <constraint firstItem="0gk-sd-FlG" firstAttribute="leading" secondItem="BPT-Ix-K0p" secondAttribute="leading" id="a0n-KW-o9b"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="0gk-sd-FlG"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -725,7 +733,9 @@
                             <constraint firstItem="BPT-Ix-K0p" firstAttribute="top" secondItem="dns-wn-RGZ" secondAttribute="bottom" id="26j-QN-nab"/>
                             <constraint firstItem="h41-Vk-dRh" firstAttribute="bottom" secondItem="SDK-lz-2ZY" secondAttribute="bottom" id="3cR-3A-meE"/>
                             <constraint firstItem="dns-wn-RGZ" firstAttribute="top" secondItem="jDo-cr-7fi" secondAttribute="top" id="60e-NY-Td9"/>
+                            <constraint firstItem="uHP-Hk-Xjh" firstAttribute="centerX" secondItem="jDo-cr-7fi" secondAttribute="centerX" id="CCk-i4-H7k"/>
                             <constraint firstItem="SDK-lz-2ZY" firstAttribute="trailing" secondItem="h41-Vk-dRh" secondAttribute="trailing" id="F4o-jT-Y4K"/>
+                            <constraint firstItem="uHP-Hk-Xjh" firstAttribute="centerY" secondItem="jDo-cr-7fi" secondAttribute="centerY" id="GsX-nB-we3"/>
                             <constraint firstItem="h41-Vk-dRh" firstAttribute="trailing" secondItem="dns-wn-RGZ" secondAttribute="trailing" id="HGY-we-e2E"/>
                             <constraint firstItem="AO7-NZ-k9u" firstAttribute="leading" secondItem="SDK-lz-2ZY" secondAttribute="leading" constant="10" id="QIa-e5-VpJ"/>
                             <constraint firstItem="SDK-lz-2ZY" firstAttribute="trailing" secondItem="AO7-NZ-k9u" secondAttribute="trailing" constant="10" id="RVg-lh-ujH"/>
@@ -751,7 +761,9 @@
                         <outlet property="imgProfile" destination="vMt-rr-cTZ" id="7f4-Zx-lDR"/>
                         <outlet property="noFeedView" destination="BPT-Ix-K0p" id="omR-l8-SXq"/>
                         <outlet property="segmentChooser" destination="8Yq-SS-qUE" id="YyB-xF-DhV"/>
+                        <outlet property="spinner" destination="uHP-Hk-Xjh" id="VIT-hQ-NJt"/>
                         <outlet property="tableView" destination="zry-fA-7Ss" id="KjW-cH-gPd"/>
+                        <outlet property="viewFeedContent" destination="h41-Vk-dRh" id="Zsb-iG-ja9"/>
                         <segue destination="UPq-qC-84m" kind="show" identifier="homeToCart" id="cI7-Td-TzM"/>
                         <segue destination="Ela-Xp-3K3" kind="show" identifier="segHomeToMe" id="QLb-Rf-ueb"/>
                     </connections>
@@ -1207,7 +1219,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="iIt-YC-sQM" userLabel="Profile Information">
-                                <rect key="frame" x="26" y="30" width="323" height="274.5"/>
+                                <rect key="frame" x="26" y="30" width="323" height="210.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FirstName LastName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1g-f7-mfA">
                                         <rect key="frame" x="24" y="0.0" width="275" height="21"/>
@@ -1228,53 +1240,56 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2VX-4k-3cu">
-                                        <rect key="frame" x="92" y="62" width="139" height="139"/>
+                                        <rect key="frame" x="124" y="62" width="75" height="75"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="139" id="NKy-Xb-lFb"/>
-                                            <constraint firstAttribute="height" constant="139" id="yOA-l0-9U7"/>
+                                            <constraint firstAttribute="width" constant="75" id="NKy-Xb-lFb"/>
+                                            <constraint firstAttribute="width" secondItem="2VX-4k-3cu" secondAttribute="height" multiplier="1:1" id="qAj-gh-voU"/>
                                         </constraints>
                                     </imageView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ZQA-vy-bnN">
-                                        <rect key="frame" x="66.5" y="211" width="190" height="30"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZQA-vy-bnN">
+                                        <rect key="frame" x="15" y="147" width="293" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="szw-Dz-dqC" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="85" height="30"/>
-                                                <color key="backgroundColor" red="0.25490196078431371" green="0.8666666666666667" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="141.5" height="30"/>
+                                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="85" id="AxT-PN-Ln7"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title="Add Friend">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Friend Request Sent">
+                                                    <color key="titleColor" red="0.25490196079999999" green="0.86666666670000003" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="fnAddFriend:" destination="mKW-hw-jiX" eventType="touchUpInside" id="k3E-cU-XZA"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rwi-hr-9PZ" customClass="RoundedWithBorder" customModule="Mito_1_0" customModuleProvider="target">
-                                                <rect key="frame" x="105" y="0.0" width="85" height="30"/>
+                                                <rect key="frame" x="151.5" y="0.0" width="141.5" height="30"/>
+                                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                                 <color key="tintColor" red="0.25490196078431371" green="0.8666666666666667" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="0 Friends">
-                                                    <color key="titleColor" red="0.25490196078431371" green="0.8666666666666667" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="titleColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                             </button>
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CAy-x4-clw">
-                                        <rect key="frame" x="140" y="251" width="43.5" height="23.5"/>
+                                        <rect key="frame" x="140" y="187" width="43.5" height="23.5"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="ZQA-vy-bnN" secondAttribute="trailing" constant="15" id="3jq-2m-NNV"/>
                                     <constraint firstItem="k1g-f7-mfA" firstAttribute="leading" secondItem="iIt-YC-sQM" secondAttribute="leading" constant="24" id="Hry-2K-guu"/>
+                                    <constraint firstItem="ZQA-vy-bnN" firstAttribute="leading" secondItem="iIt-YC-sQM" secondAttribute="leading" constant="15" id="uqJ-0Y-dqy"/>
                                 </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eV1-zt-RHT">
-                                <rect key="frame" x="0.0" y="309.5" width="375" height="247.5"/>
+                                <rect key="frame" x="0.0" y="245.5" width="375" height="311.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="homeCell" rowHeight="106" id="JOH-V7-ktB" customClass="HomeTableViewCell" customModule="Mito_1_0" customModuleProvider="target">
@@ -1300,7 +1315,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="iIt-YC-sQM" firstAttribute="centerX" secondItem="yfj-t1-xhc" secondAttribute="centerX" id="2Oz-4c-eq8"/>
                             <constraint firstItem="eV1-zt-RHT" firstAttribute="centerX" secondItem="Hy4-EJ-BfW" secondAttribute="centerX" id="4gM-oc-1CP"/>
@@ -2459,13 +2474,13 @@ If you have any questions about these Terms, please contact us at projectmitotea
         <image name="swirlsearch" width="2257" height="5634"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="73z-03-wsg"/>
+        <segue reference="Vto-2H-CEr"/>
         <segue reference="pBU-pi-a1H"/>
         <segue reference="jFg-kD-bop"/>
         <segue reference="kS1-pK-LOk"/>
         <segue reference="5va-cB-XlO"/>
-        <segue reference="4aV-H5-zth"/>
+        <segue reference="cI7-Td-TzM"/>
         <segue reference="GdB-Tr-zhu"/>
-        <segue reference="YO1-kI-SDA"/>
+        <segue reference="QLb-Rf-ueb"/>
     </inferredMetricsTieBreakers>
 </document>

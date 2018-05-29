@@ -77,12 +77,18 @@ class PeopleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
                 if let dictionary = response.result.value {
                     print(dictionary)
                     if dictionary == "Friend" {
-                        self.addFriendbtn.setTitle("Friends", for: .normal)
+                        self.addFriendbtn.setTitle("✓ Friends", for: .normal)
                         self.btnShopForFriend.isHidden = false
                         self.addFriendbtn.isEnabled = false
-                        self.addFriendbtn.backgroundColor = UIColor.gray
+//                        self.addFriendbtn.backgroundColor = UIColor.white
+                        self.addFriendbtn.setTitleColor(UIColor(red:0.25, green:0.87, blue:0.49, alpha:1.0), for: .normal)
+                    } else if dictionary == "Pending" {
+                        self.addFriendbtn.setTitle("Friend Request Sent", for: .normal)
+                        self.addFriendbtn.setTitleColor(UIColor(red:0.25, green:0.87, blue:0.49, alpha:1.0), for: .normal)
                     } else {
                         self.btnShopForFriend.isHidden = true
+                        self.btnShopForFriend.setTitle("Add friend", for: .normal)
+                        self.addFriendbtn.setTitleColor(UIColor.gray, for: .normal)
                     }
                 }
                 

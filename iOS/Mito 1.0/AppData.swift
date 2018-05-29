@@ -143,7 +143,7 @@ class AppData: NSObject {
         }
     }
     
-    func fnLoadFriendActivity(tblview: UITableView, refresherNotification: UIRefreshControl, view: UIView) {
+    func fnLoadFriendActivity(tblview: UITableView, refresherNotification: UIRefreshControl, view: UIView, feedView: UIView, spinner: UIActivityIndicatorView) {
         let urlLoadFriendActivity = URL(string: "https://api.projectmito.io/v1/feed/friends")
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
@@ -162,15 +162,18 @@ class AppData: NSObject {
                     self.arrFriendsFeedItems.sort(by: self.fnSortFeedItems)
                 }
                 print("Total Friend Feed Items: \(self.arrFriendsFeedItems.count)")
-                if (self.arrFriendsFeedItems.count == 0) {
-                    view.isHidden = false
-                    tblview.isHidden = true
-                } else {
-                    view.isHidden = true
-                    tblview.isHidden = false
-                }
 
                 DispatchQueue.main.async {
+                    if (self.arrFriendsFeedItems.count == 0) {
+                        view.isHidden = false
+                        feedView.isHidden = true
+                        tblview.isHidden = true
+                    } else {
+                        view.isHidden = true
+                        feedView.isHidden = false
+                        tblview.isHidden = false
+                    }
+                    spinner.stopAnimating()
                     tblview.reloadData()
                     refresherNotification.endRefreshing()
                 }

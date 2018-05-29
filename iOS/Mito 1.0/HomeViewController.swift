@@ -19,11 +19,16 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var noFeedView: UIView!
     @IBOutlet weak var segmentChooser: UISegmentedControl!
     @IBOutlet weak var imgProfile: UIImageView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var viewFeedContent: UIView!
     
     var refresherNotification: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        spinner.startAnimating()
+        noFeedView.isHidden = true
+        viewFeedContent.isHidden = true
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = 133
@@ -40,31 +45,30 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         imgProfile.addGestureRecognizer(tapGesture)
         
         fnLoadCurrUserAddresses()
-        //        greenTopView.backgroundColor = UIColor(rgb: 41DD7C)
         
         let userURL = "https://api.projectmito.io/v1/friend/\(appdata.intCurrentUserID)"
-//        print("Authorization: \(String(describing: UserDefaults.standard.object(forKey: "Authorization")))")
         let authToken = UserDefaults.standard.object(forKey: "Authorization") as! String
-        
-        //        var request = URLRequest(url: URL(string: "wss://api.projectmito.io/v1/ws?auth=\(String(describing: UserDefaults.standard.object(forKey: "Authorization")))")!)
         var urlWebsocket = "wss://api.projectmito.io/v1/ws?auth=\(authToken)"
         urlWebsocket = urlWebsocket.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
         var request = URLRequest(url: URL(string: urlWebsocket)!)
-//        print("Request: \(request)")
         request.timeoutInterval = 5
         appdata.socket = WebSocket(request: request)
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appdata.socket.delegate = appDelegate.self
         appdata.socket.connect()
         fnAddRefreshersNotificationsAndPackages()
-        DispatchQueue.main.async {
-            self.appdata.fnLoadFriendActivity(tblview: self.tableView, refresherNotification: self.refresherNotification, view: self.noFeedView)
-            if (self.appdata.arrMyFeedItems.count == 0) {
-                self.noFeedView.isHidden = false
-            } else {
-                self.noFeedView.isHidden = true
-            }
-        }
+        self.appdata.fnLoadFriendActivity(tblview: tableView, refresherNotification: refresherNotification, view: noFeedView, feedView: viewFeedContent, spinner: spinner)
+//        DispatchQueue.main.async {
+//
+////            self.spinner.stopAnimating()
+//            if (self.appdata.arrMyFeedItems.count == 0) {
+//                self.noFeedView.isHidden = false
+//                self.viewFeedContent.isHidden = true
+//            } else {
+//                self.viewFeedContent.isHidden = false
+//                self.noFeedView.isHidden = true
+//            }
+//        }
 
     }
     
@@ -82,7 +86,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         if segmentChooser.selectedSegmentIndex == 0 {
             appdata.arrFriendsFeedItems.removeAll()
             print("First Refresh array size: \(appdata.arrFriendsFeedItems.count)")
-            appdata.fnLoadFriendActivity(tblview: tableView, refresherNotification: refresherNotification, view: noFeedView)
+            appdata.fnLoadFriendActivity(tblview: tableView, refresherNotification: refresherNotification, view: self.noFeedView, feedView: self.viewFeedContent, spinner: spinner)
         } else {
             appdata.arrMyFeedItems.removeAll()
             appdata.fnLoadMyActivity(tblview: tableView, intUserId: appdata.intCurrentUserID, arr: appdata.arrMyFeedItems, refresherNotification: refresherNotification, view: noFeedView)
@@ -189,7 +193,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 //            } else {
 //                noFeedView.isHidden = true
 //            }
-            appdata.fnLoadFriendActivity(tblview: tableView, refresherNotification: refresherNotification, view: noFeedView)
+            appdata.fnLoadFriendActivity(tblview: tableView, refresherNotification: refresherNotification, view: noFeedView, feedView: viewFeedContent, spinner: spinner)
         }
     }
     
