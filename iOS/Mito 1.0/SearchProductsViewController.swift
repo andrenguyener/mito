@@ -85,7 +85,7 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
     func fnLoadEbayProductData(strCodedSearchQuery: String) {
         let urlEbayProductCall = URL(string: "https://api.ebay.com/buy/browse/v1/item_summary/search?q=\(strCodedSearchQuery)")
         appdata.arrEbaySearchResults.removeAll()
-        let strBearerToken = "Bearer v^1.1#i^1#f^0#p^1#r^0#I^3#t^H4sIAAAAAAAAAOVXXWwUVRTutN2SBot/iARIWAcQEWb2zszO7szIbrK0EAq0XdhKoEia+blDh52dGWdmaTdK2FTFhCjWggZCiMRgCoYIJPBgwJjwgGKUiAQpGvHBIIKGWBENGtE7s0vZVsJvERL3ZXPPPffc833nO/fOBfmq6idXz179ew02rHxLHuTLMYwaDqqrAlNHVJSPCZSBEgdsS35ivrKz4ofpjpjRLWEBdCzTcGCwI6MbjuAbY3jWNgRTdDRHMMQMdARXFlKJhnkCTQLBsk3XlE0dD9bXxXCVi0gqgDKIRiWGp8LIalyO2WzGcFmO8pBnWY6noyKUIJp3nCysNxxXNNwYTgOKIwBL0FwzzQgACCxPsjTdggcXQtvRTAO5kACP++kK/lq7JNdrpyo6DrRdFASP1ydmpZoS9XUzG5unh0pixYs8pFzRzToDR7WmAoMLRT0Lr72N43sLqawsQ8fBQ/HCDgODConLydxC+j7VLEfBcIRhJImGnBQGQ0LlLNPOiO618/AsmkKovqsADVdzc9djFLEhLYeyWxw1ohD1dUHvb35W1DVVg3YMnzkjsTiRTOLxlGm1QTHdSCRt01vVQCQX1BEsLcuSAiEkwrwYoaEULm5UiFakedBOtaahaB5pTrDRdGdAlDUcyA0tsCXcIKcmo8lOqK6XUb8f3wyoyxxS0RavqIUqZt02w6srzCAigv7w+hXoX+26tiZlXdgfYfCET1EMFy1LU/DBk74Wi/LpcGJ4m+taQijU3t5OtjOkaS8L0QBQoUUN81JyG8yIOPL1er3gr11/AaH5UGTUpshfcHMWyqUDaRUlYCzD4zQXphi+yPvAtOKDrf8ylGAODeyIoeoQXmVAlI9EAa2wQI5yQ9Eh8aJIQ14eUBJzREa009C1dFGGhIx0ls1AW1MEhlVphlMhoUR4FSlWVQmJVSIEpUIIIJQkmef+T41yo1JPyaYFk6auybkhEfyQiZ2xlaRou7kU1HVkuFHVXxWk44G84/C8Xr8piF4MBwURLY30tE3KZiZkiuhQ80ytfta3hVtD9+E9VVQEsIBUUwoXGenDJZ0VMmlDx8za6A4nm7xzvdlMQwN1iWubug7thdRtMTF0J/pdOs2vikrWNURj672G7CaPyVvUtujeRdSVndiSqyCnWDrKhrkwe3t1rfXr2pz7Dw6tmyrsbNNxoXIHPkBCA59D8TL/R3Vie0Enthu9qEAITKImgMeqKp6urLhvjKO5kNRElXS0ZQb6yrchmYY5S9Ts8ipsybhd21tLHmBbloLR/U+w6gpqeMl7DIy7MhOg7n+0huIAS3M0AwDLt4AJV2YrqVGVI0Nn4+9nDlazWxeM2LC4e9rK77HHo6Cm3wnDAmVIGWWVcF1aZLjM/KVvnhw7ZdW3pzv22D+fPfbQA2+p9Dlres0H547JLS+f6hp14O1pOeLzzjPPfXF0bVlw5KK+hj/7DtG/ffjlwUMjZj5z/tSauY2/HObemNR2eva+URsu7uzayFz69cjxz/o2RVq7Jq4s+7Rv3aLD2xcr+dc3v3j8xwmb50bzn6TLx34U7Gna2Tp+Y0P3oa1H1j71XWBfz7BHVmwbZ7zHB2v0hvHztLZAetfUP/ZWj665dAFLrtn76l89O6bs+ebS4Xd2dJ94do5xYs7XpzYdX99tNT48+bX8gXBv78kTzx9dvu3B2uU7V6+qf+EJ9auJ5dsD8d0fv3JhMpnq/endi3VnMKHl7/P71+9/qVC+fwDfz4XjGg8AAA=="
+        let strBearerToken = "Bearer v^1.1#i^1#p^1#r^0#I^3#f^0#t^H4sIAAAAAAAAAOVXXWwUVRTubtuFisWYgBCsyTJASCkze2dmZ7szdjdZWqDlp13Y2mBR6/zc6V67OzOZO0u7iSalRqKi/NgHiRjFoAbkQRCJxAetYkIkPBDFhEjhwfiAotEoBNSg3pldyrYQfouQuC+bOffcc8/3ne+cmQv6A1Xz1jWvO1ftm+Df1g/6/T4fOwlUBSrrJpf7Z1SWgRIH37b+2f0VA+WnGrCczVjSSogt08Aw2JfNGFjyjDEqZxuSKWOEJUPOQiw5qpRKLF8mcQyQLNt0TNXMUMGWphglhlkAo3xUF+uFcD3UidW4GLPdjFGsEuHUsBCOagpxgCxZxzgHWwzsyIYTozjARmkg0JzYDlgJ8FI4woiA76SCHdDGyDSICwOouJeu5O21S3K9eqoyxtB2SBAq3pJYlGpLtDQtbG1vCJXEihd5SDmyk8OjnxpNDQY75EwOXv0Y7HlLqZyqQoypULxwwuigUuJiMjeRfoHqCFQEJarLYV4Ro5FxYXKRaWdl5+ppuBak0brnKkHDQU7+WoQSMpSnoOoUn1pJiJamoPu3IidnkI6gHaMWLkg8mkgmqXjKtNJQ7mmlk7bp7lpOJ1c20QKnqooGIaTDohzhoBIuHlSIVmR5zEmNpqEhlzMcbDWdBZBkDUdzAyShhBvi1Ga02QndcTMq9eOLHEbFaKdb00IRc07acMsKs4SIoPd47QqM7HYcGyk5B45EGLvgURSjZMtCGjV20ZNiUT19OEalHceSQqHe3l6ml2dMuzvEAcCGVi1fllLTMCtTrq/b654/uvYGGnlQVEh2YiQ5eYvk0kekShIwuqk4Fw2zvFjkfXRa8bHWywwlmEOjG2K8GoTXoKIJQOQ5Tmej9fx4dEi8KNKQmwdU5Dydle0e6FgZWYW0SnSWy0IbaRIv6BwZg5DWIqJOFKvrtCJoEZrVIQQQKooqRv9PjXK9Uk+ppgWTZgap+fER/HiJnbe1pGw7+RTMZIjhelV/RZDYBXn74bm9fiMQ3RiYBJEtxLjaZlQzGzJlMtRcU5eX9S3hRuR1eFcVlQAsIEVa4UXGeHAZvEZlbIjNnE1e4UybO9fbzR5okC5xbDOTgXYHe0tMjONEvzPT/Iqo1AwiNHbdbchucEzepLZl506irhjwdV6OnBW4ekEQolzklrA1enVtz/8XQ+tGCttsYgdqt+EDJDT6NhQv837sgG8fGPDtIRcqEAJz2FlgZqD8kYrye2dg5EAGyTqDUbdBPvJtyPTAvCUj2x/wra7ZvbOr5P617XEwfeQGVlXOTiq5joGaSyuV7H3TqtkoEDgRsIAPRzrBrEurFewDFVO+e7ViymtLa7ccPLb72c/ef6xq8QZ0AlSPOPl8lWVEGGVHFp4KTB7O1Qzu/2vThT+PVv+4bONQ44Vhe6llTTs5AX35/JuZ+MT1q/atb31pA7M3uX9j+a63areuFjf1nql7uebB3McTH/r8TMfU5uO/5n/wHTs/hOZ2n07+je85Mf/QkVjb17XzPpid/uidhmY0NOl3/zfTugLDbd/+3FPdZW08nEYBoaFd+SO7Vh9a8t79R6cvMfd+RR8+8MI/m89WS+vXWnWvH39x/tqpxoq3f7sAl4Z34yfWbK7t5E++4quZ4F98fo+p7Jh3+qeelZXSUNw6cHZw+2B65/FAzbk9W57bcmj7J9/PX+x8+OnTO/oCb3yx/8k5/oOVfQ11tb/EHp777qz8puGts5+Zuau1UL5/ATyMVm0ZDwAA"
         let headers: HTTPHeaders = [
             "Authorization": strBearerToken
         ]
@@ -105,12 +105,19 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
                             let item = objItem as! NSDictionary
                             let strItemId = item["itemId"] as! String
                             let strTitle = item["title"] as! String
-                            let objImage = item["image"] as! NSDictionary
+                            if index == 22 {
+                                print(item)
+                            }
                             var strImageUrl = ""
-                            if objImage["imageUrl"] != nil {
-                                strImageUrl = objImage["imageUrl"] as! String
+                            if item["image"] != nil {
+                                let objImage = item["image"] as! NSDictionary
+                                if objImage["imageUrl"] != nil {
+                                    strImageUrl = objImage["imageUrl"] as! String
+                                } else {
+                                    strImageUrl = objImage["image"] as! String
+                                }
                             } else {
-                                strImageUrl = objImage["image"] as! String
+                                strImageUrl = "http://www.searshometownstores.com/c.3721178/hometown/img/no_image_available.jpeg?hei=50&wid=100&sharpen=1"
                             }
                             let objPrice = item["price"] as! NSDictionary
                             let strPrice = objPrice["value"] as! String
@@ -130,7 +137,7 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
                 }
                 
             case .failure(let error):
-                print("Get Amazon Product error")
+                print("Error getting Ebay products")
                 print(error.localizedDescription)
                 if error.localizedDescription == "The request timed out." {
                     let alert = self.appdata.fnDisplayAlert(title: "Error", message: "Amazon services are down blame Jeff Bezos")
