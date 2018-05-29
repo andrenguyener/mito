@@ -1055,10 +1055,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y8N-PG-Y96">
-                                <rect key="frame" x="27" y="225" width="320" height="216"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </pickerView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C5t-Vc-rde">
                                 <rect key="frame" x="15" y="50" width="345" height="23.5"/>
                                 <subviews>
@@ -1178,6 +1174,10 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y8N-PG-Y96">
+                                <rect key="frame" x="27" y="225" width="320" height="216"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -2477,7 +2477,7 @@ If you have any questions about these Terms, please contact us at projectmitotea
         <segue reference="Vto-2H-CEr"/>
         <segue reference="ruP-Sx-HS5"/>
         <segue reference="jFg-kD-bop"/>
-        <segue reference="kS1-pK-LOk"/>
+        <segue reference="4Df-8F-JjS"/>
         <segue reference="5va-cB-XlO"/>
         <segue reference="4aV-H5-zth"/>
         <segue reference="GdB-Tr-zhu"/>
