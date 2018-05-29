@@ -38,8 +38,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WebSocketDelegate {
         print(dictionary)
         let dictType = dictionary!["type"] as! String
         switch dictType {
+        case "ebay-token":
+            let strToken = dictionary!["data"] as! String
         case "friend-request":
-            let friend = dictionary!["friend"] as! NSDictionary
+            let friend = dictionary!["data"] as! NSDictionary
             let strFname = friend["userFname"] as! String
             let strLname = friend["userLname"] as! String
             var topWindow: UIWindow? = UIWindow(frame: UIScreen.main.bounds)
@@ -54,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WebSocketDelegate {
             topWindow?.rootViewController?.present(alert, animated: true, completion: nil)
             print("friend-request") // write function for what you want to do when friend-request comes in
         case "friend-accept":
-            let friend = dictionary!["friend"] as! NSDictionary
+            let friend = dictionary!["data"] as! NSDictionary
             let strFname = friend["userFname"] as! String
             let strLname = friend["userLname"] as! String
             var topWindow: UIWindow? = UIWindow(frame: UIScreen.main.bounds)

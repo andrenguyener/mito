@@ -136,8 +136,6 @@ class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("Chose people")
-        print("People indexPath.row: \(indexPath.row)")
         let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! TableViewCell
         let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
         let intNumFriends = data["NumFriends"] as? Int
