@@ -94,7 +94,7 @@ class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableV
         appdata.intNumItems = 0
         appdata.priceSum = 0.0
         for element in self.appdata.arrCartLineItems {
-            let itemPrice = "$" + element.objProduct.price // change later
+            let itemPrice = "$" + element.objProduct.strPrice! // change later
             formatter.numberStyle = .currency
             formatter.locale = Locale(identifier: "en_US")
             var decAmazonPrice: Double = 0.00

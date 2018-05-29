@@ -9,15 +9,15 @@
 import Foundation
 
 class LineItem {
-    var objProduct: Product
+    var objProduct: EbayProduct
     var intQuantity: Int
     
-    init(objProduct: Product, intQty: Int) {
+    init(objProduct: EbayProduct, intQty: Int) {
         self.objProduct = objProduct
         self.intQuantity = intQty
     }
     
     func description() -> String {
-        return "\(objProduct.title): \(intQuantity)"
+        return "\(objProduct.strTitle): \(intQuantity)"
     }
 }

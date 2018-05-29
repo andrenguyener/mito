@@ -562,35 +562,35 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
         }
     }
     
-    func fnGetCurrentOrders() {
-        let urlGetMyOrders = URL(string: "https://api.projectmito.io/v1/order/products")
-        let parameters: Parameters = [
-            "orderId": 42
-        ]
-        let headers: HTTPHeaders = [
-            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
-        ]
-        Alamofire.request(urlGetMyOrders!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
-            switch response.result {
-            case .success:
-                if let dictionary = response.result.value {
-                    let arrLineItems = dictionary as! NSArray
-                    for elem in arrLineItems {
-                        let objLineItemTemp = elem as! NSDictionary
-                        let objProduct = Product(image: objLineItemTemp["ProductImageUrl"] as! String, ASIN: objLineItemTemp["AmazonItemId"] as! String, title: objLineItemTemp["ProductName"] as! String)
-                        let intQty = objLineItemTemp["Quantity"] as! Int
-                        let objLineItem = LineItem(objProduct: objProduct, intQty: intQty)
-                        self.appdata.arrCurrUserCurrCart.append(objLineItem)
-                    }
-                    print("User has \(self.appdata.arrCurrUserCurrCart.count) line items")
-                }
-                
-            case .failure(let error):
-                print("Get current orders error")
-                print(error)
-            }
-        }
-    }
+//    func fnGetCurrentOrders() {
+//        let urlGetMyOrders = URL(string: "https://api.projectmito.io/v1/order/products")
+//        let parameters: Parameters = [
+//            "orderId": 42
+//        ]
+//        let headers: HTTPHeaders = [
+//            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
+//        ]
+//        Alamofire.request(urlGetMyOrders!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+//            switch response.result {
+//            case .success:
+//                if let dictionary = response.result.value {
+//                    let arrLineItems = dictionary as! NSArray
+//                    for elem in arrLineItems {
+//                        let objLineItemTemp = elem as! NSDictionary
+//                        let objProduct = Product(image: objLineItemTemp["ProductImageUrl"] as! String, ASIN: objLineItemTemp["AmazonItemId"] as! String, title: objLineItemTemp["ProductName"] as! String)
+//                        let intQty = objLineItemTemp["Quantity"] as! Int
+//                        let objLineItem = LineItem(objProduct: objProduct, intQty: intQty)
+//                        self.appdata.arrCurrUserCurrCart.append(objLineItem)
+//                    }
+//                    print("User has \(self.appdata.arrCurrUserCurrCart.count) line items")
+//                }
+//                
+//            case .failure(let error):
+//                print("Get current orders error")
+//                print(error)
+//            }
+//        }
+//    }
 }
 
 extension UIImage {

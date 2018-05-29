@@ -39,11 +39,11 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     func fnUpdateLineItemQuantity(intCartItemIndex: Int, intNewQuantity: Int) {
         let objCartLineItem = appdata.arrCartLineItems[intCartItemIndex]
         let parameters: Parameters = [
-            "amazonASIN": objCartLineItem.objProduct.ASIN,
-            "amazonPrice": objCartLineItem.objProduct.price,
+            "amazonASIN": objCartLineItem.objProduct.strItemId,
+            "amazonPrice": objCartLineItem.objProduct.strPrice,
             "quantity": intNewQuantity,
-            "productImageUrl": objCartLineItem.objProduct.image,
-            "productName": objCartLineItem.objProduct.title
+            "productImageUrl": objCartLineItem.objProduct.strImage,
+            "productName": objCartLineItem.objProduct.strTitle
         ]
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
@@ -126,7 +126,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.intNumItems = 0
         self.priceSum = 0.0
         for element in self.appdata.arrCartLineItems {
-            let itemPrice = "$" + element.objProduct.price // change later
+            let itemPrice = "$" + element.objProduct.strPrice! // change later
             formatter.numberStyle = .currency
             formatter.locale = Locale(identifier: "en_US")
             var decAmazonPrice: Double = 0.00
@@ -170,7 +170,8 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
                     for objCartItem in arrCartItems {
                         let dictCartItem = objCartItem as! NSDictionary
                         print(dictCartItem)
-                        let objectItem = Product(image: dictCartItem["ProductImageUrl"] as! String, ASIN: dictCartItem["AmazonItemId"] as! String, title: dictCartItem["ProductName"] as! String, publisher: "publisher", price: dictCartItem["AmazonItemPrice"] as! String, description: "description")
+                        let objectItem = EbayProduct(strItemId: "", strTitle: dictCartItem["ProductName"] as! String, strImage: dictCartItem["ProductImageUrl"] as! String, strPrice: dictCartItem["AmazonItemPrice"] as! String, strSeller: "", strRating: "")
+//                        let objectItem = Product(image: dictCartItem["ProductImageUrl"] as! String, ASIN: dictCartItem["AmazonItemId"] as! String, title: dictCartItem["ProductName"] as! String, publisher: "publisher", price: dictCartItem["AmazonItemPrice"] as! String, description: "description")
                         let intQuantity = dictCartItem["Quantity"] as! Int
                         let lineItem = LineItem(objProduct: objectItem, intQty: intQuantity)
                         self.appdata.arrCartLineItems.append(lineItem)
@@ -259,13 +260,13 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cartCell", for: indexPath) as! CartTableViewCell
         let cartObj = appdata.arrCartLineItems[indexPath.row]
-        let url = URL(string: "\(cartObj.objProduct.image)")
+        let url = URL(string: "\(cartObj.objProduct.strImage)")
         if let data = try? Data(contentsOf: url!) {
             cell.imgItemImage.image = UIImage(data: data)!
             cell.imgItemImage.contentMode = .scaleAspectFit
         }
-        cell.lblItemName.text = cartObj.objProduct.title
-        let strPrice = "$" + cartObj.objProduct.price
+        cell.lblItemName.text = cartObj.objProduct.strTitle
+        let strPrice = "$" + cartObj.objProduct.strPrice!
         formatter.numberStyle = .currency
         if let number = formatter.number(from: strPrice) {
             let intQty = (Double)(cartObj.intQuantity)

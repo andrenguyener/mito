@@ -18,6 +18,7 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     var urlAddToMitoCart = URL(string: "https://api.projectmito.io/v1/cart")
     let formatter = NumberFormatter()
     var intImageIndex = 0
+    var objProduct = EbayProduct(strItemId: "", strTitle: "", strImage: "", strPrice: "", strSeller: "")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -167,15 +168,11 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     func fnLoadProductDetails(strItemId: String){
         var str: NSString = NSString(string: "https://api.ebay.com/buy/browse/v1/item/\(strItemId)")
-//        let newStrItemId = strItemId.replacingOccurrences(of: "|", with: "%")
-//        var str = NSString(string: strItemId)
         str = str.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)! as NSString
-        let goodStr = str as! String
-        let urlLoadProductDetails = URL(string: goodStr)
-//        let safeURL =  urlLoadProductDetails.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
-        print(urlLoadProductDetails?.absoluteString)
+        let goodStr = str as? String
+        let urlLoadProductDetails = URL(string: goodStr!)
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer v^1.1#i^1#f^0#r^0#p^1#I^3#t^H4sIAAAAAAAAAOVXa2wUVRTubh9SS7USA6ZCWKaCj2Zm78zuDDsTdmGhVDah7dottVZIncfdduzszHbuXdqNEZtqeZgGNcbEGKNNjG+oVovhoTFRovgI0hiD0cQgMUpQfEQTTAzgnelStoXwLELi/tnMueeee77vfOc+QG9J6R3rV6w/Wu65xjvYC3q9Hg9bBkpLiquvK/RWFheAPAfPYO8tvUV9hYcWITllpKVGiNKWiaCvJ2WYSHKNYSpjm5IlIx1JppyCSMKqlIjWrZQ4Bkhp28KWahmUL1YTprRgQGBFQWVZwItcUiRW82TMJitMyUEAeIUVFCEQ4FlRJeMIZWDMRFg2cZjiABuiAU9zYhPgJMBKLMuEOKGV8jVDG+mWSVwYQEXcdCV3rp2X69lTlRGCNiZBqEgsWptoiMZqltc3LfLnxYrkeEhgGWfQxK9llgZ9zbKRgWdfBrneUiKjqhAhyh8ZW2FiUCl6MpmLSN+lOhCSoRZYKATEEB/ixClhstayUzI+exqORdfopOsqQRPrOHsuQgkZyv1QxbmvehIiVuNz/u7KyIae1KEdppYvjd4TjcepSMJKd0C5s56O25Yzq46ON9bQPKeqigYhpIOiLHBQCeYWGouWY3nSSsssU9MdzpCv3sJLIckaTuSGlfg8bohTg9lgR5PYySjfLzjOIWh1ajpWxAzuMJ2ywhQhwud+nrsC47MxtnUlg+F4hMkDLkWka9JpXaMmD7pSzKmnB4WpDozTkt/f3d3NdAcYy273cwCw/pa6lQm1A6ZkyvF1et311889gdZdKCokM5Eu4Wya5NJDpEoSMNupCBcKsgExx/vEtCKTracZ8jD7JzbEVDWICjQBKIIAg0FV4Fk4FR0SyYnU7+QBFTlLp2S7E+K0IauQVonOMilo65oU4JNcIJSEtCaISaLYZJJWeE2g2SSEAEJFUcXQ/6lRzlfqCdVKw7hl6Gp2agQ/VWIP2FpctnE2AQ2DGM5X9WcEiRyQlx+e0+sXAtGJgUgQOa0zjrYZ1Ur5LZlsao6pzc36knDr5Di8qopKAI4h1bWxg4xx4TJorcrYEFkZmxzhTIOzrzdZndAkXYJtyzCg3cxeEhNTuKNfmd38jKhUQyc0tl1tyC5wm7xIbcv4SqIu6vO0no6c5bmFPLmIL7w0tS5z69qU/S82rQsp7AoLYahdhguIf+JrKFLg/tg+zzbQ5xkmDyrgB/PZKjCvpHBVUeH0SqRjyOhykkF6u0ku+TZkOmE2Leu2t8Rz7+w3X23Le38NrgE3jb/ASgvZsrznGJh9aqSYvX5WORsCPCcCcsCybCuoOjVaxM4suvHA8eqIZzhy4rb75le0PtR4+527E6+D8nEnj6e4gAijoKzj4eq3vVvann+jSF2z1h7KvDNv/1PPfh3cqRe/UnZQqIoll+75pmXXJzM+rJ2zpWxk8QO/3rBjH/PbLzePhku+ekuhn3xttZFIdLR837Wr/+nhW19sTqwaGaiuWFQaPDKq/ryj6znKeOH4yrlCtqr/yO4vu09Q2w+q5oIlx+Yc8srm1vLHd69dvW60Ij6nAjwRC287Pmt0Q+O+zZ0fLHn5M/jogc6emfUl/dPuNlJ/TB/8fMPejwZG5m7uX127t1TcOnL0sXWVlUp3y7VmxcfhPT9s2vdghfndez+1b/xrSHimRvl72qft24sHFvye3Vn3T9fiw96hL94vf+nPeTM2Mu/WdH27af/hH4/RLY+Mle9fsFEU0hkPAAA="
+            "Authorization": "Bearer v^1.1#i^1#p^1#I^3#r^0#f^0#t^H4sIAAAAAAAAAOVXD2wTVRhft26ysIkoAYLTlBsGRO/67vrn2nOt6Tomi2wrdAzB6PLu7nU71t7Ve6+MSjSzEhQR0RkDJgiLcVE0MRAyJGRmRsVoiImgMSQExagJiMY/CRqDCb67ldENwhibQGLTpLnvfe973+/3/b7v+kB3WfnCDYs3/FXpuKm4txt0Fzsc/FRQXlZ6z80lxXNKi0CBg6O3e163M1dysgbDVDItLUM4begYudamkjqWbGOIyZi6ZECsYUmHKYQlokjxSOMSSeCAlDYNYihGknE11IUYmed9ICgERUFAIuAVatXPx2wxQkwAid6AByCEPGIwgOgyxhnUoGMCdRJiBMAHWOBjhWAL8EoCkLwCF+R9qxhXKzKxZujUhQNM2M5WsveaBalePlOIMTIJDcKEGyL18eZIQ92ippYad0GscJ6GOIEkg0c+RQ0VuVphMoMufwy2vaV4RlEQxow7PHTCyKBS5HwyV5G+zXRChID3AkVVVNEjBiaFyXrDTEFy+TQsi6ayCdtVQjrRSHYsQikZ8mqkkPxTEw3RUOeyfpZmYFJLaMgMMYtqIysjsRgTjhvpDgQ7m9iYaVi7GtnYsjrWJyiKrFLhsN4g9AtI9uYPGoqWZ3nUSVFDVzWLM+xqMkgtolmj0dzwBdxQp2a92YwkiJVRoZ9/mENhlVXToSJmSIdulRWlKBEu+3HsCgzvJsTU5AxBwxFGL9gUhRiYTmsqM3rRlmJePWtxiOkgJC253V1dXVyXhzPMdrcAAO9+qHFJXOlAKcjYvlavW/7a2BtYzYai0C6l/hLJpmkua6lUaQJ6OxMWAl7eE8zzPjKt8GjrRYYCzO6RDTFZDSJ6ZEEOQl72BBJ+P4KT0SHhvEjdVh5Ihlk2Bc1ORNJJqCBWoTrLpJCpqZLHlxDouYhV/cEEVWwiwco+1c/yCYTo9JNlJRj4PzXKlUo9rhhpFDOSmpKdJMFPktg9phqDJsnGUTJJDVeq+kuCxBbIawDP6vVxQLRiYBoEpjXO0janGCm3AelQs0xtdtYTwq3R1+ENVVQKcAippg69yDgbLofXKJyJsJEx6Suca7bmeovRiXTaJcQ0kklktvITYmIyJ/p1meaXRKUkNUpj242GbJxj8iq1Dcl1Re3MOVZehJz3CaLPL/q9woSwRe26tmSvydAaR2EXG5gg9T/4A+IeeRkKF9kfPufoBznHHnqfAm5wF18N5paVLHeWVMzBGkGcBhMc1tp1+iffRFwnyqahZhaXOR6u2r2rreD61fsImD18ASsv4acW3MZA1YWVUn7arEo+AHxCEHgF+l0Fqi+sOvmZzhlvnvt6UHo88vsTT/+0oPWwduDI+pnfgsphJ4ejtIjqomjHvLIiJXuq56u5h6cvLN63Cz74afln7KyPyitW/zzt+KFXT6QGtx75tf7HQ7lnnzuDz/xdK37y9kGmWNJPb793wS2vt4ns/vUnsvK26v2bjyv7Bp1rxLfIjtnswPQnX6p+v44bQNKW3b210cq772zZU7NuxWt/zL89dXqgROl75Z0pf0Zr+/jQQccdvdsrXvhuZ+M/555pD69B26PCsdbA3j3gbH92fuvguvp12/au+KJ94225346g5x+YEd1Y1b8kdnb5o/uOPeY6et8bmxc0zU6t2NL+ZVNFz9IPfzlaw74Xvn/n1CmnBk46v6lyLa9s+z7Rs+mp+aW5H7y3Tnu5b87HL37w7la4aaDvwOczh8r3L0i7bh4YDwAA"
         ]
         Alamofire.request(urlLoadProductDetails!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
@@ -206,7 +203,8 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
                     if dict["shortDescription"] != nil {
                         strDescription = dict["shortDescription"] as! String
                     }
-//                    let objProduct = EbayProduct(strItemId: strItemId, strTitle: strTitle, strImage: strImageUrl, strPrice: strPrice, strSeller: strSeller, strRating: strRating)
+                    let objProduct = EbayProduct(strItemId: strItemId, strTitle: strTitle, strImage: strImageUrl, strPrice: strPrice, strSeller: strSeller)
+                    self.objProduct = objProduct
                     self.prodPrice.text = strPrice
                     self.prodPub.text = strSeller
                     self.appdata.fnDisplayImage(strImageURL: strImageUrl, img: self.prodImage, boolCircle: false)
@@ -306,23 +304,23 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     @IBAction func btnAddToCartPressed(_ sender: Any) {
-        let objCurrentProduct = appdata.arrProductSearchResults[appdata.intCurrIndex]
+        let objCurrentProduct = self.objProduct
         var decAmazonPrice : Decimal = 0.00
-        let itemPrice = objCurrentProduct.price // change later
+        let itemPrice = objCurrentProduct.strPrice // change later
         formatter.numberStyle = .currency
         formatter.locale = Locale(identifier: "en_US")
-        print(objCurrentProduct.price)
-        if let number = formatter.number(from: itemPrice) {
+        print(objCurrentProduct.strPrice)
+        if let number = formatter.number(from: itemPrice!) {
             decAmazonPrice = number.decimalValue
         }
         print("decAmazonPrice: \(decAmazonPrice)")
         let intQuantity = (Int)(lblQuantity.text!)!
         let parameters: Parameters = [
-            "amazonASIN": objCurrentProduct.ASIN,
+            "amazonASIN": objCurrentProduct.strItemId!,
             "amazonPrice": decAmazonPrice,
             "quantity": intQuantity,
-            "productImageUrl": objCurrentProduct.image,
-            "productName": objCurrentProduct.title
+            "productImageUrl": objCurrentProduct.strImage!,
+            "productName": objCurrentProduct.strTitle!
         ]
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
