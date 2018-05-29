@@ -256,7 +256,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="CC6-PU-fKO">
-                                <rect key="frame" x="20" y="40" width="335" height="133.5"/>
+                                <rect key="frame" x="20" y="84" width="335" height="133.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lyj-rC-s4x">
                                         <rect key="frame" x="117.5" y="0.0" width="100" height="100"/>
@@ -274,7 +274,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xYb-A4-VIe">
-                                <rect key="frame" x="20" y="193.5" width="335" height="170"/>
+                                <rect key="frame" x="20" y="237.5" width="335" height="170"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2np-NQ-dZH">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="90"/>
@@ -1203,7 +1203,7 @@
             <objects>
                 <viewController title="Account Detail" id="mKW-hw-jiX" customClass="PeopleDetailsViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hy4-EJ-BfW">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="iIt-YC-sQM" userLabel="Profile Information">
@@ -2455,13 +2455,13 @@ If you have any questions about these Terms, please contact us at projectmitotea
         <image name="swirlsearch" width="2257" height="5634"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Vto-2H-CEr"/>
+        <segue reference="73z-03-wsg"/>
         <segue reference="ruP-Sx-HS5"/>
-        <segue reference="Oq9-F1-cCO"/>
+        <segue reference="jFg-kD-bop"/>
         <segue reference="kS1-pK-LOk"/>
-        <segue reference="5va-cB-XlO"/>
-        <segue reference="4aV-H5-zth"/>
+        <segue reference="39f-jC-Icg"/>
+        <segue reference="IOv-WN-4XC"/>
         <segue reference="GdB-Tr-zhu"/>
-        <segue reference="YO1-kI-SDA"/>
+        <segue reference="M0P-M1-1OC"/>
     </inferredMetricsTieBreakers>
 </document>
