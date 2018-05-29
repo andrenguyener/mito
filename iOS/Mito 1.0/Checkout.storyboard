@@ -979,7 +979,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="6VS-KB-dQD" userLabel="ImageLabelStackView">
-                                <rect key="frame" x="16" y="72" width="250" height="115"/>
+                                <rect key="frame" x="15" y="72" width="250" height="115"/>
                                 <subviews>
                                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="c3m-hZ-dPi" customClass="RoundedImage" customModule="Mito_1_0" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
@@ -1001,7 +1001,6 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="jlc-Rg-Pkl" firstAttribute="top" secondItem="6VS-KB-dQD" secondAttribute="top" constant="48" id="iXA-Rl-ZKD"/>
-                                    <constraint firstAttribute="width" constant="250" id="jaE-g7-W2P"/>
                                     <constraint firstItem="c3m-hZ-dPi" firstAttribute="top" secondItem="6VS-KB-dQD" secondAttribute="top" id="xjN-jc-vki"/>
                                 </constraints>
                             </stackView>
@@ -1019,7 +1018,7 @@
                                     <constraint firstAttribute="height" constant="46" id="SuR-AT-ofa"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
-                                <state key="normal" title="Confirm Message">
+                                <state key="normal" title="Continue">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -1031,7 +1030,7 @@
                         <constraints>
                             <constraint firstItem="QTO-0p-Ycj" firstAttribute="top" secondItem="eD1-jf-ACa" secondAttribute="bottom" constant="15" id="2or-CS-oxP"/>
                             <constraint firstItem="QTO-0p-Ycj" firstAttribute="bottom" secondItem="ZUi-71-dRE" secondAttribute="bottom" constant="-15" id="95D-jT-lQL"/>
-                            <constraint firstItem="6VS-KB-dQD" firstAttribute="leading" secondItem="ZUi-71-dRE" secondAttribute="leading" constant="16" id="Gl8-FX-YAW"/>
+                            <constraint firstItem="6VS-KB-dQD" firstAttribute="leading" secondItem="ZUi-71-dRE" secondAttribute="leading" constant="15" id="Gl8-FX-YAW"/>
                             <constraint firstItem="eD1-jf-ACa" firstAttribute="leading" secondItem="ZUi-71-dRE" secondAttribute="leading" constant="16" id="Hlz-yB-zvu"/>
                             <constraint firstItem="QTO-0p-Ycj" firstAttribute="trailing" secondItem="ZUi-71-dRE" secondAttribute="trailing" constant="-15" id="HzM-06-Qf4"/>
                             <constraint firstItem="eD1-jf-ACa" firstAttribute="top" secondItem="6VS-KB-dQD" secondAttribute="bottom" constant="30" id="NhR-yM-Hdz"/>

@@ -432,4 +432,9 @@ class AppData: NSObject {
             img.image = image
         }
     }
+    
+    open func fnShowPrice(str: String) -> NSString {
+        let dblValue = Double(str)
+        return Double(round(100 * dblValue!)/100).roundTo2f()
+    }
 }

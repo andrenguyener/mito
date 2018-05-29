@@ -174,7 +174,6 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "productCell", for: indexPath) as! ProductTableViewCell
         let objProduct = appdata.arrEbaySearchResults[indexPath.row]
-        print(objProduct.strImage)
         appdata.fnDisplayImage(strImageURL: objProduct.strImage!, img: cell.img, boolCircle: false)
         cell.title.text = objProduct.strTitle
         cell.publisher.text = objProduct.strSeller

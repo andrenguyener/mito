@@ -43,14 +43,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         //        greenTopView.backgroundColor = UIColor(rgb: 41DD7C)
         
         let userURL = "https://api.projectmito.io/v1/friend/\(appdata.intCurrentUserID)"
-        print("Authorization: \(String(describing: UserDefaults.standard.object(forKey: "Authorization")))")
+//        print("Authorization: \(String(describing: UserDefaults.standard.object(forKey: "Authorization")))")
         let authToken = UserDefaults.standard.object(forKey: "Authorization") as! String
         
         //        var request = URLRequest(url: URL(string: "wss://api.projectmito.io/v1/ws?auth=\(String(describing: UserDefaults.standard.object(forKey: "Authorization")))")!)
         var urlWebsocket = "wss://api.projectmito.io/v1/ws?auth=\(authToken)"
         urlWebsocket = urlWebsocket.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
         var request = URLRequest(url: URL(string: urlWebsocket)!)
-        print("Request: \(request)")
+//        print("Request: \(request)")
         request.timeoutInterval = 5
         appdata.socket = WebSocket(request: request)
         let appDelegate = UIApplication.shared.delegate as! AppDelegate

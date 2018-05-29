@@ -63,8 +63,7 @@ class AddNewPaymentMethodViewController: UIViewController {
     
     func fnFormatCardNumber() -> Int {
         let str = String((txtFldCardNumber.text?.prefix(16))!)
-        print(str)
-        return Int(str)!
+        return (str as NSString).integerValue
     }
     
     func fnFormatCVV() -> Int {

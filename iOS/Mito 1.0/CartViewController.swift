@@ -135,7 +135,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
                 let totalAmt: Double = decAmazonPrice * (Double)(element.intQuantity)
                 self.priceSum += Decimal(totalAmt)
             }
-            print("Total Price: \(self.priceSum)")
+            print(self.priceSum)
         }
         for objCartItem in self.appdata.arrCartLineItems {
             self.intNumItems += objCartItem.intQuantity
@@ -150,6 +150,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.cartNumber.text = "Cart has \(self.intNumItems) \(strItems)"
         
         // rounds 2 decimal places for priceSum
+        print("Total: \(self.priceSum)")
         let tempSum = Double(truncating: self.priceSum as NSNumber)
         let temp2Sum = Double(round(100 * tempSum)/100).roundTo2f()
         print("Number of items: \(self.intNumItems)")
