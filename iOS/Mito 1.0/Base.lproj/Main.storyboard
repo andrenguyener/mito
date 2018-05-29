@@ -2381,31 +2381,26 @@ If you have any questions about these Terms, please contact us at projectmitotea
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swirlsearch" translatesAutoresizingMaskIntoConstraints="NO" id="VM1-7e-wQO">
-                                <rect key="frame" x="70" y="169" width="226" height="459"/>
+                                <rect key="frame" x="105" y="114" width="187" height="430"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="aw9-kv-lUG" firstAttribute="bottom" secondItem="ZPT-d4-twW" secondAttribute="bottom" id="0iO-nr-KUF"/>
                             <constraint firstItem="ZPT-d4-twW" firstAttribute="leading" secondItem="aw9-kv-lUG" secondAttribute="leading" id="0uq-Am-vsS"/>
-                            <constraint firstItem="VM1-7e-wQO" firstAttribute="top" secondItem="er1-mp-JhR" secondAttribute="bottom" constant="39" id="2hP-ET-Fah"/>
-                            <constraint firstItem="aw9-kv-lUG" firstAttribute="bottom" secondItem="VM1-7e-wQO" secondAttribute="bottom" constant="59" id="Dv6-ds-iUb"/>
+                            <constraint firstItem="VM1-7e-wQO" firstAttribute="top" secondItem="er1-mp-JhR" secondAttribute="bottom" constant="24" id="2hP-ET-Fah"/>
+                            <constraint firstItem="aw9-kv-lUG" firstAttribute="bottom" secondItem="VM1-7e-wQO" secondAttribute="bottom" constant="74" id="Dv6-ds-iUb"/>
                             <constraint firstItem="er1-mp-JhR" firstAttribute="centerX" secondItem="aw9-kv-lUG" secondAttribute="centerX" id="K77-Y4-qrk"/>
                             <constraint firstItem="er1-mp-JhR" firstAttribute="leading" secondItem="aw9-kv-lUG" secondAttribute="leading" id="LSe-5l-alV"/>
                             <constraint firstItem="WK2-8u-3L9" firstAttribute="top" secondItem="aw9-kv-lUG" secondAttribute="top" constant="10" id="QIT-jv-w9a"/>
                             <constraint firstItem="ZPT-d4-twW" firstAttribute="top" secondItem="er1-mp-JhR" secondAttribute="bottom" id="Thu-EQ-93r"/>
                             <constraint firstItem="er1-mp-JhR" firstAttribute="top" secondItem="3tA-cA-GrG" secondAttribute="top" id="Ytv-h9-Zol"/>
                             <constraint firstItem="aw9-kv-lUG" firstAttribute="trailing" secondItem="er1-mp-JhR" secondAttribute="trailing" id="cDb-U6-lAI"/>
-                            <constraint firstItem="aw9-kv-lUG" firstAttribute="trailing" secondItem="VM1-7e-wQO" secondAttribute="trailing" constant="118" id="eBU-Bd-DGP"/>
+                            <constraint firstItem="aw9-kv-lUG" firstAttribute="trailing" secondItem="VM1-7e-wQO" secondAttribute="trailing" constant="83" id="eBU-Bd-DGP"/>
                             <constraint firstItem="aw9-kv-lUG" firstAttribute="trailing" secondItem="ZPT-d4-twW" secondAttribute="trailing" id="khY-oD-N2T"/>
-                            <constraint firstItem="VM1-7e-wQO" firstAttribute="leading" secondItem="aw9-kv-lUG" secondAttribute="leading" constant="70" id="yQq-9y-mho"/>
+                            <constraint firstItem="VM1-7e-wQO" firstAttribute="leading" secondItem="aw9-kv-lUG" secondAttribute="leading" constant="105" id="yQq-9y-mho"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aw9-kv-lUG"/>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="VM1-7e-wQO"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="0G6-7s-OlP"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -2414,6 +2409,7 @@ If you have any questions about these Terms, please contact us at projectmitotea
                         <outlet property="productTableView" destination="qfx-4Y-f3S" id="573-Uj-QqF"/>
                         <outlet property="searchBar" destination="t70-Qz-J7F" id="18q-WQ-cQ3"/>
                         <outlet property="spinnerProductSearch" destination="Fl4-nx-3no" id="6mn-s8-i7V"/>
+                        <outlet property="swirlSearchImg" destination="VM1-7e-wQO" id="3RB-Um-8Yc"/>
                         <segue destination="BHS-cQ-fVw" kind="show" identifier="segSeeProductDetails" id="Oq9-F1-cCO"/>
                         <segue destination="UPq-qC-84m" kind="show" identifier="segSearchProductToCart" id="c4b-bb-2tq"/>
                         <segue destination="Ela-Xp-3K3" kind="show" identifier="segProductsToSettings" id="dFb-Zm-TKF"/>
@@ -2476,11 +2472,11 @@ If you have any questions about these Terms, please contact us at projectmitotea
     <inferredMetricsTieBreakers>
         <segue reference="eyY-AF-kxf"/>
         <segue reference="ruP-Sx-HS5"/>
-        <segue reference="jFg-kD-bop"/>
+        <segue reference="Oq9-F1-cCO"/>
         <segue reference="4Df-8F-JjS"/>
         <segue reference="SkB-8n-kJk"/>
-        <segue reference="cI7-Td-TzM"/>
+        <segue reference="c4b-bb-2tq"/>
         <segue reference="GdB-Tr-zhu"/>
-        <segue reference="QLb-Rf-ueb"/>
+        <segue reference="dFb-Zm-TKF"/>
     </inferredMetricsTieBreakers>
 </document>

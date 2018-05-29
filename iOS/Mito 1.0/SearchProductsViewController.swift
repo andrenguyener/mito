@@ -61,12 +61,14 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         performSegue(withIdentifier: "segSearchProductToCart", sender: self)
     }
     
+    @IBOutlet weak var swirlSearchImg: UIImageView!
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if (searchBar.text!.replacingOccurrences(of: " ", with: "").count > 0) { // tests for only spaces
             intPageNumber = 1
             spinnerProductSearch.isHidden = false
             spinnerProductSearch.startAnimating()
-            //            swirlSearchImg.isHidden = true
+            swirlSearchImg.isHidden = true
             appdata.strProductQuery = ""
             appdata.strProductQuery = searchBar.text!
             fnLoadEbayProductData(strCodedSearchQuery: searchBar.text!.replacingOccurrences(of: " ", with: "%20"))
@@ -194,3 +196,4 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
     }
 }
 
+ß
