@@ -76,6 +76,8 @@
 		B2A89CD920B7E1F3002FAE42 /* 69 friend.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A89CCF20B7E1F3002FAE42 /* 69 friend.png */; };
 		B2A89CDA20B7E1F3002FAE42 /* 69 search.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A89CD020B7E1F3002FAE42 /* 69 search.png */; };
 		B2A89CDB20B7E1F3002FAE42 /* 46 shopping cart.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A89CD120B7E1F3002FAE42 /* 46 shopping cart.png */; };
+		B2A89CDE20B8AAFD002FAE42 /* 46 shopping cart 2.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A89CDC20B8AAFA002FAE42 /* 46 shopping cart 2.png */; };
+		B2A89CDF20B8AAFD002FAE42 /* 69 shopping cart 2.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A89CDD20B8AAFC002FAE42 /* 69 shopping cart 2.png */; };
 		B2F849452043C33F00CBD83A /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F849442043C33F00CBD83A /* MeViewController.swift */; };
 		B2F849472043CAA900CBD83A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F849462043CAA900CBD83A /* SettingsViewController.swift */; };
 		B2F8494F2043D71000CBD83A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F8494E2043D71000CBD83A /* LoginViewController.swift */; };
@@ -130,6 +132,8 @@
 		DAF7BB4820B68A09007BE237 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF7BB4720B68A09007BE237 /* Item.swift */; };
 		DAF7BB4C20B6A592007BE237 /* SearchProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF7BB4B20B6A592007BE237 /* SearchProductsViewController.swift */; };
 		DAF7BB4E20B6A649007BE237 /* SearchFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF7BB4D20B6A649007BE237 /* SearchFriendsViewController.swift */; };
+		DAFB82F020BA8E8800F45D65 /* EmptyDataSetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAFB82EF20BA8E8800F45D65 /* EmptyDataSetView.xib */; };
+		DAFB82F220BA8F1200F45D65 /* EmptyDataSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFB82F120BA8F1200F45D65 /* EmptyDataSetView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -231,6 +235,8 @@
 		B2A89CCF20B7E1F3002FAE42 /* 69 friend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "69 friend.png"; sourceTree = "<group>"; };
 		B2A89CD020B7E1F3002FAE42 /* 69 search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "69 search.png"; sourceTree = "<group>"; };
 		B2A89CD120B7E1F3002FAE42 /* 46 shopping cart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "46 shopping cart.png"; sourceTree = "<group>"; };
+		B2A89CDC20B8AAFA002FAE42 /* 46 shopping cart 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "46 shopping cart 2.png"; sourceTree = "<group>"; };
+		B2A89CDD20B8AAFC002FAE42 /* 69 shopping cart 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "69 shopping cart 2.png"; sourceTree = "<group>"; };
 		B2F849442043C33F00CBD83A /* MeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		B2F849462043CAA900CBD83A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B2F8494E2043D71000CBD83A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -284,6 +290,8 @@
 		DAF7BB4720B68A09007BE237 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		DAF7BB4B20B6A592007BE237 /* SearchProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProductsViewController.swift; sourceTree = "<group>"; };
 		DAF7BB4D20B6A649007BE237 /* SearchFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFriendsViewController.swift; sourceTree = "<group>"; };
+		DAFB82EF20BA8E8800F45D65 /* EmptyDataSetView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyDataSetView.xib; sourceTree = "<group>"; };
+		DAFB82F120BA8F1200F45D65 /* EmptyDataSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDataSetView.swift; sourceTree = "<group>"; };
 		E6908C73F6FF5F893922619E /* Pods-Mito 1.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mito 1.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Mito 1.0/Pods-Mito 1.0.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -486,6 +494,8 @@
 				DA88691C20B787F6002F7A08 /* SizeCollectionViewCell.swift */,
 				DA88691D20B787F6002F7A08 /* SizeCollectionViewCell.xib */,
 				DAA453E620B6D15F000C43AA /* ProductImageCollectionViewCell.xib */,
+				DAFB82EF20BA8E8800F45D65 /* EmptyDataSetView.xib */,
+				DAFB82F120BA8F1200F45D65 /* EmptyDataSetView.swift */,
 			);
 			path = "Mito 1.0";
 			sourceTree = "<group>";
@@ -521,6 +531,8 @@
 				B2A89CCF20B7E1F3002FAE42 /* 69 friend.png */,
 				B2A89CD020B7E1F3002FAE42 /* 69 search.png */,
 				B2A89CD120B7E1F3002FAE42 /* 46 shopping cart.png */,
+				B2A89CDC20B8AAFA002FAE42 /* 46 shopping cart 2.png */,
+				B2A89CDD20B8AAFC002FAE42 /* 69 shopping cart 2.png */,
 			);
 			path = "tab icon set";
 			sourceTree = "<group>";
@@ -653,6 +665,7 @@
 				DAA453E820B6D15F000C43AA /* ProductImageCollectionViewCell.xib in Resources */,
 				B2548FFD2055EA97000123D0 /* benny.png in Resources */,
 				B2A89CD820B7E1F3002FAE42 /* 69 shopping cart.png in Resources */,
+				DAFB82F020BA8E8800F45D65 /* EmptyDataSetView.xib in Resources */,
 				B24719832046245E006CF6C2 /* Notification Icon SG.png in Resources */,
 				DA5D683E2058A45F00E86BE8 /* ProductDetails.storyboard in Resources */,
 				B261913E206C5E5E004597F0 /* Roboto-Bold.ttf in Resources */,
@@ -669,6 +682,7 @@
 				B2A89CD520B7E1F3002FAE42 /* 46 friend.png in Resources */,
 				B247197420454C4E006CF6C2 /* GiftWhite.png in Resources */,
 				DA80594020AF2F1F004B33B8 /* HomeTableViewCell.xib in Resources */,
+				B2A89CDF20B8AAFD002FAE42 /* 69 shopping cart 2.png in Resources */,
 				B2A89CD220B7E1F3002FAE42 /* 69 bell.png in Resources */,
 				B29AEC67203FC9C100110EF9 /* Main.storyboard in Resources */,
 				B2548FFF2055EA97000123D0 /* ammara.png in Resources */,
@@ -703,6 +717,7 @@
 				B2619142206C5E5E004597F0 /* Roboto-LightItalic.ttf in Resources */,
 				B2A89CD620B7E1F3002FAE42 /* 46 search.png in Resources */,
 				DA28344820B0EB970084571D /* AddAddressTableViewCell.xib in Resources */,
+				B2A89CDE20B8AAFD002FAE42 /* 46 shopping cart 2.png in Resources */,
 				B2A89CD920B7E1F3002FAE42 /* 69 friend.png in Resources */,
 				B2A89CDA20B7E1F3002FAE42 /* 69 search.png in Resources */,
 				B2619144206C5E5E004597F0 /* Roboto-MediumItalic.ttf in Resources */,
@@ -829,6 +844,7 @@
 				B272DC2E2043BBE400EE2121 /* AppData.swift in Sources */,
 				DAD9953720423EE9007A7687 /* TableViewCell.swift in Sources */,
 				B2FFA72E20782BE20046CDA2 /* WelcomeViewController.swift in Sources */,
+				DAFB82F220BA8F1200F45D65 /* EmptyDataSetView.swift in Sources */,
 				B2471992204672B1006CF6C2 /* NotificationTableViewCell.swift in Sources */,
 				B247196E20453917006CF6C2 /* CartViewController.swift in Sources */,
 				B2F849452043C33F00CBD83A /* MeViewController.swift in Sources */,
@@ -1034,11 +1050,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6YML4TDR38;
+				DEVELOPMENT_TEAM = TG372K25N5;
 				INFOPLIST_FILE = "Mito 1.0/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.washington.andre.mito;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.washington.jjguo.mito;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1051,11 +1067,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6YML4TDR38;
+				DEVELOPMENT_TEAM = TG372K25N5;
 				INFOPLIST_FILE = "Mito 1.0/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.washington.andre.mito;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.washington.jjguo.mito;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

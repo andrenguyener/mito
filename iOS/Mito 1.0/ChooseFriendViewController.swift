@@ -20,7 +20,7 @@ class ChooseFriendViewController: UIViewController, UITableViewDelegate, UITable
         super.viewDidLoad()
         tblviewPeople.delegate = self
         tblviewPeople.dataSource = self
-        tblviewPeople.rowHeight = 106
+        tblviewPeople.rowHeight = 78
         searchBar.delegate = self
         appdata.fnLoadFriendsAndAllUsers(tableview: tblviewPeople)
         self.navigationItem.title = "Choose Friend"
