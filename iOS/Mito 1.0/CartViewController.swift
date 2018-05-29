@@ -38,6 +38,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func fnUpdateLineItemQuantity(intCartItemIndex: Int, intNewQuantity: Int) {
         let objCartLineItem = appdata.arrCartLineItems[intCartItemIndex]
+        print(objCartLineItem.objProduct.values())
         let parameters: Parameters = [
             "amazonASIN": objCartLineItem.objProduct.strItemId,
             "amazonPrice": objCartLineItem.objProduct.strPrice,
@@ -171,7 +172,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
                     for objCartItem in arrCartItems {
                         let dictCartItem = objCartItem as! NSDictionary
                         print(dictCartItem)
-                        let objectItem = EbayProduct(strItemId: "", strTitle: dictCartItem["ProductName"] as! String, strImage: dictCartItem["ProductImageUrl"] as! String, strPrice: dictCartItem["AmazonItemPrice"] as! String, strSeller: "", strRating: "")
+                        let objectItem = EbayProduct(strItemId: dictCartItem["AmazonItemId"] as! String, strTitle: dictCartItem["ProductName"] as! String, strImage: dictCartItem["ProductImageUrl"] as! String, strPrice: dictCartItem["AmazonItemPrice"] as! String, strSeller: "", strRating: "")
 //                        let objectItem = Product(image: dictCartItem["ProductImageUrl"] as! String, ASIN: dictCartItem["AmazonItemId"] as! String, title: dictCartItem["ProductName"] as! String, publisher: "publisher", price: dictCartItem["AmazonItemPrice"] as! String, description: "description")
                         let intQuantity = dictCartItem["Quantity"] as! Int
                         let lineItem = LineItem(objProduct: objectItem, intQty: intQuantity)
@@ -192,7 +193,6 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
 
-    
     @IBAction func btnGoToEditCheckout(_ sender: Any) {
         boolSender = true
         performSegue(withIdentifier: "segCartToChooseRecipient", sender: self)
@@ -241,7 +241,6 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         appdata.arrProductSearchResults.removeAll()
         performSegue(withIdentifier: "checkoutComplete", sender: self)
     }
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "cartToHome" {

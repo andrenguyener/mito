@@ -158,8 +158,7 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
                     if dict["shortDescription"] != nil {
                         strDescription = dict["shortDescription"] as! String
                     }
-                    let objProduct = EbayProduct(strItemId: strItemId, strTitle: strTitle, strImage: strImageUrl, strPrice: strPrice, strSeller: strSeller)
-                    self.objProduct = objProduct
+                    self.objProduct = EbayProduct(strItemId: strItemId, strTitle: strTitle, strImage: strImageUrl, strPrice: strPrice, strSeller: strSeller)
                     self.prodPrice.text = "$\(strPrice)"
                     self.prodPub.text = strSeller
                     self.appdata.fnDisplayImage(strImageURL: strImageUrl, img: self.prodImage, boolCircle: false)
@@ -260,6 +259,7 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     @IBAction func btnAddToCartPressed(_ sender: Any) {
         let objCurrentProduct = self.objProduct
+        print(objProduct.values())
         var decAmazonPrice : Decimal = 0.00
         let itemPrice = "$\(objCurrentProduct.strPrice)" // change later
         let formatter = NumberFormatter()
