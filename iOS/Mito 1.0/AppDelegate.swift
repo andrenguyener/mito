@@ -39,7 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WebSocketDelegate {
         let dictType = dictionary!["type"] as! String
         switch dictType {
         case "ebay-token":
-            let strToken = dictionary!["data"] as! String
+            let strToken = dictionary!["dataEbay"] as! String
+            UserDefaults.standard.set(strToken, forKey: "strEbayToken")
         case "friend-request":
             let friend = dictionary!["data"] as! NSDictionary
             let strFname = friend["userFname"] as! String

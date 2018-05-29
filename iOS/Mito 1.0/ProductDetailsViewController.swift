@@ -16,9 +16,9 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     var appdata = AppData.shared
     var urlAddToMitoCart = URL(string: "https://api.projectmito.io/v1/cart")
-    let formatter = NumberFormatter()
     var intImageIndex = 0
     var objProduct = EbayProduct(strItemId: "", strTitle: "", strImage: "", strPrice: "", strSeller: "")
+    var intQuantity = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -149,7 +149,7 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     @IBAction func btnDoneSelectingQuantity(_ sender: Any) {
         let strQuantity = String(appdata.arrQuantity[pickerviewQuantity.selectedRow(inComponent: 0)])
-        lblQuantity.text = strQuantity
+        intQuantity = (Int)(strQuantity)!
         btnQuantity.setTitle("Quantity: \(strQuantity)", for: .normal)
         pickerviewQuantity.isHidden = true
         confirmPicker.isHidden = true
@@ -172,7 +172,7 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
         let goodStr = str as? String
         let urlLoadProductDetails = URL(string: goodStr!)
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer v^1.1#i^1#p^1#I^3#r^0#f^0#t^H4sIAAAAAAAAAOVXD2wTVRhft26ysIkoAYLTlBsGRO/67vrn2nOt6Tomi2wrdAzB6PLu7nU71t7Ve6+MSjSzEhQR0RkDJgiLcVE0MRAyJGRmRsVoiImgMSQExagJiMY/CRqDCb67ldENwhibQGLTpLnvfe973+/3/b7v+kB3WfnCDYs3/FXpuKm4txt0Fzsc/FRQXlZ6z80lxXNKi0CBg6O3e163M1dysgbDVDItLUM4begYudamkjqWbGOIyZi6ZECsYUmHKYQlokjxSOMSSeCAlDYNYihGknE11IUYmed9ICgERUFAIuAVatXPx2wxQkwAid6AByCEPGIwgOgyxhnUoGMCdRJiBMAHWOBjhWAL8EoCkLwCF+R9qxhXKzKxZujUhQNM2M5WsveaBalePlOIMTIJDcKEGyL18eZIQ92ippYad0GscJ6GOIEkg0c+RQ0VuVphMoMufwy2vaV4RlEQxow7PHTCyKBS5HwyV5G+zXRChID3AkVVVNEjBiaFyXrDTEFy+TQsi6ayCdtVQjrRSHYsQikZ8mqkkPxTEw3RUOeyfpZmYFJLaMgMMYtqIysjsRgTjhvpDgQ7m9iYaVi7GtnYsjrWJyiKrFLhsN4g9AtI9uYPGoqWZ3nUSVFDVzWLM+xqMkgtolmj0dzwBdxQp2a92YwkiJVRoZ9/mENhlVXToSJmSIdulRWlKBEu+3HsCgzvJsTU5AxBwxFGL9gUhRiYTmsqM3rRlmJePWtxiOkgJC253V1dXVyXhzPMdrcAAO9+qHFJXOlAKcjYvlavW/7a2BtYzYai0C6l/hLJpmkua6lUaQJ6OxMWAl7eE8zzPjKt8GjrRYYCzO6RDTFZDSJ6ZEEOQl72BBJ+P4KT0SHhvEjdVh5Ihlk2Bc1ORNJJqCBWoTrLpJCpqZLHlxDouYhV/cEEVWwiwco+1c/yCYTo9JNlJRj4PzXKlUo9rhhpFDOSmpKdJMFPktg9phqDJsnGUTJJDVeq+kuCxBbIawDP6vVxQLRiYBoEpjXO0janGCm3AelQs0xtdtYTwq3R1+ENVVQKcAippg69yDgbLofXKJyJsJEx6Suca7bmeovRiXTaJcQ0kklktvITYmIyJ/p1meaXRKUkNUpj242GbJxj8iq1Dcl1Re3MOVZehJz3CaLPL/q9woSwRe26tmSvydAaR2EXG5gg9T/4A+IeeRkKF9kfPufoBznHHnqfAm5wF18N5paVLHeWVMzBGkGcBhMc1tp1+iffRFwnyqahZhaXOR6u2r2rreD61fsImD18ASsv4acW3MZA1YWVUn7arEo+AHxCEHgF+l0Fqi+sOvmZzhlvnvt6UHo88vsTT/+0oPWwduDI+pnfgsphJ4ejtIjqomjHvLIiJXuq56u5h6cvLN63Cz74afln7KyPyitW/zzt+KFXT6QGtx75tf7HQ7lnnzuDz/xdK37y9kGmWNJPb793wS2vt4ns/vUnsvK26v2bjyv7Bp1rxLfIjtnswPQnX6p+v44bQNKW3b210cq772zZU7NuxWt/zL89dXqgROl75Z0pf0Zr+/jQQccdvdsrXvhuZ+M/555pD69B26PCsdbA3j3gbH92fuvguvp12/au+KJ94225346g5x+YEd1Y1b8kdnb5o/uOPeY6et8bmxc0zU6t2NL+ZVNFz9IPfzlaw74Xvn/n1CmnBk46v6lyLa9s+z7Rs+mp+aW5H7y3Tnu5b87HL37w7la4aaDvwOczh8r3L0i7bh4YDwAA"
+            "Authorization": "Bearer v^1.1#i^1#r^0#p^1#I^3#f^0#t^H4sIAAAAAAAAAOVXa2wUVRTudrflJVQT8EH6Y51aaNWZvTO7Ozs7YVeXFmwDtAtbiRZtnccdOnZ2ZjP3ru0GQsoiVWIi8UVtjNKIJaUigaiBqAkaCIrRaER/YGIC+IdAoqBE/eHrznQp20J4FiFx/2zuueeee77vfOfeuaCnfMq9vQ29v0/3TCod6AE9pR4POw1MKS+7b4a3dHZZCShy8Az03NPjy3uPz0NS2siIyyDKWCaC/u60YSLRNcaorG2KloR0JJpSGiIRK2IqsWSxyDFAzNgWthTLoPyN9TEqxIeCEs/LMKzwbCSkEqt5NmaLReaFCFRZTokEVYUFUTKNUBY2mghLJo5RHGAFGoRpLtoCeJFjxWCU4YNCK+VfDm2kWyZxYQAVd7MV3bV2UaoXz1RCCNqYBKHijYmFqeZEY/2CppZ5gaJY8QINKSzhLBo7qrNU6F8uGVl48W2Q6y2msooCEaIC8ZEdxgYVE2eTuYr0XaZ5IagKGguEKBsKyVx4QqhcaNlpCV88D8eiq7TmuorQxDrOXYpRwob8JFRwYdREQjTW+52/pVnJ0DUd2jFqwfzEo4lkkoqnrEwHlDqb6KRtOauW0Mll9XSYUxRZhRDSoajEc1AOFTYaiVagedxOdZap6g5pyN9k4fmQZA3Hc8MWcUOcms1mO6FhJ6NiP2GUw2CrU9SRKmZxh+nUFaYJEX53eOkKjK7G2NblLIajEcZPuBTFKCmT0VVq/KSrxYJ8ulGM6sA4IwYCXV1dTFeQseyVAQ4ANvDIksUppQOmJcrxdXrd9dcvvYDWXSgKJCuRLuJchuTSTbRKEjBXUnFOCLHBaIH3sWnFx1vPMxRhDoztiInqEBjhQZDnhZAMWVmOyBPRIfGCSANOHlCWcnRasjshzhiSAmmF6CybhrauisGwxgUFDdIqH9WIYjWNlsMqT7MahABCWVaiwv+pUS5X6inFysCkZehKbmIEP1FiD9pqUrJxLgUNgxguV/UXBIkckNcfntPrVwLRiYFIECmjM462GcVKByyJHGqOqd3N+ppw6+Q+vKmKSgCOINXVkYuMceEy6CmFsSGysja5w5lm51xvsTqhSboE25ZhQHs5e01MTOCJfmNO8wuiUgyd0Nh+syG7wmPyKrUt4RuJ2pf3tJ6PnA1zkXAkJESvra51bl1bcv/FoXUlhW2wEIbqdfgACYx9DcVL3B+b97wP8p5d5EEFAqCarQJ3l3sf9nlvmY10DBld0hikrzTJV74NmU6Yy0i6XVruWVG5c1t70ftr4HFw5+gLbIqXnVb0HAOV52bK2Io7prMCCHNRwHOkN1tB1blZH3u7b+aenw6V7Vv69/Cbu5PeL/Mb9p1atWUtmD7q5PGUlRBhlCjeHw5Wobmnhppe6Hob9VUbpyfdKlS0tW1lNuzdXxP+LN/7Xt0Rb5/devjwvCPfDMXXz8w9YH66NDlDpk/sOvCd9dyqSLXA1jJPvLamavNUdWBR37IPvX39R7Nnjp8Bm+Rjf/4c2Tl1DWirfPDo57CBqX5o8PTTJc/2iy9Fh9dVTP5aeLF348vi6oZfBzu9qKJ68GQeb/8t9tHmYxSYfPDH1uF0jUlH0ljn1727flB76+O13+9ua9xb+epj9XPvqt3yxyfv/PLP1u5nTg49v13bkdizX635INZ2f82Or1KZOdv66dXzU7NmHjp64JUVi97YtPG2L3zf/jXr+Ou+aC3NWSfmtG+ZXT08Ur5/AVPSFJsZDwAA"
         ]
         Alamofire.request(urlLoadProductDetails!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
@@ -306,18 +306,18 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     @IBAction func btnAddToCartPressed(_ sender: Any) {
         let objCurrentProduct = self.objProduct
         var decAmazonPrice : Decimal = 0.00
-        let itemPrice = objCurrentProduct.strPrice // change later
+        let itemPrice = "$\(objCurrentProduct.strPrice)" // change later
+        let formatter = NumberFormatter()
         formatter.numberStyle = .currency
         formatter.locale = Locale(identifier: "en_US")
-        print(objCurrentProduct.strPrice)
-        if let number = formatter.number(from: itemPrice!) {
+        print(itemPrice)
+        if let number = formatter.number(from: itemPrice) {
             decAmazonPrice = number.decimalValue
         }
         print("decAmazonPrice: \(decAmazonPrice)")
-        let intQuantity = (Int)(lblQuantity.text!)!
         let parameters: Parameters = [
             "amazonASIN": objCurrentProduct.strItemId!,
-            "amazonPrice": decAmazonPrice,
+            "amazonPrice": Decimal(string: objCurrentProduct.strPrice!),
             "quantity": intQuantity,
             "productImageUrl": objCurrentProduct.strImage!,
             "productName": objCurrentProduct.strTitle!
