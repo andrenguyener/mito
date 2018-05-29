@@ -9,20 +9,29 @@
 import Foundation
 
 struct EbayProduct {
-    let strItemId: String?
-    let strTitle: String?
-    let strImage: String?
-    let strPrice: String?
-    let strSeller: String?
-    let strUsername: String?
+    var strItemId: String?
+    var strTitle: String?
+    var strImage: String?
+    var strPrice: String?
+    var strSeller: String?
+    var strUsername: String?
+    var strRating: String?
     
-    init(strItemId: String, strTitle: String, strImage: String, strPrice: String, strSeller: String, strUsername: String) {
+    init(strItemId: String, strTitle: String, strImage: String, strPrice: String, strSeller: String) {
         self.strItemId = strItemId
         self.strTitle = strTitle
         self.strImage = strImage
         self.strPrice = strPrice
         self.strSeller = strSeller
-        self.strUsername = strUsername
+    }
+    
+    init(strItemId: String, strTitle: String, strImage: String, strPrice: String, strSeller: String, strRating: String) {
+        self.strItemId = strItemId
+        self.strTitle = strTitle
+        self.strImage = strImage
+        self.strPrice = strPrice
+        self.strSeller = strSeller
+        self.strRating = strRating
     }
     
     func values() {

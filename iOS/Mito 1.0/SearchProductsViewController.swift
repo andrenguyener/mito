@@ -62,12 +62,6 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         performSegue(withIdentifier: "segSearchProductToCart", sender: self)
     }
     
-//    func scrollToFirstRow() {
-//        let indexPath = NSIndexPath(row: 0, section: 0)
-//        self.productTableView.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
-//    }
-    
-
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if (searchBar.text!.replacingOccurrences(of: " ", with: "").count > 0) { // tests for only spaces
             intPageNumber = 1
@@ -86,7 +80,6 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         }
         searchBar.resignFirstResponder()
     }
-    
     
     func fnLoadEbayProductData(strCodedSearchQuery: String) {
         let urlEbayProductCall = URL(string: "https://api.ebay.com/buy/browse/v1/item_summary/search?q=\(strCodedSearchQuery)")
@@ -129,7 +122,7 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
                             let strPrice = objPrice["value"] as! String
                             let objSeller = item["seller"] as! NSDictionary
                             let strSeller = objSeller["username"] as! String
-                            let objEbay = EbayProduct(strItemId: strItemId, strTitle: strTitle, strImage: strImageUrl, strPrice: strPrice, strSeller: strSeller, strUsername: strImageUrl)
+                            let objEbay = EbayProduct(strItemId: strItemId, strTitle: strTitle, strImage: strImageUrl, strPrice: strPrice, strSeller: strSeller)
                             self.appdata.arrEbaySearchResults.append(objEbay)
                             index += 1
                         }
