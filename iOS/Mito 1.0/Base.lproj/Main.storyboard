@@ -2135,7 +2135,7 @@
                                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UCn-Pe-3m7">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UCn-Pe-3m7">
                                                                     <rect key="frame" x="0.0" y="109" width="206" height="18"/>
                                                                     <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="15"/>
                                                                     <nil key="textColor"/>
@@ -2273,8 +2273,8 @@
         <segue reference="Oq9-F1-cCO"/>
         <segue reference="kS1-pK-LOk"/>
         <segue reference="5va-cB-XlO"/>
-        <segue reference="4aV-H5-zth"/>
+        <segue reference="c4b-bb-2tq"/>
         <segue reference="GdB-Tr-zhu"/>
-        <segue reference="YO1-kI-SDA"/>
+        <segue reference="dFb-Zm-TKF"/>
     </inferredMetricsTieBreakers>
 </document>
