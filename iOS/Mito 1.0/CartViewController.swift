@@ -260,6 +260,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cartCell", for: indexPath) as! CartTableViewCell
         let cartObj = appdata.arrCartLineItems[indexPath.row]
+        print(cartObj.objProduct.strImage)
         let url = URL(string: "\(cartObj.objProduct.strImage)")
         if let data = try? Data(contentsOf: url!) {
             cell.imgItemImage.image = UIImage(data: data)!

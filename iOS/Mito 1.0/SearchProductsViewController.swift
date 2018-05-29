@@ -88,8 +88,9 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         let goodStr = str as? String
         let urlLoadProductDetails = URL(string: goodStr!)
         appdata.arrEbaySearchResults.removeAll()
+        print(UserDefaults.standard.object(forKey: "strEbayToken") as! String)
         let headers: HTTPHeaders = [
-            "Authorization": UserDefaults.standard.object(forKey: "strEbayToken") as! String
+            "Authorization": "Bearer \(UserDefaults.standard.object(forKey: "strEbayToken") as! String)"
         ]
         Alamofire.request(urlLoadProductDetails!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
@@ -160,7 +161,6 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("Product count: \(appdata.arrProductSearchResults.count)")
         return appdata.arrEbaySearchResults.count
     }
     
