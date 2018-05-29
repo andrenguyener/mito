@@ -62,6 +62,7 @@ func (ctx *Context) UsersHandler(w http.ResponseWriter, r *http.Request) {
 		// if err != nil {
 		// 	http.Error(w, "fail error "+err.Error(), http.StatusBadRequest)
 		// }
+		fmt.Println(newUser)
 
 		// inserts the new user into User Store
 		user, err = ctx.UserStore.Insert(newUser)

@@ -1,10 +1,12 @@
-// @ts-check
 "use strict";
 
 
 const express = require("express");
 const morgan = require("morgan");
 const app = express();
+const axios = require('axios');
+const queryString = require('query-string');
+const sendToMQ = require('./handlers/rabbit-queue');
 // var Curl = require('node-libcurl').Curl;
 // var curl = new Curl();
 
@@ -106,8 +108,65 @@ const mqURL = `amqp://${mqAddr}`;
 var Request = require('tedious').Request;
 var TYPES = require('tedious').TYPES;
 
-var test = process.env.TEST;
-console.log(test);
+
+
+function ebayLoop(sql) {
+    console.log(sql);
+    let ebayBody = queryString.stringify({
+        "grant_type": "client_credentials",
+        "redirect_uri": "Sopheak_Neak-SopheakN-Projec-cadjmlp",
+        "scope": "https://api.ebay.com/oauth/api_scope"
+    });
+
+    axios({
+        method: 'post',
+        url: "https://api.ebay.com/identity/v1/oauth2/token",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Authorization": "Basic U29waGVha04tUHJvamVjdE0tUFJELTUyY2NiZGVlZS00OWE2MmViNDpQUkQtMmNjYmRlZWU2ZWM0LTkyOWYtNDBkNy05MTU1LWY4YWI="
+        },
+        data: ebayBody
+    })
+        .then(response => {
+            console.log(response.data)
+            return new Promise((resolve) => {
+                sql.acquire(function (err, connection) {
+                    let procedureName = "uspCreateEbayToken";
+                    var request = new Request(`${procedureName}`, (err, rowCount, rows) => {
+                        if (err) {
+                            console.log(err)
+                        }
+                        connection.release();
+                    });
+                    var addressId;
+                    request.addParameter('Token', TYPES.NVarChar, response.data.access_token);
+                    request.on('doneProc', function (rowCount, more) {
+                        resolve(response.data.access_token);
+                    });
+
+                    connection.callProcedure(request)
+                });
+            })
+                .then((token) => {
+                    const data = {
+                        type: 'ebay-token',
+                        data: token
+                    };
+                    sendToMQ(req, data);
+                    console.log(token);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+
+            debugger;
+        })
+        .catch(err => {
+            debugger;
+        });
+}
+
+
 
 (async () => {
     try {
@@ -127,6 +186,7 @@ console.log(test);
         sql.on('error', function (err) {
             console.error(err);
         });
+
 
 
         // Add global middlewares.
@@ -161,7 +221,7 @@ console.log(test);
         app.set('qName', qName);
 
 
-
+        var ebayTokenLoop = setInterval(function () { ebayLoop(sql); }, 60000);
 
         // Initialize table stores.
         let addressStore = new AddressStore(sql);

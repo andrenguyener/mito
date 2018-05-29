@@ -325,7 +325,7 @@ const AmazonHashHandler = () => {
 
             })
             .catch(function (error) {
-                console.log(error);
+                console.log(error); docker
             });
 
 
@@ -373,6 +373,7 @@ const AmazonHashHandler = () => {
             .catch(function (error) {
                 console.log(error);
             });
+        // res.json(urlString);
     });
 
     router.post('/v1/amazonproductvariety', (req, res) => {
