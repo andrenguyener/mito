@@ -542,7 +542,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dns-wn-RGZ" userLabel="Green Top Nav">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="123"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="128"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ICP-RC-yQi">
                                         <rect key="frame" x="15" y="30" width="345" height="83"/>
@@ -601,7 +601,7 @@
                                 <color key="backgroundColor" red="0.25490196078431371" green="0.8666666666666667" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="ICP-RC-yQi" firstAttribute="centerX" secondItem="dns-wn-RGZ" secondAttribute="centerX" id="cQe-mx-rwH"/>
-                                    <constraint firstAttribute="bottom" secondItem="ICP-RC-yQi" secondAttribute="bottom" constant="10" id="ea2-im-ij0"/>
+                                    <constraint firstAttribute="bottom" secondItem="ICP-RC-yQi" secondAttribute="bottom" constant="15" id="ea2-im-ij0"/>
                                     <constraint firstItem="ICP-RC-yQi" firstAttribute="leading" secondItem="dns-wn-RGZ" secondAttribute="leading" constant="15" id="m3q-1x-07S"/>
                                 </constraints>
                             </view>
@@ -609,10 +609,10 @@
                                 <rect key="frame" x="177" y="299" width="20" height="20"/>
                             </activityIndicatorView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h41-Vk-dRh" userLabel="Content View">
-                                <rect key="frame" x="0.0" y="123" width="375" height="495"/>
+                                <rect key="frame" x="0.0" y="128" width="375" height="490"/>
                                 <subviews>
                                     <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zry-fA-7Ss">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="495"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="490"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FeedCopyCell" rowHeight="107" id="J27-Y5-KsN" customClass="HomeTableViewCell" customModule="Mito_1_0" customModuleProvider="target">
@@ -705,7 +705,7 @@
                                 </variation>
                             </stackView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BPT-Ix-K0p">
-                                <rect key="frame" x="0.0" y="123" width="375" height="495"/>
+                                <rect key="frame" x="0.0" y="128" width="375" height="490"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Feed is Available Add Friends Now" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0gk-sd-FlG">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="495"/>
@@ -1215,7 +1215,7 @@
             <objects>
                 <viewController title="Account Detail" id="mKW-hw-jiX" customClass="PeopleDetailsViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hy4-EJ-BfW">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="iIt-YC-sQM" userLabel="Profile Information">
@@ -2474,11 +2474,11 @@ If you have any questions about these Terms, please contact us at projectmitotea
         <image name="swirlsearch" width="2257" height="5634"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Vto-2H-CEr"/>
+        <segue reference="eyY-AF-kxf"/>
         <segue reference="ruP-Sx-HS5"/>
         <segue reference="jFg-kD-bop"/>
         <segue reference="4Df-8F-JjS"/>
-        <segue reference="5va-cB-XlO"/>
+        <segue reference="SkB-8n-kJk"/>
         <segue reference="cI7-Td-TzM"/>
         <segue reference="GdB-Tr-zhu"/>
         <segue reference="QLb-Rf-ueb"/>
