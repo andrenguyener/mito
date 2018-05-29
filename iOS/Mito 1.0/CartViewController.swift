@@ -262,10 +262,8 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cartObj = appdata.arrCartLineItems[indexPath.row]
         print(cartObj.objProduct.strImage)
         let url = URL(string: "\(cartObj.objProduct.strImage)")
-        if let data = try? Data(contentsOf: url!) {
-            cell.imgItemImage.image = UIImage(data: data)!
-            cell.imgItemImage.contentMode = .scaleAspectFit
-        }
+        appdata.fnDisplayImage(strImageURL: cartObj.objProduct.strImage!, img: cell.imgItemImage, boolCircle: false)
+        cell.imgItemImage.contentMode = .scaleAspectFit
         cell.lblItemName.text = cartObj.objProduct.strTitle
         let strPrice = "$" + cartObj.objProduct.strPrice!
         formatter.numberStyle = .currency

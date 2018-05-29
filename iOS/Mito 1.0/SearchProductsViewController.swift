@@ -172,8 +172,6 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("Chose products")
-        print("Product indexPath.row: \(indexPath.row)")
         let cell = tableView.dequeueReusableCell(withIdentifier: "productCell", for: indexPath) as! ProductTableViewCell
         let objProduct = appdata.arrEbaySearchResults[indexPath.row]
         print(objProduct.strImage)
