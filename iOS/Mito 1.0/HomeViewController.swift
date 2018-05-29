@@ -248,8 +248,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCopyCell", for: indexPath) as! FeedCopyTableViewCell
         var feedItemObj = FeedItem(strDate: "", photoSenderUrl: "", strMessage: "", strRecipientFName: "", strRecipientLName: "", strSenderFName: "", strSenderLName: "", intRecipientId: 0, intSenderId: 0, strPhotoBytes: "")
         if segmentChooser.selectedSegmentIndex == 0 {
-            print(indexPath.row)
-            print("Array size: \(appdata.arrFriendsFeedItems.count)")
             feedItemObj = appdata.arrFriendsFeedItems[indexPath.row]
         } else {
             feedItemObj = appdata.arrMyFeedItems[indexPath.row]
