@@ -26,6 +26,8 @@ class SettingsViewController: UIViewController {
         appdata.arrPendingFriends.removeAll()
         appdata.arrMyFeedItems.removeAll()
         appdata.arrFriendsFeedItems.removeAll()
+        appdata.strProductQuery = ""
+        appdata.arrEbaySearchResults.removeAll()
         if UserDefaults.standard.object(forKey: "UserInfo") == nil {
             print("Data is gone")
         } else {

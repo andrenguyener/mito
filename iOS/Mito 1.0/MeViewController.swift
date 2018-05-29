@@ -12,11 +12,10 @@ import CoreGraphics
 import GoogleMaps
 import GooglePlaces
 import GooglePlacePicker
-import PayCardsRecognizer
 import Contacts
 import SwiftDate
 
-class MeViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate, PayCardsRecognizerPlatformDelegate {
+class MeViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate {
     
     // https://developer.apple.com/documentation/corelocation/choosing_the_authorization_level_for_location_services/requesting_always_authorization
     var appdata = AppData.shared
@@ -26,8 +25,6 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
     
     var placesClient: GMSPlacesClient!
     let locationManager = CLLocationManager()
-    
-    var recognizer: PayCardsRecognizer!
     
     @IBAction func btnScanCreditCard(_ sender: Any) {
 //        recognizer.startCamera()
@@ -250,30 +247,6 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
         }
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//
-//        recognizer.startCamera()
-//    }
-    
-//    override func viewDidDisappear(_ animated: Bool) {
-//        super.viewDidDisappear(animated)
-//
-//        recognizer.stopCamera()
-//    }
-    
-    func payCardsRecognizer(_ payCardsRecognizer: PayCardsRecognizer, didRecognize result: PayCardsRecognizerResult) {
-//        result.recognizedNumber // Card number
-//        result.recognizedHolderName // Card holder
-//        result.recognizedExpireDateMonth // Expire month
-//        result.recognizedExpireDateYear // Expire year
-//        print("Card Number: \(result.recognizedNumber)")
-//        print("Holder name: \(result.recognizedHolderName)")
-//        print("Expire Date Month: \(result.recognizedExpireDateMonth)")
-//        print("Expire Date Year: \(result.recognizedExpireDateYear)")
-    }
-    
-
     @IBAction func fnPickPlace(_ sender: Any) {
         let center = CLLocationCoordinate2D(latitude: 37.788204, longitude: -122.411937)
         let northEast = CLLocationCoordinate2D(latitude: center.latitude + 0.001, longitude: center.longitude + 0.001)
@@ -331,7 +304,6 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
             locationManager.requestAlwaysAuthorization()
         }
     }
-    
     
     @IBAction func fnGetCurrentLocation(_ sender: Any) {
         escalateLocationServiceAuthorization()
@@ -396,7 +368,6 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.fnImportImage))
         self.navigationItem.title = "Me"
         imgProfilePic.addGestureRecognizer(tapGesture)
-//        recognizer = PayCardsRecognizer(delegate: self, resultMode: .sync, container: self.view, frameColor: .green)
 
         if UserDefaults.standard.object(forKey: "UserInfo") != nil {
             let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
@@ -408,7 +379,6 @@ class MeViewController: UIViewController, UINavigationControllerDelegate, UIImag
             appdata.fnDisplayImage(strImageURL: strPhotoUrl, img: imgProfilePic, boolCircle: true)
             lblName.text = "\(data["userFname"]!) \(data["userLname"]!)"
             locationManager.delegate = self
-//            print(data["userId"] as! String)
         }
     }
     

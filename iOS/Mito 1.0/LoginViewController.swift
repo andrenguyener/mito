@@ -444,6 +444,12 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     }
     
+    @IBAction func fnSegAddAddressToSignUp(_ sender: Any) {
+        performSegue(withIdentifier: "segAddressToSignUp", sender: self)
+    }
+    
+    
+    
 //    override func viewWillDisappear(_ animated: Bool) {
 //        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: self.view.window)
 //        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: self.view.window)

@@ -47,7 +47,7 @@
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4dp-Zl-Tre">
                                                 <rect key="frame" x="50" y="0.0" width="245" height="50"/>
-                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="25"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -482,9 +482,12 @@
                                         <rect key="frame" x="0.0" y="247" width="335" height="113"/>
                                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
-                                        <state key="normal" title="Blocked User">
+                                        <state key="normal" title="Terms of Use">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="z0N-c6-B26" kind="show" id="zCI-Jw-gdi"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J0G-p0-DVc">
                                         <rect key="frame" x="0.0" y="370" width="335" height="113.5"/>
@@ -602,10 +605,13 @@
                                     <constraint firstItem="ICP-RC-yQi" firstAttribute="leading" secondItem="dns-wn-RGZ" secondAttribute="leading" constant="15" id="m3q-1x-07S"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h41-Vk-dRh" userLabel="Content View">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="uHP-Hk-Xjh">
+                                <rect key="frame" x="177" y="299" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h41-Vk-dRh" userLabel="Content View">
                                 <rect key="frame" x="0.0" y="123" width="375" height="495"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zry-fA-7Ss">
+                                    <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zry-fA-7Ss">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="495"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
@@ -715,6 +721,11 @@
                                     <constraint firstItem="0gk-sd-FlG" firstAttribute="top" secondItem="BPT-Ix-K0p" secondAttribute="top" id="S9Q-sJ-6PC"/>
                                     <constraint firstItem="0gk-sd-FlG" firstAttribute="leading" secondItem="BPT-Ix-K0p" secondAttribute="leading" id="a0n-KW-o9b"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="0gk-sd-FlG"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -722,7 +733,9 @@
                             <constraint firstItem="BPT-Ix-K0p" firstAttribute="top" secondItem="dns-wn-RGZ" secondAttribute="bottom" id="26j-QN-nab"/>
                             <constraint firstItem="h41-Vk-dRh" firstAttribute="bottom" secondItem="SDK-lz-2ZY" secondAttribute="bottom" id="3cR-3A-meE"/>
                             <constraint firstItem="dns-wn-RGZ" firstAttribute="top" secondItem="jDo-cr-7fi" secondAttribute="top" id="60e-NY-Td9"/>
+                            <constraint firstItem="uHP-Hk-Xjh" firstAttribute="centerX" secondItem="jDo-cr-7fi" secondAttribute="centerX" id="CCk-i4-H7k"/>
                             <constraint firstItem="SDK-lz-2ZY" firstAttribute="trailing" secondItem="h41-Vk-dRh" secondAttribute="trailing" id="F4o-jT-Y4K"/>
+                            <constraint firstItem="uHP-Hk-Xjh" firstAttribute="centerY" secondItem="jDo-cr-7fi" secondAttribute="centerY" id="GsX-nB-we3"/>
                             <constraint firstItem="h41-Vk-dRh" firstAttribute="trailing" secondItem="dns-wn-RGZ" secondAttribute="trailing" id="HGY-we-e2E"/>
                             <constraint firstItem="AO7-NZ-k9u" firstAttribute="leading" secondItem="SDK-lz-2ZY" secondAttribute="leading" constant="10" id="QIa-e5-VpJ"/>
                             <constraint firstItem="SDK-lz-2ZY" firstAttribute="trailing" secondItem="AO7-NZ-k9u" secondAttribute="trailing" constant="10" id="RVg-lh-ujH"/>
@@ -748,7 +761,9 @@
                         <outlet property="imgProfile" destination="vMt-rr-cTZ" id="7f4-Zx-lDR"/>
                         <outlet property="noFeedView" destination="BPT-Ix-K0p" id="omR-l8-SXq"/>
                         <outlet property="segmentChooser" destination="8Yq-SS-qUE" id="YyB-xF-DhV"/>
+                        <outlet property="spinner" destination="uHP-Hk-Xjh" id="VIT-hQ-NJt"/>
                         <outlet property="tableView" destination="zry-fA-7Ss" id="KjW-cH-gPd"/>
+                        <outlet property="viewFeedContent" destination="h41-Vk-dRh" id="Zsb-iG-ja9"/>
                         <segue destination="UPq-qC-84m" kind="show" identifier="homeToCart" id="cI7-Td-TzM"/>
                         <segue destination="Ela-Xp-3K3" kind="show" identifier="segHomeToMe" id="QLb-Rf-ueb"/>
                     </connections>
@@ -1204,7 +1219,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="iIt-YC-sQM" userLabel="Profile Information">
-                                <rect key="frame" x="26" y="30" width="323" height="274.5"/>
+                                <rect key="frame" x="26" y="30" width="323" height="210.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FirstName LastName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1g-f7-mfA">
                                         <rect key="frame" x="24" y="0.0" width="275" height="21"/>
@@ -1225,53 +1240,56 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2VX-4k-3cu">
-                                        <rect key="frame" x="92" y="62" width="139" height="139"/>
+                                        <rect key="frame" x="124" y="62" width="75" height="75"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="139" id="NKy-Xb-lFb"/>
-                                            <constraint firstAttribute="height" constant="139" id="yOA-l0-9U7"/>
+                                            <constraint firstAttribute="width" constant="75" id="NKy-Xb-lFb"/>
+                                            <constraint firstAttribute="width" secondItem="2VX-4k-3cu" secondAttribute="height" multiplier="1:1" id="qAj-gh-voU"/>
                                         </constraints>
                                     </imageView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ZQA-vy-bnN">
-                                        <rect key="frame" x="66.5" y="211" width="190" height="30"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZQA-vy-bnN">
+                                        <rect key="frame" x="15" y="147" width="293" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="szw-Dz-dqC" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="85" height="30"/>
-                                                <color key="backgroundColor" red="0.25490196078431371" green="0.8666666666666667" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="141.5" height="30"/>
+                                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="85" id="AxT-PN-Ln7"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title="Add Friend">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Friend Request Sent">
+                                                    <color key="titleColor" red="0.25490196079999999" green="0.86666666670000003" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="fnAddFriend:" destination="mKW-hw-jiX" eventType="touchUpInside" id="k3E-cU-XZA"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rwi-hr-9PZ" customClass="RoundedWithBorder" customModule="Mito_1_0" customModuleProvider="target">
-                                                <rect key="frame" x="105" y="0.0" width="85" height="30"/>
+                                                <rect key="frame" x="151.5" y="0.0" width="141.5" height="30"/>
+                                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                                 <color key="tintColor" red="0.25490196078431371" green="0.8666666666666667" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="0 Friends">
-                                                    <color key="titleColor" red="0.25490196078431371" green="0.8666666666666667" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="titleColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                             </button>
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CAy-x4-clw">
-                                        <rect key="frame" x="140" y="251" width="43.5" height="23.5"/>
+                                        <rect key="frame" x="140" y="187" width="43.5" height="23.5"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="ZQA-vy-bnN" secondAttribute="trailing" constant="15" id="3jq-2m-NNV"/>
                                     <constraint firstItem="k1g-f7-mfA" firstAttribute="leading" secondItem="iIt-YC-sQM" secondAttribute="leading" constant="24" id="Hry-2K-guu"/>
+                                    <constraint firstItem="ZQA-vy-bnN" firstAttribute="leading" secondItem="iIt-YC-sQM" secondAttribute="leading" constant="15" id="uqJ-0Y-dqy"/>
                                 </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eV1-zt-RHT">
-                                <rect key="frame" x="0.0" y="309.5" width="375" height="247.5"/>
+                                <rect key="frame" x="0.0" y="245.5" width="375" height="311.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="homeCell" rowHeight="106" id="JOH-V7-ktB" customClass="HomeTableViewCell" customModule="Mito_1_0" customModuleProvider="target">
@@ -1297,7 +1315,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="iIt-YC-sQM" firstAttribute="centerX" secondItem="yfj-t1-xhc" secondAttribute="centerX" id="2Oz-4c-eq8"/>
                             <constraint firstItem="eV1-zt-RHT" firstAttribute="centerX" secondItem="Hy4-EJ-BfW" secondAttribute="centerX" id="4gM-oc-1CP"/>
@@ -1374,21 +1392,25 @@
                                     <constraint firstAttribute="height" constant="30" id="Ysr-8X-S7z"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="85" id="yxd-bm-vDp"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Accept"/>
+                                <state key="normal" title="Confirm"/>
                                 <connections>
                                     <action selector="btnAcceptAndChooseReceivingAddress:" destination="klr-lX-eU9" eventType="touchUpInside" id="TS0-Cv-lxz"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4eM-pX-URR" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
                                 <rect key="frame" x="217" y="559" width="85" height="30"/>
-                                <color key="backgroundColor" red="0.25490196078431371" green="0.8666666666666667" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.83529411764705885" green="0.83921568627450982" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="85" id="VEX-8R-IKZ"/>
                                     <constraint firstAttribute="height" constant="30" id="WLI-Ci-07O"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Deny"/>
+                                <state key="normal" title="Decline">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="FyN-8h-Brb">
                                 <rect key="frame" x="20" y="60" width="335" height="236"/>
@@ -1580,6 +1602,172 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="anr-at-uAk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4173" y="3449"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="NQs-um-9x7">
+            <objects>
+                <viewController id="z0N-c6-B26" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nq2-8m-zpo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ST7-jr-trb">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fvq-PR-xSn">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="5144.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q4v-Bq-ITd">
+                                                <rect key="frame" x="15" y="5084.5" width="345" height="35"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="19"/>
+                                                <state key="normal" title="Accept Terms of Condition"/>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1rt-R3-pEq">
+                                                <rect key="frame" x="15" y="15" width="345" height="28.5"/>
+                                                <string key="text">Terms of Use ("Terms")
+</string>
+                                                <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="24"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y0z-Ms-vna">
+                                                <rect key="frame" x="15" y="58.5" width="345" height="5011"/>
+                                                <string key="text">
+
+
+
+
+Valid as of May 18, 2018     
+                         
+
+1. Accepting the Terms of Use
+
+Please read these Terms of Use ("Terms", "Terms of Use") carefully before using the http://www.projectmito.io website and Mito Mobile App mobile application (the "Services") operated by Mito ("us", "we", or "our").
+ 
+Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who access or use the Service.
+
+By using or accessing the Services, you agree to be bound by all the terms and conditions of this Agreement. If you disagree to all the terms and conditions of this Agreement, you shouldn't, and aren't permitted to, use the Services. 
+
+2. Use of the Service
+
+You may not use the Services, provide any personal information to Mito, or otherwise submit personal information through the Services (including, for example, a name, address, telephone number, or email address) if you are under the Minimum Age. The Minimum Age is thirteen (13). You may only use the Services if you can form a binding contract with Mito and are not legally prohibited from using the Services. 
+
+A. Account Registration
+
+In order to register, create and use an account, we may require that you submit certain Personal Information, including but not limited to your name, email address, street address or zip code, and date of birth to us. During the registration process, or when you access the Services from a phone, your phone’s device ID is also stored. You agree that the Personal Information you provide to Company upon registration and at all other times will be true, accurate, current and complete, and you agree to maintain and update this Personal Information with us as necessary.
+
+B. Identity Authentication
+
+You hereby authorize us, directly or through third parties, to make any inquiries we consider necessary to validate your identity and/or authenticate your identity and account information. This may include asking you for further information and/or documentation about your account usage or identity, or requiring you to take steps to confirm ownership of your email address, wireless/cellular telephone number or financial instruments, and verifying your information against third party databases or through other sources. This process is for internal verification purposes.
+
+C. Order History 
+
+You have the right to receive an account statement and/or order history. You may view your account statement by logging into your Mito account.
+
+D. Payment
+
+I. Refused and Refunded Transactions
+
+When you send packages, the recipient is not required to accept it. You agree that you will not hold us liable for any damages resulting from a recipient’s decision not to accept a package made through the Services.
+
+II. Debit Card Processing
+
+We will process your debit card transactions through either the debit card’s ATM debit network or the Visa/MasterCard network, as we may elect at its discretion.
+
+III. Credit Card Information
+
+If your credit card account number changes or your credit card expiration date changes, we may acquire that information from our financial services partner and update your account accordingly.
+
+3. Privacy Policy
+
+This privacy policy applies to all information we collect through our web and mobile applications from current and former Mito users, including you. When you are no longer our customer, we continue to share your information as described in this policy. 
+
+When you use Mito mobile applications, we collect your IP address, and standard web log information, such as your browser type and the pages you accessed on our website. We also may collect certain geo-location information. If you do not agree to our collection of this information, you may not be able to use our Service.
+
+If you open a Mito account, we collect the following information from you:
+
+A. Account Information - machine or mobile device ID and other similar information.
+
+B. Identification Information - your name, street address, email address, and date of birth.
+
+C. Device Information - information about you: 
+(a) from your mobile device such as your device type, machine or mobile device identification number, geo-location, time zone, language setting, browser type, and IP address, and (b) from third parties for purposes of transaction processing, identity verification, fraud detection or prevention and other similar purposes.
+
+D. Financial Information - bank account and routing numbers and credit cards linked to your Mito account. 
+
+We are committed to providing a safe, secure and all around great Service. Therefore, before permitting you to use our Service, we may require additional information from you we can use to verify your identity, address or other information or to manage risk and compliance throughout our relationship. We may also obtain information about you from third parties such as identity verification, fraud prevention and similar services.
+
+When you are using the Services, we collect information about your account transactions and we may collect information about your computer or other access device for fraud prevention and other similar purposes.
+
+Finally, we may collect additional information from or about you in other ways not specifically described here. 
+
+4. Personal Information Sharing Within Mito Network
+
+We store and process your personal information using third party servers located in data centers in the United States. This information is protected by physical, electronic and procedural safeguards in compliance with applicable US federal and state regulations. We also use computer safeguards such as firewalls and data encryption, we enforce physical access controls to our office and files, and we authorize access to personal information only for those employees who require it to fulfill their job responsibilities.
+
+To process payments on Venmo, we need to share some of your personal information with the person or company that you are paying or is paying you. Your contact information, date of sign-up, the number of payments you have received and other verification metrics like social graph activity may be provided to users or companies when you transact with, on, or through Venmo.
+
+We work with vendors to enable them to accept payments from you using Mito. In doing so, a vendor may share information about you with us, such as your mobile phone number or Venmo username, when you attempt to pay that vendor. We use this information to confirm to that vendor that you are a Mito customer.
+
+Regardless, we will not disclose your credit card number or bank account number to anyone you have purchased for or who has purchased for you through Mito, except with your express permission.
+
+5. Termination
+
+We may terminate or suspend access to our Service immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms.
+ 
+All provisions of the Terms which by their nature should survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity and limitations of liability.
+
+6. Changes
+
+We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material we will try to provide at least 30 (change this) days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.
+ 
+Contact Us
+
+If you have any questions about these Terms, please contact us at projectmitoteam@gmail.com
+</string>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="1rt-R3-pEq" firstAttribute="top" secondItem="fvq-PR-xSn" secondAttribute="top" constant="15" id="4Rq-L3-rAH"/>
+                                            <constraint firstItem="1rt-R3-pEq" firstAttribute="leading" secondItem="fvq-PR-xSn" secondAttribute="leading" constant="15" id="7fO-3J-yoW"/>
+                                            <constraint firstItem="y0z-Ms-vna" firstAttribute="top" secondItem="1rt-R3-pEq" secondAttribute="bottom" constant="15" id="Atv-35-5b6"/>
+                                            <constraint firstAttribute="trailing" secondItem="1rt-R3-pEq" secondAttribute="trailing" constant="15" id="QYm-4s-zP9"/>
+                                            <constraint firstItem="Q4v-Bq-ITd" firstAttribute="leading" secondItem="fvq-PR-xSn" secondAttribute="leading" constant="15" id="STM-5h-nrV"/>
+                                            <constraint firstAttribute="width" constant="375" id="Vff-at-JdV"/>
+                                            <constraint firstItem="y0z-Ms-vna" firstAttribute="leading" secondItem="fvq-PR-xSn" secondAttribute="leading" constant="15" id="Z34-sH-ike"/>
+                                            <constraint firstAttribute="bottom" secondItem="Q4v-Bq-ITd" secondAttribute="bottom" constant="25" id="Zjc-bL-lUi"/>
+                                            <constraint firstAttribute="trailing" secondItem="Q4v-Bq-ITd" secondAttribute="trailing" constant="15" id="fUp-rq-LXZ"/>
+                                            <constraint firstItem="Q4v-Bq-ITd" firstAttribute="top" secondItem="y0z-Ms-vna" secondAttribute="bottom" constant="15" id="obF-9h-OtR"/>
+                                            <constraint firstAttribute="trailing" secondItem="y0z-Ms-vna" secondAttribute="trailing" constant="15" id="zho-py-BDK"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="fvq-PR-xSn" firstAttribute="leading" secondItem="ST7-jr-trb" secondAttribute="leading" id="8fS-9d-UhE"/>
+                                    <constraint firstItem="fvq-PR-xSn" firstAttribute="top" secondItem="ST7-jr-trb" secondAttribute="top" id="BV2-qh-6C8"/>
+                                    <constraint firstAttribute="trailing" secondItem="fvq-PR-xSn" secondAttribute="trailing" id="P51-xu-Vfl"/>
+                                    <constraint firstAttribute="width" constant="375" id="hvt-Cf-xhP"/>
+                                    <constraint firstAttribute="bottom" secondItem="fvq-PR-xSn" secondAttribute="bottom" id="mcd-tN-XMq"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ST7-jr-trb" firstAttribute="top" secondItem="33Z-O2-9UU" secondAttribute="top" id="0pb-oD-sAf"/>
+                            <constraint firstItem="33Z-O2-9UU" firstAttribute="trailing" secondItem="ST7-jr-trb" secondAttribute="trailing" id="5Bb-jC-Mc2"/>
+                            <constraint firstItem="33Z-O2-9UU" firstAttribute="bottom" secondItem="ST7-jr-trb" secondAttribute="bottom" id="jGJ-kp-KYn"/>
+                            <constraint firstItem="ST7-jr-trb" firstAttribute="leading" secondItem="33Z-O2-9UU" secondAttribute="leading" id="nw7-xj-HeW"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="33Z-O2-9UU"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mvs-Tg-KRa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6070" y="-154"/>
         </scene>
         <!--Payment Methods-->
         <scene sceneID="y4i-ed-8HI">
@@ -2288,7 +2476,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="Vto-2H-CEr"/>
         <segue reference="ruP-Sx-HS5"/>
-        <segue reference="Oq9-F1-cCO"/>
+        <segue reference="jFg-kD-bop"/>
         <segue reference="kS1-pK-LOk"/>
         <segue reference="5va-cB-XlO"/>
         <segue reference="4aV-H5-zth"/>

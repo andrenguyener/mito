@@ -19,7 +19,6 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
     
     var appdata = AppData.shared
     var intPageNumber = 1
-    var strProductQuery = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +30,7 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         productTableView.rowHeight = 106
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
-        searchBar.text = strProductQuery
+        searchBar.text = appdata.strProductQuery
         spinnerProductSearch.isHidden = true
         let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
         var strPhotoUrl = data["profileImageString"] as! String
@@ -68,14 +67,14 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
             spinnerProductSearch.isHidden = false
             spinnerProductSearch.startAnimating()
             //            swirlSearchImg.isHidden = true
-            strProductQuery = ""
-            strProductQuery = searchBar.text!
+            appdata.strProductQuery = ""
+            appdata.strProductQuery = searchBar.text!
             fnLoadEbayProductData(strCodedSearchQuery: searchBar.text!.replacingOccurrences(of: " ", with: "%20"))
             
         } else {
-            strProductQuery = searchBar.text!.replacingOccurrences(of: " ", with: "")
+            appdata.strProductQuery = searchBar.text!.replacingOccurrences(of: " ", with: "")
             searchBar.text! = ""
-            strProductQuery = "Amazon"
+            appdata.strProductQuery = "Amazon"
             searchBar.text = "Amazon"
         }
         searchBar.resignFirstResponder()
@@ -88,9 +87,9 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         let goodStr = str as? String
         let urlLoadProductDetails = URL(string: goodStr!)
         appdata.arrEbaySearchResults.removeAll()
-        let strBearerToken = "Bearer v^1.1#i^1#p^1#I^3#r^0#f^0#t^H4sIAAAAAAAAAOVXD2wTVRhft26ysIkoAYLTlBsGRO/67vrn2nOt6Tomi2wrdAzB6PLu7nU71t7Ve6+MSjSzEhQR0RkDJgiLcVE0MRAyJGRmRsVoiImgMSQExagJiMY/CRqDCb67ldENwhibQGLTpLnvfe973+/3/b7v+kB3WfnCDYs3/FXpuKm4txt0Fzsc/FRQXlZ6z80lxXNKi0CBg6O3e163M1dysgbDVDItLUM4begYudamkjqWbGOIyZi6ZECsYUmHKYQlokjxSOMSSeCAlDYNYihGknE11IUYmed9ICgERUFAIuAVatXPx2wxQkwAid6AByCEPGIwgOgyxhnUoGMCdRJiBMAHWOBjhWAL8EoCkLwCF+R9qxhXKzKxZujUhQNM2M5WsveaBalePlOIMTIJDcKEGyL18eZIQ92ippYad0GscJ6GOIEkg0c+RQ0VuVphMoMufwy2vaV4RlEQxow7PHTCyKBS5HwyV5G+zXRChID3AkVVVNEjBiaFyXrDTEFy+TQsi6ayCdtVQjrRSHYsQikZ8mqkkPxTEw3RUOeyfpZmYFJLaMgMMYtqIysjsRgTjhvpDgQ7m9iYaVi7GtnYsjrWJyiKrFLhsN4g9AtI9uYPGoqWZ3nUSVFDVzWLM+xqMkgtolmj0dzwBdxQp2a92YwkiJVRoZ9/mENhlVXToSJmSIdulRWlKBEu+3HsCgzvJsTU5AxBwxFGL9gUhRiYTmsqM3rRlmJePWtxiOkgJC253V1dXVyXhzPMdrcAAO9+qHFJXOlAKcjYvlavW/7a2BtYzYai0C6l/hLJpmkua6lUaQJ6OxMWAl7eE8zzPjKt8GjrRYYCzO6RDTFZDSJ6ZEEOQl72BBJ+P4KT0SHhvEjdVh5Ihlk2Bc1ORNJJqCBWoTrLpJCpqZLHlxDouYhV/cEEVWwiwco+1c/yCYTo9JNlJRj4PzXKlUo9rhhpFDOSmpKdJMFPktg9phqDJsnGUTJJDVeq+kuCxBbIawDP6vVxQLRiYBoEpjXO0janGCm3AelQs0xtdtYTwq3R1+ENVVQKcAippg69yDgbLofXKJyJsJEx6Suca7bmeovRiXTaJcQ0kklktvITYmIyJ/p1meaXRKUkNUpj242GbJxj8iq1Dcl1Re3MOVZehJz3CaLPL/q9woSwRe26tmSvydAaR2EXG5gg9T/4A+IeeRkKF9kfPufoBznHHnqfAm5wF18N5paVLHeWVMzBGkGcBhMc1tp1+iffRFwnyqahZhaXOR6u2r2rreD61fsImD18ASsv4acW3MZA1YWVUn7arEo+AHxCEHgF+l0Fqi+sOvmZzhlvnvt6UHo88vsTT/+0oPWwduDI+pnfgsphJ4ejtIjqomjHvLIiJXuq56u5h6cvLN63Cz74afln7KyPyitW/zzt+KFXT6QGtx75tf7HQ7lnnzuDz/xdK37y9kGmWNJPb793wS2vt4ns/vUnsvK26v2bjyv7Bp1rxLfIjtnswPQnX6p+v44bQNKW3b210cq772zZU7NuxWt/zL89dXqgROl75Z0pf0Zr+/jQQccdvdsrXvhuZ+M/555pD69B26PCsdbA3j3gbH92fuvguvp12/au+KJ94225346g5x+YEd1Y1b8kdnb5o/uOPeY6et8bmxc0zU6t2NL+ZVNFz9IPfzlaw74Xvn/n1CmnBk46v6lyLa9s+z7Rs+mp+aW5H7y3Tnu5b87HL37w7la4aaDvwOczh8r3L0i7bh4YDwAA"
+        print(UserDefaults.standard.object(forKey: "strEbayToken") as! String)
         let headers: HTTPHeaders = [
-            "Authorization": strBearerToken
+            "Authorization": "Bearer \(UserDefaults.standard.object(forKey: "strEbayToken") as! String)"
         ]
         Alamofire.request(urlLoadProductDetails!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
@@ -161,7 +160,6 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("Product count: \(appdata.arrProductSearchResults.count)")
         return appdata.arrEbaySearchResults.count
     }
     
@@ -173,11 +171,8 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("Chose products")
-        print("Product indexPath.row: \(indexPath.row)")
         let cell = tableView.dequeueReusableCell(withIdentifier: "productCell", for: indexPath) as! ProductTableViewCell
         let objProduct = appdata.arrEbaySearchResults[indexPath.row]
-        print(objProduct.strImage)
         appdata.fnDisplayImage(strImageURL: objProduct.strImage!, img: cell.img, boolCircle: false)
         cell.title.text = objProduct.strTitle
         cell.publisher.text = objProduct.strSeller

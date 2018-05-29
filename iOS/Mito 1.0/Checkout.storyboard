@@ -448,7 +448,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ibG-SQ-XDJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="10479" y="-132"/>
+            <point key="canvasLocation" x="11416.799999999999" y="-132.23388305847078"/>
         </scene>
         <!--CheckOutComplete-->
         <scene sceneID="wfo-qB-gu0">
@@ -462,7 +462,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P2A-f0-scU" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
-                                        <rect key="frame" x="18" y="611" width="339" height="46"/>
+                                        <rect key="frame" x="23" y="606" width="329" height="46"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="46" id="rl3-bz-erV"/>
@@ -476,7 +476,7 @@
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="XyB-E9-nYh">
-                                        <rect key="frame" x="28" y="48" width="319" height="543"/>
+                                        <rect key="frame" x="28" y="48" width="319" height="538"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GiftWhite.png" translatesAutoresizingMaskIntoConstraints="NO" id="PhN-RU-rAy">
                                                 <rect key="frame" x="52" y="0.0" width="215" height="232"/>
@@ -485,13 +485,13 @@
                                                 </constraints>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="You’re so nice!.png" translatesAutoresizingMaskIntoConstraints="NO" id="C6s-Wf-UQ7">
-                                                <rect key="frame" x="26" y="361.5" width="267" height="32"/>
+                                                <rect key="frame" x="26" y="359" width="267" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="32" id="uME-LJ-cnt"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We will notify you when Sopheak accepts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8VG-bt-wq1">
-                                                <rect key="frame" x="4.5" y="523" width="310" height="20"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We will notify you when Sopheak accepts" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8VG-bt-wq1">
+                                                <rect key="frame" x="4.5" y="518" width="310" height="20"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -502,10 +502,10 @@
                                 <color key="backgroundColor" red="0.25490196079999999" green="0.86666666670000003" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailingMargin" secondItem="XyB-E9-nYh" secondAttribute="trailing" constant="20" id="5tY-e9-zwE"/>
-                                    <constraint firstItem="P2A-f0-scU" firstAttribute="leading" secondItem="4vK-kL-Od9" secondAttribute="leadingMargin" constant="10" id="BF4-DN-RV7"/>
+                                    <constraint firstItem="P2A-f0-scU" firstAttribute="leading" secondItem="4vK-kL-Od9" secondAttribute="leadingMargin" constant="15" id="BF4-DN-RV7"/>
                                     <constraint firstItem="XyB-E9-nYh" firstAttribute="leading" secondItem="4vK-kL-Od9" secondAttribute="leadingMargin" constant="20" id="JaS-oz-oAG"/>
                                     <constraint firstItem="XyB-E9-nYh" firstAttribute="top" secondItem="4vK-kL-Od9" secondAttribute="topMargin" constant="20" id="RsK-cq-eWd"/>
-                                    <constraint firstItem="P2A-f0-scU" firstAttribute="trailing" secondItem="4vK-kL-Od9" secondAttribute="trailingMargin" constant="-10" id="UsJ-FY-QqM"/>
+                                    <constraint firstItem="P2A-f0-scU" firstAttribute="trailing" secondItem="4vK-kL-Od9" secondAttribute="trailingMargin" constant="-15" id="UsJ-FY-QqM"/>
                                     <constraint firstItem="P2A-f0-scU" firstAttribute="top" secondItem="XyB-E9-nYh" secondAttribute="bottom" constant="20" id="eDy-MJ-RUs"/>
                                 </constraints>
                             </view>
@@ -516,10 +516,13 @@
                             <constraint firstItem="4vK-kL-Od9" firstAttribute="bottom" secondItem="2eT-VU-q7b" secondAttribute="bottom" id="5vw-P7-8O5"/>
                             <constraint firstItem="4vK-kL-Od9" firstAttribute="leading" secondItem="2eT-VU-q7b" secondAttribute="leading" id="S9N-dW-Zja"/>
                             <constraint firstItem="2eT-VU-q7b" firstAttribute="trailing" secondItem="4vK-kL-Od9" secondAttribute="trailing" id="sUQ-ug-q6w"/>
-                            <constraint firstItem="P2A-f0-scU" firstAttribute="bottom" secondItem="2eT-VU-q7b" secondAttribute="bottom" constant="-10" id="uQl-6A-fs6"/>
+                            <constraint firstItem="P2A-f0-scU" firstAttribute="bottom" secondItem="2eT-VU-q7b" secondAttribute="bottom" constant="-15" id="uQl-6A-fs6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2eT-VU-q7b"/>
                     </view>
+                    <navigationItem key="navigationItem" id="9KV-gA-5fT"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="lblNotifyYouMessage" destination="8VG-bt-wq1" id="aMp-A5-KCZ"/>
                         <segue destination="U5T-7J-IFD" kind="showDetail" identifier="checkoutComplete" id="Jjr-wW-Hse"/>
@@ -527,7 +530,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fPR-Qk-3Ok" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8798" y="-533"/>
+            <point key="canvasLocation" x="9736.7999999999993" y="-533.88305847076469"/>
         </scene>
         <!--Order Summary-->
         <scene sceneID="wad-Mc-dx9">
@@ -538,7 +541,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ovL-qG-CEb">
-                                <rect key="frame" x="0.0" y="20" width="375" height="581"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="571"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="81w-Hr-5bo" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="588"/>
@@ -601,7 +604,7 @@
                                                     <constraint firstItem="wBL-fs-O8e" firstAttribute="leading" secondItem="CiJ-B0-TcD" secondAttribute="leading" id="8XW-HD-n9T"/>
                                                 </constraints>
                                             </stackView>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="2" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FtS-QK-BUu" userLabel="Payment tblView">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="2" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FtS-QK-BUu" userLabel="Payment tblView">
                                                 <rect key="frame" x="20" y="265" width="335" height="160"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -661,7 +664,7 @@
                                 </constraints>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7K0-wz-TtY" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
-                                <rect key="frame" x="20" y="611" width="335" height="46"/>
+                                <rect key="frame" x="15" y="606" width="345" height="46"/>
                                 <color key="backgroundColor" red="0.25490196079999999" green="0.86666666670000003" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="F6d-NP-Zkp"/>
@@ -677,13 +680,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="ovL-qG-CEb" firstAttribute="top" secondItem="ecz-Qd-yGt" secondAttribute="top" id="0Ds-Td-698"/>
-                            <constraint firstItem="7K0-wz-TtY" firstAttribute="top" secondItem="ovL-qG-CEb" secondAttribute="bottom" constant="10" id="DJL-Bv-3oM"/>
-                            <constraint firstItem="7K0-wz-TtY" firstAttribute="leading" secondItem="ecz-Qd-yGt" secondAttribute="leading" constant="20" id="H7v-f4-mi4"/>
+                            <constraint firstItem="7K0-wz-TtY" firstAttribute="top" secondItem="ovL-qG-CEb" secondAttribute="bottom" constant="15" id="DJL-Bv-3oM"/>
+                            <constraint firstItem="7K0-wz-TtY" firstAttribute="leading" secondItem="ecz-Qd-yGt" secondAttribute="leading" constant="15" id="H7v-f4-mi4"/>
                             <constraint firstItem="ovL-qG-CEb" firstAttribute="trailing" secondItem="ecz-Qd-yGt" secondAttribute="trailing" id="HmG-Eu-Hgs"/>
                             <constraint firstItem="81w-Hr-5bo" firstAttribute="width" secondItem="Oc8-SY-TH1" secondAttribute="width" id="LmK-ka-ao9"/>
                             <constraint firstItem="ovL-qG-CEb" firstAttribute="leading" secondItem="ecz-Qd-yGt" secondAttribute="leading" id="oi5-Ed-C1M"/>
-                            <constraint firstItem="7K0-wz-TtY" firstAttribute="bottom" secondItem="ecz-Qd-yGt" secondAttribute="bottom" constant="-10" id="vs6-rS-fpu"/>
-                            <constraint firstItem="7K0-wz-TtY" firstAttribute="trailing" secondItem="ecz-Qd-yGt" secondAttribute="trailing" constant="-20" id="yJ3-e7-dU3"/>
+                            <constraint firstItem="7K0-wz-TtY" firstAttribute="bottom" secondItem="ecz-Qd-yGt" secondAttribute="bottom" constant="-15" id="vs6-rS-fpu"/>
+                            <constraint firstItem="7K0-wz-TtY" firstAttribute="trailing" secondItem="ecz-Qd-yGt" secondAttribute="trailing" constant="-15" id="yJ3-e7-dU3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ecz-Qd-yGt"/>
                     </view>
@@ -693,7 +696,11 @@
                         <outlet property="o_recipientName" destination="pvU-rq-9mI" id="8gB-PE-FBh"/>
                         <outlet property="o_tblviewOrderSummary" destination="7GW-bc-0mU" id="dRU-ro-kYb"/>
                         <outlet property="o_tblviewPaymentInfo" destination="FtS-QK-BUu" id="yB4-ec-s5K"/>
-                        <segue destination="qdc-jL-mfw" kind="show" identifier="checkoutFinish" id="XMj-eO-hpz"/>
+                        <segue destination="ll8-cJ-8yB" kind="show" identifier="checkoutFinish" id="XMj-eO-hpz"/>
+                        <segue destination="jmz-bN-xaL" kind="show" identifier="segOrderToChoosePerson" id="wgc-xo-5GA"/>
+                        <segue destination="CbO-zi-xvJ" kind="show" identifier="segGoBackChooseRecipient" id="Fc0-av-GMW"/>
+                        <segue destination="6OD-c0-snC" kind="show" identifier="segGoBackAndChoosePayment" id="sxX-Ib-Oca"/>
+                        <segue destination="y1B-fc-fA5" kind="show" identifier="segGoBackChangeAddress" id="uUW-z7-eTV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4uv-M5-cjJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -976,7 +983,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="6VS-KB-dQD" userLabel="ImageLabelStackView">
-                                <rect key="frame" x="16" y="72" width="250" height="115"/>
+                                <rect key="frame" x="15" y="72" width="250" height="115"/>
                                 <subviews>
                                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="c3m-hZ-dPi" customClass="RoundedImage" customModule="Mito_1_0" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
@@ -998,25 +1005,24 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="jlc-Rg-Pkl" firstAttribute="top" secondItem="6VS-KB-dQD" secondAttribute="top" constant="48" id="iXA-Rl-ZKD"/>
-                                    <constraint firstAttribute="width" constant="250" id="jaE-g7-W2P"/>
                                     <constraint firstItem="c3m-hZ-dPi" firstAttribute="top" secondItem="6VS-KB-dQD" secondAttribute="top" id="xjN-jc-vki"/>
                                 </constraints>
                             </stackView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" text="What's it for?" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="eD1-jf-ACa">
-                                <rect key="frame" x="16" y="217" width="343" height="384"/>
+                                <rect key="frame" x="16" y="217" width="343" height="374"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
                                 <color key="textColor" red="0.83444553610000005" green="0.838506639" blue="0.85902613400000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QTO-0p-Ycj" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
-                                <rect key="frame" x="20" y="611" width="335" height="46"/>
+                                <rect key="frame" x="15" y="606" width="345" height="46"/>
                                 <color key="backgroundColor" red="0.25490196078431371" green="0.8666666666666667" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="SuR-AT-ofa"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
-                                <state key="normal" title="Confirm Message">
+                                <state key="normal" title="Continue">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -1026,14 +1032,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="QTO-0p-Ycj" firstAttribute="top" secondItem="eD1-jf-ACa" secondAttribute="bottom" constant="10" id="2or-CS-oxP"/>
-                            <constraint firstItem="QTO-0p-Ycj" firstAttribute="bottom" secondItem="ZUi-71-dRE" secondAttribute="bottom" constant="-10" id="95D-jT-lQL"/>
-                            <constraint firstItem="6VS-KB-dQD" firstAttribute="leading" secondItem="ZUi-71-dRE" secondAttribute="leading" constant="16" id="Gl8-FX-YAW"/>
+                            <constraint firstItem="QTO-0p-Ycj" firstAttribute="top" secondItem="eD1-jf-ACa" secondAttribute="bottom" constant="15" id="2or-CS-oxP"/>
+                            <constraint firstItem="QTO-0p-Ycj" firstAttribute="bottom" secondItem="ZUi-71-dRE" secondAttribute="bottom" constant="-15" id="95D-jT-lQL"/>
+                            <constraint firstItem="6VS-KB-dQD" firstAttribute="leading" secondItem="ZUi-71-dRE" secondAttribute="leading" constant="15" id="Gl8-FX-YAW"/>
                             <constraint firstItem="eD1-jf-ACa" firstAttribute="leading" secondItem="ZUi-71-dRE" secondAttribute="leading" constant="16" id="Hlz-yB-zvu"/>
-                            <constraint firstItem="QTO-0p-Ycj" firstAttribute="trailing" secondItem="ZUi-71-dRE" secondAttribute="trailing" constant="-20" id="HzM-06-Qf4"/>
+                            <constraint firstItem="QTO-0p-Ycj" firstAttribute="trailing" secondItem="ZUi-71-dRE" secondAttribute="trailing" constant="-15" id="HzM-06-Qf4"/>
                             <constraint firstItem="eD1-jf-ACa" firstAttribute="top" secondItem="6VS-KB-dQD" secondAttribute="bottom" constant="30" id="NhR-yM-Hdz"/>
                             <constraint firstItem="ZUi-71-dRE" firstAttribute="trailing" secondItem="eD1-jf-ACa" secondAttribute="trailing" constant="16" id="YUF-1I-KsW"/>
-                            <constraint firstItem="QTO-0p-Ycj" firstAttribute="leading" secondItem="ZUi-71-dRE" secondAttribute="leading" constant="20" id="jB2-5C-See"/>
+                            <constraint firstItem="QTO-0p-Ycj" firstAttribute="leading" secondItem="ZUi-71-dRE" secondAttribute="leading" constant="15" id="jB2-5C-See"/>
                             <constraint firstItem="6VS-KB-dQD" firstAttribute="top" secondItem="ZUi-71-dRE" secondAttribute="top" constant="52" id="zqB-vY-UKD"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ZUi-71-dRE"/>
@@ -1112,7 +1118,24 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uAb-uD-7mu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9783" y="-93"/>
+            <point key="canvasLocation" x="10720.799999999999" y="-93.553223388305852"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="adQ-MP-h3F">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="ll8-cJ-8yB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mSx-VF-sCS">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="qdc-jL-mfw" kind="relationship" relationship="rootViewController" id="JGV-7I-Jcg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EWm-lV-jBO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8797.6000000000004" y="-533.88305847076469"/>
         </scene>
     </scenes>
     <resources>
@@ -1121,9 +1144,10 @@
         <image name="You’re so nice!.png" width="267" height="33"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2rk-ch-wix"/>
-        <segue reference="D79-aK-l5e"/>
-        <segue reference="Qfg-Id-CWz"/>
+        <segue reference="Jjr-wW-Hse"/>
+        <segue reference="wgc-xo-5GA"/>
+        <segue reference="uUW-z7-eTV"/>
+        <segue reference="sxX-Ib-Oca"/>
         <segue reference="MjP-Xg-3Ou"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -57,6 +57,18 @@ class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableV
         
         o_lblMessage.text = appdata.strOrderMessage
         
+        o_lblMessage.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.fnSegGoBackAndChangeMessage))
+        o_lblMessage.addGestureRecognizer(tapGesture)
+        
+        o_imgRecipient.isUserInteractionEnabled = true
+        let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(self.fnSegGoBackAndChangeRecipient))
+        o_imgRecipient.addGestureRecognizer(tapGesture2)
+        o_recipientName.isUserInteractionEnabled = true
+        let tapGesture3 = UITapGestureRecognizer(target: self, action: #selector(self.fnSegGoBackAndChangeRecipient))
+        o_recipientName.addGestureRecognizer(tapGesture3)
+        
+        
         fnGetCartSubTotal()
         //itemCountCheckout.text = String(appdata.intNumItems)
         //shippingCheckout.text = "FREE"
@@ -81,6 +93,14 @@ class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableV
         //        let last4 = String(appdata.strCardNumber.suffix(4))
         //        lblCreditCardNumber.text = "\(stars)\(last4)"
         appdata.fnDisplayImage(strImageURL: appdata.personRecipient.avatar, img: o_imgRecipient, boolCircle: true)
+    }
+    
+    @objc func fnSegGoBackAndChangeRecipient() {
+        performSegue(withIdentifier: "segGoBackChooseRecipient", sender: self)
+    }
+    
+    @objc func fnSegGoBackAndChangeMessage() {
+        performSegue(withIdentifier: "segOrderToChoosePerson", sender: self)
     }
     
     // overrides next screen's back button title
@@ -115,7 +135,6 @@ class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableV
         performSegue(withIdentifier: "checkoutFinish", sender: self)
     }
 
-    
     func fnFinishCheckout() {
         let urlCheckoutMitoCart = URL(string: "https://api.projectmito.io/v1/cart/process")
         let parameters: Parameters = [
@@ -154,6 +173,11 @@ class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.row == 0 {
+            performSegue(withIdentifier: "segGoBackAndChoosePayment", sender: self)
+        } else {
+            performSegue(withIdentifier: "segGoBackChangeAddress", sender: self)
+        }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -179,170 +203,23 @@ class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableV
         } else {
             let cell: OrderSummaryTableViewCell = o_tblviewOrderSummary.dequeueReusableCell(withIdentifier: "OrderSummaryCell", for: indexPath) as! OrderSummaryTableViewCell
             cell.lblNumItems.text = "Items (\(String(appdata.intNumItems)))"
-            let tax: Decimal = appdata.priceSum * 0.12
+            let tax = Double(truncating: appdata.priceSum as NSNumber)
+            let strTax = ((round(100 * tax * 0.12))/100).roundTo2f()
+//            let tax = Double(round(Double(100 * appdata.priceSum * 0.12))/100).roundTo2f()
             
             // rounds double with 2 digits precision
             let tempTax = Double(truncating: tax as NSNumber)
-            let temp2 = Double(round(100 * tempTax)/100)
+            let temp2 = Double(round(100 * tempTax)/100).roundTo2f()
             
-            let tempTotal = Double(truncating: (appdata.priceSum + tax) as NSNumber)
-            let temp2Total = Double(round(100 * tempTotal)/100)
+            let dblPriceSum = Double(truncating: appdata.priceSum as NSNumber)
+            let tempTotal = Double(truncating: (dblPriceSum + tax) as NSNumber)
+            let temp2Total = Double(round(100 * tempTotal)/100).roundTo2f()
             
             cell.lblTax.text = "$\(String(describing: temp2))"
-            cell.lblSubtotal.text = "$\(String(describing: appdata.priceSum))"
+            cell.lblSubtotal.text = "$\(String(describing: dblPriceSum))"
             cell.lblFinalTotal.text = "$\(String(describing: temp2Total))"
             return cell
         }
     }
     
-//    var appdata = AppData.shared
-//
-//    let formatter = NumberFormatter()
-//
-//    override func viewDidLayoutSubviews() {
-//        tblviewPaymentInfo.frame.size = tblviewPaymentInfo.contentSize
-//        tblviewOrderSummary.frame.size = tblviewOrderSummary.contentSize
-//    }
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        tblviewPaymentInfo.delegate = self
-//        tblviewPaymentInfo.dataSource = self
-//        let nibAddNewAddress = UINib(nibName: "PaymentInfoTableViewCell", bundle: nil)
-//        tblviewPaymentInfo.register(nibAddNewAddress, forCellReuseIdentifier: "PaymentInfoCell")
-//        tblviewPaymentInfo.isScrollEnabled = false
-//
-//        tblviewOrderSummary.delegate = self
-//        tblviewOrderSummary.dataSource = self
-//        let nib2AddNewAddress = UINib(nibName: "OrderSummaryTableViewCell", bundle: nil)
-//        tblviewOrderSummary.register(nib2AddNewAddress, forCellReuseIdentifier: "OrderSummaryCell")
-//        tblviewOrderSummary.isScrollEnabled = false
-//
-//        lblMessage.text = appdata.strOrderMessage
-//
-//        fnGetCartSubTotal()
-//        itemCountCheckout.text = String(appdata.intNumItems)
-//        shippingCheckout.text = "FREE"
-//        let tax: Decimal = appdata.priceSum * 0.12
-//
-//        // rounds double with 2 digits precision
-//        let tempTax = Double(truncating: tax as NSNumber)
-//        let temp2 = Double(round(100 * tempTax)/100)
-//
-//        let tempTotal = Double(truncating: (appdata.priceSum + tax) as NSNumber)
-//        let temp2Total = Double(round(100 * tempTotal)/100)
-//
-//        taxCheckout.text = "$\(String(describing: temp2))"
-//        itemTotalCheckout.text = "$\(String(describing: temp2Total))"
-//        appdata.fnDisplayImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipient, boolCircle: true)
-//        recipientName.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
-//
-//        // hide first 8 numbers of card information
-//        let last4 = String(appdata.strCardNumber.suffix(4))
-//        lblCreditCardNumber.text = "Credit ****\(last4)"
-////        let stars = String(repeating:"*", count:12)
-////        let last4 = String(appdata.strCardNumber.suffix(4))
-////        lblCreditCardNumber.text = "\(stars)\(last4)"
-//        appdata.fnDisplayImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipient, boolCircle: true)
-//    }
-//
-//    func fnGetCartSubTotal() {
-//        appdata.intNumItems = 0
-//        appdata.priceSum = 0.0
-//        for element in self.appdata.arrCartLineItems {
-//            let itemPrice = "$" + element.objProduct.price // change later
-//            formatter.numberStyle = .currency
-//            formatter.locale = Locale(identifier: "en_US")
-//            var decAmazonPrice: Double = 0.00
-//            if let number = formatter.number(from: itemPrice) {
-//                decAmazonPrice = number.doubleValue
-//                let totalAmt: Double = decAmazonPrice * (Double)(element.intQuantity)
-//                appdata.priceSum += Decimal(totalAmt)
-//            }
-//            print("Total Price: \(appdata.priceSum)")
-//        }
-//        for objCartItem in self.appdata.arrCartLineItems {
-//            appdata.intNumItems += objCartItem.intQuantity
-//        }
-//    }
-//
-//    @IBAction func finishCheckout(_ sender: Any) {
-//        self.fnFinishCheckout()
-//        performSegue(withIdentifier: "checkoutFinish", sender: self)
-//    }
-//
-//    func fnFinishCheckout() {
-//        let urlCheckoutMitoCart = URL(string: "https://api.projectmito.io/v1/cart/process")
-//        let parameters: Parameters = [
-//            "cardId": 1,
-//            "senderAddressId": appdata.address.intAddressID!,
-//            "recipientId": appdata.personRecipient.intUserID,
-//            "message": appdata.strOrderMessage,
-//            "giftOption": 0
-//        ]
-//        let headers: HTTPHeaders = [
-//            "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
-//        ]
-//        Alamofire.request(urlCheckoutMitoCart!, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseString { response in
-//            switch response.result {
-//            case .success:
-//                if let dictionary = response.result.value {
-//                    print(dictionary)
-//                    // Any code for storing locally
-//                }
-//
-//            case .failure(let error):
-//                print("Checkout could not be processed")
-//                print(error)
-//            }
-//        }
-//
-//    }
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if tableView == tblviewPaymentInfo {
-//            return 2
-//        } else {
-//            return 1
-//        }
-//    }
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-//    }
-//
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return "Order Summary"
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        if tableView == tblviewPaymentInfo {
-//            let cell:PaymentInfoTableViewCell! = tblviewPaymentInfo.dequeueReusableCell(withIdentifier: "PaymentInfoCell", for:indexPath)as! PaymentInfoTableViewCell
-//            // This function actually loads the xib
-//            cell.lblTitle.text = appdata.arrPaymentInfoTitles[indexPath.row]
-//            let last4 = String(appdata.strCardNumber.suffix(4))
-//            if indexPath.row == 0 {
-//                cell.lblSubtitle.text = "Visa ending in \(last4)"
-//            } else {
-//                cell.lblSubtitle.text = "Same as shipping address"
-//            }
-//            return cell
-//        } else {
-//            let cell: OrderSummaryTableViewCell = tblviewOrderSummary.dequeueReusableCell(withIdentifier: "OrderSummaryCell", for: indexPath) as! OrderSummaryTableViewCell
-//            cell.lblNumItems.text = "Items (\(String(appdata.intNumItems))"
-//            let tax: Decimal = appdata.priceSum * 0.12
-//
-//            // rounds double with 2 digits precision
-//            let tempTax = Double(truncating: tax as NSNumber)
-//            let temp2 = Double(round(100 * tempTax)/100)
-//
-//            let tempTotal = Double(truncating: (appdata.priceSum + tax) as NSNumber)
-//            let temp2Total = Double(round(100 * tempTotal)/100)
-//
-//            cell.lblTax.text = "$\(String(describing: temp2))"
-//            cell.lblSubtotal.text = "$\(String(describing: appdata.priceSum))"
-//            cell.lblFinalTotal.text = "$\(String(describing: temp2Total))"
-//            return cell
-//        }
-//    }
 }

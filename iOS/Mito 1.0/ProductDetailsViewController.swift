@@ -16,9 +16,9 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     var appdata = AppData.shared
     var urlAddToMitoCart = URL(string: "https://api.projectmito.io/v1/cart")
-    let formatter = NumberFormatter()
     var intImageIndex = 0
     var objProduct = EbayProduct(strItemId: "", strTitle: "", strImage: "", strPrice: "", strSeller: "")
+    var intQuantity = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,51 +64,6 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
         lblQuantity.addGestureRecognizer(tapGesture)
     }
     
-//    func swiped(gesture: UIGestureRecognizer) {
-//        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-//            switch swipeGesture.direction {
-//            case UISwipeGestureRecognizerDirection.Right :
-//                println("User swiped right")
-//                intImageIndex--
-//                if imageIndex < 0 {
-//
-//                    imageIndex = maxImages
-//
-//                }
-//
-//                image.image = UIImage(named: imageList[imageIndex])
-//
-//            case UISwipeGestureRecognizerDirection.Left:
-//                println("User swiped Left")
-//
-//                // increase index first
-//
-//                imageIndex++
-//
-//                // check if index is in range
-//
-//                if imageIndex > maxImages {
-//
-//                    imageIndex = 0
-//
-//                }
-//
-//                image.image = UIImage(named: imageList[imageIndex])
-//
-//
-//
-//
-//            default:
-//                break //stops the code/codes nothing.
-//
-//
-//            }
-//
-//        }
-//
-//
-//    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -149,7 +104,7 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     @IBAction func btnDoneSelectingQuantity(_ sender: Any) {
         let strQuantity = String(appdata.arrQuantity[pickerviewQuantity.selectedRow(inComponent: 0)])
-        lblQuantity.text = strQuantity
+        intQuantity = (Int)(strQuantity)!
         btnQuantity.setTitle("Quantity: \(strQuantity)", for: .normal)
         pickerviewQuantity.isHidden = true
         confirmPicker.isHidden = true
@@ -169,10 +124,10 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     func fnLoadProductDetails(strItemId: String){
         var str: NSString = NSString(string: "https://api.ebay.com/buy/browse/v1/item/\(strItemId)")
         str = str.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)! as NSString
-        let goodStr = str as? String
-        let urlLoadProductDetails = URL(string: goodStr!)
+        let goodStr = str as String
+        let urlLoadProductDetails = URL(string: goodStr)
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer v^1.1#i^1#p^1#I^3#r^0#f^0#t^H4sIAAAAAAAAAOVXD2wTVRhft26ysIkoAYLTlBsGRO/67vrn2nOt6Tomi2wrdAzB6PLu7nU71t7Ve6+MSjSzEhQR0RkDJgiLcVE0MRAyJGRmRsVoiImgMSQExagJiMY/CRqDCb67ldENwhibQGLTpLnvfe973+/3/b7v+kB3WfnCDYs3/FXpuKm4txt0Fzsc/FRQXlZ6z80lxXNKi0CBg6O3e163M1dysgbDVDItLUM4begYudamkjqWbGOIyZi6ZECsYUmHKYQlokjxSOMSSeCAlDYNYihGknE11IUYmed9ICgERUFAIuAVatXPx2wxQkwAid6AByCEPGIwgOgyxhnUoGMCdRJiBMAHWOBjhWAL8EoCkLwCF+R9qxhXKzKxZujUhQNM2M5WsveaBalePlOIMTIJDcKEGyL18eZIQ92ippYad0GscJ6GOIEkg0c+RQ0VuVphMoMufwy2vaV4RlEQxow7PHTCyKBS5HwyV5G+zXRChID3AkVVVNEjBiaFyXrDTEFy+TQsi6ayCdtVQjrRSHYsQikZ8mqkkPxTEw3RUOeyfpZmYFJLaMgMMYtqIysjsRgTjhvpDgQ7m9iYaVi7GtnYsjrWJyiKrFLhsN4g9AtI9uYPGoqWZ3nUSVFDVzWLM+xqMkgtolmj0dzwBdxQp2a92YwkiJVRoZ9/mENhlVXToSJmSIdulRWlKBEu+3HsCgzvJsTU5AxBwxFGL9gUhRiYTmsqM3rRlmJePWtxiOkgJC253V1dXVyXhzPMdrcAAO9+qHFJXOlAKcjYvlavW/7a2BtYzYai0C6l/hLJpmkua6lUaQJ6OxMWAl7eE8zzPjKt8GjrRYYCzO6RDTFZDSJ6ZEEOQl72BBJ+P4KT0SHhvEjdVh5Ihlk2Bc1ORNJJqCBWoTrLpJCpqZLHlxDouYhV/cEEVWwiwco+1c/yCYTo9JNlJRj4PzXKlUo9rhhpFDOSmpKdJMFPktg9phqDJsnGUTJJDVeq+kuCxBbIawDP6vVxQLRiYBoEpjXO0janGCm3AelQs0xtdtYTwq3R1+ENVVQKcAippg69yDgbLofXKJyJsJEx6Suca7bmeovRiXTaJcQ0kklktvITYmIyJ/p1meaXRKUkNUpj242GbJxj8iq1Dcl1Re3MOVZehJz3CaLPL/q9woSwRe26tmSvydAaR2EXG5gg9T/4A+IeeRkKF9kfPufoBznHHnqfAm5wF18N5paVLHeWVMzBGkGcBhMc1tp1+iffRFwnyqahZhaXOR6u2r2rreD61fsImD18ASsv4acW3MZA1YWVUn7arEo+AHxCEHgF+l0Fqi+sOvmZzhlvnvt6UHo88vsTT/+0oPWwduDI+pnfgsphJ4ejtIjqomjHvLIiJXuq56u5h6cvLN63Cz74afln7KyPyitW/zzt+KFXT6QGtx75tf7HQ7lnnzuDz/xdK37y9kGmWNJPb793wS2vt4ns/vUnsvK26v2bjyv7Bp1rxLfIjtnswPQnX6p+v44bQNKW3b210cq772zZU7NuxWt/zL89dXqgROl75Z0pf0Zr+/jQQccdvdsrXvhuZ+M/555pD69B26PCsdbA3j3gbH92fuvguvp12/au+KJ94225346g5x+YEd1Y1b8kdnb5o/uOPeY6et8bmxc0zU6t2NL+ZVNFz9IPfzlaw74Xvn/n1CmnBk46v6lyLa9s+z7Rs+mp+aW5H7y3Tnu5b87HL37w7la4aaDvwOczh8r3L0i7bh4YDwAA"
+            "Authorization": "Bearer \(UserDefaults.standard.object(forKey: "strEbayToken") as! String)"
         ]
         Alamofire.request(urlLoadProductDetails!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
@@ -203,9 +158,8 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
                     if dict["shortDescription"] != nil {
                         strDescription = dict["shortDescription"] as! String
                     }
-                    let objProduct = EbayProduct(strItemId: strItemId, strTitle: strTitle, strImage: strImageUrl, strPrice: strPrice, strSeller: strSeller)
-                    self.objProduct = objProduct
-                    self.prodPrice.text = strPrice
+                    self.objProduct = EbayProduct(strItemId: strItemId, strTitle: strTitle, strImage: strImageUrl, strPrice: strPrice, strSeller: strSeller)
+                    self.prodPrice.text = "$\(strPrice)"
                     self.prodPub.text = strSeller
                     self.appdata.fnDisplayImage(strImageURL: strImageUrl, img: self.prodImage, boolCircle: false)
                     self.prodTitle.text = strTitle
@@ -305,19 +259,20 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     @IBAction func btnAddToCartPressed(_ sender: Any) {
         let objCurrentProduct = self.objProduct
+        print(objProduct.values())
         var decAmazonPrice : Decimal = 0.00
-        let itemPrice = objCurrentProduct.strPrice // change later
+        let itemPrice = "$\(objCurrentProduct.strPrice)" // change later
+        let formatter = NumberFormatter()
         formatter.numberStyle = .currency
         formatter.locale = Locale(identifier: "en_US")
-        print(objCurrentProduct.strPrice)
-        if let number = formatter.number(from: itemPrice!) {
+        print(itemPrice)
+        if let number = formatter.number(from: itemPrice) {
             decAmazonPrice = number.decimalValue
         }
         print("decAmazonPrice: \(decAmazonPrice)")
-        let intQuantity = (Int)(lblQuantity.text!)!
         let parameters: Parameters = [
             "amazonASIN": objCurrentProduct.strItemId!,
-            "amazonPrice": decAmazonPrice,
+            "amazonPrice": Decimal(string: objCurrentProduct.strPrice!),
             "quantity": intQuantity,
             "productImageUrl": objCurrentProduct.strImage!,
             "productName": objCurrentProduct.strTitle!
