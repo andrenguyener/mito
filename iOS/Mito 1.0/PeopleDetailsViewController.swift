@@ -87,7 +87,7 @@ class PeopleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
                         self.addFriendbtn.setTitleColor(UIColor(red:0.25, green:0.87, blue:0.49, alpha:1.0), for: .normal)
                     } else {
                         self.btnShopForFriend.isHidden = true
-                        self.btnShopForFriend.setTitle("Add friend", for: .normal)
+                        self.addFriendbtn.setTitle("Add friend", for: .normal)
                         self.addFriendbtn.setTitleColor(UIColor.gray, for: .normal)
                     }
                 }
