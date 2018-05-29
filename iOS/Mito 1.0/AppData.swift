@@ -17,6 +17,7 @@ class AppData: NSObject {
     open var priceSum : Decimal = 0.00
     open var intCurrentUserID: Int = 0
     open var intCurrIndex: Int = -1
+    open var strProductQuery = ""
     
     open var personRecipient: Person = Person(firstName: "FName", lastName: "LName", email: "", avatar: "dd", intUserID: 0, strUsername: "", intNumFriends: 0, dateRequested: Date.distantPast)
     open var strOrderMessage = "What's it for?"

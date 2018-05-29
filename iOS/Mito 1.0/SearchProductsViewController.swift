@@ -19,7 +19,6 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
     
     var appdata = AppData.shared
     var intPageNumber = 1
-    var strProductQuery = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +30,7 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         productTableView.rowHeight = 106
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
-        searchBar.text = strProductQuery
+        searchBar.text = appdata.strProductQuery
         spinnerProductSearch.isHidden = true
         let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
         var strPhotoUrl = data["profileImageString"] as! String
@@ -68,14 +67,14 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
             spinnerProductSearch.isHidden = false
             spinnerProductSearch.startAnimating()
             //            swirlSearchImg.isHidden = true
-            strProductQuery = ""
-            strProductQuery = searchBar.text!
+            appdata.strProductQuery = ""
+            appdata.strProductQuery = searchBar.text!
             fnLoadEbayProductData(strCodedSearchQuery: searchBar.text!.replacingOccurrences(of: " ", with: "%20"))
             
         } else {
-            strProductQuery = searchBar.text!.replacingOccurrences(of: " ", with: "")
+            appdata.strProductQuery = searchBar.text!.replacingOccurrences(of: " ", with: "")
             searchBar.text! = ""
-            strProductQuery = "Amazon"
+            appdata.strProductQuery = "Amazon"
             searchBar.text = "Amazon"
         }
         searchBar.resignFirstResponder()
