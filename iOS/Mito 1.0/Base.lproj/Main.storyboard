@@ -256,7 +256,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="CC6-PU-fKO">
-                                <rect key="frame" x="20" y="84" width="335" height="133.5"/>
+                                <rect key="frame" x="20" y="40" width="335" height="133.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lyj-rC-s4x">
                                         <rect key="frame" x="117.5" y="0.0" width="100" height="100"/>
@@ -274,7 +274,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xYb-A4-VIe">
-                                <rect key="frame" x="20" y="237.5" width="335" height="170"/>
+                                <rect key="frame" x="20" y="193.5" width="335" height="170"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2np-NQ-dZH">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="90"/>
@@ -2479,8 +2479,8 @@ If you have any questions about these Terms, please contact us at projectmitotea
         <segue reference="jFg-kD-bop"/>
         <segue reference="4Df-8F-JjS"/>
         <segue reference="5va-cB-XlO"/>
-        <segue reference="4aV-H5-zth"/>
+        <segue reference="cI7-Td-TzM"/>
         <segue reference="GdB-Tr-zhu"/>
-        <segue reference="M0P-M1-1OC"/>
+        <segue reference="QLb-Rf-ueb"/>
     </inferredMetricsTieBreakers>
 </document>

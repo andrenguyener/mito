@@ -38,7 +38,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="jms-jt-aDl" userLabel="UsernamePassword">
                                 <rect key="frame" x="20.5" y="254.5" width="334.5" height="158"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="39o-Wv-VpO">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username/Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="39o-Wv-VpO">
                                         <rect key="frame" x="0.0" y="0.0" width="334.5" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="jmU-Nm-PfK"/>
@@ -811,7 +811,7 @@
         <image name="mitodesignblack.png" width="2000" height="1173"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="NBd-3z-iqs"/>
-        <segue reference="Fma-AT-nbz"/>
+        <segue reference="Tk8-BD-Yxk"/>
+        <segue reference="cTu-G9-fQe"/>
     </inferredMetricsTieBreakers>
 </document>
