@@ -604,7 +604,7 @@
                                                     <constraint firstItem="wBL-fs-O8e" firstAttribute="leading" secondItem="CiJ-B0-TcD" secondAttribute="leading" id="8XW-HD-n9T"/>
                                                 </constraints>
                                             </stackView>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="2" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FtS-QK-BUu" userLabel="Payment tblView">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="2" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FtS-QK-BUu" userLabel="Payment tblView">
                                                 <rect key="frame" x="20" y="265" width="335" height="160"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -697,6 +697,10 @@
                         <outlet property="o_tblviewOrderSummary" destination="7GW-bc-0mU" id="dRU-ro-kYb"/>
                         <outlet property="o_tblviewPaymentInfo" destination="FtS-QK-BUu" id="yB4-ec-s5K"/>
                         <segue destination="ll8-cJ-8yB" kind="show" identifier="checkoutFinish" id="XMj-eO-hpz"/>
+                        <segue destination="jmz-bN-xaL" kind="show" identifier="segOrderToChoosePerson" id="wgc-xo-5GA"/>
+                        <segue destination="CbO-zi-xvJ" kind="show" identifier="segGoBackChooseRecipient" id="Fc0-av-GMW"/>
+                        <segue destination="6OD-c0-snC" kind="show" identifier="segGoBackAndChoosePayment" id="sxX-Ib-Oca"/>
+                        <segue destination="y1B-fc-fA5" kind="show" identifier="segGoBackChangeAddress" id="uUW-z7-eTV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4uv-M5-cjJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1141,8 +1145,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Jjr-wW-Hse"/>
-        <segue reference="D79-aK-l5e"/>
-        <segue reference="G0C-Hd-PoN"/>
+        <segue reference="wgc-xo-5GA"/>
+        <segue reference="uUW-z7-eTV"/>
+        <segue reference="sxX-Ib-Oca"/>
         <segue reference="MjP-Xg-3Ou"/>
     </inferredMetricsTieBreakers>
 </document>
