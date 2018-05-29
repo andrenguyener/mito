@@ -131,6 +131,7 @@ type userID struct {
 	UserID    int           `json:"userIdOut"`
 	EventType string        `json:"type"`
 	EventData []interface{} `json:"data"`
+	EventEbay string        `json:"dataEbay"`
 }
 
 func (n *Notifier) start() {

@@ -150,7 +150,7 @@ function ebayLoop(sql, req) {
                 .then((token) => {
                     const data = {
                         type: 'ebay-token',
-                        data: token
+                        dataEbay: token
                     };
                     sendToMQ(req, data);
                     console.log("EBAY TOKEN: " + token);
@@ -222,7 +222,7 @@ function ebayLoop(sql, req) {
         app.set('qName', qName);
 
 
-        var ebayTokenLoop = setInterval(function () { ebayLoop(sql, app.request); }, 60000);
+        var ebayTokenLoop = setInterval(function () { ebayLoop(sql, app.request); }, 6000000);
 
         // Initialize table stores.
         let addressStore = new AddressStore(sql);
