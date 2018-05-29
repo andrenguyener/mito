@@ -418,7 +418,7 @@ class AppData: NSObject {
 //    }
     
     open func fnDisplayImage(strImageURL: String, img: UIImageView, boolCircle: Bool) {
-        if strImageURL.contains("https://") {
+        if strImageURL.contains("http://") || strImageURL.contains("https://"){
             Alamofire.request(strImageURL).responseImage(completionHandler: { (response) in
                 print(response)
                 if var image = response.result.value {
