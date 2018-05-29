@@ -24,7 +24,14 @@ class ChooseFriendViewController: UIViewController, UITableViewDelegate, UITable
         searchBar.delegate = self
         appdata.fnLoadFriendsAndAllUsers(tableview: tblviewPeople)
         self.navigationItem.title = "Choose Friend"
-        searchBar.placeholder = "Search for a friend"
+        searchBar.placeholder = "Choose friend"
+    }
+    
+    // overrides next screen's back button title
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let backItem = UIBarButtonItem()
+        backItem.title = "Back"
+        navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

@@ -189,10 +189,14 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
     }
+
     
     @IBAction func btnGoToEditCheckout(_ sender: Any) {
         boolSender = true
         performSegue(withIdentifier: "segCartToChooseRecipient", sender: self)
+        let backItem = UIBarButtonItem()
+        backItem.title = "Back"
+        navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
     }
     
     @IBOutlet weak var lblNotifyYouMessage: UILabel!
@@ -235,6 +239,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         appdata.arrProductSearchResults.removeAll()
         performSegue(withIdentifier: "checkoutComplete", sender: self)
     }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "cartToHome" {

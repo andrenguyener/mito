@@ -18,12 +18,19 @@ class ChoosePaymentViewController: UIViewController, UITableViewDataSource, UITa
         super.viewDidLoad()
         tblviewPaymentOptions.delegate = self
         tblviewPaymentOptions.dataSource = self
-        self.navigationItem.title = "Payment"
+        self.navigationItem.title = "Payment Method"
         let nib = UINib(nibName: "PaymentInfoTableViewCell", bundle: nil)
         tblviewPaymentOptions.register(nib, forCellReuseIdentifier: "PaymentInfoCell")
         let nib2 = UINib(nibName: "AddAddressTableViewCell", bundle: nil)
         tblviewPaymentOptions.register(nib2, forCellReuseIdentifier: "AddNewAddressCell")
         appdata.fnViewPaymentMethods(tblview: tblviewPaymentOptions)
+    }
+    
+    // overrides next screen's back button title
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let backItem = UIBarButtonItem()
+        backItem.title = "Back"
+        navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
     }
     
     override func viewWillAppear(_ animated: Bool) {

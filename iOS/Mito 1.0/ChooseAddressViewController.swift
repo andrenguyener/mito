@@ -32,6 +32,12 @@ class ChooseAddressViewController: UIViewController, UITableViewDataSource, UITa
         let nibAddNewAddress = UINib(nibName: "AddAddressTableViewCell", bundle: nil)
         tblviewAddress.register(nibAddNewAddress, forCellReuseIdentifier: "AddNewAddressCell")
     }
+    // overrides next screen's back button title
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let backItem = UIBarButtonItem()
+        backItem.title = "Back"
+        navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
+    }
     
     func fnGoogleChooseAddress() {
         let center = CLLocationCoordinate2D(latitude: 37.788204, longitude: -122.411937)

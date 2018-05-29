@@ -83,6 +83,13 @@ class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableV
         appdata.fnDisplayImage(strImageURL: appdata.personRecipient.avatar, img: o_imgRecipient, boolCircle: true)
     }
     
+    // overrides next screen's back button title
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let backItem = UIBarButtonItem()
+        backItem.title = "Back"
+        navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
+    }
+    
     func fnGetCartSubTotal() {
         appdata.intNumItems = 0
         appdata.priceSum = 0.0
