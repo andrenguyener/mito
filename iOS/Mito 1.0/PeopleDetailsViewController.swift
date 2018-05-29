@@ -37,7 +37,7 @@ class PeopleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
     @IBAction func btnShopNowForFriend(_ sender: Any) {
         appdata.personRecipient = appdata.personToView
         performSegue(withIdentifier: "segShopNowForFriend", sender: self)
-        self.tabBarController?.selectedIndex = 4
+        self.tabBarController?.selectedIndex = 2
     }
     
     func loadPersonData() {
@@ -130,22 +130,16 @@ class PeopleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
-    @IBAction func backButton(_ sender: Any) {
-        performSegue(withIdentifier: "segPeopleDetailsToSearchView", sender: self)
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segPeopleDetailsToSearchView" {
-            let tabBarController = segue.destination as! UITabBarController
-            tabBarController.selectedIndex = 1
-        } else if segue.identifier == "searchToMitoProfile" {
+        if segue.identifier == "searchToMitoProfile" {
             let backItem = UIBarButtonItem()
             backItem.title = "Search People"
             navigationItem.backBarButtonItem = backItem
-        } else if segue.identifier == "segShopNowForFriend" {
-            let tabBarController = segue.destination as! UITabBarController
-            tabBarController.selectedIndex = 2
         }
+//        } else if segue.identifier == "segShopNowForFriend" {
+//            let tabBarController = segue.destination as! UITabBarController
+//            tabBarController.selectedIndex = 2
+//        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -155,17 +149,7 @@ class PeopleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCopyCell", for: indexPath) as! FeedCopyTableViewCell
-//        let cell = Bundle.main.loadNibNamed("HomeTableViewCell", owner: self, options: nil)?.first as! HomeTableViewCell
         let feedItemObj = appdata.arrMitoProfileFeedItems[indexPath.row]
-//        Alamofire.request(feedItemObj.photoSenderUrl).responseImage(completionHandler: { (response) in
-//            print(response)
-//            if let image = response.result.value {
-//                let circularImage = image.af_imageRoundedIntoCircle()
-//                DispatchQueue.main.async {
-//                    cell.img.image = circularImage
-//                }
-//            }
-//        })
         var strSender = "\(feedItemObj.strSenderFName) \(feedItemObj.strSenderLName)"
         var strRecipient = "\(feedItemObj.strRecipientFName) \(feedItemObj.strRecipientLName)"
         if feedItemObj.intSenderId == appdata.intCurrentUserID {
