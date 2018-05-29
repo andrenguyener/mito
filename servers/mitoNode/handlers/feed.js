@@ -51,7 +51,7 @@ const FeedHandler = (feedStore) => {
                 }
             })
     });
-    
+
     // Get all orders that relevant friends has sent or received
     router.get('/v1/feed/friends', (req, res) => {
         const userJSON = req.get('X-User');

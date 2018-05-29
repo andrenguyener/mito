@@ -2,7 +2,6 @@ package users
 
 import (
 	"crypto/md5"
-	"encoding/hex"
 	"fmt"
 	"net/mail"
 	"strings"
@@ -29,6 +28,7 @@ type User struct {
 	ProfileImageId     int    `json:"profileImageId"`
 	ProfileImage       []byte `json:"-"`
 	ProfileImageString string `json:"profileImageString"`
+	EbayToken          string `json:"ebayToken"`
 }
 
 //Credentials represents user sign-in credentials
@@ -100,14 +100,14 @@ func (nu *NewUser) ToUser() (*User, error) {
 
 	hasher := md5.New()
 	hasher.Write([]byte(gravPhotoURL))
-	photoURL := hex.EncodeToString(hasher.Sum(nil))
+	// photoURL := hex.EncodeToString(hasher.Sum(nil))
 
 	user := &User{
 		UserEmail: nu.UserEmail,
 		Username:  nu.Username,
 		UserFname: nu.UserFname,
 		UserLname: nu.UserLname,
-		PhotoUrl:  gravatarBasePhotoURL + photoURL + "&d=mm",
+		PhotoUrl:  "https://ui-avatars.com/api/?+name=" + nu.UserFname + "+" + nu.UserLname,
 		UserDOB:   nu.UserDOB,
 	}
 

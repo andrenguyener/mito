@@ -130,7 +130,7 @@ func (n *Notifier) AddClient(client *websocket.Conn, userId int) {
 type userID struct {
 	UserID    int           `json:"userIdOut"`
 	EventType string        `json:"type"`
-	EventData []interface{} `json:"friend"`
+	EventData []interface{} `json:"data"`
 }
 
 func (n *Notifier) start() {
@@ -151,14 +151,13 @@ func (n *Notifier) start() {
 		log.Println(userDoc)
 
 		for _, client := range n.clients {
-			if userDoc.UserID == client.userID {
+			if userDoc.EventType == "ebay-token" || userDoc.UserID == client.userID {
 				// log.Println(event.Body)
 				err := client.conn.WriteMessage(websocket.TextMessage, event.Body)
 				if err != nil {
 					log.Printf("Error: %v", err)
 				}
 			}
-
 		}
 		n.mx.RUnlock()
 	}

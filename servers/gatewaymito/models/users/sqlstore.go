@@ -98,7 +98,7 @@ func (ss *SqlStore) GetByEmail(email string) (*User, error) {
 
 	defer rows.Close()
 	for rows.Next() {
-		if err := rows.Scan(&user.UserId, &user.UserFname, &user.UserLname, &user.UserEmail, &user.PasswordHash, &user.PhotoUrl, &user.UserDOB, &user.Username, &user.NumFriends, &user.IsDelete, &user.ProfileImageId, &user.ProfileImage); err != nil {
+		if err := rows.Scan(&user.UserId, &user.UserFname, &user.UserLname, &user.UserEmail, &user.PasswordHash, &user.PhotoUrl, &user.UserDOB, &user.Username, &user.NumFriends, &user.IsDelete, &user.ProfileImageId, &user.ProfileImage, &user.EbayToken); err != nil {
 			log.Fatalf("Error scanning row %v", err)
 		}
 
@@ -126,7 +126,7 @@ func (ss *SqlStore) GetByUserName(username string) (*User, error) {
 
 	defer rows.Close()
 	for rows.Next() {
-		if err := rows.Scan(&user.UserId, &user.UserFname, &user.UserLname, &user.UserEmail, &user.PhotoUrl, &user.UserDOB, &user.Username); err != nil {
+		if err := rows.Scan(&user.UserId, &user.UserFname, &user.UserLname, &user.UserEmail, &user.PasswordHash, &user.PhotoUrl, &user.UserDOB, &user.Username, &user.NumFriends, &user.IsDelete, &user.ProfileImageId, &user.ProfileImage, &user.EbayToken); err != nil {
 			log.Fatalf("Error scanning row %v", err)
 		}
 		// if err := json.Unmarshal([]byte(userString), user); err != nil {
@@ -148,7 +148,7 @@ func (ss *SqlStore) Insert(newUser *NewUser) (*User, error) {
 	if err != nil {
 		return nil, fmt.Errorf("Error converting new user to user %s", err)
 	}
-	var newUserId int64
+	// var newUserId int64
 	_, err = ss.database.Exec("uspcInsertUser",
 		sql.Named("UserFname", user.UserFname),
 		sql.Named("UserLname", user.UserLname),
@@ -156,16 +156,79 @@ func (ss *SqlStore) Insert(newUser *NewUser) (*User, error) {
 		sql.Named("PasswordHash", user.PasswordHash),
 		sql.Named("PhotoUrl", user.PhotoUrl),
 		sql.Named("UserDOB", user.UserDOB),
-		sql.Named("Username", user.Username),
-		sql.Named("RetNewUserId", sql.Out{Dest: &newUserId}))
+		sql.Named("Username", user.Username))
 	if err != nil {
 		return nil, fmt.Errorf("Error inserting user %s", err)
 	}
-	// fmt.Println(result)
-	user.UserId = int(newUserId)
-	// fmt.Println(user)
 
-	return user, err
+	returnUser := &User{}
+	tsql := fmt.Sprintf("EXEC uspcGetUserByUserEmail @Useremail;")
+
+	rows, err := ss.database.Query(
+		tsql,
+		sql.Named("Useremail", user.UserEmail))
+	if err != nil {
+		return nil, ErrUserNotFound
+	}
+
+	defer rows.Close()
+	for rows.Next() {
+		if err := rows.Scan(&returnUser.UserId,
+			&returnUser.UserFname,
+			&returnUser.UserLname,
+			&returnUser.UserEmail,
+			&returnUser.PasswordHash,
+			&returnUser.PhotoUrl,
+			&returnUser.UserDOB,
+			&returnUser.Username,
+			&returnUser.NumFriends,
+			&returnUser.IsDelete,
+			&returnUser.ProfileImageId,
+			&returnUser.ProfileImage,
+			&returnUser.EbayToken); err != nil {
+			log.Fatalf("Error scanning row %v", err)
+		}
+
+	}
+	if err := rows.Err(); err != nil {
+		log.Fatalf("Error in row %v", err)
+	}
+	// user.ProfileImageString = hex.EncodeToString(user.ProfileImage)
+	returnUser.ProfileImageString = base64.StdEncoding.EncodeToString(returnUser.ProfileImage)
+	return returnUser, nil
+
+	// user := &User{}
+	// userToInsert, err := newUser.ToUser()
+
+	// tsql := fmt.Sprintf("EXEC uspcInsertUser @UserFname, @UserLname, @UserEmail, @PasswordHash, @PhotoUrl, @UserDOB, @Username;")
+
+	// rows, err := ss.database.Query(
+	// 	tsql,
+	// 	sql.Named("UserFname", "new"),
+	// 	sql.Named("UserLname", "user"),
+	// 	sql.Named("UserEmail", "newuser3@gmail.com"),
+	// 	sql.Named("PasswordHash", []byte("hello world")),
+	// 	sql.Named("PhotoUrl", "gravatar.com"),
+	// 	sql.Named("UserDOB", "01/01/2000"),
+	// 	sql.Named("Username", "newuser3"))
+	// if err != nil {
+	// 	fmt.Println(err)
+	// 	return nil, ErrUserNotFound
+	// }
+
+	// defer rows.Close()
+	// for rows.Next() {
+	// 	if err := rows.Scan(&user.UserId, &user.UserFname, &user.UserLname, &user.UserEmail, &user.PasswordHash, &user.PhotoUrl, &user.UserDOB, &user.Username, &user.NumFriends, &user.IsDelete, &user.ProfileImageId, &user.ProfileImage, &user.EbayToken); err != nil {
+	// 		log.Fatalf("Error scanning row %v", err)
+	// 	}
+
+	// }
+	// if err := rows.Err(); err != nil {
+	// 	log.Fatalf("Error in row %v", err)
+	// }
+
+	// user.ProfileImageString = base64.StdEncoding.EncodeToString(user.ProfileImage)
+	// return user, nil
 }
 
 //Update applies passwordUpdates to the given user ID
