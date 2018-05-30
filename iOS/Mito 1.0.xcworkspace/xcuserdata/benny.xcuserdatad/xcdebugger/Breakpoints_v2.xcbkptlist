@@ -280,12 +280,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mito 1.0/SearchProductsViewController.swift"
-            timestampString = "549356842.196412"
+            timestampString = "549360193.511735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
-            landmarkName = "searchBarSearchButtonClicked(_:)"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
+            landmarkName = "viewWillAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -296,13 +296,77 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mito 1.0/SearchProductsViewController.swift"
-            timestampString = "549356842.1967551"
+            timestampString = "549360193.5123121"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "51"
             endingLineNumber = "51"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mito 1.0/ChooseAddressViewController.swift"
+            timestampString = "549359573.837271"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "fnGoogleChooseAddress()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mito 1.0/ChooseAddressViewController.swift"
+            timestampString = "549359575.266345"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "fnGoogleChooseAddress()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__ObjC.GMSPlace&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Mito_1_0.ChooseAddressViewController.fnGoogleChooseAddress() -&gt; ()"
+                  moduleName = "Mito 1.0"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/benny/Desktop/mito/iOS/Mito%201.0/ChooseAddressViewController.swift"
+                  timestampString = "549359881.426807"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "65"
+                  endingLineNumber = "65"
+                  offsetFromSymbolStart = "1336">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__ObjC.GMSPlace&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Mito_1_0.ChooseAddressViewController.fnGoogleChooseAddress() -&gt; ()"
+                  moduleName = "Mito 1.0"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/benny/Desktop/mito/iOS/Mito%201.0/ChooseAddressViewController.swift"
+                  timestampString = "549359881.429405"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "65"
+                  endingLineNumber = "65"
+                  offsetFromSymbolStart = "4536">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

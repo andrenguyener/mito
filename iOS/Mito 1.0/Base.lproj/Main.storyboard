@@ -2338,7 +2338,6 @@ If you have any questions about these Terms, please contact us at projectmitotea
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vA2-LZ-VIp">
                                                 <rect key="frame" x="305" y="0.0" width="40" height="40"/>
-                                                <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="17"/>
                                                 <state key="normal" title="X">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2503,11 +2502,6 @@ If you have any questions about these Terms, please contact us at projectmitotea
                             <constraint firstItem="VM1-7e-wQO" firstAttribute="leading" secondItem="aw9-kv-lUG" secondAttribute="leading" constant="105" id="yQq-9y-mho"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aw9-kv-lUG"/>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="VM1-7e-wQO"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="0G6-7s-OlP"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
