@@ -156,6 +156,10 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     // Opening Login Page
     @IBAction func btnLoginPressed(_ sender: Any) {
+        fnLoginPressed()
+    }
+    
+    func fnLoginPressed() {
         let parameters: Parameters = [
             "usercred": username.text!,
             "password": password.text!
@@ -196,7 +200,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                 print(error.localizedDescription)
             }
         }
-
     }
     
     @IBAction func btnSignUpPressed(_ sender: Any) {
@@ -406,18 +409,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
     
     override func viewDidLoad() {
-//        if let data = UserDefaults.standard.object(forKey: "UserInfo") {
-//            let dict = data as! NSDictionary
-//            if dict["userId"] != nil {
-//                print(dict["userId"])
-//                self.performSegue(withIdentifier: "login", sender: self)
-//            }
-//        }
-//        let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
-//        print("Current User ID: \(data["userId"] as! Int)".")
-//        if data["userId"] != nil {
-//            self.performSegue(withIdentifier: "login", sender: self)
-//        }
         if monthPicker != nil {
             monthPicker.isHidden = true
             monthPicker.delegate = self
@@ -498,6 +489,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             print("next yo")
         } else {
             textField.resignFirstResponder()
+            fnLoginPressed()
         }
         return true
     }

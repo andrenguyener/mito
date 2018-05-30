@@ -196,8 +196,14 @@ class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableV
             let last4 = String(appdata.strCardNumber.suffix(4))
             if indexPath.row == 0 {
                 cell.lblSubtitle.text = "Visa ending in \(last4)"
+            } else if appdata.arrCurrUserAddresses.count > 0 && appdata.arrCurrUserAddresses[appdata.intAddressIdx].strStreetAddress2 != nil && (appdata.arrCurrUserAddresses[appdata.intAddressIdx].strStreetAddress2?.count)! > 0 {
+                let address = appdata.arrCurrUserAddresses[appdata.intAddressIdx]
+                cell.lblSubtitle.text = "\(address.strAddressAlias) \(address.strStreetAddress1!) \(address.strStreetAddress2!), \(address.strCityName!), \(address.strStateName!) \(address.strZipCode!)"
+            } else if appdata.arrCurrUserAddresses.count > 0 {
+                let address = appdata.arrCurrUserAddresses[appdata.intAddressIdx]
+                cell.lblSubtitle.text = "\(address.strStreetAddress1!), \(address.strCityName!), \(address.strStateName!) \(address.strZipCode!)"
             } else {
-                cell.lblSubtitle.text = "4044 Howe Rd Seattle, WA 98105"
+                cell.lblSubtitle.text = "4555 Roosevelt Way NE, Seattle, WA 98105"
             }
             return cell
         } else {

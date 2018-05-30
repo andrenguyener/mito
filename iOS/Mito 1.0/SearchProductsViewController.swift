@@ -71,12 +71,13 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
             appdata.strProductQuery = searchBar.text!
             fnLoadEbayProductData(strCodedSearchQuery: searchBar.text!.replacingOccurrences(of: " ", with: "%20"))
             
-        } else {
-            appdata.strProductQuery = searchBar.text!.replacingOccurrences(of: " ", with: "")
-            searchBar.text! = ""
-            appdata.strProductQuery = "Amazon"
-            searchBar.text = "Amazon"
         }
+//        else {
+//            appdata.strProductQuery = searchBar.text!.replacingOccurrences(of: " ", with: "")
+//            searchBar.text! = ""
+//            appdata.strProductQuery = "Amazon"
+//            searchBar.text = "Amazon"
+//        }
         searchBar.resignFirstResponder()
     }
     
@@ -91,6 +92,8 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(UserDefaults.standard.object(forKey: "strEbayToken") as! String)"
         ]
+        print("Header")
+        print(headers["Authorization"])
         Alamofire.request(urlLoadProductDetails!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success:
@@ -145,7 +148,11 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
                 if error.localizedDescription == "The request timed out." {
                     let alert = self.appdata.fnDisplayAlert(title: "Error", message: "Amazon services are down blame Jeff Bezos")
                     self.present(alert, animated: true, completion: nil)
+                } else if error.localizedDescription == "Response status code was unacceptable: 401." {
+                    let alert = self.appdata.fnDisplayAlert(title: "Error", message: "You probably have an invalid access token")
+                    self.present(alert, animated: true, completion: nil)
                 }
+                print(error)
                 DispatchQueue.main.async {
                     self.spinnerProductSearch.stopAnimating()
                     self.spinnerProductSearch.isHidden = true
