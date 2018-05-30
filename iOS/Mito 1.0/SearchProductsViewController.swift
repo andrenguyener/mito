@@ -32,6 +32,11 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         searchBar.returnKeyType = UIReturnKeyType.done
         searchBar.text = appdata.strProductQuery
         spinnerProductSearch.isHidden = true
+        if appdata.strProductQuery.replacingOccurrences(of: " ", with: "").count > 0 {
+            swirlSearchImg.isHidden = true
+        } else {
+            swirlSearchImg.isHidden = false
+        }
         let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
         var strPhotoUrl = data["profileImageString"] as! String
         if strPhotoUrl.count < 100 {
