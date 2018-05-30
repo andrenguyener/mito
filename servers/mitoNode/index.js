@@ -152,7 +152,7 @@ function ebayLoop(sql, req) {
                 .then((token) => {
                     const data = {
                         type: 'ebay-token',
-                        dataEbay: token
+                        dataEbay: `Bearer ${token}`
                     };
                     sendToMQ(req, data);
                     console.log("EBAY TOKEN: " + token);
@@ -197,7 +197,8 @@ function ebayLoop(sql, req) {
         // it available from req.body.
         app.use(express.json());
 
-
+        // app.set('view engine', 'pug');
+        // app.set('views', './views');
         // All of the following APIs require the user to be authenticated.
         // If the user is not authenticated,
         // respond immediately with the status code 401 (Unauthorized).
