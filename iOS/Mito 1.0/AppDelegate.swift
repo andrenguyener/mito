@@ -111,9 +111,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WebSocketDelegate {
         print("Received data: \(data.count)")
     }
     
-
     var window: UIWindow?
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

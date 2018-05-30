@@ -158,6 +158,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func switchTab(_ sender: UISegmentedControl) {
+        tableView.isScrollEnabled = false
         if segmentChooser.selectedSegmentIndex == 1 {
             if appdata.arrMyFeedItems.count == 0 {
                 viewFeedContent.isHidden = true
@@ -241,26 +242,43 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         var feedItemObj = FeedItem(strDate: "", photoSenderUrl: "", strMessage: "", strRecipientFName: "", strRecipientLName: "", strSenderFName: "", strSenderLName: "", intRecipientId: 0, intSenderId: 0, strPhotoBytes: "")
         if segmentChooser.selectedSegmentIndex == 0 {
             feedItemObj = appdata.arrFriendsFeedItems[indexPath.row]
-        } else {
+            if feedItemObj.strPhotoBytes != nil && feedItemObj.strPhotoBytes != "AAP4AHUXf+Y=" {
+                appdata.fnDisplayImage(strImageURL: feedItemObj.strPhotoBytes!, img: cell.imgProfile, boolCircle: true)
+            } else {
+                appdata.fnDisplayImage(strImageURL: feedItemObj.photoSenderUrl, img: cell.imgProfile, boolCircle: true)
+            }
+            var strSender = "\(feedItemObj.strSenderFName) \(feedItemObj.strSenderLName)"
+            var strRecipient = "\(feedItemObj.strRecipientFName) \(feedItemObj.strRecipientLName)"
+            if feedItemObj.intSenderId == appdata.intCurrentUserID {
+                strSender = "You"
+            }
+            if feedItemObj.intRecipientId == appdata.intCurrentUserID {
+                strRecipient = "You"
+            }
+            cell.strWho.text = "\(strSender) sent \(strRecipient)"
+            cell.strDate.text = "\(appdata.fnUTCToLocal(date: feedItemObj.strDate))"
+            cell.strDescr.text = "\(feedItemObj.strMessage)"
+            cell.strDescr.numberOfLines = 2
+        } else if indexPath.row <= appdata.arrMyFeedItems.count {
             feedItemObj = appdata.arrMyFeedItems[indexPath.row]
+            if feedItemObj.strPhotoBytes != nil && feedItemObj.strPhotoBytes != "AAP4AHUXf+Y=" {
+                appdata.fnDisplayImage(strImageURL: feedItemObj.strPhotoBytes!, img: cell.imgProfile, boolCircle: true)
+            } else {
+                appdata.fnDisplayImage(strImageURL: feedItemObj.photoSenderUrl, img: cell.imgProfile, boolCircle: true)
+            }
+            var strSender = "\(feedItemObj.strSenderFName) \(feedItemObj.strSenderLName)"
+            var strRecipient = "\(feedItemObj.strRecipientFName) \(feedItemObj.strRecipientLName)"
+            if feedItemObj.intSenderId == appdata.intCurrentUserID {
+                strSender = "You"
+            }
+            if feedItemObj.intRecipientId == appdata.intCurrentUserID {
+                strRecipient = "You"
+            }
+            cell.strWho.text = "\(strSender) sent \(strRecipient)"
+            cell.strDate.text = "\(appdata.fnUTCToLocal(date: feedItemObj.strDate))"
+            cell.strDescr.text = "\(feedItemObj.strMessage)"
+            cell.strDescr.numberOfLines = 2
         }
-        if feedItemObj.strPhotoBytes != nil && feedItemObj.strPhotoBytes != "AAP4AHUXf+Y=" {
-            appdata.fnDisplayImage(strImageURL: feedItemObj.strPhotoBytes!, img: cell.imgProfile, boolCircle: true)
-        } else {
-            appdata.fnDisplayImage(strImageURL: feedItemObj.photoSenderUrl, img: cell.imgProfile, boolCircle: true)
-        }
-        var strSender = "\(feedItemObj.strSenderFName) \(feedItemObj.strSenderLName)"
-        var strRecipient = "\(feedItemObj.strRecipientFName) \(feedItemObj.strRecipientLName)"
-        if feedItemObj.intSenderId == appdata.intCurrentUserID {
-            strSender = "You"
-        }
-        if feedItemObj.intRecipientId == appdata.intCurrentUserID {
-            strRecipient = "You"
-        }
-        cell.strWho.text = "\(strSender) sent \(strRecipient)"
-        cell.strDate.text = "\(appdata.fnUTCToLocal(date: feedItemObj.strDate))"
-        cell.strDescr.text = "\(feedItemObj.strMessage)"
-        cell.strDescr.numberOfLines = 2
         return cell
     }
 

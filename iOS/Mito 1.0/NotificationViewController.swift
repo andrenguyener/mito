@@ -331,7 +331,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         if let objPackage = objNotification as? Package {
             let strDate = UTCToLocal(date: objPackage.strOrderDate)
             appdata.fnDisplayImage(strImageURL: objPackage.strPhotoUrl, img: cell.imgPerson, boolCircle: true)
-            cell.strFirstNameLastName.text = "@\(objPackage.strUserFName) has sent you a package request"
+            cell.strFirstNameLastName.text = "\(objPackage.strUserFName) has sent you a package request"
             cell.strUsername.text = strDate
             cell.btnConfirm.tag = indexPath.row
             cell.btnConfirm.addTarget(self, action: #selector(self.btnAccept(_:)), for: .touchUpInside)

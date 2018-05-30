@@ -177,6 +177,7 @@ class AppData: NSObject {
                         tblview.isHidden = false
                     }
                     spinner.stopAnimating()
+                    tblview.isScrollEnabled = true
                     tblview.reloadData()
                     refresherNotification.endRefreshing()
                 }

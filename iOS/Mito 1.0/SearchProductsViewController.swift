@@ -246,9 +246,7 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         let arrTemp = dictObj[strAttribute] as! NSArray
         return arrTemp[0] as! String
     }
-    
-    
-    
+        
     // Constraints for "Shopping for" text
     @IBOutlet weak var shoppingForLabel: UILabel!
     
