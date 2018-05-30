@@ -33,7 +33,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         tblviewNotification.delegate = self
         tblviewNotification.dataSource = self
         tblviewNotification.rowHeight = 100
-        self.fnAddRefreshersNotificationsAndPackages()
+//        self.fnAddRefreshersNotificationsAndPackages()
         self.fnGetPendingFriendRequests()
         self.fnGetPendingPackages()
         let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
@@ -76,8 +76,8 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         appdata.arrNotifications.removeAll()
         appdata.arrPendingFriends.removeAll()
         appdata.arrCurrUserPackages.removeAll()
-        fnGetPendingFriendRequests()
-        fnGetPendingPackages()
+        self.fnGetPendingFriendRequests()
+        self.fnGetPendingPackages()
     }
     
     func fnAcceptOrDeclinePackage(strPackageAction: String, senderId: Int, orderId: Int, shippingAddressId: Int) {
