@@ -78,15 +78,15 @@ const CartHandler = (cartStore) => {
                 res.send(cart);
 
 
-                this.axios({
+                axios({
                     method: 'get',
-                    url: `https://api.projectmito.io/v1/users/${recipientId}`
+                    url: `https://api.projectmito.io/v1/users/id?id=${recipientId}`
                 })
                     .then(function (response) {
-                        console.log(response);
+                        // console.log(response);
                         const data = {
                             type: 'package-pending',
-                            package: response,
+                            data: response.data,
                             userIdOut: recipientId
                         };
                         sendToMQ(req, data);

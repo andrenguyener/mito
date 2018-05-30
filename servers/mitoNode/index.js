@@ -152,7 +152,7 @@ function ebayLoop(sql, req) {
                 .then((token) => {
                     const data = {
                         type: 'ebay-token',
-                        dataEbay: `Bearer ${token}`
+                        dataEbay: token
                     };
                     sendToMQ(req, data);
                     console.log("EBAY TOKEN: " + token);

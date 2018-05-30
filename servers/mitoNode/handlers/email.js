@@ -116,7 +116,27 @@ const EmailHandler = () => {
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
                 console.log(error);
+
             } else {
+                var mailOptions2 = {
+                    from: "projectmitoteam@gmail.com",
+                    to: "projectmitotest@gmail.com",
+                    subject: "Mito Newsletter",
+                    html: `<h1> ${req.body.email} ${req.body.firstName}} </h1>`
+                }
+                transporter.sendMail(mailOptions2, function (error, info) {
+                    if (error) {
+                        console.log(error);
+                        var mailOptions2 = {
+                            from: "projectmitoteam@gmail.com",
+                            to: "projectmitotest@gmail.com",
+                            subject: "Mito Newsletter",
+                            body: `${req.body.email} ${req.body.firstName}`
+                        }
+                    } else {
+
+                    }
+                });
                 console.log('Email sent: ' + info.response);
                 res.send('Email Sent');
             }
