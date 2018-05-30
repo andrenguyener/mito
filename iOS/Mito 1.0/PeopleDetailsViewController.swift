@@ -36,6 +36,7 @@ class PeopleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
     
     @IBAction func btnShopNowForFriend(_ sender: Any) {
         appdata.personRecipient = appdata.personToView
+        appdata.boolShoppingForRecipient = true
         performSegue(withIdentifier: "segShopNowForFriend", sender: self)
         self.tabBarController?.selectedIndex = 2
     }
@@ -75,7 +76,6 @@ class PeopleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
             switch response.result {
             case .success:
                 if let dictionary = response.result.value {
-                    print(dictionary)
                     if dictionary == "Friend" {
                         self.addFriendbtn.setTitle("✓ Friends", for: .normal)
                         self.btnShopForFriend.isHidden = false
@@ -83,11 +83,12 @@ class PeopleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 //                        self.addFriendbtn.backgroundColor = UIColor.white
                         self.addFriendbtn.setTitleColor(UIColor(red:0.25, green:0.87, blue:0.49, alpha:1.0), for: .normal)
                     } else if dictionary == "Pending" {
-                        self.addFriendbtn.setTitle("Friend Request Sent", for: .normal)
+                        self.addFriendbtn.setTitle("Friend Pending", for: .normal)
                         self.addFriendbtn.setTitleColor(UIColor(red:0.25, green:0.87, blue:0.49, alpha:1.0), for: .normal)
+                        self.addFriendbtn.isEnabled = false
                     } else {
                         self.btnShopForFriend.isHidden = true
-                        self.btnShopForFriend.setTitle("Add friend", for: .normal)
+                        self.addFriendbtn.setTitle("Add friend", for: .normal)
                         self.addFriendbtn.setTitleColor(UIColor.gray, for: .normal)
                     }
                 }

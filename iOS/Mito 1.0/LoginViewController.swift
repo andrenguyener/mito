@@ -77,6 +77,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     var appdata = AppData.shared
     
     @IBAction func btnBirthdayPressed(_ sender: Any) {
+        view.endEditing(true) // resigns keyboard if visable
         if monthPicker.isHidden == true {
             monthPicker.isHidden = false
             viewCancelDone.isHidden = false
@@ -156,6 +157,10 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     // Opening Login Page
     @IBAction func btnLoginPressed(_ sender: Any) {
+        fnLoginPressed()
+    }
+    
+    func fnLoginPressed() {
         let parameters: Parameters = [
             "usercred": username.text!,
             "password": password.text!
@@ -168,8 +173,14 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                 let authHeader = response.response?.allHeaderFields["Authorization"] as! String
                 if !authHeader.isEmpty {
                     if let dictionary = response.result.value {
+                        let json = dictionary as! NSDictionary
                         UserDefaults.standard.set(dictionary, forKey: "UserInfo")
                         UserDefaults.standard.set(authHeader, forKey: "Authorization")
+                        if json["ebayToken"] != nil {
+                            let strToken = json["ebayToken"] as! String
+                            UserDefaults.standard.set(strToken, forKey: "strEbayToken")
+                            print(UserDefaults.standard.object(forKey: "strEbayToken"))
+                        }
                         if UserDefaults.standard.object(forKey: "UserInfo") != nil {
                             let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
                             print(data)
@@ -196,7 +207,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                 print(error.localizedDescription)
             }
         }
-
     }
     
     @IBAction func btnSignUpPressed(_ sender: Any) {
@@ -406,18 +416,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
     
     override func viewDidLoad() {
-//        if let data = UserDefaults.standard.object(forKey: "UserInfo") {
-//            let dict = data as! NSDictionary
-//            if dict["userId"] != nil {
-//                print(dict["userId"])
-//                self.performSegue(withIdentifier: "login", sender: self)
-//            }
-//        }
-//        let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
-//        print("Current User ID: \(data["userId"] as! Int)".")
-//        if data["userId"] != nil {
-//            self.performSegue(withIdentifier: "login", sender: self)
-//        }
         if monthPicker != nil {
             monthPicker.isHidden = true
             monthPicker.delegate = self
@@ -441,19 +439,20 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         
         NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-    
     }
+    
+//    func handleKeyboardShow(notification: Notification) {
+//        print("Keyboard will show")
+//    }
+//
+//    func handleKeyboardHide(notification: Notification) {
+//        print("Keyboard will hide")
+//    }
     
     @IBAction func fnSegAddAddressToSignUp(_ sender: Any) {
         performSegue(withIdentifier: "segAddressToSignUp", sender: self)
     }
     
-    
-    
-//    override func viewWillDisappear(_ animated: Bool) {
-//        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: self.view.window)
-//        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: self.view.window)
-//    }
     
     // add textfield as delegate of viewcontroller first
     // increment tags to delegate which uitextfield will be active after pressing return
@@ -469,11 +468,13 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             moveTextField(textField, moveDistance: -200, up: true)
             print("Hey i entered")
         }
-//        else if textField.tag > 0 && password != nil {
-//            moveTextField(textField, moveDistance: -50, up: true)
-//            print("Entering password")
-//            textField.returnKeyType = UIReturnKeyType.done
-//        }
+        // checks for last text field to put .go on return key
+        let nextTag = textField.tag + 1
+        print("checking next tag: \(nextTag)")
+        if (textField.superview?.viewWithTag(nextTag)) == nil {
+            print("im in")
+            textField.returnKeyType = UIReturnKeyType.go
+        }
     }
     
     @IBOutlet weak var userpassstack: UIStackView!
@@ -484,10 +485,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             moveTextField(textField, moveDistance: 200, up: true)
             print("hey i ended")
         }
-//        else if textField.tag > 0 && password != nil {
-//            moveTextField(textField, moveDistance: 50, up: true)
-//            print("Finished entering password")
-//        }
     }
     
     // Hide the keyboard when the return key pressed
@@ -498,6 +495,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             print("next yo")
         } else {
             textField.resignFirstResponder()
+            fnLoginPressed()
         }
         return true
     }

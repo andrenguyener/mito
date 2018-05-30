@@ -18,11 +18,14 @@ class AppData: NSObject {
     open var intCurrentUserID: Int = 0
     open var intCurrIndex: Int = -1
     open var strProductQuery = ""
+    open var intFeedIdx = 0
+    open var intSegmentIdx = 0
+    open var boolShoppingForRecipient = false
     
     open var personRecipient: Person = Person(firstName: "FName", lastName: "LName", email: "", avatar: "dd", intUserID: 0, strUsername: "", intNumFriends: 0, dateRequested: Date.distantPast)
     open var strOrderMessage = "What's it for?"
     open var strCardNumber = ""
-    open var address: Address = Address(intAddressID: 0, strAddressAlias: "Fake", strCityName: "", strStateName: "", strStreetAddress1: "", strStreetAddress2: "", strZipCode: "")
+    open var intAddressIdx: Int = 0
     
     open var currPackage: Package = Package(intGiftOption: 0, strOrderDate: "", intOrderID: 0, strOrderMessage: "", strPhotoUrl: "", intSenderID: 0, strUserFName: "", strUserLName: "")
     open let mainMitoColor = "41DD7C"
@@ -79,9 +82,6 @@ class AppData: NSObject {
             switch response.result {
             case .success:
                 print("Loaded My Activity")
-                if let dictionary = response.value {
-                    print(dictionary)
-                }
                 if let dictionary = response.data {
                     let decoder = JSONDecoder()
                     do {

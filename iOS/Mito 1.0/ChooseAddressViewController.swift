@@ -24,6 +24,7 @@ class ChooseAddressViewController: UIViewController, UITableViewDataSource, UITa
         tblviewAddress.delegate = self
         tblviewAddress.dataSource = self
         fnLoadCurrUserAddresses()
+        self.navigationController?.isNavigationBarHidden = false
         if boolSender {
              self.navigationItem.title = "Billing Address"
         } else {
@@ -34,9 +35,13 @@ class ChooseAddressViewController: UIViewController, UITableViewDataSource, UITa
     }
     // overrides next screen's back button title
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let backItem = UIBarButtonItem()
-        backItem.title = "Back"
-        navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
+//        if segue.identifier == "DirectAcceptPackage" {
+//
+//        } else {
+            let backItem = UIBarButtonItem()
+            backItem.title = "Back"
+            navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
+//        }
     }
     
     func fnGoogleChooseAddress() {
@@ -59,15 +64,26 @@ class ChooseAddressViewController: UIViewController, UITableViewDataSource, UITa
                     .joined(separator: "\n")
                 let arr: [String] = (arrInformation?.components(separatedBy: "\n"))!
                 print(arr)
-                let arrStateZIP = arr[2].components(separatedBy: " ")
                 
-                let strStreet = arr[0]
-                let strCity = arr[1]
-                let strState = arrStateZIP[0]
-                let intZIP = Int(arrStateZIP[1])!
+                var strStreet = ""
+                var strCity = ""
+                var strState = ""
+                var intZIP = 0
+                if arr.count > 3 {
+                    let arrStateZIP = arr[2].components(separatedBy: " ")
+                    strStreet = arr[0]
+                    strCity = arr[1]
+                    strState = arrStateZIP[0]
+                    intZIP = Int(arrStateZIP[1])!
+                } else {
+                    strCity = arr[0]
+                    let arrStateZIP = arr[1].components(separatedBy: " ")
+                    strState = arrStateZIP[0]
+                    intZIP = Int(arrStateZIP[1])!
+                }
                 
                 //1. Create the alert controller.
-                let alert = UIAlertController(title: "Nickname", message: "Enter a nickname (Optional)", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Nickname", message: "Enter an address nickname (Optional)", preferredStyle: .alert)
                 
                 //2. Add the text field. You can configure it however you need.
                 alert.addTextField { (textField) in
@@ -208,13 +224,13 @@ class ChooseAddressViewController: UIViewController, UITableViewDataSource, UITa
         if indexPath.row == appdata.arrCurrUserAddresses.count {
             fnGoogleChooseAddress()
         } else {
-            appdata.address = appdata.arrCurrUserAddresses[indexPath.row]
+            appdata.intAddressIdx = indexPath.row
             print(boolSender)
             if boolSender {
                 performSegue(withIdentifier: "segChooseBillingAddressToReviewOrder", sender: self)
             } else {
-                appdata.address = appdata.arrCurrUserAddresses[indexPath.row]
-                fnAcceptOrDeclinePackage(response: "Accepted", senderId: appdata.currPackage.intSenderID, orderId: appdata.currPackage.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[indexPath.row].intAddressID!)
+                let address = appdata.arrCurrUserAddresses[indexPath.row]
+                fnAcceptOrDeclinePackage(response: "Accepted", senderId: appdata.currPackage.intSenderID, orderId: appdata.currPackage.intOrderID, shippingAddressId: address.intAddressID!)
             }
         }
         tableView.deselectRow(at: indexPath, animated: true)
@@ -245,7 +261,8 @@ class ChooseAddressViewController: UIViewController, UITableViewDataSource, UITa
                         self.performSegue(withIdentifier: "CompleteChooseReceivingAddress", sender: self)
                     }))
                     self.present(alertController, animated: true, completion: nil)
-                    self.appdata.address = Address(intAddressID: 0, strAddressAlias: "", strCityName: "", strStateName: "", strStreetAddress1: "", strStreetAddress2: "", strZipCode: "")
+                    self.appdata.intAddressIdx = 0
+//                    self.appdata.address = Address(intAddressID: 0, strAddressAlias: "", strCityName: "", strStateName: "", strStreetAddress1: "", strStreetAddress2: "", strZipCode: "")
                     self.appdata.personRecipient = Person(firstName: "FName", lastName: "LName", email: "", avatar: "", intUserID: 0, strUsername: "", intNumFriends: 0)
                 }
                 

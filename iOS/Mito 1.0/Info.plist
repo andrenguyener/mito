@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>Mito</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -26,13 +28,13 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>We need your camera</string>
+	<string>We need to use your camera</string>
 	<key>NSContactsUsageDescription</key>
-	<string>We would like to get access to your contacts!</string>
+	<string>We would like to get access to your contacts</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need your location to set your address</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Your image is safe with me bro!</string>
+	<string>Mito would like access to your photos</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Roboto-Black.tff</string>

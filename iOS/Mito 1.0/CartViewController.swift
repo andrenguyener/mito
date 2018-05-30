@@ -105,7 +105,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         if cartTableView != nil {
             pickerviewEditQuantity.dataSource = self
             pickerviewEditQuantity.delegate = self
-            pickerviewEditQuantity.isHidden = false
+            pickerviewEditQuantity.isHidden = true
             cartTableView.delegate = self
             cartTableView.dataSource = self
             //cartTableView.rowHeight = 106
@@ -195,24 +195,30 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     @IBAction func btnGoToEditCheckout(_ sender: Any) {
         boolSender = true
-        performSegue(withIdentifier: "segCartToChooseRecipient", sender: self)
-        let backItem = UIBarButtonItem()
-        backItem.title = "Back"
-        navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
+        if appdata.boolShoppingForRecipient {
+            let storyboard: UIStoryboard = UIStoryboard(name: "Checkout", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "idWriteMessageViewController") as! WriteMessageViewController
+            self.show(vc, sender: self)
+        } else {
+            let backItem = UIBarButtonItem()
+            backItem.title = "Back"
+            navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
+            performSegue(withIdentifier: "segCartToChooseRecipient", sender: self)
+        }
+//        performSegue(withIdentifier: "segCartToChooseRecipient", sender: self)
     }
     
     @IBOutlet weak var lblNotifyYouMessage: UILabel!
     
     @IBAction func finishCheckout(_ sender: Any) {
         self.fnFinishCheckout()
-        performSegue(withIdentifier: "checkoutFinish", sender: self)
     }
     
     func fnFinishCheckout() {
         let urlCheckoutMitoCart = URL(string: "https://api.projectmito.io/v1/cart/process")
         let parameters: Parameters = [
             "cardId": 1,
-            "senderAddressId": appdata.address.intAddressID!,
+            "senderAddressId": appdata.arrCurrUserAddresses[appdata.intAddressIdx].intAddressID!,
             "recipientId": appdata.personRecipient.intUserID,
             "message": appdata.strOrderMessage,
             "giftOption": 0

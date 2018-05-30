@@ -73,13 +73,15 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tblviewAddress != nil {
-            appdata.address = appdata.arrCurrUserAddresses[indexPath.row]
+            appdata.intAddressIdx = indexPath.row
+//            appdata.address = appdata.arrCurrUserAddresses[indexPath.row]
             print(boolSender)
             if boolSender {
                 performSegue(withIdentifier: "ChooseAddressToCheckout", sender: self)
             } else {
-                appdata.address = appdata.arrCurrUserAddresses[indexPath.row]
-                fnAcceptOrDeclinePackage(response: "Accepted", senderId: appdata.currPackage.intSenderID, orderId: appdata.currPackage.intOrderID, shippingAddressId: appdata.arrCurrUserAddresses[indexPath.row].intAddressID!)
+                let address = appdata.arrCurrUserAddresses[indexPath.row]
+//                appdata.address = appdata.arrCurrUserAddresses[indexPath.row]
+                fnAcceptOrDeclinePackage(response: "Accepted", senderId: appdata.currPackage.intSenderID, orderId: appdata.currPackage.intOrderID, shippingAddressId: address.intAddressID!)
             }
         } else if tblviewPeople != nil {
             appdata.personRecipient = appdata.arrCurrFriendsAndAllMitoUsers[indexPath.section][indexPath.row]
@@ -114,7 +116,8 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
                         self.performSegue(withIdentifier: "CompleteChooseReceivingAddress", sender: self)
                     }))
                     self.present(alertController, animated: true, completion: nil)
-                    self.appdata.address = Address(intAddressID: 0, strAddressAlias: "", strCityName: "", strStateName: "", strStreetAddress1: "", strStreetAddress2: "", strZipCode: "")
+                    self.appdata.intAddressIdx = 0
+//                    self.appdata.address = Address(intAddressID: 0, strAddressAlias: "", strCityName: "", strStateName: "", strStreetAddress1: "", strStreetAddress2: "", strZipCode: "")
                     self.appdata.personRecipient = Person(firstName: "FName", lastName: "LName", email: "", avatar: "", intUserID: 0, strUsername: "", intNumFriends: 0)
                 }
                 
@@ -266,7 +269,7 @@ class CheckoutSelectUserViewController: UIViewController, UITableViewDelegate, U
         } else if lblRecipient != nil {
             lblRecipient.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
             appdata.fnDisplayImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipientImage, boolCircle: true)
-            lblAddressNickname.text = appdata.address.strAddressAlias
+            lblAddressNickname.text = appdata.arrCurrUserAddresses[appdata.intAddressIdx].strAddressAlias
             if appdata.strCardNumber.count > 0 {
                 let stars = String(repeating:"*", count:12)
                 let last4 = String(appdata.strCardNumber.suffix(4))

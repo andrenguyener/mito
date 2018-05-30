@@ -20,7 +20,7 @@ class PackageDetailsViewController: UIViewController {
         super.viewDidLoad()
         print(intOrderID)
         self.navigationController?.isNavigationBarHidden = false
-        self.navigationItem.title = "Choose Friend"
+        self.navigationItem.title = "Package Details"
         if appdata.arrNotifications[intOrderID] as? Package != nil {
             let package = appdata.arrNotifications[intOrderID] as! Package
             fnRetrieveIncomingOrderDetails(intOrderID: package.intOrderID)
@@ -29,6 +29,10 @@ class PackageDetailsViewController: UIViewController {
             lblMessage.text = package.strOrderMessage
             fnRetrieveIncomingOrderDetails(intOrderID: intOrderID)
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     @IBAction func btnAcceptAndChooseReceivingAddress(_ sender: Any) {

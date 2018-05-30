@@ -58,18 +58,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         appdata.socket.connect()
         fnAddRefreshersNotificationsAndPackages()
         self.appdata.fnLoadFriendActivity(tblview: tableView, refresherNotification: refresherNotification, view: noFeedView, feedView: viewFeedContent, spinner: spinner)
-//        DispatchQueue.main.async {
-//
-////            self.spinner.stopAnimating()
-//            if (self.appdata.arrMyFeedItems.count == 0) {
-//                self.noFeedView.isHidden = false
-//                self.viewFeedContent.isHidden = true
-//            } else {
-//                self.viewFeedContent.isHidden = false
-//                self.noFeedView.isHidden = true
-//            }
-//        }
-
     }
     
     @objc func fnGoToSettings() {
@@ -241,6 +229,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        appdata.intSegmentIdx = segmentChooser.selectedSegmentIndex
+        appdata.intFeedIdx = indexPath.row
+        performSegue(withIdentifier: "segHomeToFeedDetails", sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -279,8 +270,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func cart(_ sender: Any) {
         performSegue(withIdentifier: "homeToCart", sender: self)
     }
-    
-    
     
 }
 

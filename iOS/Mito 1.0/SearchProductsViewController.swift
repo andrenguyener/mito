@@ -17,6 +17,9 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
     
     @IBOutlet weak var imgCurrentRecipient: UIImageView!
     
+    
+    
+    
     var appdata = AppData.shared
     var intPageNumber = 1
     
@@ -32,6 +35,11 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         searchBar.returnKeyType = UIReturnKeyType.done
         searchBar.text = appdata.strProductQuery
         spinnerProductSearch.isHidden = true
+        if appdata.strProductQuery.replacingOccurrences(of: " ", with: "").count > 0 {
+            swirlSearchImg.isHidden = true
+        } else {
+            swirlSearchImg.isHidden = false
+        }
         let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
         var strPhotoUrl = data["profileImageString"] as! String
         if strPhotoUrl.count < 100 {
@@ -41,8 +49,52 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         imgCurrentRecipient.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.fnGoToSettings))
         imgCurrentRecipient.addGestureRecognizer(tapGesture)
-        // Do any additional setup after loading the view.
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        fnShowCurrentShoppingRecipient()
+    }
+    
+    var shopfor = 1
+    
+    
+    @IBAction func changeConstraint(_ sender: Any) {
+        shopForTopView.isActive = false
+        productTableToTop.isActive = true
+        appdata.boolShoppingForRecipient = false
+//        if appdata.boolShoppingForRecipient {
+//            // this is the one that should use if they choose a friend to shop for (Shows dark green nav)
+//            print("hey i changed")
+//
+////            shopfor = 2
+//
+//        } else {
+//            print("hey i changed 2")
+//            // this should be the one to use if you exit or do not have someone to shop for (remove green nav (uninstalls))
+//            shopForTopView.isActive = false
+//            productTableToTop.isActive = true
+//
+////            shopfor = 1
+//
+//        }
+    }
+    
+    func fnShowCurrentShoppingRecipient() {
+        if appdata.boolShoppingForRecipient {
+            shopForTopView.isActive = true
+            productTableToTop.isActive = false
+            shoppingForLabel.text = "Shopping for \(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
+        } else {
+            shopForTopView.isActive = false
+            productTableToTop.isActive = true
+        }
+    }
+    
+    //clicking button -->
+    // change label to 'shopping for person name'
+    // switch constraints
+    // extract first name and last name to new variable 
+    
     
     @objc func fnGoToSettings() {
         performSegue(withIdentifier: "segProductsToSettings", sender: self)
@@ -61,21 +113,18 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         performSegue(withIdentifier: "segSearchProductToCart", sender: self)
     }
     
+    @IBOutlet weak var swirlSearchImg: UIImageView!
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if (searchBar.text!.replacingOccurrences(of: " ", with: "").count > 0) { // tests for only spaces
             intPageNumber = 1
             spinnerProductSearch.isHidden = false
             spinnerProductSearch.startAnimating()
-            //            swirlSearchImg.isHidden = true
+            swirlSearchImg.isHidden = true
             appdata.strProductQuery = ""
             appdata.strProductQuery = searchBar.text!
             fnLoadEbayProductData(strCodedSearchQuery: searchBar.text!.replacingOccurrences(of: " ", with: "%20"))
             
-        } else {
-            appdata.strProductQuery = searchBar.text!.replacingOccurrences(of: " ", with: "")
-            searchBar.text! = ""
-            appdata.strProductQuery = "Amazon"
-            searchBar.text = "Amazon"
         }
         searchBar.resignFirstResponder()
     }
@@ -91,6 +140,8 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(UserDefaults.standard.object(forKey: "strEbayToken") as! String)"
         ]
+        print("Header")
+        print(headers["Authorization"])
         Alamofire.request(urlLoadProductDetails!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success:
@@ -145,7 +196,11 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
                 if error.localizedDescription == "The request timed out." {
                     let alert = self.appdata.fnDisplayAlert(title: "Error", message: "Amazon services are down blame Jeff Bezos")
                     self.present(alert, animated: true, completion: nil)
+                } else if error.localizedDescription == "Response status code was unacceptable: 401." {
+                    let alert = self.appdata.fnDisplayAlert(title: "Error", message: "You probably have an invalid access token")
+                    self.present(alert, animated: true, completion: nil)
                 }
+                print(error)
                 DispatchQueue.main.async {
                     self.spinnerProductSearch.stopAnimating()
                     self.spinnerProductSearch.isHidden = true
@@ -192,5 +247,17 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         let arrTemp = dictObj[strAttribute] as! NSArray
         return arrTemp[0] as! String
     }
+    
+    
+    
+    // Constraints for "Shopping for" text
+    @IBOutlet weak var shoppingForLabel: UILabel!
+    
+    // currently installed (product table constraint to top of view)
+    @IBOutlet weak var productTableToTop: NSLayoutConstraint!
+    
+    // currently uninstalled (shop for constraint to product table)
+    @IBOutlet weak var shopForTopView: NSLayoutConstraint!
+    
+    
 }
-

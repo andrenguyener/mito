@@ -21,6 +21,7 @@ class ChooseFriendViewController: UIViewController, UITableViewDelegate, UITable
         tblviewPeople.delegate = self
         tblviewPeople.dataSource = self
         tblviewPeople.rowHeight = 78
+        tblviewPeople.keyboardDismissMode = .onDrag
         searchBar.delegate = self
         appdata.fnLoadFriendsAndAllUsers(tableview: tblviewPeople)
         self.navigationItem.title = "Choose Friend"
@@ -32,6 +33,10 @@ class ChooseFriendViewController: UIViewController, UITableViewDelegate, UITable
         let backItem = UIBarButtonItem()
         backItem.title = "Back"
         navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

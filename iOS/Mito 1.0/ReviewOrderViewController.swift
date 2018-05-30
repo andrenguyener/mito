@@ -152,6 +152,7 @@ class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableV
             case .success:
                 if let dictionary = response.result.value {
                     print(dictionary)
+                    self.appdata.strOrderMessage = "What's it for?"
                     // Any code for storing locally
                 }
                 
@@ -196,28 +197,30 @@ class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableV
             let last4 = String(appdata.strCardNumber.suffix(4))
             if indexPath.row == 0 {
                 cell.lblSubtitle.text = "Visa ending in \(last4)"
+            } else if appdata.arrCurrUserAddresses.count > 0 && appdata.arrCurrUserAddresses[appdata.intAddressIdx].strStreetAddress2 != nil && (appdata.arrCurrUserAddresses[appdata.intAddressIdx].strStreetAddress2?.count)! > 0 {
+                let address = appdata.arrCurrUserAddresses[appdata.intAddressIdx]
+                cell.lblSubtitle.text = "\(address.strStreetAddress1!) \(address.strStreetAddress2!), \(address.strCityName!), \(address.strStateName!) \(address.strZipCode!)"
+            } else if appdata.arrCurrUserAddresses.count > 0 {
+                let address = appdata.arrCurrUserAddresses[appdata.intAddressIdx]
+                cell.lblSubtitle.text = "\(address.strStreetAddress1!), \(address.strCityName!), \(address.strStateName!) \(address.strZipCode!)"
             } else {
-                cell.lblSubtitle.text = "4044 Howe Rd Seattle, WA 98105"
+                cell.lblSubtitle.text = "4555 Roosevelt Way NE, Seattle, WA 98105"
             }
             return cell
         } else {
             let cell: OrderSummaryTableViewCell = o_tblviewOrderSummary.dequeueReusableCell(withIdentifier: "OrderSummaryCell", for: indexPath) as! OrderSummaryTableViewCell
             cell.lblNumItems.text = "Items (\(String(appdata.intNumItems)))"
-            let tax = Double(truncating: appdata.priceSum as NSNumber)
-            let strTax = ((round(100 * tax * 0.12))/100).roundTo2f()
-//            let tax = Double(round(Double(100 * appdata.priceSum * 0.12))/100).roundTo2f()
+            let dblSubtotal = Double(truncating: appdata.priceSum as NSNumber)
+            let dblTax = round(100 * dblSubtotal * 0.12)/100
+            let dblFinal = dblSubtotal + dblTax
             
-            // rounds double with 2 digits precision
-            let tempTax = Double(truncating: tax as NSNumber)
-            let temp2 = Double(round(100 * tempTax)/100).roundTo2f()
+            let strSubtotal = dblSubtotal.roundTo2f()
+            let strTax = ((round(100 * dblSubtotal * 0.12))/100).roundTo2f()
+            let strFinal = dblFinal.roundTo2f()
             
-            let dblPriceSum = Double(truncating: appdata.priceSum as NSNumber)
-            let tempTotal = Double(truncating: (dblPriceSum + tax) as NSNumber)
-            let temp2Total = Double(round(100 * tempTotal)/100).roundTo2f()
-            
-            cell.lblTax.text = "$\(String(describing: temp2))"
-            cell.lblSubtotal.text = "$\(String(describing: dblPriceSum))"
-            cell.lblFinalTotal.text = "$\(String(describing: temp2Total))"
+            cell.lblTax.text = "$\(String(describing: strTax))"
+            cell.lblSubtotal.text = "$\(String(describing: strSubtotal))"
+            cell.lblFinalTotal.text = "$\(String(describing: strFinal))"
             return cell
         }
     }
