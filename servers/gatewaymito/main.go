@@ -56,7 +56,6 @@ func NewServiceProxy(addrs []string, ctx *handlers.Context) *httputil.ReversePro
 	}
 }
 
-
 // Replace with your own connection parameters
 var server = "projectmito.database.windows.net"
 var user = "mitoteam"
@@ -199,5 +198,6 @@ func main() {
 	mux.Handle("/v1/notification/", NewServiceProxy(splitMitoNodeAddrs, ctx))
 	mux.Handle("/v1/image", NewServiceProxy(splitMitoNodeAddrs, ctx))
 	mux.Handle("/v1/image/", NewServiceProxy(splitMitoNodeAddrs, ctx))
+	mux.Handle("/v1/email", NewServiceProxy(splitMitoNodeAddrs, ctx))
 	log.Fatal(http.ListenAndServeTLS(addr, tlscert, tlskey, corsHandler))
 }

@@ -13,7 +13,7 @@ if [ "$(docker ps -aq --filter name=$CLIENT_CONTAINER)" ]; then
     docker rm -f $CLIENT_CONTAINER
 fi
 
-docker image prune -a
+# docker image prune -a
 
 docker run -d \
 -p 80:80 \

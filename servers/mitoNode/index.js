@@ -95,6 +95,8 @@ const NotificationHandler = require('./handlers/notification');
 
 const AmazonHashHandler = require('./handlers/amazon');
 
+const EmailHandler = require('./handlers/email')
+
 
 const addr = process.env.ADDR || "localhost:4004";
 const [host, port] = addr.split(":");
@@ -222,7 +224,7 @@ function ebayLoop(sql, req) {
         app.set('qName', qName);
 
 
-        var ebayTokenLoop = setInterval(function () { ebayLoop(sql, app.request); }, 6000000);
+        var ebayTokenLoop = setInterval(function () { ebayLoop(sql, app.request); }, 1800000);
 
         // Initialize table stores.
         let addressStore = new AddressStore(sql);
@@ -245,6 +247,7 @@ function ebayLoop(sql, req) {
         app.use(PaymentHandler(paymentStore));
         app.use(ImageHandler(imageStore));
         app.use(NotificationHandler(notificationStore));
+        app.use(EmailHandler());
 
         app.use(AmazonHashHandler());
         app.listen(portNum, host, () => {

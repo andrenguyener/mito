@@ -11,26 +11,29 @@
    
    #login-modal .modal-dialog {
        width: 350px;
+       margin: 3em auto 5em auto;
    }
    
-   #login-modal input[type=text], input[type=password] {
+   #login-modal input[type=text], input[type=password], input[type=date] {
        margin-top: 10px;
    }
    
    #div-login-msg,
    #div-lost-msg,
    #div-register-msg {
-       border: 1px solid #dadfe1;
+       /* border: 1px solid #dadfe1; */
+       margin: 50px 10px;
        height: 30px;
        line-height: 28px;
        transition: all ease-in-out 500ms;
+       text-align: center;
    }
    
    #div-login-msg.success,
    #div-lost-msg.success,
    #div-register-msg.success {
-       border: 1px solid #68c3a3;
-       background-color: #c8f7c5;
+       border: 1px solid #6FE28A;
+       background-color: #6FE28A;
    }
    
    #div-login-msg.error,
@@ -55,7 +58,7 @@
    #icon-login-msg.success,
    #icon-lost-msg.success,
    #icon-register-msg.success {
-       background-color: #68c3a3 !important;
+       background-color: #6FE28A !important;
    }
    
    #icon-login-msg.error,
@@ -68,10 +71,62 @@
        max-height: 100px;
        max-width: 100px;
    }
+
+   #login-modal {
+       /* z-index: 4000; */
+       padding-right: 0px !important;
+   }
+
+   #terms-modal {
+       z-index: 9000;
+   }
+
+   #terms-modal .modal-header {
+        padding: 30px 10px 10px 10px;
+        text-align: center;
+        display: block;
+   }
+
+   #register-terms {
+       color: #6FE28A;
+   }
+
+   #terms-box {
+       overflow: scroll;
+       padding: 20px 20px;
+   }
    
+   #error-message {
+       padding-top: 15px; 
+       color: red;
+       margin-bottom: 0px;
+       visibility: hidden;
+   }
+
+   #terms-heading {
+       padding-top: 50px;
+       text-align: center;
+   }
+
+   .terms #mainNav {
+       background-color: #6FE28A;
+   }
+
+   .terms #terms-box {
+       /* width: 500px; */
+       margin-right: 1em;
+       margin-left: 1em;
+       line-height: 2;
+       overflow: unset;
+       margin-bottom: 5em;
+   }
    /* #########################################
       #    override the bootstrap configs     #
       ######################################### */
+
+    html .modal-backdrop ~ .modal-backdrop {
+        z-index: 6000;
+    }
    
    .modal-backdrop.in {
        filter: alpha(opacity=50);
@@ -97,11 +152,29 @@
    }
    
    .modal-footer {
-       padding: 15px 15px 15px 15px;
+       display: block;
+       padding: 0px 15px 15px 15px;
        text-align: left;
        border-top: 0px;
+       /* margin-left: 0px; */
+       position: relative;
+   }
+
+   .modal-footer>:not(:last-child) {
+       margin: 20px 40px;
+
+   }
+
+   .btn-login-register {
+       background-color: #6FE28A;
+       border-color: #6FE28A;
    }
    
+    .btn-login-register:active, .btn-login-register:focus, .btn-login-register:active:focus, .btn-login-register:hover  {
+        background-color: #95a5a6 !important;
+        border-color: #95a5a6 !important;
+    }
+
    .checkbox {
        margin-bottom: 0px;
    }
