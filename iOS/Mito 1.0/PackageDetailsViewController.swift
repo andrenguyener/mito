@@ -31,6 +31,10 @@ class PackageDetailsViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
     @IBAction func btnAcceptAndChooseReceivingAddress(_ sender: Any) {
         boolSender = false
         performSegue(withIdentifier: "segPackageDetailsToChooseShippingAddress", sender: self)
