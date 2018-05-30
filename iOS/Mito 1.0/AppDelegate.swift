@@ -71,6 +71,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WebSocketDelegate {
             topWindow?.makeKeyAndVisible()
             topWindow?.rootViewController?.present(alert, animated: true, completion: nil)
             print("friend-accept")
+        case "package-pending":
+            let friend = dictionary!["data"] as! NSDictionary
+            let strFname = friend["userFname"] as! String
+            let strLname = friend["userLname"] as! String
+            var topWindow: UIWindow? = UIWindow(frame: UIScreen.main.bounds)
+            topWindow?.rootViewController = UIViewController()
+            topWindow?.windowLevel = UIWindowLevelAlert + 1
+            let alert = UIAlertController(title: "Mito", message: "\(strFname) \(strLname) has sent you a package request", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Confirm"), style: .cancel, handler: { (_ action: UIAlertAction) -> Void in
+                topWindow?.isHidden = true
+                topWindow = nil
+            }))
+            topWindow?.makeKeyAndVisible()
+            topWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+            print("friend-accept")
         case "package-accept":
             let friend = dictionary!["data"] as! NSDictionary
             let strFname = friend["userFname"] as! String
