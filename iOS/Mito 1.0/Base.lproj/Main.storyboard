@@ -16,6 +16,9 @@
         <array key="Roboto-Bold.ttf">
             <string>Roboto-Bold</string>
         </array>
+        <array key="Roboto-Italic.ttf">
+            <string>Roboto-Italic</string>
+        </array>
         <array key="Roboto-Medium.ttf">
             <string>Roboto-Medium</string>
         </array>
@@ -2370,6 +2373,15 @@ If you have any questions about these Terms, please contact us at projectmitotea
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPT-d4-twW" userLabel="Product View">
                                 <rect key="frame" x="0.0" y="90" width="375" height="528"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    Shopping For Sopheaky Neaky" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBm-Xu-AG9">
+                                        <rect key="frame" x="15" y="0.0" width="345" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="bCN-bx-0Nb"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Roboto-Italic" family="Roboto" pointSize="16"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qfx-4Y-f3S">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="528"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2436,15 +2448,32 @@ If you have any questions about these Terms, please contact us at projectmitotea
                                         </prototypes>
                                     </tableView>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                <color key="backgroundColor" red="0.054896535452777756" green="0.7224609375333334" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="qfx-4Y-f3S" firstAttribute="top" secondItem="ZPT-d4-twW" secondAttribute="top" id="5gz-DH-LYK"/>
                                     <constraint firstAttribute="bottom" secondItem="qfx-4Y-f3S" secondAttribute="bottom" id="BYF-ad-Pay"/>
-                                    <constraint firstItem="qfx-4Y-f3S" firstAttribute="top" secondItem="ZPT-d4-twW" secondAttribute="top" id="Ulx-3o-ovn"/>
+                                    <constraint firstItem="nBm-Xu-AG9" firstAttribute="leading" secondItem="ZPT-d4-twW" secondAttribute="leading" constant="15" id="CmC-cG-XqL"/>
+                                    <constraint firstItem="nBm-Xu-AG9" firstAttribute="bottom" secondItem="qfx-4Y-f3S" secondAttribute="top" id="F6l-yW-rlR"/>
+                                    <constraint firstAttribute="trailing" secondItem="nBm-Xu-AG9" secondAttribute="trailing" constant="15" id="TvV-s2-huz"/>
+                                    <constraint firstItem="nBm-Xu-AG9" firstAttribute="top" secondItem="ZPT-d4-twW" secondAttribute="top" id="cFd-WA-VXO"/>
                                     <constraint firstItem="qfx-4Y-f3S" firstAttribute="leading" secondItem="ZPT-d4-twW" secondAttribute="leading" id="vlM-LW-of5"/>
                                     <constraint firstItem="qfx-4Y-f3S" firstAttribute="centerX" secondItem="ZPT-d4-twW" secondAttribute="centerX" id="x0n-Be-pfk"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="F6l-yW-rlR"/>
+                                    </mask>
+                                </variation>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vA2-LZ-VIp">
+                                <rect key="frame" x="164" y="318" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="changeConstraint:" destination="cz1-uG-LnH" eventType="touchUpInside" id="OsK-fK-uhD"/>
+                                </connections>
+                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swirlsearch" translatesAutoresizingMaskIntoConstraints="NO" id="VM1-7e-wQO">
                                 <rect key="frame" x="105" y="114" width="187" height="430"/>
                             </imageView>
@@ -2466,13 +2495,21 @@ If you have any questions about these Terms, please contact us at projectmitotea
                             <constraint firstItem="VM1-7e-wQO" firstAttribute="leading" secondItem="aw9-kv-lUG" secondAttribute="leading" constant="105" id="yQq-9y-mho"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aw9-kv-lUG"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="VM1-7e-wQO"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="0G6-7s-OlP"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="imgCurrentRecipient" destination="lnr-Wb-d36" id="NJp-za-hVG"/>
+                        <outlet property="productTableToTop" destination="5gz-DH-LYK" id="UQ2-0H-kF8"/>
                         <outlet property="productTableView" destination="qfx-4Y-f3S" id="573-Uj-QqF"/>
                         <outlet property="searchBar" destination="t70-Qz-J7F" id="18q-WQ-cQ3"/>
+                        <outlet property="shopProductTableConst" destination="F6l-yW-rlR" id="JeK-1F-a33"/>
+                        <outlet property="shoppingForLabel" destination="nBm-Xu-AG9" id="Ei6-PT-a4x"/>
                         <outlet property="spinnerProductSearch" destination="Fl4-nx-3no" id="6mn-s8-i7V"/>
                         <outlet property="swirlSearchImg" destination="VM1-7e-wQO" id="3RB-Um-8Yc"/>
                         <segue destination="BHS-cQ-fVw" kind="show" identifier="segSeeProductDetails" id="Oq9-F1-cCO"/>
@@ -2482,7 +2519,7 @@ If you have any questions about these Terms, please contact us at projectmitotea
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L38-b9-TK8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2596" y="1513"/>
+            <point key="canvasLocation" x="2596" y="1512.5937031484259"/>
         </scene>
         <!--Search-->
         <scene sceneID="5Qd-Cr-hB1">
@@ -2540,8 +2577,8 @@ If you have any questions about these Terms, please contact us at projectmitotea
         <segue reference="Oq9-F1-cCO"/>
         <segue reference="4Df-8F-JjS"/>
         <segue reference="5va-cB-XlO"/>
-        <segue reference="4aV-H5-zth"/>
+        <segue reference="c4b-bb-2tq"/>
         <segue reference="GdB-Tr-zhu"/>
-        <segue reference="YO1-kI-SDA"/>
+        <segue reference="dFb-Zm-TKF"/>
     </inferredMetricsTieBreakers>
 </document>

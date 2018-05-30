@@ -17,6 +17,9 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
     
     @IBOutlet weak var imgCurrentRecipient: UIImageView!
     
+    
+    
+    
     var appdata = AppData.shared
     var intPageNumber = 1
     
@@ -46,8 +49,32 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         imgCurrentRecipient.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.fnGoToSettings))
         imgCurrentRecipient.addGestureRecognizer(tapGesture)
-        // Do any additional setup after loading the view.
     }
+    
+    var shopfor = 1
+    
+    @IBAction func changeConstraint(_ sender: Any) {
+        if shopfor == 1 {
+            // this is the one that should use if they choose a friend to shop for (Shows dark green nav)
+            shopProductTableConst.isActive = true
+            productTableToTop.isActive = false
+            print("hey i changed")
+            
+            shopfor = 2
+            
+        } else {
+            print("hey i changed 2")
+            // this should be the one to use if you exit or do not have someone to shop for (remove green nav (uninstalls))
+            shopProductTableConst.isActive = false
+            productTableToTop.isActive = true
+            
+            shopfor = 1
+
+        }
+
+
+    }
+    
     
     @objc func fnGoToSettings() {
         performSegue(withIdentifier: "segProductsToSettings", sender: self)
@@ -79,12 +106,6 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
             fnLoadEbayProductData(strCodedSearchQuery: searchBar.text!.replacingOccurrences(of: " ", with: "%20"))
             
         }
-//        else {
-//            appdata.strProductQuery = searchBar.text!.replacingOccurrences(of: " ", with: "")
-//            searchBar.text! = ""
-//            appdata.strProductQuery = "Amazon"
-//            searchBar.text = "Amazon"
-//        }
         searchBar.resignFirstResponder()
     }
     
@@ -206,4 +227,18 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         let arrTemp = dictObj[strAttribute] as! NSArray
         return arrTemp[0] as! String
     }
+    
+    // Constraints for "Shopping for" text
+    
+    @IBOutlet weak var shoppingForLabel: UILabel!
+    
+    // currently uninstalled (shop for constraint to product table)
+    @IBOutlet weak var shopProductTableConst: NSLayoutConstraint!
+    
+    // currently installed (product table constraint to top of view)
+    @IBOutlet weak var productTableToTop: NSLayoutConstraint!
+    
+    
+    
+    
 }
