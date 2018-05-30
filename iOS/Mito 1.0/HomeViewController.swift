@@ -149,23 +149,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                         intIndex += 1
                         boolNewIndex = true
                     }
-//                    self.dispatchGroup.leave()
-//                    self.dispatchGroup.notify(queue: .main, execute: {
-//                        self.viewProductImages.reloadData()
-//                    })
-                    //                    DispatchGroup.notify(dispatchGroup, DispatchQueue.main, {
-                    //                        self.viewProductImages.reloadData()
-                    //                    })
-                    //                    DispatchQueue.main.asyncAfter(deadline: .now() + 15.0) {
-                    //                        self.viewProductImages.reloadData()
-                    //                    }
-                    //                    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: nil) {
-                    //                        self.viewProductImages.reloadData()
-                    //                    }
-                    //                    DispatchQueue.main.async {
-                    //                        print(self.appdata.arrVariations.count)
-                    //                        self.viewProductImages.reloadData()
-                    //                    }
                 }
             case .failure(let error):
                 print("Get products error")
@@ -261,7 +244,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else {
             feedItemObj = appdata.arrMyFeedItems[indexPath.row]
         }
-        if feedItemObj.strPhotoBytes != nil {
+        if feedItemObj.strPhotoBytes != nil && feedItemObj.strPhotoBytes != "AAP4AHUXf+Y=" {
             appdata.fnDisplayImage(strImageURL: feedItemObj.strPhotoBytes!, img: cell.imgProfile, boolCircle: true)
         } else {
             appdata.fnDisplayImage(strImageURL: feedItemObj.photoSenderUrl, img: cell.imgProfile, boolCircle: true)

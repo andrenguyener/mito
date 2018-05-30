@@ -133,6 +133,7 @@ class AppData: NSObject {
 
                     DispatchQueue.main.async {
                         tblview.reloadData()
+                        tblview.isScrollEnabled = true
                         feedView.isHidden = false
                         refresherNotification.endRefreshing()
                     }
