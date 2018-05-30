@@ -82,7 +82,7 @@
                                     <constraint firstItem="viu-6B-jMr" firstAttribute="leading" secondItem="gon-wu-V0E" secondAttribute="leading" id="yU0-6l-pjz"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pMO-br-P7i">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pMO-br-P7i" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
                                 <rect key="frame" x="20" y="601" width="335" height="46"/>
                                 <color key="backgroundColor" red="0.25490196079999999" green="0.86666666670000003" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
