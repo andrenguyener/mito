@@ -65,7 +65,11 @@ class TabBarViewController: UITabBarController {
                     }
                     self.appdata.arrNotifications.sort(by: self.fnSortNotification)
                     DispatchQueue.main.async {
-                        self.tabBar.items?.last?.badgeValue = String(self.appdata.arrNotifications.count)
+                        if self.appdata.arrNotifications.count == 0 {
+                            self.tabBar.items?.last?.badgeValue = nil
+                        } else {
+                            self.tabBar.items?.last?.badgeValue = String(self.appdata.arrNotifications.count)
+                        }
                     }
                 }
                 
@@ -106,7 +110,11 @@ class TabBarViewController: UITabBarController {
                 self.appdata.arrNotifications.sort(by: self.fnSortNotification)
                 DispatchQueue.main.async {
                     // to apply it to your last tab
-                    self.tabBar.items?.last?.badgeValue = String(self.appdata.arrNotifications.count)
+                    if self.appdata.arrNotifications.count == 0 {
+                        self.tabBar.items?.last?.badgeValue = nil
+                    } else {
+                        self.tabBar.items?.last?.badgeValue = String(self.appdata.arrNotifications.count)
+                    }
                 }
                 
             case .failure(let error):
