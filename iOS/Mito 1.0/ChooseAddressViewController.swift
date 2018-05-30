@@ -83,7 +83,7 @@ class ChooseAddressViewController: UIViewController, UITableViewDataSource, UITa
                 }
                 
                 //1. Create the alert controller.
-                let alert = UIAlertController(title: "Nickname", message: "Enter a nickname (Optional)", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Nickname", message: "Enter an address nickname (Optional)", preferredStyle: .alert)
                 
                 //2. Add the text field. You can configure it however you need.
                 alert.addTextField { (textField) in
