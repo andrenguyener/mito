@@ -2124,9 +2124,7 @@ If you have any questions about these Terms, please contact us at projectmitotea
         <scene sceneID="SPr-mp-Qlb">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="hig-ud-FA0" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Notification" image="46 bell" id="y7E-EB-PS0">
-                        <color key="badgeColor" red="0.25490196079999999" green="0.86666666670000003" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Notification" image="46 bell" id="y7E-EB-PS0"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="uxo-NP-mTf">
                         <autoresizingMask key="autoresizingMask"/>
