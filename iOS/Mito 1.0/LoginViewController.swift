@@ -77,6 +77,7 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     var appdata = AppData.shared
     
     @IBAction func btnBirthdayPressed(_ sender: Any) {
+        view.endEditing(true) // resigns keyboard if visable
         if monthPicker.isHidden == true {
             monthPicker.isHidden = false
             viewCancelDone.isHidden = false
@@ -434,6 +435,14 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
+//    func handleKeyboardShow(notification: Notification) {
+//        print("Keyboard will show")
+//    }
+//
+//    func handleKeyboardHide(notification: Notification) {
+//        print("Keyboard will hide")
+//    }
+    
     @IBAction func fnSegAddAddressToSignUp(_ sender: Any) {
         performSegue(withIdentifier: "segAddressToSignUp", sender: self)
     }
@@ -460,11 +469,6 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             print("im in")
             textField.returnKeyType = UIReturnKeyType.go
         }
-//        else if textField.tag > 0 && password != nil {
-//            moveTextField(textField, moveDistance: -50, up: true)
-//            print("Entering password")
-//            textField.returnKeyType = UIReturnKeyType.done
-//        }
     }
     
     @IBOutlet weak var userpassstack: UIStackView!
