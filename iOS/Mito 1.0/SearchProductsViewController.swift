@@ -202,5 +202,3 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         return arrTemp[0] as! String
     }
 }
-
-ß

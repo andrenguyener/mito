@@ -273,7 +273,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.lblPrice.text = "$ \(dblPrice.roundTo2f())"
         }
         cell.btnEditQuantity.setTitle("Quantity: (\(cartObj.intQuantity))", for: .normal)
-//        cell.lblSellerName.text = String(cartObj.intQuantity) //cartObj.objProduct.publisher
+        cell.lblSellerName.text = String(cartObj.intQuantity) //cartObj.objProduct.publisher
         cell.btnDelete.tag = indexPath.row
         cell.btnDelete.addTarget(self, action: #selector(self.fnRemoveItem(_:)), for: .touchUpInside)
         cell.btnEditQuantity.tag = indexPath.row
