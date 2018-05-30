@@ -540,9 +540,58 @@
                     <view key="view" contentMode="scaleToFill" id="tg0-Ep-RxS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="S6Q-Dc-IbW">
+                                <rect key="frame" x="20" y="45" width="335" height="88"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XhG-Zg-xWa">
+                                        <rect key="frame" x="0.0" y="0.0" width="88" height="88"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="XhG-Zg-xWa" secondAttribute="height" multiplier="1:1" id="O8c-ou-lwh"/>
+                                            <constraint firstAttribute="height" constant="88" id="Qhy-r2-yZu"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="88" id="av5-n5-bwE"/>
+                                        </constraints>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="c6g-tY-D5f">
+                                        <rect key="frame" x="98" y="0.0" width="237" height="59"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="JJ Guo sent August Johnson" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zv7-LD-sa5">
+                                                <rect key="frame" x="0.0" y="0.0" width="237" height="18"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="crE-MA-ADy">
+                                                <rect key="frame" x="0.0" y="23" width="237" height="14.5"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WNL-WY-AEx">
+                                                <rect key="frame" x="0.0" y="42.5" width="237" height="16.5"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="S6Q-Dc-IbW" firstAttribute="top" secondItem="J2u-cO-zJi" secondAttribute="top" constant="25" id="bxY-7E-cWH"/>
+                            <constraint firstItem="S6Q-Dc-IbW" firstAttribute="leading" secondItem="J2u-cO-zJi" secondAttribute="leading" constant="20" id="dJb-rV-9RD"/>
+                            <constraint firstItem="S6Q-Dc-IbW" firstAttribute="centerX" secondItem="tg0-Ep-RxS" secondAttribute="centerX" id="jvf-pW-eFg"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="J2u-cO-zJi"/>
                     </view>
+                    <connections>
+                        <outlet property="imgSender" destination="XhG-Zg-xWa" id="dxv-sX-faZ"/>
+                        <outlet property="lblDate" destination="crE-MA-ADy" id="qes-GO-shq"/>
+                        <outlet property="lblDescr" destination="WNL-WY-AEx" id="5ZU-VQ-cbT"/>
+                        <outlet property="lblWhatHappened" destination="zv7-LD-sa5" id="2S6-FX-7rc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B6p-nZ-KFt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

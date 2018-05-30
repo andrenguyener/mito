@@ -58,20 +58,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         appdata.socket.connect()
         fnAddRefreshersNotificationsAndPackages()
         self.appdata.fnLoadFriendActivity(tblview: tableView, refresherNotification: refresherNotification, view: noFeedView, feedView: viewFeedContent, spinner: spinner)
-        let strToken = "v^1.1#i^1#r^0#p^1#f^0#I^3#t^H4sIAAAAAAAAAOVXbWwURRju9cs0tZImBhAJrItCYt292d3b7d2md3Bw1FbpB1xBPgLN3O5cu/Ru99yZo72IWPuDgICJ5UOJMQELidQfUvxKmkhQEwk2hh+CECMkBqMIJhKDEFGDs3tHuVbCZxES789l3nnnnfd53ued2QHdpWVPrq1be7HC80Dhjm7QXejxCOWgrLSk6qGiwkklBSDPwbOj+/Hu4p6i0zUYJhMpdQHCKcvEiOlKJkysusYgm7ZN1YLYwKoJkwirRFOj4YZ5qsgDNWVbxNKsBMvUR4KsFgABSfaJAVHU45JUTa3mlZgtVpCVgA8h2R+IKxpQ9ACi8xinUb2JCTRJkBWB4OeAzImBFlFQZaAKgK/2SUtZZhGysWGZ1IUHbMhNV3XX2nm5Xj9ViDGyCQ3ChurDtdGmcH1kbmNLjTcvVijHQ5RAksYjR3MsHTGLYCKNrr8Ndr3VaFrTEMasN5TdYWRQNXwlmdtI36Xa56+GCvTHFEmBASiMDZW1lp2E5Pp5OBZD5+Kuq4pMYpDMjRilbMRWIo3kRo00RH2Ecf7mp2HCiBvIDrJzZ4eXhJub2VDUSrUj2NHINduWs6qBa14Q4WRR02I6QojzBaAiopgvt1E2Wo7mUTvNsUzdcEjDTKNFZiOaNRrNjS+PG+rUZDbZ4ThxMsr3k65wKPmXOkXNVjFN2k2nrihJiWDc4Y0rMLyaENuIpQkajjB6wqUoyMJUytDZ0ZOuFnPy6cJBtp2QlOr1dnZ28p0Sb9ltXhEAwbu4YV5Ua0dJyFJfp9ez/saNF3CGC0Wj2qL+KsmkaC5dVKs0AbONDYl+nyAFcryPTCs02vovQx5m78iOGKsOUSS5WtElWRN9PsEn6mPRIaGcSL1OHigGM1wS2h2IpBJQQ5xGdZZOItvQVUmOi5I/jjhdCcSpYuNxLibrCifEEQIIxWJawP9/apSblXpUs1Ko2UoYWmZMBD9mYpdsvRnaJBNFiQQ13KzqrwkSOyDvOjyn128JohMD0yAwZfCOtnnNSnotSA81x9TqZn1HuA16H95XRaUAs0gNPXuR8S5cHq/SeBthK23TO5xvcs71FqsDmbRLiG0lEsheJNwRE2N3ot+j0/yaqLSEQWlsvd+Q3eIxeZvahuQeoi7u8Sy7BnJBFqsVCSgCuCNsc9y6tmT+g0PrlgpbZ2GC9LvwAeId+RwKFbg/ocfzIejxDNAXFfCCJ4Rp4LHSooXFRQ9OwgZBvAHjPDbaTPqVbyO+A2VS0LALSz3LJu/d05r3ANuxHEwcfoKVFQnlee8xMPnqTIkwbkKF4AcyfU4JMhDAUjDt6myxML744Zmrzu/amumrGX+uq3cFs3jn1IHlNaBi2MnjKSmgyijY9u7xqnNH9L8fefPwut89K49ePLkarWXKi9aVH9h+uu3srNbKwz7P+u9++mJipPdU/8y3OXNwyuXjrW/MuDQUqwse3HLOOgbZr4ymGs/espc3i5dPVHJfH4o2rkm+OOObP/elrV9mvfVj7WDixF/P7Tw0dHz+S/370w1VXw5Wbdry8ZqhY5k/BqbuO3nq4JGn5M9ff6Vx0pJNT/e/88yu8+vbB5YNzppx5tuNzIXK5Xtqxcz3lxZ7tbmRyoVH42Vbfzg7dGFKsGt33YTXPi0/0/fztt2Pdu+fvn11RV/J3l9f6Fcu1P224b2NPub8Jzx5/7MVz5/9CHd+0LdBmU6eZcatqenvPSALxlEmUj/0arZ8/wC56vDhGg8AAA=="
-        UserDefaults.standard.set(strToken, forKey: "strEbayToken")
-//        DispatchQueue.main.async {
-//
-////            self.spinner.stopAnimating()
-//            if (self.appdata.arrMyFeedItems.count == 0) {
-//                self.noFeedView.isHidden = false
-//                self.viewFeedContent.isHidden = true
-//            } else {
-//                self.viewFeedContent.isHidden = false
-//                self.noFeedView.isHidden = true
-//            }
-//        }
-
     }
     
     @objc func fnGoToSettings() {

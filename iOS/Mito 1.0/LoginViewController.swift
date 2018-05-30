@@ -173,8 +173,14 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                 let authHeader = response.response?.allHeaderFields["Authorization"] as! String
                 if !authHeader.isEmpty {
                     if let dictionary = response.result.value {
+                        let json = dictionary as! NSDictionary
                         UserDefaults.standard.set(dictionary, forKey: "UserInfo")
                         UserDefaults.standard.set(authHeader, forKey: "Authorization")
+                        if json["ebayToken"] != nil {
+                            let strToken = json["ebayToken"] as! String
+                            UserDefaults.standard.set(strToken, forKey: "strEbayToken")
+                            print(UserDefaults.standard.object(forKey: "strEbayToken"))
+                        }
                         if UserDefaults.standard.object(forKey: "UserInfo") != nil {
                             let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
                             print(data)

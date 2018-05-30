@@ -10,14 +10,28 @@ import UIKit
 
 class FeedDetailsViewController: UIViewController {
 
+    // Xib Outlets
+//    @IBOutlet weak var imgSender: UIImageView!
+//    @IBOutlet weak var lblWhatHappened: UILabel!
+//    @IBOutlet weak var lblDate: UILabel!
+//    @IBOutlet weak var lblDescr: UILabel!
+    
+    
     @IBOutlet weak var imgSender: UIImageView!
     @IBOutlet weak var lblWhatHappened: UILabel!
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var lblDescr: UILabel!
+    
     var appdata = AppData.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fnLoadInformation()
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationItem.title = "Story"
+    }
+    
+    func fnLoadInformation() {
         var objFeedItem: FeedItem = FeedItem(strDate: "", photoSenderUrl: "", strMessage: "", strRecipientFName: "", strRecipientLName: "", strSenderFName: "", strSenderLName: "", intRecipientId: 0, intSenderId: 0, strPhotoBytes: "")
         if appdata.intSegmentIdx == 0 {
             objFeedItem = appdata.arrFriendsFeedItems[appdata.intFeedIdx]
