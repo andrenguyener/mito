@@ -105,7 +105,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         if cartTableView != nil {
             pickerviewEditQuantity.dataSource = self
             pickerviewEditQuantity.delegate = self
-            pickerviewEditQuantity.isHidden = false
+            pickerviewEditQuantity.isHidden = true
             cartTableView.delegate = self
             cartTableView.dataSource = self
             //cartTableView.rowHeight = 106
