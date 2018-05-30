@@ -102,7 +102,7 @@ class AppData: NSObject {
         }
     }
     
-    open func fnLoadMyActivity(tblview: UITableView, intUserId: Int, arr: [FeedItem], refresherNotification: UIRefreshControl, view: UIView) {
+    open func fnLoadMyActivity(tblview: UITableView, intUserId: Int, arr: [FeedItem], refresherNotification: UIRefreshControl, view: UIView, feedView: UIView) {
         let urlLoadMyActivity = URL(string: "https://api.projectmito.io/v1/feed/")
         let parameters: Parameters = [
             "friendId": intUserId
@@ -133,6 +133,7 @@ class AppData: NSObject {
 
                     DispatchQueue.main.async {
                         tblview.reloadData()
+                        feedView.isHidden = false
                         refresherNotification.endRefreshing()
                     }
                 }
