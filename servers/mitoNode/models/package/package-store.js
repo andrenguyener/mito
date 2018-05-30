@@ -58,6 +58,8 @@ class PackageStore {
             });
     }
 
+
+
     // Get all orders that user has sent to friends
     getSentPackages(userId) {
         return new Promise((resolve) => {

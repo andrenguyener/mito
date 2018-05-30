@@ -41,6 +41,7 @@ const EmailHandler = () => {
             <head>
                 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
                 <style type="text/css"></style>
+            </head>
             
                 <body style="padding: 0; width: 100% !important; -webkit-text-size-adjust: 100%; margin: 0; -ms-text-size-adjust: 100%" marginheight="0"
                     marginwidth="0">
@@ -56,7 +57,7 @@ const EmailHandler = () => {
                                         </tr>
                                         <tr style="line-height: 0px">
                                             <td width="100%" style="font-size: 0px" align="center" height="1">
-                                                // <img width="40px" style="max-height: 110px; width: 70px; *width: 70px; *height: 110px" alt="" src="cid:MitoLogo" />
+                                                <!-- <img width="40px" style="max-height: 110px; width: 70px; *width: 70px; *height: 110px" alt="" src="cid:MitoLogo" /> -->
                                             </td>
                                         </tr>
                                         <tr>
@@ -104,8 +105,7 @@ const EmailHandler = () => {
                             </tr>
                         </table>
                     </center>
-                </body>
-            </head>`
+                </body>`
             // ,
             // attachments: [{
             //     filename: 'GiftGreen.png',

@@ -5,6 +5,7 @@ const express = require('express');
 
 const Cart = require('./../models/cart/cart-class');
 const sendToMQ = require('./rabbit-queue');
+const axios = require('axios');
 
 const CartHandler = (cartStore) => {
     if (!cartStore) {
@@ -75,6 +76,26 @@ const CartHandler = (cartStore) => {
             .process(user.userId, senderAddressId, recipientId, cardId, message, giftOption)
             .then((cart) => {
                 res.send(cart);
+
+
+                this.axios({
+                    method: 'get',
+                    url: `https://api.projectmito.io/v1/users/${recipientId}`
+                })
+                    .then(function (response) {
+                        console.log(response);
+                        const data = {
+                            type: 'package-pending',
+                            package: response,
+                            userIdOut: recipientId
+                        };
+                        sendToMQ(req, data);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+
             })
             .catch(err => {
                 if (err !== breakSignal) {
