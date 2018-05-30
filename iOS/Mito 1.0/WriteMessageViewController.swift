@@ -19,11 +19,18 @@ class WriteMessageViewController: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
         textviewWriteMessage.delegate = self
         textviewWriteMessage.keyboardDismissMode = .onDrag
-        self.navigationItem.title = "Message"
+        self.navigationItem.title = "Send A Message"
         appdata.fnDisplayImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipientProfile, boolCircle: true)
         strRecipientName.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
         textviewWriteMessage.text = "What's it for?"
         appdata.fnDisplayImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipientProfile, boolCircle: true)
+    }
+    
+    // overrides next screen's back button title
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let backItem = UIBarButtonItem()
+        backItem.title = "Back"
+        navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
     }
     
     func textViewDidChange(_ textView: UITextView) {

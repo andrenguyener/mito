@@ -17,6 +17,7 @@ class AppData: NSObject {
     open var priceSum : Decimal = 0.00
     open var intCurrentUserID: Int = 0
     open var intCurrIndex: Int = -1
+    open var strProductQuery = ""
     
     open var personRecipient: Person = Person(firstName: "FName", lastName: "LName", email: "", avatar: "dd", intUserID: 0, strUsername: "", intNumFriends: 0, dateRequested: Date.distantPast)
     open var strOrderMessage = "What's it for?"
@@ -54,6 +55,7 @@ class AppData: NSObject {
     open let strNoImageAvailable = "https://www.yankee-division.com/uploads/1/7/6/5/17659643/notavailable_2_orig.jpg?210b"
     
     open var arrProductSearchResults: [Product] = []
+    open var arrEbaySearchResults: [EbayProduct] = []
     
     open var arrMonths: [Month] = []
     open var arrDays: [String] = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"]
@@ -142,7 +144,7 @@ class AppData: NSObject {
         }
     }
     
-    func fnLoadFriendActivity(tblview: UITableView, refresherNotification: UIRefreshControl, view: UIView) {
+    func fnLoadFriendActivity(tblview: UITableView, refresherNotification: UIRefreshControl, view: UIView, feedView: UIView, spinner: UIActivityIndicatorView) {
         let urlLoadFriendActivity = URL(string: "https://api.projectmito.io/v1/feed/friends")
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String
@@ -161,15 +163,18 @@ class AppData: NSObject {
                     self.arrFriendsFeedItems.sort(by: self.fnSortFeedItems)
                 }
                 print("Total Friend Feed Items: \(self.arrFriendsFeedItems.count)")
-                if (self.arrFriendsFeedItems.count == 0) {
-                    view.isHidden = false
-                    tblview.isHidden = true
-                } else {
-                    view.isHidden = true
-                    tblview.isHidden = false
-                }
 
                 DispatchQueue.main.async {
+                    if (self.arrFriendsFeedItems.count == 0) {
+                        view.isHidden = false
+                        feedView.isHidden = true
+                        tblview.isHidden = true
+                    } else {
+                        view.isHidden = true
+                        feedView.isHidden = false
+                        tblview.isHidden = false
+                    }
+                    spinner.stopAnimating()
                     tblview.reloadData()
                     refresherNotification.endRefreshing()
                 }
@@ -247,7 +252,7 @@ class AppData: NSObject {
                     for obj in dict2 {
                         let object = obj as! NSDictionary
                         var strAvatar = object["ProfileImage"] as! String
-                        if strAvatar == self.strImageDefault || strAvatar == "AAP4AHUXf+Y="{
+                        if strAvatar == self.strImageDefault || strAvatar == "AAP4AHUXf+Y=" {
                             strAvatar = object["PhotoUrl"] as! String
                         }
                         let p: Person = Person(firstName: (object["UserFname"] as? String)!,
@@ -324,11 +329,6 @@ class AppData: NSObject {
                     let objUsers = dictionary as! NSArray
                     for objUser in objUsers {
                         let objPerson2 = objUser as! NSDictionary
-                        let samantha = objPerson2["UserFname"] as! String
-                        if samantha == "Samantha" {
-                            print(objPerson2)
-                        }
-//                        print(objPerson2)
                         var strAvatar = objPerson2["ProfileImage"] as! String
                         if strAvatar == self.strImageDefault || strAvatar == "AAP4AHUXf+Y=" {
                             strAvatar = objPerson2["PhotoUrl"] as! String
@@ -417,7 +417,7 @@ class AppData: NSObject {
 //    }
     
     open func fnDisplayImage(strImageURL: String, img: UIImageView, boolCircle: Bool) {
-        if strImageURL.contains("https://") {
+        if strImageURL.contains("http://") || strImageURL.contains("https://"){
             Alamofire.request(strImageURL).responseImage(completionHandler: { (response) in
                 print(response)
                 if var image = response.result.value {
@@ -435,5 +435,10 @@ class AppData: NSObject {
             image = image?.af_imageRoundedIntoCircle()
             img.image = image
         }
+    }
+    
+    open func fnShowPrice(str: String) -> NSString {
+        let dblValue = Double(str)
+        return Double(round(100 * dblValue!)/100).roundTo2f()
     }
 }

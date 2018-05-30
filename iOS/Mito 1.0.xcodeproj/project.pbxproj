@@ -124,6 +124,7 @@
 		DAC178BE2088385A0039AA08 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC178BD2088385A0039AA08 /* Package.swift */; };
 		DACCDE29206057C500CD59D9 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACCDE28206057C500CD59D9 /* State.swift */; };
 		DACCDE2B2060617000CD59D9 /* Month.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACCDE2A2060617000CD59D9 /* Month.swift */; };
+		DAD0D53920BCDB300031ABC0 /* EbayProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD0D53820BCDB300031ABC0 /* EbayProduct.swift */; };
 		DAD995312042386E007A7687 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD995302042386E007A7687 /* SearchViewController.swift */; };
 		DAD995332042389B007A7687 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD995322042389B007A7687 /* Person.swift */; };
 		DAD9953520423A4B007A7687 /* Andre.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD9953420423A4B007A7687 /* Andre.png */; };
@@ -282,6 +283,7 @@
 		DAC178BD2088385A0039AA08 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		DACCDE28206057C500CD59D9 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		DACCDE2A2060617000CD59D9 /* Month.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Month.swift; sourceTree = "<group>"; };
+		DAD0D53820BCDB300031ABC0 /* EbayProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EbayProduct.swift; sourceTree = "<group>"; };
 		DAD995302042386E007A7687 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		DAD995322042389B007A7687 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		DAD9953420423A4B007A7687 /* Andre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Andre.png; sourceTree = "<group>"; };
@@ -425,6 +427,7 @@
 				DAC178BB2088240F0039AA08 /* Address.swift */,
 				DAA9075D209963C400F151E1 /* AddressTableViewCell.swift */,
 				B272DC2D2043BBE400EE2121 /* AppData.swift */,
+				DAD0D53820BCDB300031ABC0 /* EbayProduct.swift */,
 				B29AEC61203FC9C100110EF9 /* AppDelegate.swift */,
 				B247196F20454733006CF6C2 /* CartTableViewCell.swift */,
 				B247196D20453917006CF6C2 /* CartViewController.swift */,
@@ -861,6 +864,7 @@
 				DA27C218204353FF00CCFD60 /* HomeViewController.swift in Sources */,
 				B2F849472043CAA900CBD83A /* SettingsViewController.swift in Sources */,
 				DA23437C20AE5200003E4D6A /* ChoosePaymentViewController.swift in Sources */,
+				DAD0D53920BCDB300031ABC0 /* EbayProduct.swift in Sources */,
 				DA28344B20B10AE90084571D /* PaymentInfoTableViewCell.swift in Sources */,
 				DA42CC0A2064909900900C7D /* LineItem.swift in Sources */,
 				B2471994204672DE006CF6C2 /* NotificationViewController.swift in Sources */,
@@ -1049,6 +1053,7 @@
 			baseConfigurationReference = E6908C73F6FF5F893922619E /* Pods-Mito 1.0.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TG372K25N5;
 				INFOPLIST_FILE = "Mito 1.0/Info.plist";
@@ -1056,6 +1061,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.washington.jjguo.mito;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1066,6 +1072,7 @@
 			baseConfigurationReference = 84DCA3E27CF3BAF309A28CA2 /* Pods-Mito 1.0.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TG372K25N5;
 				INFOPLIST_FILE = "Mito 1.0/Info.plist";
@@ -1073,6 +1080,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.uw.washington.jjguo.mito;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

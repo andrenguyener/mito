@@ -16,24 +16,30 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     var appdata = AppData.shared
     var urlAddToMitoCart = URL(string: "https://api.projectmito.io/v1/cart")
-    let formatter = NumberFormatter()
     var intImageIndex = 0
+    var objProduct = EbayProduct(strItemId: "", strTitle: "", strImage: "", strPrice: "", strSeller: "")
+    var intQuantity = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let objEbay = appdata.arrEbaySearchResults[appdata.intCurrIndex]
+        print(objEbay.values())
+        fnLoadProductDetails(strItemId: objEbay.strItemId!)
+        
         appdata.arrVariations.removeAll()
-        let objProduct = appdata.arrProductSearchResults[appdata.intCurrIndex]
-        fnSearchByASIN(strASIN: objProduct.strParentASIN)
+//        let objProduct = appdata.arrProductSearchResults[appdata.intCurrIndex]
+//        fnSearchByASIN(strASIN: objProduct.strParentASIN)
         pickerviewQuantity.isHidden = true
         pickerviewQuantity.delegate = self
         pickerviewQuantity.dataSource = self
         self.navigationItem.title = "Product"
         self.navigationController?.isNavigationBarHidden = false
-        appdata.fnDisplayImage(strImageURL: objProduct.image, img: prodImage, boolCircle: false)
-        prodTitle.text = objProduct.title
-        prodPub.text = objProduct.publisher
-        prodPrice.text = objProduct.price
-        prodDetail.text = objProduct.description
+//        appdata.fnDisplayImage(strImageURL: objProduct.image, img: prodImage, boolCircle: false)
+//        prodTitle.text = objProduct.title
+//        prodPub.text = objProduct.publisher
+//        prodPrice.text = objProduct.price
+//        prodDetail.text = objProduct.description
         
         let nibAddNewAddress = UINib(nibName: "ProductImageCollectionViewCell", bundle: nil)
         viewProductImages.register(nibAddNewAddress, forCellWithReuseIdentifier: "ProductImageCell")
@@ -57,51 +63,6 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.fnChooseQuantity))
         lblQuantity.addGestureRecognizer(tapGesture)
     }
-    
-//    func swiped(gesture: UIGestureRecognizer) {
-//        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-//            switch swipeGesture.direction {
-//            case UISwipeGestureRecognizerDirection.Right :
-//                println("User swiped right")
-//                intImageIndex--
-//                if imageIndex < 0 {
-//
-//                    imageIndex = maxImages
-//
-//                }
-//
-//                image.image = UIImage(named: imageList[imageIndex])
-//
-//            case UISwipeGestureRecognizerDirection.Left:
-//                println("User swiped Left")
-//
-//                // increase index first
-//
-//                imageIndex++
-//
-//                // check if index is in range
-//
-//                if imageIndex > maxImages {
-//
-//                    imageIndex = 0
-//
-//                }
-//
-//                image.image = UIImage(named: imageList[imageIndex])
-//
-//
-//
-//
-//            default:
-//                break //stops the code/codes nothing.
-//
-//
-//            }
-//
-//        }
-//
-//
-//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -143,7 +104,7 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     @IBAction func btnDoneSelectingQuantity(_ sender: Any) {
         let strQuantity = String(appdata.arrQuantity[pickerviewQuantity.selectedRow(inComponent: 0)])
-        lblQuantity.text = strQuantity
+        intQuantity = (Int)(strQuantity)!
         btnQuantity.setTitle("Quantity: \(strQuantity)", for: .normal)
         pickerviewQuantity.isHidden = true
         confirmPicker.isHidden = true
@@ -158,6 +119,57 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
         btnQuantity.isHidden = false
         lblQuantity.isHidden = false
         btnAddToCart.isHidden = false
+    }
+    
+    func fnLoadProductDetails(strItemId: String){
+        var str: NSString = NSString(string: "https://api.ebay.com/buy/browse/v1/item/\(strItemId)")
+        str = str.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)! as NSString
+        let goodStr = str as String
+        let urlLoadProductDetails = URL(string: goodStr)
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(UserDefaults.standard.object(forKey: "strEbayToken") as! String)"
+        ]
+        Alamofire.request(urlLoadProductDetails!, method: .get, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                if let dictionary = response.value {
+                    let dict = dictionary as! NSDictionary
+                    print(dict)
+                    let strItemId = dict["itemId"] as! String
+                    let strTitle = dict["title"] as! String
+                    let objPrice = dict["price"] as! NSDictionary
+                    let strPrice = objPrice["value"] as! String
+                    var strImageUrl = ""
+                    if dict["image"] != nil {
+                        let objImage = dict["image"] as! NSDictionary
+                        if objImage["imageUrl"] != nil {
+                            strImageUrl = objImage["imageUrl"] as! String
+                        } else {
+                            strImageUrl = objImage["image"] as! String
+                        }
+                    } else {
+                        strImageUrl = "http://www.searshometownstores.com/c.3721178/hometown/img/no_image_available.jpeg?hei=50&wid=100&sharpen=1"
+                    }
+//                    let objRating = dict["primaryProductReviewRating"] as! NSDictionary
+//                    let strRating = objRating["averageRating"] as! String
+                    let objSeller = dict["seller"] as! NSDictionary
+                    let strSeller = objSeller["username"] as! String
+                    var strDescription = "N/A"
+                    if dict["shortDescription"] != nil {
+                        strDescription = dict["shortDescription"] as! String
+                    }
+                    self.objProduct = EbayProduct(strItemId: strItemId, strTitle: strTitle, strImage: strImageUrl, strPrice: strPrice, strSeller: strSeller)
+                    self.prodPrice.text = "$\(strPrice)"
+                    self.prodPub.text = strSeller
+                    self.appdata.fnDisplayImage(strImageURL: strImageUrl, img: self.prodImage, boolCircle: false)
+                    self.prodTitle.text = strTitle
+                    self.prodDetail.text = strDescription
+                }
+            case .failure(let error):
+                print("Error getting product information")
+                print(error)
+            }
+        }
     }
     
     func fnSearchByASIN(strASIN: String) {
@@ -246,23 +258,24 @@ class ProductDetailsViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     @IBAction func btnAddToCartPressed(_ sender: Any) {
-        let objCurrentProduct = appdata.arrProductSearchResults[appdata.intCurrIndex]
+        let objCurrentProduct = self.objProduct
+        print(objProduct.values())
         var decAmazonPrice : Decimal = 0.00
-        let itemPrice = objCurrentProduct.price // change later
+        let itemPrice = "$\(objCurrentProduct.strPrice)" // change later
+        let formatter = NumberFormatter()
         formatter.numberStyle = .currency
         formatter.locale = Locale(identifier: "en_US")
-        print(objCurrentProduct.price)
+        print(itemPrice)
         if let number = formatter.number(from: itemPrice) {
             decAmazonPrice = number.decimalValue
         }
         print("decAmazonPrice: \(decAmazonPrice)")
-        let intQuantity = (Int)(lblQuantity.text!)!
         let parameters: Parameters = [
-            "amazonASIN": objCurrentProduct.ASIN,
-            "amazonPrice": decAmazonPrice,
+            "amazonASIN": objCurrentProduct.strItemId!,
+            "amazonPrice": Decimal(string: objCurrentProduct.strPrice!),
             "quantity": intQuantity,
-            "productImageUrl": objCurrentProduct.image,
-            "productName": objCurrentProduct.title
+            "productImageUrl": objCurrentProduct.strImage!,
+            "productName": objCurrentProduct.strTitle!
         ]
         let headers: HTTPHeaders = [
             "Authorization": UserDefaults.standard.object(forKey: "Authorization") as! String

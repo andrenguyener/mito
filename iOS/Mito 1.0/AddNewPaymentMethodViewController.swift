@@ -23,7 +23,14 @@ class AddNewPaymentMethodViewController: UIViewController {
         self.hideKeyboard()
         // Do any additional setup after loading the view.
     }
-
+    
+    // overrides next screen's back button title
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let backItem = UIBarButtonItem()
+        backItem.title = "Back"
+        navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -55,7 +62,8 @@ class AddNewPaymentMethodViewController: UIViewController {
     }
     
     func fnFormatCardNumber() -> Int {
-        return Int(String((txtFldCardNumber.text?.prefix(16))!))!
+        let str = String((txtFldCardNumber.text?.prefix(16))!)
+        return (str as NSString).integerValue
     }
     
     func fnFormatCVV() -> Int {

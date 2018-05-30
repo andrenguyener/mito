@@ -95,6 +95,8 @@ const NotificationHandler = require('./handlers/notification');
 
 const AmazonHashHandler = require('./handlers/amazon');
 
+const EmailHandler = require('./handlers/email')
+
 
 const addr = process.env.ADDR || "localhost:4004";
 const [host, port] = addr.split(":");
@@ -110,8 +112,8 @@ var TYPES = require('tedious').TYPES;
 
 
 
-function ebayLoop(sql) {
-    console.log(sql);
+function ebayLoop(sql, req) {
+    // console.log(sql);
     let ebayBody = queryString.stringify({
         "grant_type": "client_credentials",
         "redirect_uri": "Sopheak_Neak-SopheakN-Projec-cadjmlp",
@@ -128,7 +130,7 @@ function ebayLoop(sql) {
         data: ebayBody
     })
         .then(response => {
-            console.log(response.data)
+            // console.log(response.data)
             return new Promise((resolve) => {
                 sql.acquire(function (err, connection) {
                     let procedureName = "uspCreateEbayToken";
@@ -150,10 +152,10 @@ function ebayLoop(sql) {
                 .then((token) => {
                     const data = {
                         type: 'ebay-token',
-                        data: token
+                        dataEbay: token
                     };
                     sendToMQ(req, data);
-                    console.log(token);
+                    console.log("EBAY TOKEN: " + token);
                 })
                 .catch((err) => {
                     console.log(err);
@@ -195,6 +197,7 @@ function ebayLoop(sql) {
         // it available from req.body.
         app.use(express.json());
 
+
         // All of the following APIs require the user to be authenticated.
         // If the user is not authenticated,
         // respond immediately with the status code 401 (Unauthorized).
@@ -221,7 +224,7 @@ function ebayLoop(sql) {
         app.set('qName', qName);
 
 
-        var ebayTokenLoop = setInterval(function () { ebayLoop(sql); }, 60000);
+        var ebayTokenLoop = setInterval(function () { ebayLoop(sql, app.request); }, 1800000);
 
         // Initialize table stores.
         let addressStore = new AddressStore(sql);
@@ -244,6 +247,7 @@ function ebayLoop(sql) {
         app.use(PaymentHandler(paymentStore));
         app.use(ImageHandler(imageStore));
         app.use(NotificationHandler(notificationStore));
+        app.use(EmailHandler());
 
         app.use(AmazonHashHandler());
         app.listen(portNum, host, () => {
