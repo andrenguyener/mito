@@ -36,10 +36,10 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="jms-jt-aDl" userLabel="UsernamePassword">
-                                <rect key="frame" x="20.5" y="254.5" width="334.5" height="158"/>
+                                <rect key="frame" x="15" y="250.5" width="345" height="166"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username/Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="39o-Wv-VpO">
-                                        <rect key="frame" x="0.0" y="0.0" width="334.5" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="345" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="jmU-Nm-PfK"/>
                                         </constraints>
@@ -54,7 +54,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i9J-yt-UsC">
-                                        <rect key="frame" x="0.0" y="60" width="334.5" height="40"/>
+                                        <rect key="frame" x="0.0" y="60" width="345" height="40"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES" textContentType="password"/>
@@ -66,12 +66,12 @@
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TQZ-rQ-MLe" customClass="RoundedButton" customModule="Mito_1_0" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="120" width="334.5" height="38"/>
+                                        <rect key="frame" x="0.0" y="120" width="345" height="46"/>
                                         <color key="backgroundColor" red="0.25490196078431371" green="0.8666666666666667" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="38" id="wIT-4n-9US"/>
+                                            <constraint firstAttribute="height" constant="46" id="wIT-4n-9US"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                         <state key="normal" title="LOGIN">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -85,16 +85,16 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Ko4-yo-lJ8" userLabel="Sign Up">
-                                <rect key="frame" x="20.5" y="617" width="334.5" height="30"/>
+                                <rect key="frame" x="15" y="622" width="345" height="30"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Don't have an account?" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Toa-Sz-Dyo">
-                                        <rect key="frame" x="0.0" y="0.0" width="259" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="267" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gS8-lv-B80">
-                                        <rect key="frame" x="259" y="0.0" width="75.5" height="30"/>
+                                        <rect key="frame" x="267" y="0.0" width="78" height="30"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                         <state key="normal" title="Sign Up"/>
                                         <connections>
@@ -118,13 +118,13 @@
                             <constraint firstItem="REU-qp-z2d" firstAttribute="centerX" secondItem="Es7-sx-xiV" secondAttribute="centerX" id="4uh-RU-Cf3"/>
                             <constraint firstItem="jms-jt-aDl" firstAttribute="centerY" secondItem="Es7-sx-xiV" secondAttribute="centerY" id="5bV-vc-10N"/>
                             <constraint firstItem="jms-jt-aDl" firstAttribute="centerX" secondItem="Es7-sx-xiV" secondAttribute="centerX" id="9eN-N4-rFI"/>
-                            <constraint firstItem="Ko4-yo-lJ8" firstAttribute="leading" secondItem="LFW-Cc-TyY" secondAttribute="leading" constant="20" id="N0L-Sz-hoB"/>
-                            <constraint firstItem="jms-jt-aDl" firstAttribute="leading" secondItem="LFW-Cc-TyY" secondAttribute="leading" constant="20" id="ZuB-qj-ARw"/>
-                            <constraint firstItem="LFW-Cc-TyY" firstAttribute="trailing" secondItem="Ko4-yo-lJ8" secondAttribute="trailing" constant="20" id="irG-sl-TM5"/>
+                            <constraint firstItem="Ko4-yo-lJ8" firstAttribute="leading" secondItem="LFW-Cc-TyY" secondAttribute="leading" constant="15" id="N0L-Sz-hoB"/>
+                            <constraint firstItem="jms-jt-aDl" firstAttribute="leading" secondItem="LFW-Cc-TyY" secondAttribute="leading" constant="15" id="ZuB-qj-ARw"/>
+                            <constraint firstItem="LFW-Cc-TyY" firstAttribute="trailing" secondItem="Ko4-yo-lJ8" secondAttribute="trailing" constant="15" id="irG-sl-TM5"/>
                             <constraint firstItem="REU-qp-z2d" firstAttribute="top" secondItem="LFW-Cc-TyY" secondAttribute="top" constant="40" id="nMq-1i-m6A"/>
                             <constraint firstItem="Ko4-yo-lJ8" firstAttribute="centerX" secondItem="Es7-sx-xiV" secondAttribute="centerX" id="qdk-d2-T5N"/>
-                            <constraint firstItem="LFW-Cc-TyY" firstAttribute="trailing" secondItem="jms-jt-aDl" secondAttribute="trailing" constant="20" id="rGE-g5-rRe"/>
-                            <constraint firstItem="LFW-Cc-TyY" firstAttribute="bottom" secondItem="Ko4-yo-lJ8" secondAttribute="bottom" constant="20" id="wbT-KZ-gZq"/>
+                            <constraint firstItem="LFW-Cc-TyY" firstAttribute="trailing" secondItem="jms-jt-aDl" secondAttribute="trailing" constant="15" id="rGE-g5-rRe"/>
+                            <constraint firstItem="LFW-Cc-TyY" firstAttribute="bottom" secondItem="Ko4-yo-lJ8" secondAttribute="bottom" constant="15" id="wbT-KZ-gZq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LFW-Cc-TyY"/>
                     </view>
@@ -853,7 +853,7 @@
         <image name="mitodesignblack.png" width="2000" height="1173"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="NBd-3z-iqs"/>
-        <segue reference="Fma-AT-nbz"/>
+        <segue reference="Tk8-BD-Yxk"/>
+        <segue reference="cTu-G9-fQe"/>
     </inferredMetricsTieBreakers>
 </document>
