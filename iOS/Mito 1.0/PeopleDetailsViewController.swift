@@ -36,6 +36,7 @@ class PeopleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
     
     @IBAction func btnShopNowForFriend(_ sender: Any) {
         appdata.personRecipient = appdata.personToView
+        appdata.boolShoppingForRecipient = true
         performSegue(withIdentifier: "segShopNowForFriend", sender: self)
         self.tabBarController?.selectedIndex = 2
     }

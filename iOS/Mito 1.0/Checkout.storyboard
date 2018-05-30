@@ -987,7 +987,7 @@
         <!--Send a Message-->
         <scene sceneID="IIU-ar-ycY">
             <objects>
-                <viewController title="Send a Message" id="jmz-bN-xaL" customClass="WriteMessageViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="idWriteMessageViewController" title="Send a Message" id="jmz-bN-xaL" customClass="WriteMessageViewController" customModule="Mito_1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AHA-pg-VVB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1134,7 +1134,6 @@
         <!--Navigation Controller-->
         <scene sceneID="adQ-MP-h3F">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EWm-lV-jBO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="ll8-cJ-8yB" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mSx-VF-sCS">
@@ -1145,6 +1144,7 @@
                         <segue destination="qdc-jL-mfw" kind="relationship" relationship="rootViewController" id="JGV-7I-Jcg"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EWm-lV-jBO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="8797.6000000000004" y="-533.88305847076469"/>
         </scene>
@@ -1156,9 +1156,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Jjr-wW-Hse"/>
-        <segue reference="wgc-xo-5GA"/>
+        <segue reference="E9w-it-1S2"/>
         <segue reference="D79-aK-l5e"/>
-        <segue reference="Qfg-Id-CWz"/>
+        <segue reference="G0C-Hd-PoN"/>
         <segue reference="MjP-Xg-3Ou"/>
     </inferredMetricsTieBreakers>
 </document>

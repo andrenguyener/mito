@@ -51,26 +51,42 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         imgCurrentRecipient.addGestureRecognizer(tapGesture)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        fnShowCurrentShoppingRecipient()
+    }
+    
     var shopfor = 1
     
+    
     @IBAction func changeConstraint(_ sender: Any) {
-        
-        if shopfor == 1 {
-            // this is the one that should use if they choose a friend to shop for (Shows dark green nav)
+        shopForTopView.isActive = false
+        productTableToTop.isActive = true
+        appdata.boolShoppingForRecipient = false
+//        if appdata.boolShoppingForRecipient {
+//            // this is the one that should use if they choose a friend to shop for (Shows dark green nav)
+//            print("hey i changed")
+//
+////            shopfor = 2
+//
+//        } else {
+//            print("hey i changed 2")
+//            // this should be the one to use if you exit or do not have someone to shop for (remove green nav (uninstalls))
+//            shopForTopView.isActive = false
+//            productTableToTop.isActive = true
+//
+////            shopfor = 1
+//
+//        }
+    }
+    
+    func fnShowCurrentShoppingRecipient() {
+        if appdata.boolShoppingForRecipient {
             shopForTopView.isActive = true
             productTableToTop.isActive = false
-            print("hey i changed")
-            
-            shopfor = 2
-            
+            shoppingForLabel.text = "Shopping for \(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
         } else {
-            print("hey i changed 2")
-            // this should be the one to use if you exit or do not have someone to shop for (remove green nav (uninstalls))
             shopForTopView.isActive = false
             productTableToTop.isActive = true
-            
-            shopfor = 1
-
         }
     }
     

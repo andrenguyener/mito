@@ -1272,6 +1272,7 @@
                         <outlet property="pickerviewEditQuantity" destination="Y8N-PG-Y96" id="9Pz-85-Z4b"/>
                         <segue destination="5ev-RP-TnR" kind="show" identifier="cartToHome" id="4Df-8F-JjS"/>
                         <segue destination="J5E-gk-jdR" kind="show" identifier="segCartToChooseRecipient" id="2w6-3A-Bb1"/>
+                        <segue destination="J5E-gk-jdR" kind="show" id="UaC-n9-PAq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4qR-31-kjr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2151,7 +2152,7 @@ If you have any questions about these Terms, please contact us at projectmitotea
                 <viewControllerPlaceholder storyboardName="Checkout" referencedIdentifier="UIViewController-CbO-zi-xvJ" id="J5E-gk-jdR" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tZx-Y6-HKT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4174" y="132"/>
+            <point key="canvasLocation" x="4271" y="288"/>
         </scene>
         <!--Search People-->
         <scene sceneID="MWu-N9-DXP">
@@ -2580,6 +2581,7 @@ If you have any questions about these Terms, please contact us at projectmitotea
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="eyY-AF-kxf"/>
+        <segue reference="UaC-n9-PAq"/>
         <segue reference="pBU-pi-a1H"/>
         <segue reference="Oq9-F1-cCO"/>
         <segue reference="4Df-8F-JjS"/>

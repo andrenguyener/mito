@@ -195,17 +195,23 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     @IBAction func btnGoToEditCheckout(_ sender: Any) {
         boolSender = true
-        performSegue(withIdentifier: "segCartToChooseRecipient", sender: self)
-        let backItem = UIBarButtonItem()
-        backItem.title = "Back"
-        navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
+        if appdata.boolShoppingForRecipient {
+            let storyboard: UIStoryboard = UIStoryboard(name: "Checkout", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "idWriteMessageViewController") as! WriteMessageViewController
+            self.show(vc, sender: self)
+        } else {
+            let backItem = UIBarButtonItem()
+            backItem.title = "Back"
+            navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
+            performSegue(withIdentifier: "segCartToChooseRecipient", sender: self)
+        }
+//        performSegue(withIdentifier: "segCartToChooseRecipient", sender: self)
     }
     
     @IBOutlet weak var lblNotifyYouMessage: UILabel!
     
     @IBAction func finishCheckout(_ sender: Any) {
         self.fnFinishCheckout()
-        performSegue(withIdentifier: "checkoutFinish", sender: self)
     }
     
     func fnFinishCheckout() {
