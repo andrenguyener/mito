@@ -24,6 +24,7 @@ class ChooseAddressViewController: UIViewController, UITableViewDataSource, UITa
         tblviewAddress.delegate = self
         tblviewAddress.dataSource = self
         fnLoadCurrUserAddresses()
+        self.navigationController?.isNavigationBarHidden = false
         if boolSender {
              self.navigationItem.title = "Billing Address"
         } else {
@@ -34,9 +35,13 @@ class ChooseAddressViewController: UIViewController, UITableViewDataSource, UITa
     }
     // overrides next screen's back button title
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let backItem = UIBarButtonItem()
-        backItem.title = "Back"
-        navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
+//        if segue.identifier == "DirectAcceptPackage" {
+//
+//        } else {
+            let backItem = UIBarButtonItem()
+            backItem.title = "Back"
+            navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
+//        }
     }
     
     func fnGoogleChooseAddress() {
