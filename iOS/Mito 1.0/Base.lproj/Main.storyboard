@@ -2323,65 +2323,34 @@ If you have any questions about these Terms, please contact us at projectmitotea
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="er1-mp-JhR" userLabel="Green Top Nav">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPT-d4-twW" userLabel="Product View">
+                                <rect key="frame" x="0.0" y="90" width="375" height="528"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WK2-8u-3L9" userLabel="Header Stack">
-                                        <rect key="frame" x="15" y="30" width="345" height="50"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Pas-aT-JIw" userLabel="Shop For Stack">
+                                        <rect key="frame" x="15" y="-40" width="345" height="40"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lnr-Wb-d36" customClass="RoundedImage" customModule="Mito_1_0" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="gbB-0f-szr"/>
-                                                    <constraint firstAttribute="width" secondItem="lnr-Wb-d36" secondAttribute="height" multiplier="1:1" id="j21-xI-BRe"/>
-                                                </constraints>
-                                            </imageView>
-                                            <searchBar contentMode="redraw" placeholder="Search Products" backgroundImage="Mito Green Background.png" translatesAutoresizingMaskIntoConstraints="NO" id="t70-Qz-J7F">
-                                                <rect key="frame" x="50" y="0.0" width="245" height="50"/>
-                                                <color key="barTintColor" red="0.25490196079999999" green="0.86666666670000003" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                                <scopeButtonTitles>
-                                                    <string>Products</string>
-                                                    <string>People</string>
-                                                </scopeButtonTitles>
-                                            </searchBar>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ce0-ay-WCv" userLabel="Cart">
-                                                <rect key="frame" x="295" y="0.0" width="50" height="50"/>
-                                                <color key="backgroundColor" red="0.25490196079999999" green="0.86666666670000003" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="Ce0-ay-WCv" secondAttribute="height" multiplier="1:1" id="Joo-Qd-WPo"/>
-                                                    <constraint firstAttribute="width" constant="50" id="MWj-qC-7bY"/>
-                                                </constraints>
-                                                <state key="normal" image="46 shopping cart 2"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    Shopping For Sopheaky Neaky" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBm-Xu-AG9">
+                                                <rect key="frame" x="0.0" y="0.0" width="305" height="40"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Italic" family="Roboto" pointSize="16"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vA2-LZ-VIp">
+                                                <rect key="frame" x="305" y="0.0" width="40" height="40"/>
+                                                <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="17"/>
+                                                <state key="normal" title="X">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
                                                 <connections>
-                                                    <action selector="btnCartPressed:" destination="cz1-uG-LnH" eventType="touchUpInside" id="zxv-oN-wZf"/>
+                                                    <action selector="changeConstraint:" destination="cz1-uG-LnH" eventType="touchUpInside" id="OsK-fK-uhD"/>
                                                 </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="G6I-f1-RLL"/>
+                                            <constraint firstAttribute="height" constant="40" id="zbI-BZ-QCG"/>
                                         </constraints>
                                     </stackView>
-                                </subviews>
-                                <color key="backgroundColor" red="0.25490196079999999" green="0.86666666670000003" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstItem="WK2-8u-3L9" firstAttribute="leading" secondItem="er1-mp-JhR" secondAttribute="leading" constant="15" id="HwQ-kY-ukd"/>
-                                    <constraint firstAttribute="bottom" secondItem="WK2-8u-3L9" secondAttribute="bottom" constant="10" id="Wfw-yL-7o9"/>
-                                    <constraint firstItem="WK2-8u-3L9" firstAttribute="centerX" secondItem="er1-mp-JhR" secondAttribute="centerX" id="gZ0-JQ-e5a"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPT-d4-twW" userLabel="Product View">
-                                <rect key="frame" x="0.0" y="90" width="375" height="528"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    Shopping For Sopheaky Neaky" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBm-Xu-AG9">
-                                        <rect key="frame" x="15" y="0.0" width="345" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="bCN-bx-0Nb"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Roboto-Italic" family="Roboto" pointSize="16"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qfx-4Y-f3S">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="528"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2450,39 +2419,77 @@ If you have any questions about these Terms, please contact us at projectmitotea
                                 </subviews>
                                 <color key="backgroundColor" red="0.054896535452777756" green="0.7224609375333334" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="qfx-4Y-f3S" firstAttribute="top" secondItem="Pas-aT-JIw" secondAttribute="bottom" id="2Zz-AN-gTg"/>
                                     <constraint firstItem="qfx-4Y-f3S" firstAttribute="top" secondItem="ZPT-d4-twW" secondAttribute="top" id="5gz-DH-LYK"/>
                                     <constraint firstAttribute="bottom" secondItem="qfx-4Y-f3S" secondAttribute="bottom" id="BYF-ad-Pay"/>
-                                    <constraint firstItem="nBm-Xu-AG9" firstAttribute="leading" secondItem="ZPT-d4-twW" secondAttribute="leading" constant="15" id="CmC-cG-XqL"/>
-                                    <constraint firstItem="nBm-Xu-AG9" firstAttribute="bottom" secondItem="qfx-4Y-f3S" secondAttribute="top" id="F6l-yW-rlR"/>
-                                    <constraint firstAttribute="trailing" secondItem="nBm-Xu-AG9" secondAttribute="trailing" constant="15" id="TvV-s2-huz"/>
-                                    <constraint firstItem="nBm-Xu-AG9" firstAttribute="top" secondItem="ZPT-d4-twW" secondAttribute="top" id="cFd-WA-VXO"/>
+                                    <constraint firstItem="Pas-aT-JIw" firstAttribute="leading" secondItem="ZPT-d4-twW" secondAttribute="leading" constant="15" id="YxB-n5-Hwf"/>
+                                    <constraint firstItem="Pas-aT-JIw" firstAttribute="top" secondItem="ZPT-d4-twW" secondAttribute="top" id="h4Y-rl-4Qp"/>
+                                    <constraint firstAttribute="trailing" secondItem="Pas-aT-JIw" secondAttribute="trailing" constant="15" id="tCI-C1-G6J"/>
                                     <constraint firstItem="qfx-4Y-f3S" firstAttribute="leading" secondItem="ZPT-d4-twW" secondAttribute="leading" id="vlM-LW-of5"/>
                                     <constraint firstItem="qfx-4Y-f3S" firstAttribute="centerX" secondItem="ZPT-d4-twW" secondAttribute="centerX" id="x0n-Be-pfk"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="F6l-yW-rlR"/>
+                                        <exclude reference="h4Y-rl-4Qp"/>
                                     </mask>
                                 </variation>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vA2-LZ-VIp">
-                                <rect key="frame" x="164" y="318" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="changeConstraint:" destination="cz1-uG-LnH" eventType="touchUpInside" id="OsK-fK-uhD"/>
-                                </connections>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swirlsearch" translatesAutoresizingMaskIntoConstraints="NO" id="VM1-7e-wQO">
-                                <rect key="frame" x="105" y="114" width="187" height="430"/>
+                                <rect key="frame" x="105" y="140" width="187" height="404"/>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="er1-mp-JhR" userLabel="Green Top Nav">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WK2-8u-3L9" userLabel="Header Stack">
+                                        <rect key="frame" x="15" y="30" width="345" height="50"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lnr-Wb-d36" customClass="RoundedImage" customModule="Mito_1_0" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="gbB-0f-szr"/>
+                                                    <constraint firstAttribute="width" secondItem="lnr-Wb-d36" secondAttribute="height" multiplier="1:1" id="j21-xI-BRe"/>
+                                                </constraints>
+                                            </imageView>
+                                            <searchBar contentMode="redraw" placeholder="Search Products" backgroundImage="Mito Green Background.png" translatesAutoresizingMaskIntoConstraints="NO" id="t70-Qz-J7F">
+                                                <rect key="frame" x="50" y="0.0" width="245" height="50"/>
+                                                <color key="barTintColor" red="0.25490196079999999" green="0.86666666670000003" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <scopeButtonTitles>
+                                                    <string>Products</string>
+                                                    <string>People</string>
+                                                </scopeButtonTitles>
+                                            </searchBar>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ce0-ay-WCv" userLabel="Cart">
+                                                <rect key="frame" x="295" y="0.0" width="50" height="50"/>
+                                                <color key="backgroundColor" red="0.25490196079999999" green="0.86666666670000003" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="Ce0-ay-WCv" secondAttribute="height" multiplier="1:1" id="Joo-Qd-WPo"/>
+                                                    <constraint firstAttribute="width" constant="50" id="MWj-qC-7bY"/>
+                                                </constraints>
+                                                <state key="normal" image="46 shopping cart 2"/>
+                                                <connections>
+                                                    <action selector="btnCartPressed:" destination="cz1-uG-LnH" eventType="touchUpInside" id="zxv-oN-wZf"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="G6I-f1-RLL"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.25490196079999999" green="0.86666666670000003" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="WK2-8u-3L9" firstAttribute="leading" secondItem="er1-mp-JhR" secondAttribute="leading" constant="15" id="HwQ-kY-ukd"/>
+                                    <constraint firstAttribute="bottom" secondItem="WK2-8u-3L9" secondAttribute="bottom" constant="10" id="Wfw-yL-7o9"/>
+                                    <constraint firstItem="WK2-8u-3L9" firstAttribute="centerX" secondItem="er1-mp-JhR" secondAttribute="centerX" id="gZ0-JQ-e5a"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="aw9-kv-lUG" firstAttribute="bottom" secondItem="ZPT-d4-twW" secondAttribute="bottom" id="0iO-nr-KUF"/>
                             <constraint firstItem="ZPT-d4-twW" firstAttribute="leading" secondItem="aw9-kv-lUG" secondAttribute="leading" id="0uq-Am-vsS"/>
-                            <constraint firstItem="VM1-7e-wQO" firstAttribute="top" secondItem="er1-mp-JhR" secondAttribute="bottom" constant="24" id="2hP-ET-Fah"/>
+                            <constraint firstItem="VM1-7e-wQO" firstAttribute="top" secondItem="er1-mp-JhR" secondAttribute="bottom" constant="50" id="2hP-ET-Fah"/>
                             <constraint firstItem="aw9-kv-lUG" firstAttribute="bottom" secondItem="VM1-7e-wQO" secondAttribute="bottom" constant="74" id="Dv6-ds-iUb"/>
                             <constraint firstItem="er1-mp-JhR" firstAttribute="centerX" secondItem="aw9-kv-lUG" secondAttribute="centerX" id="K77-Y4-qrk"/>
                             <constraint firstItem="er1-mp-JhR" firstAttribute="leading" secondItem="aw9-kv-lUG" secondAttribute="leading" id="LSe-5l-alV"/>
@@ -2508,7 +2515,7 @@ If you have any questions about these Terms, please contact us at projectmitotea
                         <outlet property="productTableToTop" destination="5gz-DH-LYK" id="UQ2-0H-kF8"/>
                         <outlet property="productTableView" destination="qfx-4Y-f3S" id="573-Uj-QqF"/>
                         <outlet property="searchBar" destination="t70-Qz-J7F" id="18q-WQ-cQ3"/>
-                        <outlet property="shopProductTableConst" destination="F6l-yW-rlR" id="JeK-1F-a33"/>
+                        <outlet property="shopForTopView" destination="h4Y-rl-4Qp" id="Z7k-Yq-ja5"/>
                         <outlet property="shoppingForLabel" destination="nBm-Xu-AG9" id="Ei6-PT-a4x"/>
                         <outlet property="spinnerProductSearch" destination="Fl4-nx-3no" id="6mn-s8-i7V"/>
                         <outlet property="swirlSearchImg" destination="VM1-7e-wQO" id="3RB-Um-8Yc"/>

@@ -54,9 +54,10 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
     var shopfor = 1
     
     @IBAction func changeConstraint(_ sender: Any) {
+        
         if shopfor == 1 {
             // this is the one that should use if they choose a friend to shop for (Shows dark green nav)
-            shopProductTableConst.isActive = true
+            shopForTopView.isActive = true
             productTableToTop.isActive = false
             print("hey i changed")
             
@@ -65,15 +66,18 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         } else {
             print("hey i changed 2")
             // this should be the one to use if you exit or do not have someone to shop for (remove green nav (uninstalls))
-            shopProductTableConst.isActive = false
+            shopForTopView.isActive = false
             productTableToTop.isActive = true
             
             shopfor = 1
 
         }
-
-
     }
+    
+    //clicking button -->
+    // change label to 'shopping for person name'
+    // switch constraints
+    // extract first name and last name to new variable 
     
     
     @objc func fnGoToSettings() {
@@ -228,17 +232,16 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         return arrTemp[0] as! String
     }
     
+    
+    
     // Constraints for "Shopping for" text
-    
     @IBOutlet weak var shoppingForLabel: UILabel!
-    
-    // currently uninstalled (shop for constraint to product table)
-    @IBOutlet weak var shopProductTableConst: NSLayoutConstraint!
     
     // currently installed (product table constraint to top of view)
     @IBOutlet weak var productTableToTop: NSLayoutConstraint!
     
-    
+    // currently uninstalled (shop for constraint to product table)
+    @IBOutlet weak var shopForTopView: NSLayoutConstraint!
     
     
 }
