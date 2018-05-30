@@ -123,8 +123,7 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
             swirlSearchImg.isHidden = true
             appdata.strProductQuery = ""
             appdata.strProductQuery = searchBar.text!
-            fnLoadEbayProductData(strCodedSearchQuery: searchBar.text!.replacingOccurrences(of: " ", with: "%20"))
-            
+            fnLoadEbayProductData(strCodedSearchQuery: searchBar.text!.replacingOccurrences(of: " ", with: "+"))
         }
         searchBar.resignFirstResponder()
     }

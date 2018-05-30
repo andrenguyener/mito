@@ -102,7 +102,7 @@ class AppData: NSObject {
         }
     }
     
-    open func fnLoadMyActivity(tblview: UITableView, intUserId: Int, arr: [FeedItem], refresherNotification: UIRefreshControl, view: UIView) {
+    open func fnLoadMyActivity(tblview: UITableView, intUserId: Int, arr: [FeedItem], refresherNotification: UIRefreshControl, view: UIView, feedView: UIView) {
         let urlLoadMyActivity = URL(string: "https://api.projectmito.io/v1/feed/")
         let parameters: Parameters = [
             "friendId": intUserId
@@ -133,6 +133,7 @@ class AppData: NSObject {
 
                     DispatchQueue.main.async {
                         tblview.reloadData()
+                        feedView.isHidden = false
                         refresherNotification.endRefreshing()
                     }
                 }
@@ -419,7 +420,6 @@ class AppData: NSObject {
     open func fnDisplayImage(strImageURL: String, img: UIImageView, boolCircle: Bool) {
         if strImageURL.contains("http://") || strImageURL.contains("https://"){
             Alamofire.request(strImageURL).responseImage(completionHandler: { (response) in
-                print(response)
                 if var image = response.result.value {
                     if boolCircle {
                         image = image.af_imageRoundedIntoCircle()

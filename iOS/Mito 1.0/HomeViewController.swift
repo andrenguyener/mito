@@ -58,6 +58,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         appdata.socket.connect()
         fnAddRefreshersNotificationsAndPackages()
         self.appdata.fnLoadFriendActivity(tblview: tableView, refresherNotification: refresherNotification, view: noFeedView, feedView: viewFeedContent, spinner: spinner)
+        if let tabItems = self.tabBarController?.tabBar.items as NSArray!
+        {
+            // In this case we want to modify the badge number of the third tab:
+            let tabItem = tabItems[3] as! UITabBarItem
+            tabItem.badgeValue = String(appdata.arrNotifications.count)
+        }
+
     }
     
     @objc func fnGoToSettings() {
@@ -77,7 +84,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             appdata.fnLoadFriendActivity(tblview: tableView, refresherNotification: refresherNotification, view: self.noFeedView, feedView: self.viewFeedContent, spinner: spinner)
         } else {
             appdata.arrMyFeedItems.removeAll()
-            appdata.fnLoadMyActivity(tblview: tableView, intUserId: appdata.intCurrentUserID, arr: appdata.arrMyFeedItems, refresherNotification: refresherNotification, view: noFeedView)
+            appdata.fnLoadMyActivity(tblview: tableView, intUserId: appdata.intCurrentUserID, arr: appdata.arrMyFeedItems, refresherNotification: refresherNotification, view: noFeedView, feedView: viewFeedContent)
         }
     }
     
@@ -169,7 +176,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func switchTab(_ sender: UISegmentedControl) {
         if segmentChooser.selectedSegmentIndex == 1 {
-            appdata.fnLoadMyActivity(tblview: tableView, intUserId: appdata.intCurrentUserID, arr: appdata.arrMyFeedItems, refresherNotification: refresherNotification, view: noFeedView)
+            if appdata.arrMyFeedItems.count == 0 {
+                viewFeedContent.isHidden = true
+                spinner.startAnimating()
+                appdata.fnLoadMyActivity(tblview: tableView, intUserId: appdata.intCurrentUserID, arr: appdata.arrMyFeedItems, refresherNotification: refresherNotification, view: noFeedView, feedView: viewFeedContent)
+            } else {
+                appdata.fnLoadMyActivity(tblview: tableView, intUserId: appdata.intCurrentUserID, arr: appdata.arrMyFeedItems, refresherNotification: refresherNotification, view: noFeedView, feedView: viewFeedContent)
+            }
 //            if (appdata.arrMyFeedItems.count == 0) {
 //                noFeedView.isHidden = false
 //            } else {
@@ -182,6 +195,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 //                noFeedView.isHidden = true
 //            }
             appdata.fnLoadFriendActivity(tblview: tableView, refresherNotification: refresherNotification, view: noFeedView, feedView: viewFeedContent, spinner: spinner)
+            
         }
     }
     
