@@ -64,12 +64,23 @@ class ChooseAddressViewController: UIViewController, UITableViewDataSource, UITa
                     .joined(separator: "\n")
                 let arr: [String] = (arrInformation?.components(separatedBy: "\n"))!
                 print(arr)
-                let arrStateZIP = arr[2].components(separatedBy: " ")
                 
-                let strStreet = arr[0]
-                let strCity = arr[1]
-                let strState = arrStateZIP[0]
-                let intZIP = Int(arrStateZIP[1])!
+                var strStreet = ""
+                var strCity = ""
+                var strState = ""
+                var intZIP = 0
+                if arr.count > 3 {
+                    let arrStateZIP = arr[2].components(separatedBy: " ")
+                    strStreet = arr[0]
+                    strCity = arr[1]
+                    strState = arrStateZIP[0]
+                    intZIP = Int(arrStateZIP[1])!
+                } else {
+                    strCity = arr[0]
+                    let arrStateZIP = arr[1].components(separatedBy: " ")
+                    strState = arrStateZIP[0]
+                    intZIP = Int(arrStateZIP[1])!
+                }
                 
                 //1. Create the alert controller.
                 let alert = UIAlertController(title: "Nickname", message: "Enter a nickname (Optional)", preferredStyle: .alert)
