@@ -464,10 +464,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="aau-YT-r95">
-                                <rect key="frame" x="20" y="40" width="335" height="607"/>
+                                <rect key="frame" x="20" y="173.5" width="335" height="320"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AOn-Si-y3v">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="113.5"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                         <state key="normal" title="Edit Profile">
@@ -476,6 +477,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gac-qa-YXU">
                                         <rect key="frame" x="0.0" y="123.5" width="335" height="113.5"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                         <state key="normal" title="Cards">
@@ -483,8 +485,11 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CUf-EX-Siv">
-                                        <rect key="frame" x="0.0" y="247" width="335" height="113"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="100"/>
                                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="3rA-HG-Qnu"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                         <state key="normal" title="Terms of Use">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -494,7 +499,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J0G-p0-DVc">
-                                        <rect key="frame" x="0.0" y="370" width="335" height="113.5"/>
+                                        <rect key="frame" x="0.0" y="110" width="335" height="100"/>
                                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                         <state key="normal" title="Change Password">
@@ -505,7 +510,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gcj-Wh-e2k">
-                                        <rect key="frame" x="0.0" y="493.5" width="335" height="113.5"/>
+                                        <rect key="frame" x="0.0" y="220" width="335" height="100"/>
                                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                         <state key="normal" title="Sign Out">
@@ -516,14 +521,20 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="AOn-Si-y3v"/>
+                                        <exclude reference="gac-qa-YXU"/>
+                                    </mask>
+                                </variation>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="0nQ-Yc-UuX" firstAttribute="bottom" secondItem="aau-YT-r95" secondAttribute="bottom" constant="20" id="NUz-61-IvP"/>
-                            <constraint firstItem="aau-YT-r95" firstAttribute="top" secondItem="0nQ-Yc-UuX" secondAttribute="top" constant="20" id="VNt-rT-D28"/>
-                            <constraint firstItem="aau-YT-r95" firstAttribute="leading" secondItem="0nQ-Yc-UuX" secondAttribute="leading" constant="20" id="jwd-ln-st3"/>
-                            <constraint firstItem="0nQ-Yc-UuX" firstAttribute="trailing" secondItem="aau-YT-r95" secondAttribute="trailing" constant="20" id="qBo-YI-r9r"/>
+                            <constraint firstItem="aau-YT-r95" firstAttribute="centerY" secondItem="yWn-Dw-IHE" secondAttribute="centerY" id="Abo-j8-JSV"/>
+                            <constraint firstItem="0nQ-Yc-UuX" firstAttribute="trailing" secondItem="aau-YT-r95" secondAttribute="trailing" constant="20" id="CD7-RH-xTG"/>
+                            <constraint firstItem="aau-YT-r95" firstAttribute="centerX" secondItem="yWn-Dw-IHE" secondAttribute="centerX" id="n55-64-cEf"/>
+                            <constraint firstItem="aau-YT-r95" firstAttribute="leading" secondItem="0nQ-Yc-UuX" secondAttribute="leading" constant="20" id="s4V-FI-joK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0nQ-Yc-UuX"/>
                     </view>
@@ -2577,11 +2588,12 @@ If you have any questions about these Terms, please contact us at projectmitotea
         <image name="swirlsearch" width="2257" height="5634"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="1wg-ls-dvc"/>
         <segue reference="Vto-2H-CEr"/>
         <segue reference="UaC-n9-PAq"/>
         <segue reference="pBU-pi-a1H"/>
         <segue reference="Oq9-F1-cCO"/>
-        <segue reference="4Df-8F-JjS"/>
+        <segue reference="d1X-sC-VrZ"/>
         <segue reference="5va-cB-XlO"/>
         <segue reference="c4b-bb-2tq"/>
         <segue reference="GdB-Tr-zhu"/>
