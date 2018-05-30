@@ -43,23 +43,32 @@
                                             <outlet property="delegate" destination="Jn1-pF-IbP" id="G4J-aM-FYo"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Card number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fSK-cS-anL">
+                                    <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Card number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fSK-cS-anL">
                                         <rect key="frame" x="0.0" y="60" width="335" height="60"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad" smartDashesType="yes" textContentType="cc-number"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Jn1-pF-IbP" id="ZBr-QU-Y28"/>
+                                        </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Expiration" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TMt-Bb-r9u">
+                                    <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Expiration" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TMt-Bb-r9u">
                                         <rect key="frame" x="0.0" y="120" width="335" height="60"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="alert"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Jn1-pF-IbP" id="C0z-Nq-t5c"/>
+                                        </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Security code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wS3-vO-eol">
+                                    <textField opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Security code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wS3-vO-eol">
                                         <rect key="frame" x="0.0" y="180" width="335" height="60"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Jn1-pF-IbP" id="AYo-90-QfT"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -1146,8 +1155,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="Jjr-wW-Hse"/>
         <segue reference="E9w-it-1S2"/>
-        <segue reference="uUW-z7-eTV"/>
-        <segue reference="G0C-Hd-PoN"/>
+        <segue reference="D79-aK-l5e"/>
+        <segue reference="Qfg-Id-CWz"/>
         <segue reference="MjP-Xg-3Ou"/>
     </inferredMetricsTieBreakers>
 </document>

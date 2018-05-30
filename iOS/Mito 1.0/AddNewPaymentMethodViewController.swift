@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class AddNewPaymentMethodViewController: UIViewController {
+class AddNewPaymentMethodViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var txtFldName: UITextField!
     @IBOutlet weak var txtFldCardNumber: UITextField!
@@ -22,6 +22,32 @@ class AddNewPaymentMethodViewController: UIViewController {
         self.navigationItem.title = "Add Payment"
         self.hideKeyboard()
         // Do any additional setup after loading the view.
+        self.addDoneButtonOnKeyboard()
+
+    }
+    
+    func addDoneButtonOnKeyboard() {
+        let doneToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
+        doneToolbar.barStyle       = UIBarStyle.default
+        let flexSpace              = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        let done: UIBarButtonItem  = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(AddNewPaymentMethodViewController.doneButtonAction))
+        
+        var items = [UIBarButtonItem]()
+        items.append(flexSpace)
+        items.append(done)
+        
+        doneToolbar.items = items
+        doneToolbar.sizeToFit()
+        
+        txtFldCardNumber.inputAccessoryView = doneToolbar
+        txtFldExp.inputAccessoryView = doneToolbar
+        txtFldCVV.inputAccessoryView = doneToolbar
+    }
+    
+    @objc func doneButtonAction() {
+        txtFldCardNumber.resignFirstResponder()
+        txtFldExp.resignFirstResponder()
+        txtFldCVV.resignFirstResponder()
     }
     
     // overrides next screen's back button title
@@ -104,6 +130,9 @@ class AddNewPaymentMethodViewController: UIViewController {
         }
     }
     
+    
+
+    
     // add textfield as delegate of viewcontroller first
     // increment tags to delegate which uitextfield will be active after pressing return
     // Only shifts up if tag is > 3
@@ -113,17 +142,21 @@ class AddNewPaymentMethodViewController: UIViewController {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print("Your textfield position : \(textField.frame)") // (x,y,width,height)
         //print("Your stack position : \(userpassstack.frame)")
-        textField.returnKeyType = UIReturnKeyType.next
+//        textField.returnKeyType = .next
         if textField.tag > 3 {
-            moveTextField(textField, moveDistance: -200, up: true)
+            moveTextField(textField, moveDistance: -100, up: true)
             print("Hey i entered")
         }
+        
+//        if textField.tag > 1 {
+//            self.addDoneButtonOnKeyboard(textField)
+//        }
     }
     
     // Finish Editing The Text Field
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.tag > 3 {
-            moveTextField(textField, moveDistance: 200, up: true)
+            moveTextField(textField, moveDistance: 100, up: true)
             print("hey i ended")
         }
     }
@@ -151,5 +184,4 @@ class AddNewPaymentMethodViewController: UIViewController {
         self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
         UIView.commitAnimations()
     }
-
 }
