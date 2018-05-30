@@ -108,9 +108,19 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         btnNext.isHidden = false
     }
     
+    @IBAction func btnCancelState(_ sender: Any) {
+        pickerviewStateAA.isHidden = true
+        confirmStatePicker.isHidden = true
+        statePickView.isHidden = true
+        btnCreateAccount.isHidden = false
+    }
+    
+    
     @IBAction func btnSelectStateDone(_ sender: Any) {
         pickerviewStateAA.isHidden = true
         confirmStatePicker.isHidden = true
+        statePickView.isHidden = true
+        btnCreateAccount.isHidden = false
         let objStateSelected = appdata.arrStates[pickerviewStateAA.selectedRow(inComponent: 0)]
         strState = objStateSelected.value
         btnChooseState.setTitle(objStateSelected.value, for: .normal)
@@ -293,8 +303,11 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var zipcodeAA: UITextField!
     @IBOutlet weak var pickerviewStateAA: UIPickerView!
     @IBOutlet weak var btnChooseState: UIButton!
+    @IBOutlet weak var statePickView: UIView!
     
     var strState = ""
+    
+    @IBOutlet weak var btnCreateAccount: UIButton!
     
     @IBAction func btnCreateAccountPressed(_ sender: Any) {
         var userID: Int?
@@ -384,6 +397,8 @@ class LoginViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         if pickerviewStateAA.isHidden {
             pickerviewStateAA.isHidden = false
             confirmStatePicker.isHidden = false
+            statePickView.isHidden = false
+            btnCreateAccount.isHidden = true
         }
         appdata.arrStates.sort(by: fnSortStateAlphabetically)
     }
