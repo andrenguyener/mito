@@ -997,6 +997,7 @@
                                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="c3m-hZ-dPi" customClass="RoundedImage" customModule="Mito_1_0" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
                                         <constraints>
+                                            <constraint firstAttribute="width" secondItem="c3m-hZ-dPi" secondAttribute="height" multiplier="1:1" id="sTc-wd-J9y"/>
                                             <constraint firstAttribute="height" constant="115" id="sly-LU-RxO"/>
                                         </constraints>
                                     </imageView>

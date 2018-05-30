@@ -27,8 +27,6 @@ class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         peopleTableView.delegate = self
         peopleTableView.dataSource = self
         peopleTableView.rowHeight = 97.5
-        //peopleTableView.estimatedRowHeight = 96
-        //peopleTableView.rowHeight = UITableViewAutomaticDimension
         peopleTableView.keyboardDismissMode = .onDrag
         let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary
         var strPhotoUrl = data["profileImageString"] as! String
@@ -42,7 +40,6 @@ class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        appdata.fnLoadFriendsAndAllUsers(tableview: peopleTableView)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
@@ -55,7 +52,6 @@ class SearchFriendsViewController: UIViewController, UITableViewDelegate, UITabl
         performSegue(withIdentifier: "segSearchFriendToCart", sender: self)
     }
     
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
