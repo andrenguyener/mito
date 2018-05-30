@@ -22,7 +22,12 @@ class WriteMessageViewController: UIViewController, UITextViewDelegate {
         self.navigationItem.title = "Send A Message"
         appdata.fnDisplayImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipientProfile, boolCircle: true)
         strRecipientName.text = "\(appdata.personRecipient.firstName) \(appdata.personRecipient.lastName)"
-        textviewWriteMessage.text = "What's it for?"
+        if appdata.strOrderMessage != "What's it for?" {
+            textviewWriteMessage.text = appdata.strOrderMessage.replacingOccurrences(of: "\n", with: "")
+            textviewWriteMessage.textColor = UIColor.black
+        } else {
+            textviewWriteMessage.text = "What's it for?"
+        }
         appdata.fnDisplayImage(strImageURL: appdata.personRecipient.avatar, img: imgRecipientProfile, boolCircle: true)
     }
     
@@ -35,6 +40,8 @@ class WriteMessageViewController: UIViewController, UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         if textView.text.contains("\n") {
+//            let str = String((textView.text?.prefix(textView.text.count - 2))!)
+            appdata.strOrderMessage = textView.text.replacingOccurrences(of: "\n", with: "")
             textView.resignFirstResponder()
         }
     }
