@@ -79,12 +79,6 @@ func LoadConfiguration(file string) Config {
 	return config
 }
 
-// Replace with your own connection parameters
-var server = "projectmito.database.windows.net"
-var user = "mitoteam"
-var password = "JABS2018!"
-var db *sql.DB
-
 //main is the main entry point for the server
 func main() {
 	config := LoadConfiguration("config.json")
