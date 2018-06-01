@@ -45,22 +45,10 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         imgProfile.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.fnGoToSettings))
         imgProfile.addGestureRecognizer(tapGesture)
-//        viewEmptyDataSet.lblTitle.text
-//        self.viewEmptyDataSet = Bundle.main.loadNibNamed("EmptyDataSetView", owner: self, options: nil)?.first as? EmptyDataSetView
         viewEmptyDataSet.isHidden = true
         lblTitle.text = "No Notifications"
         lblSubtitle.text = "You can find things that require your attention here."
-//        viewEmptyDataSet.topAnchor.constraint(equalTo: viewGreenNav.topAnchor, constant: 1.0).isActive = true
-        
-//        viewEmptyDataSet.lblTitle.centerXAnchor.constraint(equalTo: self.viewEmptyDataSet.centerXAnchor).isActive = true
-//        viewEmptyDataSet.lblSubtitle.centerYAnchor.constraint(equalTo: self.viewEmptyDataSet.centerYAnchor).isActive = true
         lblSubtitle.numberOfLines = 2
-//        let leftConstraint = NSLayoutConstraint(item: <#T##Any#>, attribute: <#T##NSLayoutAttribute#>, relatedBy: <#T##NSLayoutRelation#>, toItem: <#T##Any?#>, attribute: <#T##NSLayoutAttribute#>, multiplier: <#T##CGFloat#>, constant: <#T##CGFloat#>)
-//        headerView?.addConstraint(<#T##constraint: NSLayoutConstraint##NSLayoutConstraint#>)
-//        viewEmptyDataSet.lblTitle.text = "No Notifications"
-//        viewEmptyDataSet.lblSubtitle.text = "You can find things that require your attention here."
-//        self.view.addSubview(viewEmptyDataSet!)
-//        let nibAddNewAddress = UINib(nibName: "EmptyDataSetView", bundle: nil)
     }
     
     @objc func fnGoToSettings() {
@@ -88,8 +76,8 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         appdata.arrNotifications.removeAll()
         appdata.arrPendingFriends.removeAll()
         appdata.arrCurrUserPackages.removeAll()
-        fnGetPendingFriendRequests()
-        fnGetPendingPackages()
+        self.fnGetPendingFriendRequests()
+        self.fnGetPendingPackages()
     }
     
     func fnAcceptOrDeclinePackage(strPackageAction: String, senderId: Int, orderId: Int, shippingAddressId: Int) {
@@ -145,7 +133,12 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     for objPackageTemp in arrPackages {
                         print(objPackageTemp)
                         let elem = objPackageTemp as! NSDictionary
-                        let objPackage = Package(intGiftOption: elem["GiftOption"] as! Int, strOrderDate: elem["OrderDate"] as! String, intOrderID: elem["OrderId"] as! Int, strOrderMessage: elem["OrderMessage"] as! String, strPhotoUrl: elem["PhotoUrl"] as! String, intSenderID: elem["SenderId"] as! Int, strUserFName: elem["UserFname"] as! String, strUserLName: elem["UserLname"] as! String, dateRequested: self.fnStringToDate(strDate: elem["OrderDate"] as! String))
+                        print(elem)
+                        var strAvatar = elem["SenderProfileImage"] as! String
+                        if strAvatar == self.appdata.strImageDefault || strAvatar == "AAP4AHUXf+Y=" {
+                            strAvatar = elem["PhotoUrl"] as! String
+                        }
+                        let objPackage = Package(intGiftOption: elem["GiftOption"] as! Int, strOrderDate: elem["OrderDate"] as! String, intOrderID: elem["OrderId"] as! Int, strOrderMessage: elem["OrderMessage"] as! String, strPhotoUrl: strAvatar, intSenderID: elem["SenderId"] as! Int, strUserFName: elem["UserFname"] as! String, strUserLName: elem["UserLname"] as! String, dateRequested: self.fnStringToDate(strDate: elem["OrderDate"] as! String))
                         self.appdata.arrNotifications.append(objPackage)
                     }
                 }
@@ -176,11 +169,15 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                     for obj in dict2 {
                         let object = obj as! NSDictionary
                         var p: Person = Person(firstName: "", lastName: "", email: "", avatar: "", intUserID: 1, strUsername: "", intNumFriends: 1)
+                        var strAvatar = object["ProfileImage"] as! String
+                        if strAvatar == self.appdata.strImageDefault || strAvatar == "AAP4AHUXf+Y=" {
+                            strAvatar = object["PhotoUrl"] as! String
+                        }
                         if object["CreatedDate"] != nil {
                             p = Person(firstName: (object["UserFname"] as? String)!,
                                        lastName: (object["UserLname"] as? String)!,
                                        email: (object["UserEmail"] as? String?)!!,
-                                       avatar: (object["PhotoUrl"] as? String?)!!,
+                                       avatar: strAvatar,
                                        intUserID: (object["UserId"] as? Int)!,
                                        strUsername: (object["Username"] as? String)!,
                                        intNumFriends: (object["NumFriends"] as! Int),
@@ -189,7 +186,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
                             p = Person(firstName: (object["UserFname"] as? String)!,
                                        lastName: (object["UserLname"] as? String)!,
                                        email: (object["UserEmail"] as? String?)!!,
-                                       avatar: (object["PhotoUrl"] as? String?)!!,
+                                       avatar: strAvatar,
                                        intUserID: (object["UserId"] as? Int)!,
                                        strUsername: (object["Username"] as? String)!,
                                        intNumFriends: (object["NumFriends"] as! Int))
@@ -330,27 +327,29 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Friend Requests
         let cell = tblviewNotification.dequeueReusableCell(withIdentifier: "cellNotification", for: indexPath) as! NotificationTableViewCell
-        let objNotification = appdata.arrNotifications[indexPath.row]
-        if let objPackage = objNotification as? Package {
-            let strDate = UTCToLocal(date: objPackage.strOrderDate)
-            appdata.fnDisplayImage(strImageURL: objPackage.strPhotoUrl, img: cell.imgPerson, boolCircle: true)
-            cell.strFirstNameLastName.text = "@\(objPackage.strUserFName) has sent you a package request"
-            cell.strUsername.text = strDate
-            cell.btnConfirm.tag = indexPath.row
-            cell.btnConfirm.addTarget(self, action: #selector(self.btnAccept(_:)), for: .touchUpInside)
-            cell.btnDecline.tag = indexPath.row
-            cell.btnDecline.addTarget(self, action: #selector(self.btnDeny(_:)), for: .touchUpInside)
-        } else {
-            let objFriendRequest = objNotification as! Person
-            let strDate = fnConvertDateToString(date: objFriendRequest.dateRequested)
-            let dateLocal = UTCToLocal(date: strDate)
-            appdata.fnDisplayImage(strImageURL: objFriendRequest.avatar, img: cell.imgPerson, boolCircle: true)
-            cell.strFirstNameLastName.text = "@\(objFriendRequest.strUsername) has sent you a friend request"
-            cell.strUsername.text = dateLocal
-            cell.btnConfirm.tag = indexPath.row
-            cell.btnConfirm.addTarget(self, action: #selector(self.btnAccept(_:)), for: .touchUpInside)
-            cell.btnDecline.tag = indexPath.row
-            cell.btnDecline.addTarget(self, action: #selector(self.btnDeny(_:)), for: .touchUpInside)
+        if indexPath.row < appdata.arrNotifications.count {
+            let objNotification = appdata.arrNotifications[indexPath.row]
+            if let objPackage = objNotification as? Package {
+                let strDate = UTCToLocal(date: objPackage.strOrderDate)
+                appdata.fnDisplayImage(strImageURL: objPackage.strPhotoUrl, img: cell.imgPerson, boolCircle: true)
+                cell.strFirstNameLastName.text = "\(objPackage.strUserFName) has sent you a package request"
+                cell.strUsername.text = strDate
+                cell.btnConfirm.tag = indexPath.row
+                cell.btnConfirm.addTarget(self, action: #selector(self.btnAccept(_:)), for: .touchUpInside)
+                cell.btnDecline.tag = indexPath.row
+                cell.btnDecline.addTarget(self, action: #selector(self.btnDeny(_:)), for: .touchUpInside)
+            } else {
+                let objFriendRequest = objNotification as! Person
+                let strDate = fnConvertDateToString(date: objFriendRequest.dateRequested)
+                let dateLocal = UTCToLocal(date: strDate)
+                appdata.fnDisplayImage(strImageURL: objFriendRequest.avatar, img: cell.imgPerson, boolCircle: true)
+                cell.strFirstNameLastName.text = "@\(objFriendRequest.strUsername) has sent you a friend request"
+                cell.strUsername.text = dateLocal
+                cell.btnConfirm.tag = indexPath.row
+                cell.btnConfirm.addTarget(self, action: #selector(self.btnAccept(_:)), for: .touchUpInside)
+                cell.btnDecline.tag = indexPath.row
+                cell.btnDecline.addTarget(self, action: #selector(self.btnDeny(_:)), for: .touchUpInside)
+            }
         }
         return cell
     }

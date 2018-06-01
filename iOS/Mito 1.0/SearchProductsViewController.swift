@@ -123,8 +123,7 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
             swirlSearchImg.isHidden = true
             appdata.strProductQuery = ""
             appdata.strProductQuery = searchBar.text!
-            fnLoadEbayProductData(strCodedSearchQuery: searchBar.text!.replacingOccurrences(of: " ", with: "%20"))
-            
+            fnLoadEbayProductData(strCodedSearchQuery: searchBar.text!.replacingOccurrences(of: " ", with: "+"))
         }
         searchBar.resignFirstResponder()
     }
@@ -247,9 +246,7 @@ class SearchProductsViewController: UIViewController, UITableViewDataSource, UIT
         let arrTemp = dictObj[strAttribute] as! NSArray
         return arrTemp[0] as! String
     }
-    
-    
-    
+        
     // Constraints for "Shopping for" text
     @IBOutlet weak var shoppingForLabel: UILabel!
     

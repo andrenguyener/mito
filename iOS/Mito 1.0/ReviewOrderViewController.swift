@@ -132,6 +132,7 @@ class ReviewOrderViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBAction func finishCheckout(_ sender: Any) {
         self.fnFinishCheckout()
+        self.appdata.boolShoppingForRecipient = false
         performSegue(withIdentifier: "checkoutFinish", sender: self)
     }
 

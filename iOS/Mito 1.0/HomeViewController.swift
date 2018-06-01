@@ -58,6 +58,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         appdata.socket.connect()
         fnAddRefreshersNotificationsAndPackages()
         self.appdata.fnLoadFriendActivity(tblview: tableView, refresherNotification: refresherNotification, view: noFeedView, feedView: viewFeedContent, spinner: spinner)
+        if let tabItems = self.tabBarController?.tabBar.items as NSArray!
+        {
+            // In this case we want to modify the badge number of the third tab:
+            let tabItem = tabItems[3] as! UITabBarItem
+            tabItem.badgeValue = String(appdata.arrNotifications.count)
+        }
+
     }
     
     @objc func fnGoToSettings() {
@@ -77,7 +84,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             appdata.fnLoadFriendActivity(tblview: tableView, refresherNotification: refresherNotification, view: self.noFeedView, feedView: self.viewFeedContent, spinner: spinner)
         } else {
             appdata.arrMyFeedItems.removeAll()
-            appdata.fnLoadMyActivity(tblview: tableView, intUserId: appdata.intCurrentUserID, arr: appdata.arrMyFeedItems, refresherNotification: refresherNotification, view: noFeedView)
+            appdata.fnLoadMyActivity(tblview: tableView, intUserId: appdata.intCurrentUserID, arr: appdata.arrMyFeedItems, refresherNotification: refresherNotification, view: noFeedView, feedView: viewFeedContent)
         }
     }
     
@@ -142,23 +149,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                         intIndex += 1
                         boolNewIndex = true
                     }
-//                    self.dispatchGroup.leave()
-//                    self.dispatchGroup.notify(queue: .main, execute: {
-//                        self.viewProductImages.reloadData()
-//                    })
-                    //                    DispatchGroup.notify(dispatchGroup, DispatchQueue.main, {
-                    //                        self.viewProductImages.reloadData()
-                    //                    })
-                    //                    DispatchQueue.main.asyncAfter(deadline: .now() + 15.0) {
-                    //                        self.viewProductImages.reloadData()
-                    //                    }
-                    //                    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: nil) {
-                    //                        self.viewProductImages.reloadData()
-                    //                    }
-                    //                    DispatchQueue.main.async {
-                    //                        print(self.appdata.arrVariations.count)
-                    //                        self.viewProductImages.reloadData()
-                    //                    }
                 }
             case .failure(let error):
                 print("Get products error")
@@ -168,8 +158,15 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func switchTab(_ sender: UISegmentedControl) {
+//        tableView.isScrollEnabled = false
         if segmentChooser.selectedSegmentIndex == 1 {
-            appdata.fnLoadMyActivity(tblview: tableView, intUserId: appdata.intCurrentUserID, arr: appdata.arrMyFeedItems, refresherNotification: refresherNotification, view: noFeedView)
+            if appdata.arrMyFeedItems.count == 0 {
+                viewFeedContent.isHidden = true
+                spinner.startAnimating()
+                appdata.fnLoadMyActivity(tblview: tableView, intUserId: appdata.intCurrentUserID, arr: appdata.arrMyFeedItems, refresherNotification: refresherNotification, view: noFeedView, feedView: viewFeedContent)
+            } else {
+                appdata.fnLoadMyActivity(tblview: tableView, intUserId: appdata.intCurrentUserID, arr: appdata.arrMyFeedItems, refresherNotification: refresherNotification, view: noFeedView, feedView: viewFeedContent)
+            }
 //            if (appdata.arrMyFeedItems.count == 0) {
 //                noFeedView.isHidden = false
 //            } else {
@@ -182,6 +179,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 //                noFeedView.isHidden = true
 //            }
             appdata.fnLoadFriendActivity(tblview: tableView, refresherNotification: refresherNotification, view: noFeedView, feedView: viewFeedContent, spinner: spinner)
+            
         }
     }
     
@@ -243,27 +241,46 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCopyCell", for: indexPath) as! FeedCopyTableViewCell
         var feedItemObj = FeedItem(strDate: "", photoSenderUrl: "", strMessage: "", strRecipientFName: "", strRecipientLName: "", strSenderFName: "", strSenderLName: "", intRecipientId: 0, intSenderId: 0, strPhotoBytes: "")
         if segmentChooser.selectedSegmentIndex == 0 {
-            feedItemObj = appdata.arrFriendsFeedItems[indexPath.row]
-        } else {
+            if indexPath.row < appdata.arrFriendsFeedItems.count {
+                feedItemObj = appdata.arrFriendsFeedItems[indexPath.row]
+                if feedItemObj.strPhotoBytes != nil && feedItemObj.strPhotoBytes != "AAP4AHUXf+Y=" {
+                    appdata.fnDisplayImage(strImageURL: feedItemObj.strPhotoBytes!, img: cell.imgProfile, boolCircle: true)
+                } else {
+                    appdata.fnDisplayImage(strImageURL: feedItemObj.photoSenderUrl, img: cell.imgProfile, boolCircle: true)
+                }
+                var strSender = "\(feedItemObj.strSenderFName) \(feedItemObj.strSenderLName)"
+                var strRecipient = "\(feedItemObj.strRecipientFName) \(feedItemObj.strRecipientLName)"
+                if feedItemObj.intSenderId == appdata.intCurrentUserID {
+                    strSender = "You"
+                }
+                if feedItemObj.intRecipientId == appdata.intCurrentUserID {
+                    strRecipient = "You"
+                }
+                cell.strWho.text = "\(strSender) sent \(strRecipient)"
+                cell.strDate.text = "\(appdata.fnUTCToLocal(date: feedItemObj.strDate))"
+                cell.strDescr.text = "\(feedItemObj.strMessage)"
+                cell.strDescr.numberOfLines = 2
+            }
+        } else if indexPath.row < appdata.arrMyFeedItems.count {
             feedItemObj = appdata.arrMyFeedItems[indexPath.row]
+            if feedItemObj.strPhotoBytes != nil && feedItemObj.strPhotoBytes != "AAP4AHUXf+Y=" {
+                appdata.fnDisplayImage(strImageURL: feedItemObj.strPhotoBytes!, img: cell.imgProfile, boolCircle: true)
+            } else {
+                appdata.fnDisplayImage(strImageURL: feedItemObj.photoSenderUrl, img: cell.imgProfile, boolCircle: true)
+            }
+            var strSender = "\(feedItemObj.strSenderFName) \(feedItemObj.strSenderLName)"
+            var strRecipient = "\(feedItemObj.strRecipientFName) \(feedItemObj.strRecipientLName)"
+            if feedItemObj.intSenderId == appdata.intCurrentUserID {
+                strSender = "You"
+            }
+            if feedItemObj.intRecipientId == appdata.intCurrentUserID {
+                strRecipient = "You"
+            }
+            cell.strWho.text = "\(strSender) sent \(strRecipient)"
+            cell.strDate.text = "\(appdata.fnUTCToLocal(date: feedItemObj.strDate))"
+            cell.strDescr.text = "\(feedItemObj.strMessage)"
+            cell.strDescr.numberOfLines = 2
         }
-        if feedItemObj.strPhotoBytes != nil {
-            appdata.fnDisplayImage(strImageURL: feedItemObj.strPhotoBytes!, img: cell.imgProfile, boolCircle: true)
-        } else {
-            appdata.fnDisplayImage(strImageURL: feedItemObj.photoSenderUrl, img: cell.imgProfile, boolCircle: true)
-        }
-        var strSender = "\(feedItemObj.strSenderFName) \(feedItemObj.strSenderLName)"
-        var strRecipient = "\(feedItemObj.strRecipientFName) \(feedItemObj.strRecipientLName)"
-        if feedItemObj.intSenderId == appdata.intCurrentUserID {
-            strSender = "You"
-        }
-        if feedItemObj.intRecipientId == appdata.intCurrentUserID {
-            strRecipient = "You"
-        }
-        cell.strWho.text = "\(strSender) sent \(strRecipient)"
-        cell.strDate.text = "\(appdata.fnUTCToLocal(date: feedItemObj.strDate))"
-        cell.strDescr.text = "\(feedItemObj.strMessage)"
-        cell.strDescr.numberOfLines = 2
         return cell
     }
 

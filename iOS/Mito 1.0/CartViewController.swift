@@ -108,7 +108,6 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             pickerviewEditQuantity.isHidden = true
             cartTableView.delegate = self
             cartTableView.dataSource = self
-            //cartTableView.rowHeight = 106
             cartTableView.estimatedRowHeight = 165
             cartTableView.rowHeight = UITableViewAutomaticDimension
             self.navigationController?.isNavigationBarHidden = false
@@ -171,9 +170,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
                     let arrCartItems = dictionary as! NSArray
                     for objCartItem in arrCartItems {
                         let dictCartItem = objCartItem as! NSDictionary
-                        print(dictCartItem)
                         let objectItem = EbayProduct(strItemId: dictCartItem["AmazonItemId"] as! String, strTitle: dictCartItem["ProductName"] as! String, strImage: dictCartItem["ProductImageUrl"] as! String, strPrice: dictCartItem["AmazonItemPrice"] as! String, strSeller: "", strRating: "")
-//                        let objectItem = Product(image: dictCartItem["ProductImageUrl"] as! String, ASIN: dictCartItem["AmazonItemId"] as! String, title: dictCartItem["ProductName"] as! String, publisher: "publisher", price: dictCartItem["AmazonItemPrice"] as! String, description: "description")
                         let intQuantity = dictCartItem["Quantity"] as! Int
                         let lineItem = LineItem(objProduct: objectItem, intQty: intQuantity)
                         self.appdata.arrCartLineItems.append(lineItem)
@@ -266,8 +263,6 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cartCell", for: indexPath) as! CartTableViewCell
         let cartObj = appdata.arrCartLineItems[indexPath.row]
-        print(cartObj.objProduct.strImage)
-        let url = URL(string: "\(cartObj.objProduct.strImage)")
         appdata.fnDisplayImage(strImageURL: cartObj.objProduct.strImage!, img: cell.imgItemImage, boolCircle: false)
         cell.imgItemImage.contentMode = .scaleAspectFit
         cell.lblItemName.text = cartObj.objProduct.strTitle
@@ -279,7 +274,6 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.lblPrice.text = "$ \(dblPrice.roundTo2f())"
         }
         cell.btnEditQuantity.setTitle("Quantity: (\(cartObj.intQuantity))", for: .normal)
-//        cell.lblSellerName.text = String(cartObj.intQuantity) //cartObj.objProduct.publisher
         cell.btnDelete.tag = indexPath.row
         cell.btnDelete.addTarget(self, action: #selector(self.fnRemoveItem(_:)), for: .touchUpInside)
         cell.btnEditQuantity.tag = indexPath.row
