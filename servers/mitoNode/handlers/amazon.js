@@ -3,14 +3,15 @@
 const express = require('express');
 const axios = require('axios');
 var _ = require('lodash');
+var config = require('config')
 // var parser = require('xml2json');
 var parseString = require('xml2js').parseString;
 const Address = require('./../models/amazon/amazon');
 const sendToMQ = require('./message-queue');
 
 const sha256hash = require('./amazonhash');
-const publicKeyAmazon = "AKIAJSRYKM2YU35LEDSQ";
-const secretKeyAmazon = "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";
+const publicKeyAmazon = config.get('API.Amazon.publicKeyAmazon');
+const secretKeyAmazon = config.get('API.Amazon.secretKeyAmazon');
 var chrsz = 8;
 // invokeRequest("harry+potter", "All", "");
 function invokeRequest(type, keyword, pageNumber) {

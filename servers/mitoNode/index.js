@@ -7,6 +7,7 @@ const app = express();
 const axios = require('axios');
 const queryString = require('query-string');
 const sendToMQ = require('./handlers/rabbit-queue');
+var config = require('config');
 // var Curl = require('node-libcurl').Curl;
 // var curl = new Curl();
 
@@ -26,21 +27,12 @@ const sendToMQ = require('./handlers/rabbit-queue');
 
 // curl.on('error', curl.close.bind(curl));
 // curl.perform();
-var Connection = require('tedious').Connection;
+
 var ConnectionPool = require('tedious-connection-pool');
 
 // var CONFIG = require('./config.json');
 
-// config for your database
-var config = {
-    userName: "mitoteam",
-    password: "JABS2018!",
-    server: "projectmito.database.windows.net",
-    options: {
-        encrypt: true,
-        database: "projectmito"
-    }
-};
+
 
 var poolConfig = {
     min: 1,
@@ -48,12 +40,12 @@ var poolConfig = {
 };
 
 var connectionConfig = {
-    userName: "mitoteam",
-    password: "JABS2018!",
-    server: "projectmito.database.windows.net",
+    userName: config.get('SQL.user'),
+    password: config.get('SQL.password'),
+    server: config.get('SQL.server'),
     options: {
         encrypt: true,
-        database: "projectmito"
+        database: config.get('SQL.database')
     }
 }
 
@@ -115,17 +107,17 @@ var TYPES = require('tedious').TYPES;
 function ebayLoop(sql, req) {
     // console.log(sql);
     let ebayBody = queryString.stringify({
-        "grant_type": "client_credentials",
-        "redirect_uri": "Sopheak_Neak-SopheakN-Projec-cadjmlp",
-        "scope": "https://api.ebay.com/oauth/api_scope"
+        "grant_type": config.get('API.Ebay.grant_type'),
+        "redirect_uri": config.get('API.Ebay.redirect_uri'),
+        "scope": config.get('API.Ebay.scope')
     });
 
     axios({
         method: 'post',
-        url: "https://api.ebay.com/identity/v1/oauth2/token",
+        url: config.get('API.Ebay.url'),
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
-            "Authorization": "Basic U29waGVha04tUHJvamVjdE0tUFJELTUyY2NiZGVlZS00OWE2MmViNDpQUkQtMmNjYmRlZWU2ZWM0LTkyOWYtNDBkNy05MTU1LWY4YWI="
+            "Authorization": config.get('API.Ebay.Authorization')
         },
         data: ebayBody
     })

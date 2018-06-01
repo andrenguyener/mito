@@ -76,7 +76,7 @@ const PackageHandler = (packageStore) => {
                 if (packages == "User denied package") {
                     axios({
                         method: 'get',
-                        url: `https://api.projectmito.io/v1/users/id?id=${senderId}`
+                        url: `https://api.projectmito.io/v1/users/id?id=${user.userId}`
                     })
                         .then(function (response) {
                             // console.log(response);
@@ -94,7 +94,7 @@ const PackageHandler = (packageStore) => {
                 } else {
                     axios({
                         method: 'get',
-                        url: `https://api.projectmito.io/v1/users/id?id=${senderId}`
+                        url: `https://api.projectmito.io/v1/users/id?id=${user.userId}`
                     })
                         .then(function (response) {
                             // console.log(response);

@@ -56,6 +56,29 @@ func NewServiceProxy(addrs []string, ctx *handlers.Context) *httputil.ReversePro
 	}
 }
 
+type Config struct {
+	SQL struct {
+		Server   string `json:"server"`
+		User     string `json:"user"`
+		Password string `json:"password"`
+		Database string `json:"database"`
+	} `json:"SQL"`
+	Host string `json:"host"`
+	Port string `json:"port"`
+}
+
+func LoadConfiguration(file string) Config {
+	var config Config
+	configFile, err := os.Open(file)
+	defer configFile.Close()
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	jsonParser := json.NewDecoder(configFile)
+	jsonParser.Decode(&config)
+	return config
+}
+
 // Replace with your own connection parameters
 var server = "projectmito.database.windows.net"
 var user = "mitoteam"
@@ -64,6 +87,7 @@ var db *sql.DB
 
 //main is the main entry point for the server
 func main() {
+	config := LoadConfiguration("config.json")
 	addr := os.Getenv("ADDR")
 	sessionKey := os.Getenv("SESSIONKEY")
 	redisAddr := os.Getenv("REDISADDR")
@@ -93,8 +117,8 @@ func main() {
 
 	// Connection to SQL
 	// Create connection string
-	connString := fmt.Sprintf("server=%s;user id=%s;password=%s;database=projectmito",
-		server, user, password)
+	connString := fmt.Sprintf("server=%s;user id=%s;password=%s;database=%s",
+		config.SQL.Server, config.SQL.User, config.SQL.Password, config.SQL.Database)
 
 	// Create connection pool
 	db, err := sql.Open("sqlserver", connString)

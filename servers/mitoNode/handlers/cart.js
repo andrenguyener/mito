@@ -80,7 +80,7 @@ const CartHandler = (cartStore) => {
 
                 axios({
                     method: 'get',
-                    url: `https://api.projectmito.io/v1/users/id?id=${recipientId}`
+                    url: `https://api.projectmito.io/v1/users/id?id=${user.userId}`
                 })
                     .then(function (response) {
                         // console.log(response);

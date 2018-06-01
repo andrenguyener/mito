@@ -3,15 +3,16 @@
 
 const express = require('express');
 var nodemailer = require("nodemailer");
+var config = require('config');
 // var pug = require('pug');
 
 // const compiledFunction = pug.compileFile('./welcome.pug');
 
 var transporter = nodemailer.createTransport({
-    service: 'gmail',
+    service: config.get('EMAIL.service'),
     auth: {
-        user: 'projectmitoteam@gmail.com',
-        pass: 'JABS2018!'
+        user: config.get('EMAIL.auth.user'),
+        pass: config.get('EMAIL.auth.pass')
     }
 });
 
