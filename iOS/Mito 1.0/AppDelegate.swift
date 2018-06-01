@@ -39,8 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WebSocketDelegate {
         let dictionary = try? JSONSerialization.jsonObject(with: jsonData!, options: .mutableLeaves) as! NSDictionary
         print(dictionary)
         self.appdata.arrNotifications.removeAll()
-        self.fnGetPendingFriendRequests()
-        self.fnGetPendingPackages()
+//        self.fnGetPendingFriendRequests()
+//        self.fnGetPendingPackages()
         let dictType = dictionary!["type"] as! String
         switch dictType {
         case "ebay-token":

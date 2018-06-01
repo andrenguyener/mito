@@ -33,7 +33,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         tblviewNotification.delegate = self
         tblviewNotification.dataSource = self
         tblviewNotification.rowHeight = 100
-//        self.fnAddRefreshersNotificationsAndPackages()
+        self.fnAddRefreshersNotificationsAndPackages()
         self.fnGetPendingFriendRequests()
         self.fnGetPendingPackages()
         let data = UserDefaults.standard.object(forKey: "UserInfo") as! NSDictionary

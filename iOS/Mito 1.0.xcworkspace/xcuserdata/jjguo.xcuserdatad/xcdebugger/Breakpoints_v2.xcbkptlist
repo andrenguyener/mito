@@ -248,7 +248,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mito 1.0/NotificationViewController.swift"
-            timestampString = "549411723.489653"
+            timestampString = "549503585.057489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "246"
@@ -488,7 +488,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mito 1.0/NotificationViewController.swift"
-            timestampString = "549411723.490593"
+            timestampString = "549503585.062591"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "286"
@@ -711,22 +711,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Mito 1.0/SearchProductsViewController.swift"
-            timestampString = "549411723.491207"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
-            landmarkName = "fnLoadEbayProductData(strCodedSearchQuery:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Mito 1.0/WriteMessageViewController.swift"
             timestampString = "549340086.358807"
             startingColumnNumber = "9223372036854775807"
@@ -760,7 +744,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mito 1.0/SearchProductsViewController.swift"
-            timestampString = "549411723.491293"
+            timestampString = "549503585.067187"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "109"
@@ -792,12 +776,12 @@
                   moduleName = "Mito 1.0"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/jjguo/code/mito/iOS/Mito%201.0/LoginViewController.swift"
-                  timestampString = "549410320.6122839"
+                  timestampString = "549503214.963896"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "183"
                   endingLineNumber = "183"
-                  offsetFromSymbolStart = "88">
+                  offsetFromSymbolStart = "87">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -807,12 +791,12 @@
                   moduleName = "Mito 1.0"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/jjguo/code/mito/iOS/Mito%201.0/LoginViewController.swift"
-                  timestampString = "549410320.614309"
+                  timestampString = "549503214.966874"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "183"
                   endingLineNumber = "183"
-                  offsetFromSymbolStart = "8144">
+                  offsetFromSymbolStart = "10709">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -840,7 +824,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mito 1.0/HomeViewController.swift"
-            timestampString = "549411723.491425"
+            timestampString = "549503585.067952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "162"
@@ -856,7 +840,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mito 1.0/SearchProductsViewController.swift"
-            timestampString = "549411723.491493"
+            timestampString = "549503585.069855"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "126"
@@ -872,7 +856,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Mito 1.0/SearchProductsViewController.swift"
-            timestampString = "549411723.491554"
+            timestampString = "549503585.070057"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "133"
@@ -887,13 +871,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Mito 1.0/AppDelegate.swift"
-            timestampString = "549411723.491624"
+            filePath = "Mito 1.0/SearchProductsViewController.swift"
+            timestampString = "549503585.070334"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "websocketDidReceiveMessage(socket:text:)"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
+            landmarkName = "fnLoadEbayProductData(strCodedSearchQuery:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mito 1.0/SearchProductsViewController.swift"
+            timestampString = "549503585.0705791"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
+            landmarkName = "fnLoadEbayProductData(strCodedSearchQuery:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
