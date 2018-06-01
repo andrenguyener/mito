@@ -32,8 +32,8 @@
    #div-login-msg.success,
    #div-lost-msg.success,
    #div-register-msg.success {
-       border: 1px solid #6FE28A;
-       background-color: #6FE28A;
+       border: 1px solid #41DD7C;
+       background-color: #41DD7C;
    }
    
    #div-login-msg.error,
@@ -58,7 +58,7 @@
    #icon-login-msg.success,
    #icon-lost-msg.success,
    #icon-register-msg.success {
-       background-color: #6FE28A !important;
+       background-color: #41DD7C !important;
    }
    
    #icon-login-msg.error,
@@ -109,7 +109,7 @@
    }
 
    .terms #mainNav {
-       background-color: #6FE28A;
+       background-color: #41DD7C;
    }
 
    .terms #terms-box {
@@ -166,8 +166,8 @@
    }
 
    .btn-login-register {
-       background-color: #6FE28A;
-       border-color: #6FE28A;
+       background-color: #41DD7C;
+       border-color: #41DD7C;
    }
    
     .btn-login-register:active, .btn-login-register:focus, .btn-login-register:active:focus, .btn-login-register:hover  {

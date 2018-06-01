@@ -74,36 +74,58 @@ const PackageHandler = (packageStore) => {
             .then(packages => {
                 res.json(packages)
                 if (packages == "User denied package") {
-                    const data = {
-                        type: 'package-denied',
-                        package: packages,
-                        userIdOut: senderId
-                    };
-                    sendToMQ(req, data);
-                } else {
-                    const data = {
-                        type: 'package-accept',
-                        data: packages,
-                        userIdOut: senderId
-                    };
-                    sendToMQ(req, data);
                     axios({
-                        method: 'post',
-                        url: 'https://api.zinc.io/v1/orders',
-                        auth: {
-                            username: 'janedoe',
-                        },
-                        data: {
-                            firstName: 'Fred',
-                            lastName: 'Flintstone'
-                        }
+                        method: 'get',
+                        url: `https://api.projectmito.io/v1/users/id?id=${user.userId}`
                     })
                         .then(function (response) {
-                            console.log(response)
+                            // console.log(response);
+                            const data = {
+                                type: 'package-denied',
+                                data: response.data,
+                                userIdOut: senderId
+                            };
+                            sendToMQ(req, data);
                         })
                         .catch(function (error) {
-
+                            console.log(error);
                         });
+
+                } else {
+                    axios({
+                        method: 'get',
+                        url: `https://api.projectmito.io/v1/users/id?id=${user.userId}`
+                    })
+                        .then(function (response) {
+                            // console.log(response);
+                            const data = {
+                                type: 'package-accept',
+                                data: response.data,
+                                userIdOut: senderId
+                            };
+                            sendToMQ(req, data);
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+
+                    // axios({
+                    //     method: 'post',
+                    //     url: 'https://api.zinc.io/v1/orders',
+                    //     auth: {
+                    //         username: 'janedoe',
+                    //     },
+                    //     data: {
+                    //         firstName: 'Fred',
+                    //         lastName: 'Flintstone'
+                    //     }
+                    // })
+                    //     .then(function (response) {
+                    //         console.log(response)
+                    //     })
+                    //     .catch(function (error) {
+
+                    //     });
                 }
 
 
