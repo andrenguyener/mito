@@ -84,7 +84,7 @@ Similar to your address book, Mito allows you to save payment methods (credit ca
 To allow for users to purchase goods online, Mito integrates others e-commerce store to our platform such as Amazon and Ebay. Currently, we only support products catalog from Ebay. You may search for products by entering words in the search textbox (shown below). Although the products are from Ebay, we do not support bidding items. Products that are found through our search are limited to only those that may be purchase right away with a fixed price.
 Upon tapping on an item in the search result, you will be navigated to the product details page. The product details page includes information such as product name, seller name, price, and product description.
 
-<img src="/screenshots/Shopping-For-Search.png" width="200">
+<img src="/screenshots/Searching-Not-Shopping-For.png" width="200">
 
 #### Shopping Cart
 
@@ -111,27 +111,33 @@ There are two methods for choosing a recipient for the products you are buying. 
 
 As a Mito user, you may interact with other users by navigating to their profile. In their profile, you may request them to be your friend, view the number of friends they have, and look at packages they have received or sent to other Mito users (Feed). However, you can only view the message that is attached to the packages, not the content of the package. In addition, you may start shopping for the person directly from this page by tapping on “Shop for…” at the bottom of the page. By tapping on the button, you will be navigated to the Search screen.
 
+<img src="/screenshots/View-Friend-Details.png" width="200">
 
 #### Adds Users As Friends
 
 To request for another Mito user to be your friend, you may tap on “Add Friend” button in their Profile page. This action will send a friend request to the corresponding users. If you already requested the user as a friend, you will see “Pending Friend” instead of “Add Friend”. If you are already a friend of the user, you will simply see “Friend” on their profile page.
 
+<img src="/screenshots/View-NonFriend-Details.png" width="200">
 
 
 #### Friends List
 
 In Mito, you are able to view all the friends you added in the **Friends** tab at the bottom navigation. By toggling to the **Friends** tab, you will see your list of friends in your network or search for other users on Mito by using the **Search** bar at the top. To view your friends profile, you may simply tap on their name or picture from the list.
 
+<img src="/screenshots/Friend-List.png" width="200">
+
 
 ### Confirms or Declines Friend Requests
 
 In Mito, you may view any friend pending requests in the **Notifications** tab at the bottom navigation. As a user, you have the power to accept or decline any users as your friend. The **Notifications** tab will notify you when you receive a new friend request. You can toggle to the **Notifications** tab to view the user who requested you as their friend. By tapping on “Confirm”, the user will be added to your friends list. By tapping on “Decline”, the notification will go away and the user will not be added to your friends list.
 
+<img src="/screenshots/Pending-Friend-Request.png" width="200">
 
 ### Confirms or Declines Package Requests
 
 Similar to pending friend requests, **Notifications** tab will also alert you of any incoming pending packages. These packages are sent by other users on Mito and awaiting for your approval to be shipped. By tapping on the notification item, you will be able to view the message attached to the package and confirm or decline the sent package. By tapping on “Decline”, the notification will go away and the sender will be notified that you didn’t accept the package. By tapping on “Confirm”, you will navigated to a screen where you may select a shipping address from your Address book or add a new shipping address. Upon selecting a shipping address, the package will be shipped to the address you chose.
-SCREENSHOT
+
+<img src="/screenshots/Pending-Package-Request.png" width="200">
 
 _Please note that if you do not confirm or decline the package in 7 business days, our platform will notify the senders that you haven’t responded to the package and cancel the sender’s order._
 
@@ -141,9 +147,13 @@ _Please note that if you do not confirm or decline the package in 7 business day
 
 In the **Home** tab at the bottom navigation, you will be able to see packages sent and/or received in your friend network. The “Friends” section of the **Home** tab lists the transactions made in your friend network. Each item in the list shows the sender and receiver name along with the message attached to the transactions. Tapping on an item from the list will take you to a screen to view the package on a separate screen.
 
+<img src="/screenshots/Home-Feed.png" width="200">
+
 #### My Feed
 
 In addition to the “Friends” feed, you can also view only the confirmed packages that you have sent or received. By tapping on the “Me” sections of the Home tab, the screen lists only the packages you have accepted and successfully sent to other users on Mito. Similar to the items in “Friend” section, you may view the details of a package on a separate screen by tapping on an item.
+
+<img src="/screenshots/Me-Feed.png" width="200">
 
 ## Technologies
 ### Go
