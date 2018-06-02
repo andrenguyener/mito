@@ -5,8 +5,6 @@ Consumers have shifted from simply exchanging information on the internet to now
 
 Mito, derived from Latin for “giving with ease”, provides a social platform that lets users purchase products available on major online e-commerce shops, such as Amazon, to send to one another without exchanging physical addresses. Our solution offers a seamless process for buying goods for recipients while protecting users’ address information at all cost. We aim to break through the address exchange barrier between consumers in an online peer-to-peer transaction. A transaction via Mito will no longer require users to share their private physical address with each other.
 
-<span style="display:block;text-align:center"><img src="/screenshots/Add-An-Address.png" width="150"></span>
-
 ## Table of Contents
   - [Features](#features)
     - [Register for a Mito Account](#registers-for-a-mito-account)
@@ -44,27 +42,40 @@ Mito, derived from Latin for “giving with ease”, provides a social platform 
 #### Account Sign Up
 Mito account registration is fairly easy and straightforward. You may sign up for a Mito account via our [website](https://projectmito.io/) or iOS mobile application. To create an account, you must provide your first name, last name, a valid email address, password (must be at least six characters), and birth of date. Please keep in mind that you must be at least 13 years old to register for an account. Upon creating an account, you agree to Mito terms and services. You may learn more about our Terms and Conditions on our [website](https://projectmito.io/terms.html).
 
+<img src="/screenshots/Sign-Up-Screen.png" width="200">
+
 #### Account Sign In
 
 Mito currently only supports account sign in on our mobile application. You can sign into our platform with either your email address or username along with your secret password. Mito will verify the provided information with our database to ensure that the credentials are correct and valid.
 
+<img src="/screenshots/Login-Screen.png" width="200">
+
 #### Profile Customization
 
-Upon registering an account, Mito creates a public profile for every user. Your public profile does not show sensitive information such as payment method or your address book. Mito public profile shows your first and last name, username (starts with ‘@’), and profile picture. By default, if you do not upload any picture, your profile picture will have the initials of your first and last name. You can upload a new profile picture in **My Profile** page (the instructions are below).
+Upon registering an account, Mito creates a public profile for every user. Your public profile does not show sensitive information such as payment method or your address book. Mito public profile shows your first and last name, username (starts with ‘@’), and profile picture. By default, if you do not upload any picture, your profile picture will have the initials of your first and last name. You can upload a new profile picture in **Me** page by tapping on the profile picture.
+
+<img src="/screenshots/Me-View.png" width="200">
+<img src="/screenshots/Uploading-Picture.png" width="200">
 
 #### User Address Book
 
 Mito users have the ability to save multiple addresses in their address book. You may provide each address with its own alias to make easier for you to choose an address. To add a new address to your account, you may navigate to address book in your **My Profile**. You may simply enter your address information corresponding text box or search the address on Google via Google Maps API.
-SCREENSHOT
+
+<img src="/screenshots/Searching-Address-Google-Maps-API.png" width="200">
+
 
 Selecting an address is required to sending and receiving a package. As a sender, you are required to select a billing address to continue the cart check out process. Please make sure that the billing address you selected is corresponded to the payment method you choose.
 
 As a recipient, you are required to select a shipping address to confirm a package sent from other Mito users. The package you receive will be sent to the desired address you have in your address book.
-SCREENSHOT
+
+<img src="/screenshots/Choose-Shipping-Address.png" width="200">
+
 
 #### Payment Methods
 
 Similar to your address book, Mito allows you to save payment methods (credit cards and/or debit cards) to your account. We securely store your payment information in our database. You may learn more about our [privacy policy on the website](https://projectmito.io/terms.html). Selecting a payment method is required upon checking out products in your cart. When adding a new payment method, we required that payment method is valid. If you provide a card that is already expired, the payment information will not be saved in your account.
+
+<img src="/screenshots/Add-Payment-Information.png" width="200"><img src="/screenshots/Select-Payment-Method.png" width="200">
 
 
 ### Purchases Products on Mito
@@ -72,14 +83,18 @@ Similar to your address book, Mito allows you to save payment methods (credit ca
 
 To allow for users to purchase goods online, Mito integrates others e-commerce store to our platform such as Amazon and Ebay. Currently, we only support products catalog from Ebay. You may search for products by entering words in the search textbox (shown below). Although the products are from Ebay, we do not support bidding items. Products that are found through our search are limited to only those that may be purchase right away with a fixed price.
 Upon tapping on an item in the search result, you will be navigated to the product details page. The product details page includes information such as product name, seller name, price, and product description.
+
+<img src="/screenshots/Shopping-For-Search.png" width="200">
+
 #### Shopping Cart
 
 In a product details page, users have the ability to add the item to their cart. To add any product to the cart, simply choose a quantity by tapping on “Quantity” button and tap on “Add to Cart” to save the items in your cart. To view items in your cart, you may tap on the cart icon appears in the “Search” screen. Items you put in your cart will stay in the cart until you delete them from your cart. You will not lose any items in the cart upon signing out or exiting the app.
 
+<img src="/screenshots/Product-Details.png" width="200">
+
 #### Cart Checkout
 
 There are two methods for choosing a recipient for the products you are buying. One, you will be prompted to select a friend when you’re checking out the items in your cart. Or, you can pre-select a friend by navigating to the target user and tap on “Shop for…” button. Upon tapping on the button, you will be taken to the “Search” screen and a text box will appear right below the search bar confirming the person you are shopping for (as shown below).
-SCREENSHOTS
 
  - Choose a Friend: There are two methods for choosing a recipient for the products you are buying. One, you will be prompted to select a friend when you’re checking out the items in your cart. Or, you can pre-select a friend by navigating to the target user and tap on “Shop for…” button. Upon tapping on the button, you will be taken to the “Search” screen and a text box will appear right below the search bar confirming the person you are shopping for.
  
@@ -89,14 +104,19 @@ SCREENSHOTS
 
 - Confirms your purchase in order summary: After selecting a payment method, our app will take you to the order summary screen. In this page, you may confirm all the relevant information to make sure they are correct as expected. You can change the payment information, billing address, or message by tapping on the corresponding text.
 
+<img src="/screenshots/Shopping-For-Search.png" width="200">
 
 ### Interacts in Mito Network
 #### Views Mito User Profile
 
 As a Mito user, you may interact with other users by navigating to their profile. In their profile, you may request them to be your friend, view the number of friends they have, and look at packages they have received or sent to other Mito users (Feed). However, you can only view the message that is attached to the packages, not the content of the package. In addition, you may start shopping for the person directly from this page by tapping on “Shop for…” at the bottom of the page. By tapping on the button, you will be navigated to the Search screen.
+
+
 #### Adds Users As Friends
 
 To request for another Mito user to be your friend, you may tap on “Add Friend” button in their Profile page. This action will send a friend request to the corresponding users. If you already requested the user as a friend, you will see “Pending Friend” instead of “Add Friend”. If you are already a friend of the user, you will simply see “Friend” on their profile page.
+
+
 
 #### Friends List
 
