@@ -29,7 +29,6 @@ Mito, derived from Latin for “giving with ease”, provides a social platform 
   - [Technologies](#technologies)
 	  - [Go](#go)
 	  - [NodeJS](#nodejs)
-	  - [Server Hosting](#server-hosting)
 	  - [Database Management](#database-management)
 	  - [Amazon Product Advertising API](#amazon-product-advertising-api)
 	  - [Ebay API](#ebay-api)
@@ -162,9 +161,6 @@ Is a modern language that allowed for concurrency, is open sourced, strict varia
 
 ### NodeJS
 Clean and usable which makes it ideal for real-time data-intensive applications. Runs on an engine developed by Google which allows for its fast operational speeds. Ability to leverage node packages and libraries to integrate. Backed by a large community to seek help.
-
-### Server Hosting
-Digital Ocean - Allowed for creation and deletion of droplets with ease and contained an intuitive navigation compared to AWS.
 
 ### Database Management
 Mito utilized the relational database design offered by Microsoft Azure. Microsoft Azure database offers a stable physical database design that follows the ACID principles. By storing our data in a SQL database, it ensures the information stored will be of valid data types, operations execute in explicit transactions, and can be rollback if any in-flight transaction fails. With the integration of Microsoft Azure SQL database, we can enforce policy and constraints on data that is flowing to the database.
