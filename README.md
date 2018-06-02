@@ -54,8 +54,7 @@ Mito currently only supports account sign in on our mobile application. You can 
 
 Upon registering an account, Mito creates a public profile for every user. Your public profile does not show sensitive information such as payment method or your address book. Mito public profile shows your first and last name, username (starts with ‘@’), and profile picture. By default, if you do not upload any picture, your profile picture will have the initials of your first and last name. You can upload a new profile picture in **Me** page by tapping on the profile picture.
 
-<img src="/screenshots/Me-View.png" width="200">
-<img src="/screenshots/Uploading-Picture.png" width="200">
+<span><img src="/screenshots/Me-View.png" width="200" style="margin"><img src="/screenshots/Uploading-Picture.png" width="200"></span>
 
 #### User Address Book
 
@@ -75,7 +74,8 @@ As a recipient, you are required to select a shipping address to confirm a packa
 
 Similar to your address book, Mito allows you to save payment methods (credit cards and/or debit cards) to your account. We securely store your payment information in our database. You may learn more about our [privacy policy on the website](https://projectmito.io/terms.html). Selecting a payment method is required upon checking out products in your cart. When adding a new payment method, we required that payment method is valid. If you provide a card that is already expired, the payment information will not be saved in your account.
 
-<img src="/screenshots/Add-Payment-Information.png" width="200"><img src="/screenshots/Select-Payment-Method.png" width="200">
+<img src="/screenshots/Add-Payment-Information.png" width="200">
+<img src="/screenshots/Select-Payment-Method.png" width="200">
 
 
 ### Purchases Products on Mito
