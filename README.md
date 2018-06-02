@@ -184,5 +184,7 @@ Implementation the product in Xcode using Swift and Cocoapods makes it easier to
 To enhance readability, we focused on prioritizing style as we coded. We followed lower camel casing for all our variable names and upper camel casing for our .swift file names. Any variable names had a prefix indicating what the variable type is such as “int” for integer, “dbl” for double, “str” for string, “bool” for booleans, and “arr” for arrays. Any Xcode type objects also had prefixes such as, “btn” for button, “lbl” for label, etc. Functions that involved a Xcode type object such as a button being pressed would say, “btnCartPressed” which would call a separate function start with prefix, “fnCartPressed” so that code would be easily interchangeable.
 
 ## Contacts
-
-
+-  Andre Nguyen | andrenguyenp@gmail.com
+-  Benny Souriyadeth | souriyadethbs@gmail.com
+-  JJ Guo | jjguo123@gmail.com
+-  Sopheak Neak | sopheakneak@live.com
