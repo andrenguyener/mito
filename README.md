@@ -84,7 +84,7 @@ SCREENSHOTS
  
  - Write a message: When sending items to another Mito user, you can attach a short note or message along with your packages. During the checkout process, you will be prompted to add a short message. The text box also supports Emoji. The receiver will be able to read the message you are attaching to the package. The message will also appear on your friend’s feed when users navigate to their respective profile.
 
-- Select a paymethod method: The next step requires you to choose a payment method. You can select any payment method you already saved in your account or add a new payment information on the spot. Please refer to the [Payment Method](#payment-method) section to learn more about payment information. Your account will only be charged if the recipient accepts and confirms your package. You can learn more in the [Confirm/Decline Package Request section](#Confirms-or-Declines-Friend-Requests).
+- Select a paymethod method: The next step requires you to choose a payment method. You can select any payment method you already saved in your account or add a new payment information on the spot. Please refer to the Payment Method section to learn more about payment information. Your account will only be charged if the recipient accepts and confirms your package. You can learn more in the Confirm/Decline Package Request section.
 
 - Confirms your purchase in order summary: After selecting a payment method, our app will take you to the order summary screen. In this page, you may confirm all the relevant information to make sure they are correct as expected. You can change the payment information, billing address, or message by tapping on the corresponding text.
 
