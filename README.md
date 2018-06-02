@@ -42,8 +42,6 @@ Mito, derived from Latin for “giving with ease”, provides a social platform 
 #### Account Sign Up
 Mito account registration is fairly easy and straightforward. You may sign up for a Mito account via our [website](https://projectmito.io/) or iOS mobile application. To create an account, you must provide your first name, last name, a valid email address, password (must be at least six characters), and birth of date. Please keep in mind that you must be at least 13 years old to register for an account. Upon creating an account, you agree to Mito terms and services. You may learn more about our Terms and Conditions on our [website](https://projectmito.io/terms.html).
 
-The file explorer is accessible using the button in left corner of the navigation bar. You can create a new file by clicking the **New file** button in the file explorer. You can also create folders by clicking the **New folder** button.
-
 #### Account Sign In
 
 Mito currently only supports account sign in on our mobile application. You can sign into our platform with either your email address or username along with your secret password. Mito will verify the provided information with our database to ensure that the credentials are correct and valid.
@@ -65,6 +63,7 @@ SCREENSHOT
 #### Payment Methods
 
 Similar to your address book, Mito allows you to save payment methods (credit cards and/or debit cards) to your account. We securely store your payment information in our database. You may learn more about our [privacy policy on the website](https://projectmito.io/terms.html). Selecting a payment method is required upon checking out products in your cart. When adding a new payment method, we required that payment method is valid. If you provide a card that is already expired, the payment information will not be saved in your account.
+
 
 ### Purchases Products on Mito
 #### Products Search
@@ -88,6 +87,7 @@ SCREENSHOTS
 
 - Confirms your purchase in order summary: After selecting a payment method, our app will take you to the order summary screen. In this page, you may confirm all the relevant information to make sure they are correct as expected. You can change the payment information, billing address, or message by tapping on the corresponding text.
 
+
 ### Interacts in Mito Network
 #### Views Mito User Profile
 
@@ -100,9 +100,11 @@ To request for another Mito user to be your friend, you may tap on “Add Friend
 
 In Mito, you are able to view all the friends you added in the **Friends** tab at the bottom navigation. By toggling to the **Friends** tab, you will see your list of friends in your network or search for other users on Mito by using the **Search** bar at the top. To view your friends profile, you may simply tap on their name or picture from the list.
 
+
 ### Confirms or Declines Friend Requests
 
 In Mito, you may view any friend pending requests in the **Notifications** tab at the bottom navigation. As a user, you have the power to accept or decline any users as your friend. The **Notifications** tab will notify you when you receive a new friend request. You can toggle to the **Notifications** tab to view the user who requested you as their friend. By tapping on “Confirm”, the user will be added to your friends list. By tapping on “Decline”, the notification will go away and the user will not be added to your friends list.
+
 
 ### Confirms or Declines Package Requests
 
@@ -110,6 +112,7 @@ Similar to pending friend requests, **Notifications** tab will also alert you of
 SCREENSHOT
 
 _Please note that if you do not confirm or decline the package in 7 business days, our platform will notify the senders that you haven’t responded to the package and cancel the sender’s order._
+
 
 ### Views Packages Feed
 #### Friends Feed
