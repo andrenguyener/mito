@@ -5,6 +5,8 @@ Consumers have shifted from simply exchanging information on the internet to now
 
 Mito, derived from Latin for “giving with ease”, provides a social platform that lets users purchase products available on major online e-commerce shops, such as Amazon, to send to one another without exchanging physical addresses. Our solution offers a seamless process for buying goods for recipients while protecting users’ address information at all cost. We aim to break through the address exchange barrier between consumers in an online peer-to-peer transaction. A transaction via Mito will no longer require users to share their private physical address with each other.
 
+![TestImage](https://raw.github.com/andrenguyener/mito/screenshots/Add An Address.png)
+
 ## Table of Contents
   - [Features](#features)
     - [Register for a Mito Account](#registers-for-a-mito-account)
