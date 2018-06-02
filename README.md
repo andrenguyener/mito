@@ -54,7 +54,8 @@ Mito currently only supports account sign in on our mobile application. You can 
 
 Upon registering an account, Mito creates a public profile for every user. Your public profile does not show sensitive information such as payment method or your address book. Mito public profile shows your first and last name, username (starts with ‘@’), and profile picture. By default, if you do not upload any picture, your profile picture will have the initials of your first and last name. You can upload a new profile picture in **Me** page by tapping on the profile picture.
 
-<span><img src="/screenshots/Me-View.png" width="200" style="margin"><img src="/screenshots/Uploading-Picture.png" width="200"></span>
+<img src="/screenshots/Me-View.png" width="200">
+<img src="/screenshots/Uploading-Picture.png" width="200">
 
 #### User Address Book
 
