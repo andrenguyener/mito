@@ -1,1 +1,0 @@
-ssh root@api.projectmito.io 'bash -s' < test.sh
